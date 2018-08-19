@@ -188,7 +188,7 @@ class PackageDocumentAction(DoxygenAction):
         """Generate doxygen index page. Inherited class should implement it."""
         fObj   = self._pObj.GetFileObj()
         pdObj  = doxygen.DoxygenFile('%s Package Document' % self._pObj.GetName(),
-                                     '%s.decdoxygen' % self._pObj.GetFilename())
+                                     '%s.decdoxygen' % os.path.join (self._configFile.mOutputDir, os.path.basename(self._pObj.GetFilename())))
         self._configFile.AddFile(pdObj.GetFilename())
         pdObj.AddDescription(fObj.GetFileHeader())
 
@@ -207,7 +207,7 @@ class PackageDocumentAction(DoxygenAction):
 
         knownIssueSection = doxygen.Section('Known_Issue_section', 'Known Issue')
         knownIssueSection.AddDescription('<ul>')
-        knownIssueSection.AddDescription('<li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li>')
+        knownIssueSection.AddDescription('<li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disappear in this document! </li>')
         knownIssueSection.AddDescription('</ul>')
         pdObj.AddSection(knownIssueSection)
 
@@ -233,6 +233,10 @@ class PackageDocumentAction(DoxygenAction):
         if not self._onlyIncludeDocument:
             pdObj.AddPages(self.GenerateModulePages(self._pObj, self._configFile))
 
+        packageListSection = doxygen.Section('Packages', 'Packages')
+        packageListSection.AddDescription('<ul><li><a href="../../index.html">Packages</a></li></ul>')
+        pdObj.AddSection(packageListSection)
+
         pdObj.Save()
         return pdObj.GetFilename()
 
@@ -254,6 +258,8 @@ class PackageDocumentAction(DoxygenAction):
         for obj in objs:
             # Add path to include path
             path = os.path.join(pObj.GetFileObj().GetPackageRootPath(), obj.GetPath())
+            if not os.path.exists(path):
+                continue
             configFile.AddIncludePath(path)
 
             # only list common folder's include file
@@ -364,6 +370,8 @@ class PackageDocumentAction(DoxygenAction):
             wx.Yield()
         if not os.path.exists(path):
             ErrorMsg('Source file path %s does not exist!' % path)
+            return
+        if os.path.isdir(path):
             return
 
         if configFile.FileExists(path):
@@ -714,9 +722,10 @@ class PackageDocumentAction(DoxygenAction):
                 if not IsCHeaderFile(fPath):
                     continue
                 try:
-                    f = open(fPath, 'r')
-                    lines = f.readlines()
-                    f.close()
+                    with open(fPath, 'r') as f:
+                        lines = f.readlines()
+                except UnicodeDecodeError:
+                    return
                 except IOError:
                     self.Log('Fail to open file %s\n' % fPath)
                     continue

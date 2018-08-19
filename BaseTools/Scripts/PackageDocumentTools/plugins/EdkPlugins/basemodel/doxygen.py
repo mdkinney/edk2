@@ -122,7 +122,7 @@ DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = %(ProjectName)s
 PROJECT_NUMBER         = %(ProjectVersion)s
 OUTPUT_DIRECTORY       = %(OutputDir)s
-CREATE_SUBDIRS         = YES
+CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
 REPEAT_BRIEF           = YES
@@ -142,14 +142,14 @@ INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
 STRIP_FROM_PATH        = %(StripPath)s
 STRIP_FROM_INC_PATH    =
-SHORT_NAMES            = YES
+SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = NO
 QT_AUTOBRIEF           = NO
 MULTILINE_CPP_IS_BRIEF = NO
 DETAILS_AT_TOP         = YES
 INHERIT_DOCS           = YES
 SEPARATE_MEMBER_PAGES  = NO
-TAB_SIZE               = 1
+TAB_SIZE               = 2
 ALIASES                =
 OPTIMIZE_OUTPUT_FOR_C  = YES
 OPTIMIZE_OUTPUT_JAVA   = NO
@@ -323,7 +323,7 @@ DOT_MULTI_TARGETS      = NO
 GENERATE_LEGEND        = YES
 DOT_CLEANUP            = YES
 
-SEARCHENGINE           = NO
+SEARCHENGINE           = YES
 
 """
 class DoxygenConfigFile:
