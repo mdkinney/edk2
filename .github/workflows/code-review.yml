@@ -1,3 +1,10 @@
+## @file
+# GitHub Actions build file for processing code review events using ubuntu
+#
+# Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
 name: Code Review
 
 on:
@@ -11,23 +18,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        ref: ${{ github.event.pull_request.head.sha }}
-        fetch-depth: 0
-    - name: Run a one-line script
-      run: echo Hello, world!!!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-    - name: Run git log
-      run: git log --oneline -n30
-    - name: Run dir
-      run: dir
     - uses: actions/setup-python@v1
       with:
         python-version: '3.x'
         architecture: 'x64'
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+        fetch-depth: 0
+    - name: Run git log
+      run: git log --oneline -n30
+    - name: Run ls -al
+      run: ls -al
+    - name: Generate mail text file
+      run: |
+        echo -e "Subject: PR #${{ github.event.pull_request.number }} Updated SHA ${{ github.event.pull_request.head.sha }}\n" > mail.txt
+        echo -e "PR Notification\n" >> mail.txt
+        more mail.txt
+    - name: Send mail
+      run: python .github/workflows/SendMail.py --server ${{secrets.MAIL_SERVER}} --port ${{secrets.MAIL_PORT}} --user-name "${{secrets.MAIL_USERNAME}}" --password "${{secrets.MAIL_PASSWORD}}" --to "${{secrets.GROUPS_IO_EDK2_CODE_REVIEW_EMAIL_ADDRESS}}" -i mail.txt
     - name: PatchCheck
       run: python BaseTools/Scripts/PatchCheck.py ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
