@@ -60,6 +60,11 @@ L: https://edk2.groups.io/g/devel/
 T: git - https://github.com/tianocore/edk2.git
 T: git (mirror) - https://bitbucket.org/tianocore/edk2.git
 
+All patches CC:d here
+L: EDK II Development Mailing List [] devel@edk2.groups.io
+F: *
+F: */
+
 Tianocore Stewards
 ------------------
 F: *
