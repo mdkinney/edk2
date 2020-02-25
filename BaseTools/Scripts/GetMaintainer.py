@@ -119,15 +119,18 @@ def get_maintainers(path, sections, level=0):
 
     return maintainers + lists
 
-def parse_maintainers_line(line):
+def parse_maintainers_line(line, tag=False):
     """Parse one line of Maintainers.txt, returning any match group and its key."""
     for key, expression in EXPRESSIONS.items():
         match = expression.match(line)
         if match:
-            return key, match.group(key)
+            if tag and key not in ['file', 'exclude']:
+                return key, line.strip()
+            else:
+                return key, match.group(key)
     return None, None
 
-def parse_maintainers_file(filename):
+def parse_maintainers_file(filename, tag=False):
     """Parse the Maintainers.txt from top-level of repo and
        return a list containing dictionaries of all sections."""
     with open(filename, 'r') as text:
@@ -135,7 +138,7 @@ def parse_maintainers_file(filename):
         sectionlist = []
         section = defaultdict(list)
         while line:
-            key, value = parse_maintainers_line(line)
+            key, value = parse_maintainers_line(line, tag)
             if key and value:
                 section[key].append(value)
 
@@ -165,13 +168,17 @@ if __name__ == '__main__':
     PARSER.add_argument('-l', '--lookup',
                         help='Find section matches for path LOOKUP',
                         required=False)
+    PARSER.add_argument('-t', '--tag',
+                        action = "store_true",
+                        help='Retrieve only maintainers',
+                        required=False)
     ARGS = PARSER.parse_args()
 
     REPO = SetupGit.locate_repo()
 
     CONFIG_FILE = os.path.join(REPO.working_dir, 'Maintainers.txt')
 
-    SECTIONS = parse_maintainers_file(CONFIG_FILE)
+    SECTIONS = parse_maintainers_file(CONFIG_FILE, ARGS.tag)
 
     if ARGS.lookup:
         FILES = [ARGS.lookup]
