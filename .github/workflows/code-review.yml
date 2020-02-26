@@ -27,6 +27,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install gitpython
         pip install PyGitHub
+    - name: AssignReviewers
+      run: python .github/workflows/AssignReviewers.py --access-token  ${{ secrets.GITHUB_TOKEN }} --base-repo ${{ github.event.pull_request.base.repo.full_name }} --pull-request-number ${{ github.event.pull_request.number }} -v
     - uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.sha }}
@@ -35,8 +37,6 @@ jobs:
       run: git log --oneline -n30
     - name: Run ls -al
       run: ls -al
-    - name: AssignReviewers
-      run: python .github/workflows/AssignReviewers.py --access-token  ${{ secrets.GITHUB_TOKEN }} --base-repo ${{ github.event.pull_request.base.repo.full_name }} --pull-request-number ${{ github.event.pull_request.number }} -v
     - name: PatchCheck
       run: python BaseTools/Scripts/PatchCheck.py ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
     - name: Generate mail text file
