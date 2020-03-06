@@ -22,6 +22,11 @@ jobs:
       with:
         python-version: '3.x'
         architecture: 'x64'
+    - name: Install python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install gitpython
+        pip install PyGitHub
     - uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.sha }}
@@ -30,6 +35,10 @@ jobs:
       run: git log --oneline -n30
     - name: Run ls -al
       run: ls -al
+    - name: AssignReviewers
+      run: python .github/workflows/AssignReviewers.py --access-token  ${{ secrets.GITHUB_TOKEN }} --base-repo ${{ github.event.pull_request.base.repo.full_name }} --pull-request-number ${{ github.event.pull_request.number }} -v
+    - name: PatchCheck
+      run: python BaseTools/Scripts/PatchCheck.py ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
     - name: Generate mail text file
       run: |
         echo -e "Subject: PR #${{ github.event.pull_request.number }} Updated SHA ${{ github.event.pull_request.head.sha }}\n" > mail.txt
@@ -37,5 +46,3 @@ jobs:
         more mail.txt
     - name: Send mail
       run: python .github/workflows/SendMail.py --server ${{secrets.MAIL_SERVER}} --port ${{secrets.MAIL_PORT}} --user-name "${{secrets.MAIL_USERNAME}}" --password "${{secrets.MAIL_PASSWORD}}" --to "${{secrets.GROUPS_IO_EDK2_CODE_REVIEW_EMAIL_ADDRESS}}" -i mail.txt
-    - name: PatchCheck
-      run: python BaseTools/Scripts/PatchCheck.py ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
