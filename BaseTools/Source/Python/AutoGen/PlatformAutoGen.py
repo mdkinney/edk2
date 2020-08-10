@@ -1043,7 +1043,13 @@ class PlatformAutoGen(AutoGen):
 
     @cached_property
     def _MbList(self):
-        return [self.BuildDatabase[m, self.Arch, self.BuildTarget, self.ToolChain] for m in self.Platform.Modules]
+        mlist = []
+        for m in self.Platform.Modules:
+            component = self.Platform.Modules[m]
+            module = self.BuildDatabase[m, self.Arch, self.BuildTarget, self.ToolChain]
+            module.Guid = component.Guid
+            mlist.append(module)
+        return mlist
 
     @cached_property
     def _MaList(self):
