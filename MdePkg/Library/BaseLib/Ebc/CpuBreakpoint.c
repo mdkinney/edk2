@@ -27,7 +27,7 @@ CpuBreakpoint (
   VOID
   )
 {
-  _break (3);
+//  _break (3);
 }
 
 /**

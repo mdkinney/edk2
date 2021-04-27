@@ -65,7 +65,7 @@
   X64/GccInline.c | GCC
   SynchronizationGcc.c  | GCC
 
-[Sources.EBC]
+[Sources.EBC, Sources.MYCPUARCH]
   Synchronization.c
   Ebc/Synchronization.c
 

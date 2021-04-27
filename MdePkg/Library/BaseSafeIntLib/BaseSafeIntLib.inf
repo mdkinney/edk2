@@ -34,7 +34,7 @@
 [Sources.Ia32, Sources.ARM]
   SafeIntLib32.c
 
-[Sources.X64, Sources.AARCH64, Sources.RISCV64]
+[Sources.X64, Sources.AARCH64, Sources.RISCV64, Sources.MyCpuArch]
   SafeIntLib64.c
 
 [Sources.EBC]

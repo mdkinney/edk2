@@ -41,7 +41,7 @@
   IoLib.c
   Ia32/IoFifo.nasm
 
-[Sources.X64]
+[Sources.X64, Sources.MyCpuArch]
   IoLibGcc.c    | GCC
   IoLibMsc.c    | MSFT
   IoLib.c

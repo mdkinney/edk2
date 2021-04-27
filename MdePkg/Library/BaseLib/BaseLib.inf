@@ -323,7 +323,7 @@
   X64/VmgExit.nasm
   ChkStkGcc.c  | GCC
 
-[Sources.EBC]
+[Sources.EBC, Sources.MyCpuArch]
   Ebc/CpuBreakpoint.c
   Ebc/SetJumpLongJump.c
   Ebc/SwitchStack.c
