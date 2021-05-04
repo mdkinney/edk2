@@ -1,0 +1,28 @@
+## @file
+#  Provides platform policy services used during a capsule update.
+#
+#  Copyright (c) 2016, Microsoft Corporation. All rights reserved.<BR>
+#  Copyright (c) 2018, Intel Corporation. All rights reserved.<BR>
+#
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+[Defines]
+  INF_VERSION     = 0x00010005
+  BASE_NAME       = MyCapsuleUpdatePolicyLib
+  MODULE_UNI_FILE = MyCapsuleUpdatePolicyLib.uni
+  FILE_GUID       = F9D3C8C7-FD2A-4FD9-B24B-356E6F040765
+  MODULE_TYPE     = BASE
+  VERSION_STRING  = 1.0
+  LIBRARY_CLASS   = CapsuleUpdatePolicyLib
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  MyCapsuleUpdatePolicyLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  FmpDevicePkg/FmpDevicePkg.dec

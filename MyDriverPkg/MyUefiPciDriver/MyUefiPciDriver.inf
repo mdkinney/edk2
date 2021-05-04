@@ -1,0 +1,43 @@
+## @file
+#  UEFI Driver MyUefiPciDriver
+#
+#  Copyright (c) 2021, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  INF_VERSION               = 0x00010005
+  BASE_NAME                 = MyUefiPciDriver
+  FILE_GUID                 = fa627640-ac75-11eb-8afc-54e1ad3bf134
+  MODULE_TYPE               = UEFI_DRIVER
+  VERSION_STRING            = 0.1
+  ENTRY_POINT               = MyUefiPciDriverDriverEntryPoint
+  UNLOAD_IMAGE              = MyUefiPciDriverUnload
+
+[Packages]
+  MdePkg/MdePkg.dec
+  FmpDevicePkg/FmpDevicePkg.dec
+
+[Sources]
+  MyUefiPciDriver.h
+  MyUefiPciDriver.c
+  GraphicsOutput.c
+  GraphicsOutput.h
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  BaseLib
+  UefiLib
+  DevicePathLib
+  DebugLib
+
+[Protocols]
+  gEfiDriverBindingProtocolGuid
+  gEfiDiskIoProtocolGuid
+  gEfiGraphicsOutputProtocolGuid
+  gEfiEdidDiscoveredProtocolGuid
+  gEfiEdidActiveProtocolGuid

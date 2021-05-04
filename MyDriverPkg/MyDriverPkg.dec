@@ -1,0 +1,13 @@
+## @file
+#  Example driver package
+#
+#  Copyright (c) 2021, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  DEC_SPECIFICATION = 0x00010005
+  PACKAGE_NAME      = MyDriverPkg
+  PACKAGE_GUID      = eb2a4861-ac75-11eb-aeda-54e1ad3bf134
+  PACKAGE_VERSION   = 0.1
