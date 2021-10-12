@@ -1313,4 +1313,3 @@ typedef UINTN RETURN_STATUS;
 #define ARRAY_SIZE(Array) (sizeof (Array) / sizeof ((Array)[0]))
 
 #endif
-
