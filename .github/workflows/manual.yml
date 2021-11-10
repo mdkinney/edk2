@@ -45,5 +45,6 @@ jobs:
     - run: ls -al
     - run: sudo apt-get install make gcc uuid-dev iasl nasm python3-pip gcc-arm-none-eabi gcc-riscv64-linux-gnu gcc-aarch64-linux-gnu pax-utils
     - run: cd edk2
+    - run: ls -al
     - run: . edksetup.sh
     - run: python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -n 4 -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p ArmPkg/ArmPkg.dsc --quiet
