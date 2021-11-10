@@ -51,6 +51,7 @@ jobs:
         ref: ${{ github.event.inputs.ref1 }}
         path: edk2
         submodules: true
+    - run: sudo apt-get upgrade
     - run: sudo apt-get update
     - run: sudo apt-get install make gcc uuid-dev iasl nasm python3-pip gcc-arm-none-eabi gcc-riscv64-linux-gnu gcc-aarch64-linux-gnu pax-utils
     - run: |
