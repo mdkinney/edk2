@@ -69,7 +69,7 @@ jobs:
     - run: |
         sudo apt-get upgrade
         sudo apt-get update
-        sudo apt-get install make gcc uuid-dev iasl python3-pip gcc-arm-none-eabi gcc-riscv64-linux-gnu gcc-aarch64-linux-gnu pax-utils
+        sudo apt-get install make gcc gcc-multilib uuid-dev iasl gcc-arm-none-eabi gcc-aarch64-linux-gnu gcc-riscv64-linux-gnu pax-utils
     - run: |
         . edksetup.sh
         make -C BaseTools
