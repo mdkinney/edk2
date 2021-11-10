@@ -59,27 +59,29 @@ jobs:
         ref: ${{ github.event.inputs.ref1 }}
         path: edk2
         submodules: true
-    - run: |
+    - name: Install pip modules
+      run: |
         python -m pip install --upgrade pip
         pip install GitPython
-    - run: |
+    - name: Install NASM
+      run: |
         curl -k -O  -L http://ftp.us.debian.org/debian//pool/main/n/nasm/nasm_2.15.05-1_amd64.deb
         sudo apt install ./nasm_2.15.05-1_amd64.deb
         nasm --version
-    - run: |
+    - name: Install IASL/ARM/AARCH64/RISCV64 compilers
+      run: |
         sudo apt-get update
         sudo apt-get install iasl gcc-arm-none-eabi gcc-aarch64-linux-gnu gcc-riscv64-linux-gnu pax-utils libc6-dev-i386
-#        sudo apt-get install make gcc gcc-multilib uuid-dev iasl gcc-arm-none-eabi gcc-aarch64-linux-gnu gcc-riscv64-linux-gnu pax-utils
-    - run: |
+    - name: Build BaseTools
+      run: |
         . edksetup.sh
         make -C BaseTools
-    - run: |
+    - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg, CryptoPkg
+      run: |
         . edksetup.sh
         export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
         export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
         export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
-        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc ${{ github.event.inputs.buildoptions }}
-        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p ArmPkg/ArmPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a AARCH64 -b NOOPT -p ArmPkg/ArmPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p ArmPlatformPkg/ArmPlatformPkg.dsc ${{ github.event.inputs.buildoptions }}
@@ -97,7 +99,10 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p CryptoPkg/CryptoPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a AARCH64 -b NOOPT -p CryptoPkg/CryptoPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a RISCV64 -b NOOPT -p CryptoPkg/CryptoPkg.dsc ${{ github.event.inputs.buildoptions }}
-    - run: |
+        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc ${{ github.event.inputs.buildoptions }}
+        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc ${{ github.event.inputs.buildoptions }}
+    - name: Compare DynamicTablesPkg, EmbeddedPkg, FatPkg, FmpDevicePkg
+      run: |
         . edksetup.sh
         export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
         export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
@@ -108,6 +113,12 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p EmbeddedPkg/EmbeddedPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p EmbeddedPkg/EmbeddedPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a AARCH64 -b NOOPT -p EmbeddedPkg/EmbeddedPkg.dsc ${{ github.event.inputs.buildoptions }}
+        #
+        # Skip because X11 not supported on Ubuntu-20.04
+        #
+        # python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p EmulatorPkg/EmulatorPkg.dsc ${{ github.event.inputs.buildoptions }}
+        # python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p EmulatorPkg/EmulatorPkg.dsc ${{ github.event.inputs.buildoptions }}
+        #
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p FatPkg/FatPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p FatPkg/FatPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p FatPkg/FatPkg.dsc ${{ github.event.inputs.buildoptions }}
@@ -120,7 +131,8 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a RISCV64 -b NOOPT -p FmpDevicePkg/FmpDevicePkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p FmpDevicePkg/Test/FmpDeviceHostPkgTest.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p FmpDevicePkg/Test/FmpDeviceHostPkgTest.dsc ${{ github.event.inputs.buildoptions }}
-    - run: |
+    - name: Compare IntelFsp*Pkg, MdeModulePkg, MdePkg, NetworkPkg
+      run: |
         . edksetup.sh
         export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
         export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
@@ -130,8 +142,18 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc ${{ github.event.inputs.buildoptions }}
+        #
+        # Skip because HII resource section link failure on Linux GCC ARM NOOPT if HII obj is not last in list of linked libs.
+        #
+        # python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc ${{ github.event.inputs.buildoptions }}
+        #
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a AARCH64 -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a RISCV64 -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc ${{ github.event.inputs.buildoptions }}
+        #
+        # Skip because it uses cmocka that uses __LINE__ that can not be overriden
+        #
+        # python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p MdeModulePkg/Test/MdeModulePkgHostTest.dsc ${{ github.event.inputs.buildoptions }}
+        #
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p MdePkg/MdePkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p MdePkg/MdePkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p MdePkg/MdePkg.dsc ${{ github.event.inputs.buildoptions }}
@@ -144,18 +166,25 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p NetworkPkg/NetworkPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a AARCH64 -b NOOPT -p NetworkPkg/NetworkPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a RISCV64 -b NOOPT -p NetworkPkg/NetworkPkg.dsc ${{ github.event.inputs.buildoptions }}
-    - run: |
+    - name: Compare OvmfPkg
+      run: |
         . edksetup.sh
         export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
         export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
         export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
+        #
+        # Skip because "Can't find grub mkimage"
+        #
+        # python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p OvmfPkg/AmdSev/AmdSevX64.dsc ${{ github.event.inputs.buildoptions }}
+        #
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p OvmfPkg/OvmfPkgIa32.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -a X64 -b NOOPT -p OvmfPkg/OvmfPkgIa32X64.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p OvmfPkg/OvmfPkgX64.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p OvmfPkg/OvmfXen.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p OvmfPkg/Bhyve/BhyveX64.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p OvmfPkg/Microvm/MicrovmX64.dsc ${{ github.event.inputs.buildoptions }}
-    - run: |
+    - name: Compare PcAtChipsetPkg, RedfishPkg, SecurityPkg, ShellPkg
+      run: |
         . edksetup.sh
         export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
         export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
@@ -177,7 +206,8 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p ShellPkg/ShellPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a AARCH64 -b NOOPT -p ShellPkg/ShellPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a RISCV64 -b NOOPT -p ShellPkg/ShellPkg.dsc ${{ github.event.inputs.buildoptions }}
-    - run: |
+    - name: Compare SignedCapsulePkg, UefiCpuPkg, SourceLevelDebugPkg, UefiPayloadPkg, UnitTestFrameworkPkg
+      run: |
         . edksetup.sh
         export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
         export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
@@ -186,11 +216,11 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p SignedCapsulePkg/SignedCapsulePkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p SignedCapsulePkg/SignedCapsulePkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p SignedCapsulePkg/SignedCapsulePkg.dsc ${{ github.event.inputs.buildoptions }}
-        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p UefiCpuPkg/Test/UefiCpuPkgHostTest.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p SourceLevelDebugPkg/SourceLevelDebugPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p SourceLevelDebugPkg/SourceLevelDebugPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p UefiCpuPkg/UefiCpuPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p UefiCpuPkg/UefiCpuPkg.dsc ${{ github.event.inputs.buildoptions }}
+        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p UefiCpuPkg/Test/UefiCpuPkgHostTest.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p UefiCpuPkg/Test/UefiCpuPkgHostTest.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -a X64 -b NOOPT -p UefiPayloadPkg/UefiPayloadPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p UnitTestFrameworkPkg/UnitTestFrameworkPkg.dsc ${{ github.event.inputs.buildoptions }}
