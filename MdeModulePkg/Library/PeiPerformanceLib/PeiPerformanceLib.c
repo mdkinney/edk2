@@ -208,7 +208,7 @@ GetFpdtRecordId (
       } else {
         *ProgressID = MODULE_LOADIMAGE_END_ID;
       }
-    } else if ((AsciiStrCmp (String, SEC_TOK) == 0) ||               // "SEC"
+    } else if ((AsciiStrCmp (String, SEC_TOK) == 0) ||             // "SEC"
                (AsciiStrCmp (String, PEI_TOK) == 0))               // "PEI"
     {
       if (Attribute == PerfStartEntry) {
