@@ -51,12 +51,14 @@ jobs:
         ref: ${{ github.event.inputs.ref1 }}
         path: edk2
         submodules: true
+    - run: sudo apt-get update
     - run: sudo apt-get install make gcc uuid-dev iasl nasm python3-pip gcc-arm-none-eabi gcc-riscv64-linux-gnu gcc-aarch64-linux-gnu pax-utils
     - run: |
         python -m pip install --upgrade pip
         pip install GitPython
     - run: |
         . edksetup.sh
+        make -C BaseTools
         export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
         export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
         export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
