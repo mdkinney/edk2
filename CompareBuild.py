@@ -322,7 +322,7 @@ if __name__ == '__main__':
             # Run build command using customized Conf directory
             print ('Run:', BuildCommand + ' --conf=' + NewConfDir)
             try:
-                subprocess.run(BuildCommand + ' --conf=' + NewConfDir, shell=True)
+                subprocess.run(BuildCommand + ' --conf=' + NewConfDir, shell=True, check=True)
             except:
                 # Build command failed
                 BuildFailed = True
