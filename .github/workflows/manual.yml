@@ -74,6 +74,7 @@ jobs:
         . edksetup.sh
         make -C BaseTools
     - run: |
+        . edksetup.sh
         export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
         export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
         export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
@@ -97,6 +98,7 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc ${{ github.event.inputs.buildoptions }}
     - run: |
+        . edksetup.sh
         export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
         export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
         export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
@@ -119,6 +121,7 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p FmpDevicePkg/Test/FmpDeviceHostPkgTest.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p FmpDevicePkg/Test/FmpDeviceHostPkgTest.dsc ${{ github.event.inputs.buildoptions }}
     - run: |
+        . edksetup.sh
         export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
         export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
         export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
@@ -142,6 +145,7 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a AARCH64 -b NOOPT -p NetworkPkg/NetworkPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a RISCV64 -b NOOPT -p NetworkPkg/NetworkPkg.dsc ${{ github.event.inputs.buildoptions }}
     - run: |
+        . edksetup.sh
         export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
         export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
         export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
@@ -152,6 +156,7 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p OvmfPkg/Bhyve/BhyveX64.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p OvmfPkg/Microvm/MicrovmX64.dsc ${{ github.event.inputs.buildoptions }}
     - run: |
+        . edksetup.sh
         export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
         export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
         export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
@@ -173,6 +178,7 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a AARCH64 -b NOOPT -p ShellPkg/ShellPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a RISCV64 -b NOOPT -p ShellPkg/ShellPkg.dsc ${{ github.event.inputs.buildoptions }}
     - run: |
+        . edksetup.sh
         export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
         export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
         export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
