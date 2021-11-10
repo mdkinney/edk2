@@ -13,6 +13,10 @@ on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
+      repo:
+        description: 'Public edk2 repository to use for comparison'
+        default: 'mdkinney/edk2'
+        required: true
       ref1:
         description: 'First git reference for comparison'
         default: ''
@@ -21,6 +25,10 @@ on:
         description: 'Second git reference for comparison'
         default: ''
         required: true
+      buildoptions:
+        description: 'Extra options to add to end of build command (e.g. --quiet, --verbose)'
+        default: '-n 4 --quiet'
+        required: false
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -41,13 +49,13 @@ jobs:
         submodules: false
     - uses: actions/checkout@v2
       with:
-        name: mdkinney/edk2
+        name: ${{ github.event.inputs.repo }}
         ref: ${{ github.event.inputs.ref2 }}
         path: edk2
-        submodules: true
+        submodules: false
     - uses: actions/checkout@v2
       with:
-        name: mdkinney/edk2
+        name: ${{ github.event.inputs.repo }}
         ref: ${{ github.event.inputs.ref1 }}
         path: edk2
         submodules: true
@@ -57,6 +65,7 @@ jobs:
     - run: |
         curl -k -O  -L http://ftp.us.debian.org/debian//pool/main/n/nasm/nasm_2.15.05-1_amd64.deb
         sudo apt install ./nasm_2.15.05-1_amd64.deb
+        nasm --version
     - run: |
         sudo apt-get upgrade
         sudo apt-get update
@@ -67,9 +76,9 @@ jobs:
         export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
         export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
         export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
-        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -n 4 -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p FatPkg/FatPkg.dsc --verbose
-        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -n 4 -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p FatPkg/FatPkg.dsc --verbose
-        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -n 4 -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p FatPkg/FatPkg.dsc --verbose
-        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -n 4 -t GCC5 -j Build/Build.log -a AARCH64 -b NOOPT -p FatPkg/FatPkg.dsc --verbose
-        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -n 4 -t GCC5 -j Build/Build.log -a RISCV64 -b NOOPT -p FatPkg/FatPkg.dsc --verbose
+        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p FatPkg/FatPkg.dsc ${{ github.event.inputs.buildoptions }}
+        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p FatPkg/FatPkg.dsc ${{ github.event.inputs.buildoptions }}
+        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p FatPkg/FatPkg.dsc ${{ github.event.inputs.buildoptions }}
+        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a AARCH64 -b NOOPT -p FatPkg/FatPkg.dsc ${{ github.event.inputs.buildoptions }}
+        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a RISCV64 -b NOOPT -p FatPkg/FatPkg.dsc ${{ github.event.inputs.buildoptions }}
     - run: ls -al
