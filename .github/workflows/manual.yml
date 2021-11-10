@@ -27,6 +27,9 @@ jobs:
   gcc_compare:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./edk2
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -42,9 +45,8 @@ jobs:
         ref: ${{ github.event.inputs.ref1 }}
         path: edk2
         submodules: true
-    - run: ls -al
     - run: sudo apt-get install make gcc uuid-dev iasl nasm python3-pip gcc-arm-none-eabi gcc-riscv64-linux-gnu gcc-aarch64-linux-gnu pax-utils
-    - run: cd edk2
     - run: ls -al
     - run: . edksetup.sh
     - run: python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -n 4 -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p ArmPkg/ArmPkg.dsc --quiet
+    - run: ls -al
