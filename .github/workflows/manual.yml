@@ -30,17 +30,18 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - uses: actions/checkout@V2
+    - uses: actions/checkout@v2
       with:
         name: mdkinney/edk2
         ref: sandbox/CompareBuild
         path: compare
         submodules: false
-    - uses: actions/checkout@V2
+    - uses: actions/checkout@v2
       with:
         name: mdkinney/edk2
         path: edk2
         submodules: true
+    - run: ls -al
     - run: apt-get install make gcc uuid-dev iasl nasm python3-pip gcc-arm-none-eabi gcc-riscv64-linux-gnu gcc-aarch64-linux-gnu pax-utils
     - run: cd edk2
     - run: . edksetup.sh
