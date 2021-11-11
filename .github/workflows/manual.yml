@@ -32,7 +32,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  gcc_compare:
+  gcc_setup:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     defaults:
@@ -76,6 +76,17 @@ jobs:
       run: |
         . edksetup.sh
         make -C BaseTools
+
+  gcc_compare_1:
+    needs: gcc_setup
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./edk2
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
     - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg, CryptoPkg
       run: |
         . edksetup.sh
@@ -101,6 +112,17 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a RISCV64 -b NOOPT -p CryptoPkg/CryptoPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc ${{ github.event.inputs.buildoptions }}
+
+  gcc_compare_2:
+    needs: gcc_setup
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./edk2
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
     - name: Compare DynamicTablesPkg, EmbeddedPkg, FatPkg, FmpDevicePkg
       run: |
         . edksetup.sh
@@ -131,6 +153,17 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a RISCV64 -b NOOPT -p FmpDevicePkg/FmpDevicePkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p FmpDevicePkg/Test/FmpDeviceHostPkgTest.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p FmpDevicePkg/Test/FmpDeviceHostPkgTest.dsc ${{ github.event.inputs.buildoptions }}
+
+  gcc_compare_3:
+    needs: gcc_setup
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./edk2
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
     - name: Compare IntelFsp*Pkg, MdeModulePkg, MdePkg, NetworkPkg
       run: |
         . edksetup.sh
@@ -166,6 +199,17 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p NetworkPkg/NetworkPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a AARCH64 -b NOOPT -p NetworkPkg/NetworkPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a RISCV64 -b NOOPT -p NetworkPkg/NetworkPkg.dsc ${{ github.event.inputs.buildoptions }}
+
+  gcc_compare_4:
+    needs: gcc_setup
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./edk2
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
     - name: Compare OvmfPkg
       run: |
         . edksetup.sh
@@ -183,6 +227,17 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p OvmfPkg/OvmfXen.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p OvmfPkg/Bhyve/BhyveX64.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p OvmfPkg/Microvm/MicrovmX64.dsc ${{ github.event.inputs.buildoptions }}
+
+  gcc_compare_5:
+    needs: gcc_setup
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./edk2
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
     - name: Compare PcAtChipsetPkg, RedfishPkg, SecurityPkg, ShellPkg
       run: |
         . edksetup.sh
@@ -206,6 +261,17 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p ShellPkg/ShellPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a AARCH64 -b NOOPT -p ShellPkg/ShellPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a RISCV64 -b NOOPT -p ShellPkg/ShellPkg.dsc ${{ github.event.inputs.buildoptions }}
+
+  gcc_compare_6:
+    needs: gcc_setup
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./edk2
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
     - name: Compare SignedCapsulePkg, UefiCpuPkg, SourceLevelDebugPkg, UefiPayloadPkg, UnitTestFrameworkPkg
       run: |
         . edksetup.sh
