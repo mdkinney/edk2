@@ -70,13 +70,15 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
+        set NASM_PREFIX="c:\Program Files\NASM\"
+        set IASL_PREFIX="c:\tools\ASL\"
         edksetup.bat Rebuild
     - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
       run: |
-        edksetup.bat
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX="c:\tools\ASL\"
-        ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT -p FatPkg/FatPkg.dsc ${{ github.event.inputs.buildoptions }}
+        edksetup.bat
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT -p FatPkg/FatPkg.dsc ${{ github.event.inputs.buildoptions }}
 
   gcc_compare_1a:
     # The type of runner that the job will run on
