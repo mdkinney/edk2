@@ -78,7 +78,356 @@ jobs:
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX="c:\tools\ASL\"
         call edksetup.bat
-        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT -p FatPkg/FatPkg.dsc ${{ github.event.inputs.buildoptions }}
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p CryptoPkg/CryptoPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p EmbeddedPkg/EmbeddedPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p EmulatorPkg/EmulatorPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p FatPkg/FatPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p FmpDevicePkg/FmpDevicePkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p FmpDevicePkg/Test/FmpDeviceHostPkgTest.dsc
+
+  vs_compare_2:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: cmd
+        working-directory: .\edk2
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        name: mdkinney/edk2
+        ref: sandbox/CompareBuild
+        path: compare
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref2 }}
+        path: edk2
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref1 }}
+        path: edk2
+        submodules: true
+    - name: Install pip modules
+      run: |
+        python -m pip install --upgrade pip
+        pip install GitPython
+    - name: Install NASM
+      run: |
+        choco install nasm
+        choco install iasl --version=2017.11.10
+    - name: Build BaseTools
+      run: |
+        set NASM_PREFIX="c:\Program Files\NASM\"
+        set IASL_PREFIX="c:\tools\ASL\"
+        call edksetup.bat Rebuild
+    - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
+      run: |
+        set NASM_PREFIX="c:\Program Files\NASM\"
+        set IASL_PREFIX="c:\tools\ASL\"
+        call edksetup.bat
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p IntelFsp2Pkg/IntelFsp2Pkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p MdeModulePkg/MdeModulePkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p MdePkg/MdePkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p MdePkg/Test/MdePkgHostTest.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p NetworkPkg/NetworkPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p OvmfPkg/OvmfPkgIa32.dsc
+
+  vs_compare_3:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: cmd
+        working-directory: .\edk2
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        name: mdkinney/edk2
+        ref: sandbox/CompareBuild
+        path: compare
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref2 }}
+        path: edk2
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref1 }}
+        path: edk2
+        submodules: true
+    - name: Install pip modules
+      run: |
+        python -m pip install --upgrade pip
+        pip install GitPython
+    - name: Install NASM
+      run: |
+        choco install nasm
+        choco install iasl --version=2017.11.10
+    - name: Build BaseTools
+      run: |
+        set NASM_PREFIX="c:\Program Files\NASM\"
+        set IASL_PREFIX="c:\tools\ASL\"
+        call edksetup.bat Rebuild
+    - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
+      run: |
+        set NASM_PREFIX="c:\Program Files\NASM\"
+        set IASL_PREFIX="c:\tools\ASL\"
+        call edksetup.bat
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p PcAtChipsetPkg/PcAtChipsetPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p RedfishPkg/RedfishPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p SecurityPkg/SecurityPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p ShellPkg/ShellPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p SignedCapsulePkg/SignedCapsulePkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p UefiCpuPkg/Test/UefiCpuPkgHostTest.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p SourceLevelDebugPkg/SourceLevelDebugPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p UefiCpuPkg/UefiCpuPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p UnitTestFrameworkPkg/UnitTestFrameworkPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc
+
+  vs_compare_4:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: cmd
+        working-directory: .\edk2
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        name: mdkinney/edk2
+        ref: sandbox/CompareBuild
+        path: compare
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref2 }}
+        path: edk2
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref1 }}
+        path: edk2
+        submodules: true
+    - name: Install pip modules
+      run: |
+        python -m pip install --upgrade pip
+        pip install GitPython
+    - name: Install NASM
+      run: |
+        choco install nasm
+        choco install iasl --version=2017.11.10
+    - name: Build BaseTools
+      run: |
+        set NASM_PREFIX="c:\Program Files\NASM\"
+        set IASL_PREFIX="c:\tools\ASL\"
+        call edksetup.bat Rebuild
+    - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
+      run: |
+        set NASM_PREFIX="c:\Program Files\NASM\"
+        set IASL_PREFIX="c:\tools\ASL\"
+        call edksetup.bat
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p CryptoPkg/CryptoPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p EmbeddedPkg/EmbeddedPkg.dsc
+        REM
+        REM Too many issues to fix right now
+        REM Build break EmbeddedPkg\Library\GdbSerialDebugPortLib\GdbSerialDebugPortLib.c(127): warning C4244: 'function': conversion from 'UINTN' to 'UINT32', possible loss of data
+        REM Build break EmbeddedPkg\Library\GdbSerialDebugPortLib\GdbSerialDebugPortLib.c(153): warning C4244: 'function': conversion from 'UINTN' to 'UINT32', possible loss of data
+        REM
+        REM python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p EmulatorPkg/EmulatorPkg.dsc
+        REM
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p FatPkg/FatPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p FmpDevicePkg/FmpDevicePkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p FmpDevicePkg/Test/FmpDeviceHostPkgTest.dsc
+
+  vs_compare_5:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: cmd
+        working-directory: .\edk2
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        name: mdkinney/edk2
+        ref: sandbox/CompareBuild
+        path: compare
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref2 }}
+        path: edk2
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref1 }}
+        path: edk2
+        submodules: true
+    - name: Install pip modules
+      run: |
+        python -m pip install --upgrade pip
+        pip install GitPython
+    - name: Install NASM
+      run: |
+        choco install nasm
+        choco install iasl --version=2017.11.10
+    - name: Build BaseTools
+      run: |
+        set NASM_PREFIX="c:\Program Files\NASM\"
+        set IASL_PREFIX="c:\tools\ASL\"
+        call edksetup.bat Rebuild
+    - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
+      run: |
+        set NASM_PREFIX="c:\Program Files\NASM\"
+        set IASL_PREFIX="c:\tools\ASL\"
+        call edksetup.bat
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p MdeModulePkg/MdeModulePkg.dsc
+        REM
+        REM Skip because it uses cmocka that uses __LINE__ that can not be overriden
+        REM
+        REM python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p MdeModulePkg/Test/MdeModulePkgHostTest.dsc
+        REM
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p MdePkg/MdePkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p MdePkg/Test/MdePkgHostTest.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p NetworkPkg/NetworkPkg.dsc
+
+  vs_compare_6:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: cmd
+        working-directory: .\edk2
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        name: mdkinney/edk2
+        ref: sandbox/CompareBuild
+        path: compare
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref2 }}
+        path: edk2
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref1 }}
+        path: edk2
+        submodules: true
+    - name: Install pip modules
+      run: |
+        python -m pip install --upgrade pip
+        pip install GitPython
+    - name: Install NASM
+      run: |
+        choco install nasm
+        choco install iasl --version=2017.11.10
+    - name: Build BaseTools
+      run: |
+        set NASM_PREFIX="c:\Program Files\NASM\"
+        set IASL_PREFIX="c:\tools\ASL\"
+        call edksetup.bat Rebuild
+    - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
+      run: |
+        set NASM_PREFIX="c:\Program Files\NASM\"
+        set IASL_PREFIX="c:\tools\ASL\"
+        call edksetup.bat
+        REM
+        REM Skip because of Linux shell dependencies
+        REM
+        REM ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p OvmfPkg/AmdSev/AmdSevX64.dsc
+        REM
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p OvmfPkg/OvmfPkgIa32X64.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p OvmfPkg/OvmfPkgX64.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p OvmfPkg/OvmfXen.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p OvmfPkg/Bhyve/BhyveX64.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p OvmfPkg/Microvm/MicrovmX64.dsc
+
+  vs_compare_7:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: cmd
+        working-directory: .\edk2
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        name: mdkinney/edk2
+        ref: sandbox/CompareBuild
+        path: compare
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref2 }}
+        path: edk2
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref1 }}
+        path: edk2
+        submodules: true
+    - name: Install pip modules
+      run: |
+        python -m pip install --upgrade pip
+        pip install GitPython
+    - name: Install NASM
+      run: |
+        choco install nasm
+        choco install iasl --version=2017.11.10
+    - name: Build BaseTools
+      run: |
+        set NASM_PREFIX="c:\Program Files\NASM\"
+        set IASL_PREFIX="c:\tools\ASL\"
+        call edksetup.bat Rebuild
+    - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
+      run: |
+        set NASM_PREFIX="c:\Program Files\NASM\"
+        set IASL_PREFIX="c:\tools\ASL\"
+        call edksetup.bat
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p PcAtChipsetPkg/PcAtChipsetPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p RedfishPkg/RedfishPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p SecurityPkg/SecurityPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p ShellPkg/ShellPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p SignedCapsulePkg/SignedCapsulePkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p SourceLevelDebugPkg/SourceLevelDebugPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p UefiCpuPkg/UefiCpuPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p UefiCpuPkg/Test/UefiCpuPkgHostTest.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p UefiPayloadPkg/UefiPayloadPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p UnitTestFrameworkPkg/UnitTestFrameworkPkg.dsc
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc
 
   gcc_compare_1a:
     # The type of runner that the job will run on
