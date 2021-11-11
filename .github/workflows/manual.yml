@@ -32,7 +32,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  gcc_setup:
+  gcc_compare_1:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     defaults:
@@ -76,17 +76,6 @@ jobs:
       run: |
         . edksetup.sh
         make -C BaseTools
-
-  gcc_compare_1:
-    needs: gcc_setup
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./edk2
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
     - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg, CryptoPkg
       run: |
         . edksetup.sh
@@ -114,7 +103,6 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc ${{ github.event.inputs.buildoptions }}
 
   gcc_compare_2:
-    needs: gcc_setup
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     defaults:
@@ -123,6 +111,41 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - uses: actions/checkout@v2
+      with:
+        name: mdkinney/edk2
+        ref: sandbox/CompareBuild
+        path: compare
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref2 }}
+        path: edk2
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref1 }}
+        path: edk2
+        submodules: true
+    - name: Install pip modules
+      run: |
+        python -m pip install --upgrade pip
+        pip install GitPython
+    - name: Install NASM
+      run: |
+        curl -k -O  -L http://ftp.us.debian.org/debian//pool/main/n/nasm/nasm_2.15.05-1_amd64.deb
+        sudo apt install ./nasm_2.15.05-1_amd64.deb
+        nasm --version
+    - name: Install IASL/ARM/AARCH64/RISCV64 compilers
+      run: |
+        sudo apt-get update
+        sudo apt-get install iasl gcc-arm-none-eabi gcc-aarch64-linux-gnu gcc-riscv64-linux-gnu pax-utils libc6-dev-i386
+    - name: Build BaseTools
+      run: |
+        . edksetup.sh
+        make -C BaseTools
     - name: Compare DynamicTablesPkg, EmbeddedPkg, FatPkg, FmpDevicePkg
       run: |
         . edksetup.sh
@@ -155,7 +178,6 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p FmpDevicePkg/Test/FmpDeviceHostPkgTest.dsc ${{ github.event.inputs.buildoptions }}
 
   gcc_compare_3:
-    needs: gcc_setup
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     defaults:
@@ -164,6 +186,41 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - uses: actions/checkout@v2
+      with:
+        name: mdkinney/edk2
+        ref: sandbox/CompareBuild
+        path: compare
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref2 }}
+        path: edk2
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref1 }}
+        path: edk2
+        submodules: true
+    - name: Install pip modules
+      run: |
+        python -m pip install --upgrade pip
+        pip install GitPython
+    - name: Install NASM
+      run: |
+        curl -k -O  -L http://ftp.us.debian.org/debian//pool/main/n/nasm/nasm_2.15.05-1_amd64.deb
+        sudo apt install ./nasm_2.15.05-1_amd64.deb
+        nasm --version
+    - name: Install IASL/ARM/AARCH64/RISCV64 compilers
+      run: |
+        sudo apt-get update
+        sudo apt-get install iasl gcc-arm-none-eabi gcc-aarch64-linux-gnu gcc-riscv64-linux-gnu pax-utils libc6-dev-i386
+    - name: Build BaseTools
+      run: |
+        . edksetup.sh
+        make -C BaseTools
     - name: Compare IntelFsp*Pkg, MdeModulePkg, MdePkg, NetworkPkg
       run: |
         . edksetup.sh
@@ -201,7 +258,6 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a RISCV64 -b NOOPT -p NetworkPkg/NetworkPkg.dsc ${{ github.event.inputs.buildoptions }}
 
   gcc_compare_4:
-    needs: gcc_setup
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     defaults:
@@ -210,6 +266,41 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - uses: actions/checkout@v2
+      with:
+        name: mdkinney/edk2
+        ref: sandbox/CompareBuild
+        path: compare
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref2 }}
+        path: edk2
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref1 }}
+        path: edk2
+        submodules: true
+    - name: Install pip modules
+      run: |
+        python -m pip install --upgrade pip
+        pip install GitPython
+    - name: Install NASM
+      run: |
+        curl -k -O  -L http://ftp.us.debian.org/debian//pool/main/n/nasm/nasm_2.15.05-1_amd64.deb
+        sudo apt install ./nasm_2.15.05-1_amd64.deb
+        nasm --version
+    - name: Install IASL/ARM/AARCH64/RISCV64 compilers
+      run: |
+        sudo apt-get update
+        sudo apt-get install iasl gcc-arm-none-eabi gcc-aarch64-linux-gnu gcc-riscv64-linux-gnu pax-utils libc6-dev-i386
+    - name: Build BaseTools
+      run: |
+        . edksetup.sh
+        make -C BaseTools
     - name: Compare OvmfPkg
       run: |
         . edksetup.sh
@@ -229,7 +320,6 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p OvmfPkg/Microvm/MicrovmX64.dsc ${{ github.event.inputs.buildoptions }}
 
   gcc_compare_5:
-    needs: gcc_setup
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     defaults:
@@ -238,6 +328,41 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - uses: actions/checkout@v2
+      with:
+        name: mdkinney/edk2
+        ref: sandbox/CompareBuild
+        path: compare
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref2 }}
+        path: edk2
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref1 }}
+        path: edk2
+        submodules: true
+    - name: Install pip modules
+      run: |
+        python -m pip install --upgrade pip
+        pip install GitPython
+    - name: Install NASM
+      run: |
+        curl -k -O  -L http://ftp.us.debian.org/debian//pool/main/n/nasm/nasm_2.15.05-1_amd64.deb
+        sudo apt install ./nasm_2.15.05-1_amd64.deb
+        nasm --version
+    - name: Install IASL/ARM/AARCH64/RISCV64 compilers
+      run: |
+        sudo apt-get update
+        sudo apt-get install iasl gcc-arm-none-eabi gcc-aarch64-linux-gnu gcc-riscv64-linux-gnu pax-utils libc6-dev-i386
+    - name: Build BaseTools
+      run: |
+        . edksetup.sh
+        make -C BaseTools
     - name: Compare PcAtChipsetPkg, RedfishPkg, SecurityPkg, ShellPkg
       run: |
         . edksetup.sh
@@ -263,7 +388,6 @@ jobs:
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a RISCV64 -b NOOPT -p ShellPkg/ShellPkg.dsc ${{ github.event.inputs.buildoptions }}
 
   gcc_compare_6:
-    needs: gcc_setup
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     defaults:
@@ -272,6 +396,41 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - uses: actions/checkout@v2
+      with:
+        name: mdkinney/edk2
+        ref: sandbox/CompareBuild
+        path: compare
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref2 }}
+        path: edk2
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        name: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref1 }}
+        path: edk2
+        submodules: true
+    - name: Install pip modules
+      run: |
+        python -m pip install --upgrade pip
+        pip install GitPython
+    - name: Install NASM
+      run: |
+        curl -k -O  -L http://ftp.us.debian.org/debian//pool/main/n/nasm/nasm_2.15.05-1_amd64.deb
+        sudo apt install ./nasm_2.15.05-1_amd64.deb
+        nasm --version
+    - name: Install IASL/ARM/AARCH64/RISCV64 compilers
+      run: |
+        sudo apt-get update
+        sudo apt-get install iasl gcc-arm-none-eabi gcc-aarch64-linux-gnu gcc-riscv64-linux-gnu pax-utils libc6-dev-i386
+    - name: Build BaseTools
+      run: |
+        . edksetup.sh
+        make -C BaseTools
     - name: Compare SignedCapsulePkg, UefiCpuPkg, SourceLevelDebugPkg, UefiPayloadPkg, UnitTestFrameworkPkg
       run: |
         . edksetup.sh
