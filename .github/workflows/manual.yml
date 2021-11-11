@@ -73,7 +73,7 @@ jobs:
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX="c:\tools\ASL\"
         call edksetup.bat Rebuild
-    - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
+    - name: Compare IA32 CryptoPkg, EmbeddedPkg, EmulatorPkg, FatPkg, FmpDevicePkg
       run: |
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX="c:\tools\ASL\"
@@ -127,7 +127,7 @@ jobs:
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX="c:\tools\ASL\"
         call edksetup.bat Rebuild
-    - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
+    - name: Compare IA32 IntelFsp*Pkg, MdeModulePkg, MdePkg, NetworkPkg, OvmfPkg
       run: |
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX="c:\tools\ASL\"
@@ -181,7 +181,7 @@ jobs:
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX="c:\tools\ASL\"
         call edksetup.bat Rebuild
-    - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
+    - name: Compare IA32 PcAtChipsetPkg, RedfishPkg, SecurityPkg, ShellPkg, UefiCpuPkg, SourceLeveleDebugPkg, UefiCpuPkg, UnitTestFrameworkPkg
       run: |
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX="c:\tools\ASL\"
@@ -238,21 +238,21 @@ jobs:
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX="c:\tools\ASL\"
         call edksetup.bat Rebuild
-    - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
+    - name: Compare X64 CryptoPkg, EmulatorPkg, FatPkg, FmpDevicePkg
       run: |
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX="c:\tools\ASL\"
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p CryptoPkg/CryptoPkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc
-        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p EmbeddedPkg/EmbeddedPkg.dsc
         REM
         REM Too many issues to fix right now
         REM Build break EmbeddedPkg\Library\GdbSerialDebugPortLib\GdbSerialDebugPortLib.c(127): warning C4244: 'function': conversion from 'UINTN' to 'UINT32', possible loss of data
         REM Build break EmbeddedPkg\Library\GdbSerialDebugPortLib\GdbSerialDebugPortLib.c(153): warning C4244: 'function': conversion from 'UINTN' to 'UINT32', possible loss of data
         REM
-        REM python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p EmulatorPkg/EmulatorPkg.dsc
+        REM python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p EmbeddedPkg/EmbeddedPkg.dsc
         REM
+        python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p EmulatorPkg/EmulatorPkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p FatPkg/FatPkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p FmpDevicePkg/FmpDevicePkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p FmpDevicePkg/Test/FmpDeviceHostPkgTest.dsc
@@ -298,7 +298,7 @@ jobs:
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX="c:\tools\ASL\"
         call edksetup.bat Rebuild
-    - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
+    - name: Compare X64 IntelFsp*Pkg, MdeModulePkg, MdePkg, NetworkPkg
       run: |
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX="c:\tools\ASL\"
@@ -355,7 +355,7 @@ jobs:
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX="c:\tools\ASL\"
         call edksetup.bat Rebuild
-    - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
+    - name: Compare X64 OvmfPkg
       run: |
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX="c:\tools\ASL\"
@@ -412,7 +412,7 @@ jobs:
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
-    - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
+    - name: Compare X64 PcAtChipsetPkg, RedfishPkg, SecurityPkg, ShellPkg, SignedCapsulePkg, SourceLevelDebugPkg, UefiCpuPkg, UefiPayloadPkg, UnitTestFrameworkPkg
       run: |
         set NASM_PREFIX="c:\Program Files\NASM\"
         set IASL_PREFIX=c:\tools\ASL\
