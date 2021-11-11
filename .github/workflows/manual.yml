@@ -65,8 +65,8 @@ jobs:
         pip install GitPython
     - name: Install NASM
       run: |
-        choco --yes install nasm
-#        choco --yes install iasl --version=2017.11.10
+        choco install nasm
+        choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
         edksetup.bat Rebuild
