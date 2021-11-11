@@ -410,12 +410,12 @@ jobs:
     - name: Build BaseTools
       run: |
         set NASM_PREFIX="c:\Program Files\NASM\"
-        set IASL_PREFIX="c:\tools\ASL\"
+        set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
       run: |
         set NASM_PREFIX="c:\Program Files\NASM\"
-        set IASL_PREFIX="c:\tools\ASL\"
+        set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p PcAtChipsetPkg/PcAtChipsetPkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p RedfishPkg/RedfishPkg.dsc
