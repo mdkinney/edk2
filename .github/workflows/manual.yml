@@ -65,7 +65,6 @@ jobs:
         submodules: true
     - name: Install pip modules
       run: |
-        set
         python -m pip install --upgrade pip
         pip install GitPython
     - name: Install NASM
@@ -74,13 +73,9 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare IA32 CryptoPkg, EmbeddedPkg, EmulatorPkg, FatPkg, FmpDevicePkg
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p CryptoPkg/CryptoPkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc
@@ -135,13 +130,9 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare IA32 IntelFsp*Pkg, MdeModulePkg, MdePkg, NetworkPkg, OvmfPkg
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p IntelFsp2Pkg/IntelFsp2Pkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dsc
@@ -192,13 +183,9 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare IA32 PcAtChipsetPkg, RedfishPkg, SecurityPkg, ShellPkg, UefiCpuPkg, SourceLeveleDebugPkg, UefiCpuPkg, UnitTestFrameworkPkg
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p PcAtChipsetPkg/PcAtChipsetPkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p RedfishPkg/RedfishPkg.dsc
@@ -252,13 +239,9 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare X64 CryptoPkg, EmulatorPkg, FatPkg, FmpDevicePkg
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p CryptoPkg/CryptoPkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc
@@ -315,13 +298,9 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare X64 IntelFsp*Pkg, MdeModulePkg, MdePkg, NetworkPkg
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p MdeModulePkg/MdeModulePkg.dsc
@@ -375,13 +354,9 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare X64 OvmfPkg
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         REM
         REM Skip because of Linux shell dependencies
@@ -432,13 +407,9 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare X64 OvmfPkg Virt
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p OvmfPkg/OvmfXen.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p OvmfPkg/Bhyve/BhyveX64.dsc
@@ -485,13 +456,9 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare X64 PcAtChipsetPkg, RedfishPkg, SecurityPkg, ShellPkg
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p PcAtChipsetPkg/PcAtChipsetPkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p RedfishPkg/RedfishPkg.dsc
@@ -539,13 +506,9 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare X64 SignedCapsulePkg, SourceLevelDebugPkg, UefiCpuPkg, UefiPayloadPkg, UnitTestFrameworkPkg
       run: |
-        REM set NASM_PREFIX="c:\Program Files\NASM\"
-        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p SignedCapsulePkg/SignedCapsulePkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p SourceLevelDebugPkg/SourceLevelDebugPkg.dsc
@@ -588,7 +551,6 @@ jobs:
         submodules: true
     - name: Install pip modules
       run: |
-        export
         python -m pip install --upgrade pip
         pip install GitPython
     - name: Install NASM
@@ -607,9 +569,6 @@ jobs:
     - name: Compare ArmPkg, ArmPlatformPkg, ArmVirtPkg
       run: |
         . edksetup.sh
-        # export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
-        # export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
-        # export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p ArmPkg/ArmPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a AARCH64 -b NOOPT -p ArmPkg/ArmPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p ArmPlatformPkg/ArmPlatformPkg.dsc ${{ github.event.inputs.buildoptions }}
@@ -674,9 +633,6 @@ jobs:
     - name: Compare CryptoPkg
       run: |
         . edksetup.sh
-        # export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
-        # export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
-        # export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p CryptoPkg/CryptoPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p CryptoPkg/CryptoPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p CryptoPkg/CryptoPkg.dsc ${{ github.event.inputs.buildoptions }}
@@ -736,9 +692,6 @@ jobs:
     - name: Compare DynamicTablesPkg, EmbeddedPkg, FatPkg, FmpDevicePkg
       run: |
         . edksetup.sh
-        # export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
-        # export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
-        # export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p DynamicTablesPkg/DynamicTablesPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a AARCH64 -b NOOPT -p DynamicTablesPkg/DynamicTablesPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p EmbeddedPkg/EmbeddedPkg.dsc ${{ github.event.inputs.buildoptions }}
@@ -815,9 +768,6 @@ jobs:
     - name: Compare IntelFsp*Pkg, MdePkg, NetworkPkg
       run: |
         . edksetup.sh
-        # export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
-        # export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
-        # export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p IntelFsp2Pkg/IntelFsp2Pkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dsc ${{ github.event.inputs.buildoptions }}
@@ -885,9 +835,6 @@ jobs:
     - name: Compare MdeModulePkg
       run: |
         . edksetup.sh
-        # export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
-        # export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
-        # export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc ${{ github.event.inputs.buildoptions }}
         #
@@ -954,9 +901,6 @@ jobs:
     - name: Compare OvmfPkg
       run: |
         . edksetup.sh
-        # export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
-        # export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
-        # export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
         #
         # Skip because "Can't find grub mkimage"
         #
@@ -1017,9 +961,6 @@ jobs:
     - name: Compare OvmfPkg
       run: |
         . edksetup.sh
-        # export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
-        # export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
-        # export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p OvmfPkg/OvmfXen.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p OvmfPkg/Bhyve/BhyveX64.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p OvmfPkg/Microvm/MicrovmX64.dsc ${{ github.event.inputs.buildoptions }}
@@ -1075,9 +1016,6 @@ jobs:
     - name: Compare PcAtChipsetPkg, RedfishPkg, SecurityPkg
       run: |
         . edksetup.sh
-        # export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
-        # export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
-        # export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p PcAtChipsetPkg/PcAtChipsetPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p PcAtChipsetPkg/PcAtChipsetPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p RedfishPkg/RedfishPkg.dsc ${{ github.event.inputs.buildoptions }}
@@ -1142,9 +1080,6 @@ jobs:
     - name: Compare ShellPkg
       run: |
         . edksetup.sh
-        # export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
-        # export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
-        # export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p ShellPkg/ShellPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a X64 -b NOOPT -p ShellPkg/ShellPkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p ShellPkg/ShellPkg.dsc ${{ github.event.inputs.buildoptions }}
@@ -1202,9 +1137,6 @@ jobs:
     - name: Compare SignedCapsulePkg, UefiCpuPkg, SourceLevelDebugPkg, UefiPayloadPkg, UnitTestFrameworkPkg
       run: |
         . edksetup.sh
-        # export GCC5_AARCH64_PREFIX="/usr/bin/aarch64-linux-gnu-"
-        # export GCC5_ARM_PREFIX="/usr/bin/arm-none-eabi-"
-        # export GCC5_RISCV64_PREFIX="/usr/bin/riscv64-linux-gnu-"
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a AARCH64 -b NOOPT -p SignedCapsulePkg/SignedCapsulePkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a ARM -b NOOPT -p SignedCapsulePkg/SignedCapsulePkg.dsc ${{ github.event.inputs.buildoptions }}
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log -a IA32 -b NOOPT -p SignedCapsulePkg/SignedCapsulePkg.dsc ${{ github.event.inputs.buildoptions }}
