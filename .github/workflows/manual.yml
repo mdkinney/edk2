@@ -37,7 +37,7 @@ jobs:
     runs-on: windows-latest
     env:
       NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: c:\tools\ASL\
+      IASL_PREFIX: "c:\tools\ASL\"
     defaults:
       run:
         shell: cmd
@@ -98,7 +98,7 @@ jobs:
     runs-on: windows-latest
     env:
       NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: c:\tools\ASL\
+      IASL_PREFIX: "c:\tools\ASL\"
     defaults:
       run:
         shell: cmd
@@ -155,7 +155,7 @@ jobs:
     runs-on: windows-latest
     env:
       NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: c:\tools\ASL\
+      IASL_PREFIX: "c:\tools\ASL\"
     defaults:
       run:
         shell: cmd
@@ -215,7 +215,7 @@ jobs:
     runs-on: windows-latest
     env:
       NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: c:\tools\ASL\
+      IASL_PREFIX: "c:\tools\ASL\"
     defaults:
       run:
         shell: cmd
@@ -278,7 +278,7 @@ jobs:
     runs-on: windows-latest
     env:
       NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: c:\tools\ASL\
+      IASL_PREFIX: "c:\tools\ASL\"
     defaults:
       run:
         shell: cmd
@@ -338,7 +338,7 @@ jobs:
     runs-on: windows-latest
     env:
       NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: c:\tools\ASL\
+      IASL_PREFIX: "c:\tools\ASL\"
     defaults:
       run:
         shell: cmd
@@ -395,7 +395,7 @@ jobs:
     runs-on: windows-latest
     env:
       NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: c:\tools\ASL\
+      IASL_PREFIX: "c:\tools\ASL\"
     defaults:
       run:
         shell: cmd
@@ -448,7 +448,7 @@ jobs:
     runs-on: windows-latest
     env:
       NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: c:\tools\ASL\
+      IASL_PREFIX: "c:\tools\ASL\"
     defaults:
       run:
         shell: cmd
@@ -502,7 +502,7 @@ jobs:
     runs-on: windows-latest
     env:
       NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: c:\tools\ASL\
+      IASL_PREFIX: "c:\tools\ASL\"
     defaults:
       run:
         shell: cmd
