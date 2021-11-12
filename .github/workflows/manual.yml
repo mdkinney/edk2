@@ -74,13 +74,13 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare IA32 CryptoPkg, EmbeddedPkg, EmulatorPkg, FatPkg, FmpDevicePkg
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p CryptoPkg/CryptoPkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc
@@ -135,13 +135,13 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare IA32 IntelFsp*Pkg, MdeModulePkg, MdePkg, NetworkPkg, OvmfPkg
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p IntelFsp2Pkg/IntelFsp2Pkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dsc
@@ -192,13 +192,13 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare IA32 PcAtChipsetPkg, RedfishPkg, SecurityPkg, ShellPkg, UefiCpuPkg, SourceLeveleDebugPkg, UefiCpuPkg, UnitTestFrameworkPkg
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p PcAtChipsetPkg/PcAtChipsetPkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a IA32 -b NOOPT ${{ github.event.inputs.buildoptions }} -p RedfishPkg/RedfishPkg.dsc
@@ -252,13 +252,13 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare X64 CryptoPkg, EmulatorPkg, FatPkg, FmpDevicePkg
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p CryptoPkg/CryptoPkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc
@@ -315,13 +315,13 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare X64 IntelFsp*Pkg, MdeModulePkg, MdePkg, NetworkPkg
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p MdeModulePkg/MdeModulePkg.dsc
@@ -375,13 +375,13 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare X64 OvmfPkg
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         REM
         REM Skip because of Linux shell dependencies
@@ -432,13 +432,13 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare X64 OvmfPkg Virt
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p OvmfPkg/OvmfXen.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p OvmfPkg/Bhyve/BhyveX64.dsc
@@ -485,13 +485,13 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare X64 PcAtChipsetPkg, RedfishPkg, SecurityPkg, ShellPkg
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p PcAtChipsetPkg/PcAtChipsetPkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p RedfishPkg/RedfishPkg.dsc
@@ -539,13 +539,13 @@ jobs:
         choco install iasl --version=2017.11.10
     - name: Build BaseTools
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat Rebuild
     - name: Compare X64 SignedCapsulePkg, SourceLevelDebugPkg, UefiCpuPkg, UefiPayloadPkg, UnitTestFrameworkPkg
       run: |
-#        set NASM_PREFIX="c:\Program Files\NASM\"
-#        set IASL_PREFIX=c:\tools\ASL\
+        REM set NASM_PREFIX="c:\Program Files\NASM\"
+        REM set IASL_PREFIX=c:\tools\ASL\
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p SignedCapsulePkg/SignedCapsulePkg.dsc
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log -a X64 -b NOOPT ${{ github.event.inputs.buildoptions }} -p SourceLevelDebugPkg/SourceLevelDebugPkg.dsc
