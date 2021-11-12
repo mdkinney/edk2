@@ -98,8 +98,8 @@ jobs:
     # The type of runner that the job will run on
     runs-on: windows-latest
     env:
-      NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: "c:\tools\ASL\"
+      NASM_PREFIX: c:\\Program Files\\NASM\\
+      IASL_PREFIX: c:\\tools\\ASL\\
     defaults:
       run:
         shell: cmd
@@ -155,8 +155,8 @@ jobs:
     # The type of runner that the job will run on
     runs-on: windows-latest
     env:
-      NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: "c:\tools\ASL\"
+      NASM_PREFIX: c:\\Program Files\\NASM\\
+      IASL_PREFIX: c:\\tools\\ASL\\
     defaults:
       run:
         shell: cmd
@@ -215,8 +215,8 @@ jobs:
     # The type of runner that the job will run on
     runs-on: windows-latest
     env:
-      NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: "c:\tools\ASL\"
+      NASM_PREFIX: c:\\Program Files\\NASM\\
+      IASL_PREFIX: c:\\tools\\ASL\\
     defaults:
       run:
         shell: cmd
@@ -278,8 +278,8 @@ jobs:
     # The type of runner that the job will run on
     runs-on: windows-latest
     env:
-      NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: "c:\tools\ASL\"
+      NASM_PREFIX: c:\\Program Files\\NASM\\
+      IASL_PREFIX: c:\\tools\\ASL\\
     defaults:
       run:
         shell: cmd
@@ -338,8 +338,8 @@ jobs:
     # The type of runner that the job will run on
     runs-on: windows-latest
     env:
-      NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: "c:\tools\ASL\"
+      NASM_PREFIX: c:\\Program Files\\NASM\\
+      IASL_PREFIX: c:\\tools\\ASL\\
     defaults:
       run:
         shell: cmd
@@ -395,8 +395,8 @@ jobs:
     # The type of runner that the job will run on
     runs-on: windows-latest
     env:
-      NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: "c:\tools\ASL\"
+      NASM_PREFIX: c:\\Program Files\\NASM\\
+      IASL_PREFIX: c:\\tools\\ASL\\
     defaults:
       run:
         shell: cmd
@@ -448,8 +448,8 @@ jobs:
     # The type of runner that the job will run on
     runs-on: windows-latest
     env:
-      NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: "c:\tools\ASL\"
+      NASM_PREFIX: c:\\Program Files\\NASM\\
+      IASL_PREFIX: c:\\tools\\ASL\\
     defaults:
       run:
         shell: cmd
@@ -502,8 +502,8 @@ jobs:
     # The type of runner that the job will run on
     runs-on: windows-latest
     env:
-      NASM_PREFIX: "c:\Program Files\NASM\"
-      IASL_PREFIX: "c:\tools\ASL\"
+      NASM_PREFIX: c:\\Program Files\\NASM\\
+      IASL_PREFIX: c:\\tools\\ASL\\
     defaults:
       run:
         shell: cmd
@@ -588,6 +588,7 @@ jobs:
         submodules: true
     - name: Install pip modules
       run: |
+        export
         python -m pip install --upgrade pip
         pip install GitPython
     - name: Install NASM
