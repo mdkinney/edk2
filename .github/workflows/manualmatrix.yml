@@ -244,4 +244,4 @@ jobs:
     - name: ${{matrix.platform}}
       run: |
         . edksetup.sh
-        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log ${{ github.event.inputs.buildoptions }} ${{matrix.platform}}
+        python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log ${{ github.event.inputs.buildoptions }} -b NOOPT ${{matrix.platform}}
