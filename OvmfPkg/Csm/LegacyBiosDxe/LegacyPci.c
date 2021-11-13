@@ -2923,10 +2923,10 @@ LegacyBiosInstallPciRom (
       if (
             (
                ((PciConfigHeader.Hdr.ClassCode[2] == PCI_CLASS_OLD) &&
-                (PciConfigHeader.Hdr.ClassCode[1] == PCI_CLASS_OLD_VGA))
+              (PciConfigHeader.Hdr.ClassCode[1] == PCI_CLASS_OLD_VGA))
             ||
-               ((PciConfigHeader.Hdr.ClassCode[2] == PCI_CLASS_DISPLAY) &&
-                (PciConfigHeader.Hdr.ClassCode[1] == PCI_CLASS_DISPLAY_VGA))
+             ((PciConfigHeader.Hdr.ClassCode[2] == PCI_CLASS_DISPLAY) &&
+              (PciConfigHeader.Hdr.ClassCode[1] == PCI_CLASS_DISPLAY_VGA))
             )
          &&
             (!Private->VgaInstalled)

@@ -41,13 +41,13 @@ STATIC CONST OVMF_TYPE0  mOvmfDefaultType0 = {
       0,   // Reserved                                      :2
       0,   // Unknown                                       :1
       1,   // BiosCharacteristicsNotSupported               :1
-             // Remaining BiosCharacteristics bits left unset :60
+           // Remaining BiosCharacteristics bits left unset :60
     },
     {      // BIOSCharacteristicsExtensionBytes[2]
       0,   // BiosReserved
       0x1C // SystemReserved = VirtualMachineSupported |
-             //                  UefiSpecificationSupported |
-             //                  TargetContentDistributionEnabled
+           //                  UefiSpecificationSupported |
+           //                  TargetContentDistributionEnabled
     },
     0,     // UINT8                     SystemBiosMajorRelease
     0,     // UINT8                     SystemBiosMinorRelease
