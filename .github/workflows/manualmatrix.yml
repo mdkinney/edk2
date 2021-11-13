@@ -127,14 +127,15 @@ jobs:
       run: |
         call edksetup.bat
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log ${{ github.event.inputs.buildoptions }} -b NOOPT ${{matrix.platform}}
+      continue-on-error: true
 
   gcc_build:
     strategy:
       matrix:
         platform: [
-          -a ARM -a AARCH64                           -p ArmPkg/ArmPkg.dsc, 
-          -a ARM -a AARCH64                           -p ArmPlatformPkg/ArmPlatformPkg.dsc, 
-          -a AARCH64                                  -p ArmVirtPkg/ArmVirtCloudHv.dsc, 
+          -a ARM -a AARCH64                           -p ArmPkg/ArmPkg.dsc,
+          -a ARM -a AARCH64                           -p ArmPlatformPkg/ArmPlatformPkg.dsc,
+          -a AARCH64                                  -p ArmVirtPkg/ArmVirtCloudHv.dsc,
           -a ARM                                      -p ArmVirtPkg/ArmVirtCloudHv.dsc,
           -a AARCH64                                  -p ArmVirtPkg/ArmVirtQemu.dsc,
           -a ARM                                      -p ArmVirtPkg/ArmVirtQemu.dsc,
@@ -150,7 +151,7 @@ jobs:
           # Skip because X11 not supported on Ubuntu-20.04
           #
           #  -a X64  -p EmulatorPkg/EmulatorPkg.dsc,
-          #  -a IA32 -p EmulatorPkg/EmulatorPkg.dsc, 
+          #  -a IA32 -p EmulatorPkg/EmulatorPkg.dsc,
           #
           -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FatPkg/FatPkg.dsc,
           -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FmpDevicePkg/FmpDevicePkg.dsc,
@@ -245,3 +246,4 @@ jobs:
       run: |
         . edksetup.sh
         python3 ../compare/CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t GCC5 -j Build/Build.log ${{ github.event.inputs.buildoptions }} -b NOOPT ${{matrix.platform}}
+      continue-on-error: true
