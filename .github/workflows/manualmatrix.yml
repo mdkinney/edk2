@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
 
-name: Manual maxtrix workflow
+name: Compare edk2 repository builds
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
@@ -32,7 +32,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  vs_build:
+  vs_compare_build:
     strategy:
       matrix:
         platform: [
@@ -129,7 +129,7 @@ jobs:
         python ..\compare\CompareBuild.py --ref1 ${{ github.event.inputs.ref1 }} --ref2 ${{ github.event.inputs.ref2 }} build -t VS2019 -j Build/Build.log ${{ github.event.inputs.buildoptions }} -b NOOPT ${{matrix.platform}}
       continue-on-error: true
 
-  gcc_build:
+  gcc_compare_build:
     strategy:
       matrix:
         platform: [
