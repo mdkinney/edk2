@@ -94,7 +94,7 @@ jobs:
     - name: Download Coverity Build Tool
       run: |
         wget -nv \
-          --post-data "token=${{ github.event.inputs.COVERITY_SCAN_TOKEN }}&project=${{ inputs.project }}" \
+          --post-data "token=${{ github.event.inputs.COVERITY_SCAN_TOKEN }}&project=${{ github.event.inputs.COVERITY_SCAN_PROJECT_NAME }}" \
           -O cov-analysis.tar.gz \
           https://scan.coverity.com/download/cxx/linux64
         mkdir cov-analysis
