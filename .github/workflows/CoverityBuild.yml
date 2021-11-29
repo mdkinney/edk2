@@ -3,6 +3,12 @@
 #
 # Copyright (c) 2021, Intel Corporation. All rights reserved.<BR>
 # SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+# Basd on: https://github.com/vapier/coverity-scan-action
+#
+# Modified to support combinng scan results from many EDK II
+# builds before uploading to coverity.
+#
 ##
 
 name: Open Coverity edk2 repository builds
@@ -84,15 +90,32 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install iasl gcc-arm-none-eabi gcc-aarch64-linux-gnu gcc-riscv64-linux-gnu pax-utils libc6-dev-i386
+
+    - name: Download Coverity Build Tool
+      run: |
+        wget -nv \
+          --post-data "token=${{ github.event.inputs.COVERITY_SCAN_TOKEN }}&project=${{ inputs.project }}" \
+          -O cov-analysis.tar.gz \
+          https://scan.coverity.com/download/cxx/linux64
+        mkdir cov-analysis
+        tar -xzf cov-analysis.tar.gz --strip 1 -C cov-analysis
     - name: Build BaseTools
       run: |
         . edksetup.sh
         make -C BaseTools
-    - uses: vapier/coverity-scan-action@v0
-      with:
-        project: ${{ github.event.inputs.COVERITY_SCAN_PROJECT_NAME }}
-        token: ${{ github.event.inputs.COVERITY_SCAN_TOKEN }}
-        email: ${{ github.event.inputs.COVERITY_SCAN_EMAIL }}
-        build_language: 'cxx'
-        build_platform: 'linux64'
-        command: edksetup.sh && build -t GCC5 -j Build/Build.log ${{ github.event.inputs.buildoptions }} -b NOOPT ${{matrix.platformsimple}}
+    - name: Build with cov-build
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-build --dir cov-int build -t GCC5 -j Build/Build.log ${{ github.event.inputs.buildoptions }} -b NOOPT ${{matrix.platformsimple}}
+    - name: Submit results to Coverity Scan
+      run: |
+        tar -czvf cov-int.tgz cov-int
+        curl \
+          --form project="${{ github.event.inputs.COVERITY_SCAN_PROJECT_NAME }}" \
+          --form token="${{ github.event.inputs.COVERITY_SCAN_TOKEN }}" \
+          --form email="${{ github.event.inputs.COVERITY_SCAN_EMAIL }}" \
+          --form file=@cov-int.tgz \
+          --form version="${{ github.sha }}" \
+          --form description="coverity-scan-action ${{ github.repository }} / ${{ github.ref }}" \
+          "https://scan.coverity.com/builds?project=${{ github.event.inputs.COVERITY_SCAN_PROJECT_NAME }}"
