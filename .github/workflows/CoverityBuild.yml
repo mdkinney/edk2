@@ -44,71 +44,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [
-          -a ARM -a AARCH64                           -p ArmPkg/ArmPkg.dsc,
-          -a ARM -a AARCH64                           -p ArmPlatformPkg/ArmPlatformPkg.dsc,
-          -a AARCH64                                  -p ArmVirtPkg/ArmVirtCloudHv.dsc,
-          -a ARM                                      -p ArmVirtPkg/ArmVirtCloudHv.dsc,
-          -a AARCH64                                  -p ArmVirtPkg/ArmVirtQemu.dsc,
-          -a ARM                                      -p ArmVirtPkg/ArmVirtQemu.dsc,
-          -a AARCH64                                  -p ArmVirtPkg/ArmVirtQemuKernel.dsc,
-          -a ARM                                      -p ArmVirtPkg/ArmVirtQemuKernel.dsc,
-          -a AARCH64                                  -p ArmVirtPkg/ArmVirtXen.dsc,
-          -a ARM                                      -p ArmVirtPkg/ArmVirtXen.dsc,
-          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p CryptoPkg/CryptoPkg.dsc,
-          -a IA32 -a X64                              -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc,
-          -a ARM -a AARCH64                           -p DynamicTablesPkg/DynamicTablesPkg.dsc,
-          -a IA32 -a X64 -a ARM -a AARCH64            -p EmbeddedPkg/EmbeddedPkg.dsc,
-          #
-          # Skip because X11 not supported on Ubuntu-20.04
-          #
-          #  -a X64  -p EmulatorPkg/EmulatorPkg.dsc,
-          #  -a IA32 -p EmulatorPkg/EmulatorPkg.dsc,
-          #
-          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FatPkg/FatPkg.dsc,
-          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FmpDevicePkg/FmpDevicePkg.dsc,
-          -a IA32 -a X64                              -p FmpDevicePkg/Test/FmpDeviceHostPkgTest.dsc,
-          -a IA32                                     -p IntelFsp2Pkg/IntelFsp2Pkg.dsc,
-          -a IA32 -a X64                              -p IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dsc,
-          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p MdePkg/MdePkg.dsc,
-          -a IA32 -a X64                              -p MdePkg/Test/MdePkgHostTest.dsc,
-          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p NetworkPkg/NetworkPkg.dsc,
-          -a IA32 -a X64 -a AARCH64 -a RISCV64        -p MdeModulePkg/MdeModulePkg.dsc,
-          #
-          # Skip because HII resource section link failure on Linux GCC ARM NOOPT if HII obj is not last in list of linked libs.
-          #
-          # -a ARM -p MdeModulePkg/MdeModulePkg.dsc,
-          #
-          #
-          # Skip because it uses cmocka that uses __LINE__ that can not be overriden
-          #
-          # -a X64 -p MdeModulePkg/Test/MdeModulePkgHostTest.dsc,
-          #
-          #
-          # Skip because "Can't find grub mkimage"
-          #
-          # -a X64         -p OvmfPkg/AmdSev/AmdSevX64.dsc,
-          #
-          -a IA32                                     -p OvmfPkg/OvmfPkgIa32.dsc,
-          -a IA32 -a X64                              -p OvmfPkg/OvmfPkgIa32X64.dsc,
-          -a X64                                      -p OvmfPkg/OvmfPkgX64.dsc,
-          -a X64                                      -p OvmfPkg/OvmfXen.dsc,
-          -a X64                                      -p OvmfPkg/Bhyve/BhyveX64.dsc,
-          -a X64                                      -p OvmfPkg/Microvm/MicrovmX64.dsc,
-          -a IA32 -a X64                              -p PcAtChipsetPkg/PcAtChipsetPkg.dsc,
-          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p RedfishPkg/RedfishPkg.dsc,
-          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p SecurityPkg/SecurityPkg.dsc,
-          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p ShellPkg/ShellPkg.dsc,
-          -a IA32 -a X64 -a AARCH64 -a ARM            -p SignedCapsulePkg/SignedCapsulePkg.dsc ,
-          -a IA32 -a X64                              -p SourceLevelDebugPkg/SourceLevelDebugPkg.dsc,
-          -a IA32 -a X64                              -p UefiCpuPkg/UefiCpuPkg.dsc,
-          -a IA32 -a X64                              -p UefiCpuPkg/Test/UefiCpuPkgHostTest.dsc,
-          -a IA32 -a X64                              -p UefiPayloadPkg/UefiPayloadPkg.dsc,
-          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV   -p UnitTestFrameworkPkg/UnitTestFrameworkPkg.dsc,
-          -a IA32 -a X64                              -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc
-          ]
         platformsimple: [
-          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FatPkg/FatPkg.dsc,
+          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FatPkg/FatPkg.dsc
           ]
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -158,4 +95,4 @@ jobs:
         email: ${{ github.event.inputs.COVERITY_SCAN_EMAIL }}
         build_language: 'cxx'
         build_platform: 'linux64'
-        command: . edksetup.sh && build -t GCC5 -j Build/Build.log ${{ github.event.inputs.buildoptions }} -b NOOPT ${{matrix.platformsimple}}
+        command: edksetup.sh && build -t GCC5 -j Build/Build.log ${{ github.event.inputs.buildoptions }} -b NOOPT ${{matrix.platformsimple}}
