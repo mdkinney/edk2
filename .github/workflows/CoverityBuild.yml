@@ -1,0 +1,161 @@
+## @file
+# Manual GitHubAction to perform Open Coverity builds
+#
+# Copyright (c) 2021, Intel Corporation. All rights reserved.<BR>
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+name: Open Coverity edk2 repository builds
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      COVERITY_SCAN_TOKEN:
+        description: 'Coverity Scan Token for the project being scanned'
+        default: ''
+        required: true
+      COVERITY_SCAN_PROJECT_NAME:
+        description: 'Name of the Coverity Scan Project'
+        default: 'mdkinney%2Fedk2'
+        required: true
+      COVERITY_SCAN_EMAIL:
+        description: 'Email associated with the Coverity Scan Project'
+        default: 'michael.d.kinney@intel.com'
+        required: true
+      repo:
+        description: 'Public edk2 repository to use for Open Coverity build'
+        default: 'mdkinney/edk2'
+        required: true
+      ref:
+        description: 'git branch/tag/sha to run Open Coverity build'
+        default: 'master'
+        required: true
+      buildoptions:
+        description: 'Extra options to add to end of build command (e.g. --quiet, --verbose)'
+        default: '-n 4 --quiet'
+        required: false
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  gcc_coverity_build:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [
+          -a ARM -a AARCH64                           -p ArmPkg/ArmPkg.dsc,
+          -a ARM -a AARCH64                           -p ArmPlatformPkg/ArmPlatformPkg.dsc,
+          -a AARCH64                                  -p ArmVirtPkg/ArmVirtCloudHv.dsc,
+          -a ARM                                      -p ArmVirtPkg/ArmVirtCloudHv.dsc,
+          -a AARCH64                                  -p ArmVirtPkg/ArmVirtQemu.dsc,
+          -a ARM                                      -p ArmVirtPkg/ArmVirtQemu.dsc,
+          -a AARCH64                                  -p ArmVirtPkg/ArmVirtQemuKernel.dsc,
+          -a ARM                                      -p ArmVirtPkg/ArmVirtQemuKernel.dsc,
+          -a AARCH64                                  -p ArmVirtPkg/ArmVirtXen.dsc,
+          -a ARM                                      -p ArmVirtPkg/ArmVirtXen.dsc,
+          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p CryptoPkg/CryptoPkg.dsc,
+          -a IA32 -a X64                              -p CryptoPkg/Test/CryptoPkgHostUnitTest.dsc,
+          -a ARM -a AARCH64                           -p DynamicTablesPkg/DynamicTablesPkg.dsc,
+          -a IA32 -a X64 -a ARM -a AARCH64            -p EmbeddedPkg/EmbeddedPkg.dsc,
+          #
+          # Skip because X11 not supported on Ubuntu-20.04
+          #
+          #  -a X64  -p EmulatorPkg/EmulatorPkg.dsc,
+          #  -a IA32 -p EmulatorPkg/EmulatorPkg.dsc,
+          #
+          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FatPkg/FatPkg.dsc,
+          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FmpDevicePkg/FmpDevicePkg.dsc,
+          -a IA32 -a X64                              -p FmpDevicePkg/Test/FmpDeviceHostPkgTest.dsc,
+          -a IA32                                     -p IntelFsp2Pkg/IntelFsp2Pkg.dsc,
+          -a IA32 -a X64                              -p IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dsc,
+          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p MdePkg/MdePkg.dsc,
+          -a IA32 -a X64                              -p MdePkg/Test/MdePkgHostTest.dsc,
+          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p NetworkPkg/NetworkPkg.dsc,
+          -a IA32 -a X64 -a AARCH64 -a RISCV64        -p MdeModulePkg/MdeModulePkg.dsc,
+          #
+          # Skip because HII resource section link failure on Linux GCC ARM NOOPT if HII obj is not last in list of linked libs.
+          #
+          # -a ARM -p MdeModulePkg/MdeModulePkg.dsc,
+          #
+          #
+          # Skip because it uses cmocka that uses __LINE__ that can not be overriden
+          #
+          # -a X64 -p MdeModulePkg/Test/MdeModulePkgHostTest.dsc,
+          #
+          #
+          # Skip because "Can't find grub mkimage"
+          #
+          # -a X64         -p OvmfPkg/AmdSev/AmdSevX64.dsc,
+          #
+          -a IA32                                     -p OvmfPkg/OvmfPkgIa32.dsc,
+          -a IA32 -a X64                              -p OvmfPkg/OvmfPkgIa32X64.dsc,
+          -a X64                                      -p OvmfPkg/OvmfPkgX64.dsc,
+          -a X64                                      -p OvmfPkg/OvmfXen.dsc,
+          -a X64                                      -p OvmfPkg/Bhyve/BhyveX64.dsc,
+          -a X64                                      -p OvmfPkg/Microvm/MicrovmX64.dsc,
+          -a IA32 -a X64                              -p PcAtChipsetPkg/PcAtChipsetPkg.dsc,
+          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p RedfishPkg/RedfishPkg.dsc,
+          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p SecurityPkg/SecurityPkg.dsc,
+          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p ShellPkg/ShellPkg.dsc,
+          -a IA32 -a X64 -a AARCH64 -a ARM            -p SignedCapsulePkg/SignedCapsulePkg.dsc ,
+          -a IA32 -a X64                              -p SourceLevelDebugPkg/SourceLevelDebugPkg.dsc,
+          -a IA32 -a X64                              -p UefiCpuPkg/UefiCpuPkg.dsc,
+          -a IA32 -a X64                              -p UefiCpuPkg/Test/UefiCpuPkgHostTest.dsc,
+          -a IA32 -a X64                              -p UefiPayloadPkg/UefiPayloadPkg.dsc,
+          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV   -p UnitTestFrameworkPkg/UnitTestFrameworkPkg.dsc,
+          -a IA32 -a X64                              -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc
+          ]
+        platformsimple: [
+          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FatPkg/FatPkg.dsc,
+          ]
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env:
+      GCC5_AARCH64_PREFIX: "/usr/bin/aarch64-linux-gnu-"
+      GCC5_ARM_PREFIX: "/usr/bin/arm-none-eabi-"
+      GCC5_RISCV64_PREFIX: "/usr/bin/riscv64-linux-gnu-"
+    defaults:
+      run:
+        working-directory: ./edk2
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: mdkinney/edk2
+        ref: sandbox/CompareBuild
+        path: compare
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        repository: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref }}
+        path: edk2
+        submodules: false
+    - name: Install pip modules
+      run: |
+        python -m pip install --upgrade pip
+        pip install GitPython
+    - name: Install NASM
+      run: |
+        curl -k -O  -L http://ftp.us.debian.org/debian//pool/main/n/nasm/nasm_2.15.05-1_amd64.deb
+        sudo apt install ./nasm_2.15.05-1_amd64.deb
+        nasm --version
+    - name: Install IASL/ARM/AARCH64/RISCV64 compilers
+      run: |
+        sudo apt-get update
+        sudo apt-get install iasl gcc-arm-none-eabi gcc-aarch64-linux-gnu gcc-riscv64-linux-gnu pax-utils libc6-dev-i386
+    - name: Build BaseTools
+      run: |
+        . edksetup.sh
+        make -C BaseTools
+    - uses: vapier/coverity-scan-action@v0
+      with:
+        project: ${{ github.event.inputs.COVERITY_SCAN_PROJECT_NAME }}
+        token: ${{ github.event.inputs.COVERITY_SCAN_TOKEN }}
+        email: ${{ github.event.inputs.COVERITY_SCAN_EMAIL }}
+        build_language: 'cxx'
+        build_platform: 'linux64'
+        command: . edksetup.sh && build -t GCC5 -j Build/Build.log ${{ github.event.inputs.buildoptions }} -b NOOPT ${{matrix.platformsimple}}
