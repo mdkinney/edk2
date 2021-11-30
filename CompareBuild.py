@@ -305,6 +305,8 @@ if __name__ == '__main__':
                 if 'DEFINE' in Line:
                     NewToolsDefLines.append(Line)
                     continue
+                if '_NASM_FLAGS' in Line:
+                    Line = Line.replace (' -g','')
                 if '_VS20' in Line and '_CC_FLAGS' in Line:
                     Line = Line.replace (' /Zi','')
                     Line = Line.replace (' /Zd','')
