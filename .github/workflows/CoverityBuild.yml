@@ -104,7 +104,7 @@ jobs:
         cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64                              -p UefiCpuPkg/UefiCpuPkg.dsc
         cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64                              -p PcAtChipsetPkg/PcAtChipsetPkg.dsc
         cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p MdePkg/MdePkg.dsc
-        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p MdeModulePkg/MdeModulePkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64        -a AARCH64 -a RISCV64 -p MdeModulePkg/MdeModulePkg.dsc
         cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p ShellPkg/ShellPkg.dsc
         cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FatPkg/FatPkg.dsc
         cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM -a AARCH64                           -p ArmPkg/ArmPkg.dsc
