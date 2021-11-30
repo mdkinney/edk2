@@ -1,0 +1,122 @@
+## @file
+# Manual GitHubAction to perform Open Coverity builds
+#
+# Copyright (c) 2021, Intel Corporation. All rights reserved.<BR>
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+# Basd on: https://github.com/vapier/coverity-scan-action
+#
+# Modified to support combinng scan results from many EDK II
+# builds before uploading to coverity.
+#
+##
+
+name: Open Coverity edk2 repository builds
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      COVERITY_SCAN_TOKEN:
+        description: 'Coverity Scan Token for the project being scanned'
+        default: ''
+        required: true
+      COVERITY_SCAN_PROJECT_NAME:
+        description: 'Name of the Coverity Scan Project'
+        default: 'mdkinney%2Fedk2'
+        required: true
+      COVERITY_SCAN_EMAIL:
+        description: 'Email associated with the Coverity Scan Project'
+        default: 'michael.d.kinney@intel.com'
+        required: true
+      repo:
+        description: 'Public edk2 repository to use for Open Coverity build'
+        default: 'mdkinney/edk2'
+        required: true
+      ref:
+        description: 'git branch/tag/sha to run Open Coverity build'
+        default: 'master'
+        required: true
+      buildoptions:
+        description: 'Extra options to add to end of build command (e.g. --quiet, --verbose)'
+        default: '-n 4 --quiet'
+        required: false
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  gcc_coverity_build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env:
+      GCC5_AARCH64_PREFIX: "/usr/bin/aarch64-linux-gnu-"
+      GCC5_ARM_PREFIX: "/usr/bin/arm-none-eabi-"
+      GCC5_RISCV64_PREFIX: "/usr/bin/riscv64-linux-gnu-"
+    defaults:
+      run:
+        working-directory: ./edk2
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: mdkinney/edk2
+        ref: sandbox/CompareBuild
+        path: compare
+        submodules: false
+    - uses: actions/checkout@v2
+      with:
+        repository: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref }}
+        path: edk2
+        submodules: true
+    - name: Install pip modules
+      run: |
+        python -m pip install --upgrade pip
+        pip install GitPython
+    - name: Install NASM
+      run: |
+        curl -k -O  -L http://ftp.us.debian.org/debian//pool/main/n/nasm/nasm_2.15.05-1_amd64.deb
+        sudo apt install ./nasm_2.15.05-1_amd64.deb
+        nasm --version
+    - name: Install IASL/ARM/AARCH64/RISCV64 compilers
+      run: |
+        sudo apt-get update
+        sudo apt-get install iasl gcc-arm-none-eabi gcc-aarch64-linux-gnu gcc-riscv64-linux-gnu pax-utils libc6-dev-i386
+
+    - name: Download Coverity Build Tool
+      run: |
+        wget -nv \
+          --post-data "token=${{ github.event.inputs.COVERITY_SCAN_TOKEN }}&project=${{ github.event.inputs.COVERITY_SCAN_PROJECT_NAME }}" \
+          -O cov-analysis.tar.gz \
+          https://scan.coverity.com/download/cxx/linux64
+        mkdir cov-analysis
+        tar -xzf cov-analysis.tar.gz --strip 1 -C cov-analysis
+    - name: Build BaseTools
+      run: |
+        . edksetup.sh
+        make -C BaseTools
+    - name: Build with cov-build
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler ${GCC5_AARCH64_PREFIX}-gcc --comptype gcc --template
+        cov-configure --compiler ${GCC5_ARM_PREFIX}-gcc     --comptype gcc --template
+        cov-configure --compiler ${GCC5_RISCV64_PREFIX}-gcc --comptype gcc --template
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32    -p FatPkg/FatPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a X64     -p FatPkg/FatPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM     -p FatPkg/FatPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a AARCH64 -p FatPkg/FatPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a RISCV64 -p FatPkg/FatPkg.dsc
+    - name: Submit results to Coverity Scan
+      run: |
+        tar -czvf cov-int.tgz cov-int
+        curl \
+          --form project="${{ github.event.inputs.COVERITY_SCAN_PROJECT_NAME }}" \
+          --form token="${{ github.event.inputs.COVERITY_SCAN_TOKEN }}" \
+          --form email="${{ github.event.inputs.COVERITY_SCAN_EMAIL }}" \
+          --form file=@cov-int.tgz \
+          --form version="${{ github.sha }}" \
+          --form description="coverity-scan-action ${{ github.repository }} / ${{ github.ref }}" \
+          "https://scan.coverity.com/builds?project=${{ github.event.inputs.COVERITY_SCAN_PROJECT_NAME }}"
