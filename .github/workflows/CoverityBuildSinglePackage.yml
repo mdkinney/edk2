@@ -101,9 +101,9 @@ jobs:
       run: |
         export PATH="${PWD}/cov-analysis/bin:${PATH}"
         . edksetup.sh
-        cov-configure --compiler ${GCC5_AARCH64_PREFIX}-gcc --comptype gcc --template
-        cov-configure --compiler ${GCC5_ARM_PREFIX}-gcc     --comptype gcc --template
-        cov-configure --compiler ${GCC5_RISCV64_PREFIX}-gcc --comptype gcc --template
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32    -p FatPkg/FatPkg.dsc
         cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a X64     -p FatPkg/FatPkg.dsc
         cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM     -p FatPkg/FatPkg.dsc
