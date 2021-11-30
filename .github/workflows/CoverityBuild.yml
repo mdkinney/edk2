@@ -101,12 +101,41 @@ jobs:
       run: |
         export PATH="${PWD}/cov-analysis/bin:${PATH}"
         . edksetup.sh
-        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -p UefiCpuPkg/UefiCpuPkg.dsc
-        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -p PcAtChipsetPkg/PcAtChipsetPkg.dsc
-        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -p MdePkg/MdePkg.dsc
-        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -p MdeModulePkg/MdeModulePkg.dsc
-        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -p ShellPkg/ShellPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64                              -p UefiCpuPkg/UefiCpuPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64                              -p PcAtChipsetPkg/PcAtChipsetPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p MdePkg/MdePkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p MdeModulePkg/MdeModulePkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p ShellPkg/ShellPkg.dsc
         cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FatPkg/FatPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM -a AARCH64                           -p ArmPkg/ArmPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM -a AARCH64                           -p ArmPlatformPkg/ArmPlatformPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a AARCH64                                  -p ArmVirtPkg/ArmVirtCloudHv.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM                                      -p ArmVirtPkg/ArmVirtCloudHv.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a AARCH64                                  -p ArmVirtPkg/ArmVirtQemu.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM                                      -p ArmVirtPkg/ArmVirtQemu.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a AARCH64                                  -p ArmVirtPkg/ArmVirtQemuKernel.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM                                      -p ArmVirtPkg/ArmVirtQemuKernel.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a AARCH64                                  -p ArmVirtPkg/ArmVirtXen.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM                                      -p ArmVirtPkg/ArmVirtXen.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p CryptoPkg/CryptoPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM -a AARCH64                           -p DynamicTablesPkg/DynamicTablesPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64            -p EmbeddedPkg/EmbeddedPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FmpDevicePkg/FmpDevicePkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32                                     -p IntelFsp2Pkg/IntelFsp2Pkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64                              -p IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p NetworkPkg/NetworkPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32                                     -p OvmfPkg/OvmfPkgIa32.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64                              -p OvmfPkg/OvmfPkgIa32X64.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a X64                                      -p OvmfPkg/OvmfPkgX64.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a X64                                      -p OvmfPkg/OvmfXen.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a X64                                      -p OvmfPkg/Bhyve/BhyveX64.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a X64                                      -p OvmfPkg/Microvm/MicrovmX64.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p RedfishPkg/RedfishPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p SecurityPkg/SecurityPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a AARCH64 -a ARM            -p SignedCapsulePkg/SignedCapsulePkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64                              -p SourceLevelDebugPkg/SourceLevelDebugPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64                              -p UefiPayloadPkg/UefiPayloadPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV   -p UnitTestFrameworkPkg/UnitTestFrameworkPkg.dsc
     - name: Submit results to Coverity Scan
       run: |
         tar -czvf cov-int.tgz cov-int
