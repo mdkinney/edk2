@@ -76,7 +76,7 @@ jobs:
         repository: ${{ github.event.inputs.repo }}
         ref: ${{ github.event.inputs.ref }}
         path: edk2
-        submodules: false
+        submodules: true
     - name: Install pip modules
       run: |
         python -m pip install --upgrade pip
