@@ -47,12 +47,6 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   gcc_coverity_build:
-    strategy:
-      fail-fast: false
-      matrix:
-        platformsimple: [
-          -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FatPkg/FatPkg.dsc
-          ]
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     env:
@@ -107,7 +101,12 @@ jobs:
       run: |
         export PATH="${PWD}/cov-analysis/bin:${PATH}"
         . edksetup.sh
-        cov-build --dir cov-int build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT ${{matrix.platformsimple}}
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -p UefiCpuPkg/UefiCpuPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -p PcAtChipsetPkg/PcAtChipsetPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -p MdePkg/MdePkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -p MdeModulePkg/MdeModulePkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -p ShellPkg/ShellPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FatPkg/FatPkg.dsc
     - name: Submit results to Coverity Scan
       run: |
         tar -czvf cov-int.tgz cov-int
