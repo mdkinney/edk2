@@ -107,7 +107,7 @@ jobs:
       run: |
         export PATH="${PWD}/cov-analysis/bin:${PATH}"
         . edksetup.sh
-        cov-build --dir cov-int build -t GCC5 -j Build/Build.log ${{ github.event.inputs.buildoptions }} -b NOOPT ${{matrix.platformsimple}}
+        cov-build --dir cov-int build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT ${{matrix.platformsimple}}
     - name: Submit results to Coverity Scan
       run: |
         tar -czvf cov-int.tgz cov-int
