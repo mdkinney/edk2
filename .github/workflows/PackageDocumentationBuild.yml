@@ -14,12 +14,20 @@ on:
     # Inputs the workflow accepts.
     inputs:
       repo:
-        description: 'Public edk2 repository to use building package documentation'
+        description: 'Public edk2 repository sources used to build package documentation'
         default: 'mdkinney/edk2'
         required: true
       ref:
-        description: 'Git branch/tag/sha to use building package documentation'
+        description: 'Git branch/tag/sha sources used to build package documentation'
         default: ''
+        required: true
+      publish_repo:
+        description: 'Public edk2 repository used to publish package documentation'
+        default: 'mdkinney/edk2'
+        required: true
+      publish_branch:
+        description: 'Git branch to publish package documentation'
+        default: 'gh-pages'
         required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -27,9 +35,6 @@ jobs:
   gcc_build_package_documents:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./edk2
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -47,9 +52,8 @@ jobs:
         /usr/bin/doxygen --version
     - name: Build HTML package documents
       run: |
+        cd edk2
         . edksetup.sh
-        mkdir Build
-        mkdir Build/Doxygen
         echo "<!DOCTYPE html>"                                           > $WORKSPACE/Build/Doxygen/index.html
         echo "<html>"                                                   >> $WORKSPACE/Build/Doxygen/index.html
         echo "  <head>"                                                 >> $WORKSPACE/Build/Doxygen/index.html
@@ -89,5 +93,13 @@ jobs:
         done
         echo "  </body>"       >> $WORKSPACE/Build/Doxygen/index.html
         echo "</html>"       >> $WORKSPACE/Build/Doxygen/index.html
-        ls -al Build/Doxygen
-        more Build/Doxygen/index.html
+    - name: Publish HTML package documents
+      run: |
+        git clone -b ${{github.event.inputs.publish_branch}} https://${GITHUB_ACTOR}:${{secrets.GITBOOK_ACTION_PERSONAL_TOKEN}}@github.com/${{github.event.inputs.publish_repo}}.git Publish
+        cp -rfp edk2/Build/Doxygen/. Publish
+        cd Publish
+        git config --local user.name  ${GITHUB_ACTOR}
+        git config --local user.email ${GITHUB_ACTOR}@users.noreply.github.com
+        git add .
+        git commit -m "Publish package documentation"
+        echo git push https://${GITHUB_ACTOR}:${{secrets.GITBOOK_ACTION_PERSONAL_TOKEN}}@github.com/${{github.event.inputs.publish_repo}}.git  ${{github.event.inputs.publish_branch}}:${{github.event.inputs.publish_branch}}
