@@ -54,6 +54,8 @@ jobs:
       run: |
         cd edk2
         . edksetup.sh
+        mkdir $WORKSPACE/Build
+        mkdir $WORKSPACE/Build/Doxygen
         echo "<!DOCTYPE html>"                                           > $WORKSPACE/Build/Doxygen/index.html
         echo "<html>"                                                   >> $WORKSPACE/Build/Doxygen/index.html
         echo "  <head>"                                                 >> $WORKSPACE/Build/Doxygen/index.html
