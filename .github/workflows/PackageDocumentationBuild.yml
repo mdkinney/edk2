@@ -104,4 +104,4 @@ jobs:
         git config --local user.email ${GITHUB_ACTOR}@users.noreply.github.com
         git add .
         git commit -m "Publish package documentation"
-        echo git push https://${GITHUB_ACTOR}:${{secrets.PACKAGE_DOCUMENTATION_PERSONAL_TOKEN}}@github.com/${{github.event.inputs.publish_repo}}.git  ${{github.event.inputs.publish_branch}}:${{github.event.inputs.publish_branch}}
+        git push https://${GITHUB_ACTOR}:${{secrets.PACKAGE_DOCUMENTATION_PERSONAL_TOKEN}}@github.com/${{github.event.inputs.publish_repo}}.git  ${{github.event.inputs.publish_branch}}:${{github.event.inputs.publish_branch}}
