@@ -50,13 +50,13 @@ jobs:
         . edksetup.sh
         mkdir Build
         mkdir Build/Doxygen
-        echo '<!DOCTYPE html>'                                           > $WORKSPACE/Build/Doxygen/index.html
-        echo '<html>'                                                   >> $WORKSPACE/Build/Doxygen/index.html
-        echo '  <head>'                                                 >> $WORKSPACE/Build/Doxygen/index.html
-        echo '    <title>EDK II Package Doxygen Documentation</title>'  >> $WORKSPACE/Build/Doxygen/index.html
-        echo '  </head>'                                                >> $WORKSPACE/Build/Doxygen/index.html
-        echo '  <body>'                                                 >> $WORKSPACE/Build/Doxygen/index.html
-        echo '    <h1>EDK II Package Doxygen Documentation</h1>'        >> $WORKSPACE/Build/Doxygen/index.html
+        echo "<!DOCTYPE html>"                                           > $WORKSPACE/Build/Doxygen/index.html
+        echo "<html>"                                                   >> $WORKSPACE/Build/Doxygen/index.html
+        echo "  <head>"                                                 >> $WORKSPACE/Build/Doxygen/index.html
+        echo "    <title>EDK II Package Doxygen Documentation</title>"  >> $WORKSPACE/Build/Doxygen/index.html
+        echo "  </head>"                                                >> $WORKSPACE/Build/Doxygen/index.html
+        echo "  <body>"                                                 >> $WORKSPACE/Build/Doxygen/index.html
+        echo "    <h1>EDK II Package Doxygen Documentation</h1>"        >> $WORKSPACE/Build/Doxygen/index.html
         for Pkg in \
           ArmPkg \
           ArmPlatformPkg \
@@ -85,9 +85,9 @@ jobs:
           UnitTestFrameworkPkg
         do
           python3 BaseTools/Scripts/PackageDocumentTools/packagedoc_cli.py -w $WORKSPACE -p $WORKSPACE/$Pkg/$Pkg.dec -x /usr/bin/doxygen -a ALL -i -o $WORKSPACE/Build/Doxygen/$Pkg
-          echo '    <a href="${Pkg}/html/index.html">${Pkg}</a><br>'       >> $WORKSPACE/Build/Doxygen/index.html
+          echo "    <a href=\"${Pkg}/html/index.html\">${Pkg}</a><br>"       >> $WORKSPACE/Build/Doxygen/index.html
         done
-        echo '  </body>'       >> $WORKSPACE/Build/Doxygen/index.html
-        echo '</html>'       >> $WORKSPACE/Build/Doxygen/index.html
+        echo "  </body>"       >> $WORKSPACE/Build/Doxygen/index.html
+        echo "</html>"       >> $WORKSPACE/Build/Doxygen/index.html
         ls -al Build/Doxygen
         more Build/Doxygen/index.html
