@@ -1,0 +1,88 @@
+## @file
+# Manual GitHubAction to perform build of package documentation
+#
+# Copyright (c) 2021, Intel Corporation. All rights reserved.<BR>
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+name: Build package documentation
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      repo:
+        description: 'Public edk2 repository to use building package documentation'
+        default: 'mdkinney/edk2'
+        required: true
+      ref:
+        description: 'Git branch/tag/sha to use building package documentation'
+        default: ''
+        required: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  vs_build_package_documents:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: cmd
+        working-directory: .\edk2
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: ${{ github.event.inputs.repo }}
+        ref: ${{ github.event.inputs.ref }}
+        path: edk2
+        submodules: false
+    - name: Install Doxygen 1.8.6
+      run: |
+        choco install doxygen.install --version=1.8.6
+    - name: Build HTML package documents
+      run: |
+        call edksetup.bat
+        mkdir %WORKSPACE%\Build\Doxygen
+        echo ^<!DOCTYPE html^>  > %WORKSPACE%\Build\Doxygen\index.html
+        echo ^<html^>          >> %WORKSPACE%\Build\Doxygen\index.html
+        echo ^<head^>       >> %WORKSPACE%\Build\Doxygen\index.html
+        echo ^<title^>EDK II Package Doxygen Documentation^</title^>       >> %WORKSPACE%\Build\Doxygen\index.html
+        echo ^</head^>       >> %WORKSPACE%\Build\Doxygen\index.html
+        echo ^<body^>       >> %WORKSPACE%\Build\Doxygen\index.html
+        echo ^<h1^>EDK II Package Doxygen Documentation^</h1^>       >> %WORKSPACE%\Build\Doxygen\index.html
+        for %%a in (
+          ArmPkg
+          ArmPlatformPkg
+          ArmVirtPkg
+          CryptoPkg
+          DynamicTablesPkg
+          EmbeddedPkg
+          EmulatorPkg
+          FatPkg
+          FmpDevicePkg
+          IntelFsp2Pkg
+          IntelFsp2WrapperPkg
+          MdeModulePkg
+          MdePkg
+          NetworkPkg
+          OvmfPkg
+          PcAtChipsetPkg
+          RedfishPkg
+          SecurityPkg
+          ShellPkg
+          SignedCapsulePkg
+          SourceLevelDebugPkg
+          StandaloneMmPkg
+          UefiCpuPkg
+          UefiPayloadPkg
+          UnitTestFrameworkPkg
+        ) do (
+          BaseTools\Scripts\PackageDocumentTools\packagedoc_cli.py -w %WORKSPACE% -p %WORKSPACE%\%%a\%%a.dec -x "c:\Program Files\doxygen\bin\doxygen.exe" -a ALL -i -o %WORKSPACE%\Build\Doxygen\%%a
+          echo ^<a href="%%a/html/index.html"^>%%a^</a^>^<br^>       >> %WORKSPACE%\Build\Doxygen\index.html
+        )
+        echo ^</body^>       >> %WORKSPACE%\Build\Doxygen\index.html
+        echo ^</html^>       >> %WORKSPACE%\Build\Doxygen\index.html
