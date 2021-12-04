@@ -42,7 +42,10 @@ jobs:
         submodules: false
     - name: Install Doxygen 1.8.6
       run: |
-        choco install doxygen.install --version=1.8.6
+        call edksetup.bat
+        mkdir %WORKSPACE%\Build
+        curl -o %WORKSPACE%\Build\doxygen.zip https://sourceforge.net/projects/doxygen/files/rel-1.8.6/doxygen-1.8.6.windows.x64.bin.zip/download
+        unzip %WORKSPACE%\Build\doxygen.zip -d %WORKSPACE%\Build\DoxygenBin
     - name: Build HTML package documents
       run: |
         call edksetup.bat
@@ -81,7 +84,7 @@ jobs:
           UefiPayloadPkg
           UnitTestFrameworkPkg
         ) do (
-          BaseTools\Scripts\PackageDocumentTools\packagedoc_cli.py -w %WORKSPACE% -p %WORKSPACE%\%%a\%%a.dec -x "c:\Program Files\doxygen\bin\doxygen.exe" -a ALL -i -o %WORKSPACE%\Build\Doxygen\%%a
+          BaseTools\Scripts\PackageDocumentTools\packagedoc_cli.py -w %WORKSPACE% -p %WORKSPACE%\%%a\%%a.dec -x %WORKSPACE%\Build\DoxygenBin\doxygen.exe -a ALL -i -o %WORKSPACE%\Build\Doxygen\%%a
           echo ^<a href="%%a/html/index.html"^>%%a^</a^>^<br^>       >> %WORKSPACE%\Build\Doxygen\index.html
         )
         echo ^</body^>       >> %WORKSPACE%\Build\Doxygen\index.html
