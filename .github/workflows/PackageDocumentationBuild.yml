@@ -24,13 +24,12 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  vs_build_package_documents:
+  gcc_build_package_documents:
     # The type of runner that the job will run on
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     defaults:
       run:
-        shell: cmd
-        working-directory: .\edk2
+        working-directory: ./edk2
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -42,50 +41,52 @@ jobs:
         submodules: false
     - name: Install Doxygen 1.8.6
       run: |
-        call edksetup.bat
-        mkdir %WORKSPACE%\Build
-        curl -o %WORKSPACE%\Build\doxygen.zip https://sourceforge.net/projects/doxygen/files/rel-1.8.6/doxygen-1.8.6.windows.x64.bin.zip/download
-        unzip %WORKSPACE%\Build\doxygen.zip -d %WORKSPACE%\Build\DoxygenBin
+        curl -o doxygen.deb http://launchpadlibrarian.net/163827726/doxygen_1.8.6-2_amd64.deb
+        sudo apt install doxygen.deb
+        rm doxygen.deb
+        /usr/bin/doxygen --version
     - name: Build HTML package documents
       run: |
-        call edksetup.bat
-        mkdir %WORKSPACE%\Build\Doxygen
-        echo ^<!DOCTYPE html^>  > %WORKSPACE%\Build\Doxygen\index.html
-        echo ^<html^>          >> %WORKSPACE%\Build\Doxygen\index.html
-        echo ^<head^>       >> %WORKSPACE%\Build\Doxygen\index.html
-        echo ^<title^>EDK II Package Doxygen Documentation^</title^>       >> %WORKSPACE%\Build\Doxygen\index.html
-        echo ^</head^>       >> %WORKSPACE%\Build\Doxygen\index.html
-        echo ^<body^>       >> %WORKSPACE%\Build\Doxygen\index.html
-        echo ^<h1^>EDK II Package Doxygen Documentation^</h1^>       >> %WORKSPACE%\Build\Doxygen\index.html
-        for %%a in (
-          ArmPkg
-          ArmPlatformPkg
-          ArmVirtPkg
-          CryptoPkg
-          DynamicTablesPkg
-          EmbeddedPkg
-          EmulatorPkg
-          FatPkg
-          FmpDevicePkg
-          IntelFsp2Pkg
-          IntelFsp2WrapperPkg
-          MdeModulePkg
-          MdePkg
-          NetworkPkg
-          OvmfPkg
-          PcAtChipsetPkg
-          RedfishPkg
-          SecurityPkg
-          ShellPkg
-          SignedCapsulePkg
-          SourceLevelDebugPkg
-          StandaloneMmPkg
-          UefiCpuPkg
-          UefiPayloadPkg
+        . edksetup.sh
+        mkdir Build/Doxygen
+        echo '<!DOCTYPE html>'                                           > $WORKSPACE/Build/Doxygen/index.html
+        echo '<html>'                                                   >> $WORKSPACE/Build/Doxygen/index.html
+        echo '  <head>'                                                 >> $WORKSPACE/Build/Doxygen/index.html
+        echo '    <title>EDK II Package Doxygen Documentation</title>'  >> $WORKSPACE/Build/Doxygen/index.html
+        echo '  </head>'                                                >> $WORKSPACE/Build/Doxygen/index.html
+        echo '  <body>'                                                 >> $WORKSPACE/Build/Doxygen/index.html
+        echo '    <h1>EDK II Package Doxygen Documentation</h1>'        >> $WORKSPACE/Build/Doxygen/index.html
+        for Pkg in \
+          ArmPkg \
+          ArmPlatformPkg \
+          ArmVirtPkg \
+          CryptoPkg \
+          DynamicTablesPkg \
+          EmbeddedPkg \
+          EmulatorPkg \
+          FatPkg \
+          FmpDevicePkg \
+          IntelFsp2Pkg \
+          IntelFsp2WrapperPkg \
+          MdeModulePkg \
+          MdePkg \
+          NetworkPkg \
+          OvmfPkg \
+          PcAtChipsetPkg \
+          RedfishPkg \
+          SecurityPkg \
+          ShellPkg \
+          SignedCapsulePkg \
+          SourceLevelDebugPkg \
+          StandaloneMmPkg \
+          UefiCpuPkg \
+          UefiPayloadPkg \
           UnitTestFrameworkPkg
-        ) do (
-          BaseTools\Scripts\PackageDocumentTools\packagedoc_cli.py -w %WORKSPACE% -p %WORKSPACE%\%%a\%%a.dec -x %WORKSPACE%\Build\DoxygenBin\doxygen.exe -a ALL -i -o %WORKSPACE%\Build\Doxygen\%%a
-          echo ^<a href="%%a/html/index.html"^>%%a^</a^>^<br^>       >> %WORKSPACE%\Build\Doxygen\index.html
-        )
-        echo ^</body^>       >> %WORKSPACE%\Build\Doxygen\index.html
-        echo ^</html^>       >> %WORKSPACE%\Build\Doxygen\index.html
+        do
+          python3 BaseTools/Scripts/PackageDocumentTools/packagedoc_cli.py -w $WORKSPACE -p $WORKSPACE/$Pkg/$Pkg.dec -x /usr/bin/doxygen -a ALL -i -o $WORKSPACE/Build/Doxygen/$Pkg
+          echo '    <a href="${Pkg}/html/index.html">${Pkg}</a><br>'       >> $WORKSPACE/Build/Doxygen/index.html
+        done
+        echo '  </body>'       >> $WORKSPACE/Build/Doxygen/index.html
+        echo '</html>'       >> $WORKSPACE/Build/Doxygen/index.html
+        ls -al Build/Doxygen
+        more Build/Doxygen/index.html
