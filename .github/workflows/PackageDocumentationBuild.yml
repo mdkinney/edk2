@@ -41,17 +41,14 @@ jobs:
         submodules: false
     - name: Install Doxygen 1.8.6
       run: |
-        ls -al
         curl -o ./doxygen.deb http://launchpadlibrarian.net/163827726/doxygen_1.8.6-2_amd64.deb
-        ls -al
         sudo apt install ./doxygen.deb
-        ls -al
         rm ./doxygen.deb
-        ls -al
         /usr/bin/doxygen --version
     - name: Build HTML package documents
       run: |
         . edksetup.sh
+        mkdir Build
         mkdir Build/Doxygen
         echo '<!DOCTYPE html>'                                           > $WORKSPACE/Build/Doxygen/index.html
         echo '<html>'                                                   >> $WORKSPACE/Build/Doxygen/index.html
