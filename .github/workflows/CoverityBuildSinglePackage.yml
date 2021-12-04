@@ -11,7 +11,7 @@
 #
 ##
 
-name: Open Coverity edk2 repository builds
+name: Open Coverity edk2 single package build
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
@@ -38,6 +38,10 @@ on:
       ref:
         description: 'git branch/tag/sha to run Open Coverity build'
         default: 'master'
+        required: true
+      package:
+        description: 'edk2 arhc/package options (e.g. -a IA32 -p FatPkg/FatPkg.dsc)'
+        default: ''
         required: true
       buildoptions:
         description: 'Extra options to add to end of build command (e.g. --quiet, --verbose)'
@@ -104,11 +108,7 @@ jobs:
         cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
         cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
         cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
-        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32    -p FatPkg/FatPkg.dsc
-        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a X64     -p FatPkg/FatPkg.dsc
-        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM     -p FatPkg/FatPkg.dsc
-        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a AARCH64 -p FatPkg/FatPkg.dsc
-        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a RISCV64 -p FatPkg/FatPkg.dsc
+        cov-build --dir cov-int --append-log build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT ${{ github.event.inputs.package }}
     - name: Submit results to Coverity Scan
       run: |
         tar -czvf cov-int.tgz cov-int
