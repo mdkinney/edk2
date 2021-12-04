@@ -41,9 +41,13 @@ jobs:
         submodules: false
     - name: Install Doxygen 1.8.6
       run: |
-        curl -o doxygen.deb http://launchpadlibrarian.net/163827726/doxygen_1.8.6-2_amd64.deb
-        sudo apt install doxygen.deb
-        rm doxygen.deb
+        ls -al
+        curl -o ./doxygen.deb http://launchpadlibrarian.net/163827726/doxygen_1.8.6-2_amd64.deb
+        ls -al
+        sudo apt install ./doxygen.deb
+        ls -al
+        rm ./doxygen.deb
+        ls -al
         /usr/bin/doxygen --version
     - name: Build HTML package documents
       run: |
