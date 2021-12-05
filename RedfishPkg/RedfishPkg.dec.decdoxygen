@@ -6,9 +6,11 @@
 <br>
  SPDX-License-Identifier: BSD-2-Clause-Patent
  \section Known_Issue_section Known Issue
-<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disappear in this document! </li></ul>
  \section PackageBasicInformation Package Basic Information
 <TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x0001001b</TD></TR><TR><TD><B>Package Guid</B></TD><TD>c432b76e-5232-11e7-9010-005056c00008</TD></TR></TABLE><br>
+ \section Packages Packages
+<ul><li><a href="../../index.html">Packages</a></li></ul>
 <p> \section content_index INDEX
 <ul>
 <li>\subpage RedfishPkg_public_includes "Public Includes" </li>

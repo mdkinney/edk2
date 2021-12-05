@@ -25,7 +25,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_emu_block_io_8h.html",
-"pcd__pcds_fixed_at_build_common__pcd_emu_mp_services_polling_interval.html"
+"pcd__pcds_fixed_at_build_common__pcd_emu_memory_size.html#PCDinformation"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

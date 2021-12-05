@@ -31,8 +31,8 @@ var NAVTREEINDEX =
 "_arm_lib_8h.html#ab9e2e785499701ac1131edd8b2006b27",
 "_arm_std_smc_8h.html#a91d426ac7f4083f69e535660aed815e0",
 "_guid_2_arm_mp_core_info_8h.html#adba2da96c55e1d1395b2d6490c257f2d",
-"pcd__pcds_dynamic_common__pcd_pci_io_size.html",
-"struct___s_c_m_i___p_e_r_f_o_r_m_a_n_c_e___p_r_o_t_o_c_o_l.html#a0d0dcd188d58ccc77e7d413abf4a5fe4"
+"pcd__pcds_dynamic_common__pcd_pci_io_base.html#PCDinformation",
+"struct___s_c_m_i___p_e_r_f_o_r_m_a_n_c_e___p_r_o_t_o_c_o_l.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

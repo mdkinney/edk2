@@ -34,16 +34,16 @@ var NAVTREEINDEX =
 "_status_code_8h.html#ae69da49811f33803c8e8882871ff4b58",
 "_virtio_scsi_8h.html",
 "globals_a.html",
-"params_8h.html#a6524ec13c1c445be1e8c0d5f24ae3093",
-"protocol_page_g_efi_isa_acpi_protocol_guid.html#BasicProtocolInfo",
-"struct_c_p_u___h_o_t___e_j_e_c_t___d_a_t_a.html#adabaab13c5ca8dfadce56209f552b3c4",
-"struct_e_f_i___l_e_g_a_c_y___p_i_r_q___t_a_b_l_e___h_e_a_d_e_r.html#a820d5f8c11a8afd339037d887826ce7f",
-"struct_f_r_a_m_e_w_o_r_k___e_f_i___r_u_n_t_i_m_e___s_e_r_v_i_c_e_s.html#a7e3485596178713a5b5b46e0d67a56f1",
-"struct_q_e_m_u___s_m_r_a_m___s_a_v_e___s_t_a_t_e___m_a_p64.html#a2a7faa9c26a7cce1932c0bb664ec5031",
-"struct_v_i_r_t_i_o___f_s___f_u_s_e___c_r_e_a_t_e___r_e_q_u_e_s_t.html",
-"struct_v_r_i_n_g___a_v_a_i_l.html",
-"structvcpu__guest__core__regs.html#a4ee90147b3bdbea02e985b0a7ef8f1c6",
-"xen_8h.html#ab8906d0caa1a5a97890691d9e3a477c3"
+"params_8h.html#a62689cc825f7edc755781e9a68e1e39c",
+"protocol_page_g_efi_isa_acpi_protocol_guid.html",
+"struct_c_p_u___h_o_t___e_j_e_c_t___d_a_t_a.html#a5d6e2398a2bad7758b9f48915d845be1",
+"struct_e_f_i___l_e_g_a_c_y___p_i_r_q___t_a_b_l_e___h_e_a_d_e_r.html#a6b9bfee2315eba33f98d19fdbf0e017f",
+"struct_f_r_a_m_e_w_o_r_k___e_f_i___r_u_n_t_i_m_e___s_e_r_v_i_c_e_s.html#a7410491e2df908e4d012ff8c56879c54",
+"struct_q_e_m_u___s_m_r_a_m___s_a_v_e___s_t_a_t_e___m_a_p64.html#a2a15cdaeb7e92fc08110b4e4e8f0f3ef",
+"struct_v_i_r_t_i_o___f_s___f_u_s_e___a_t_t_r_i_b_u_t_e_s___r_e_s_p_o_n_s_e.html#afd9a5d33302bcbcd81599fb95fe46e48",
+"struct_v_r_i_n_g.html#afc8d481942168b97bbf21a7274c955bb",
+"structvcpu__guest__core__regs.html#a4ea6de3fc4d9b7c70d9db2905b28cb64",
+"xen_8h.html#ab6aab740fda18e95ca4b917a44bedede"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

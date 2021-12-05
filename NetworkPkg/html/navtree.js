@@ -29,7 +29,8 @@ var NAVTREEINDEX =
 "_dpc_8h.html",
 "_net_lib_8h.html#a5ffcb0a6818fd33fecfd748f0d649aeb",
 "globals_v.html",
-"struct_h_t_t_p___i_o.html#a64ebcf960fd045bd66640964311a2b57"
+"struct_h_t_t_p___i_o.html#a5410701fe19d2ca696c18f60c81a2df0",
+"union_v_l_a_n___t_c_i.html#aeb65297552ee0f77ff18c441c41e7425"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

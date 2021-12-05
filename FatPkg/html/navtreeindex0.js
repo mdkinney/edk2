@@ -9,5 +9,6 @@ var NAVTREEINDEX0 =
 "index.html":[],
 "index.html#Known_Issue_section":[0,0],
 "index.html#PackageBasicInformation":[0,1],
+"index.html#Packages":[0,2],
 "pages.html":[]
 };

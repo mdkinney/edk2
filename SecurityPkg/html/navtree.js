@@ -29,8 +29,8 @@ var NAVTREEINDEX =
 "_authenticated_variable_format_8h.html",
 "_tcg_storage_core_lib_8h.html#a6314a854eabb3db1bc5c2dde18c1aaae",
 "globals_func.html",
-"pcd__pcds_dynamic_ex_common__pcd_skip_hdd_password_prompt.html#PCDinformation",
-"struct___f_v___h_a_s_h___i_n_f_o.html"
+"pcd__pcds_dynamic_ex_common__pcd_skip_hdd_password_prompt.html",
+"struct___e_d_k_i_i___t_c_g___p_p_i.html#a23f40ff102ef34db45ac912085960fd4"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

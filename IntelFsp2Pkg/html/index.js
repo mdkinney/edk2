@@ -2,6 +2,7 @@ var index =
 [
     [ "Known Issue", "index.html#Known_Issue_section", null ],
     [ "Package Basic Information", "index.html#PackageBasicInformation", null ],
+    [ "Packages", "index.html#Packages", null ],
     [ "INDEX", "index.html#content_index", null ],
     [ "Public Includes", "_intel_fsp2_pkg_public_includes.html", "_intel_fsp2_pkg_public_includes" ],
     [ "Library Class", "_intel_fsp2_pkg_libraryclass.html", "_intel_fsp2_pkg_libraryclass" ],

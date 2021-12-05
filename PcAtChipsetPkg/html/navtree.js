@@ -24,7 +24,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_hpet_8h.html",
-"union_h_p_e_t___t_i_m_e_r___c_o_n_f_i_g_u_r_a_t_i_o_n___r_e_g_i_s_t_e_r.html#a8196d981e67c2c8600cf3d844a2e3bbd"
+"union_h_p_e_t___t_i_m_e_r___c_o_n_f_i_g_u_r_a_t_i_o_n___r_e_g_i_s_t_e_r.html#a39db860fbcf1c22fae081db0a8086593"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -3,7 +3,8 @@ var NAVTREE =
   [ "FatPkg[all]", "index.html", [
     [ "FatPkg Package Document", "index.html", [
       [ "Known Issue", "index.html#Known_Issue_section", null ],
-      [ "Package Basic Information", "index.html#PackageBasicInformation", null ]
+      [ "Package Basic Information", "index.html#PackageBasicInformation", null ],
+      [ "Packages", "index.html#Packages", null ]
     ] ],
     [ "Files", null, [
       [ "File List", "files.html", "files" ]

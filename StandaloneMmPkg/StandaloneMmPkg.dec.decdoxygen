@@ -20,9 +20,11 @@ Include<br>
 [LibraryClasses]<br>
 
  \section Known_Issue_section Known Issue
-<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disappear in this document! </li></ul>
  \section PackageBasicInformation Package Basic Information
 <TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x0001001A</TD></TR><TR><TD><B>Package Guid</B></TD><TD>2AE82968-7769-4A85-A5BC-A0954CE54A5C</TD></TR></TABLE><br>
+ \section Packages Packages
+<ul><li><a href="../../index.html">Packages</a></li></ul>
 <p> \section content_index INDEX
 <ul>
 <li>\subpage StandaloneMmPkg_libraryclass "Library Class" </li>

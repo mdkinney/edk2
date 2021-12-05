@@ -28,8 +28,8 @@ var NAVTREEINDEX =
 [
 "_acpi_cpu_data_8h.html",
 "_smm_cpu_features_lib_8h.html#a3c31fc7e98ac196624eeb415e021db82a7d1311ee182357e154f91e748c2d21b8",
-"pcd__pcds_feature_flag_common__pcd_cpu_hot_plug_support.html#PCDinformation",
-"struct_c_p_u___h_o_t___p_l_u_g___d_a_t_a.html#a9d51b04c81ab42a747099bab3646f6f5"
+"pcd__pcds_feature_flag_common__pcd_cpu_hot_plug_support.html",
+"struct_c_p_u___h_o_t___p_l_u_g___d_a_t_a.html#a9062de11eccf32d36153f0da1d3b9ff1"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

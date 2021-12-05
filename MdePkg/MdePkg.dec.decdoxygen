@@ -11,9 +11,11 @@
  SPDX-License-Identifier: BSD-2-Clause-Patent<br>
 
  \section Known_Issue_section Known Issue
-<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disappear in this document! </li></ul>
  \section PackageBasicInformation Package Basic Information
 <TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>1E73767F-8F52-4603-AEB4-F29B510B6766</TD></TR></TABLE><br>
+ \section Packages Packages
+<ul><li><a href="../../index.html">Packages</a></li></ul>
 <p> \section content_index INDEX
 <ul>
 <li>\subpage MdePkg_public_includes "Public Includes" </li>

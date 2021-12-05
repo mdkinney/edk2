@@ -25,7 +25,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_arm_platform_lib_8h.html",
-"pcd__pcds_fixed_at_build_common__p_l011_uart_integer.html#PCDinformation"
+"pcd__pcds_fixed_at_build_common__p_l011_uart_integer.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

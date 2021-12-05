@@ -29,7 +29,7 @@ var NAVTREEINDEX =
 [
 "_acpi_helper_lib_8h.html",
 "_smbios_table_generator_8h.html#af4c8fb7efd3da0063e07e1cd123dbe98a6d3d1eb70b961110030f29011cce964c",
-"struct_cm_arm_device_handle_acpi.html#a00035c5b10aea2942159990903e74cd3"
+"struct_cm_arm_device_handle_acpi.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

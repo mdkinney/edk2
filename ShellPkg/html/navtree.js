@@ -28,7 +28,7 @@ var NAVTREEINDEX =
 [
 "_acpi_view_command_lib_8h.html",
 "_shell_lib_hii_guid_8h.html#a4a284c262f5a02ca2837e10f9c7e85f5",
-"pcd__pcds_patchable_in_module_common_root_page.html#content_index"
+"pcd__pcds_patchable_in_module_common_root_page.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

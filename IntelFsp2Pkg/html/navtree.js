@@ -27,7 +27,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_cache_as_ram_lib_8h.html",
-"pcd__pcds_dynamic_common_root_page.html#content_index"
+"pcd__pcds_dynamic_common_root_page.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
