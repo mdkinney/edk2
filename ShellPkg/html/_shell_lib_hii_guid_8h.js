@@ -1,0 +1,27 @@
+var _shell_lib_hii_guid_8h =
+[
+    [ "HANDLE_PARSING_HII_GUID", "_shell_lib_hii_guid_8h.html#a94749ecffe306fc570c8e016cb48af99", null ],
+    [ "SHELL_BCFG_HII_GUID", "_shell_lib_hii_guid_8h.html#a7e47db6b8919efc62d7b9bfabc0d5e35", null ],
+    [ "SHELL_DEBUG1_HII_GUID", "_shell_lib_hii_guid_8h.html#aae295be3fcad9a74d7b6380431afbdec", null ],
+    [ "SHELL_DRIVER1_HII_GUID", "_shell_lib_hii_guid_8h.html#a65116ec39d123cfd39c9615914e843ba", null ],
+    [ "SHELL_HTTP_HII_GUID", "_shell_lib_hii_guid_8h.html#a85bcef0ce9698b393fd264dcf33906fd", null ],
+    [ "SHELL_INSTALL1_HII_GUID", "_shell_lib_hii_guid_8h.html#ad4b3c62eadbc28d26419704fcc7ddecb", null ],
+    [ "SHELL_LEVEL1_HII_GUID", "_shell_lib_hii_guid_8h.html#a0773280a62830611990a1f77766c8734", null ],
+    [ "SHELL_LEVEL2_HII_GUID", "_shell_lib_hii_guid_8h.html#a4ef1c0b294fbe2da83c9bf591166b900", null ],
+    [ "SHELL_LEVEL3_HII_GUID", "_shell_lib_hii_guid_8h.html#ae935bc4895ff79f1b6071d377492d970", null ],
+    [ "SHELL_NETWORK1_HII_GUID", "_shell_lib_hii_guid_8h.html#a7c01e8a8fa1b27b8dffc42795fa1983b", null ],
+    [ "SHELL_NETWORK2_HII_GUID", "_shell_lib_hii_guid_8h.html#a09b35bc1dda162151a36d5c4f34979ee", null ],
+    [ "SHELL_TFTP_HII_GUID", "_shell_lib_hii_guid_8h.html#ad628062179fbe142d76649c3485fef80", null ],
+    [ "gHandleParsingHiiGuid", "_shell_lib_hii_guid_8h.html#a5d9df8ac5e18c90372881ec0085e5161", null ],
+    [ "gShellBcfgHiiGuid", "_shell_lib_hii_guid_8h.html#a034cd6fc3a1f4673c3778619c12f45d8", null ],
+    [ "gShellDebug1HiiGuid", "_shell_lib_hii_guid_8h.html#abe9c1cfc9cd29f8d01cf8fc9ab101795", null ],
+    [ "gShellDriver1HiiGuid", "_shell_lib_hii_guid_8h.html#aeca11587adfb03e756a5c4cbeb1c3ad7", null ],
+    [ "gShellHttpHiiGuid", "_shell_lib_hii_guid_8h.html#acb4c243c3fa34cbb41fcfaeafa5676ef", null ],
+    [ "gShellInstall1HiiGuid", "_shell_lib_hii_guid_8h.html#a4a284c262f5a02ca2837e10f9c7e85f5", null ],
+    [ "gShellLevel1HiiGuid", "_shell_lib_hii_guid_8h.html#ade2639ca8316e8f0ff99e354602ad90a", null ],
+    [ "gShellLevel2HiiGuid", "_shell_lib_hii_guid_8h.html#a15bc7db8104f1c645d1521bfa80427e0", null ],
+    [ "gShellLevel3HiiGuid", "_shell_lib_hii_guid_8h.html#a50db5b5aa7335a3eab83fc4764c69af7", null ],
+    [ "gShellNetwork1HiiGuid", "_shell_lib_hii_guid_8h.html#a6effb088877cb10af57b893b75921905", null ],
+    [ "gShellNetwork2HiiGuid", "_shell_lib_hii_guid_8h.html#ae2dcbd8592db44a9e32b4972a3c432d4", null ],
+    [ "gShellTftpHiiGuid", "_shell_lib_hii_guid_8h.html#aaeda43274700dd2e0c4ce4ca54ecff43", null ]
+];

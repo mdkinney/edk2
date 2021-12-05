@@ -1,0 +1,6 @@
+var struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___s_y_s_t_e_m___l_o_c_a_l_i_t_y___l_a02a75da4206b089fffd8255b45dc5d4f =
+[
+    [ "AccessAttributes", "struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___s_y_s_t_e_m___l_o_c_a_l_i_t_y___l_a02a75da4206b089fffd8255b45dc5d4f.html#a6f3ee20a388a562189591fed8c92b4ad", null ],
+    [ "MemoryHierarchy", "struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___s_y_s_t_e_m___l_o_c_a_l_i_t_y___l_a02a75da4206b089fffd8255b45dc5d4f.html#a1671507b5d3407d8898521e31708124d", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___s_y_s_t_e_m___l_o_c_a_l_i_t_y___l_a02a75da4206b089fffd8255b45dc5d4f.html#a034c799969c378c9e5e602ac53e69249", null ]
+];

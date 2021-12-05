@@ -1,0 +1,8 @@
+var union_p_c_i___e_x_p_r_e_s_s___r_e_g___p_h_y_s_i_c_a_l___l_a_y_e_r__32__0___t_r_a_n_s___m_o_d_i_f_i_e_d___t_s___d_a_t_a2 =
+[
+    [ "AltProtocolNegotiationStatus", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___p_h_y_s_i_c_a_l___l_a_y_e_r__32__0___t_r_a_n_s___m_o_d_i_f_i_e_d___t_s___d_a_t_a2.html#a99cd63cf21a614620b33e829416f032a", null ],
+    [ "Bits", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___p_h_y_s_i_c_a_l___l_a_y_e_r__32__0___t_r_a_n_s___m_o_d_i_f_i_e_d___t_s___d_a_t_a2.html#af7e1b7ee4a5f4614f84d615015b0322f", null ],
+    [ "Reserved", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___p_h_y_s_i_c_a_l___l_a_y_e_r__32__0___t_r_a_n_s___m_o_d_i_f_i_e_d___t_s___d_a_t_a2.html#a6dc43b373866f0a80c57a5808031ae60", null ],
+    [ "TransModifiedTSUsageInfo2", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___p_h_y_s_i_c_a_l___l_a_y_e_r__32__0___t_r_a_n_s___m_o_d_i_f_i_e_d___t_s___d_a_t_a2.html#a3c87b135b968c5cf9cd7e7adedde21ce", null ],
+    [ "Uint32", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___p_h_y_s_i_c_a_l___l_a_y_e_r__32__0___t_r_a_n_s___m_o_d_i_f_i_e_d___t_s___d_a_t_a2.html#a849e3f45b10b0e109b28df874bbc3b82", null ]
+];

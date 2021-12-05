@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['emmc',['Emmc',['../union_e_d_k_i_i___s_d___m_m_c___d_r_i_v_e_r___s_t_r_e_n_g_t_h.html#a35dd1546f509772002c45a46e5a267ad',1,'EDKII_SD_MMC_DRIVER_STRENGTH']]],
+  ['enableatachannel',['EnableAtaChannel',['../struct___p_e_i___a_t_a___c_o_n_t_r_o_l_l_e_r___p_p_i.html#a0c90488c5601604c321bccaccd7e4494',1,'_PEI_ATA_CONTROLLER_PPI']]],
+  ['endgauge',['EndGauge',['../struct___p_e_r_f_o_r_m_a_n_c_e___p_r_o_t_o_c_o_l.html#adc22dcb3e46614386da9440895f53c9a',1,'_PERFORMANCE_PROTOCOL']]],
+  ['endgaugeex',['EndGaugeEx',['../struct___p_e_r_f_o_r_m_a_n_c_e___e_x___p_r_o_t_o_c_o_l.html#a65395b3ddd27b91758aab0e7d71053c9',1,'_PERFORMANCE_EX_PROTOCOL']]],
+  ['endptr',['EndPtr',['../struct_v_a_r_i_a_b_l_e___p_o_i_n_t_e_r___t_r_a_c_k.html#a5e5535679d37ec002a0798364e1bf7c0',1,'VARIABLE_POINTER_TRACK::EndPtr()'],['../struct_v_a_r_i_a_b_l_e___i_n_d_e_x___t_a_b_l_e.html#a507a299d7a078046cd2d6699aee216b5',1,'VARIABLE_INDEX_TABLE::EndPtr()']]],
+  ['endtimestamp',['EndTimeStamp',['../struct_p_e_i___p_e_r_f_o_r_m_a_n_c_e___l_o_g___e_n_t_r_y.html#a64f68a0b74e0af470d62c5b8aa4b2d49',1,'PEI_PERFORMANCE_LOG_ENTRY::EndTimeStamp()'],['../struct_g_a_u_g_e___d_a_t_a___e_n_t_r_y.html#ab644a3969dac478768a46da1e1bc95a8',1,'GAUGE_DATA_ENTRY::EndTimeStamp()'],['../struct_g_a_u_g_e___d_a_t_a___e_n_t_r_y___e_x.html#ace58ede997be70b74950f5ac8ba85429',1,'GAUGE_DATA_ENTRY_EX::EndTimeStamp()']]],
+  ['entry',['Entry',['../struct_u_n_i_v_e_r_s_a_l___p_a_y_l_o_a_d___e_x_t_r_a___d_a_t_a.html#aef2bd9d0a9d4da2ea70170143622da53',1,'UNIVERSAL_PAYLOAD_EXTRA_DATA']]],
+  ['entrypoint',['EntryPoint',['../struct_s_m_m___c_o_r_e___i_m_a_g_e___d_a_t_a_b_a_s_e___s_t_r_u_c_t_u_r_e.html#ad221d8c1da3dd12a5e48780395aab17f',1,'SMM_CORE_IMAGE_DATABASE_STRUCTURE::EntryPoint()'],['../struct_m_e_m_o_r_y___p_r_o_f_i_l_e___d_r_i_v_e_r___i_n_f_o.html#aa62eebdd518e75ef9e37833b8d75751c',1,'MEMORY_PROFILE_DRIVER_INFO::EntryPoint()'],['../struct_v_m___c_o_n_t_e_x_t.html#aac9509f011bf80d60509d31d5ab59148',1,'VM_CONTEXT::EntryPoint()']]],
+  ['errorlevel',['ErrorLevel',['../struct_e_f_i___d_e_b_u_g___i_n_f_o.html#a1441d0869d87ac386edc8cfee5824d9b',1,'EFI_DEBUG_INFO']]],
+  ['errorstring',['ErrorString',['../struct___f_o_r_m___d_i_s_p_l_a_y___e_n_g_i_n_e___f_o_r_m.html#a058a7a4ce3261d8f3dd4b8134a45867b',1,'_FORM_DISPLAY_ENGINE_FORM']]],
+  ['exceptionflags',['ExceptionFlags',['../struct_v_m___c_o_n_t_e_x_t.html#ae708972cd72f096c428003e7dbfba609',1,'VM_CONTEXT']]],
+  ['exceptiontss',['ExceptionTss',['../union_c_p_u___e_x_c_e_p_t_i_o_n___i_n_i_t___d_a_t_a.html#ad066c2bb581a193c9607ce92ff65d7ef',1,'CPU_EXCEPTION_INIT_DATA']]],
+  ['exceptiontssdesc',['ExceptionTssDesc',['../union_c_p_u___e_x_c_e_p_t_i_o_n___i_n_i_t___d_a_t_a.html#adced4e1e06f2d6ba70adb564efcc0cd4',1,'CPU_EXCEPTION_INIT_DATA']]],
+  ['exceptiontssdescsize',['ExceptionTssDescSize',['../union_c_p_u___e_x_c_e_p_t_i_o_n___i_n_i_t___d_a_t_a.html#a7c266e520498cf9781a10167b5598eab',1,'CPU_EXCEPTION_INIT_DATA']]],
+  ['exceptiontsssize',['ExceptionTssSize',['../union_c_p_u___e_x_c_e_p_t_i_o_n___i_n_i_t___d_a_t_a.html#a18bc4836974bee6afedda2b0ae8b148e',1,'CPU_EXCEPTION_INIT_DATA']]],
+  ['execute',['Execute',['../struct___e_f_i___e_b_c___v_m___t_e_s_t___p_r_o_t_o_c_o_l.html#a2aa55afcd8642c3c667fca571757379f',1,'_EFI_EBC_VM_TEST_PROTOCOL']]],
+  ['executeaction',['ExecuteAction',['../struct___e_d_k_i_i___f_o_r_m___b_r_o_w_s_e_r___e_x_t_e_n_s_i_o_n2___p_r_o_t_o_c_o_l.html#a7ec8addc35554a67576f35d004256116',1,'_EDKII_FORM_BROWSER_EXTENSION2_PROTOCOL']]],
+  ['exguidindex',['ExGuidIndex',['../struct_d_y_n_a_m_i_c_e_x___m_a_p_p_i_n_g.html#a24c9debfb96c94d044f7134bbf2df0f2',1,'DYNAMICEX_MAPPING']]],
+  ['exitdata',['ExitData',['../struct_e_f_i___b_o_o_t___m_a_n_a_g_e_r___l_o_a_d___o_p_t_i_o_n.html#ae082aea2182fbfab4df3f6e2e7af727f',1,'EFI_BOOT_MANAGER_LOAD_OPTION']]],
+  ['exitdatasize',['ExitDataSize',['../struct_e_f_i___b_o_o_t___m_a_n_a_g_e_r___l_o_a_d___o_p_t_i_o_n.html#aea558537b587f4133071ec05a653555d',1,'EFI_BOOT_MANAGER_LOAD_OPTION']]],
+  ['exitdisplay',['ExitDisplay',['../struct_e_d_k_i_i___f_o_r_m___d_i_s_p_l_a_y___e_n_g_i_n_e___p_r_o_t_o_c_o_l.html#a027c580b40a931a3dcf77b432b4646ce',1,'EDKII_FORM_DISPLAY_ENGINE_PROTOCOL']]],
+  ['exmaptableoffset',['ExMapTableOffset',['../struct_p_c_d___d_a_t_a_b_a_s_e___i_n_i_t.html#a871e9a6b3ced5dd9786eb51d1c5e257b',1,'PCD_DATABASE_INIT']]],
+  ['extendopcode',['ExtendOpCode',['../struct___e_f_i___i_f_r___g_u_i_d___l_a_b_e_l.html#a415c70441d286966cfb3e4a8a108a6ac',1,'_EFI_IFR_GUID_LABEL::ExtendOpCode()'],['../struct___e_f_i___i_f_r___g_u_i_d___b_a_n_n_e_r.html#a8153ac4b804c5a8fdc373306c29be7a4',1,'_EFI_IFR_GUID_BANNER::ExtendOpCode()'],['../struct___e_f_i___i_f_r___g_u_i_d___t_i_m_e_o_u_t.html#a79080860533f582953257a74bc47fb64',1,'_EFI_IFR_GUID_TIMEOUT::ExtendOpCode()'],['../struct___e_f_i___i_f_r___g_u_i_d___c_l_a_s_s.html#a57be4691663abc1e7bee3e8547c86658',1,'_EFI_IFR_GUID_CLASS::ExtendOpCode()'],['../struct___e_f_i___i_f_r___g_u_i_d___s_u_b_c_l_a_s_s.html#a67f48031f7a126dce2b446a6ee068374',1,'_EFI_IFR_GUID_SUBCLASS::ExtendOpCode()'],['../struct___e_f_i___i_f_r___g_u_i_d___o_p_t_i_o_n_k_e_y.html#a4dd7cd87c6d073415cc0f9523eb5b86d',1,'_EFI_IFR_GUID_OPTIONKEY::ExtendOpCode()'],['../struct___e_f_i___i_f_r___g_u_i_d___v_a_r_e_q_n_a_m_e.html#a3ae0362419385c6d7d7a4e045d4c2118',1,'_EFI_IFR_GUID_VAREQNAME::ExtendOpCode()']]],
+  ['extokencount',['ExTokenCount',['../struct_p_c_d___d_a_t_a_b_a_s_e___i_n_i_t.html#a46299b17bfcbdc3c54ab1395dcbb42e6',1,'PCD_DATABASE_INIT']]],
+  ['extokennumber',['ExTokenNumber',['../struct_d_y_n_a_m_i_c_e_x___m_a_p_p_i_n_g.html#a39f7cb2cf67b93305997dd47e2f3c2fc',1,'DYNAMICEX_MAPPING']]]
+];

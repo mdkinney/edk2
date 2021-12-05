@@ -1,0 +1,559 @@
+/** \mainpage EmulatorPkg Package Document
+<br>
+ This is the Emu Emulation Environment Platform<br>
+<br>
+ Copyright (c) 2008 - 2019, Intel Corporation. All rights reserved.<BR><br>
+ Portions copyright (c) 2011, Apple Inc. All rights reserved.<br>
+ (C) Copyright 2020 Hewlett Packard Enterprise Development LP<BR><br>
+<br>
+    SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>36E48BD7-7D92-5A47-A2CD-513F072E3300</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage EmulatorPkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+<li>\subpage ppi_root_page "PPI" </li>
+<li>\subpage protocol_root_page "PROTOCOL" </li>
+</ul>
+ **/
+/** \page EmulatorPkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_EmuMagicPageLib "EmuMagicPageLib" </li>
+<li>\subpage lc_EmuThunkLib "EmuThunkLib" </li>
+<li>\subpage lc_KeyMap "KeyMap" </li>
+<li>\subpage lc_PpiListLib "PpiListLib" </li>
+<li>\subpage lc_SmbiosLib "SmbiosLib" </li>
+<li>\subpage lc_ThunkPpiList "ThunkPpiList" </li>
+<li>\subpage lc_ThunkProtocolList "ThunkProtocolList" </li>
+</ul>
+ **/
+/** \page lc_EmuMagicPageLib EmuMagicPageLib
+\copydoc Include/Library/EmuMagicPageLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/EmuMagicPageLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_EmuThunkLib EmuThunkLib
+\copydoc Include/Library/EmuThunkLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/EmuThunkLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_KeyMap KeyMap
+\copydoc Include/Library/KeyMapLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/KeyMapLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_PpiListLib PpiListLib
+\copydoc Include/Library/PpiListLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/PpiListLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_SmbiosLib SmbiosLib
+\copydoc Include/Library/SmbiosLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/SmbiosLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_ThunkPpiList ThunkPpiList
+\copydoc Include/Library/ThunkPpiList.h<p>
+ \section ref Refer to Header File
+\link Include/Library/ThunkPpiList.h
+ \endlink<p>
+
+ **/
+/** \page lc_ThunkProtocolList ThunkProtocolList
+\copydoc Include/Library/ThunkProtocolList.h<p>
+ \section ref Refer to Header File
+\link Include/Library/ThunkProtocolList.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_root_page "PcdsFeatureFlag" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+<li>\subpage pcd_PcdsPatchableInModule_root_page "PcdsPatchableInModule" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_root_page PcdsFeatureFlag
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdEmulatorLazyLoadSymbols "gEmulatorPkgTokenSpaceGuid.PcdEmulatorLazyLoadSymbols" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdEmulatorLazyLoadSymbols gEmulatorPkgTokenSpaceGuid.PcdEmulatorLazyLoadSymbols
+ If TRUE, if symbols only load on breakpoints and gdb entry<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmulatorLazyLoadSymbols</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00020000</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuApCount "gEmulatorPkgTokenSpaceGuid.PcdEmuApCount" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuBootMode "gEmulatorPkgTokenSpaceGuid.PcdEmuBootMode" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuCpuModel "gEmulatorPkgTokenSpaceGuid.PcdEmuCpuModel" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuCpuSpeed "gEmulatorPkgTokenSpaceGuid.PcdEmuCpuSpeed" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuFdBaseAddress "gEmulatorPkgTokenSpaceGuid.PcdEmuFdBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuFileSystem "gEmulatorPkgTokenSpaceGuid.PcdEmuFileSystem" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuFirmwareBlockSize "gEmulatorPkgTokenSpaceGuid.PcdEmuFirmwareBlockSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuFirmwareFdSize "gEmulatorPkgTokenSpaceGuid.PcdEmuFirmwareFdSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuFirmwareVolume "gEmulatorPkgTokenSpaceGuid.PcdEmuFirmwareVolume" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuFlashFvRecoveryBase "gEmulatorPkgTokenSpaceGuid.PcdEmuFlashFvRecoveryBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuFlashFvRecoverySize "gEmulatorPkgTokenSpaceGuid.PcdEmuFlashFvRecoverySize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuFlashNvStorageEventLogBase "gEmulatorPkgTokenSpaceGuid.PcdEmuFlashNvStorageEventLogBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuFlashNvStorageEventLogSize "gEmulatorPkgTokenSpaceGuid.PcdEmuFlashNvStorageEventLogSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuFlashNvStorageFtwSpareBase "gEmulatorPkgTokenSpaceGuid.PcdEmuFlashNvStorageFtwSpareBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuFlashNvStorageFtwWorkingBase "gEmulatorPkgTokenSpaceGuid.PcdEmuFlashNvStorageFtwWorkingBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuFlashNvStorageVariableBase "gEmulatorPkgTokenSpaceGuid.PcdEmuFlashNvStorageVariableBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuGop "gEmulatorPkgTokenSpaceGuid.PcdEmuGop" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuMemorySize "gEmulatorPkgTokenSpaceGuid.PcdEmuMemorySize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuMpServicesPollingInterval "gEmulatorPkgTokenSpaceGuid.PcdEmuMpServicesPollingInterval" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuNetworkInterface "gEmulatorPkgTokenSpaceGuid.PcdEmuNetworkInterface" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuSerialPort "gEmulatorPkgTokenSpaceGuid.PcdEmuSerialPort" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmuVirtualDisk "gEmulatorPkgTokenSpaceGuid.PcdEmuVirtualDisk" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdNetworkPacketFilterSize "gEmulatorPkgTokenSpaceGuid.PcdNetworkPacketFilterSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPeiServicesTablePage "gEmulatorPkgTokenSpaceGuid.PcdPeiServicesTablePage" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdRedfishServiePassword "gEmulatorPkgTokenSpaceGuid.PcdRedfishServiePassword" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdRedfishServieStopIfExitbootService "gEmulatorPkgTokenSpaceGuid.PcdRedfishServieStopIfExitbootService" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdRedfishServieStopIfSecureBootDisabled "gEmulatorPkgTokenSpaceGuid.PcdRedfishServieStopIfSecureBootDisabled" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdRedfishServieUserId "gEmulatorPkgTokenSpaceGuid.PcdRedfishServieUserId" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuApCount gEmulatorPkgTokenSpaceGuid.PcdEmuApCount
+ Number of Application Processors (APs) in the system 0 means Uniprocessor mode<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuApCount</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001019</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"0"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuBootMode gEmulatorPkgTokenSpaceGuid.PcdEmuBootMode
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuBootMode</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001006</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>1</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuCpuModel gEmulatorPkgTokenSpaceGuid.PcdEmuCpuModel
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuCpuModel</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001007</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"Intel(R) Processor Model"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuCpuSpeed gEmulatorPkgTokenSpaceGuid.PcdEmuCpuSpeed
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuCpuSpeed</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001008</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"3000"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuFdBaseAddress gEmulatorPkgTokenSpaceGuid.PcdEmuFdBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuFdBaseAddress</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001017</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuFileSystem gEmulatorPkgTokenSpaceGuid.PcdEmuFileSystem
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuFileSystem</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001004</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"."</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuFirmwareBlockSize gEmulatorPkgTokenSpaceGuid.PcdEmuFirmwareBlockSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuFirmwareBlockSize</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001013</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuFirmwareFdSize gEmulatorPkgTokenSpaceGuid.PcdEmuFirmwareFdSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuFirmwareFdSize</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001012</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuFirmwareVolume gEmulatorPkgTokenSpaceGuid.PcdEmuFirmwareVolume
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuFirmwareVolume</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001009</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"..\\Fv\\Fv_Recovery.fd"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuFlashFvRecoveryBase gEmulatorPkgTokenSpaceGuid.PcdEmuFlashFvRecoveryBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuFlashFvRecoveryBase</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001010</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuFlashFvRecoverySize gEmulatorPkgTokenSpaceGuid.PcdEmuFlashFvRecoverySize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuFlashFvRecoverySize</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001011</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuFlashNvStorageEventLogBase gEmulatorPkgTokenSpaceGuid.PcdEmuFlashNvStorageEventLogBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuFlashNvStorageEventLogBase</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000100e</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuFlashNvStorageEventLogSize gEmulatorPkgTokenSpaceGuid.PcdEmuFlashNvStorageEventLogSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuFlashNvStorageEventLogSize</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000100f</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuFlashNvStorageFtwSpareBase gEmulatorPkgTokenSpaceGuid.PcdEmuFlashNvStorageFtwSpareBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuFlashNvStorageFtwSpareBase</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001015</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuFlashNvStorageFtwWorkingBase gEmulatorPkgTokenSpaceGuid.PcdEmuFlashNvStorageFtwWorkingBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuFlashNvStorageFtwWorkingBase</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001016</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuFlashNvStorageVariableBase gEmulatorPkgTokenSpaceGuid.PcdEmuFlashNvStorageVariableBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuFlashNvStorageVariableBase</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001014</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuGop gEmulatorPkgTokenSpaceGuid.PcdEmuGop
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuGop</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001018</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"GOP Window"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuMemorySize gEmulatorPkgTokenSpaceGuid.PcdEmuMemorySize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuMemorySize</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000100c</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"64!64"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuMpServicesPollingInterval gEmulatorPkgTokenSpaceGuid.PcdEmuMpServicesPollingInterval
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuMpServicesPollingInterval</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000101a</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x100</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuNetworkInterface gEmulatorPkgTokenSpaceGuid.PcdEmuNetworkInterface
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuNetworkInterface</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000100d</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"en0"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuSerialPort gEmulatorPkgTokenSpaceGuid.PcdEmuSerialPort
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuSerialPort</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001002</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"/dev/ttyS0"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmuVirtualDisk gEmulatorPkgTokenSpaceGuid.PcdEmuVirtualDisk
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuVirtualDisk</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001001</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"disk.dmg:FW"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdNetworkPacketFilterSize gEmulatorPkgTokenSpaceGuid.PcdNetworkPacketFilterSize
+ Size of the packet filter<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdNetworkPacketFilterSize</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000101c</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>524288</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPeiServicesTablePage gEmulatorPkgTokenSpaceGuid.PcdPeiServicesTablePage
+ Magic page to implement PEI Services Table Pointer Lib<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPeiServicesTablePage</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000101b</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x1013000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdRedfishServiePassword gEmulatorPkgTokenSpaceGuid.PcdRedfishServiePassword
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRedfishServiePassword</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001023</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>"pwd123456"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdRedfishServieStopIfExitbootService gEmulatorPkgTokenSpaceGuid.PcdRedfishServieStopIfExitbootService
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRedfishServieStopIfExitbootService</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001021</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdRedfishServieStopIfSecureBootDisabled gEmulatorPkgTokenSpaceGuid.PcdRedfishServieStopIfSecureBootDisabled
+ Platform level Redfish Service control PCD<br>
+ These PCDs are used to stop the Redfish sevice when secure boot is disabled<br>
+ or exit boot service.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRedfishServieStopIfSecureBootDisabled</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001020</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdRedfishServieUserId gEmulatorPkgTokenSpaceGuid.PcdRedfishServieUserId
+ edk2 Redfish implementation on Emulator package is designed to access<br>
+ to Redfish simulator.<br>
+ https://github.com/DMTF/Redfish-Profile-Simulator<br>
+ The user ID and password are fixed as below.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRedfishServieUserId</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001022</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>"admin"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_root_page PcdsPatchableInModule
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdEmuBootMode "gEmulatorPkgTokenSpaceGuid.PcdEmuBootMode" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdEmuCpuModel "gEmulatorPkgTokenSpaceGuid.PcdEmuCpuModel" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdEmuCpuSpeed "gEmulatorPkgTokenSpaceGuid.PcdEmuCpuSpeed" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdEmuFileSystem "gEmulatorPkgTokenSpaceGuid.PcdEmuFileSystem" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdEmuFirmwareVolume "gEmulatorPkgTokenSpaceGuid.PcdEmuFirmwareVolume" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdEmuGop "gEmulatorPkgTokenSpaceGuid.PcdEmuGop" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdEmuMemorySize "gEmulatorPkgTokenSpaceGuid.PcdEmuMemorySize" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdEmuMpServicesPollingInterval "gEmulatorPkgTokenSpaceGuid.PcdEmuMpServicesPollingInterval" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdEmuNetworkInterface "gEmulatorPkgTokenSpaceGuid.PcdEmuNetworkInterface" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdEmuSerialPort "gEmulatorPkgTokenSpaceGuid.PcdEmuSerialPort" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdEmuVirtualDisk "gEmulatorPkgTokenSpaceGuid.PcdEmuVirtualDisk" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdEmuBootMode gEmulatorPkgTokenSpaceGuid.PcdEmuBootMode
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuBootMode</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001006</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>1</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdEmuCpuModel gEmulatorPkgTokenSpaceGuid.PcdEmuCpuModel
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuCpuModel</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001007</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"Intel(R) Processor Model"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdEmuCpuSpeed gEmulatorPkgTokenSpaceGuid.PcdEmuCpuSpeed
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuCpuSpeed</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001008</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"3000"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdEmuFileSystem gEmulatorPkgTokenSpaceGuid.PcdEmuFileSystem
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuFileSystem</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001004</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"."</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdEmuFirmwareVolume gEmulatorPkgTokenSpaceGuid.PcdEmuFirmwareVolume
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuFirmwareVolume</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001009</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"..\\Fv\\Fv_Recovery.fd"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdEmuGop gEmulatorPkgTokenSpaceGuid.PcdEmuGop
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuGop</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001018</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"GOP Window"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdEmuMemorySize gEmulatorPkgTokenSpaceGuid.PcdEmuMemorySize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuMemorySize</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000100c</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"64!64"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdEmuMpServicesPollingInterval gEmulatorPkgTokenSpaceGuid.PcdEmuMpServicesPollingInterval
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuMpServicesPollingInterval</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000101a</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x100</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdEmuNetworkInterface gEmulatorPkgTokenSpaceGuid.PcdEmuNetworkInterface
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuNetworkInterface</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000100d</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"en0"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdEmuSerialPort gEmulatorPkgTokenSpaceGuid.PcdEmuSerialPort
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuSerialPort</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001002</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"/dev/ttyS0"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdEmuVirtualDisk gEmulatorPkgTokenSpaceGuid.PcdEmuVirtualDisk
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuVirtualDisk</CAPTION></TD><TD><CAPTION>gEmulatorPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001001</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"disk.dmg:FW"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gEmulatorPkgTokenSpaceGuid "gEmulatorPkgTokenSpaceGuid" </li>
+<li>\subpage guid_common_gEmuPhysicalDisksGuid "gEmuPhysicalDisksGuid" </li>
+<li>\subpage guid_common_gEmuRedfishServiceGuid "gEmuRedfishServiceGuid" </li>
+<li>\subpage guid_common_gEmuSystemConfigGuid "gEmuSystemConfigGuid" </li>
+<li>\subpage guid_common_gEmuVirtualDisksGuid "gEmuVirtualDisksGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gEmulatorPkgTokenSpaceGuid gEmulatorPkgTokenSpaceGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEmulatorPkgTokenSpaceGuid</TD><TD>{ 0x4F792E68, 0xE8C8, 0x794E, { 0xB1, 0xD8, 0x37, 0x03, 0xF3, 0xF2, 0xD5, 0xA5 } }</TD></TR></TABLE>
+ **/
+/** \page guid_common_gEmuPhysicalDisksGuid gEmuPhysicalDisksGuid
+ \copydoc EmulatorPkg/Include/Guid/EmuPhysicalDisk.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEmuPhysicalDisksGuid</TD><TD>{ 0xf2bdcc96, 0x8985, 0x11db, { 0x87, 0x19, 0x00, 0x40, 0xd0, 0x2b, 0x18, 0x35 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link EmulatorPkg/Include/Guid/EmuPhysicalDisk.h
+\endlink
+
+ **/
+/** \page guid_common_gEmuRedfishServiceGuid gEmuRedfishServiceGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEmuRedfishServiceGuid</TD><TD>{ 0x3fb208ac, 0x2185, 0x498c, { 0xbf, 0x46, 0xdc, 0x23, 0xda, 0x58, 0x7b, 0x55 } }</TD></TR></TABLE>
+ **/
+/** \page guid_common_gEmuSystemConfigGuid gEmuSystemConfigGuid
+ \copydoc EmulatorPkg/Include/Guid/EmuSystemConfig.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEmuSystemConfigGuid</TD><TD>{ 0xF8626165, 0x6CEB, 0x924A, { 0xBA, 0xFC, 0xF1, 0x3A, 0xB9, 0xD6, 0x57, 0x28 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link EmulatorPkg/Include/Guid/EmuSystemConfig.h
+\endlink
+
+ **/
+/** \page guid_common_gEmuVirtualDisksGuid gEmuVirtualDisksGuid
+ \copydoc EmulatorPkg/Include/Guid/EmuVirtualDisk.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEmuVirtualDisksGuid</TD><TD>{ 0xf2ba331a, 0x8985, 0x11db, { 0xa4, 0x06, 0x00, 0x40, 0xd0, 0x2b, 0x18, 0x35 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link EmulatorPkg/Include/Guid/EmuVirtualDisk.h
+\endlink
+
+ **/
+/** \page ppi_root_page PPI
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page ppi_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_page_gEmuThunkPpiGuid "gEmuThunkPpiGuid" </li>
+</ul>
+ **/
+/** \page ppi_page_gEmuThunkPpiGuid gEmuThunkPpiGuid
+ \copydoc EmulatorPkg/Include/Ppi/EmuThunk.h <br>
+ \section BasicPpiInfo PPI Information
+<TABLE><TR><TD><CAPTION>PPI's Guid Name</CAPTION></TD><TD><CAPTION>PPI's Guid</CAPTION></TD></TR><TR><TD>gEmuThunkPpiGuid</TD><TD>{ 0xE113F896, 0x75CF, 0xF640, { 0x81, 0x7F, 0xC8, 0x5A, 0x79, 0xE8, 0xAE, 0x67 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link EmulatorPkg/Include/Ppi/EmuThunk.h
+\endlink
+
+ **/
+/** \page protocol_root_page PROTOCOL
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page protocol_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_page_gEmuBlockIoProtocolGuid "gEmuBlockIoProtocolGuid" </li>
+<li>\subpage protocol_page_gEmuGraphicsWindowProtocolGuid "gEmuGraphicsWindowProtocolGuid" </li>
+<li>\subpage protocol_page_gEmuIoThunkProtocolGuid "gEmuIoThunkProtocolGuid" </li>
+<li>\subpage protocol_page_gEmuSnpProtocolGuid "gEmuSnpProtocolGuid" </li>
+<li>\subpage protocol_page_gEmuThreadThunkProtocolGuid "gEmuThreadThunkProtocolGuid" </li>
+<li>\subpage protocol_page_gEmuThunkProtocolGuid "gEmuThunkProtocolGuid" </li>
+</ul>
+ **/
+/** \page protocol_page_gEmuBlockIoProtocolGuid gEmuBlockIoProtocolGuid
+ \copydoc EmulatorPkg/Include/Protocol/EmuBlockIo.h <br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEmuBlockIoProtocolGuid</TD><TD>{ 0x6888A4AE, 0xAFCE, 0xE84B, { 0x91, 0x02, 0xF7, 0xB9, 0xDA, 0xE6, 0xA0, 0x30 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link EmulatorPkg/Include/Protocol/EmuBlockIo.h
+\endlink
+
+ **/
+/** \page protocol_page_gEmuGraphicsWindowProtocolGuid gEmuGraphicsWindowProtocolGuid
+ \copydoc EmulatorPkg/Include/Protocol/EmuFileSystem.h <br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEmuGraphicsWindowProtocolGuid</TD><TD>{ 0x30FD316A, 0x6728, 0x2E41, { 0xA6, 0x90, 0x0D, 0x13, 0x33, 0xD8, 0xCA, 0xC1 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link EmulatorPkg/Include/Protocol/EmuFileSystem.h
+\endlink
+
+ **/
+/** \page protocol_page_gEmuIoThunkProtocolGuid gEmuIoThunkProtocolGuid
+ \copydoc EmulatorPkg/Include/Protocol/EmuIoThunk.h <br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEmuIoThunkProtocolGuid</TD><TD>{ 0x453368F6, 0x7C85, 0x434A, { 0xA9, 0x8A, 0x72, 0xD1, 0xB7, 0xFF, 0xA9, 0x26 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link EmulatorPkg/Include/Protocol/EmuIoThunk.h
+\endlink
+
+ **/
+/** \page protocol_page_gEmuSnpProtocolGuid gEmuSnpProtocolGuid
+ \copydoc EmulatorPkg/Include/Protocol/EmuSnp.h <br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEmuSnpProtocolGuid</TD><TD>{ 0xFD5FBE54, 0x8C35, 0xB345, { 0x8A, 0x0F, 0x7A, 0xC8, 0xA5, 0xFD, 0x05, 0x21 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link EmulatorPkg/Include/Protocol/EmuSnp.h
+\endlink
+
+ **/
+/** \page protocol_page_gEmuThreadThunkProtocolGuid gEmuThreadThunkProtocolGuid
+ \copydoc EmulatorPkg/Include/Protocol/EmuThread.h <br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEmuThreadThunkProtocolGuid</TD><TD>{ 0x3B1E4B7C, 0x09D8, 0x944F, { 0xA4, 0x08, 0x13, 0x09, 0xEB, 0x8B, 0x44, 0x27 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link EmulatorPkg/Include/Protocol/EmuThread.h
+\endlink
+
+ **/
+/** \page protocol_page_gEmuThunkProtocolGuid gEmuThunkProtocolGuid
+ \copydoc EmulatorPkg/Include/Protocol/EmuThunk.h <br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEmuThunkProtocolGuid</TD><TD>{ 0x5CF32E0B, 0x8EDF, 0x2E44, { 0x9C, 0xDA, 0x93, 0x20, 0x5E, 0x99, 0xEC, 0x1C } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link EmulatorPkg/Include/Protocol/EmuThunk.h
+\endlink
+
+ **/

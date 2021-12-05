@@ -1,0 +1,8 @@
+var struct_e_f_i___a_c_p_i__6__2___m_a_x_i_m_u_m___s_y_s_t_e_m___c_h_a_r_a_c_t_e_r_i_s_t_i_c_s___t_a_b_l_e___h_e_a_d_e_r =
+[
+    [ "Header", "struct_e_f_i___a_c_p_i__6__2___m_a_x_i_m_u_m___s_y_s_t_e_m___c_h_a_r_a_c_t_e_r_i_s_t_i_c_s___t_a_b_l_e___h_e_a_d_e_r.html#afdc1da9cbe85e45a67d63b5aaf7caa9e", null ],
+    [ "MaximumNumberOfClockDomains", "struct_e_f_i___a_c_p_i__6__2___m_a_x_i_m_u_m___s_y_s_t_e_m___c_h_a_r_a_c_t_e_r_i_s_t_i_c_s___t_a_b_l_e___h_e_a_d_e_r.html#a2e9cb67718f7edab544a26ff7be66c3c", null ],
+    [ "MaximumNumberOfProximityDomains", "struct_e_f_i___a_c_p_i__6__2___m_a_x_i_m_u_m___s_y_s_t_e_m___c_h_a_r_a_c_t_e_r_i_s_t_i_c_s___t_a_b_l_e___h_e_a_d_e_r.html#a97221176601d227166f7fc79a2251e99", null ],
+    [ "MaximumPhysicalAddress", "struct_e_f_i___a_c_p_i__6__2___m_a_x_i_m_u_m___s_y_s_t_e_m___c_h_a_r_a_c_t_e_r_i_s_t_i_c_s___t_a_b_l_e___h_e_a_d_e_r.html#a90054b33446084a21ca7f7651120ecac", null ],
+    [ "OffsetProxDomInfo", "struct_e_f_i___a_c_p_i__6__2___m_a_x_i_m_u_m___s_y_s_t_e_m___c_h_a_r_a_c_t_e_r_i_s_t_i_c_s___t_a_b_l_e___h_e_a_d_e_r.html#a6a275ab551edb741e5a3362977b1571f", null ]
+];

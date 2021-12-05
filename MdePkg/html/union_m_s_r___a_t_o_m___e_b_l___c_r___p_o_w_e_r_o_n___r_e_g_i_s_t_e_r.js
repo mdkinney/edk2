@@ -1,0 +1,28 @@
+var union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r =
+[
+    [ "AERR_DriveEnable", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#ac7def7e104f27c969842049e0904723d", null ],
+    [ "AERR_ObservationEnabled", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a2e09c671050df0f28421fe3f02c852c6", null ],
+    [ "APICClusterID", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a750c931d3ac5b460a8aeab94a942e97b", null ],
+    [ "BERR_Enable", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a34420c4b5bd506daa4e1125c224dc15f", null ],
+    [ "BINIT_DriverEnable", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a7de1db8e8affd8105a8529ca65acd984", null ],
+    [ "BINIT_ObservationEnabled", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#ac974384ff39c3e33d6bd351a6d798ee4", null ],
+    [ "Bits", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a4ace524bf6d753bb2c7766f4d199f132", null ],
+    [ "DataErrorCheckingEnable", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#af1017bde85e2adb6d363883ed541c350", null ],
+    [ "ExecuteBIST", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a63ca45b6bd7f769549993bb383305811", null ],
+    [ "IntegerBusFrequencyRatio", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a87846153a2065b82dda2568e23249614", null ],
+    [ "Reserved1", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a61d2c4546768ae23ed09ce37c8c2386c", null ],
+    [ "Reserved10", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a43a977c5d56d9ad8483ae175ae012be3", null ],
+    [ "Reserved2", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a7a7f9cf8562817fc169981b64eb60729", null ],
+    [ "Reserved3", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#ab36835cbf2a26025040555aabb8c9661", null ],
+    [ "Reserved4", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#abfd68b47427c1c0e9b5a1d4c8ac76e05", null ],
+    [ "Reserved5", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#aef1b3850c1d249f594d34d8290440040", null ],
+    [ "Reserved6", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a5e48c5922ce993bb6df4701aff8dea2f", null ],
+    [ "Reserved7", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#ab176b09cc5fae3aa0fa7a89962b791b9", null ],
+    [ "Reserved8", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#aa638b51047a732a3dc1f6cc3c80d1f39", null ],
+    [ "Reserved9", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#ac336af1b529a23972b4a4276619c5548", null ],
+    [ "ResetVector", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a4029b48d1c25f0bf9901f93889d20870", null ],
+    [ "ResponseErrorCheckingEnable", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a137d7b49e74ede03f9261daf5fd0904c", null ],
+    [ "SymmetricArbitrationID", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a848b7ab302bf773f82163999baffd0aa", null ],
+    [ "Uint32", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#abdb0b56b6a1230667020337fe2340a21", null ],
+    [ "Uint64", "union_m_s_r___a_t_o_m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#aee955b4157e3b05b63355dcae1152aeb", null ]
+];

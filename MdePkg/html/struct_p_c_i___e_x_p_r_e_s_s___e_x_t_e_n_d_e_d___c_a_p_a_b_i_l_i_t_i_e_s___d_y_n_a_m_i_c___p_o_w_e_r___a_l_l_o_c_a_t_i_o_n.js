@@ -1,0 +1,9 @@
+var struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___d_y_n_a_m_i_c___p_o_w_e_r___a_l_l_o_c_a_t_i_o_n =
+[
+    [ "DpaCapability", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___d_y_n_a_m_i_c___p_o_w_e_r___a_l_l_o_c_a_t_i_o_n.html#a2df1f2f504806904bb96ebd040bebfbf", null ],
+    [ "DpaControl", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___d_y_n_a_m_i_c___p_o_w_e_r___a_l_l_o_c_a_t_i_o_n.html#a8562d2e66e83cec78f94ebe940bb3f3f", null ],
+    [ "DpaLatencyIndicator", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___d_y_n_a_m_i_c___p_o_w_e_r___a_l_l_o_c_a_t_i_o_n.html#a1c8d788c3d104a9479a2e03108b423af", null ],
+    [ "DpaPowerAllocationArray", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___d_y_n_a_m_i_c___p_o_w_e_r___a_l_l_o_c_a_t_i_o_n.html#a736fd0f42b4307184fdb49d30a44c611", null ],
+    [ "DpaStatus", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___d_y_n_a_m_i_c___p_o_w_e_r___a_l_l_o_c_a_t_i_o_n.html#ab9dc709efe637bc8a001b6ced54a561b", null ],
+    [ "Header", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___d_y_n_a_m_i_c___p_o_w_e_r___a_l_l_o_c_a_t_i_o_n.html#a3968e829c54dcf868b024adacb7b36f1", null ]
+];

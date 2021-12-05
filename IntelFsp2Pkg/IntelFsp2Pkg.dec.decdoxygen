@@ -1,0 +1,413 @@
+/** \mainpage IntelFsp2Pkg Package Document
+ Provides driver and definitions to build fsp in EDKII bios.<br>
+<br>
+ Copyright (c) 2014 - 2021, Intel Corporation. All rights reserved.<BR><br>
+ SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>A8C53B5E-D556-4F3E-874D-0D6FA2CDC7BF</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage IntelFsp2Pkg_public_includes "Public Includes" </li>
+<li>\subpage IntelFsp2Pkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+<li>\subpage ppi_root_page "PPI" </li>
+</ul>
+ **/
+/** \page IntelFsp2Pkg_public_includes Public Includes
+<p> \section content_index INDEX
+<ul>
+<li>\subpage public_include_top "IntelFsp2Pkg/Include" </li>
+<li>\subpage public_include_FspEas "IntelFsp2Pkg/Include/FspEas" </li>
+</ul>
+ **/
+/** \page public_include_top IntelFsp2Pkg/Include
+<ul>
+<li> \link IntelFsp2Pkg/Include/FspStatusCode.h\endlink </li>
+<li> \link IntelFsp2Pkg/Include/FspEas.h\endlink </li>
+<li> \link IntelFsp2Pkg/Include/FspGlobalData.h\endlink </li>
+<li> \link IntelFsp2Pkg/Include/FspMeasurePointId.h\endlink </li>
+</ul>
+
+ **/
+/** \page public_include_FspEas IntelFsp2Pkg/Include/FspEas
+<ul>
+<li> \link IntelFsp2Pkg/Include/FspEas/FspApi.h \endlink </li>
+</ul>
+
+ **/
+/** \page IntelFsp2Pkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_CacheAsRamLib "CacheAsRamLib" </li>
+<li>\subpage lc_CacheLib "CacheLib" </li>
+<li>\subpage lc_DebugDeviceLib "DebugDeviceLib" </li>
+<li>\subpage lc_FspCommonLib "FspCommonLib" </li>
+<li>\subpage lc_FspPlatformLib "FspPlatformLib" </li>
+<li>\subpage lc_FspSecPlatformLib "FspSecPlatformLib" </li>
+<li>\subpage lc_FspSwitchStackLib "FspSwitchStackLib" </li>
+</ul>
+ **/
+/** \page lc_CacheAsRamLib CacheAsRamLib
+  @libraryclass  Provides cache-as-ram support.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/CacheAsRamLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_CacheLib CacheLib
+  @libraryclass  Provides cache setting on MTRR.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/CacheLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_DebugDeviceLib DebugDeviceLib
+  @libraryclass  Provides debug device abstraction.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/DebugDeviceLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_FspCommonLib FspCommonLib
+  @libraryclass  Provides FSP related services.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/FspCommonLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_FspPlatformLib FspPlatformLib
+  @libraryclass  Provides FSP platform related actions.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/FspPlatformLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_FspSecPlatformLib FspSecPlatformLib
+  @libraryclass  Provides FSP platform sec related actions.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/FspSecPlatformLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_FspSwitchStackLib FspSwitchStackLib
+  @libraryclass  Provides FSP switch stack function.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/FspSwitchStackLib.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_root_page "PcdsDynamic" </li>
+<li>\subpage pcd_PcdsDynamicEx_root_page "PcdsDynamicEx" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_root_page PcdsDynamic
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_PcdBootLoaderEntry          "gIntelFsp2PkgTokenSpaceGuid.PcdBootLoaderEntry         " </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdFspReservedMemoryLength  "gIntelFsp2PkgTokenSpaceGuid.PcdFspReservedMemoryLength " </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdBootLoaderEntry          gIntelFsp2PkgTokenSpaceGuid.PcdBootLoaderEntry         
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdBootLoaderEntry         </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x46530100</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFFFFFFE4</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdFspReservedMemoryLength  gIntelFsp2PkgTokenSpaceGuid.PcdFspReservedMemoryLength 
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspReservedMemoryLength </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x46530000</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00100000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_root_page PcdsDynamicEx
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdBootLoaderEntry          "gIntelFsp2PkgTokenSpaceGuid.PcdBootLoaderEntry         " </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdFspReservedMemoryLength  "gIntelFsp2PkgTokenSpaceGuid.PcdFspReservedMemoryLength " </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdBootLoaderEntry          gIntelFsp2PkgTokenSpaceGuid.PcdBootLoaderEntry         
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdBootLoaderEntry         </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x46530100</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFFFFFFE4</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdFspReservedMemoryLength  gIntelFsp2PkgTokenSpaceGuid.PcdFspReservedMemoryLength 
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspReservedMemoryLength </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x46530000</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00100000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdBootLoaderEntry          "gIntelFsp2PkgTokenSpaceGuid.PcdBootLoaderEntry         " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspAreaBaseAddress        "gIntelFsp2PkgTokenSpaceGuid.PcdFspAreaBaseAddress       " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspAreaSize               "gIntelFsp2PkgTokenSpaceGuid.PcdFspAreaSize              " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspBootFirmwareVolumeBase "gIntelFsp2PkgTokenSpaceGuid.PcdFspBootFirmwareVolumeBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspHeaderSpecVersion      "gIntelFsp2PkgTokenSpaceGuid.PcdFspHeaderSpecVersion     " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspHeapSizePercentage     "gIntelFsp2PkgTokenSpaceGuid.PcdFspHeapSizePercentage    " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspMaxInterruptSupported  "gIntelFsp2PkgTokenSpaceGuid.PcdFspMaxInterruptSupported " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspMaxPatchEntry          "gIntelFsp2PkgTokenSpaceGuid.PcdFspMaxPatchEntry         " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspMaxPerfEntry           "gIntelFsp2PkgTokenSpaceGuid.PcdFspMaxPerfEntry          " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspPrivateTemporaryRamSize  "gIntelFsp2PkgTokenSpaceGuid.PcdFspPrivateTemporaryRamSize " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspReservedBufferSize     "gIntelFsp2PkgTokenSpaceGuid.PcdFspReservedBufferSize    " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspReservedMemoryLength  "gIntelFsp2PkgTokenSpaceGuid.PcdFspReservedMemoryLength " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspTemporaryRamSize       "gIntelFsp2PkgTokenSpaceGuid.PcdFspTemporaryRamSize      " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdGlobalDataPointerAddress  "gIntelFsp2PkgTokenSpaceGuid.PcdGlobalDataPointerAddress " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdTemporaryRamBase          "gIntelFsp2PkgTokenSpaceGuid.PcdTemporaryRamBase         " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdTemporaryRamSize          "gIntelFsp2PkgTokenSpaceGuid.PcdTemporaryRamSize         " </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdBootLoaderEntry          gIntelFsp2PkgTokenSpaceGuid.PcdBootLoaderEntry         
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdBootLoaderEntry         </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x46530100</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFFFFFFE4</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspAreaBaseAddress        gIntelFsp2PkgTokenSpaceGuid.PcdFspAreaBaseAddress       
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspAreaBaseAddress       </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFFF80000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspAreaSize               gIntelFsp2PkgTokenSpaceGuid.PcdFspAreaSize              
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspAreaSize              </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00040000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspBootFirmwareVolumeBase gIntelFsp2PkgTokenSpaceGuid.PcdFspBootFirmwareVolumeBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspBootFirmwareVolumeBase</CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000003</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFFF80000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspHeaderSpecVersion      gIntelFsp2PkgTokenSpaceGuid.PcdFspHeaderSpecVersion     
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspHeaderSpecVersion     </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000002</CAPTION></TD><TD><CAPTION> UINT8</CAPTION></TD><TD><CAPTION>      0x20</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspHeapSizePercentage     gIntelFsp2PkgTokenSpaceGuid.PcdFspHeapSizePercentage    
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspHeapSizePercentage    </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000004</CAPTION></TD><TD><CAPTION> UINT8</CAPTION></TD><TD><CAPTION>        50</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspMaxInterruptSupported  gIntelFsp2PkgTokenSpaceGuid.PcdFspMaxInterruptSupported 
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspMaxInterruptSupported </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000005</CAPTION></TD><TD><CAPTION> UINT8</CAPTION></TD><TD><CAPTION>        34</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspMaxPatchEntry          gIntelFsp2PkgTokenSpaceGuid.PcdFspMaxPatchEntry         
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspMaxPatchEntry         </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00002002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>         6</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspMaxPerfEntry           gIntelFsp2PkgTokenSpaceGuid.PcdFspMaxPerfEntry          
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspMaxPerfEntry          </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00002001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>        32</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspPrivateTemporaryRamSize  gIntelFsp2PkgTokenSpaceGuid.PcdFspPrivateTemporaryRamSize 
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspPrivateTemporaryRamSize </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000006</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspReservedBufferSize     gIntelFsp2PkgTokenSpaceGuid.PcdFspReservedBufferSize    
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspReservedBufferSize    </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10001004</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>     0x100</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspReservedMemoryLength  gIntelFsp2PkgTokenSpaceGuid.PcdFspReservedMemoryLength 
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspReservedMemoryLength </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x46530000</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00100000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspTemporaryRamSize       gIntelFsp2PkgTokenSpaceGuid.PcdFspTemporaryRamSize      
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspTemporaryRamSize      </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10001003</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>    0x1000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdGlobalDataPointerAddress  gIntelFsp2PkgTokenSpaceGuid.PcdGlobalDataPointerAddress 
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGlobalDataPointerAddress </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFED00108</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdTemporaryRamBase          gIntelFsp2PkgTokenSpaceGuid.PcdTemporaryRamBase         
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdTemporaryRamBase         </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10001001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFEF00000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdTemporaryRamSize          gIntelFsp2PkgTokenSpaceGuid.PcdTemporaryRamSize         
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdTemporaryRamSize         </CAPTION></TD><TD><CAPTION>gIntelFsp2PkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10001002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>    0x2000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gFspBootLoaderTolumHobGuid "gFspBootLoaderTolumHobGuid" </li>
+<li>\subpage guid_common_gFspEventEndOfFirmwareGuid "gFspEventEndOfFirmwareGuid" </li>
+<li>\subpage guid_common_gFspHeaderFileGuid "gFspHeaderFileGuid" </li>
+<li>\subpage guid_common_gFspNonVolatileStorageHob2Guid "gFspNonVolatileStorageHob2Guid" </li>
+<li>\subpage guid_common_gFspNonVolatileStorageHobGuid "gFspNonVolatileStorageHobGuid" </li>
+<li>\subpage guid_common_gFspPerformanceDataGuid "gFspPerformanceDataGuid" </li>
+<li>\subpage guid_common_gFspReservedMemoryResourceHobGuid "gFspReservedMemoryResourceHobGuid" </li>
+<li>\subpage guid_common_gIntelFsp2PkgTokenSpaceGuid "gIntelFsp2PkgTokenSpaceGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gFspBootLoaderTolumHobGuid gFspBootLoaderTolumHobGuid
+ \copydoc IntelFsp2Pkg/Include/Guid/GuidHobFspEas.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gFspBootLoaderTolumHobGuid</TD><TD>{ 0x73ff4f56, 0xaa8e, 0x4451, { 0xb3, 0x16, 0x36, 0x35, 0x36, 0x67, 0xad, 0x44 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link IntelFsp2Pkg/Include/Guid/GuidHobFspEas.h
+\endlink
+
+ **/
+/** \page guid_common_gFspEventEndOfFirmwareGuid gFspEventEndOfFirmwareGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gFspEventEndOfFirmwareGuid</TD><TD>{ 0xbd44f629, 0xeae7, 0x4198, { 0x87, 0xf1, 0x39, 0xfa, 0xb0, 0xfd, 0x71, 0x7e } }</TD></TR></TABLE>
+ **/
+/** \page guid_common_gFspHeaderFileGuid gFspHeaderFileGuid
+ \copydoc IntelFsp2Pkg/Include/Guid/FspHeaderFile.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gFspHeaderFileGuid</TD><TD>{ 0x912740BE, 0x2284, 0x4734, { 0xB9, 0x71, 0x84, 0xB0, 0x27, 0x35, 0x3F, 0x0C } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link IntelFsp2Pkg/Include/Guid/FspHeaderFile.h
+\endlink
+
+ **/
+/** \page guid_common_gFspNonVolatileStorageHob2Guid gFspNonVolatileStorageHob2Guid
+ \copydoc IntelFsp2Pkg/Include/Guid/FspNonVolatileStorageHob2.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gFspNonVolatileStorageHob2Guid</TD><TD>{ 0x4866788f, 0x6ba8, 0x47d8, { 0x83, 0x06, 0xac, 0xf7, 0x7f, 0x55, 0x10, 0x46 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link IntelFsp2Pkg/Include/Guid/FspNonVolatileStorageHob2.h
+\endlink
+
+ **/
+/** \page guid_common_gFspNonVolatileStorageHobGuid gFspNonVolatileStorageHobGuid
+ \copydoc IntelFsp2Pkg/Include/Guid/GuidHobFspEas.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gFspNonVolatileStorageHobGuid</TD><TD>{ 0x721acf02, 0x4d77, 0x4c2a, { 0xb3, 0xdc, 0x27, 0x0b, 0x7b, 0xa9, 0xe4, 0xb0 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link IntelFsp2Pkg/Include/Guid/GuidHobFspEas.h
+\endlink
+
+ **/
+/** \page guid_common_gFspPerformanceDataGuid gFspPerformanceDataGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gFspPerformanceDataGuid</TD><TD>{ 0x56ed21b6, 0xba23, 0x429e, { 0x89, 0x32, 0x37, 0x6d, 0x8e, 0x18, 0x2e, 0xe3 } }</TD></TR></TABLE>
+ **/
+/** \page guid_common_gFspReservedMemoryResourceHobGuid gFspReservedMemoryResourceHobGuid
+ \copydoc IntelFsp2Pkg/Include/Guid/GuidHobFspEas.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gFspReservedMemoryResourceHobGuid</TD><TD>{ 0x69a79759, 0x1373, 0x4367, { 0xa6, 0xc4, 0xc7, 0xf5, 0x9e, 0xfd, 0x98, 0x6e } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link IntelFsp2Pkg/Include/Guid/GuidHobFspEas.h
+\endlink
+
+ **/
+/** \page guid_common_gIntelFsp2PkgTokenSpaceGuid gIntelFsp2PkgTokenSpaceGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gIntelFsp2PkgTokenSpaceGuid</TD><TD>{ 0xed6e0531, 0xf715, 0x4a3d, { 0x9b, 0x12, 0xc1, 0xca, 0x5e, 0xf6, 0x98, 0xa2 } }</TD></TR></TABLE>
+ **/
+/** \page ppi_root_page PPI
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page ppi_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_page_gFspInApiModePpiGuid "gFspInApiModePpiGuid" </li>
+<li>\subpage ppi_page_gFspmArchConfigPpiGuid "gFspmArchConfigPpiGuid" </li>
+<li>\subpage ppi_page_gFspReadyForNotifyPhasePpiGuid "gFspReadyForNotifyPhasePpiGuid" </li>
+<li>\subpage ppi_page_gFspTempRamExitPpiGuid "gFspTempRamExitPpiGuid" </li>
+</ul>
+ **/
+/** \page ppi_page_gFspInApiModePpiGuid gFspInApiModePpiGuid
+ \section BasicPpiInfo PPI Information
+<TABLE><TR><TD><CAPTION>PPI's Guid Name</CAPTION></TD><TD><CAPTION>PPI's Guid</CAPTION></TD></TR><TR><TD>gFspInApiModePpiGuid</TD><TD>{ 0xa1eeab87, 0xc859, 0x479d, {0x89, 0xb5, 0x14, 0x61, 0xf4, 0x06, 0x1a, 0x3e}}</TD></TR></TABLE>
+ **/
+/** \page ppi_page_gFspmArchConfigPpiGuid gFspmArchConfigPpiGuid
+ \copydoc IntelFsp2Pkg/Include/Ppi/FspmArchConfigPpi.h <br>
+ \section BasicPpiInfo PPI Information
+<TABLE><TR><TD><CAPTION>PPI's Guid Name</CAPTION></TD><TD><CAPTION>PPI's Guid</CAPTION></TD></TR><TR><TD>gFspmArchConfigPpiGuid</TD><TD>{ 0x824d5a3a, 0xaf92, 0x4c0c, {0x9f, 0x19, 0x19, 0x52, 0x6d, 0xca, 0x4a, 0xbb}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link IntelFsp2Pkg/Include/Ppi/FspmArchConfigPpi.h
+\endlink
+
+ **/
+/** \page ppi_page_gFspReadyForNotifyPhasePpiGuid gFspReadyForNotifyPhasePpiGuid
+ \section BasicPpiInfo PPI Information
+<TABLE><TR><TD><CAPTION>PPI's Guid Name</CAPTION></TD><TD><CAPTION>PPI's Guid</CAPTION></TD></TR><TR><TD>gFspReadyForNotifyPhasePpiGuid</TD><TD>{ 0xcd167c1e, 0x6e0b, 0x42b3, {0x82, 0xf6, 0xe3, 0xe9, 0x06, 0x19, 0x98, 0x10}}</TD></TR></TABLE>
+ **/
+/** \page ppi_page_gFspTempRamExitPpiGuid gFspTempRamExitPpiGuid
+ \copydoc IntelFsp2Pkg/Include/Ppi/TempRamExitPpi.h <br>
+ \section BasicPpiInfo PPI Information
+<TABLE><TR><TD><CAPTION>PPI's Guid Name</CAPTION></TD><TD><CAPTION>PPI's Guid</CAPTION></TD></TR><TR><TD>gFspTempRamExitPpiGuid</TD><TD>{ 0xbc1cfbdb, 0x7e50, 0x42be, {0xb4, 0x87, 0x22, 0xe0, 0xa9, 0x0c, 0xb0, 0x52}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link IntelFsp2Pkg/Include/Ppi/TempRamExitPpi.h
+\endlink
+
+ **/

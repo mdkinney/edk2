@@ -1,0 +1,6 @@
+warning: source /home/runner/work/edk2/edk2/edk2/FatPkg/Include is not a readable file or directory... skipping.
+warning: source /home/runner/work/edk2/edk2/edk2/FatPkg/Include/Library is not a readable file or directory... skipping.
+warning: source /home/runner/work/edk2/edk2/edk2/FatPkg/Include/Protocol is not a readable file or directory... skipping.
+warning: source /home/runner/work/edk2/edk2/edk2/FatPkg/Include/Ppi is not a readable file or directory... skipping.
+warning: source /home/runner/work/edk2/edk2/edk2/FatPkg/Include/Guid is not a readable file or directory... skipping.
+warning: source /home/runner/work/edk2/edk2/edk2/FatPkg/Include/IndustryStandard is not a readable file or directory... skipping.

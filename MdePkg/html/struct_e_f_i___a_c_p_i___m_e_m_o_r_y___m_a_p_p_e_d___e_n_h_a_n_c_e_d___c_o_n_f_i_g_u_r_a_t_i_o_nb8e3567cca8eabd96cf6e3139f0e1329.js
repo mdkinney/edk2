@@ -1,0 +1,8 @@
+var struct_e_f_i___a_c_p_i___m_e_m_o_r_y___m_a_p_p_e_d___e_n_h_a_n_c_e_d___c_o_n_f_i_g_u_r_a_t_i_o_nb8e3567cca8eabd96cf6e3139f0e1329 =
+[
+    [ "BaseAddress", "struct_e_f_i___a_c_p_i___m_e_m_o_r_y___m_a_p_p_e_d___e_n_h_a_n_c_e_d___c_o_n_f_i_g_u_r_a_t_i_o_nb8e3567cca8eabd96cf6e3139f0e1329.html#a81a50b3d5f28ea80f29d11578a0ac4c4", null ],
+    [ "EndBusNumber", "struct_e_f_i___a_c_p_i___m_e_m_o_r_y___m_a_p_p_e_d___e_n_h_a_n_c_e_d___c_o_n_f_i_g_u_r_a_t_i_o_nb8e3567cca8eabd96cf6e3139f0e1329.html#a2d2782b70127ed2161da0c158804c746", null ],
+    [ "PciSegmentGroupNumber", "struct_e_f_i___a_c_p_i___m_e_m_o_r_y___m_a_p_p_e_d___e_n_h_a_n_c_e_d___c_o_n_f_i_g_u_r_a_t_i_o_nb8e3567cca8eabd96cf6e3139f0e1329.html#a5e456c180b9adbcf3ea9c93f3cd30c66", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i___m_e_m_o_r_y___m_a_p_p_e_d___e_n_h_a_n_c_e_d___c_o_n_f_i_g_u_r_a_t_i_o_nb8e3567cca8eabd96cf6e3139f0e1329.html#a33fb67d472d00863bb5e08a346eab0b5", null ],
+    [ "StartBusNumber", "struct_e_f_i___a_c_p_i___m_e_m_o_r_y___m_a_p_p_e_d___e_n_h_a_n_c_e_d___c_o_n_f_i_g_u_r_a_t_i_o_nb8e3567cca8eabd96cf6e3139f0e1329.html#a82d9f28f5e9012741f95d2d3fe59b420", null ]
+];

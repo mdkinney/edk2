@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['x2apic_5fmsr_5fbase_5faddress',['X2APIC_MSR_BASE_ADDRESS',['../_local_apic_8h.html#a4d6a3f0e93a411da429ff71a2f53dafc',1,'LocalApic.h']]],
+  ['x2apic_5fmsr_5ficr_5faddress',['X2APIC_MSR_ICR_ADDRESS',['../_local_apic_8h.html#ad9c7a71533909576d3c47ef4cccd1c19',1,'LocalApic.h']]],
+  ['xapic_5feoi_5foffset',['XAPIC_EOI_OFFSET',['../_local_apic_8h.html#a9024d5482f4279029fa3dc72a5e72d92',1,'LocalApic.h']]],
+  ['xapic_5ficr_5fdfr_5foffset',['XAPIC_ICR_DFR_OFFSET',['../_local_apic_8h.html#a509daefe43fa976d2baa9ba59a4b2c18',1,'LocalApic.h']]],
+  ['xapic_5ficr_5fhigh_5foffset',['XAPIC_ICR_HIGH_OFFSET',['../_local_apic_8h.html#ac878bc61eeb450b163bf9e5b5b035d7a',1,'LocalApic.h']]],
+  ['xapic_5ficr_5flow_5foffset',['XAPIC_ICR_LOW_OFFSET',['../_local_apic_8h.html#a4933c0f3da45ab643985e795f893184c',1,'LocalApic.h']]],
+  ['xapic_5fid_5foffset',['XAPIC_ID_OFFSET',['../_local_apic_8h.html#a6698f9dc7e9a50da478c036908b0ee23',1,'LocalApic.h']]],
+  ['xapic_5flvt_5flint0_5foffset',['XAPIC_LVT_LINT0_OFFSET',['../_local_apic_8h.html#a6944b5fed7a89e2468d9631635fc5a43',1,'LocalApic.h']]],
+  ['xapic_5flvt_5flint1_5foffset',['XAPIC_LVT_LINT1_OFFSET',['../_local_apic_8h.html#a362126f6d14797a628cf06e921db2886',1,'LocalApic.h']]],
+  ['xapic_5flvt_5ftimer_5foffset',['XAPIC_LVT_TIMER_OFFSET',['../_local_apic_8h.html#a3f0b357fab8e457566539ae4bde6f448',1,'LocalApic.h']]],
+  ['xapic_5fspurious_5fvector_5foffset',['XAPIC_SPURIOUS_VECTOR_OFFSET',['../_local_apic_8h.html#a3c4d2dc971660575ddd2fb4c96180dbf',1,'LocalApic.h']]],
+  ['xapic_5ftimer_5fcurrent_5fcount_5foffset',['XAPIC_TIMER_CURRENT_COUNT_OFFSET',['../_local_apic_8h.html#ad6b514686b98f4a230408b6204d5fe46',1,'LocalApic.h']]],
+  ['xapic_5ftimer_5fdivide_5fconfiguration_5foffset',['XAPIC_TIMER_DIVIDE_CONFIGURATION_OFFSET',['../_local_apic_8h.html#ad11cce8c88813ae96a8d34e794ea0c01',1,'LocalApic.h']]],
+  ['xapic_5ftimer_5finit_5fcount_5foffset',['XAPIC_TIMER_INIT_COUNT_OFFSET',['../_local_apic_8h.html#a99b56fe3d332dc74645c4f42457aff52',1,'LocalApic.h']]],
+  ['xapic_5fversion_5foffset',['XAPIC_VERSION_OFFSET',['../_local_apic_8h.html#a4400904c95be90eab707fb464f7e18b9',1,'LocalApic.h']]],
+  ['xstate_5freadonly',['XSTATE_READONLY',['../_stm_api_8h.html#a0ed0e387a9e48f8d268c6f1354da6d9d',1,'StmApi.h']]],
+  ['xstate_5freadwrite',['XSTATE_READWRITE',['../_stm_api_8h.html#a9928072148ba13e5eef10bc56fb5bcb3',1,'StmApi.h']]],
+  ['xstate_5fscrub',['XSTATE_SCRUB',['../_stm_api_8h.html#af20eb01837e53cc4dec4d67305ac245e',1,'StmApi.h']]]
+];

@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['c',['C',['../struct_o_p_t_e_e___m_e_s_s_a_g_e___p_a_r_a_m___v_a_l_u_e.html#a916e51a44a954f21b477c78e53f5b2d0',1,'OPTEE_MESSAGE_PARAM_VALUE']]],
+  ['cancelid',['CancelId',['../struct_o_p_t_e_e___m_e_s_s_a_g_e___a_r_g.html#a0a9371ff2e104af94c7afcc35a291510',1,'OPTEE_MESSAGE_ARG']]],
+  ['channelstatus',['ChannelStatus',['../struct_m_t_l___m_a_i_l_b_o_x.html#af7a368ec6cb262013a41627de330e55b',1,'MTL_MAILBOX']]],
+  ['channeltype',['ChannelType',['../struct_m_t_l___c_h_a_n_n_e_l.html#a0fdcb222e8de701963d8cd626ec5aaa9',1,'MTL_CHANNEL']]],
+  ['clusterid',['ClusterId',['../struct_a_r_m___c_o_r_e___i_n_f_o.html#a09ffd42effca48970be0fbb810e6bf75',1,'ARM_CORE_INFO']]],
+  ['command',['Command',['../struct_o_p_t_e_e___m_e_s_s_a_g_e___a_r_g.html#afe9acfbf99dd7ac00b56c87bd300a6b6',1,'OPTEE_MESSAGE_ARG']]],
+  ['continuousrate',['ContinuousRate',['../union_s_c_m_i___c_l_o_c_k___r_a_t_e.html#a6f3dbbd9fc06b96e30d12687bde1f338',1,'SCMI_CLOCK_RATE']]],
+  ['corecount',['CoreCount',['../struct_o_e_m___m_i_s_c___p_r_o_c_e_s_s_o_r___d_a_t_a.html#adc4794ee644575ca8be9d8db6a2a808b',1,'OEM_MISC_PROCESSOR_DATA']]],
+  ['coreid',['CoreId',['../struct_a_r_m___c_o_r_e___i_n_f_o.html#a38c7b3303cf1c36b90005f3016e5b4ec',1,'ARM_CORE_INFO']]],
+  ['coresenabled',['CoresEnabled',['../struct_o_e_m___m_i_s_c___p_r_o_c_e_s_s_o_r___d_a_t_a.html#aee69a25d67f250f87a249cd6796f4f1f',1,'OEM_MISC_PROCESSOR_DATA']]],
+  ['creatorid',['CreatorId',['../struct_a_r_m___p_r_o_c_e_s_s_o_r___t_a_b_l_e___h_e_a_d_e_r.html#a28bc6eafc410741772615d2153164371',1,'ARM_PROCESSOR_TABLE_HEADER']]],
+  ['creatorrevision',['CreatorRevision',['../struct_a_r_m___p_r_o_c_e_s_s_o_r___t_a_b_l_e___h_e_a_d_e_r.html#a86082f6c8125c2d3a6534f6aaf7d65dc',1,'ARM_PROCESSOR_TABLE_HEADER']]],
+  ['ctype1',['Ctype1',['../union_c_l_i_d_r___d_a_t_a.html#a68c38b944b34c66d0d065463816d8d21',1,'CLIDR_DATA']]],
+  ['ctype2',['Ctype2',['../union_c_l_i_d_r___d_a_t_a.html#ac68d6f2fead69f2c7444588eecd5f5c0',1,'CLIDR_DATA']]],
+  ['ctype3',['Ctype3',['../union_c_l_i_d_r___d_a_t_a.html#a8ac7e94179c78d9f760b31cc3b5b6671',1,'CLIDR_DATA']]],
+  ['ctype4',['Ctype4',['../union_c_l_i_d_r___d_a_t_a.html#a69a53504e9fd86fdef82b5ab928a3ce4',1,'CLIDR_DATA']]],
+  ['ctype5',['Ctype5',['../union_c_l_i_d_r___d_a_t_a.html#a25499984dd6adbffda70017dcdf99c26',1,'CLIDR_DATA']]],
+  ['ctype6',['Ctype6',['../union_c_l_i_d_r___d_a_t_a.html#a234ca2047e65a1700b97f5109e79f7bb',1,'CLIDR_DATA']]],
+  ['ctype7',['Ctype7',['../union_c_l_i_d_r___d_a_t_a.html#a454da65e9c8a235c75f6fc9f653ad99a',1,'CLIDR_DATA']]],
+  ['currentspeed',['CurrentSpeed',['../struct_o_e_m___m_i_s_c___p_r_o_c_e_s_s_o_r___d_a_t_a.html#a8152f36e462a193521e323dd5ef9f112',1,'OEM_MISC_PROCESSOR_DATA']]]
+];

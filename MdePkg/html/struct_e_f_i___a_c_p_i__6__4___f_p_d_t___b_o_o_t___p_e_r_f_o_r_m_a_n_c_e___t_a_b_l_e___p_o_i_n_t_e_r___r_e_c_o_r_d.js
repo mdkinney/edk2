@@ -1,0 +1,6 @@
+var struct_e_f_i___a_c_p_i__6__4___f_p_d_t___b_o_o_t___p_e_r_f_o_r_m_a_n_c_e___t_a_b_l_e___p_o_i_n_t_e_r___r_e_c_o_r_d =
+[
+    [ "BootPerformanceTablePointer", "struct_e_f_i___a_c_p_i__6__4___f_p_d_t___b_o_o_t___p_e_r_f_o_r_m_a_n_c_e___t_a_b_l_e___p_o_i_n_t_e_r___r_e_c_o_r_d.html#a7dba20855a8dd5a46dffe7988989056f", null ],
+    [ "Header", "struct_e_f_i___a_c_p_i__6__4___f_p_d_t___b_o_o_t___p_e_r_f_o_r_m_a_n_c_e___t_a_b_l_e___p_o_i_n_t_e_r___r_e_c_o_r_d.html#afe8be81b11adfa0be8a0abbd0692ae0b", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__6__4___f_p_d_t___b_o_o_t___p_e_r_f_o_r_m_a_n_c_e___t_a_b_l_e___p_o_i_n_t_e_r___r_e_c_o_r_d.html#a673700f1b4b3f1d20f1b69e1b8da9e24", null ]
+];

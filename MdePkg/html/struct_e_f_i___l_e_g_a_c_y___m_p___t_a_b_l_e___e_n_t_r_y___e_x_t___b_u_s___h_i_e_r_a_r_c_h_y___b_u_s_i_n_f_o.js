@@ -1,0 +1,5 @@
+var struct_e_f_i___l_e_g_a_c_y___m_p___t_a_b_l_e___e_n_t_r_y___e_x_t___b_u_s___h_i_e_r_a_r_c_h_y___b_u_s_i_n_f_o =
+[
+    [ "Reserved", "struct_e_f_i___l_e_g_a_c_y___m_p___t_a_b_l_e___e_n_t_r_y___e_x_t___b_u_s___h_i_e_r_a_r_c_h_y___b_u_s_i_n_f_o.html#a9b508b626083b98fc6262c087d09e0cc", null ],
+    [ "SubtractiveDecode", "struct_e_f_i___l_e_g_a_c_y___m_p___t_a_b_l_e___e_n_t_r_y___e_x_t___b_u_s___h_i_e_r_a_r_c_h_y___b_u_s_i_n_f_o.html#a388368b00f6d5570359269065142db8e", null ]
+];

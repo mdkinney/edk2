@@ -1,0 +1,631 @@
+/** \mainpage NetworkPkg Package Document
+ Network Package.<br>
+<br>
+ This package provides network modules that conform to UEFI 2.4 specification.<br>
+<br>
+ Copyright (c) 2009 - 2021, Intel Corporation. All rights reserved.<BR><br>
+ (C) Copyright 2015-2020 Hewlett Packard Enterprise Development LP<BR><br>
+<br>
+ SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>947988BE-8D5C-471a-893D-AD181C46BEBB</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage NetworkPkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+<li>\subpage protocol_root_page "PROTOCOL" </li>
+</ul>
+ **/
+/** \page NetworkPkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_DpcLib "DpcLib" </li>
+<li>\subpage lc_HttpIoLib "HttpIoLib" </li>
+<li>\subpage lc_HttpLib "HttpLib" </li>
+<li>\subpage lc_IpIoLib "IpIoLib" </li>
+<li>\subpage lc_NetLib "NetLib" </li>
+<li>\subpage lc_TcpIoLib "TcpIoLib" </li>
+<li>\subpage lc_UdpIoLib "UdpIoLib" </li>
+</ul>
+ **/
+/** \page lc_DpcLib DpcLib
+  @libraryclass  Library for Deferred Procedure Calls.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/DpcLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_HttpIoLib HttpIoLib
+  @libraryclass  Http IO helper routines for HTTP transfer.<br>
+   This library is only intended to be used by UEFI network stack modules.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/HttpIoLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_HttpLib HttpLib
+  @libraryclass  The helper routines to access HTTP service.<br>
+   This library is only intended to be used by UEFI network stack modules.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/HttpLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_IpIoLib IpIoLib
+  @libraryclass  IpIo layer upon EFI IP4 Protocol.<br>
+   This library is only intended to be used by UEFI network stack modules.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/IpIoLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_NetLib NetLib
+  @libraryclass  Basic function for UEFI network stack.<br>
+   This library is only intended to be used by UEFI network stack modules.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/NetLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_TcpIoLib TcpIoLib
+  @libraryclass  The helper routines to access TCP service.<br>
+   This library is only intended to be used by UEFI network stack modules.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/TcpIoLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_UdpIoLib UdpIoLib
+  @libraryclass  The helper routines to access UDP service.<br>
+   This library is only intended to be used by UEFI network stack modules.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/UdpIoLib.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_root_page "PcdsDynamic" </li>
+<li>\subpage pcd_PcdsDynamicEx_root_page "PcdsDynamicEx" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+<li>\subpage pcd_PcdsPatchableInModule_root_page "PcdsPatchableInModule" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_root_page PcdsDynamic
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_PcdDhcp6UidType "gEfiNetworkPkgTokenSpaceGuid.PcdDhcp6UidType" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdHttpIoTimeout "gEfiNetworkPkgTokenSpaceGuid.PcdHttpIoTimeout" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdIPv4PXESupport "gEfiNetworkPkgTokenSpaceGuid.PcdIPv4PXESupport" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdIPv6PXESupport "gEfiNetworkPkgTokenSpaceGuid.PcdIPv6PXESupport" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdIScsiAIPNetworkBootPolicy "gEfiNetworkPkgTokenSpaceGuid.PcdIScsiAIPNetworkBootPolicy" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdDhcp6UidType gEfiNetworkPkgTokenSpaceGuid.PcdDhcp6UidType
+ IPv6 DHCP Unique Identifier (DUID) Type configuration (From RFCs 3315 and 6355).<br>
+ 01 = DUID Based on Link-layer Address Plus Time [DUID-LLT]<br>
+ 04 = UUID-Based DHCPv6 Unique Identifier (DUID-UUID)<br>
+ 02 = DUID Assigned by Vendor Based on Enterprise Number [DUID-EN] (not supported)<br>
+ 03 = DUID Based on Link-layer Address [DUID-LL] (not supported)<br>
+ @Prompt Type Value of Dhcp6 Unique Identifier (DUID).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdDhcp6UidType</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000001</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>4</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdHttpIoTimeout gEfiNetworkPkgTokenSpaceGuid.PcdHttpIoTimeout
+ The Timeout value of HTTP IO.<br>
+ @Prompt The Timeout value of HTTP Io. Default value is 5000.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHttpIoTimeout</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000F</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>5000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdIPv4PXESupport gEfiNetworkPkgTokenSpaceGuid.PcdIPv4PXESupport
+ IPv4 PXE support<br>
+ 0x01 = PXE Enabled<br>
+ 0x00 = PXE Disabled<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIPv4PXESupport</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000009</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x01</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdIPv6PXESupport gEfiNetworkPkgTokenSpaceGuid.PcdIPv6PXESupport
+ IPv6 PXE support<br>
+ 0x01 = PXE Enabled<br>
+ 0x00 = PXE Disabled<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIPv6PXESupport</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1000000a</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x01</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdIScsiAIPNetworkBootPolicy gEfiNetworkPkgTokenSpaceGuid.PcdIScsiAIPNetworkBootPolicy
+ Network boot policy to stop UEFI iSCSI if applicable.<br>
+ 0x00 = Always use UEFI iSCSI and ignore iSCSI HBA.<br>
+ 0x01 = Stop UEFI iSCSI if iSCSI HBA adapter produces AIP protocol with Network Boot.<br>
+ 0x02 = Stop UEFI iSCSI if iSCSI HBA adapter supports booting from iSCSI IPv4 targets.<br>
+ 0x04 = Stop UEFI iSCSI if iSCSI HBA adapter supports booting from iSCSI IPv6 targets.<br>
+ 0x08 = Stop UEFI iSCSI if iSCSI HBA adapter supports an offload engine for iSCSI boot.<br>
+ 0x10 = Stop UEFI iSCSI if iSCSI HBA adapter supports multipath I/O for iSCSI boot.<br>
+ 0x20 = Stop UEFI iSCSI if iSCSI HBA adapter is currently configured to boot from iSCSI IPv4 targets.<br>
+ 0x40 = Stop UEFI iSCSI if iSCSI HBA adapter is currently configured to boot from iSCSI IPv6 targets.<br>
+ 0xFF = Always use iSCSI HBA and ignore UEFI iSCSI.<br>
+ @Prompt Type Value of network boot policy used in iSCSI.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIScsiAIPNetworkBootPolicy</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000007</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x08</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_root_page PcdsDynamicEx
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdDhcp6UidType "gEfiNetworkPkgTokenSpaceGuid.PcdDhcp6UidType" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdHttpIoTimeout "gEfiNetworkPkgTokenSpaceGuid.PcdHttpIoTimeout" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdIPv4PXESupport "gEfiNetworkPkgTokenSpaceGuid.PcdIPv4PXESupport" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdIPv6PXESupport "gEfiNetworkPkgTokenSpaceGuid.PcdIPv6PXESupport" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdIScsiAIPNetworkBootPolicy "gEfiNetworkPkgTokenSpaceGuid.PcdIScsiAIPNetworkBootPolicy" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdDhcp6UidType gEfiNetworkPkgTokenSpaceGuid.PcdDhcp6UidType
+ IPv6 DHCP Unique Identifier (DUID) Type configuration (From RFCs 3315 and 6355).<br>
+ 01 = DUID Based on Link-layer Address Plus Time [DUID-LLT]<br>
+ 04 = UUID-Based DHCPv6 Unique Identifier (DUID-UUID)<br>
+ 02 = DUID Assigned by Vendor Based on Enterprise Number [DUID-EN] (not supported)<br>
+ 03 = DUID Based on Link-layer Address [DUID-LL] (not supported)<br>
+ @Prompt Type Value of Dhcp6 Unique Identifier (DUID).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdDhcp6UidType</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000001</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>4</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdHttpIoTimeout gEfiNetworkPkgTokenSpaceGuid.PcdHttpIoTimeout
+ The Timeout value of HTTP IO.<br>
+ @Prompt The Timeout value of HTTP Io. Default value is 5000.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHttpIoTimeout</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000F</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>5000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdIPv4PXESupport gEfiNetworkPkgTokenSpaceGuid.PcdIPv4PXESupport
+ IPv4 PXE support<br>
+ 0x01 = PXE Enabled<br>
+ 0x00 = PXE Disabled<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIPv4PXESupport</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000009</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x01</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdIPv6PXESupport gEfiNetworkPkgTokenSpaceGuid.PcdIPv6PXESupport
+ IPv6 PXE support<br>
+ 0x01 = PXE Enabled<br>
+ 0x00 = PXE Disabled<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIPv6PXESupport</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1000000a</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x01</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdIScsiAIPNetworkBootPolicy gEfiNetworkPkgTokenSpaceGuid.PcdIScsiAIPNetworkBootPolicy
+ Network boot policy to stop UEFI iSCSI if applicable.<br>
+ 0x00 = Always use UEFI iSCSI and ignore iSCSI HBA.<br>
+ 0x01 = Stop UEFI iSCSI if iSCSI HBA adapter produces AIP protocol with Network Boot.<br>
+ 0x02 = Stop UEFI iSCSI if iSCSI HBA adapter supports booting from iSCSI IPv4 targets.<br>
+ 0x04 = Stop UEFI iSCSI if iSCSI HBA adapter supports booting from iSCSI IPv6 targets.<br>
+ 0x08 = Stop UEFI iSCSI if iSCSI HBA adapter supports an offload engine for iSCSI boot.<br>
+ 0x10 = Stop UEFI iSCSI if iSCSI HBA adapter supports multipath I/O for iSCSI boot.<br>
+ 0x20 = Stop UEFI iSCSI if iSCSI HBA adapter is currently configured to boot from iSCSI IPv4 targets.<br>
+ 0x40 = Stop UEFI iSCSI if iSCSI HBA adapter is currently configured to boot from iSCSI IPv6 targets.<br>
+ 0xFF = Always use iSCSI HBA and ignore UEFI iSCSI.<br>
+ @Prompt Type Value of network boot policy used in iSCSI.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIScsiAIPNetworkBootPolicy</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000007</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x08</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdAllowHttpConnections "gEfiNetworkPkgTokenSpaceGuid.PcdAllowHttpConnections" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdDhcp6UidType "gEfiNetworkPkgTokenSpaceGuid.PcdDhcp6UidType" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdHttpIoTimeout "gEfiNetworkPkgTokenSpaceGuid.PcdHttpIoTimeout" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdIPv4PXESupport "gEfiNetworkPkgTokenSpaceGuid.PcdIPv4PXESupport" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdIPv6PXESupport "gEfiNetworkPkgTokenSpaceGuid.PcdIPv6PXESupport" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdIScsiAIPNetworkBootPolicy "gEfiNetworkPkgTokenSpaceGuid.PcdIScsiAIPNetworkBootPolicy" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdMaxHttpChunkTransfer "gEfiNetworkPkgTokenSpaceGuid.PcdMaxHttpChunkTransfer" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdMaxIScsiAttemptNumber "gEfiNetworkPkgTokenSpaceGuid.PcdMaxIScsiAttemptNumber" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPxeTftpWindowSize "gEfiNetworkPkgTokenSpaceGuid.PcdPxeTftpWindowSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSnpCreateExitBootServicesEvent "gEfiNetworkPkgTokenSpaceGuid.PcdSnpCreateExitBootServicesEvent" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdTftpBlockSize "gEfiNetworkPkgTokenSpaceGuid.PcdTftpBlockSize" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdAllowHttpConnections gEfiNetworkPkgTokenSpaceGuid.PcdAllowHttpConnections
+ Indicates whether HTTP connections (i.e., unsecured) are permitted or not.<br>
+ TRUE  - HTTP connections are allowed. Both the "https://" and "http://" URI schemes are permitted.<br>
+ FALSE - HTTP connections are denied. Only the "https://" URI scheme is permitted.<br>
+ @Prompt Indicates whether HTTP connections are permitted or not.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAllowHttpConnections</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000008</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdDhcp6UidType gEfiNetworkPkgTokenSpaceGuid.PcdDhcp6UidType
+ IPv6 DHCP Unique Identifier (DUID) Type configuration (From RFCs 3315 and 6355).<br>
+ 01 = DUID Based on Link-layer Address Plus Time [DUID-LLT]<br>
+ 04 = UUID-Based DHCPv6 Unique Identifier (DUID-UUID)<br>
+ 02 = DUID Assigned by Vendor Based on Enterprise Number [DUID-EN] (not supported)<br>
+ 03 = DUID Based on Link-layer Address [DUID-LL] (not supported)<br>
+ @Prompt Type Value of Dhcp6 Unique Identifier (DUID).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdDhcp6UidType</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000001</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>4</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdHttpIoTimeout gEfiNetworkPkgTokenSpaceGuid.PcdHttpIoTimeout
+ The Timeout value of HTTP IO.<br>
+ @Prompt The Timeout value of HTTP Io. Default value is 5000.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHttpIoTimeout</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000F</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>5000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdIPv4PXESupport gEfiNetworkPkgTokenSpaceGuid.PcdIPv4PXESupport
+ IPv4 PXE support<br>
+ 0x01 = PXE Enabled<br>
+ 0x00 = PXE Disabled<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIPv4PXESupport</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000009</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x01</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdIPv6PXESupport gEfiNetworkPkgTokenSpaceGuid.PcdIPv6PXESupport
+ IPv6 PXE support<br>
+ 0x01 = PXE Enabled<br>
+ 0x00 = PXE Disabled<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIPv6PXESupport</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1000000a</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x01</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdIScsiAIPNetworkBootPolicy gEfiNetworkPkgTokenSpaceGuid.PcdIScsiAIPNetworkBootPolicy
+ Network boot policy to stop UEFI iSCSI if applicable.<br>
+ 0x00 = Always use UEFI iSCSI and ignore iSCSI HBA.<br>
+ 0x01 = Stop UEFI iSCSI if iSCSI HBA adapter produces AIP protocol with Network Boot.<br>
+ 0x02 = Stop UEFI iSCSI if iSCSI HBA adapter supports booting from iSCSI IPv4 targets.<br>
+ 0x04 = Stop UEFI iSCSI if iSCSI HBA adapter supports booting from iSCSI IPv6 targets.<br>
+ 0x08 = Stop UEFI iSCSI if iSCSI HBA adapter supports an offload engine for iSCSI boot.<br>
+ 0x10 = Stop UEFI iSCSI if iSCSI HBA adapter supports multipath I/O for iSCSI boot.<br>
+ 0x20 = Stop UEFI iSCSI if iSCSI HBA adapter is currently configured to boot from iSCSI IPv4 targets.<br>
+ 0x40 = Stop UEFI iSCSI if iSCSI HBA adapter is currently configured to boot from iSCSI IPv6 targets.<br>
+ 0xFF = Always use iSCSI HBA and ignore UEFI iSCSI.<br>
+ @Prompt Type Value of network boot policy used in iSCSI.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIScsiAIPNetworkBootPolicy</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000007</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x08</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdMaxHttpChunkTransfer gEfiNetworkPkgTokenSpaceGuid.PcdMaxHttpChunkTransfer
+ The maximum size of total HTTP chunk transfer.<br>
+ @Prompt Max size of total HTTP chunk transfer. the default value is 12MB.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMaxHttpChunkTransfer</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000E</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0C00000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdMaxIScsiAttemptNumber gEfiNetworkPkgTokenSpaceGuid.PcdMaxIScsiAttemptNumber
+ The max attempt number will be created by iSCSI driver.<br>
+ @Prompt Max attempt number.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMaxIScsiAttemptNumber</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000D</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x08</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPxeTftpWindowSize gEfiNetworkPkgTokenSpaceGuid.PcdPxeTftpWindowSize
+ This setting is to specify the MTFTP windowsize used by UEFI PXE driver.<br>
+ A value of 0 indicates the default value of windowsize(1).<br>
+ A non-zero value will be used as windowsize.<br>
+ @Prompt PXE TFTP windowsize.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPxeTftpWindowSize</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000008</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x4</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSnpCreateExitBootServicesEvent gEfiNetworkPkgTokenSpaceGuid.PcdSnpCreateExitBootServicesEvent
+ Indicates whether SnpDxe driver will create an event that will be notified<br>
+ upon gBS->ExitBootServices() call.<br>
+ TRUE - Event being triggered upon ExitBootServices call will be created<br>
+ FALSE - Event being triggered upon ExitBootServices call will NOT be created<br>
+ @Prompt Indicates whether SnpDxe creates event for ExitBootServices() call.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSnpCreateExitBootServicesEvent</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1000000C</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdTftpBlockSize gEfiNetworkPkgTokenSpaceGuid.PcdTftpBlockSize
+ This setting can override the default TFTP block size. A value of 0 computes<br>
+ the default from MTU information. A non-zero value will be used as block size<br>
+ in bytes.<br>
+ @Prompt TFTP block size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdTftpBlockSize</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1000000B</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_root_page PcdsPatchableInModule
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdAllowHttpConnections "gEfiNetworkPkgTokenSpaceGuid.PcdAllowHttpConnections" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdDhcp6UidType "gEfiNetworkPkgTokenSpaceGuid.PcdDhcp6UidType" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdHttpIoTimeout "gEfiNetworkPkgTokenSpaceGuid.PcdHttpIoTimeout" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdIPv4PXESupport "gEfiNetworkPkgTokenSpaceGuid.PcdIPv4PXESupport" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdIPv6PXESupport "gEfiNetworkPkgTokenSpaceGuid.PcdIPv6PXESupport" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdIScsiAIPNetworkBootPolicy "gEfiNetworkPkgTokenSpaceGuid.PcdIScsiAIPNetworkBootPolicy" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdPxeTftpWindowSize "gEfiNetworkPkgTokenSpaceGuid.PcdPxeTftpWindowSize" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdSnpCreateExitBootServicesEvent "gEfiNetworkPkgTokenSpaceGuid.PcdSnpCreateExitBootServicesEvent" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdTftpBlockSize "gEfiNetworkPkgTokenSpaceGuid.PcdTftpBlockSize" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdAllowHttpConnections gEfiNetworkPkgTokenSpaceGuid.PcdAllowHttpConnections
+ Indicates whether HTTP connections (i.e., unsecured) are permitted or not.<br>
+ TRUE  - HTTP connections are allowed. Both the "https://" and "http://" URI schemes are permitted.<br>
+ FALSE - HTTP connections are denied. Only the "https://" URI scheme is permitted.<br>
+ @Prompt Indicates whether HTTP connections are permitted or not.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAllowHttpConnections</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000008</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdDhcp6UidType gEfiNetworkPkgTokenSpaceGuid.PcdDhcp6UidType
+ IPv6 DHCP Unique Identifier (DUID) Type configuration (From RFCs 3315 and 6355).<br>
+ 01 = DUID Based on Link-layer Address Plus Time [DUID-LLT]<br>
+ 04 = UUID-Based DHCPv6 Unique Identifier (DUID-UUID)<br>
+ 02 = DUID Assigned by Vendor Based on Enterprise Number [DUID-EN] (not supported)<br>
+ 03 = DUID Based on Link-layer Address [DUID-LL] (not supported)<br>
+ @Prompt Type Value of Dhcp6 Unique Identifier (DUID).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdDhcp6UidType</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000001</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>4</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdHttpIoTimeout gEfiNetworkPkgTokenSpaceGuid.PcdHttpIoTimeout
+ The Timeout value of HTTP IO.<br>
+ @Prompt The Timeout value of HTTP Io. Default value is 5000.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHttpIoTimeout</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000F</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>5000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdIPv4PXESupport gEfiNetworkPkgTokenSpaceGuid.PcdIPv4PXESupport
+ IPv4 PXE support<br>
+ 0x01 = PXE Enabled<br>
+ 0x00 = PXE Disabled<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIPv4PXESupport</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000009</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x01</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdIPv6PXESupport gEfiNetworkPkgTokenSpaceGuid.PcdIPv6PXESupport
+ IPv6 PXE support<br>
+ 0x01 = PXE Enabled<br>
+ 0x00 = PXE Disabled<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIPv6PXESupport</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1000000a</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x01</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdIScsiAIPNetworkBootPolicy gEfiNetworkPkgTokenSpaceGuid.PcdIScsiAIPNetworkBootPolicy
+ Network boot policy to stop UEFI iSCSI if applicable.<br>
+ 0x00 = Always use UEFI iSCSI and ignore iSCSI HBA.<br>
+ 0x01 = Stop UEFI iSCSI if iSCSI HBA adapter produces AIP protocol with Network Boot.<br>
+ 0x02 = Stop UEFI iSCSI if iSCSI HBA adapter supports booting from iSCSI IPv4 targets.<br>
+ 0x04 = Stop UEFI iSCSI if iSCSI HBA adapter supports booting from iSCSI IPv6 targets.<br>
+ 0x08 = Stop UEFI iSCSI if iSCSI HBA adapter supports an offload engine for iSCSI boot.<br>
+ 0x10 = Stop UEFI iSCSI if iSCSI HBA adapter supports multipath I/O for iSCSI boot.<br>
+ 0x20 = Stop UEFI iSCSI if iSCSI HBA adapter is currently configured to boot from iSCSI IPv4 targets.<br>
+ 0x40 = Stop UEFI iSCSI if iSCSI HBA adapter is currently configured to boot from iSCSI IPv6 targets.<br>
+ 0xFF = Always use iSCSI HBA and ignore UEFI iSCSI.<br>
+ @Prompt Type Value of network boot policy used in iSCSI.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIScsiAIPNetworkBootPolicy</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000007</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x08</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdPxeTftpWindowSize gEfiNetworkPkgTokenSpaceGuid.PcdPxeTftpWindowSize
+ This setting is to specify the MTFTP windowsize used by UEFI PXE driver.<br>
+ A value of 0 indicates the default value of windowsize(1).<br>
+ A non-zero value will be used as windowsize.<br>
+ @Prompt PXE TFTP windowsize.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPxeTftpWindowSize</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000008</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x4</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdSnpCreateExitBootServicesEvent gEfiNetworkPkgTokenSpaceGuid.PcdSnpCreateExitBootServicesEvent
+ Indicates whether SnpDxe driver will create an event that will be notified<br>
+ upon gBS->ExitBootServices() call.<br>
+ TRUE - Event being triggered upon ExitBootServices call will be created<br>
+ FALSE - Event being triggered upon ExitBootServices call will NOT be created<br>
+ @Prompt Indicates whether SnpDxe creates event for ExitBootServices() call.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSnpCreateExitBootServicesEvent</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1000000C</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdTftpBlockSize gEfiNetworkPkgTokenSpaceGuid.PcdTftpBlockSize
+ This setting can override the default TFTP block size. A value of 0 computes<br>
+ the default from MTU information. A non-zero value will be used as block size<br>
+ in bytes.<br>
+ @Prompt TFTP block size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdTftpBlockSize</CAPTION></TD><TD><CAPTION>gEfiNetworkPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1000000B</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gEdkiiHttpTlsCipherListGuid "gEdkiiHttpTlsCipherListGuid" </li>
+<li>\subpage guid_common_gEfiNetworkPkgTokenSpaceGuid "gEfiNetworkPkgTokenSpaceGuid" </li>
+<li>\subpage guid_common_gEfiTlsCaCertificateGuid "gEfiTlsCaCertificateGuid" </li>
+<li>\subpage guid_common_gHttpBootConfigGuid "gHttpBootConfigGuid" </li>
+<li>\subpage guid_common_gIp4Config2NvDataGuid "gIp4Config2NvDataGuid" </li>
+<li>\subpage guid_common_gIp4IScsiConfigGuid "gIp4IScsiConfigGuid" </li>
+<li>\subpage guid_common_gIp6ConfigNvDataGuid "gIp6ConfigNvDataGuid" </li>
+<li>\subpage guid_common_gIScsiCHAPAuthInfoGuid "gIScsiCHAPAuthInfoGuid" </li>
+<li>\subpage guid_common_gIScsiConfigGuid "gIScsiConfigGuid" </li>
+<li>\subpage guid_common_gTlsAuthConfigGuid "gTlsAuthConfigGuid" </li>
+<li>\subpage guid_common_gVlanConfigFormSetGuid "gVlanConfigFormSetGuid" </li>
+<li>\subpage guid_common_gWifiConfigGuid "gWifiConfigGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gEdkiiHttpTlsCipherListGuid gEdkiiHttpTlsCipherListGuid
+ \copydoc NetworkPkg/Include/Guid/HttpTlsCipherList.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEdkiiHttpTlsCipherListGuid</TD><TD>{ 0x46ddb415, 0x5244, 0x49c7, { 0x93, 0x74, 0xf0, 0xe2, 0x98, 0xe7, 0xd3, 0x86 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link NetworkPkg/Include/Guid/HttpTlsCipherList.h
+\endlink
+
+ **/
+/** \page guid_common_gEfiNetworkPkgTokenSpaceGuid gEfiNetworkPkgTokenSpaceGuid
+ Network package token space guid.<br> Include/Guid/NetworkPkgTokenSpace.h<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEfiNetworkPkgTokenSpaceGuid</TD><TD>{ 0x40e064b2, 0x0ae0, 0x48b1, { 0xa0, 0x7d, 0xf8, 0xcf, 0x1e, 0x1a, 0x23, 0x10}}</TD></TR></TABLE>
+ **/
+/** \page guid_common_gEfiTlsCaCertificateGuid gEfiTlsCaCertificateGuid
+ \copydoc NetworkPkg/Include/Guid/TlsAuthentication.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEfiTlsCaCertificateGuid</TD><TD>{ 0xfd2340D0, 0x3dab, 0x4349, { 0xa6, 0xc7, 0x3b, 0x4f, 0x12, 0xb4, 0x8e, 0xae }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link NetworkPkg/Include/Guid/TlsAuthentication.h
+\endlink
+
+ **/
+/** \page guid_common_gHttpBootConfigGuid gHttpBootConfigGuid
+ \copydoc NetworkPkg/Include/Guid/HttpBootConfigHii.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gHttpBootConfigGuid</TD><TD>{ 0x4d20583a, 0x7765, 0x4e7a, { 0x8a, 0x67, 0xdc, 0xde, 0x74, 0xee, 0x3e, 0xc5 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link NetworkPkg/Include/Guid/HttpBootConfigHii.h
+\endlink
+
+ **/
+/** \page guid_common_gIp4Config2NvDataGuid gIp4Config2NvDataGuid
+ Include/Guid/Ip4Config2Hii.h<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gIp4Config2NvDataGuid</TD><TD>{ 0x9b942747, 0x154e, 0x4d29, { 0xa4, 0x36, 0xbf, 0x71, 0x0, 0xc8, 0xb5, 0x3b }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link NetworkPkg/Include/Guid/Ip4Config2Hii.h
+\endlink
+
+ **/
+/** \page guid_common_gIp4IScsiConfigGuid gIp4IScsiConfigGuid
+ Include/Guid/Ip4IScsiConfigHii.h<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gIp4IScsiConfigGuid</TD><TD>{ 0x6456ed61, 0x3579, 0x41c9, { 0x8a, 0x26, 0x0a, 0x0b, 0xd6, 0x2b, 0x78, 0xfc }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link NetworkPkg/Include/Guid/Ip4IScsiConfigHii.h
+\endlink
+
+ **/
+/** \page guid_common_gIp6ConfigNvDataGuid gIp6ConfigNvDataGuid
+ \copydoc NetworkPkg/Include/Guid/Ip6ConfigHii.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gIp6ConfigNvDataGuid</TD><TD>{ 0x2eea107, 0x98db, 0x400e, { 0x98, 0x30, 0x46, 0xa, 0x15, 0x42, 0xd7, 0x99}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link NetworkPkg/Include/Guid/Ip6ConfigHii.h
+\endlink
+
+ **/
+/** \page guid_common_gIScsiCHAPAuthInfoGuid gIScsiCHAPAuthInfoGuid
+ \copydoc NetworkPkg/Include/Guid/Ip4IScsiConfigHii.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gIScsiCHAPAuthInfoGuid</TD><TD>{ 0x786ec0ac, 0x65ae, 0x4d1b, { 0xb1, 0x37, 0xd, 0x11, 0xa, 0x48, 0x37, 0x97 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link NetworkPkg/Include/Guid/Ip4IScsiConfigHii.h
+\endlink
+
+ **/
+/** \page guid_common_gIScsiConfigGuid gIScsiConfigGuid
+ \copydoc NetworkPkg/Include/Guid/IScsiConfigHii.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gIScsiConfigGuid</TD><TD>{ 0x4b47d616, 0xa8d6, 0x4552, { 0x9d, 0x44, 0xcc, 0xad, 0x2e, 0xf, 0x4c, 0xf9}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link NetworkPkg/Include/Guid/IScsiConfigHii.h
+\endlink
+
+ **/
+/** \page guid_common_gTlsAuthConfigGuid gTlsAuthConfigGuid
+ \copydoc NetworkPkg/Include/Guid/TlsAuthConfigHii.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gTlsAuthConfigGuid</TD><TD>{ 0xb0eae4f8, 0x9a04, 0x4c6d, { 0xa7, 0x48, 0x79, 0x3d, 0xaa, 0xf, 0x65, 0xdf }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link NetworkPkg/Include/Guid/TlsAuthConfigHii.h
+\endlink
+
+ **/
+/** \page guid_common_gVlanConfigFormSetGuid gVlanConfigFormSetGuid
+ Include/Guid/VlanConfigHii.h<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gVlanConfigFormSetGuid</TD><TD>{ 0xd79df6b0, 0xef44, 0x43bd, { 0x97, 0x97, 0x43, 0xe9, 0x3b, 0xcf, 0x5f, 0xa8 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link NetworkPkg/Include/Guid/VlanConfigHii.h
+\endlink
+
+ **/
+/** \page guid_common_gWifiConfigGuid gWifiConfigGuid
+ \copydoc NetworkPkg/Include/Guid/WifiConnectionManagerConfigHii.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gWifiConfigGuid</TD><TD>{ 0x9f94d327, 0x0b18, 0x4245, { 0x8f, 0xf2, 0x83, 0x2e, 0x30, 0xd, 0x2c, 0xef }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link NetworkPkg/Include/Guid/WifiConnectionManagerConfigHii.h
+\endlink
+
+ **/
+/** \page protocol_root_page PROTOCOL
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page protocol_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_page_gEdkiiHttpCallbackProtocolGuid "gEdkiiHttpCallbackProtocolGuid" </li>
+<li>\subpage protocol_page_gEfiDpcProtocolGuid "gEfiDpcProtocolGuid" </li>
+</ul>
+ **/
+/** \page protocol_page_gEdkiiHttpCallbackProtocolGuid gEdkiiHttpCallbackProtocolGuid
+ Include/Protocol/HttpCallback.h<br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEdkiiHttpCallbackProtocolGuid</TD><TD>{0x611114f1, 0xa37b, 0x4468, {0xa4, 0x36, 0x5b, 0xdd, 0xa1, 0x6a, 0xa2, 0x40}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link NetworkPkg/Include/Protocol/HttpCallback.h
+\endlink
+
+ **/
+/** \page protocol_page_gEfiDpcProtocolGuid gEfiDpcProtocolGuid
+ Include/Protocol/Dpc.h<br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEfiDpcProtocolGuid</TD><TD>{0x480f8ae9, 0xc46, 0x4aa9,  { 0xbc, 0x89, 0xdb, 0x9f, 0xba, 0x61, 0x98, 0x6 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link NetworkPkg/Include/Protocol/Dpc.h
+\endlink
+
+ **/

@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['scmiclockrateformatdiscrete',['ScmiClockRateFormatDiscrete',['../_arm_scmi_clock_protocol_8h.html#a1b1857c37bb3a0cffd3db1ad1919cdfaa1dd9f178f34461028021f180f62687c4',1,'ArmScmiClockProtocol.h']]],
+  ['scmiclockrateformatlinear',['ScmiClockRateFormatLinear',['../_arm_scmi_clock_protocol_8h.html#a1b1857c37bb3a0cffd3db1ad1919cdfaa6e469e60acdf22523e4f90509ab7a59d',1,'ArmScmiClockProtocol.h']]],
+  ['scmimessageidbasediscoverimplementationversion',['ScmiMessageIdBaseDiscoverImplementationVersion',['../_arm_scmi_base_protocol_8h.html#a5107c3e26c1386ac017cfab684f2694cab4f1c3e6e4e49147bd83fab5bbff4b27',1,'ArmScmiBaseProtocol.h']]],
+  ['scmimessageidbasediscoverlistprotocols',['ScmiMessageIdBaseDiscoverListProtocols',['../_arm_scmi_base_protocol_8h.html#a5107c3e26c1386ac017cfab684f2694cac0ef86a9be2e11d1bc5848a7c77abfee',1,'ArmScmiBaseProtocol.h']]],
+  ['scmimessageidbasediscoversubvendor',['ScmiMessageIdBaseDiscoverSubVendor',['../_arm_scmi_base_protocol_8h.html#a5107c3e26c1386ac017cfab684f2694cae6cf1deb42ba24be4336921f8216c254',1,'ArmScmiBaseProtocol.h']]],
+  ['scmimessageidbasediscovervendor',['ScmiMessageIdBaseDiscoverVendor',['../_arm_scmi_base_protocol_8h.html#a5107c3e26c1386ac017cfab684f2694cabb2a9159cf4fbaeef2bff54544d6e224',1,'ArmScmiBaseProtocol.h']]],
+  ['scmimessageidclockattributes',['ScmiMessageIdClockAttributes',['../_arm_scmi_clock_protocol_8h.html#a635abcc735a28514d77698df3f115620a7d3121a0203b3b6e2f8db7f37d68db98',1,'ArmScmiClockProtocol.h']]],
+  ['scmimessageidclockconfigset',['ScmiMessageIdClockConfigSet',['../_arm_scmi_clock_protocol_8h.html#a635abcc735a28514d77698df3f115620a222a3e9e32e92af7f70840e39261641b',1,'ArmScmiClockProtocol.h']]],
+  ['scmimessageidclockdescriberates',['ScmiMessageIdClockDescribeRates',['../_arm_scmi_clock_protocol_8h.html#a635abcc735a28514d77698df3f115620a89d1e8f70fa92a693b6a3202047fafbd',1,'ArmScmiClockProtocol.h']]],
+  ['scmimessageidclockrateget',['ScmiMessageIdClockRateGet',['../_arm_scmi_clock_protocol_8h.html#a635abcc735a28514d77698df3f115620a736477a82a9fede9e9288ca445f7cd27',1,'ArmScmiClockProtocol.h']]],
+  ['scmimessageidclockrateset',['ScmiMessageIdClockRateSet',['../_arm_scmi_clock_protocol_8h.html#a635abcc735a28514d77698df3f115620a0796df269824091f952fbdfe45e3dcb8',1,'ArmScmiClockProtocol.h']]],
+  ['scmimessageidperformancedescribelevels',['ScmiMessageIdPerformanceDescribeLevels',['../_arm_scmi_performance_protocol_8h.html#ab2afb80b66bbb0d32e00e384cfd2af76abcd5140f562cbf1971e68c05621ee77e',1,'ArmScmiPerformanceProtocol.h']]],
+  ['scmimessageidperformancedomainattributes',['ScmiMessageIdPerformanceDomainAttributes',['../_arm_scmi_performance_protocol_8h.html#ab2afb80b66bbb0d32e00e384cfd2af76a945b50984be7f7beb5fdf1e055de7f39',1,'ArmScmiPerformanceProtocol.h']]],
+  ['scmimessageidperformancelevelget',['ScmiMessageIdPerformanceLevelGet',['../_arm_scmi_performance_protocol_8h.html#ab2afb80b66bbb0d32e00e384cfd2af76a9c925b5ad553e3f9360fb889bb57133a',1,'ArmScmiPerformanceProtocol.h']]],
+  ['scmimessageidperformancelevelset',['ScmiMessageIdPerformanceLevelSet',['../_arm_scmi_performance_protocol_8h.html#ab2afb80b66bbb0d32e00e384cfd2af76a625cd6361ae2f010e55981d80d0fd001',1,'ArmScmiPerformanceProtocol.h']]],
+  ['scmimessageidperformancelimitsget',['ScmiMessageIdPerformanceLimitsGet',['../_arm_scmi_performance_protocol_8h.html#ab2afb80b66bbb0d32e00e384cfd2af76a6831e487af1523689b04a6bd37bec83a',1,'ArmScmiPerformanceProtocol.h']]],
+  ['scmimessageidperformancelimitsset',['ScmiMessageIdPerformanceLimitsSet',['../_arm_scmi_performance_protocol_8h.html#ab2afb80b66bbb0d32e00e384cfd2af76a2ac6e6d6c00ba2102825fe15bbdffb25',1,'ArmScmiPerformanceProtocol.h']]],
+  ['serialnumbertype02',['SerialNumberType02',['../_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a6856aca2a7116fcdd73f118c3ba81e84',1,'OemMiscLib.h']]],
+  ['serialnumbertype03',['SerialNumberType03',['../_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a4a6c26de72d6dce091733ccb071a7f65',1,'OemMiscLib.h']]],
+  ['serialnumtype01',['SerialNumType01',['../_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a18eb74db914d3750cf6589004a87da1e',1,'OemMiscLib.h']]],
+  ['skunumbertype01',['SkuNumberType01',['../_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3ad0585b96c82cb6cc73910706ab8e9f36',1,'OemMiscLib.h']]],
+  ['skunumbertype02',['SkuNumberType02',['../_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3ad8dc9c1b1ec8bda6533d8e21810b99db',1,'OemMiscLib.h']]],
+  ['skunumbertype03',['SkuNumberType03',['../_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3ad8971702d8621edd76d1da7aacd208ac',1,'OemMiscLib.h']]],
+  ['smbioshiistringfieldmax',['SmbiosHiiStringFieldMax',['../_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3ade31a90645e8c470538ab9b097c517ca',1,'OemMiscLib.h']]],
+  ['systemmanufacturertype01',['SystemManufacturerType01',['../_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a9fd9f40c007a129855df0eb283522347',1,'OemMiscLib.h']]]
+];

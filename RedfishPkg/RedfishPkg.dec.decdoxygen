@@ -1,0 +1,230 @@
+/** \mainpage RedfishPkg Package Document
+ Redfish Package<br>
+<br>
+ Copyright (c) 2019, Intel Corporation. All rights reserved.<BR><br>
+ (C) Copyright 2021 Hewlett Packard Enterprise Development LP<BR><br>
+<br>
+ SPDX-License-Identifier: BSD-2-Clause-Patent
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x0001001b</TD></TR><TR><TD><B>Package Guid</B></TD><TD>c432b76e-5232-11e7-9010-005056c00008</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage RedfishPkg_public_includes "Public Includes" </li>
+<li>\subpage RedfishPkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+<li>\subpage protocol_root_page "PROTOCOL" </li>
+</ul>
+ **/
+/** \page RedfishPkg_public_includes Public Includes
+<p> \section content_index INDEX
+<ul>
+<li>\subpage public_include_top "RedfishPkg/Include" </li>
+<li>\subpage public_include_IndustryStandard "RedfishPkg/Include/IndustryStandard" </li>
+<li>\subpage public_include_Pcd "RedfishPkg/Include/Pcd" </li>
+</ul>
+ **/
+/** \page public_include_top RedfishPkg/Include
+<ul>
+</ul>
+
+ **/
+/** \page public_include_IndustryStandard RedfishPkg/Include/IndustryStandard
+<ul>
+<li> \link RedfishPkg/Include/IndustryStandard/RedfishHostInterface.h \endlink </li>
+</ul>
+
+ **/
+/** \page public_include_Pcd RedfishPkg/Include/Pcd
+<ul>
+<li> \link RedfishPkg/Include/Pcd/RestExServiceDevicePath.h \endlink </li>
+</ul>
+
+ **/
+/** \page RedfishPkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_JsonLib "JsonLib" </li>
+<li>\subpage lc_RedfishContentCodingLib "RedfishContentCodingLib" </li>
+<li>\subpage lc_RedfishPlatformCredentialLib "RedfishPlatformCredentialLib" </li>
+<li>\subpage lc_RedfishPlatformHostInterfaceLib "RedfishPlatformHostInterfaceLib" </li>
+<li>\subpage lc_RestExLib "RestExLib" </li>
+<li>\subpage lc_Ucs2Utf8Lib "Ucs2Utf8Lib" </li>
+</ul>
+ **/
+/** \page lc_JsonLib JsonLib
+  @libraryclass  Provides the library functions based on third party<br>
+  jansson library to manipulate JSON data structure.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/JsonLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_RedfishContentCodingLib RedfishContentCodingLib
+  @libraryclass  Provides the library functions to encode/decode<br>
+   Redfish packet.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/RedfishContentCodingLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_RedfishPlatformCredentialLib RedfishPlatformCredentialLib
+  @libraryclass Platform Redfish Credential Library<br>
+   Platform implementation-specific Redfish Credential Interface.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/RedfishCredentialLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_RedfishPlatformHostInterfaceLib RedfishPlatformHostInterfaceLib
+  @libraryclass Platform Redfish Host Interface Library<br>
+   Platform implementation-specific Redfish Host Interface.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/RedfishHostInterfaceLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_RestExLib RestExLib
+  @libraryclass  The helper routines to access REST EX service.<br>
+   This library is only intended to be used by UEFI network stack modules.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/RestExLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_Ucs2Utf8Lib Ucs2Utf8Lib
+  @libraryclass  This library provides UCS2 to UTF8 manipulation<br>
+   functions.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/BaseUcs2Utf8Lib.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+<li>\subpage pcd_PcdsPatchableInModule_root_page "PcdsPatchableInModule" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdRedfishDiscoverAccessModeInBand "gEfiRedfishPkgTokenSpaceGuid.PcdRedfishDiscoverAccessModeInBand" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdRedfishRestExServiceAccessModeInBand "gEfiRedfishPkgTokenSpaceGuid.PcdRedfishRestExServiceAccessModeInBand" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdRedfishRestExServiceDevicePath "gEfiRedfishPkgTokenSpaceGuid.PcdRedfishRestExServiceDevicePath" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdRedfishDiscoverAccessModeInBand gEfiRedfishPkgTokenSpaceGuid.PcdRedfishDiscoverAccessModeInBand
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRedfishDiscoverAccessModeInBand</CAPTION></TD><TD><CAPTION>gEfiRedfishPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001002</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdRedfishRestExServiceAccessModeInBand gEfiRedfishPkgTokenSpaceGuid.PcdRedfishRestExServiceAccessModeInBand
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRedfishRestExServiceAccessModeInBand</CAPTION></TD><TD><CAPTION>gEfiRedfishPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001001</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdRedfishRestExServiceDevicePath gEfiRedfishPkgTokenSpaceGuid.PcdRedfishRestExServiceDevicePath
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRedfishRestExServiceDevicePath</CAPTION></TD><TD><CAPTION>gEfiRedfishPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001000 {</CAPTION></TD><TD><CAPTION>REST_EX_SERVICE_DEVICE_PATH_DATA</CAPTION></TD><TD><CAPTION>{0x0}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_root_page PcdsPatchableInModule
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdRedfishDiscoverAccessModeInBand "gEfiRedfishPkgTokenSpaceGuid.PcdRedfishDiscoverAccessModeInBand" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdRedfishRestExServiceAccessModeInBand "gEfiRedfishPkgTokenSpaceGuid.PcdRedfishRestExServiceAccessModeInBand" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdRedfishRestExServiceDevicePath "gEfiRedfishPkgTokenSpaceGuid.PcdRedfishRestExServiceDevicePath" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdRedfishDiscoverAccessModeInBand gEfiRedfishPkgTokenSpaceGuid.PcdRedfishDiscoverAccessModeInBand
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRedfishDiscoverAccessModeInBand</CAPTION></TD><TD><CAPTION>gEfiRedfishPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001002</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdRedfishRestExServiceAccessModeInBand gEfiRedfishPkgTokenSpaceGuid.PcdRedfishRestExServiceAccessModeInBand
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRedfishRestExServiceAccessModeInBand</CAPTION></TD><TD><CAPTION>gEfiRedfishPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001001</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdRedfishRestExServiceDevicePath gEfiRedfishPkgTokenSpaceGuid.PcdRedfishRestExServiceDevicePath
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRedfishRestExServiceDevicePath</CAPTION></TD><TD><CAPTION>gEfiRedfishPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001000 {</CAPTION></TD><TD><CAPTION>REST_EX_SERVICE_DEVICE_PATH_DATA</CAPTION></TD><TD><CAPTION>{0x0}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gEfiRedfishPkgTokenSpaceGuid "gEfiRedfishPkgTokenSpaceGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gEfiRedfishPkgTokenSpaceGuid gEfiRedfishPkgTokenSpaceGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEfiRedfishPkgTokenSpaceGuid</TD><TD>{ 0x4fdbccb7, 0xe829, 0x4b4c, { 0x88, 0x87, 0xb2, 0x3f, 0xd7, 0x25, 0x4b, 0x85 }}</TD></TR></TABLE>
+ **/
+/** \page protocol_root_page PROTOCOL
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page protocol_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_page_gEdkIIRedfishConfigHandlerProtocolGuid "gEdkIIRedfishConfigHandlerProtocolGuid" </li>
+<li>\subpage protocol_page_gEdkIIRedfishCredentialProtocolGuid "gEdkIIRedfishCredentialProtocolGuid" </li>
+</ul>
+ **/
+/** \page protocol_page_gEdkIIRedfishConfigHandlerProtocolGuid gEdkIIRedfishConfigHandlerProtocolGuid
+ Include/Protocol/Edk2RedfishConfigHandler.h<br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEdkIIRedfishConfigHandlerProtocolGuid</TD><TD>{ 0xbc0fe6bb, 0x2cc9, 0x463e, { 0x90, 0x82, 0xfa, 0x11, 0x76, 0xfc, 0x67, 0xde } }</TD></TR></TABLE>
+ **/
+/** \page protocol_page_gEdkIIRedfishCredentialProtocolGuid gEdkIIRedfishCredentialProtocolGuid
+ Include/Protocol/EdkIIRedfishCredential.h<br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEdkIIRedfishCredentialProtocolGuid</TD><TD>{ 0x8804377, 0xaf7a, 0x4496, { 0x8a, 0x7b, 0x17, 0x59, 0x0, 0xe9, 0xab, 0x46 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link RedfishPkg/Include/Protocol/EdkIIRedfishCredential.h
+\endlink
+
+ **/

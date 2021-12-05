@@ -1,0 +1,179 @@
+/** \mainpage CryptoPkg Package Document
+  Package for cryptography modules.<br>
+<br>
+  This Package provides cryptographic-related libraries for UEFI security modules.<br>
+  It also provides a test application to test libraries.<br>
+<br>
+  Copyright (c) 2009 - 2020, Intel Corporation. All rights reserved.<BR><br>
+  SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>36470E80-36F2-4ba0-8CC8-937C7D9FF888</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage CryptoPkg_public_includes "Public Includes" </li>
+<li>\subpage CryptoPkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+<li>\subpage ppi_root_page "PPI" </li>
+<li>\subpage protocol_root_page "PROTOCOL" </li>
+</ul>
+ **/
+/** \page CryptoPkg_public_includes Public Includes
+<p> \section content_index INDEX
+<ul>
+<li>\subpage public_include_top "CryptoPkg/Include" </li>
+<li>\subpage public_include_Pcd "CryptoPkg/Include/Pcd" </li>
+</ul>
+ **/
+/** \page public_include_top CryptoPkg/Include
+<ul>
+</ul>
+
+ **/
+/** \page public_include_Pcd CryptoPkg/Include/Pcd
+<ul>
+<li> \link CryptoPkg/Include/Pcd/PcdCryptoServiceFamilyEnable.h \endlink </li>
+</ul>
+
+ **/
+/** \page CryptoPkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_BaseCryptLib "BaseCryptLib" </li>
+<li>\subpage lc_HashApiLib "HashApiLib" </li>
+<li>\subpage lc_TlsLib "TlsLib" </li>
+</ul>
+ **/
+/** \page lc_BaseCryptLib BaseCryptLib
+\copydoc Include/Library/BaseCryptLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/BaseCryptLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_HashApiLib HashApiLib
+  @libraryclass  Provides Unified API for different hash implementations.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/HashApiLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_TlsLib TlsLib
+\copydoc Include/Library/TlsLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/TlsLib.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCryptoServiceFamilyEnable "gEfiCryptoPkgTokenSpaceGuid.PcdCryptoServiceFamilyEnable" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdHashApiLibPolicy "gEfiCryptoPkgTokenSpaceGuid.PcdHashApiLibPolicy" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCryptoServiceFamilyEnable gEfiCryptoPkgTokenSpaceGuid.PcdCryptoServiceFamilyEnable
+ Enable/Disable the families and individual services produced by the<br>
+  EDK II Crypto Protocols/PPIs.  The default is all services disabled.<br>
+  This Structured PCD is associated with PCD_CRYPTO_SERVICE_FAMILY_ENABLE<br>
+  structure that is defined in Include/Pcd/PcdCryptoServiceFamilyEnable.h.<br>
+ @Prompt Enable/Disable EDK II Crypto Protocol/PPI services<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCryptoServiceFamilyEnable</CAPTION></TD><TD><CAPTION>gEfiCryptoPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000002 {</CAPTION></TD><TD><CAPTION>PCD_CRYPTO_SERVICE_FAMILY_ENABLE</CAPTION></TD><TD><CAPTION>{0x00}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdHashApiLibPolicy gEfiCryptoPkgTokenSpaceGuid.PcdHashApiLibPolicy
+ This PCD indicates the HASH algorithm to calculate hash of data<br>
+  Based on the value set, the required algorithm is chosen to calculate<br>
+  the hash of data.<BR><br>
+  The default hashing algorithm for BaseHashApiLib is set to SHA256.<BR><br>
+     0x00000001    - HASH_ALG_SHA1.<BR><br>
+     0x00000002    - HASH_ALG_SHA256.<BR><br>
+     0x00000004    - HASH_ALG_SHA384.<BR><br>
+     0x00000008    - HASH_ALG_SHA512.<BR><br>
+     0x00000010    - HASH_ALG_SM3_256.<BR><br>
+ @Prompt Set policy for hashing unsigned image for Secure Boot.<br>
+ @ValidList 0x80000001 | 0x00000001, 0x00000002, 0x00000004, 0x00000008, 0x00000010<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHashApiLibPolicy</CAPTION></TD><TD><CAPTION>gEfiCryptoPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000002</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gEfiCryptoPkgTokenSpaceGuid "gEfiCryptoPkgTokenSpaceGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gEfiCryptoPkgTokenSpaceGuid gEfiCryptoPkgTokenSpaceGuid
+ Crypto package token space guid.<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEfiCryptoPkgTokenSpaceGuid</TD><TD>{ 0x6bd7de60, 0x9ef7, 0x4899, { 0x97, 0xd0, 0xab, 0xff, 0xfd, 0xe9, 0x70, 0xf2 } }</TD></TR></TABLE>
+ **/
+/** \page ppi_root_page PPI
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page ppi_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_page_gEdkiiCryptoPpiGuid "gEdkiiCryptoPpiGuid" </li>
+</ul>
+ **/
+/** \page ppi_page_gEdkiiCryptoPpiGuid gEdkiiCryptoPpiGuid
+ EDK II Crypto PPI<br> 7DCE671B-C223-446A-A705-ED637AAF6771<br>
+ \section BasicPpiInfo PPI Information
+<TABLE><TR><TD><CAPTION>PPI's Guid Name</CAPTION></TD><TD><CAPTION>PPI's Guid</CAPTION></TD></TR><TR><TD>gEdkiiCryptoPpiGuid</TD><TD>{ 0x7DCE671B, 0xC223, 0x446A, { 0xA7, 0x05, 0xED, 0x63, 0x7A, 0xAF, 0x67, 0x71 }}</TD></TR></TABLE>
+ **/
+/** \page protocol_root_page PROTOCOL
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page protocol_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_page_gEdkiiCryptoProtocolGuid "gEdkiiCryptoProtocolGuid" </li>
+<li>\subpage protocol_page_gEdkiiSmmCryptoProtocolGuid "gEdkiiSmmCryptoProtocolGuid" </li>
+</ul>
+ **/
+/** \page protocol_page_gEdkiiCryptoProtocolGuid gEdkiiCryptoProtocolGuid
+ EDK II Crypto DXE protocol<br> 2C2275C9-3A7B-426F-BE54-2D22BD9D1092<br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEdkiiCryptoProtocolGuid</TD><TD>{ 0x2C2275C9, 0x3A7B, 0x426F, { 0xBE, 0x54, 0x2D, 0x22, 0xBD, 0x9D, 0x10, 0x92 }}</TD></TR></TABLE>
+ **/
+/** \page protocol_page_gEdkiiSmmCryptoProtocolGuid gEdkiiSmmCryptoProtocolGuid
+ EDK II Crypto SMM protocol<br> F46B2EB2-E0D7-4C96-A3B1-CB7C572EB300<br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEdkiiSmmCryptoProtocolGuid</TD><TD>{ 0xF46B2EB2, 0xE0D7, 0x4C96, { 0xA3, 0xB1, 0xc, 0x61, 0xbb, 0x24, 0x5c, 0x42 }}</TD></TR></TABLE>
+ **/

@@ -1,0 +1,12 @@
+var struct_e_f_i___a_c_p_i__5__0___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_rbd2567abf31207b9587bf4f6ef48ff57 =
+[
+    [ "AddressRegisterMsrAddress", "struct_e_f_i___a_c_p_i__5__0___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_rbd2567abf31207b9587bf4f6ef48ff57.html#a204d1291819ff887509ca9e917e5480a", null ],
+    [ "BankNumber", "struct_e_f_i___a_c_p_i__5__0___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_rbd2567abf31207b9587bf4f6ef48ff57.html#ae3cdb8f8c5fb0f5bd9e85ca6c66a76db", null ],
+    [ "ClearStatusOnInitialization", "struct_e_f_i___a_c_p_i__5__0___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_rbd2567abf31207b9587bf4f6ef48ff57.html#af24881a66175625fdfbcfbf8abc225e9", null ],
+    [ "ControlInitData", "struct_e_f_i___a_c_p_i__5__0___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_rbd2567abf31207b9587bf4f6ef48ff57.html#aecfc47fc4266166fddbf929f38c8fe65", null ],
+    [ "ControlRegisterMsrAddress", "struct_e_f_i___a_c_p_i__5__0___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_rbd2567abf31207b9587bf4f6ef48ff57.html#a9afea409ad8ed6fc0c54776c47b73637", null ],
+    [ "MiscRegisterMsrAddress", "struct_e_f_i___a_c_p_i__5__0___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_rbd2567abf31207b9587bf4f6ef48ff57.html#ae989823368447f5d4dcc23060ce1433f", null ],
+    [ "Reserved0", "struct_e_f_i___a_c_p_i__5__0___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_rbd2567abf31207b9587bf4f6ef48ff57.html#ad28a166208c650bef7ccb8bcc7d5851f", null ],
+    [ "StatusDataFormat", "struct_e_f_i___a_c_p_i__5__0___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_rbd2567abf31207b9587bf4f6ef48ff57.html#a2ea09c5cc85de8fa4cba23190d7a5335", null ],
+    [ "StatusRegisterMsrAddress", "struct_e_f_i___a_c_p_i__5__0___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_rbd2567abf31207b9587bf4f6ef48ff57.html#ab3e4cec2b99eb752b777e3ca46bbce78", null ]
+];

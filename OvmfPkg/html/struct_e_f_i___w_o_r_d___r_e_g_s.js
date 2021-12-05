@@ -1,0 +1,27 @@
+var struct_e_f_i___w_o_r_d___r_e_g_s =
+[
+    [ "AX", "struct_e_f_i___w_o_r_d___r_e_g_s.html#ab31d725ca2afa3c008da1b279fc816ee", null ],
+    [ "BP", "struct_e_f_i___w_o_r_d___r_e_g_s.html#af88f5e884278c6acbc93aee0ab95e06b", null ],
+    [ "BX", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a47d8c18f4c6136060467eaa4f7793b9f", null ],
+    [ "CS", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a97d061a191de17f8149c80388de6cbeb", null ],
+    [ "CX", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a99d4af59b723738863fa27d1c2ab8e81", null ],
+    [ "DI", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a0b71196d189731fdc342f8d8838fc58c", null ],
+    [ "DS", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a0ff68c9e78859c04d18fbb00513a92c6", null ],
+    [ "DX", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a33b22446353b7c2dce8c29d1e6e50b74", null ],
+    [ "ES", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a6ae126c9ea812ac18f0f4f32b7bc9de3", null ],
+    [ "Flags", "struct_e_f_i___w_o_r_d___r_e_g_s.html#abfe7029ac9a091cef4368f8a809fc53a", null ],
+    [ "FS", "struct_e_f_i___w_o_r_d___r_e_g_s.html#ac81b77ecd414c0b9e9bc1f23d8128bc9", null ],
+    [ "GS", "struct_e_f_i___w_o_r_d___r_e_g_s.html#ae14baef944830476f2fe4e9f76d6a730", null ],
+    [ "ReservedAX", "struct_e_f_i___w_o_r_d___r_e_g_s.html#ae49a2dc7d5c008eef3d29388cc7a771d", null ],
+    [ "ReservedBP", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a29655654329e152f77ead8b333bae076", null ],
+    [ "ReservedBX", "struct_e_f_i___w_o_r_d___r_e_g_s.html#aa1edac5f48bdc4b9eb133d12ca3a3779", null ],
+    [ "ReservedCX", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a1ed619e0218ca777e6e9783401c74780", null ],
+    [ "ReservedDI", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a80f71293e77aa059e3a3ea577457e454", null ],
+    [ "ReservedDX", "struct_e_f_i___w_o_r_d___r_e_g_s.html#ae6fdbadaeb38a01334e8926cac080b5a", null ],
+    [ "ReservedFlags", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a6e2191261b9346974c9ad5e9e35392fe", null ],
+    [ "ReservedSI", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a9fa387693e21e2271d1056e2821a1eff", null ],
+    [ "ReservedSP", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a96459483918fca9d5fce4fef117b8158", null ],
+    [ "SI", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a67727f0fcdc56b69e3e2d90611f99146", null ],
+    [ "SP", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a8b19d0fe75e245a9e22b9a87042918d7", null ],
+    [ "SS", "struct_e_f_i___w_o_r_d___r_e_g_s.html#a6e0c3c0e0bfb1b13f84588d8196e40c7", null ]
+];

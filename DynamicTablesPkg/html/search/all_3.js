@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['data',['Data',['../struct_cm_obj_descriptor.html#a1c39e1afd0e673be96949f00b03904a1',1,'CmObjDescriptor']]],
+  ['deregisteracpitablegenerator',['DeregisterAcpiTableGenerator',['../struct_dynamic_table_factory_protocol.html#a80932cb89a7e484ff8f6f4acab7c0c68',1,'DynamicTableFactoryProtocol::DeregisterAcpiTableGenerator()'],['../_acpi_table_generator_8h.html#ab230fbbec11d47982aed1016534cfa85',1,'DeregisterAcpiTableGenerator():&#160;AcpiTableGenerator.h']]],
+  ['deregisterdttablegenerator',['DeregisterDtTableGenerator',['../struct_dynamic_table_factory_protocol.html#ace1862202d8d53ede4886e2c359a9cf9',1,'DynamicTableFactoryProtocol::DeregisterDtTableGenerator()'],['../_device_tree_table_generator_8h.html#ab59f1246ac0cf32d545ae89391d855ac',1,'DeregisterDtTableGenerator():&#160;DeviceTreeTableGenerator.h']]],
+  ['deregistersmbiostablegenerator',['DeregisterSmbiosTableGenerator',['../struct_dynamic_table_factory_protocol.html#a0825747ff89e89947e04b781c5f4ce4c',1,'DynamicTableFactoryProtocol::DeregisterSmbiosTableGenerator()'],['../_smbios_table_generator_8h.html#a07251ead601f724a7d9690f1b515c3a8',1,'DeregisterSmbiosTableGenerator():&#160;SmbiosTableGenerator.h']]],
+  ['description',['Description',['../struct_dt_table_generator.html#a1946f06a19f494d51ebb80a60b40414f',1,'DtTableGenerator::Description()'],['../struct_acpi_table_generator.html#a4dbc09945202ef3b1df46baab42a5571',1,'AcpiTableGenerator::Description()'],['../struct_smbios_table_generator.html#a07f0a5dcdedf6b24f8c501ad6e2174fc',1,'SmbiosTableGenerator::Description()']]],
+  ['devicehandletoken',['DeviceHandleToken',['../struct_cm_arm_generic_initiator_affinity_info.html#a1685e8bf9ae0599e82ba3f31fa327189',1,'CmArmGenericInitiatorAffinityInfo']]],
+  ['devicehandletype',['DeviceHandleType',['../struct_cm_arm_generic_initiator_affinity_info.html#ab84d57d03717bd442729f9d1b81d608b',1,'CmArmGenericInitiatorAffinityInfo']]],
+  ['deviceidmappingindex',['DeviceIdMappingIndex',['../struct_cm_arm_smmu_v3_node.html#a0c6fa73e16a0323598863703bfb7715d',1,'CmArmSmmuV3Node']]],
+  ['devicenumber',['DeviceNumber',['../struct_cm_arm_device_handle_pci.html#a10b4fd06fe7097c6cebb41bcaf22420c',1,'CmArmDeviceHandlePci']]],
+  ['devicetreetablegenerator_2eh',['DeviceTreeTableGenerator.h',['../_device_tree_table_generator_8h.html',1,'']]],
+  ['discoveryrangebaseaddress',['DiscoveryRangeBaseAddress',['../struct_cm_arm_gic_redist_info.html#a02cf258759ce6a851c4af83900ed35e0',1,'CmArmGicRedistInfo']]],
+  ['discoveryrangelength',['DiscoveryRangeLength',['../struct_cm_arm_gic_redist_info.html#a5c0a10b446b0eb89f4b9bbe22ccadce5',1,'CmArmGicRedistInfo']]],
+  ['dt_5ftable_5fgenerator',['DT_TABLE_GENERATOR',['../_device_tree_table_generator_8h.html#a56fa9d7b716ec35c0a91661db6ecbecb',1,'DeviceTreeTableGenerator.h']]],
+  ['dt_5ftable_5fgenerator_5fbuild_5ftable',['DT_TABLE_GENERATOR_BUILD_TABLE',['../_device_tree_table_generator_8h.html#a9e512a0aee8bc0d814495350e21e576d',1,'DeviceTreeTableGenerator.h']]],
+  ['dt_5ftable_5fgenerator_5ffree_5ftable',['DT_TABLE_GENERATOR_FREE_TABLE',['../_device_tree_table_generator_8h.html#ac5427837b97d35ad3b74929960ab1de1',1,'DeviceTreeTableGenerator.h']]],
+  ['dt_5ftable_5fgenerator_5fid',['DT_TABLE_GENERATOR_ID',['../_device_tree_table_generator_8h.html#a314488d079a730a19ceca3eaea24b9c9',1,'DeviceTreeTableGenerator.h']]],
+  ['dtccount',['DtcCount',['../struct_cm_arm_cmn600_info.html#affbd85824f4f270bb1d27de65e753eb3',1,'CmArmCmn600Info']]],
+  ['dtcinterrupt',['DtcInterrupt',['../struct_cm_arm_cmn600_info.html#aecfa14a00f8ae001515e2200088c47ca',1,'CmArmCmn600Info']]],
+  ['dttablegenerator',['DtTableGenerator',['../struct_dt_table_generator.html',1,'']]],
+  ['dump_5facpi_5ftable_5fheader',['DUMP_ACPI_TABLE_HEADER',['../_acpi_table_generator_8h.html#a17976a16dc6cb1121b46194e0d8a37df',1,'AcpiTableGenerator.h']]],
+  ['dynamictablefactoryprotocol',['DynamicTableFactoryProtocol',['../struct_dynamic_table_factory_protocol.html',1,'']]],
+  ['dynamictablefactoryprotocol_2eh',['DynamicTableFactoryProtocol.h',['../_dynamic_table_factory_protocol_8h.html',1,'']]],
+  ['dynamictablespkg_2edec_2edecdoxygen',['DynamicTablesPkg.dec.decdoxygen',['../_dynamic_tables_pkg_8dec_8decdoxygen.html',1,'']]],
+  ['dynamictablespkg_20package_20document',['DynamicTablesPkg Package Document',['../index.html',1,'']]]
+];

@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['base_5flist',['BASE_LIST',['../_base_8h.html#ada94b3756d4cfbf038cfc4c409a0b7c8',1,'Base.h']]],
+  ['base_5fsort_5fcompare',['BASE_SORT_COMPARE',['../_base_lib_8h.html#a2ba0740f28c5cb80a8828847b8696fd8',1,'BaseLib.h']]],
+  ['bdaddr',['BDAddr',['../_bluetooth_le_config_8h.html#ac1bfb44e281525a2feb94cac26f41202',1,'BluetoothLeConfig.h']]],
+  ['bestdevicename',['BestDeviceName',['../_shell_8h.html#ab068612b16e4bbcbabe7809665c53f1c',1,'Shell.h']]],
+  ['biosaddress',['BiosAddress',['../_legacy_spi_flash_8h.html#a4d1e98c4ed47fcb0f905dd6147f15cb3',1,'BiosAddress():&#160;LegacySpiFlash.h'],['../_legacy_spi_controller_8h.html#a4d1e98c4ed47fcb0f905dd6147f15cb3',1,'BiosAddress():&#160;LegacySpiController.h']]],
+  ['biosbaseaddress',['BiosBaseAddress',['../_legacy_spi_flash_8h.html#a6b23db6308879c7d09805f4655d42f52',1,'BiosBaseAddress():&#160;LegacySpiFlash.h'],['../_legacy_spi_controller_8h.html#a6b23db6308879c7d09805f4655d42f52',1,'BiosBaseAddress():&#160;LegacySpiController.h']]],
+  ['bis_5falg_5fid',['BIS_ALG_ID',['../_bis_8h.html#a2199a608621925a982e4f7c04c592a86',1,'Bis.h']]],
+  ['bis_5fapplication_5fhandle',['BIS_APPLICATION_HANDLE',['../_bis_8h.html#afcbbd36b0c926506b1b6e1005ee3afa5',1,'Bis.h']]],
+  ['bis_5fcert_5fid',['BIS_CERT_ID',['../_bis_8h.html#abaafb705b367ccd7da8afcbeec84904f',1,'Bis.h']]],
+  ['blockcount',['BlockCount',['../_spi_nor_flash_8h.html#afb696e20da02ad63bce34284b96ebf61',1,'SpiNorFlash.h']]],
+  ['blockstoprotect',['BlocksToProtect',['../_legacy_spi_flash_8h.html#ae4a279bdc20bebaccb2ef43c4dcc9986',1,'BlocksToProtect():&#160;LegacySpiFlash.h'],['../_legacy_spi_controller_8h.html#ae4a279bdc20bebaccb2ef43c4dcc9986',1,'BlocksToProtect():&#160;LegacySpiController.h']]],
+  ['boolean',['BOOLEAN',['../_ia32_2_processor_bind_8h.html#a241cb7969626e26a0961a75645528770',1,'BOOLEAN():&#160;ProcessorBind.h'],['../_x64_2_processor_bind_8h.html#a112e3146cb38b6ee95e64d85842e380a',1,'BOOLEAN():&#160;ProcessorBind.h'],['../_risc_v64_2_processor_bind_8h.html#a112e3146cb38b6ee95e64d85842e380a',1,'BOOLEAN():&#160;ProcessorBind.h'],['../_arm_2_processor_bind_8h.html#a112e3146cb38b6ee95e64d85842e380a',1,'BOOLEAN():&#160;ProcessorBind.h'],['../_a_arch64_2_processor_bind_8h.html#a112e3146cb38b6ee95e64d85842e380a',1,'BOOLEAN():&#160;ProcessorBind.h'],['../_ebc_2_processor_bind_8h.html#a112e3146cb38b6ee95e64d85842e380a',1,'BOOLEAN():&#160;ProcessorBind.h']]],
+  ['bootpolicy',['BootPolicy',['../_protocol_2_security2_8h.html#ae5f9cb3ee90968d53417c3323730a353',1,'Security2.h']]],
+  ['bsize',['BSIZE',['../_tpm20_8h.html#a6999169afc71ec279d10439376d3f715',1,'Tpm20.h']]],
+  ['buffer',['Buffer',['../_supplicant_8h.html#ac67e1217dfc7830023855fe9cade358e',1,'Buffer():&#160;Supplicant.h'],['../_block_io_crypto_8h.html#a99d97ba1195dfbab8ca74fe6a7f50335',1,'Buffer():&#160;BlockIoCrypto.h'],['../_tls_8h.html#ad8cbbbea7c0f4155055e99215f61f458',1,'Buffer():&#160;Tls.h'],['../_usb_function_io_8h.html#a7392a77d0e35e153a8628f98eda7781c',1,'Buffer():&#160;UsbFunctionIo.h'],['../_disk_io2_8h.html#a788500f8d3d6aaa712c1dd3442a4aa07',1,'Buffer():&#160;DiskIo2.h'],['../_spi_nor_flash_8h.html#ae2a9e3729d81c6c7628f7102571b777f',1,'Buffer():&#160;SpiNorFlash.h'],['../_protocol_2_block_io2_8h.html#a440067988f7b3564501ca815e02227a3',1,'Buffer():&#160;BlockIo2.h'],['../_shell_8h.html#a55c5978b5bde598ab30faba6fbfcaa17',1,'Buffer():&#160;Shell.h']]],
+  ['buffersize',['BufferSize',['../_supplicant_8h.html#a06f57ea9385465fee2b92042c6e5b928',1,'BufferSize():&#160;Supplicant.h'],['../_block_io_crypto_8h.html#a095ec2625e86f9c9347d4ea9dad07208',1,'BufferSize():&#160;BlockIoCrypto.h'],['../_tls_8h.html#a38f9e7208d1a8ee563f94c3f9dd6f507',1,'BufferSize():&#160;Tls.h'],['../_usb_function_io_8h.html#a9227dc59f52edb59645c0e98b0eeb8d9',1,'BufferSize():&#160;UsbFunctionIo.h'],['../_disk_io2_8h.html#a14b803350e45a5cc1a503e91385d9174',1,'BufferSize():&#160;DiskIo2.h'],['../_protocol_2_block_io2_8h.html#a06f57ea9385465fee2b92042c6e5b928',1,'BufferSize():&#160;BlockIo2.h']]],
+  ['busclockhertz',['BusClockHertz',['../_ppi_2_i2c_master_8h.html#a278adc238149f86e94763438dc2c8b4e',1,'BusClockHertz():&#160;I2cMaster.h'],['../_i2c_enumerate_8h.html#afc533027cb47484a0a449228fc7bfba5',1,'BusClockHertz():&#160;I2cEnumerate.h'],['../_protocol_2_i2c_master_8h.html#ad6f3b2b9ade1cb46dec2c18137428ae6',1,'BusClockHertz():&#160;I2cMaster.h']]],
+  ['busspeed',['BusSpeed',['../_usb_function_io_8h.html#aa1e9cdf04a99ee78c761395e3472f512',1,'UsbFunctionIo.h']]],
+  ['bustransaction',['BusTransaction',['../_spi_hc_8h.html#aa2f1a1c4c8cc5923009ef4846cdb9c18',1,'SpiHc.h']]],
+  ['buswidth',['BusWidth',['../_spi_io_8h.html#a3e0e77a15eaf08c5f84f8fb51323abc6',1,'SpiIo.h']]],
+  ['byte',['BYTE',['../_tpm20_8h.html#a7f198a4ec02dba18942d78b7bc065e06',1,'Tpm20.h']]]
+];

@@ -1,0 +1,8 @@
+var union_s_p_d4___l_r_d_i_m_m___d_a_t_a___b_u_f_f_e_r___d_q___d_e_c_i_s_i_o_n___f_e_e_d_b_a_c_k___e_q_u_a_l_i_z_a_t_i_o_n =
+[
+    [ "Bits", "union_s_p_d4___l_r_d_i_m_m___d_a_t_a___b_u_f_f_e_r___d_q___d_e_c_i_s_i_o_n___f_e_e_d_b_a_c_k___e_q_u_a_l_i_z_a_t_i_o_n.html#ac6964149ca2a7ef71e7ddf167102d72d", null ],
+    [ "Data", "union_s_p_d4___l_r_d_i_m_m___d_a_t_a___b_u_f_f_e_r___d_q___d_e_c_i_s_i_o_n___f_e_e_d_b_a_c_k___e_q_u_a_l_i_z_a_t_i_o_n.html#a1a96428a8890e990d989e93f014ee6d9", null ],
+    [ "DataBufferDfe", "union_s_p_d4___l_r_d_i_m_m___d_a_t_a___b_u_f_f_e_r___d_q___d_e_c_i_s_i_o_n___f_e_e_d_b_a_c_k___e_q_u_a_l_i_z_a_t_i_o_n.html#ab905ef6cecb128ca22d818fbe16d6d17", null ],
+    [ "DataBufferGainAdjustment", "union_s_p_d4___l_r_d_i_m_m___d_a_t_a___b_u_f_f_e_r___d_q___d_e_c_i_s_i_o_n___f_e_e_d_b_a_c_k___e_q_u_a_l_i_z_a_t_i_o_n.html#ae0e70cbf08e2dc82b42d857a0d62d5b4", null ],
+    [ "Reserved", "union_s_p_d4___l_r_d_i_m_m___d_a_t_a___b_u_f_f_e_r___d_q___d_e_c_i_s_i_o_n___f_e_e_d_b_a_c_k___e_q_u_a_l_i_z_a_t_i_o_n.html#a379ad4b1715059a14a38033baa8acf24", null ]
+];

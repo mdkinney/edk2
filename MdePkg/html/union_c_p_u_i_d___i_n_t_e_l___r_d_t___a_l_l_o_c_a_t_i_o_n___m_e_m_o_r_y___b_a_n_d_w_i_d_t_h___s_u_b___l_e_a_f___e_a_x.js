@@ -1,0 +1,7 @@
+var union_c_p_u_i_d___i_n_t_e_l___r_d_t___a_l_l_o_c_a_t_i_o_n___m_e_m_o_r_y___b_a_n_d_w_i_d_t_h___s_u_b___l_e_a_f___e_a_x =
+[
+    [ "Bits", "union_c_p_u_i_d___i_n_t_e_l___r_d_t___a_l_l_o_c_a_t_i_o_n___m_e_m_o_r_y___b_a_n_d_w_i_d_t_h___s_u_b___l_e_a_f___e_a_x.html#ab3692cc64d14fb7754878be01c814179", null ],
+    [ "MaximumMBAThrottling", "union_c_p_u_i_d___i_n_t_e_l___r_d_t___a_l_l_o_c_a_t_i_o_n___m_e_m_o_r_y___b_a_n_d_w_i_d_t_h___s_u_b___l_e_a_f___e_a_x.html#a4eb962f54bf83b1b7f19903cea90a748", null ],
+    [ "Reserved", "union_c_p_u_i_d___i_n_t_e_l___r_d_t___a_l_l_o_c_a_t_i_o_n___m_e_m_o_r_y___b_a_n_d_w_i_d_t_h___s_u_b___l_e_a_f___e_a_x.html#a47fa2c7f99b6a318f224c9c5e657e715", null ],
+    [ "Uint32", "union_c_p_u_i_d___i_n_t_e_l___r_d_t___a_l_l_o_c_a_t_i_o_n___m_e_m_o_r_y___b_a_n_d_w_i_d_t_h___s_u_b___l_e_a_f___e_a_x.html#af83fddeaff9957ee17df33269795ed71", null ]
+];

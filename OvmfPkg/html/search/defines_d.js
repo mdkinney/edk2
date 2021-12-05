@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['oem_5fowner',['OEM_OWNER',['../_protocol_2_legacy_bios_8h.html#a084c129b15b27f0e31996f03377541fc',1,'LegacyBios.h']]],
+  ['offset_5fof_5fvblk',['OFFSET_OF_VBLK',['../_virtio_blk_8h.html#aaf54ab2e6931b8ebe623056ab7bed3ca',1,'VirtioBlk.h']]],
+  ['offset_5fof_5fvnet',['OFFSET_OF_VNET',['../_virtio095_net_8h.html#a748e0f8d6eea9784009087c66a25bd62',1,'Virtio095Net.h']]],
+  ['offset_5fof_5fvscsi',['OFFSET_OF_VSCSI',['../_virtio_scsi_8h.html#a49d4a09c3f77dcd13a6d3657c5d69e42',1,'VirtioScsi.h']]],
+  ['override_5faddress_5fsize',['OVERRIDE_ADDRESS_SIZE',['../_instruction_parsing_8h.html#ada9ce95c23f1eab9819b82e3d96e25b2',1,'InstructionParsing.h']]],
+  ['override_5foperand_5fsize',['OVERRIDE_OPERAND_SIZE',['../_instruction_parsing_8h.html#a140e3ad763b626e4e0964d5112c114a3',1,'InstructionParsing.h']]],
+  ['override_5fsegment_5fcs',['OVERRIDE_SEGMENT_CS',['../_instruction_parsing_8h.html#a959f72efb57806b987cd69647dad9552',1,'InstructionParsing.h']]],
+  ['override_5fsegment_5fds',['OVERRIDE_SEGMENT_DS',['../_instruction_parsing_8h.html#a77c1f30cb6dfcb1760fb9f0a63b94609',1,'InstructionParsing.h']]],
+  ['override_5fsegment_5fes',['OVERRIDE_SEGMENT_ES',['../_instruction_parsing_8h.html#aef01c29c79202473cbdc371a015cecb6',1,'InstructionParsing.h']]],
+  ['override_5fsegment_5ffs',['OVERRIDE_SEGMENT_FS',['../_instruction_parsing_8h.html#a7c246765e3767b04a7d5c127a81f1d2b',1,'InstructionParsing.h']]],
+  ['override_5fsegment_5fgs',['OVERRIDE_SEGMENT_GS',['../_instruction_parsing_8h.html#a7359c9c58949ff83a36d30ea460a4ddf',1,'InstructionParsing.h']]],
+  ['override_5fsegment_5fss',['OVERRIDE_SEGMENT_SS',['../_instruction_parsing_8h.html#ad78e918ee09dfe13d74484347e2538e6',1,'InstructionParsing.h']]],
+  ['ovmf_5fhostbridge_5fdid',['OVMF_HOSTBRIDGE_DID',['../_ovmf_platforms_8h.html#a32266404fc7300ca2257a8d80ceb9063',1,'OvmfPlatforms.h']]],
+  ['ovmf_5floaded_5fx86_5flinux_5fkernel_5fprotocol_5fguid',['OVMF_LOADED_X86_LINUX_KERNEL_PROTOCOL_GUID',['../_ovmf_loaded_x86_linux_kernel_8h.html#a556f9edbbebecf8607a7d7269a31b8ef',1,'OvmfLoadedX86LinuxKernel.h']]],
+  ['ovmf_5fpk_5fkek1_5fapp_5fprefix_5fguid',['OVMF_PK_KEK1_APP_PREFIX_GUID',['../_ovmf_pk_kek1_app_prefix_8h.html#a2b4b1aa8a11746fea5962d6435d2ad87',1,'OvmfPkKek1AppPrefix.h']]],
+  ['ovmf_5fplatform_5fconfig_5fguid',['OVMF_PLATFORM_CONFIG_GUID',['../_ovmf_platform_config_8h.html#a117f803dff52b8bb3a8cbeb5b47748d9',1,'OvmfPlatformConfig.h']]]
+];

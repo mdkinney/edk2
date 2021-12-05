@@ -1,0 +1,7 @@
+var _firmware_volume_info_measurement_excluded_8h =
+[
+    [ "EFI_PEI_FIRMWARE_VOLUME_INFO_MEASUREMENT_EXCLUDED_FV", "struct_e_f_i___p_e_i___f_i_r_m_w_a_r_e___v_o_l_u_m_e___i_n_f_o___m_e_a_s_u_r_e_m_e_n_t___e_x_c_l_u_d_e_d___f_v.html", "struct_e_f_i___p_e_i___f_i_r_m_w_a_r_e___v_o_l_u_m_e___i_n_f_o___m_e_a_s_u_r_e_m_e_n_t___e_x_c_l_u_d_e_d___f_v" ],
+    [ "EFI_PEI_FIRMWARE_VOLUME_INFO_MEASUREMENT_EXCLUDED_PPI", "struct_e_f_i___p_e_i___f_i_r_m_w_a_r_e___v_o_l_u_m_e___i_n_f_o___m_e_a_s_u_r_e_m_e_n_t___e_x_c_l_u_d_e_d___p_p_i.html", "struct_e_f_i___p_e_i___f_i_r_m_w_a_r_e___v_o_l_u_m_e___i_n_f_o___m_e_a_s_u_r_e_m_e_n_t___e_x_c_l_u_d_e_d___p_p_i" ],
+    [ "EFI_PEI_FIRMWARE_VOLUME_INFO_MEASUREMENT_EXCLUDED_PPI_GUID", "_firmware_volume_info_measurement_excluded_8h.html#ac34314f7223f7d7ab73811d64f83f6ed", null ],
+    [ "gEfiPeiFirmwareVolumeInfoMeasurementExcludedPpiGuid", "_firmware_volume_info_measurement_excluded_8h.html#ac0f3943f3c7860a08de5300dbd52eaa4", null ]
+];

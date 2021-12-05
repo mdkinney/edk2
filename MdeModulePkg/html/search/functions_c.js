@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['pcihostbridgefreerootbridges',['PciHostBridgeFreeRootBridges',['../_pci_host_bridge_lib_8h.html#ab195bd5e4791dfc39ee5ebd52f3eec5c',1,'PciHostBridgeLib.h']]],
+  ['pcihostbridgegetrootbridges',['PciHostBridgeGetRootBridges',['../_pci_host_bridge_lib_8h.html#a5917a10503006eed73251ef6932f9291',1,'PciHostBridgeLib.h']]],
+  ['pcihostbridgeresourceconflict',['PciHostBridgeResourceConflict',['../_pci_host_bridge_lib_8h.html#ab46f648631438209f797c0d5ee172d3f',1,'PciHostBridgeLib.h']]],
+  ['performquicksort',['PerformQuickSort',['../_sort_lib_8h.html#a2c79d228d16f9cfcfc984e2cd0b7d0f0',1,'SortLib.h']]],
+  ['platformbootmanagerafterconsole',['PlatformBootManagerAfterConsole',['../_platform_boot_manager_lib_8h.html#a69b84dd263113bbc57732e1ddee4e0c0',1,'PlatformBootManagerLib.h']]],
+  ['platformbootmanagerbeforeconsole',['PlatformBootManagerBeforeConsole',['../_platform_boot_manager_lib_8h.html#a138e21e11973796ce4a5b64aa966eb56',1,'PlatformBootManagerLib.h']]],
+  ['platformbootmanagerunabletoboot',['PlatformBootManagerUnableToBoot',['../_platform_boot_manager_lib_8h.html#a4934c0069477b0ea2c6251c700f47633',1,'PlatformBootManagerLib.h']]],
+  ['platformbootmanagerwaitcallback',['PlatformBootManagerWaitCallback',['../_platform_boot_manager_lib_8h.html#a224cb833eaac254d8a219a3ea64fe3e2',1,'PlatformBootManagerLib.h']]],
+  ['platformhookaftersmmdispatch',['PlatformHookAfterSmmDispatch',['../_smm_core_platform_hook_lib_8h.html#ac74f12b863027d8ddd012093a0f44241',1,'SmmCorePlatformHookLib.h']]],
+  ['platformhookbeforesmmdispatch',['PlatformHookBeforeSmmDispatch',['../_smm_core_platform_hook_lib_8h.html#a6e6bbd0e15da1ec335500e0bfc09db09',1,'SmmCorePlatformHookLib.h']]],
+  ['platformhookserialportinitialize',['PlatformHookSerialPortInitialize',['../_platform_hook_lib_8h.html#a4b09788778887fafc54f13456e60eb86',1,'PlatformHookLib.h']]],
+  ['platformvarcleanup',['PlatformVarCleanup',['../_platform_var_cleanup_lib_8h.html#ab7f3717e83e545c3652aab271e100a92',1,'PlatformVarCleanupLib.h']]],
+  ['printcharat',['PrintCharAt',['../_customized_display_lib_8h.html#a95693d988f4d8296905602fefa2738c7',1,'CustomizedDisplayLib.h']]],
+  ['printstringat',['PrintStringAt',['../_customized_display_lib_8h.html#a73e7bb18d15e1e7e1a734c4a6f921acb',1,'CustomizedDisplayLib.h']]],
+  ['printstringatwithwidth',['PrintStringAtWithWidth',['../_customized_display_lib_8h.html#a6681c5e4cf74c0904cb791e1abbb946b',1,'CustomizedDisplayLib.h']]],
+  ['processcapsuleimage',['ProcessCapsuleImage',['../_capsule_lib_8h.html#a23a4e0a45e0b84c1aeeb230ae729368b',1,'CapsuleLib.h']]],
+  ['processcapsules',['ProcessCapsules',['../_capsule_lib_8h.html#aff9442a6e154abd7e6f270902b5e419a',1,'CapsuleLib.h']]]
+];

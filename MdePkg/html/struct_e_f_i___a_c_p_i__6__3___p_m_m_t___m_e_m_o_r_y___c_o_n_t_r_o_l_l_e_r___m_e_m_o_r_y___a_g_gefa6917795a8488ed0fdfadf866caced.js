@@ -1,0 +1,12 @@
+var struct_e_f_i___a_c_p_i__6__3___p_m_m_t___m_e_m_o_r_y___c_o_n_t_r_o_l_l_e_r___m_e_m_o_r_y___a_g_gefa6917795a8488ed0fdfadf866caced =
+[
+    [ "Header", "struct_e_f_i___a_c_p_i__6__3___p_m_m_t___m_e_m_o_r_y___c_o_n_t_r_o_l_l_e_r___m_e_m_o_r_y___a_g_gefa6917795a8488ed0fdfadf866caced.html#ac8261176ad1ed9d88516473f5d0ab192", null ],
+    [ "NumberOfProximityDomains", "struct_e_f_i___a_c_p_i__6__3___p_m_m_t___m_e_m_o_r_y___c_o_n_t_r_o_l_l_e_r___m_e_m_o_r_y___a_g_gefa6917795a8488ed0fdfadf866caced.html#aff7b4f3c94444291a016ff4b2ba60bfa", null ],
+    [ "OptimalAccessAlignment", "struct_e_f_i___a_c_p_i__6__3___p_m_m_t___m_e_m_o_r_y___c_o_n_t_r_o_l_l_e_r___m_e_m_o_r_y___a_g_gefa6917795a8488ed0fdfadf866caced.html#afe433aa6b4ad55b37a33336543a4fe60", null ],
+    [ "OptimalAccessUnit", "struct_e_f_i___a_c_p_i__6__3___p_m_m_t___m_e_m_o_r_y___c_o_n_t_r_o_l_l_e_r___m_e_m_o_r_y___a_g_gefa6917795a8488ed0fdfadf866caced.html#aa6408a4f3541c2273a57a6c318c9fefb", null ],
+    [ "ReadBandwidth", "struct_e_f_i___a_c_p_i__6__3___p_m_m_t___m_e_m_o_r_y___c_o_n_t_r_o_l_l_e_r___m_e_m_o_r_y___a_g_gefa6917795a8488ed0fdfadf866caced.html#a4912a8c1605d0d915b19b4b58e20ec2a", null ],
+    [ "ReadLatency", "struct_e_f_i___a_c_p_i__6__3___p_m_m_t___m_e_m_o_r_y___c_o_n_t_r_o_l_l_e_r___m_e_m_o_r_y___a_g_gefa6917795a8488ed0fdfadf866caced.html#af1a804a502618a47727633651269ef2c", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__6__3___p_m_m_t___m_e_m_o_r_y___c_o_n_t_r_o_l_l_e_r___m_e_m_o_r_y___a_g_gefa6917795a8488ed0fdfadf866caced.html#aa78bc6dd15134bed7e33f34ebdac2d0e", null ],
+    [ "WriteBandwidth", "struct_e_f_i___a_c_p_i__6__3___p_m_m_t___m_e_m_o_r_y___c_o_n_t_r_o_l_l_e_r___m_e_m_o_r_y___a_g_gefa6917795a8488ed0fdfadf866caced.html#a2da9badd83975f832fb570248121f87a", null ],
+    [ "WriteLatency", "struct_e_f_i___a_c_p_i__6__3___p_m_m_t___m_e_m_o_r_y___c_o_n_t_r_o_l_l_e_r___m_e_m_o_r_y___a_g_gefa6917795a8488ed0fdfadf866caced.html#abdf946711e7292b32049ff83a3e85ba3", null ]
+];

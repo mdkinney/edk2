@@ -1,0 +1,25 @@
+var union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r =
+[
+    [ "AcsVoilation", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#a0e0a52278503f04c9bf00a0304a7144b", null ],
+    [ "AtomicOpEgressBlocked", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#a35a3b01f19afeebcd78a403cbff2ee29", null ],
+    [ "Bits", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#a8d1fd9733a2ad7828a085c166f93d434", null ],
+    [ "CompleterAbort", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#a7caab95f60b089ce3443943ee3f0d08b", null ],
+    [ "CompletionTimeout", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#ad546cd1e1acdd2cd8c216eb75554cf55", null ],
+    [ "DataLinkProtocolError", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#af0769c66e92f24d8cf5d60759a42c536", null ],
+    [ "EcrcError", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#a805771d7705114a252e69d7d176fb3de", null ],
+    [ "FlowControlProtocolError", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#a7bd1b8774be8abaf9febe7f0c4d9d1c5", null ],
+    [ "MalformedTlp", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#a887f239946d1b4c63d611f07c6a3efe4", null ],
+    [ "McBlockedTlp", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#a04583bcef701018b8f8e5fee4fd1044f", null ],
+    [ "PoisonedTlp", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#af0f37439b07b262a075624cdc6d48644", null ],
+    [ "ReceiverOverflow", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#a95e9ad6d87469538aebeb907a229d0e8", null ],
+    [ "Reserved", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#a38df78b80b9bbefdf448cc013bb088b2", null ],
+    [ "Reserved2", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#ac7de667a68b7992bff737f25a5a60aab", null ],
+    [ "Reserved3", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#a98fabdbbde64c7706d4bf31d067ed247", null ],
+    [ "SurpriseDownError", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#a399794deadeb8cd5b1307fc2a11166a7", null ],
+    [ "TlpPrefixBlockedError", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#a5eb6fdf46d4211651e7215a04cd0fa68", null ],
+    [ "Uint32", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#ad77072a9253ecaecd6c4937e00be0fe4", null ],
+    [ "UncorrectableInternalError", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#a2714730569ec3de8f70f965120c7491f", null ],
+    [ "Undefined", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#ab20489370b7d7299aa6fa7d1d606aaed", null ],
+    [ "UnexpectedCompletion", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#a8ee3f33977c2e4e44e6db8edfff3f40a", null ],
+    [ "UnsupportedRequestError", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___u_n_c_o_r_r_e_c_t_a_b_l_e___e_r_r_o_r.html#aa4bb3143bb69a2fdb4bc9254185613b1", null ]
+];

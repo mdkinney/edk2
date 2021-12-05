@@ -1,0 +1,27 @@
+var union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x =
+[
+    [ "ARAT", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#adfc8817d5dfc6e21dc601f04327911f1", null ],
+    [ "Bits", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#abf3560531c4e0a2710100b5789af7375", null ],
+    [ "DigitalTemperatureSensor", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#a1996bca3436bbd3781d25c56f4c9c50a", null ],
+    [ "ECMD", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#a0bbee921e56e268c9b82ef8573a9f808", null ],
+    [ "FastAccessMode", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#a36d91c8937eb3b21272840072f292f93", null ],
+    [ "FlexibleHWP", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#af319773161b01687b1179b6cab854d33", null ],
+    [ "HDC", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#a40b8ecb63a74fc190e5de97b4e896298", null ],
+    [ "HWP", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#af894cc8eb7a1cb913ce37d2879f40d0c", null ],
+    [ "HWP_Activity_Window", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#a7ffc231fbc46c63edac4a982f6b247f5", null ],
+    [ "HWP_Energy_Performance_Preference", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#aad40770cb6db55d9a34e8fb13560b018", null ],
+    [ "HWP_Notification", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#aa61dc2a99675111926ece42e5caee5cb", null ],
+    [ "HWP_Package_Level_Request", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#a2e9debdfd2a63d386c03f3b958361bca", null ],
+    [ "HWPCapabilities", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#a0fd5091b2bf69ece5e078e40ea9dd5dc", null ],
+    [ "HWPPECIOverride", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#a6bc1e567103fa5fc34f6f3018c490590", null ],
+    [ "IgnoringIdleLogicalProcessorHWPRequest", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#ac7f62c4668048c00e8a4cbfa7f64cba5", null ],
+    [ "PLN", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#a2a6f26cf416285c8c404c253cfef4330", null ],
+    [ "PTM", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#ad85f56b1985aa6cba029711ca7fb9e75", null ],
+    [ "Reserved1", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#af5eb79665b56b4cb2766f4cdf3736c0b", null ],
+    [ "Reserved2", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#aa10c0c4980120bebc9a386362968a998", null ],
+    [ "Reserved4", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#a4ec74aa59c7bfeeb41eca58b4ae9c1c7", null ],
+    [ "Reserved5", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#a42c15c24658b836d5dfbe767b79b49ae", null ],
+    [ "TurboBoostMaxTechnology30", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#a2185a1c91ff4cf5b494d00105dd3f4f6", null ],
+    [ "TurboBoostTechnology", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#a518ea75ff74a2a290171a3e0eef22458", null ],
+    [ "Uint32", "union_c_p_u_i_d___t_h_e_r_m_a_l___p_o_w_e_r___m_a_n_a_g_e_m_e_n_t___e_a_x.html#ae5fe90d0a9dd64c7da69bca042e63cea", null ]
+];

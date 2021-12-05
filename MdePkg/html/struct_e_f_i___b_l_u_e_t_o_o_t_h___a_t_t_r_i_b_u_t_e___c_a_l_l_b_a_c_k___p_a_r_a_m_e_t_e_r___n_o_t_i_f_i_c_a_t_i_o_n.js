@@ -1,0 +1,4 @@
+var struct_e_f_i___b_l_u_e_t_o_o_t_h___a_t_t_r_i_b_u_t_e___c_a_l_l_b_a_c_k___p_a_r_a_m_e_t_e_r___n_o_t_i_f_i_c_a_t_i_o_n =
+[
+    [ "AttributeHandle", "struct_e_f_i___b_l_u_e_t_o_o_t_h___a_t_t_r_i_b_u_t_e___c_a_l_l_b_a_c_k___p_a_r_a_m_e_t_e_r___n_o_t_i_f_i_c_a_t_i_o_n.html#af616574d4f71e26b9b5b4b5eee299e56", null ]
+];

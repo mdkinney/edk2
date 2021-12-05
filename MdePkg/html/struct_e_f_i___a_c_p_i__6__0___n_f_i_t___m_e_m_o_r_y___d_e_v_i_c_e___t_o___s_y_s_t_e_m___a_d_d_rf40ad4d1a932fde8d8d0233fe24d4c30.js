@@ -1,0 +1,17 @@
+var struct_e_f_i___a_c_p_i__6__0___n_f_i_t___m_e_m_o_r_y___d_e_v_i_c_e___t_o___s_y_s_t_e_m___a_d_d_rf40ad4d1a932fde8d8d0233fe24d4c30 =
+[
+    [ "InterleaveStructureIndex", "struct_e_f_i___a_c_p_i__6__0___n_f_i_t___m_e_m_o_r_y___d_e_v_i_c_e___t_o___s_y_s_t_e_m___a_d_d_rf40ad4d1a932fde8d8d0233fe24d4c30.html#afc2611701f5578c0a2c5eae74d2bd946", null ],
+    [ "InterleaveWays", "struct_e_f_i___a_c_p_i__6__0___n_f_i_t___m_e_m_o_r_y___d_e_v_i_c_e___t_o___s_y_s_t_e_m___a_d_d_rf40ad4d1a932fde8d8d0233fe24d4c30.html#a869de8396dafcd9a6376386e4bd440cb", null ],
+    [ "Length", "struct_e_f_i___a_c_p_i__6__0___n_f_i_t___m_e_m_o_r_y___d_e_v_i_c_e___t_o___s_y_s_t_e_m___a_d_d_rf40ad4d1a932fde8d8d0233fe24d4c30.html#a2cc38867c4ca63d394d5eb10d012f1c2", null ],
+    [ "MemoryDevicePhysicalAddressRegionBase", "struct_e_f_i___a_c_p_i__6__0___n_f_i_t___m_e_m_o_r_y___d_e_v_i_c_e___t_o___s_y_s_t_e_m___a_d_d_rf40ad4d1a932fde8d8d0233fe24d4c30.html#a89f7bfaa945244ccd5c649363d27983f", null ],
+    [ "MemoryDevicePhysicalID", "struct_e_f_i___a_c_p_i__6__0___n_f_i_t___m_e_m_o_r_y___d_e_v_i_c_e___t_o___s_y_s_t_e_m___a_d_d_rf40ad4d1a932fde8d8d0233fe24d4c30.html#a4aab5f07db85e7649ffbe7dc2b603429", null ],
+    [ "MemoryDeviceRegionID", "struct_e_f_i___a_c_p_i__6__0___n_f_i_t___m_e_m_o_r_y___d_e_v_i_c_e___t_o___s_y_s_t_e_m___a_d_d_rf40ad4d1a932fde8d8d0233fe24d4c30.html#a922fe9d9f53ff6256e5aadbafe51ca88", null ],
+    [ "MemoryDeviceRegionSize", "struct_e_f_i___a_c_p_i__6__0___n_f_i_t___m_e_m_o_r_y___d_e_v_i_c_e___t_o___s_y_s_t_e_m___a_d_d_rf40ad4d1a932fde8d8d0233fe24d4c30.html#aea9a74cf3e727ab928f334044a37a12b", null ],
+    [ "MemoryDeviceStateFlags", "struct_e_f_i___a_c_p_i__6__0___n_f_i_t___m_e_m_o_r_y___d_e_v_i_c_e___t_o___s_y_s_t_e_m___a_d_d_rf40ad4d1a932fde8d8d0233fe24d4c30.html#a15a586a6b8e24bc1462510e26ab76117", null ],
+    [ "NFITDeviceHandle", "struct_e_f_i___a_c_p_i__6__0___n_f_i_t___m_e_m_o_r_y___d_e_v_i_c_e___t_o___s_y_s_t_e_m___a_d_d_rf40ad4d1a932fde8d8d0233fe24d4c30.html#a6849f2cec0dbab1551074591db8c7a07", null ],
+    [ "NVDIMMControlRegionStructureIndex", "struct_e_f_i___a_c_p_i__6__0___n_f_i_t___m_e_m_o_r_y___d_e_v_i_c_e___t_o___s_y_s_t_e_m___a_d_d_rf40ad4d1a932fde8d8d0233fe24d4c30.html#a37705fdedc5fa4491d0364e908ca8821", null ],
+    [ "RegionOffset", "struct_e_f_i___a_c_p_i__6__0___n_f_i_t___m_e_m_o_r_y___d_e_v_i_c_e___t_o___s_y_s_t_e_m___a_d_d_rf40ad4d1a932fde8d8d0233fe24d4c30.html#ad48854a17681d97e726ab4e1126e887a", null ],
+    [ "Reserved_46", "struct_e_f_i___a_c_p_i__6__0___n_f_i_t___m_e_m_o_r_y___d_e_v_i_c_e___t_o___s_y_s_t_e_m___a_d_d_rf40ad4d1a932fde8d8d0233fe24d4c30.html#ac057beb5d2f9af331d3af8974837acaa", null ],
+    [ "SPARangeStructureIndex", "struct_e_f_i___a_c_p_i__6__0___n_f_i_t___m_e_m_o_r_y___d_e_v_i_c_e___t_o___s_y_s_t_e_m___a_d_d_rf40ad4d1a932fde8d8d0233fe24d4c30.html#a3eb8b7843b237fecfc31a965260082f3", null ],
+    [ "Type", "struct_e_f_i___a_c_p_i__6__0___n_f_i_t___m_e_m_o_r_y___d_e_v_i_c_e___t_o___s_y_s_t_e_m___a_d_d_rf40ad4d1a932fde8d8d0233fe24d4c30.html#ae5aa8dbf14111befd04e4e4e2402a0fe", null ]
+];

@@ -1,0 +1,26 @@
+var union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r =
+[
+    [ "ADDR0_CFG", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#a1f4806aa0c528b1df2470491d3156022", null ],
+    [ "ADDR1_CFG", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#aa8e28c1283012dc5fbe03748d76b4c5d", null ],
+    [ "Bits", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#a1088011026a91a7af58f6157358dd57e", null ],
+    [ "BranchEn", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#ad3946a4b4d1d0254583ffe41fc937c38", null ],
+    [ "CR3", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#a408600d35c2f5e39176a751caeb5b549", null ],
+    [ "CYCEn", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#a96624f856018145f9c178f247f1a0ccc", null ],
+    [ "CYCThresh", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#a5a7e71b19cf0bbfe6d6e39d7b2824bcf", null ],
+    [ "DisRETC", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#aec0ec9b375e7252f54fcd0efa33b10bb", null ],
+    [ "MTCEn", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#afc9d5d89f7d61b7d6a890848de8efb68", null ],
+    [ "MTCFreq", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#ac6342b80652d7d3c91a524331f686e62", null ],
+    [ "OS", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#a2218490b73769f412b864c53dc354618", null ],
+    [ "PSBFreq", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#a0e2d8be8daa7b411cff28feecd156bf9", null ],
+    [ "Reserved1", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#a3c4c2b698e6c374377f6a4ace2afd28a", null ],
+    [ "Reserved2", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#abe422e05e299b47ecfd4daaeeaafc18a", null ],
+    [ "Reserved3", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#a929ea02401d8627820bd902e738fc832", null ],
+    [ "Reserved4", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#adf9520de79ac394e8490df68ed770c9c", null ],
+    [ "Reserved5", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#ae29ccca2b2bbe208383f954f32e30f1b", null ],
+    [ "Reserved6", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#a34647b9938d313835d6c1768e882ed49", null ],
+    [ "ToPA", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#a8612f4edaad06bc0df5f611c1da57dce", null ],
+    [ "TraceEn", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#a372609562e549dd9829f7cdde3a79068", null ],
+    [ "TSCEn", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#a0c6f6340631231ce77a81efafa15369c", null ],
+    [ "Uint64", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#a53585790097ca77ba6d27345039fbb6a", null ],
+    [ "User", "union_m_s_r___g_o_l_d_m_o_n_t___i_a32___r_t_i_t___c_t_l___r_e_g_i_s_t_e_r.html#aa2611cfbe6f8b0bcc3eebb46ef116110", null ]
+];

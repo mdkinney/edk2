@@ -1,0 +1,28 @@
+var struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e =
+[
+    [ "Cr0", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#a203f28e76e573803c1c1cf508f8bbd9d", null ],
+    [ "Cr1", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#ac78a5d4d23fcf71924b591c288a85958", null ],
+    [ "Cr2", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#a071fe65382d0fe01bed3d46644d97e7c", null ],
+    [ "Cr3", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#a6510a4047e251cf1d7f0f45b494e54df", null ],
+    [ "Cr4", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#a5d8c5748a18ad29cf6f833e03784edbf", null ],
+    [ "Cs", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#a796ec00f5ff72e707952f03bee821a50", null ],
+    [ "Ds", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#a4c12b5b1d6be04574c20fa63919688da", null ],
+    [ "Eax", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#a63b6efc052ca093f07a41143cd7c558a", null ],
+    [ "Ebp", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#a34f046e72594701fa1b0a69bc207392f", null ],
+    [ "Ebx", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#a739eada22bc41261ed9a80a235020dba", null ],
+    [ "Ecx", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#ac5a0f1a238ec82adcc818a011596f8df", null ],
+    [ "Edi", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#a5fb0af9f1241e1dc99b88a78db431ae1", null ],
+    [ "Edx", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#ab5379daae26ed781d8c1500fa7819def", null ],
+    [ "Eflags", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#a5d2524b7d7a9194eceda1ec60f3bde24", null ],
+    [ "Eip", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#aa944091509630e5dc43e5a58c66c4083", null ],
+    [ "Es", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#aecc21f96a11d8867503d2c2e90a97640", null ],
+    [ "Esi", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#a1fc46838aabdda8c75a6e9a840062ed9", null ],
+    [ "Esp", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#aac65d1d93241c602e766068a1779553f", null ],
+    [ "Fs", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#aaccb1b61d4626677a4678e196d23cd02", null ],
+    [ "Gdtr", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#ac9cddcc95a58feddeaaa0c027f21ef99", null ],
+    [ "Gs", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#ac307aae1a02291afb643854cefdff8d5", null ],
+    [ "Idtr", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#a15b99dc883f048d205f4ec2156a817cd", null ],
+    [ "Ldtr", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#a6089f14d94d984a83481bf0ec88e8270", null ],
+    [ "Ss", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#ad528274614c6f4b23b9703199d69e37b", null ],
+    [ "Tr", "struct_e_f_i___c_o_n_t_e_x_t___i_a32___r_e_g_i_s_t_e_r___s_t_a_t_e.html#aa4458812237879e1b925958daac041fc", null ]
+];

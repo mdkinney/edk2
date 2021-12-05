@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['ppilistlib',['PpiListLib',['../lc__ppi_list_lib.html',1,'lc_common']]],
+  ['pcdsfeatureflag',['PcdsFeatureFlag',['../pcd__pcds_feature_flag_root_page.html',1,'pcd_root_page']]],
+  ['pcdsfixedatbuild',['PcdsFixedAtBuild',['../pcd__pcds_fixed_at_build_root_page.html',1,'pcd_root_page']]],
+  ['pcdspatchableinmodule',['PcdsPatchableInModule',['../pcd__pcds_patchable_in_module_root_page.html',1,'pcd_root_page']]],
+  ['pcd',['PCD',['../pcd_root_page.html',1,'index']]],
+  ['pecoffgetentrypoint',['PeCoffGetEntryPoint',['../struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#ab3fc6fe27267a99f04f9049018c4b507',1,'_EMU_THUNK_PROTOCOL']]],
+  ['pecoffrelocateimageextraaction',['PeCoffRelocateImageExtraAction',['../struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a00e55636726a76856fd7b409babf567b',1,'_EMU_THUNK_PROTOCOL']]],
+  ['pecoffunloadimageextraaction',['PeCoffUnloadImageExtraAction',['../struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a40279519bf4320c4eb26a02fb6157653',1,'_EMU_THUNK_PROTOCOL']]],
+  ['peiservicestablepointer',['PeiServicesTablePointer',['../struct_e_m_u___m_a_g_i_c___p_a_g_e___l_a_y_o_u_t.html#ae70ed2c9cbbd254435fa1cc2b116c343',1,'EMU_MAGIC_PAGE_LAYOUT']]],
+  ['pollstdin',['PollStdIn',['../struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a1802a35831384ccbb91c658c1e06d710',1,'_EMU_THUNK_PROTOCOL']]],
+  ['ppi',['PPI',['../ppi_root_page.html',1,'index']]],
+  ['ppilist',['PpiList',['../struct_e_m_u___m_a_g_i_c___p_a_g_e___l_a_y_o_u_t.html#a4245710b22b6542a6d883307d6e23d95',1,'EMU_MAGIC_PAGE_LAYOUT']]],
+  ['ppilistlib_2eh',['PpiListLib.h',['../_ppi_list_lib_8h.html',1,'']]],
+  ['private',['Private',['../struct___e_m_u___i_o___t_h_u_n_k___p_r_o_t_o_c_o_l.html#af26bd2b114dcea3018f7aa4f9887852c',1,'_EMU_IO_THUNK_PROTOCOL']]],
+  ['protocol',['Protocol',['../struct___e_m_u___i_o___t_h_u_n_k___p_r_o_t_o_c_o_l.html#aedecdc363e28b73a307adfb0aa0ae510',1,'_EMU_IO_THUNK_PROTOCOL']]],
+  ['protocol',['PROTOCOL',['../protocol_root_page.html',1,'index']]]
+];

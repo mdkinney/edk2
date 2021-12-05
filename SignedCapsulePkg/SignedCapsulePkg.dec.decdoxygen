@@ -1,0 +1,279 @@
+/** \mainpage SignedCapsulePkg Package Document
+ This package provides EDKII capsule related support.<br>
+<br>
+ Copyright (c) 2016, Intel Corporation. All rights reserved.<BR><br>
+ SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>75AA5D82-7BC4-44A9-82FB-0820EBC79BED</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage SignedCapsulePkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+</ul>
+ **/
+/** \page SignedCapsulePkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_EdkiiSystemCapsuleLib "EdkiiSystemCapsuleLib" </li>
+<li>\subpage lc_IniParsingLib "IniParsingLib" </li>
+<li>\subpage lc_PlatformFlashAccessLib "PlatformFlashAccessLib" </li>
+</ul>
+ **/
+/** \page lc_EdkiiSystemCapsuleLib EdkiiSystemCapsuleLib
+ @libraryclass  Provides services for EDKII system FMP capsule.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/EdkiiSystemCapsuleLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_IniParsingLib IniParsingLib
+ @libraryclass  Provides services to parse the INI configuration file.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/IniParsingLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_PlatformFlashAccessLib PlatformFlashAccessLib
+ @libraryclass  Provides services to access flash device.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/PlatformFlashAccessLib.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_root_page "PcdsDynamic" </li>
+<li>\subpage pcd_PcdsDynamicEx_root_page "PcdsDynamicEx" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+<li>\subpage pcd_PcdsPatchableInModule_root_page "PcdsPatchableInModule" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_root_page PcdsDynamic
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_PcdEdkiiPkcs7TestPublicKeyFileGuid "gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiPkcs7TestPublicKeyFileGuid" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid "gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdLowestSupportedFirmwareVersion "gEfiSignedCapsulePkgTokenSpaceGuid.PcdLowestSupportedFirmwareVersion" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdEdkiiPkcs7TestPublicKeyFileGuid gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiPkcs7TestPublicKeyFileGuid
+ This is the GUID of the FFS which contains the Pkcs7TestPublicKeyFile as a RAW section.<br>
+ @Prompt GUID of the FFS which contains the Pkcs7TestPublicKeyFile.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEdkiiPkcs7TestPublicKeyFileGuid</CAPTION></TD><TD><CAPTION>gEfiSignedCapsulePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xA0010002</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0xba, 0xf5, 0x93, 0xf0, 0x37, 0x6f, 0x16, 0x48, 0x9e, 0x52, 0x91, 0xbe, 0xa0, 0xf7, 0xe0, 0xb8}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid
+ This is the GUID of the FFS which contains the Rsa2048Sha256TestPublicKeyFile as a RAW section.<br>
+ @Prompt GUID of the FFS which contains the Rsa2048Sha256TestPublicKeyFile.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid</CAPTION></TD><TD><CAPTION>gEfiSignedCapsulePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xA0010001</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x04, 0xe1, 0xfe, 0xc4, 0x57, 0x66, 0x36, 0x49, 0xa6, 0x11, 0x13, 0x8d, 0xbc, 0x2a, 0x76, 0xad}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdLowestSupportedFirmwareVersion gEfiSignedCapsulePkgTokenSpaceGuid.PcdLowestSupportedFirmwareVersion
+ This is the lowest supported version number that can be upgraded to, as exposed via the System Firmware descriptor.<br>
+ @Prompt Lowest support version number that can be upgraded to via capsule update<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdLowestSupportedFirmwareVersion</CAPTION></TD><TD><CAPTION>gEfiSignedCapsulePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xA0010003</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x1</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_root_page PcdsDynamicEx
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdEdkiiPkcs7TestPublicKeyFileGuid "gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiPkcs7TestPublicKeyFileGuid" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid "gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdEdkiiSystemFirmwareFileGuid "gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiSystemFirmwareFileGuid" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdEdkiiSystemFirmwareImageDescriptor "gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiSystemFirmwareImageDescriptor" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdLowestSupportedFirmwareVersion "gEfiSignedCapsulePkgTokenSpaceGuid.PcdLowestSupportedFirmwareVersion" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdEdkiiPkcs7TestPublicKeyFileGuid gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiPkcs7TestPublicKeyFileGuid
+ This is the GUID of the FFS which contains the Pkcs7TestPublicKeyFile as a RAW section.<br>
+ @Prompt GUID of the FFS which contains the Pkcs7TestPublicKeyFile.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEdkiiPkcs7TestPublicKeyFileGuid</CAPTION></TD><TD><CAPTION>gEfiSignedCapsulePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xA0010002</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0xba, 0xf5, 0x93, 0xf0, 0x37, 0x6f, 0x16, 0x48, 0x9e, 0x52, 0x91, 0xbe, 0xa0, 0xf7, 0xe0, 0xb8}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid
+ This is the GUID of the FFS which contains the Rsa2048Sha256TestPublicKeyFile as a RAW section.<br>
+ @Prompt GUID of the FFS which contains the Rsa2048Sha256TestPublicKeyFile.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid</CAPTION></TD><TD><CAPTION>gEfiSignedCapsulePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xA0010001</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x04, 0xe1, 0xfe, 0xc4, 0x57, 0x66, 0x36, 0x49, 0xa6, 0x11, 0x13, 0x8d, 0xbc, 0x2a, 0x76, 0xad}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdEdkiiSystemFirmwareFileGuid gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiSystemFirmwareFileGuid
+ This dynamic PCD hold the GUID of a firmware FFS which includes EDKII<br>
+  system firmware image.<br>
+  An EDKII system firmware update module need consume this PCD to extract<br>
+  the EDKII system firmware from the capsule image.<br>
+  It must be in [PcdsDynamicEx], because the EDKII system firmware update module may<br>
+  consume the PCD produced in current system firmware image.<br>
+ @Prompt EDKII system firmware image FFS GUID.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEdkiiSystemFirmwareFileGuid</CAPTION></TD><TD><CAPTION>gEfiSignedCapsulePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001010</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x0}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdEdkiiSystemFirmwareImageDescriptor gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiSystemFirmwareImageDescriptor
+ This dynamic PCD holds the EDKII system firmware image descriptor.<br>
+  This information can be used for version check in EDKII system FMP capsule.<br>
+  Only if the new EdkiiSystemFirmwareImageDescriptor.Version is not less than<br>
+  the current PcdEdkiiSystemFirmwareImageDescriptor.LowestSupportedVersion,<br>
+  the EDKII system FmpCapsule will be processed.<br>
+  The data structure of this PCD is EDKII_SYSTEM_FIRMWARE_IMAGE_DESCRIPTOR,<br>
+  SignedCapsulePkg/Include/Guid/EdkiiSystemFmpCapsule.h.<br>
+  It must be in [PcdsDynamicEx], because the EDKII system firmware update module may<br>
+  consume the PCD produced in current system firmware.<br>
+ @Prompt EDKII system firmware image descriptor.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEdkiiSystemFirmwareImageDescriptor</CAPTION></TD><TD><CAPTION>gEfiSignedCapsulePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000037</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x0}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdLowestSupportedFirmwareVersion gEfiSignedCapsulePkgTokenSpaceGuid.PcdLowestSupportedFirmwareVersion
+ This is the lowest supported version number that can be upgraded to, as exposed via the System Firmware descriptor.<br>
+ @Prompt Lowest support version number that can be upgraded to via capsule update<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdLowestSupportedFirmwareVersion</CAPTION></TD><TD><CAPTION>gEfiSignedCapsulePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xA0010003</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x1</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEdkiiPkcs7TestPublicKeyFileGuid "gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiPkcs7TestPublicKeyFileGuid" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid "gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdLowestSupportedFirmwareVersion "gEfiSignedCapsulePkgTokenSpaceGuid.PcdLowestSupportedFirmwareVersion" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEdkiiPkcs7TestPublicKeyFileGuid gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiPkcs7TestPublicKeyFileGuid
+ This is the GUID of the FFS which contains the Pkcs7TestPublicKeyFile as a RAW section.<br>
+ @Prompt GUID of the FFS which contains the Pkcs7TestPublicKeyFile.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEdkiiPkcs7TestPublicKeyFileGuid</CAPTION></TD><TD><CAPTION>gEfiSignedCapsulePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xA0010002</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0xba, 0xf5, 0x93, 0xf0, 0x37, 0x6f, 0x16, 0x48, 0x9e, 0x52, 0x91, 0xbe, 0xa0, 0xf7, 0xe0, 0xb8}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid
+ This is the GUID of the FFS which contains the Rsa2048Sha256TestPublicKeyFile as a RAW section.<br>
+ @Prompt GUID of the FFS which contains the Rsa2048Sha256TestPublicKeyFile.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid</CAPTION></TD><TD><CAPTION>gEfiSignedCapsulePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xA0010001</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x04, 0xe1, 0xfe, 0xc4, 0x57, 0x66, 0x36, 0x49, 0xa6, 0x11, 0x13, 0x8d, 0xbc, 0x2a, 0x76, 0xad}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdLowestSupportedFirmwareVersion gEfiSignedCapsulePkgTokenSpaceGuid.PcdLowestSupportedFirmwareVersion
+ This is the lowest supported version number that can be upgraded to, as exposed via the System Firmware descriptor.<br>
+ @Prompt Lowest support version number that can be upgraded to via capsule update<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdLowestSupportedFirmwareVersion</CAPTION></TD><TD><CAPTION>gEfiSignedCapsulePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xA0010003</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x1</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_root_page PcdsPatchableInModule
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdEdkiiPkcs7TestPublicKeyFileGuid "gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiPkcs7TestPublicKeyFileGuid" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid "gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdLowestSupportedFirmwareVersion "gEfiSignedCapsulePkgTokenSpaceGuid.PcdLowestSupportedFirmwareVersion" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdEdkiiPkcs7TestPublicKeyFileGuid gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiPkcs7TestPublicKeyFileGuid
+ This is the GUID of the FFS which contains the Pkcs7TestPublicKeyFile as a RAW section.<br>
+ @Prompt GUID of the FFS which contains the Pkcs7TestPublicKeyFile.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEdkiiPkcs7TestPublicKeyFileGuid</CAPTION></TD><TD><CAPTION>gEfiSignedCapsulePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xA0010002</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0xba, 0xf5, 0x93, 0xf0, 0x37, 0x6f, 0x16, 0x48, 0x9e, 0x52, 0x91, 0xbe, 0xa0, 0xf7, 0xe0, 0xb8}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid
+ This is the GUID of the FFS which contains the Rsa2048Sha256TestPublicKeyFile as a RAW section.<br>
+ @Prompt GUID of the FFS which contains the Rsa2048Sha256TestPublicKeyFile.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEdkiiRsa2048Sha256TestPublicKeyFileGuid</CAPTION></TD><TD><CAPTION>gEfiSignedCapsulePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xA0010001</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x04, 0xe1, 0xfe, 0xc4, 0x57, 0x66, 0x36, 0x49, 0xa6, 0x11, 0x13, 0x8d, 0xbc, 0x2a, 0x76, 0xad}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdLowestSupportedFirmwareVersion gEfiSignedCapsulePkgTokenSpaceGuid.PcdLowestSupportedFirmwareVersion
+ This is the lowest supported version number that can be upgraded to, as exposed via the System Firmware descriptor.<br>
+ @Prompt Lowest support version number that can be upgraded to via capsule update<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdLowestSupportedFirmwareVersion</CAPTION></TD><TD><CAPTION>gEfiSignedCapsulePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xA0010003</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x1</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gEdkiiSystemFirmwareImageDescriptorFileGuid "gEdkiiSystemFirmwareImageDescriptorFileGuid" </li>
+<li>\subpage guid_common_gEdkiiSystemFmpCapsuleConfigFileGuid "gEdkiiSystemFmpCapsuleConfigFileGuid" </li>
+<li>\subpage guid_common_gEdkiiSystemFmpCapsuleDriverFvFileGuid "gEdkiiSystemFmpCapsuleDriverFvFileGuid" </li>
+<li>\subpage guid_common_gEfiSignedCapsulePkgTokenSpaceGuid "gEfiSignedCapsulePkgTokenSpaceGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gEdkiiSystemFirmwareImageDescriptorFileGuid gEdkiiSystemFirmwareImageDescriptorFileGuid
+ Include/Guid/EdkiiSystemFmpCapsule.h<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEdkiiSystemFirmwareImageDescriptorFileGuid</TD><TD>{0x90b2b846, 0xca6d, 0x4d6e, {0xa8, 0xd3, 0xc1, 0x40, 0xa8, 0xe1, 0x10, 0xac}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link SignedCapsulePkg/Include/Guid/EdkiiSystemFmpCapsule.h
+\endlink
+
+ **/
+/** \page guid_common_gEdkiiSystemFmpCapsuleConfigFileGuid gEdkiiSystemFmpCapsuleConfigFileGuid
+ \copydoc SignedCapsulePkg/Include/Guid/EdkiiSystemFmpCapsule.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEdkiiSystemFmpCapsuleConfigFileGuid</TD><TD>{0x812136d3, 0x4d3a, 0x433a, {0x94, 0x18, 0x29, 0xbb, 0x9b, 0xf7, 0x8f, 0x6e}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link SignedCapsulePkg/Include/Guid/EdkiiSystemFmpCapsule.h
+\endlink
+
+ **/
+/** \page guid_common_gEdkiiSystemFmpCapsuleDriverFvFileGuid gEdkiiSystemFmpCapsuleDriverFvFileGuid
+ \copydoc SignedCapsulePkg/Include/Guid/EdkiiSystemFmpCapsule.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEdkiiSystemFmpCapsuleDriverFvFileGuid</TD><TD>{0xce57b167, 0xb0e4, 0x41e8, {0xa8, 0x97, 0x5f, 0x4f, 0xeb, 0x78, 0x1d, 0x40}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link SignedCapsulePkg/Include/Guid/EdkiiSystemFmpCapsule.h
+\endlink
+
+ **/
+/** \page guid_common_gEfiSignedCapsulePkgTokenSpaceGuid gEfiSignedCapsulePkgTokenSpaceGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEfiSignedCapsulePkgTokenSpaceGuid</TD><TD>{ 0xe1eb612f, 0x1c6c, 0x485d, { 0x9d, 0x6, 0x65, 0x8, 0x44, 0x88, 0x15, 0x69 }}</TD></TR></TABLE>
+ **/

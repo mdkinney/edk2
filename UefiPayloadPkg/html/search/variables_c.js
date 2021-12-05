@@ -1,0 +1,14 @@
+var searchData=
+[
+  ['red_5fmask_5fpos',['red_mask_pos',['../structcb__framebuffer.html#adab8c9477b9976ca1081b41dc00a6fe9',1,'cb_framebuffer']]],
+  ['red_5fmask_5fsize',['red_mask_size',['../structcb__framebuffer.html#a50aba1f65d24b4e2a59ff2d86d3ea9b5',1,'cb_framebuffer']]],
+  ['registers',['Registers',['../struct_p_l_d___s_m_m___r_e_g_i_s_t_e_r_s.html#a815d8e45a388b94dabf25e8945128abd',1,'PLD_SMM_REGISTERS']]],
+  ['regwidth',['RegWidth',['../struct_s_e_r_i_a_l___p_o_r_t___i_n_f_o.html#ab850476449a843c4a0a914e0f383a383',1,'SERIAL_PORT_INFO::RegWidth()'],['../structcb__serial.html#a22b072a62518c2b47117007dabfee25c',1,'cb_serial::regwidth()']]],
+  ['reserved',['Reserved',['../struct_p_l_d___s_m_m___r_e_g_i_s_t_e_r_s.html#af71e460078c166cecfc4e3794fa78768',1,'PLD_SMM_REGISTERS::Reserved()'],['../struct_s_p_i___f_l_a_s_h___i_n_f_o.html#a45029475c0db79775a519d8db448591f',1,'SPI_FLASH_INFO::Reserved()'],['../struct_m_e_m_o_r_y___m_a_p___e_n_t_r_y.html#ad7741a8957aee6c2e5498167f2467b08',1,'MEMORY_MAP_ENTRY::Reserved()'],['../struct_s_m_m___s3___i_n_f_o.html#a9735e8f426f4f7b5e4704fa48c2df668',1,'SMM_S3_INFO::Reserved()'],['../struct_n_v___v_a_r_i_a_b_l_e___i_n_f_o.html#a38d6539528e4858b915278a4d772a801',1,'NV_VARIABLE_INFO::Reserved()']]],
+  ['reserved0',['Reserved0',['../struct_m_e_m_o_r_y___m_a_p___i_n_f_o.html#a7524c26830cea7dcb38295df81b9d719',1,'MEMORY_MAP_INFO::Reserved0()'],['../struct_s_e_r_i_a_l___p_o_r_t___i_n_f_o.html#abcc344d774fe672ed7e7a3cc63a98750',1,'SERIAL_PORT_INFO::Reserved0()'],['../struct_a_c_p_i___b_o_a_r_d___i_n_f_o.html#aacc4f2eb11a0005a400951dd5ffeab04',1,'ACPI_BOARD_INFO::Reserved0()']]],
+  ['reserved_5fmask_5fpos',['reserved_mask_pos',['../structcb__framebuffer.html#a1a49b03065777997cbe61a5eb8c4585a',1,'cb_framebuffer']]],
+  ['reserved_5fmask_5fsize',['reserved_mask_size',['../structcb__framebuffer.html#a76944ed9cafbe0244414b7ffd3f24329',1,'cb_framebuffer']]],
+  ['resetregaddress',['ResetRegAddress',['../struct_a_c_p_i___b_o_a_r_d___i_n_f_o.html#af9c611b3a47f83df2dc7154fc8901f8a',1,'ACPI_BOARD_INFO']]],
+  ['resetvalue',['ResetValue',['../struct_a_c_p_i___b_o_a_r_d___i_n_f_o.html#a989117f506df7607a30c8537686f1010',1,'ACPI_BOARD_INFO']]],
+  ['revision',['Revision',['../struct_p_l_d___s_m_m___r_e_g_i_s_t_e_r_s.html#afd9c188e0be4f044813db6de0d8807c1',1,'PLD_SMM_REGISTERS::Revision()'],['../struct_s_p_i___f_l_a_s_h___i_n_f_o.html#a528c1618bd27949f6c9ca5a078d1307a',1,'SPI_FLASH_INFO::Revision()'],['../struct_m_e_m_o_r_y___m_a_p___i_n_f_o.html#a88d4a1de7364f4633e99f932d5e86115',1,'MEMORY_MAP_INFO::Revision()'],['../struct_s_e_r_i_a_l___p_o_r_t___i_n_f_o.html#a3c5a8d1018b570a6012bec5a926fffd0',1,'SERIAL_PORT_INFO::Revision()'],['../struct_a_c_p_i___b_o_a_r_d___i_n_f_o.html#a4ba36aa7efc6267244fe9809742142b1',1,'ACPI_BOARD_INFO::Revision()'],['../struct_n_v___v_a_r_i_a_b_l_e___i_n_f_o.html#a4de633f0f68c2e16d8852b8da53c7a20',1,'NV_VARIABLE_INFO::Revision()']]]
+];

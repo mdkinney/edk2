@@ -1,0 +1,27 @@
+var union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r =
+[
+    [ "Bits", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a65fed1cafba45935cf87bc1dcd758bc6", null ],
+    [ "CriticalTempStatus", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#ab8fdcf496f885f7fbdafb211ac37c28e", null ],
+    [ "CriticalTempStatusLog", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a1ffe04d27423a5cd08bbf23864c2a46e", null ],
+    [ "CrossDomainLimitLog", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a4ac3ff9436a2bc7e958a71b04ed11028", null ],
+    [ "CrossDomainLimitStatus", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#ab8cf9754dff14f55da89f2cf99753333", null ],
+    [ "CurrentLimitLog", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#adec253fe95167ab1288c52a7ac2631b7", null ],
+    [ "CurrentLimitStatus", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a8afa2e870bba6f197bdd33b267d8d013", null ],
+    [ "DigitalReadout", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a1e446d3bfcc86ab68513fba69c4b3945", null ],
+    [ "PowerLimitLog", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#adec2b54d480c1ff5a3c9fd497e87aee2", null ],
+    [ "PowerLimitStatus", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a9bd3ac66da6cfa0fb87b8d638e35c8f8", null ],
+    [ "PROCHOT_FORCEPR_Event", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#ae5a7cd06f64b66d060e88d136e695c06", null ],
+    [ "PROCHOT_FORCEPR_Log", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a18c4093dc08052bd07cfd514e8760efd", null ],
+    [ "ReadingValid", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a19437445feeada556460b54915836b27", null ],
+    [ "Reserved1", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a2be797e6927ee6beedcadc9a10ea88d6", null ],
+    [ "Reserved2", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a57e80ee3feec7b8df67edae3813b09d9", null ],
+    [ "ResolutionInDegreesCelsius", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a909bfba49f414350dc6a9ec569e0bddb", null ],
+    [ "ThermalStatus", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#aea6530e331560b6e17f757f774a4d130", null ],
+    [ "ThermalStatusLog", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#af6d3cf7d1f6f02647fdc9b4e9f845c41", null ],
+    [ "ThermalThreshold1Log", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a8ae458462161610ba9cd80864dcb7bb1", null ],
+    [ "ThermalThreshold1Status", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a92dd320ca4bf8fc705327a5e3e114c18", null ],
+    [ "ThermalThreshold2Log", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a3d9cb5d46f4f327ae5ceb9fecbd48a83", null ],
+    [ "ThermalThreshold2Status", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#ad3a68533ddd24f3132e5d3cf70f2bd66", null ],
+    [ "Uint32", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a377eee71a1b3003dfdae58422e213fc4", null ],
+    [ "Uint64", "union_m_s_r___i_a32___t_h_e_r_m___s_t_a_t_u_s___r_e_g_i_s_t_e_r.html#a5d2470d0b67cec5218b2a73843b3e4d5", null ]
+];

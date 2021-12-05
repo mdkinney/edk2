@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['efi_5fstatus',['EFI_STATUS',['../_ppi_2_arm_mp_core_info_8h.html#a5dac44c0c24c9e77d9d4dc3c4b561d49',1,'EFI_STATUS(EFIAPI *ARM_MP_CORE_INFO_GET)(OUT UINTN *ArmCoreCount:&#160;ArmMpCoreInfo.h'],['../_arm_scmi_base_protocol_8h.html#ac73acf015552309f836f17b7b9f9b61d',1,'EFI_STATUS(EFIAPI *SCMI_BASE_GET_VERSION)(IN SCMI_BASE_PROTOCOL *This:&#160;ArmScmiBaseProtocol.h'],['../_arm_scmi_performance_protocol_8h.html#ab9dc0ac72903a19d68b6465e18a49408',1,'EFI_STATUS(EFIAPI *SCMI_PERFORMANCE_GET_VERSION)(IN SCMI_PERFORMANCE_PROTOCOL *This:&#160;ArmScmiPerformanceProtocol.h'],['../_arm_scmi_clock_protocol_8h.html#a1090f6b9538553facf21d1b5180f47dd',1,'EFI_STATUS(EFIAPI *SCMI_CLOCK_GET_VERSION)(IN SCMI_CLOCK_PROTOCOL *This:&#160;ArmScmiClockProtocol.h'],['../_arm_scmi_clock2_protocol_8h.html#a8d3f098a93115617d2d9aacac4ab9f82',1,'EFI_STATUS(EFIAPI *SCMI_CLOCK2_GET_VERSION)(IN SCMI_CLOCK2_PROTOCOL *This:&#160;ArmScmiClock2Protocol.h']]]
+];

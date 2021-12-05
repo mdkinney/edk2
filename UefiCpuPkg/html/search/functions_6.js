@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['mpinitlibenabledisableap',['MpInitLibEnableDisableAP',['../_mp_init_lib_8h.html#a3cf96cc405c4efddfb7d080acc23227c',1,'MpInitLib.h']]],
+  ['mpinitlibgetnumberofprocessors',['MpInitLibGetNumberOfProcessors',['../_mp_init_lib_8h.html#af0c307895d350fa481004412821664ce',1,'MpInitLib.h']]],
+  ['mpinitlibgetprocessorinfo',['MpInitLibGetProcessorInfo',['../_mp_init_lib_8h.html#a512657b6557ac9c0e3be503eb86b3491',1,'MpInitLib.h']]],
+  ['mpinitlibinitialize',['MpInitLibInitialize',['../_mp_init_lib_8h.html#add72648582c22bbcc6af8a0f3acda4b5',1,'MpInitLib.h']]],
+  ['mpinitlibstartupallaps',['MpInitLibStartupAllAPs',['../_mp_init_lib_8h.html#a50cf11ec0487331ee1fcf5b926e11be2',1,'MpInitLib.h']]],
+  ['mpinitlibstartupallcpus',['MpInitLibStartupAllCPUs',['../_mp_init_lib_8h.html#ad6880f1151fbe066b345655b2825aedd',1,'MpInitLib.h']]],
+  ['mpinitlibstartupthisap',['MpInitLibStartupThisAP',['../_mp_init_lib_8h.html#a217fbe3cdc0b8045578aecd03c8bb6ba',1,'MpInitLib.h']]],
+  ['mpinitlibswitchbsp',['MpInitLibSwitchBSP',['../_mp_init_lib_8h.html#a511930acaf02d759d186a96b6e6009a4',1,'MpInitLib.h']]],
+  ['mpinitlibwhoami',['MpInitLibWhoAmI',['../_mp_init_lib_8h.html#a2c0676b6bdf8540721a54d6708f05eb6',1,'MpInitLib.h']]],
+  ['mtrrdebugprintallmtrrs',['MtrrDebugPrintAllMtrrs',['../_mtrr_lib_8h.html#a316f103cf1dca10f34898f84e35d22d6',1,'MtrrLib.h']]],
+  ['mtrrgetallmtrrs',['MtrrGetAllMtrrs',['../_mtrr_lib_8h.html#a65fd410547bee9867a3cb8cd8be6c33d',1,'MtrrLib.h']]],
+  ['mtrrgetdefaultmemorytype',['MtrrGetDefaultMemoryType',['../_mtrr_lib_8h.html#aa5f52d75e59810ebfda6d72e4ed9ae5c',1,'MtrrLib.h']]],
+  ['mtrrgetfixedmtrr',['MtrrGetFixedMtrr',['../_mtrr_lib_8h.html#a01f7264d7126102976ac1079b6700517',1,'MtrrLib.h']]],
+  ['mtrrgetmemoryattribute',['MtrrGetMemoryAttribute',['../_mtrr_lib_8h.html#a1461e7eba8c870d673695c80242beb30',1,'MtrrLib.h']]],
+  ['mtrrgetmemoryattributeinvariablemtrr',['MtrrGetMemoryAttributeInVariableMtrr',['../_mtrr_lib_8h.html#a13bcef9baa930b6be001fb8184e6a49c',1,'MtrrLib.h']]],
+  ['mtrrsetallmtrrs',['MtrrSetAllMtrrs',['../_mtrr_lib_8h.html#a27fea575802e29833b2525f77c1358ff',1,'MtrrLib.h']]],
+  ['mtrrsetmemoryattribute',['MtrrSetMemoryAttribute',['../_mtrr_lib_8h.html#a7d8ea260663969552a67830d7e1ba330',1,'MtrrLib.h']]],
+  ['mtrrsetmemoryattributeinmtrrsettings',['MtrrSetMemoryAttributeInMtrrSettings',['../_mtrr_lib_8h.html#a6906c8521ce89450e67d7cd79c7cf139',1,'MtrrLib.h']]],
+  ['mtrrsetmemoryattributesinmtrrsettings',['MtrrSetMemoryAttributesInMtrrSettings',['../_mtrr_lib_8h.html#aacc6484ce231f046cae6c31b2a5b593d',1,'MtrrLib.h']]]
+];

@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['redfishservicehostname',['RedfishServiceHostname',['../struct_r_e_d_f_i_s_h___o_v_e_r___i_p___p_r_o_t_o_c_o_l___d_a_t_a.html#a732465e3218661ae5df0223957396691',1,'REDFISH_OVER_IP_PROTOCOL_DATA']]],
+  ['redfishservicehostnamelength',['RedfishServiceHostnameLength',['../struct_r_e_d_f_i_s_h___o_v_e_r___i_p___p_r_o_t_o_c_o_l___d_a_t_a.html#a12f306aeb6e271fec795102e20d16943',1,'REDFISH_OVER_IP_PROTOCOL_DATA']]],
+  ['redfishserviceipaddress',['RedfishServiceIpAddress',['../struct_r_e_d_f_i_s_h___o_v_e_r___i_p___p_r_o_t_o_c_o_l___d_a_t_a.html#a52d148d6781e4cd92748b04a77ba7b33',1,'REDFISH_OVER_IP_PROTOCOL_DATA']]],
+  ['redfishserviceipaddressformat',['RedfishServiceIpAddressFormat',['../struct_r_e_d_f_i_s_h___o_v_e_r___i_p___p_r_o_t_o_c_o_l___d_a_t_a.html#ae9487f32ce0395448472aa9e96600e63',1,'REDFISH_OVER_IP_PROTOCOL_DATA']]],
+  ['redfishserviceipdiscoverytype',['RedfishServiceIpDiscoveryType',['../struct_r_e_d_f_i_s_h___o_v_e_r___i_p___p_r_o_t_o_c_o_l___d_a_t_a.html#ad6d9952513031c88b2274978c1e9fa4e',1,'REDFISH_OVER_IP_PROTOCOL_DATA']]],
+  ['redfishserviceipmask',['RedfishServiceIpMask',['../struct_r_e_d_f_i_s_h___o_v_e_r___i_p___p_r_o_t_o_c_o_l___d_a_t_a.html#aeff5c458eee9c589dec1695d71d3a1df',1,'REDFISH_OVER_IP_PROTOCOL_DATA']]],
+  ['redfishserviceipport',['RedfishServiceIpPort',['../struct_r_e_d_f_i_s_h___o_v_e_r___i_p___p_r_o_t_o_c_o_l___d_a_t_a.html#a8db49073a984ca47e97e15a857f4f36f',1,'REDFISH_OVER_IP_PROTOCOL_DATA']]],
+  ['redfishservicelocation',['RedfishServiceLocation',['../struct_r_e_d_f_i_s_h___c_o_n_f_i_g___s_e_r_v_i_c_e___i_n_f_o_r_m_a_t_i_o_n.html#a8940dac1809519ec88002152fdbd5056',1,'REDFISH_CONFIG_SERVICE_INFORMATION']]],
+  ['redfishserviceos',['RedfishServiceOs',['../struct_r_e_d_f_i_s_h___c_o_n_f_i_g___s_e_r_v_i_c_e___i_n_f_o_r_m_a_t_i_o_n.html#ac78039fe62719dc360aa38cd5054675e',1,'REDFISH_CONFIG_SERVICE_INFORMATION']]],
+  ['redfishserviceosversion',['RedfishServiceOsVersion',['../struct_r_e_d_f_i_s_h___c_o_n_f_i_g___s_e_r_v_i_c_e___i_n_f_o_r_m_a_t_i_o_n.html#af0450e1421d128e75e792feb8f91a58a',1,'REDFISH_CONFIG_SERVICE_INFORMATION']]],
+  ['redfishserviceproduct',['RedfishServiceProduct',['../struct_r_e_d_f_i_s_h___c_o_n_f_i_g___s_e_r_v_i_c_e___i_n_f_o_r_m_a_t_i_o_n.html#ab3b02824142f9b4e03d8dc7c8840052f',1,'REDFISH_CONFIG_SERVICE_INFORMATION']]],
+  ['redfishserviceproductver',['RedfishServiceProductVer',['../struct_r_e_d_f_i_s_h___c_o_n_f_i_g___s_e_r_v_i_c_e___i_n_f_o_r_m_a_t_i_o_n.html#a96ab323a2b5e445267629bab51552081',1,'REDFISH_CONFIG_SERVICE_INFORMATION']]],
+  ['redfishservicerestexhandle',['RedfishServiceRestExHandle',['../struct_r_e_d_f_i_s_h___c_o_n_f_i_g___s_e_r_v_i_c_e___i_n_f_o_r_m_a_t_i_o_n.html#a63c6544a8c8471bcd33f765acc5cab65',1,'REDFISH_CONFIG_SERVICE_INFORMATION']]],
+  ['redfishserviceusehttps',['RedfishServiceUseHttps',['../struct_r_e_d_f_i_s_h___c_o_n_f_i_g___s_e_r_v_i_c_e___i_n_f_o_r_m_a_t_i_o_n.html#a1ba55a973e914fbe3f82bbf00e7a549e',1,'REDFISH_CONFIG_SERVICE_INFORMATION']]],
+  ['redfishserviceuuid',['RedfishServiceUuid',['../struct_r_e_d_f_i_s_h___c_o_n_f_i_g___s_e_r_v_i_c_e___i_n_f_o_r_m_a_t_i_o_n.html#a3c72ed38892c8c8850128fe06dd108c5',1,'REDFISH_CONFIG_SERVICE_INFORMATION']]],
+  ['redfishserviceversion',['RedfishServiceVersion',['../struct_r_e_d_f_i_s_h___c_o_n_f_i_g___s_e_r_v_i_c_e___i_n_f_o_r_m_a_t_i_o_n.html#a9a4851e44d0ecf6fdd8b228b17061a0f',1,'REDFISH_CONFIG_SERVICE_INFORMATION']]],
+  ['redfishservicevlanid',['RedfishServiceVlanId',['../struct_r_e_d_f_i_s_h___o_v_e_r___i_p___p_r_o_t_o_c_o_l___d_a_t_a.html#a4feedb8898a72a42ce03162ef7cb8498',1,'REDFISH_OVER_IP_PROTOCOL_DATA']]]
+];

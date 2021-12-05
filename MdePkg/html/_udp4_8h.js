@@ -1,0 +1,25 @@
+var _udp4_8h =
+[
+    [ "EFI_UDP4_SERVICE_POINT", "struct_e_f_i___u_d_p4___s_e_r_v_i_c_e___p_o_i_n_t.html", "struct_e_f_i___u_d_p4___s_e_r_v_i_c_e___p_o_i_n_t" ],
+    [ "EFI_UDP4_VARIABLE_DATA", "struct_e_f_i___u_d_p4___v_a_r_i_a_b_l_e___d_a_t_a.html", "struct_e_f_i___u_d_p4___v_a_r_i_a_b_l_e___d_a_t_a" ],
+    [ "EFI_UDP4_FRAGMENT_DATA", "struct_e_f_i___u_d_p4___f_r_a_g_m_e_n_t___d_a_t_a.html", "struct_e_f_i___u_d_p4___f_r_a_g_m_e_n_t___d_a_t_a" ],
+    [ "EFI_UDP4_SESSION_DATA", "struct_e_f_i___u_d_p4___s_e_s_s_i_o_n___d_a_t_a.html", "struct_e_f_i___u_d_p4___s_e_s_s_i_o_n___d_a_t_a" ],
+    [ "EFI_UDP4_CONFIG_DATA", "struct_e_f_i___u_d_p4___c_o_n_f_i_g___d_a_t_a.html", "struct_e_f_i___u_d_p4___c_o_n_f_i_g___d_a_t_a" ],
+    [ "EFI_UDP4_TRANSMIT_DATA", "struct_e_f_i___u_d_p4___t_r_a_n_s_m_i_t___d_a_t_a.html", "struct_e_f_i___u_d_p4___t_r_a_n_s_m_i_t___d_a_t_a" ],
+    [ "EFI_UDP4_RECEIVE_DATA", "struct_e_f_i___u_d_p4___r_e_c_e_i_v_e___d_a_t_a.html", "struct_e_f_i___u_d_p4___r_e_c_e_i_v_e___d_a_t_a" ],
+    [ "EFI_UDP4_COMPLETION_TOKEN", "struct_e_f_i___u_d_p4___c_o_m_p_l_e_t_i_o_n___t_o_k_e_n.html", "struct_e_f_i___u_d_p4___c_o_m_p_l_e_t_i_o_n___t_o_k_e_n" ],
+    [ "_EFI_UDP4_PROTOCOL", "struct___e_f_i___u_d_p4___p_r_o_t_o_c_o_l.html", "struct___e_f_i___u_d_p4___p_r_o_t_o_c_o_l" ],
+    [ "EFI_UDP4_PROTOCOL_GUID", "_udp4_8h.html#ae87fccce95102fb2633f35ad8e4ed7e0", null ],
+    [ "EFI_UDP4_SERVICE_BINDING_PROTOCOL_GUID", "_udp4_8h.html#aa7d33ce5018503d082b6dc189f5993e2", null ],
+    [ "EFI_UDP4_CANCEL", "_udp4_8h.html#a257ae5a511c2ae9df179019fb3557a4d", null ],
+    [ "EFI_UDP4_CONFIGURE", "_udp4_8h.html#a341029680e0f33ec540d1a7a73a83d58", null ],
+    [ "EFI_UDP4_GET_MODE_DATA", "_udp4_8h.html#a9d37219365010c960af0b1e32708e942", null ],
+    [ "EFI_UDP4_GROUPS", "_udp4_8h.html#afcb4ae18aa8ee717c697576d4e94e194", null ],
+    [ "EFI_UDP4_POLL", "_udp4_8h.html#a0b2b026cad49686c480f6e9eb0552b18", null ],
+    [ "EFI_UDP4_PROTOCOL", "_udp4_8h.html#a52df569577fe405526dcf8e44c188545", null ],
+    [ "EFI_UDP4_RECEIVE", "_udp4_8h.html#ab7935f078a424c85b24c51a4c6992629", null ],
+    [ "EFI_UDP4_ROUTES", "_udp4_8h.html#a40697608c844919cea7835abb3a7312b", null ],
+    [ "EFI_UDP4_TRANSMIT", "_udp4_8h.html#a93187fc388e536dc8a6d9908de66a1d7", null ],
+    [ "gEfiUdp4ProtocolGuid", "_udp4_8h.html#a56d81ec7ff52e81871df768c0befbd04", null ],
+    [ "gEfiUdp4ServiceBindingProtocolGuid", "_udp4_8h.html#a53d41251590be79808d9ff1142fbbded", null ]
+];

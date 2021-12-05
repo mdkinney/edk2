@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['dns_5fclass_5fany',['DNS_CLASS_ANY',['../_net_lib_8h.html#a5559ce92af93f2440518dcec488986e7',1,'NetLib.h']]],
+  ['dns_5fclass_5fch',['DNS_CLASS_CH',['../_net_lib_8h.html#aa3eb5221ee3ac4ac83cd88b74553e15a',1,'NetLib.h']]],
+  ['dns_5fclass_5fhs',['DNS_CLASS_HS',['../_net_lib_8h.html#abfa6914cc6fb0b8e086e07e35e22bdbf',1,'NetLib.h']]],
+  ['dns_5fclass_5finet',['DNS_CLASS_INET',['../_net_lib_8h.html#a448de38667fadfbbea2f3ea5a13f2ac9',1,'NetLib.h']]],
+  ['dns_5fmax_5fmessage_5fsize',['DNS_MAX_MESSAGE_SIZE',['../_net_lib_8h.html#aea4bf05786469ea2dddb0219cfdeb9ca',1,'NetLib.h']]],
+  ['dns_5fmax_5fname_5fsize',['DNS_MAX_NAME_SIZE',['../_net_lib_8h.html#aba564a71c4fb4c44fae69015e880b0db',1,'NetLib.h']]],
+  ['dns_5ftype_5fa',['DNS_TYPE_A',['../_net_lib_8h.html#afe9f7ff23f3feba2776dcfa366f53c3f',1,'NetLib.h']]],
+  ['dns_5ftype_5faaaa',['DNS_TYPE_AAAA',['../_net_lib_8h.html#acfb2eb201eadb88b54ae795a01fd34cd',1,'NetLib.h']]],
+  ['dns_5ftype_5fany',['DNS_TYPE_ANY',['../_net_lib_8h.html#a23b3a43df647c117e8c2630a89dfda51',1,'NetLib.h']]],
+  ['dns_5ftype_5faxfr',['DNS_TYPE_AXFR',['../_net_lib_8h.html#afe063194ed1916f72bff38e8f0a975bd',1,'NetLib.h']]],
+  ['dns_5ftype_5fcname',['DNS_TYPE_CNAME',['../_net_lib_8h.html#a71d717fd39f72756ba00a61bc0279e76',1,'NetLib.h']]],
+  ['dns_5ftype_5fhinfo',['DNS_TYPE_HINFO',['../_net_lib_8h.html#a169ea4755db82670fbe2ad186a3acd50',1,'NetLib.h']]],
+  ['dns_5ftype_5fmailb',['DNS_TYPE_MAILB',['../_net_lib_8h.html#aa9133b34a6a642d54d8f14e79056d325',1,'NetLib.h']]],
+  ['dns_5ftype_5fminfo',['DNS_TYPE_MINFO',['../_net_lib_8h.html#a0dc8fca3beb07776d91f57e6bf34c819',1,'NetLib.h']]],
+  ['dns_5ftype_5fmx',['DNS_TYPE_MX',['../_net_lib_8h.html#a1a854d4623c4a82c242773058be7612c',1,'NetLib.h']]],
+  ['dns_5ftype_5fns',['DNS_TYPE_NS',['../_net_lib_8h.html#a76921a21844be80847aaccde77bb7d75',1,'NetLib.h']]],
+  ['dns_5ftype_5fptr',['DNS_TYPE_PTR',['../_net_lib_8h.html#a3afdb36ca805590d57ace8cee38a1b01',1,'NetLib.h']]],
+  ['dns_5ftype_5fsoa',['DNS_TYPE_SOA',['../_net_lib_8h.html#a794df4821da86953f8b5448f3962ac04',1,'NetLib.h']]],
+  ['dns_5ftype_5fsrv_5frr',['DNS_TYPE_SRV_RR',['../_net_lib_8h.html#ae1abf1c1978b077928af9d5adb223eed',1,'NetLib.h']]],
+  ['dns_5ftype_5ftxt',['DNS_TYPE_TXT',['../_net_lib_8h.html#a031f145dfe0b1498c03e07af10be3c23',1,'NetLib.h']]],
+  ['dns_5ftype_5fwks',['DNS_TYPE_WKS',['../_net_lib_8h.html#a2cc85d86448ea1aaa857f3a7cb64e9fa',1,'NetLib.h']]]
+];

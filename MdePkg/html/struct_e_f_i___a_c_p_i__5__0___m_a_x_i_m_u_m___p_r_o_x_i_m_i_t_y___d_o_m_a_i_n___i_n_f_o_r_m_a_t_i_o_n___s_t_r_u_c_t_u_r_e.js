@@ -1,0 +1,9 @@
+var struct_e_f_i___a_c_p_i__5__0___m_a_x_i_m_u_m___p_r_o_x_i_m_i_t_y___d_o_m_a_i_n___i_n_f_o_r_m_a_t_i_o_n___s_t_r_u_c_t_u_r_e =
+[
+    [ "Length", "struct_e_f_i___a_c_p_i__5__0___m_a_x_i_m_u_m___p_r_o_x_i_m_i_t_y___d_o_m_a_i_n___i_n_f_o_r_m_a_t_i_o_n___s_t_r_u_c_t_u_r_e.html#a4f6b914cd898c55254712aa700c8a73f", null ],
+    [ "MaximumMemoryCapacity", "struct_e_f_i___a_c_p_i__5__0___m_a_x_i_m_u_m___p_r_o_x_i_m_i_t_y___d_o_m_a_i_n___i_n_f_o_r_m_a_t_i_o_n___s_t_r_u_c_t_u_r_e.html#a5bfe9c83cf96714de5b8ee7260e8407f", null ],
+    [ "MaximumProcessorCapacity", "struct_e_f_i___a_c_p_i__5__0___m_a_x_i_m_u_m___p_r_o_x_i_m_i_t_y___d_o_m_a_i_n___i_n_f_o_r_m_a_t_i_o_n___s_t_r_u_c_t_u_r_e.html#a0b6053da5ca48b9aba96342787bdce61", null ],
+    [ "ProximityDomainRangeHigh", "struct_e_f_i___a_c_p_i__5__0___m_a_x_i_m_u_m___p_r_o_x_i_m_i_t_y___d_o_m_a_i_n___i_n_f_o_r_m_a_t_i_o_n___s_t_r_u_c_t_u_r_e.html#afcb8eb49dfc11d0acc8ec1f321c27daf", null ],
+    [ "ProximityDomainRangeLow", "struct_e_f_i___a_c_p_i__5__0___m_a_x_i_m_u_m___p_r_o_x_i_m_i_t_y___d_o_m_a_i_n___i_n_f_o_r_m_a_t_i_o_n___s_t_r_u_c_t_u_r_e.html#a72826e40cded4f89ca7d3f50ecd4dfc8", null ],
+    [ "Revision", "struct_e_f_i___a_c_p_i__5__0___m_a_x_i_m_u_m___p_r_o_x_i_m_i_t_y___d_o_m_a_i_n___i_n_f_o_r_m_a_t_i_o_n___s_t_r_u_c_t_u_r_e.html#a252621421f59e217aa899025b76f8524", null ]
+];

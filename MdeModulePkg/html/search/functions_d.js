@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['refreshkeyhelp',['RefreshKeyHelp',['../_customized_display_lib_8h.html#a21a457eee1dfe0333ab80a86d1cde082',1,'CustomizedDisplayLib.h']]],
+  ['registerbasicvariablepolicy',['RegisterBasicVariablePolicy',['../_variable_policy_helper_lib_8h.html#a6855921239783144c638f57c98765820',1,'VariablePolicyHelperLib.h']]],
+  ['registercpuinterrupthandler',['RegisterCpuInterruptHandler',['../_cpu_exception_handler_lib_8h.html#aafe96df81d8af901256f209f1a9535cb',1,'CpuExceptionHandlerLib.h']]],
+  ['registernondiscoverablemmiodevice',['RegisterNonDiscoverableMmioDevice',['../_non_discoverable_device_registration_lib_8h.html#a74297871125a19bf4c75285373ecd5a1',1,'NonDiscoverableDeviceRegistrationLib.h']]],
+  ['registersecurity2handler',['RegisterSecurity2Handler',['../_security_management_lib_8h.html#ae46e52dcae9b9eb03951aec7c61f5991',1,'SecurityManagementLib.h']]],
+  ['registersecurityhandler',['RegisterSecurityHandler',['../_security_management_lib_8h.html#a59f804fc6e880cc9d030e55c1f9e5bb6',1,'SecurityManagementLib.h']]],
+  ['registervariablepolicy',['RegisterVariablePolicy',['../_variable_policy_lib_8h.html#aff2a1b48f2deadbaaff4f92e721efb30',1,'VariablePolicyLib.h']]],
+  ['registervarstatevariablepolicy',['RegisterVarStateVariablePolicy',['../_variable_policy_helper_lib_8h.html#a38982f1178d13fd8f53b30edd66027ee',1,'VariablePolicyHelperLib.h']]],
+  ['resetcold',['ResetCold',['../_reset_system_lib_8h.html#aaad4ebc7369a7d85a7fa1ff40bf157a2',1,'ResetSystemLib.h']]],
+  ['resetplatformspecific',['ResetPlatformSpecific',['../_reset_system_lib_8h.html#a74072a5a618c6062b3fe2afa1d55596e',1,'ResetSystemLib.h']]],
+  ['resetplatformspecificguid',['ResetPlatformSpecificGuid',['../_reset_utility_lib_8h.html#a6d2173ed6c24c66bb30ecdaadd5d1cd1',1,'ResetUtilityLib.h']]],
+  ['resetshutdown',['ResetShutdown',['../_reset_system_lib_8h.html#a4c04b77bd6354dfbc5d75880e695ab2d',1,'ResetSystemLib.h']]],
+  ['resetsystem',['ResetSystem',['../_reset_system_lib_8h.html#adfdbda36165c2a0f30df826d7d50ff2e',1,'ResetSystemLib.h']]],
+  ['resetsystemwithsubtype',['ResetSystemWithSubtype',['../_reset_utility_lib_8h.html#ac80060336071f29e015db78657d3861e',1,'ResetUtilityLib.h']]],
+  ['resetwarm',['ResetWarm',['../_reset_system_lib_8h.html#a3cca7f4e3461de2acb9ed113e3e1056e',1,'ResetSystemLib.h']]],
+  ['restorealllockboxinplace',['RestoreAllLockBoxInPlace',['../_lock_box_lib_8h.html#a5f067f5f41aecc298281760f364b094c',1,'LockBoxLib.h']]],
+  ['restorelockbox',['RestoreLockBox',['../_lock_box_lib_8h.html#ae1e0dab253d0f218218001ea76f982d2',1,'LockBoxLib.h']]]
+];

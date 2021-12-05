@@ -1,0 +1,6 @@
+var struct_e_f_i___a_c_p_i__6__4___p_c_c_t___g_e_n_e_r_i_c___s_h_a_r_e_d___m_e_m_o_r_y___r_e_g_i_o_n___c_o_m_m_a_n_d =
+[
+    [ "Command", "struct_e_f_i___a_c_p_i__6__4___p_c_c_t___g_e_n_e_r_i_c___s_h_a_r_e_d___m_e_m_o_r_y___r_e_g_i_o_n___c_o_m_m_a_n_d.html#a212d59b262c92e1ab2798c6ce5aeba6e", null ],
+    [ "NotifyOnCompletion", "struct_e_f_i___a_c_p_i__6__4___p_c_c_t___g_e_n_e_r_i_c___s_h_a_r_e_d___m_e_m_o_r_y___r_e_g_i_o_n___c_o_m_m_a_n_d.html#a8a71f98cca14f6385593b2d62bdd3bea", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__6__4___p_c_c_t___g_e_n_e_r_i_c___s_h_a_r_e_d___m_e_m_o_r_y___r_e_g_i_o_n___c_o_m_m_a_n_d.html#a401b33f810c603dddb32f574f36927eb", null ]
+];

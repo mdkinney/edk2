@@ -1,0 +1,9 @@
+var struct_e_f_i___a_c_p_i__6__4___m_p_s_t___m_e_m_o_r_y___p_o_w_e_r___s_t_a_t_e___c_h_a_r_a_c_t_e_r800ef381fbf0728431a1ad274adf89b5 =
+[
+    [ "AveragePowerConsumedInMPS0", "struct_e_f_i___a_c_p_i__6__4___m_p_s_t___m_e_m_o_r_y___p_o_w_e_r___s_t_a_t_e___c_h_a_r_a_c_t_e_r800ef381fbf0728431a1ad274adf89b5.html#adf71ab39d90faa76c7013ef056f02529", null ],
+    [ "ExitLatencyToMPS0", "struct_e_f_i___a_c_p_i__6__4___m_p_s_t___m_e_m_o_r_y___p_o_w_e_r___s_t_a_t_e___c_h_a_r_a_c_t_e_r800ef381fbf0728431a1ad274adf89b5.html#a263a1a582c4fb6ad3690312036752dc4", null ],
+    [ "Flag", "struct_e_f_i___a_c_p_i__6__4___m_p_s_t___m_e_m_o_r_y___p_o_w_e_r___s_t_a_t_e___c_h_a_r_a_c_t_e_r800ef381fbf0728431a1ad274adf89b5.html#acf41bdfc1777915c5f1e95918be811cb", null ],
+    [ "PowerStateStructureID", "struct_e_f_i___a_c_p_i__6__4___m_p_s_t___m_e_m_o_r_y___p_o_w_e_r___s_t_a_t_e___c_h_a_r_a_c_t_e_r800ef381fbf0728431a1ad274adf89b5.html#ae08a9dd503f917acb789c764a97cb5c8", null ],
+    [ "RelativePowerSavingToMPS0", "struct_e_f_i___a_c_p_i__6__4___m_p_s_t___m_e_m_o_r_y___p_o_w_e_r___s_t_a_t_e___c_h_a_r_a_c_t_e_r800ef381fbf0728431a1ad274adf89b5.html#a785bfb97b54854deaf80a547d52eba2d", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__6__4___m_p_s_t___m_e_m_o_r_y___p_o_w_e_r___s_t_a_t_e___c_h_a_r_a_c_t_e_r800ef381fbf0728431a1ad274adf89b5.html#aab3fe5366858355fdca8f14db6e070de", null ]
+];

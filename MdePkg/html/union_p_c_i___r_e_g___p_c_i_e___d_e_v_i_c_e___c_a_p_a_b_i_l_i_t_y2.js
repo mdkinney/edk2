@@ -1,0 +1,26 @@
+var union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2 =
+[
+    [ "AriForwarding", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a8616fbffa2bc92c44c401394e0a28ed9", null ],
+    [ "AtomicOp32Completer", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a7922a4eef3480eece62b875a386b0562", null ],
+    [ "AtomicOp64Completer", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a10611a25e3797cfb48d9cf4be475d0ea", null ],
+    [ "AtomicOpRouting", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a51fe03dd38463db4310ea75cbd751115", null ],
+    [ "Bits", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a7b90eb1cd671c18e0b8b78ee539f1b82", null ],
+    [ "Cas128Completer", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a2853c71114fdd0222d81513bac12ba19", null ],
+    [ "CompletionTimeoutDisable", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a38786b81cabfac6f5170cf903883d187", null ],
+    [ "CompletionTimeoutRanges", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a26eaf1009c9e3eb8c8b89886a555b103", null ],
+    [ "EmergencyPowerReductionInitializationRequired", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#acf05a40b3605aacb9f259e711ebdf4c7", null ],
+    [ "EmergencyPowerReductionSupported", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#ab915de1c1908bc7e4be49a5b4aa7cdbc", null ],
+    [ "EndEndTlpPrefix", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#abc9d593cd0f87ca8ea21041fb2dc6d5c", null ],
+    [ "ExtendedFmtField", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a501132e246276b11f4a2c3f588e86928", null ],
+    [ "FrsSupported", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a6aeb5b1f25a496c6f65b7aaba0545082", null ],
+    [ "LnSystemCLS", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a2a76a9c0a9d2ef93b18231d6cee10fa4", null ],
+    [ "LtrMechanism", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a6721d62ddf3b3c1f9164ba3f18f4f324", null ],
+    [ "MaxEndEndTlpPrefixes", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a92f18620c23b5b181e89d851bf09b667", null ],
+    [ "NoRoEnabledPrPrPassing", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a1cc028f9fdf2c3f36dacfc2ba192cdb8", null ],
+    [ "Obff", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a4f34000714bced68e822b5411d79a9a3", null ],
+    [ "Reserved3", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a3dbef7819fc3c8d9b549819dc5fd35f1", null ],
+    [ "TenBitTagCompleterSupported", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a20d314861edc56e90d0d749c5f9ecc67", null ],
+    [ "TenBitTagRequesterSupported", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#a6a9f93c27dea3c0bef6acf57f7f54a0b", null ],
+    [ "TphCompleter", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#ac95df1e98a2f01e12e751fa64d037316", null ],
+    [ "Uint32", "union_p_c_i___r_e_g___p_c_i_e___d_e_v_i_c_e___c_a_p_a_b_i_l_i_t_y2.html#aa580be384ebbb0b7b1427844511575c3", null ]
+];

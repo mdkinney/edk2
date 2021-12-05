@@ -1,0 +1,25 @@
+var _page_table_8h =
+[
+    [ "PAGE_MAP_AND_DIRECTORY_POINTER", "union_p_a_g_e___m_a_p___a_n_d___d_i_r_e_c_t_o_r_y___p_o_i_n_t_e_r.html", "union_p_a_g_e___m_a_p___a_n_d___d_i_r_e_c_t_o_r_y___p_o_i_n_t_e_r" ],
+    [ "PAGE_TABLE_4K_ENTRY", "union_p_a_g_e___t_a_b_l_e__4_k___e_n_t_r_y.html", "union_p_a_g_e___t_a_b_l_e__4_k___e_n_t_r_y" ],
+    [ "PAGE_TABLE_ENTRY", "union_p_a_g_e___t_a_b_l_e___e_n_t_r_y.html", "union_p_a_g_e___t_a_b_l_e___e_n_t_r_y" ],
+    [ "PAGE_TABLE_1G_ENTRY", "union_p_a_g_e___t_a_b_l_e__1_g___e_n_t_r_y.html", "union_p_a_g_e___t_a_b_l_e__1_g___e_n_t_r_y" ],
+    [ "IA32_PG_P", "_page_table_8h.html#a0e863f5935bed2657f64435ad4adfe42", null ],
+    [ "IA32_PG_PS", "_page_table_8h.html#a3ba0a30beb1d1e1db5b93f9fb60c85bc", null ],
+    [ "IA32_PG_RW", "_page_table_8h.html#a2f878b8d2fff18a243e43010199a9a29", null ],
+    [ "PAGETABLE_ENTRY_MASK", "_page_table_8h.html#a3bf1a5ae37be16e0d6f110a759bb6244", null ],
+    [ "PAGING_1G_ADDRESS_MASK_64", "_page_table_8h.html#af1d3272c0b7a3f21ac0c8ad7bbd8701f", null ],
+    [ "PAGING_1G_ADDRESS_MASK_64", "_page_table_8h.html#af1d3272c0b7a3f21ac0c8ad7bbd8701f", null ],
+    [ "PAGING_2M_ADDRESS_MASK_64", "_page_table_8h.html#a1c7afb4b10195c39da0d86815f06b695", null ],
+    [ "PAGING_4K_ADDRESS_MASK_64", "_page_table_8h.html#a9b7175d9e37e185b91f938b6b582b253", null ],
+    [ "PAGING_L1_ADDRESS_SHIFT", "_page_table_8h.html#a0ae47eb3bff800aa76295dabefd5bbe0", null ],
+    [ "PAGING_L2_ADDRESS_SHIFT", "_page_table_8h.html#a001617a15f56f567768d0b2546e8a5fb", null ],
+    [ "PAGING_L3_ADDRESS_SHIFT", "_page_table_8h.html#a2c9aa5777c74a118ed6a4646e480154d", null ],
+    [ "PAGING_L4_ADDRESS_SHIFT", "_page_table_8h.html#a13746a7ea7f4835050c8b3a4b7e5a603", null ],
+    [ "PAGING_PAE_INDEX_MASK", "_page_table_8h.html#acf2a595fe285578aa0fab9699ccd1fd1", null ],
+    [ "PAGING_PML4E_NUMBER", "_page_table_8h.html#a71a2c1d1a6bf4dc873891568f355902e", null ],
+    [ "PDE_OFFSET", "_page_table_8h.html#afcecf6c399a97c3060f8cceee274bbf6", null ],
+    [ "PDP_OFFSET", "_page_table_8h.html#a6f627f7e7bd73355a1f6aa674262a010", null ],
+    [ "PML4_OFFSET", "_page_table_8h.html#a6c3e4fc325cb500f3609edf21f6bbb51", null ],
+    [ "PTE_OFFSET", "_page_table_8h.html#ae47ac8e38fa6138ba5bb7688086686a1", null ]
+];

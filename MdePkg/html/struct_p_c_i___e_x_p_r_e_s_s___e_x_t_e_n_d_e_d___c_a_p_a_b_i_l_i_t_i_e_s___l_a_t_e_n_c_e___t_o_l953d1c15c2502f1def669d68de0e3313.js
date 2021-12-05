@@ -1,0 +1,6 @@
+var struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___l_a_t_e_n_c_e___t_o_l953d1c15c2502f1def669d68de0e3313 =
+[
+    [ "Header", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___l_a_t_e_n_c_e___t_o_l953d1c15c2502f1def669d68de0e3313.html#a7a071b559712e2735480e02bf1ff9138", null ],
+    [ "MaxNoSnoopLatency", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___l_a_t_e_n_c_e___t_o_l953d1c15c2502f1def669d68de0e3313.html#a812c5eb087ae99b6a671f590fbb1af1c", null ],
+    [ "MaxSnoopLatency", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___l_a_t_e_n_c_e___t_o_l953d1c15c2502f1def669d68de0e3313.html#a362665344d7b87f8b2eb5b8f62a153a8", null ]
+];

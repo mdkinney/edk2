@@ -1,0 +1,47 @@
+var xs__wire_8h =
+[
+    [ "xsd_errors", "structxsd__errors.html", "structxsd__errors" ],
+    [ "xsd_sockmsg", "structxsd__sockmsg.html", "structxsd__sockmsg" ],
+    [ "xenstore_domain_interface", "structxenstore__domain__interface.html", "structxenstore__domain__interface" ],
+    [ "MASK_XENSTORE_IDX", "xs__wire_8h.html#a921eba3040f0437c6c60fb668f9a6090", null ],
+    [ "XENSTORE_ABS_PATH_MAX", "xs__wire_8h.html#a9651c883d9a4dad69ab024b41906d46b", null ],
+    [ "XENSTORE_CONNECTED", "xs__wire_8h.html#a489d3e1e8bcb0daa12f7ff73b74277ea", null ],
+    [ "XENSTORE_PAYLOAD_MAX", "xs__wire_8h.html#aad14d63c7ef73ebfb3cc2829d801d679", null ],
+    [ "XENSTORE_RECONNECT", "xs__wire_8h.html#a903e6be308f1dc5d204229860f3be9bd", null ],
+    [ "XENSTORE_REL_PATH_MAX", "xs__wire_8h.html#ac65ed0d49e2fd2e9de319aed5dd84949", null ],
+    [ "XENSTORE_RING_SIZE", "xs__wire_8h.html#a2a46788f1f173e4d2cc828e116bdb7f0", null ],
+    [ "XENSTORE_SERVER_FEATURE_RECONNECTION", "xs__wire_8h.html#a6c58a20d1dc723b6ceddf5141f386d41", null ],
+    [ "XS_WRITE_CREATE", "xs__wire_8h.html#a0722818912d55d88d8f35c0e09ee558d", null ],
+    [ "XS_WRITE_CREATE_EXCL", "xs__wire_8h.html#a85b095214fe2b408fec3fbd557931d5b", null ],
+    [ "XS_WRITE_NONE", "xs__wire_8h.html#a0a1ca024a89f924e4b201724f04eecc0", null ],
+    [ "XENSTORE_RING_IDX", "xs__wire_8h.html#aec663ebe15881101fe4a2d93a2e4f8a8", null ],
+    [ "xs_watch_type", "xs__wire_8h.html#a307fda09e05c7ecbc960f3d1e8b71aa5", [
+      [ "XS_WATCH_PATH", "xs__wire_8h.html#a307fda09e05c7ecbc960f3d1e8b71aa5acbab347420592259dcf315e9e97102be", null ],
+      [ "XS_WATCH_TOKEN", "xs__wire_8h.html#a307fda09e05c7ecbc960f3d1e8b71aa5a6e7c86b2aa097ee35261dd4fc373e634", null ]
+    ] ],
+    [ "xsd_sockmsg_type", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8", [
+      [ "XS_DEBUG", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8ab5e90b5edc6d8b1cb257bc59658c8f96", null ],
+      [ "XS_DIRECTORY", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8a49a0596f7b279063935b83fb5ba7df44", null ],
+      [ "XS_READ", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8a671a1d2003bd84c14058425e41e950ea", null ],
+      [ "XS_GET_PERMS", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8ad97be06f67279bc601126035e8169463", null ],
+      [ "XS_WATCH", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8ac2fba9d15bc1193c8ff1f61499a52a12", null ],
+      [ "XS_UNWATCH", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8abf797b9454bd71fdb408929a3ff82e09", null ],
+      [ "XS_TRANSACTION_START", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8a478ef2dd6f3e8741887785cd66559d9d", null ],
+      [ "XS_TRANSACTION_END", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8afbffe61d087ddcb86b07202a53c825fa", null ],
+      [ "XS_INTRODUCE", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8abe4ecf5a6a75b5627f838aa4eb45a7ca", null ],
+      [ "XS_RELEASE", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8a07bff4499880694f0cc221d7948094d4", null ],
+      [ "XS_GET_DOMAIN_PATH", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8a47e6ffbf486baedc82d0a7ef5f226245", null ],
+      [ "XS_WRITE", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8a07f986226bb72cf826e115fbedc73468", null ],
+      [ "XS_MKDIR", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8a119b5a8b98e4b34db9756c0204c5f7c6", null ],
+      [ "XS_RM", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8ad00bad465d8207b43d93b012f8782af5", null ],
+      [ "XS_SET_PERMS", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8adf9ec6842986db8ed24763a099fac054", null ],
+      [ "XS_WATCH_EVENT", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8a5aa0ab6ada142d3b65f363219d35ce52", null ],
+      [ "XS_ERROR", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8a9d4ce4277c8b3779e3a3ee921ee0f921", null ],
+      [ "XS_IS_DOMAIN_INTRODUCED", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8a2c4eb6a97b4ee53ea0ee7527e38b94ac", null ],
+      [ "XS_RESUME", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8a9a481491a212139456abd19a73953d9f", null ],
+      [ "XS_SET_TARGET", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8acdcf759771379e9d0e8f3fca2f76cffb", null ],
+      [ "XS_RESTRICT", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8a0d28151402c283c7f83e85c62f79d2aa", null ],
+      [ "XS_RESET_WATCHES", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8a952ea74382bcd12470722d95f1480343", null ],
+      [ "XS_INVALID", "xs__wire_8h.html#a3072cd916da5717d4bc0b955e3951df8a069d4c0d090d9e350a5fa6a1ba7de4ff", null ]
+    ] ]
+];

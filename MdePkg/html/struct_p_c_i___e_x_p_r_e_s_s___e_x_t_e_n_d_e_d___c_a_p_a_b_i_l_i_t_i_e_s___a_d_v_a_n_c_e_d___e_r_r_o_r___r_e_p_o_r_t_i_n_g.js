@@ -1,0 +1,16 @@
+var struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___a_d_v_a_n_c_e_d___e_r_r_o_r___r_e_p_o_r_t_i_n_g =
+[
+    [ "AdvancedErrorCapabilitiesAndControl", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___a_d_v_a_n_c_e_d___e_r_r_o_r___r_e_p_o_r_t_i_n_g.html#a8bd3b0bc99acd12802f66e4037b732c8", null ],
+    [ "CorrectableErrorMask", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___a_d_v_a_n_c_e_d___e_r_r_o_r___r_e_p_o_r_t_i_n_g.html#ac76211f8be891493ea7a832cfd056b7d", null ],
+    [ "CorrectableErrorSourceIdentification", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___a_d_v_a_n_c_e_d___e_r_r_o_r___r_e_p_o_r_t_i_n_g.html#a2fed698d6624be2e9cb11d2a49fc7bd3", null ],
+    [ "CorrectableErrorStatus", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___a_d_v_a_n_c_e_d___e_r_r_o_r___r_e_p_o_r_t_i_n_g.html#abefa64805edd29bdd35845c8b1bc5e4b", null ],
+    [ "ErrorSourceIdentification", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___a_d_v_a_n_c_e_d___e_r_r_o_r___r_e_p_o_r_t_i_n_g.html#a960ef9e4aa157df64f00c0ea12c3b813", null ],
+    [ "Header", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___a_d_v_a_n_c_e_d___e_r_r_o_r___r_e_p_o_r_t_i_n_g.html#a69333e1d17aae3d705ccfc8bc4cb2f61", null ],
+    [ "HeaderLog", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___a_d_v_a_n_c_e_d___e_r_r_o_r___r_e_p_o_r_t_i_n_g.html#a3b666fa432c6a80945c144a978aff212", null ],
+    [ "RootErrorCommand", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___a_d_v_a_n_c_e_d___e_r_r_o_r___r_e_p_o_r_t_i_n_g.html#af29e4a512bac4e0c5296062a530e7ccd", null ],
+    [ "RootErrorStatus", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___a_d_v_a_n_c_e_d___e_r_r_o_r___r_e_p_o_r_t_i_n_g.html#a2673cf8a93e608da36a1b3c05d6aabe3", null ],
+    [ "TlpPrefixLog", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___a_d_v_a_n_c_e_d___e_r_r_o_r___r_e_p_o_r_t_i_n_g.html#a136f4d89bcb398d75b8646379fbed12c", null ],
+    [ "UncorrectableErrorMask", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___a_d_v_a_n_c_e_d___e_r_r_o_r___r_e_p_o_r_t_i_n_g.html#a50c2b5c99deafff5a067a3d80f7be951", null ],
+    [ "UncorrectableErrorSeverity", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___a_d_v_a_n_c_e_d___e_r_r_o_r___r_e_p_o_r_t_i_n_g.html#aa82ef2f61a13c1a88723aba718b1bc11", null ],
+    [ "UncorrectableErrorStatus", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___a_d_v_a_n_c_e_d___e_r_r_o_r___r_e_p_o_r_t_i_n_g.html#aeefcf57fa15da1c2b8e2fcbfa6cb1e09", null ]
+];

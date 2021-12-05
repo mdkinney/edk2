@@ -1,0 +1,703 @@
+/** \mainpage ShellPkg Package Document
+ This Package provides all definitions for EFI and UEFI Shell<br>
+<br>
+ (C) Copyright 2013-2014 Hewlett-Packard Development Company, L.P.<BR><br>
+ Copyright (c) 2009 - 2018, Intel Corporation. All rights reserved.<BR><br>
+ Copyright (c) 2016 - 2018, ARM Limited. All rights reserved.<BR><br>
+<br>
+ SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>C1014BB7-4092-43D4-984F-0738EB424DBF</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ShellPkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+<li>\subpage protocol_root_page "PROTOCOL" </li>
+</ul>
+ **/
+/** \page ShellPkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_AcpiViewCommandLib "AcpiViewCommandLib" </li>
+<li>\subpage lc_BcfgCommandLib "BcfgCommandLib" </li>
+<li>\subpage lc_HandleParsingLib "HandleParsingLib" </li>
+<li>\subpage lc_ShellCEntryLib "ShellCEntryLib" </li>
+<li>\subpage lc_ShellCommandLib "ShellCommandLib" </li>
+<li>\subpage lc_ShellLib "ShellLib" </li>
+</ul>
+ **/
+/** \page lc_AcpiViewCommandLib AcpiViewCommandLib
+ @libraryclass   provides the AcpiView command<br>
+
+ \section ref Refer to Header File
+\link Include/Library/AcpiViewCommandLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_BcfgCommandLib BcfgCommandLib
+ @libraryclass   provides BCFG command<br>
+
+ \section ref Refer to Header File
+\link Include/Library/BcfgCommandLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_HandleParsingLib HandleParsingLib
+ @libraryclass   Provides advanced parsing functions<br>
+
+ \section ref Refer to Header File
+\link Include/Library/HandleParsingLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_ShellCEntryLib ShellCEntryLib
+ @libraryclass   Allows for a shell application to have a C style entry point<br>
+
+ \section ref Refer to Header File
+\link Include/Library/ShellCEntryLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_ShellCommandLib ShellCommandLib
+  @libraryclass  Provides shell internal support Only available for shell internal commands<br>
+
+ \section ref Refer to Header File
+\link Include/Library/ShellCommandLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_ShellLib ShellLib
+  @libraryclass  Provides most Shell APIs. Only available for Shell applications<br>
+
+ \section ref Refer to Header File
+\link Include/Library/ShellLib.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_root_page "PcdsDynamic" </li>
+<li>\subpage pcd_PcdsDynamicEx_root_page "PcdsDynamicEx" </li>
+<li>\subpage pcd_PcdsFeatureFlag_root_page "PcdsFeatureFlag" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+<li>\subpage pcd_PcdsPatchableInModule_root_page "PcdsPatchableInModule" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_root_page PcdsDynamic
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_PcdShellDecodeIScsiMapNames "gEfiShellPkgTokenSpaceGuid.PcdShellDecodeIScsiMapNames" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdShellInsertModeDefault "gEfiShellPkgTokenSpaceGuid.PcdShellInsertModeDefault" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdShellPageBreakDefault "gEfiShellPkgTokenSpaceGuid.PcdShellPageBreakDefault" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdShellScreenLogCount "gEfiShellPkgTokenSpaceGuid.PcdShellScreenLogCount" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdShellSupplier "gEfiShellPkgTokenSpaceGuid.PcdShellSupplier" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdShellSupportOldProtocols "gEfiShellPkgTokenSpaceGuid.PcdShellSupportOldProtocols" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdShellVendorExtendedDecode "gEfiShellPkgTokenSpaceGuid.PcdShellVendorExtendedDecode" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdUsbExtendedDecode "gEfiShellPkgTokenSpaceGuid.PcdUsbExtendedDecode" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdShellDecodeIScsiMapNames gEfiShellPkgTokenSpaceGuid.PcdShellDecodeIScsiMapNames
+ Do iSCSI decode for map names.<br>
+ This is disabled by default due to the length of generated strings<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellDecodeIScsiMapNames</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000012</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdShellInsertModeDefault gEfiShellPkgTokenSpaceGuid.PcdShellInsertModeDefault
+ this flag determines whether insert mode for typing is default (FALSE means typeover)<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellInsertModeDefault</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000007</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdShellPageBreakDefault gEfiShellPkgTokenSpaceGuid.PcdShellPageBreakDefault
+ this flag determines whether Page Break (-b) defaults to on or off in the shell<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellPageBreakDefault</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000006</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdShellScreenLogCount gEfiShellPkgTokenSpaceGuid.PcdShellScreenLogCount
+ this flag determines the default number of screens kept for history log.<br>
+  the spec defines 3 as the minimum<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellScreenLogCount</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000008</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>3</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdShellSupplier gEfiShellPkgTokenSpaceGuid.PcdShellSupplier
+ Unicode string of the shell supplier<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellSupplier</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000010</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"EDK II"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdShellSupportOldProtocols gEfiShellPkgTokenSpaceGuid.PcdShellSupportOldProtocols
+ This flag is used to control the protocols produced by the shell<br>
+  If TRUE the shell will produce EFI_SHELL_ENVIRONMENT2 and EFI_SHELL_INTERFACE<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellSupportOldProtocols</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000002</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdShellVendorExtendedDecode gEfiShellPkgTokenSpaceGuid.PcdShellVendorExtendedDecode
+ Controls Extended decode for Vendor device path nodes for map names.<br>
+ Up to this many bytes of vendor specific data will be used. Default is 0<br>
+ (disabled).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellVendorExtendedDecode</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000013</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdUsbExtendedDecode gEfiShellPkgTokenSpaceGuid.PcdUsbExtendedDecode
+ Do extended decode of USB for determining media type<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbExtendedDecode</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000011</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_root_page PcdsDynamicEx
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdShellDecodeIScsiMapNames "gEfiShellPkgTokenSpaceGuid.PcdShellDecodeIScsiMapNames" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdShellInsertModeDefault "gEfiShellPkgTokenSpaceGuid.PcdShellInsertModeDefault" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdShellPageBreakDefault "gEfiShellPkgTokenSpaceGuid.PcdShellPageBreakDefault" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdShellScreenLogCount "gEfiShellPkgTokenSpaceGuid.PcdShellScreenLogCount" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdShellSupplier "gEfiShellPkgTokenSpaceGuid.PcdShellSupplier" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdShellSupportOldProtocols "gEfiShellPkgTokenSpaceGuid.PcdShellSupportOldProtocols" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdShellVendorExtendedDecode "gEfiShellPkgTokenSpaceGuid.PcdShellVendorExtendedDecode" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdUsbExtendedDecode "gEfiShellPkgTokenSpaceGuid.PcdUsbExtendedDecode" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdShellDecodeIScsiMapNames gEfiShellPkgTokenSpaceGuid.PcdShellDecodeIScsiMapNames
+ Do iSCSI decode for map names.<br>
+ This is disabled by default due to the length of generated strings<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellDecodeIScsiMapNames</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000012</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdShellInsertModeDefault gEfiShellPkgTokenSpaceGuid.PcdShellInsertModeDefault
+ this flag determines whether insert mode for typing is default (FALSE means typeover)<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellInsertModeDefault</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000007</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdShellPageBreakDefault gEfiShellPkgTokenSpaceGuid.PcdShellPageBreakDefault
+ this flag determines whether Page Break (-b) defaults to on or off in the shell<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellPageBreakDefault</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000006</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdShellScreenLogCount gEfiShellPkgTokenSpaceGuid.PcdShellScreenLogCount
+ this flag determines the default number of screens kept for history log.<br>
+  the spec defines 3 as the minimum<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellScreenLogCount</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000008</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>3</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdShellSupplier gEfiShellPkgTokenSpaceGuid.PcdShellSupplier
+ Unicode string of the shell supplier<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellSupplier</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000010</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"EDK II"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdShellSupportOldProtocols gEfiShellPkgTokenSpaceGuid.PcdShellSupportOldProtocols
+ This flag is used to control the protocols produced by the shell<br>
+  If TRUE the shell will produce EFI_SHELL_ENVIRONMENT2 and EFI_SHELL_INTERFACE<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellSupportOldProtocols</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000002</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdShellVendorExtendedDecode gEfiShellPkgTokenSpaceGuid.PcdShellVendorExtendedDecode
+ Controls Extended decode for Vendor device path nodes for map names.<br>
+ Up to this many bytes of vendor specific data will be used. Default is 0<br>
+ (disabled).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellVendorExtendedDecode</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000013</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdUsbExtendedDecode gEfiShellPkgTokenSpaceGuid.PcdUsbExtendedDecode
+ Do extended decode of USB for determining media type<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbExtendedDecode</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000011</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_root_page PcdsFeatureFlag
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdShellForceConsole "gEfiShellPkgTokenSpaceGuid.PcdShellForceConsole" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdShellIncludeNtGuids "gEfiShellPkgTokenSpaceGuid.PcdShellIncludeNtGuids" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdShellRequireHiiPlatform "gEfiShellPkgTokenSpaceGuid.PcdShellRequireHiiPlatform" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdShellSupportFrameworkHii "gEfiShellPkgTokenSpaceGuid.PcdShellSupportFrameworkHii" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdShellForceConsole gEfiShellPkgTokenSpaceGuid.PcdShellForceConsole
+ This flag forces the shell to present a user console.  Allows for earlier debugging of platforms.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellForceConsole</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000F</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdShellIncludeNtGuids gEfiShellPkgTokenSpaceGuid.PcdShellIncludeNtGuids
+ This flag is used to control whether the shell includes NT32 platform Guids<br>
+  and thereby prevents dependancy on that Pkg<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellIncludeNtGuids</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000E</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdShellRequireHiiPlatform gEfiShellPkgTokenSpaceGuid.PcdShellRequireHiiPlatform
+ This flag is used to control HII required by the shell<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellRequireHiiPlatform</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000003</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdShellSupportFrameworkHii gEfiShellPkgTokenSpaceGuid.PcdShellSupportFrameworkHii
+ This flag is used to control HII required by the shell<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellSupportFrameworkHii</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000004</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdShellDecodeIScsiMapNames "gEfiShellPkgTokenSpaceGuid.PcdShellDecodeIScsiMapNames" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdShellFileOperationSize "gEfiShellPkgTokenSpaceGuid.PcdShellFileOperationSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdShellInsertModeDefault "gEfiShellPkgTokenSpaceGuid.PcdShellInsertModeDefault" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdShellLibAutoInitialize "gEfiShellPkgTokenSpaceGuid.PcdShellLibAutoInitialize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdShellMapNameLength "gEfiShellPkgTokenSpaceGuid.PcdShellMapNameLength" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdShellMaxHistoryCommandCount "gEfiShellPkgTokenSpaceGuid.PcdShellMaxHistoryCommandCount" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdShellPageBreakDefault "gEfiShellPkgTokenSpaceGuid.PcdShellPageBreakDefault" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdShellPrintBufferSize "gEfiShellPkgTokenSpaceGuid.PcdShellPrintBufferSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdShellProfileMask "gEfiShellPkgTokenSpaceGuid.PcdShellProfileMask" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdShellScreenLogCount "gEfiShellPkgTokenSpaceGuid.PcdShellScreenLogCount" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdShellSupplier "gEfiShellPkgTokenSpaceGuid.PcdShellSupplier" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdShellSupportLevel "gEfiShellPkgTokenSpaceGuid.PcdShellSupportLevel" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdShellSupportOldProtocols "gEfiShellPkgTokenSpaceGuid.PcdShellSupportOldProtocols" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdShellVendorExtendedDecode "gEfiShellPkgTokenSpaceGuid.PcdShellVendorExtendedDecode" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdUsbExtendedDecode "gEfiShellPkgTokenSpaceGuid.PcdUsbExtendedDecode" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdShellDecodeIScsiMapNames gEfiShellPkgTokenSpaceGuid.PcdShellDecodeIScsiMapNames
+ Do iSCSI decode for map names.<br>
+ This is disabled by default due to the length of generated strings<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellDecodeIScsiMapNames</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000012</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdShellFileOperationSize gEfiShellPkgTokenSpaceGuid.PcdShellFileOperationSize
+ This determines how many bytes are read out of files at a time for file operations (type, copy, etc...)<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellFileOperationSize</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000A</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x1000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdShellInsertModeDefault gEfiShellPkgTokenSpaceGuid.PcdShellInsertModeDefault
+ this flag determines whether insert mode for typing is default (FALSE means typeover)<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellInsertModeDefault</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000007</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdShellLibAutoInitialize gEfiShellPkgTokenSpaceGuid.PcdShellLibAutoInitialize
+ This flag is used to control initialization of the shell library<br>
+  This should be FALSE for compiling the shell application itself only.<br>
+  This should be FALSE for compiling the dynamic command drivers.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellLibAutoInitialize</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000005</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdShellMapNameLength gEfiShellPkgTokenSpaceGuid.PcdShellMapNameLength
+ This is the character count for allocation for consistent mappings<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellMapNameLength</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000009</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>50</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdShellMaxHistoryCommandCount gEfiShellPkgTokenSpaceGuid.PcdShellMaxHistoryCommandCount
+ This determines the max count of history commands<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellMaxHistoryCommandCount</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000014</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0x0020</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdShellPageBreakDefault gEfiShellPkgTokenSpaceGuid.PcdShellPageBreakDefault
+ this flag determines whether Page Break (-b) defaults to on or off in the shell<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellPageBreakDefault</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000006</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdShellPrintBufferSize gEfiShellPkgTokenSpaceGuid.PcdShellPrintBufferSize
+ This is the max buffer for ShellLib and internal Shell printings.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellPrintBufferSize</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000C</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>16000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdShellProfileMask gEfiShellPkgTokenSpaceGuid.PcdShellProfileMask
+ This flag is used to control the profiles available in the shell<br>
+  don't forget to update the text file if you change this.<br>
+  bit 0 = Drivers1<br>
+  bit 1 = Debug1<br>
+  bit 2 = Install1<br>
+  bit 3 = Network1<br>
+  bit 4 = Network2<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellProfileMask</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000D</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0xFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdShellScreenLogCount gEfiShellPkgTokenSpaceGuid.PcdShellScreenLogCount
+ this flag determines the default number of screens kept for history log.<br>
+  the spec defines 3 as the minimum<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellScreenLogCount</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000008</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>3</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdShellSupplier gEfiShellPkgTokenSpaceGuid.PcdShellSupplier
+ Unicode string of the shell supplier<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellSupplier</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000010</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"EDK II"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdShellSupportLevel gEfiShellPkgTokenSpaceGuid.PcdShellSupportLevel
+ This flag is used to control the commands available in the shell<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellSupportLevel</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000001</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>3</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdShellSupportOldProtocols gEfiShellPkgTokenSpaceGuid.PcdShellSupportOldProtocols
+ This flag is used to control the protocols produced by the shell<br>
+  If TRUE the shell will produce EFI_SHELL_ENVIRONMENT2 and EFI_SHELL_INTERFACE<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellSupportOldProtocols</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000002</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdShellVendorExtendedDecode gEfiShellPkgTokenSpaceGuid.PcdShellVendorExtendedDecode
+ Controls Extended decode for Vendor device path nodes for map names.<br>
+ Up to this many bytes of vendor specific data will be used. Default is 0<br>
+ (disabled).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellVendorExtendedDecode</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000013</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdUsbExtendedDecode gEfiShellPkgTokenSpaceGuid.PcdUsbExtendedDecode
+ Do extended decode of USB for determining media type<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbExtendedDecode</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000011</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_root_page PcdsPatchableInModule
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdShellDecodeIScsiMapNames "gEfiShellPkgTokenSpaceGuid.PcdShellDecodeIScsiMapNames" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdShellInsertModeDefault "gEfiShellPkgTokenSpaceGuid.PcdShellInsertModeDefault" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdShellPageBreakDefault "gEfiShellPkgTokenSpaceGuid.PcdShellPageBreakDefault" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdShellScreenLogCount "gEfiShellPkgTokenSpaceGuid.PcdShellScreenLogCount" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdShellSupplier "gEfiShellPkgTokenSpaceGuid.PcdShellSupplier" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdShellSupportOldProtocols "gEfiShellPkgTokenSpaceGuid.PcdShellSupportOldProtocols" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdShellVendorExtendedDecode "gEfiShellPkgTokenSpaceGuid.PcdShellVendorExtendedDecode" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdUsbExtendedDecode "gEfiShellPkgTokenSpaceGuid.PcdUsbExtendedDecode" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdShellDecodeIScsiMapNames gEfiShellPkgTokenSpaceGuid.PcdShellDecodeIScsiMapNames
+ Do iSCSI decode for map names.<br>
+ This is disabled by default due to the length of generated strings<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellDecodeIScsiMapNames</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000012</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdShellInsertModeDefault gEfiShellPkgTokenSpaceGuid.PcdShellInsertModeDefault
+ this flag determines whether insert mode for typing is default (FALSE means typeover)<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellInsertModeDefault</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000007</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdShellPageBreakDefault gEfiShellPkgTokenSpaceGuid.PcdShellPageBreakDefault
+ this flag determines whether Page Break (-b) defaults to on or off in the shell<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellPageBreakDefault</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000006</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdShellScreenLogCount gEfiShellPkgTokenSpaceGuid.PcdShellScreenLogCount
+ this flag determines the default number of screens kept for history log.<br>
+  the spec defines 3 as the minimum<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellScreenLogCount</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000008</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>3</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdShellSupplier gEfiShellPkgTokenSpaceGuid.PcdShellSupplier
+ Unicode string of the shell supplier<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellSupplier</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000010</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L"EDK II"</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdShellSupportOldProtocols gEfiShellPkgTokenSpaceGuid.PcdShellSupportOldProtocols
+ This flag is used to control the protocols produced by the shell<br>
+  If TRUE the shell will produce EFI_SHELL_ENVIRONMENT2 and EFI_SHELL_INTERFACE<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellSupportOldProtocols</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000002</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdShellVendorExtendedDecode gEfiShellPkgTokenSpaceGuid.PcdShellVendorExtendedDecode
+ Controls Extended decode for Vendor device path nodes for map names.<br>
+ Up to this many bytes of vendor specific data will be used. Default is 0<br>
+ (disabled).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellVendorExtendedDecode</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000013</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdUsbExtendedDecode gEfiShellPkgTokenSpaceGuid.PcdUsbExtendedDecode
+ Do extended decode of USB for determining media type<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbExtendedDecode</CAPTION></TD><TD><CAPTION>gEfiShellPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000011</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gEfiShellEnvironment2ExtGuid "gEfiShellEnvironment2ExtGuid" </li>
+<li>\subpage guid_common_gEfiShellPkgTokenSpaceGuid "gEfiShellPkgTokenSpaceGuid" </li>
+<li>\subpage guid_common_gHandleParsingHiiGuid "gHandleParsingHiiGuid" </li>
+<li>\subpage guid_common_gShellAcpiViewHiiGuid "gShellAcpiViewHiiGuid" </li>
+<li>\subpage guid_common_gShellAliasGuid "gShellAliasGuid" </li>
+<li>\subpage guid_common_gShellBcfgHiiGuid "gShellBcfgHiiGuid" </li>
+<li>\subpage guid_common_gShellDebug1HiiGuid "gShellDebug1HiiGuid" </li>
+<li>\subpage guid_common_gShellDriver1HiiGuid "gShellDriver1HiiGuid" </li>
+<li>\subpage guid_common_gShellHttpHiiGuid "gShellHttpHiiGuid" </li>
+<li>\subpage guid_common_gShellInstall1HiiGuid "gShellInstall1HiiGuid" </li>
+<li>\subpage guid_common_gShellLevel1HiiGuid "gShellLevel1HiiGuid" </li>
+<li>\subpage guid_common_gShellLevel2HiiGuid "gShellLevel2HiiGuid" </li>
+<li>\subpage guid_common_gShellLevel3HiiGuid "gShellLevel3HiiGuid" </li>
+<li>\subpage guid_common_gShellMapGuid "gShellMapGuid" </li>
+<li>\subpage guid_common_gShellNetwork1HiiGuid "gShellNetwork1HiiGuid" </li>
+<li>\subpage guid_common_gShellNetwork2HiiGuid "gShellNetwork2HiiGuid" </li>
+<li>\subpage guid_common_gShellTftpHiiGuid "gShellTftpHiiGuid" </li>
+<li>\subpage guid_common_gShellVariableGuid "gShellVariableGuid" </li>
+<li>\subpage guid_common_gUefiShellFileGuid "gUefiShellFileGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gEfiShellEnvironment2ExtGuid gEfiShellEnvironment2ExtGuid
+ \copydoc ShellPkg/Include/Guid/ShellEnvironment2Ext.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEfiShellEnvironment2ExtGuid</TD><TD>{0xd2c18636, 0x40e5, 0x4eb5, {0xa3, 0x1b, 0x36, 0x69, 0x5f, 0xd4, 0x2c, 0x87}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellEnvironment2Ext.h
+\endlink
+
+ **/
+/** \page guid_common_gEfiShellPkgTokenSpaceGuid gEfiShellPkgTokenSpaceGuid
+ \copydoc ShellPkg/Include/Guid/ShellPkgTokenSpace.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEfiShellPkgTokenSpaceGuid</TD><TD>{0x171e9188, 0x31d3, 0x40f5, {0xb1, 0x0c, 0x53, 0x9b, 0x2d, 0xb9, 0x40, 0xcd}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellPkgTokenSpace.h
+\endlink
+
+ **/
+/** \page guid_common_gHandleParsingHiiGuid gHandleParsingHiiGuid
+ \copydoc ShellPkg/Include/Guid/ShellLibHiiGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gHandleParsingHiiGuid</TD><TD>{0xb8969637, 0x81de, 0x43af, {0xbc, 0x9a, 0x24, 0xd9, 0x89, 0x13, 0xf2, 0xf6}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellLibHiiGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gShellAcpiViewHiiGuid gShellAcpiViewHiiGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gShellAcpiViewHiiGuid</TD><TD>{0xda8ccdf4, 0xed8f, 0x4ffc, {0xb5, 0xef, 0x2e, 0xf5, 0x5e, 0x24, 0x93, 0x2a}}</TD></TR></TABLE>
+ **/
+/** \page guid_common_gShellAliasGuid gShellAliasGuid
+ \copydoc ShellPkg/Include/Guid/ShellAliasGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gShellAliasGuid</TD><TD>{0x0053d9d6, 0x2659, 0x4599, {0xa2, 0x6b, 0xef, 0x45, 0x36, 0xe6, 0x31, 0xa9}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellAliasGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gShellBcfgHiiGuid gShellBcfgHiiGuid
+ \copydoc ShellPkg/Include/Guid/ShellLibHiiGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gShellBcfgHiiGuid</TD><TD>{0x5f5f605d, 0x1583, 0x4a2d, {0xa6, 0xb2, 0xeb, 0x12, 0xda, 0xb4, 0xa2, 0xb6}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellLibHiiGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gShellDebug1HiiGuid gShellDebug1HiiGuid
+ \copydoc ShellPkg/Include/Guid/ShellLibHiiGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gShellDebug1HiiGuid</TD><TD>{0x25f200aa, 0xd3cb, 0x470a, {0xbf, 0x51, 0xe7, 0xd1, 0x62, 0xd2, 0x2e, 0x6f}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellLibHiiGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gShellDriver1HiiGuid gShellDriver1HiiGuid
+ \copydoc ShellPkg/Include/Guid/ShellLibHiiGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gShellDriver1HiiGuid</TD><TD>{0xaf0b742, 0x63ec, 0x45bd, {0x8d, 0xb6, 0x71, 0xad, 0x7f, 0x2f, 0xe8, 0xe8}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellLibHiiGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gShellHttpHiiGuid gShellHttpHiiGuid
+ \copydoc ShellPkg/Include/Guid/ShellLibHiiGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gShellHttpHiiGuid</TD><TD>{0x390f84b3, 0x221c, 0x4d9e, {0xb5, 0x06, 0x6d, 0xb9, 0x42, 0x3e, 0x0a, 0x7e}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellLibHiiGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gShellInstall1HiiGuid gShellInstall1HiiGuid
+ \copydoc ShellPkg/Include/Guid/ShellLibHiiGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gShellInstall1HiiGuid</TD><TD>{0x7d574d54, 0xd364, 0x4d4a, {0x95, 0xe3, 0x49, 0x45, 0xdb, 0x7a, 0xd3, 0xee}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellLibHiiGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gShellLevel1HiiGuid gShellLevel1HiiGuid
+ \copydoc ShellPkg/Include/Guid/ShellLibHiiGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gShellLevel1HiiGuid</TD><TD>{0xdec5daa4, 0x6781, 0x4820, {0x9c, 0x63, 0xa7, 0xb0, 0xe4, 0xf1, 0xdb, 0x31}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellLibHiiGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gShellLevel2HiiGuid gShellLevel2HiiGuid
+ \copydoc ShellPkg/Include/Guid/ShellLibHiiGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gShellLevel2HiiGuid</TD><TD>{0xf95a7ccc, 0x4c55, 0x4426, {0xa7, 0xb4, 0xdc, 0x89, 0x61, 0x95, 0xb, 0xae}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellLibHiiGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gShellLevel3HiiGuid gShellLevel3HiiGuid
+ \copydoc ShellPkg/Include/Guid/ShellLibHiiGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gShellLevel3HiiGuid</TD><TD>{0x4344558d, 0x4ef9, 0x4725, {0xb1, 0xe4, 0x33, 0x76, 0xe8, 0xd6, 0x97, 0x4f}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellLibHiiGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gShellMapGuid gShellMapGuid
+ \copydoc ShellPkg/Include/Guid/ShellMapGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gShellMapGuid</TD><TD>{0x51271e13, 0x7de3, 0x43af, {0x8b, 0xc2, 0x71, 0xad, 0x3b, 0x82, 0x43, 0x25}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellMapGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gShellNetwork1HiiGuid gShellNetwork1HiiGuid
+ \copydoc ShellPkg/Include/Guid/ShellLibHiiGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gShellNetwork1HiiGuid</TD><TD>{0xf3d301bb, 0xf4a5, 0x45a8, {0xb0, 0xb7, 0xfa, 0x99, 0x9c, 0x62, 0x37, 0xae}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellLibHiiGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gShellNetwork2HiiGuid gShellNetwork2HiiGuid
+ \copydoc ShellPkg/Include/Guid/ShellLibHiiGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gShellNetwork2HiiGuid</TD><TD>{0x174b2b5, 0xf505, 0x4b12, {0xaa, 0x60, 0x59, 0xdf, 0xf8, 0xd6, 0xea, 0x37}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellLibHiiGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gShellTftpHiiGuid gShellTftpHiiGuid
+ \copydoc ShellPkg/Include/Guid/ShellLibHiiGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gShellTftpHiiGuid</TD><TD>{0x738a9314, 0x82c1, 0x4592, {0x8f, 0xf7, 0xc1, 0xbd, 0xf1, 0xb2, 0x0e, 0xd4}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellLibHiiGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gShellVariableGuid gShellVariableGuid
+ \copydoc ShellPkg/Include/Guid/ShellVariableGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gShellVariableGuid</TD><TD>{0x158def5a, 0xf656, 0x419c, {0xb0, 0x27, 0x7a, 0x31, 0x92, 0xc0, 0x79, 0xd2}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Guid/ShellVariableGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gUefiShellFileGuid gUefiShellFileGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gUefiShellFileGuid</TD><TD>{0x7c04a583, 0x9e3e, 0x4f1c, {0xad, 0x65, 0xe0, 0x52, 0x68, 0xd0, 0xb4, 0xd1}}</TD></TR></TABLE>
+ **/
+/** \page protocol_root_page PROTOCOL
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page protocol_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_page_gEfiShellEnvironment2Guid "gEfiShellEnvironment2Guid" </li>
+<li>\subpage protocol_page_gEfiShellInterfaceGuid "gEfiShellInterfaceGuid" </li>
+</ul>
+ **/
+/** \page protocol_page_gEfiShellEnvironment2Guid gEfiShellEnvironment2Guid
+ \copydoc ShellPkg/Include/Protocol/EfiShellEnvironment2.h <br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEfiShellEnvironment2Guid</TD><TD>{0x47c7b221, 0xc42a, 0x11d2, {0x8e, 0x57, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Protocol/EfiShellEnvironment2.h
+\endlink
+
+ **/
+/** \page protocol_page_gEfiShellInterfaceGuid gEfiShellInterfaceGuid
+ \copydoc ShellPkg/Include/Protocol/EfiShellInterface.h <br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEfiShellInterfaceGuid</TD><TD>{0x47c7b223, 0xc42a, 0x11d2, {0x8e, 0x57, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ShellPkg/Include/Protocol/EfiShellInterface.h
+\endlink
+
+ **/

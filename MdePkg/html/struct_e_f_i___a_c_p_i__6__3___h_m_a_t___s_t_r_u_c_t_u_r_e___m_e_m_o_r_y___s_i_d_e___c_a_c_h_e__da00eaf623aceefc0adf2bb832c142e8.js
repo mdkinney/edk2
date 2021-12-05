@@ -1,0 +1,8 @@
+var struct_e_f_i___a_c_p_i__6__3___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___s_i_d_e___c_a_c_h_e__da00eaf623aceefc0adf2bb832c142e8 =
+[
+    [ "CacheAssociativity", "struct_e_f_i___a_c_p_i__6__3___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___s_i_d_e___c_a_c_h_e__da00eaf623aceefc0adf2bb832c142e8.html#af922bfc4eefd4c6ed3110d222188c705", null ],
+    [ "CacheLevel", "struct_e_f_i___a_c_p_i__6__3___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___s_i_d_e___c_a_c_h_e__da00eaf623aceefc0adf2bb832c142e8.html#aeb9360fc8c3774d0bc3c7c38f37f1542", null ],
+    [ "CacheLineSize", "struct_e_f_i___a_c_p_i__6__3___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___s_i_d_e___c_a_c_h_e__da00eaf623aceefc0adf2bb832c142e8.html#ae633f6f6cef3b8069605a6d7e0a97ab2", null ],
+    [ "TotalCacheLevels", "struct_e_f_i___a_c_p_i__6__3___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___s_i_d_e___c_a_c_h_e__da00eaf623aceefc0adf2bb832c142e8.html#aa918232d91ed509340a51371993d6a3c", null ],
+    [ "WritePolicy", "struct_e_f_i___a_c_p_i__6__3___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___s_i_d_e___c_a_c_h_e__da00eaf623aceefc0adf2bb832c142e8.html#a81ce7c96f1c7ce21c5dc31e5a967272e", null ]
+];

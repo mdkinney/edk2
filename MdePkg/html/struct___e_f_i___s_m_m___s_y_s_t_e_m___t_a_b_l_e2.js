@@ -1,0 +1,28 @@
+var struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2 =
+[
+    [ "CpuSaveState", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#a42718ed75b1d26f3c7a42601c12f6099", null ],
+    [ "CpuSaveStateSize", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#a901980b0fb2162d28e5d820cb2d1d143", null ],
+    [ "CurrentlyExecutingCpu", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#ad0f23e1bb9e678fb5facd181fff1135f", null ],
+    [ "Hdr", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#a93724f90c112f8ed31c645c673d73e50", null ],
+    [ "NumberOfCpus", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#addc3f91f4ef9bbbe5a5de1bd70d75249", null ],
+    [ "NumberOfTableEntries", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#aaf1ab353d748110546831a3c355b9102", null ],
+    [ "SmiHandlerRegister", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#ac393c3eef983e833cee8bf73a954d8de", null ],
+    [ "SmiHandlerUnRegister", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#a3ed289550ef91742db5de8ec7ee0077f", null ],
+    [ "SmiManage", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#aec5ba9ee95f0b457e47b6b6159a31603", null ],
+    [ "SmmAllocatePages", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#acebfc2be177e1110f721b7044dfe8633", null ],
+    [ "SmmAllocatePool", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#ae45ef4836a36e1f3d8feed04eb73cad8", null ],
+    [ "SmmConfigurationTable", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#abfcb81cb008cb27050507df4a91fa7c7", null ],
+    [ "SmmFirmwareRevision", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#aa3b61679c91cb4fbcfdf1f6307848562", null ],
+    [ "SmmFirmwareVendor", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#ac785843ccf19f3e830901ab56d5e1d63", null ],
+    [ "SmmFreePages", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#a05d4aaeb52644430b763b9aa8989c297", null ],
+    [ "SmmFreePool", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#a0463c987a28972716e371a8330f5b247", null ],
+    [ "SmmHandleProtocol", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#af503b5d53a5e04ed04985f9ceb66a99b", null ],
+    [ "SmmInstallConfigurationTable", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#a09bbdd06cfaae98739620d76c2b54d1a", null ],
+    [ "SmmInstallProtocolInterface", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#a43f4e1b057b05c6c4f623f1e5a0b92bd", null ],
+    [ "SmmIo", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#a2f1ae23c453b1f02dd2a9aeb76925306", null ],
+    [ "SmmLocateHandle", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#ab3e18f1218cdcf9c45aad5c833df8a0a", null ],
+    [ "SmmLocateProtocol", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#abf17b023b1dcb3a8df7d9b8dd9f1ab6d", null ],
+    [ "SmmRegisterProtocolNotify", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#a9874b30eb8c1a50cce3d49c3569cf55b", null ],
+    [ "SmmStartupThisAp", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#a7ab5ea389ecc4bfc0e265392098b0745", null ],
+    [ "SmmUninstallProtocolInterface", "struct___e_f_i___s_m_m___s_y_s_t_e_m___t_a_b_l_e2.html#a070a6c5d720b4c84ebc77c0d49511acb", null ]
+];

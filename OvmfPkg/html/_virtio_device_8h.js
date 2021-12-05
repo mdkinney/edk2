@@ -1,0 +1,37 @@
+var _virtio_device_8h =
+[
+    [ "_VIRTIO_DEVICE_PROTOCOL", "struct___v_i_r_t_i_o___d_e_v_i_c_e___p_r_o_t_o_c_o_l.html", "struct___v_i_r_t_i_o___d_e_v_i_c_e___p_r_o_t_o_c_o_l" ],
+    [ "VIRTIO_DEVICE_PROTOCOL_GUID", "_virtio_device_8h.html#a0e175eb8ef0b4465749856ede620b39a", null ],
+    [ "VIRTIO_SPEC_REVISION", "_virtio_device_8h.html#a47557f83dd8011c4934465b9b523e0da", null ],
+    [ "Alignment", "_virtio_device_8h.html#a4efbabfe720373ccf918999d9dfccfcd", null ],
+    [ "Buffer", "_virtio_device_8h.html#a24d77a6e98922a6659db41fafc44560f", null ],
+    [ "BufferSize", "_virtio_device_8h.html#a6c4622c42086bd4633e8ee262358220b", null ],
+    [ "DeviceAddress", "_virtio_device_8h.html#a4c40563baf4c5d7426229bf2f160b455", null ],
+    [ "DeviceFeatures", "_virtio_device_8h.html#a4001bbcbde995b1a3b7cd3d2e7d492e7", null ],
+    [ "DeviceStatus", "_virtio_device_8h.html#acf6cf224405aec9423207ca1d9c54b31", null ],
+    [ "Features", "_virtio_device_8h.html#a75886259cb3cff9e3884279807834c1d", null ],
+    [ "FieldOffset", "_virtio_device_8h.html#acf54a53fd49ce8820d1b04c795abcf29", null ],
+    [ "FieldSize", "_virtio_device_8h.html#a68c81326afc504b9e1a0cb4b2596964e", null ],
+    [ "HostAddress", "_virtio_device_8h.html#a7304d074ddc5990804d4b68e2434255e", null ],
+    [ "Index", "_virtio_device_8h.html#a6251296ffd662374e3398b01de09e35e", null ],
+    [ "Mapping", "_virtio_device_8h.html#a286147d373e39bf0562dc60dbfbba621", null ],
+    [ "NumberOfBytes", "_virtio_device_8h.html#a03b101dd0e307d46720705ec087cb0c0", null ],
+    [ "Operation", "_virtio_device_8h.html#a55423277e6c247f85eb6d4721576fef1", null ],
+    [ "PageSize", "_virtio_device_8h.html#a36c7442cb739e139b0da2bb3b4ea638e", null ],
+    [ "QueueNumMax", "_virtio_device_8h.html#a8badce9a67deae108e7e74f5449dcb23", null ],
+    [ "QueueSize", "_virtio_device_8h.html#ab65154637eaaf40f80aafbff39931bb1", null ],
+    [ "Ring", "_virtio_device_8h.html#a2f00e71da7561b92d4924692680bd38c", null ],
+    [ "RingBaseShift", "_virtio_device_8h.html#a4576ce15790aff63b8880dc9f2badcdd", null ],
+    [ "Value", "_virtio_device_8h.html#ab6fbbcd0f26087b3614e24064a140cf8", null ],
+    [ "VIRTIO_ALLOCATE_SHARED", "_virtio_device_8h.html#a86c54399920df7febd77c83c15f1e241", null ],
+    [ "VIRTIO_DEVICE_PROTOCOL", "_virtio_device_8h.html#ab6aacc5a49a155b55afafd5bec754c84", null ],
+    [ "VIRTIO_FREE_SHARED", "_virtio_device_8h.html#adf9c4580a8c735a9d3a27b948665c2c1", null ],
+    [ "VIRTIO_UNMAP_SHARED", "_virtio_device_8h.html#a15dd4bdacad847975f92d5e087016f3b", null ],
+    [ "VIRTIO_MAP_OPERATION", "_virtio_device_8h.html#aa4ac52e19518658dbdaaf279ab7ea8ef", [
+      [ "VirtioOperationBusMasterRead", "_virtio_device_8h.html#aa4ac52e19518658dbdaaf279ab7ea8eface12f5d490b1eb3896ca51b09806d1cc", null ],
+      [ "VirtioOperationBusMasterWrite", "_virtio_device_8h.html#aa4ac52e19518658dbdaaf279ab7ea8efad920b207c717eac1693b5aa10fa46216", null ],
+      [ "VirtioOperationBusMasterCommonBuffer", "_virtio_device_8h.html#aa4ac52e19518658dbdaaf279ab7ea8efa565131f3676e81b2ab880823f43754c9", null ]
+    ] ],
+    [ "EFI_STATUS", "_virtio_device_8h.html#a74d7020e18780b17f5f8ca0573b29482", null ],
+    [ "gVirtioDeviceProtocolGuid", "_virtio_device_8h.html#a19d08245f781c5670832cc938cad6fd1", null ]
+];

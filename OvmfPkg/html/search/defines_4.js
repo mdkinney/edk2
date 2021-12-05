@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['data_5fsize_5f16',['DATA_SIZE_16',['../_protocol_2_legacy_bios_8h.html#a850200241c2c13be07ed89cb08719a8b',1,'LegacyBios.h']]],
+  ['data_5fsize_5f32',['DATA_SIZE_32',['../_protocol_2_legacy_bios_8h.html#aa6ba52ab66b392f5dbe846a67ce61264',1,'LegacyBios.h']]],
+  ['data_5fsize_5f64',['DATA_SIZE_64',['../_protocol_2_legacy_bios_8h.html#ab9cd2af2866c92fda4020613a9a3a64e',1,'LegacyBios.h']]],
+  ['data_5fsize_5f8',['DATA_SIZE_8',['../_protocol_2_legacy_bios_8h.html#a66660fd245007e727374b6f8e941efd7',1,'LegacyBios.h']]],
+  ['define_5fring_5ftypes',['DEFINE_RING_TYPES',['../ring_8h.html#a42df24686fde4d5825a69e2b3503ef82',1,'ring.h']]],
+  ['define_5fxen_5fguest_5fhandle',['DEFINE_XEN_GUEST_HANDLE',['../arch-x86_2xen_8h.html#ae74e9f15fb9a0b53b9d10a529b84e121',1,'DEFINE_XEN_GUEST_HANDLE():&#160;xen.h'],['../arch-arm_2xen_8h.html#ae74e9f15fb9a0b53b9d10a529b84e121',1,'DEFINE_XEN_GUEST_HANDLE():&#160;xen.h']]],
+  ['device_5fparallel_5fmode_5fmode_5fbidirectional',['DEVICE_PARALLEL_MODE_MODE_BIDIRECTIONAL',['../_protocol_2_legacy_bios_8h.html#a49f360809897e6a4d24694ef030c6587',1,'LegacyBios.h']]],
+  ['device_5fparallel_5fmode_5fmode_5fecp',['DEVICE_PARALLEL_MODE_MODE_ECP',['../_protocol_2_legacy_bios_8h.html#a8f721ba0367b7a8bfd472ffcf73f022d',1,'LegacyBios.h']]],
+  ['device_5fparallel_5fmode_5fmode_5fepp',['DEVICE_PARALLEL_MODE_MODE_EPP',['../_protocol_2_legacy_bios_8h.html#a92713ca03de75bbcf588731fdace980d',1,'LegacyBios.h']]],
+  ['device_5fparallel_5fmode_5fmode_5foutput_5fonly',['DEVICE_PARALLEL_MODE_MODE_OUTPUT_ONLY',['../_protocol_2_legacy_bios_8h.html#a89fe809b981f48dd913e379575de287c',1,'LegacyBios.h']]],
+  ['device_5fserial_5fmode_5fask_5fir',['DEVICE_SERIAL_MODE_ASK_IR',['../_protocol_2_legacy_bios_8h.html#aa7926836fe8ec47a2e65190c350a0281',1,'LegacyBios.h']]],
+  ['device_5fserial_5fmode_5fduplex_5ffull',['DEVICE_SERIAL_MODE_DUPLEX_FULL',['../_protocol_2_legacy_bios_8h.html#a970371e2cf8cec344175b4797a6cb638',1,'LegacyBios.h']]],
+  ['device_5fserial_5fmode_5fduplex_5fhalf',['DEVICE_SERIAL_MODE_DUPLEX_HALF',['../_protocol_2_legacy_bios_8h.html#aa674b16f372c7f8c4bcc38cc1c0e62bb',1,'LegacyBios.h']]],
+  ['device_5fserial_5fmode_5firda',['DEVICE_SERIAL_MODE_IRDA',['../_protocol_2_legacy_bios_8h.html#a257a310f7f92b034f1e9bd6ebe0e3b57',1,'LegacyBios.h']]],
+  ['device_5fserial_5fmode_5fnormal',['DEVICE_SERIAL_MODE_NORMAL',['../_protocol_2_legacy_bios_8h.html#a7737824364f7c9296b7968bf59fcf423',1,'LegacyBios.h']]],
+  ['dmi_5fpnp_5f50_5f57',['DMI_PNP_50_57',['../_protocol_2_legacy_bios_8h.html#ae27e5c1d1dd07783c3b00a5f58c2b5ec',1,'LegacyBios.h']]],
+  ['domid_5fcow',['DOMID_COW',['../xen_8h.html#a51650c6e893bd06faf62c96c33d939d2',1,'xen.h']]],
+  ['domid_5ffirst_5freserved',['DOMID_FIRST_RESERVED',['../xen_8h.html#a9ac49a47125b5244077355a3cf2ec397',1,'xen.h']]],
+  ['domid_5fidle',['DOMID_IDLE',['../xen_8h.html#a346001069dbc3dacc7e34443b8b712b1',1,'xen.h']]],
+  ['domid_5finvalid',['DOMID_INVALID',['../xen_8h.html#a14f066e67f10f6b886886a3befdfe6be',1,'xen.h']]],
+  ['domid_5fio',['DOMID_IO',['../xen_8h.html#ab0d934a6f32a8feb76959586dd66418c',1,'xen.h']]],
+  ['domid_5fself',['DOMID_SELF',['../xen_8h.html#a632d71fe6315d8b3dfcc2cad373fb7ec',1,'xen.h']]],
+  ['domid_5fxen',['DOMID_XEN',['../xen_8h.html#a4a604fcd4144dbd998b76cca7600d081',1,'xen.h']]],
+  ['dramc_5fregister_5fq35',['DRAMC_REGISTER_Q35',['../_q35_mch_ich9_8h.html#aa7531e6cad39cf80564124cb44a7ec00',1,'Q35MchIch9.h']]]
+];

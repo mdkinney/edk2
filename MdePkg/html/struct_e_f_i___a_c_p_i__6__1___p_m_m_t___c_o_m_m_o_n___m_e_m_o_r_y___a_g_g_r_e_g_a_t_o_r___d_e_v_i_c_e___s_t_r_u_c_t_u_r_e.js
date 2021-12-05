@@ -1,0 +1,8 @@
+var struct_e_f_i___a_c_p_i__6__1___p_m_m_t___c_o_m_m_o_n___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e =
+[
+    [ "Flags", "struct_e_f_i___a_c_p_i__6__1___p_m_m_t___c_o_m_m_o_n___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e.html#ad6f51c5ee77d466bc34379f5ab48f683", null ],
+    [ "Length", "struct_e_f_i___a_c_p_i__6__1___p_m_m_t___c_o_m_m_o_n___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e.html#a2033e13fe3d05baef57e91e7271c8c40", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__6__1___p_m_m_t___c_o_m_m_o_n___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e.html#ac4090017f5c093de506d24b1c50231be", null ],
+    [ "Reserved1", "struct_e_f_i___a_c_p_i__6__1___p_m_m_t___c_o_m_m_o_n___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e.html#aa45cafe28cf7ffaffdc4d1ef56b7337c", null ],
+    [ "Type", "struct_e_f_i___a_c_p_i__6__1___p_m_m_t___c_o_m_m_o_n___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e.html#ad6a9524cab17728b8f0942db4a9e820c", null ]
+];

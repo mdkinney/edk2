@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['v0_5f9_5f5',['V0_9_5',['../struct_v_i_r_t_i_o__1__0___n_e_t___r_e_q.html#afc9baaefec35b783162469720c697229',1,'VIRTIO_1_0_NET_REQ']]],
+  ['valid',['Valid',['../struct_v_i_r_t_i_o___f_s___f_u_s_e___s_e_t_a_t_t_r___r_e_q_u_e_s_t.html#a6366cd47c937d90ce79bbae844788162',1,'VIRTIO_FS_FUSE_SETATTR_REQUEST']]],
+  ['value',['value',['../structxen__hvm__param.html#a89025b36f96ccd598b55fe018c995900',1,'xen_hvm_param::value()'],['../struct_f_r_a_m_e_w_o_r_k___e_f_i___i_f_r___o_n_e___o_f___o_p_t_i_o_n.html#a5e90813c3490e7d0af37f28dcb9d64f5',1,'FRAMEWORK_EFI_IFR_ONE_OF_OPTION::Value()'],['../struct_e_f_i___i_f_r___h_i_d_d_e_n.html#a703ddd1248b65b920fcd3b42903460af',1,'EFI_IFR_HIDDEN::Value()'],['../struct_f_r_a_m_e_w_o_r_k___e_f_i___i_f_r___e_q___i_d___v_a_l.html#a763a91cc148093d8fbc3d393307cc5e9',1,'FRAMEWORK_EFI_IFR_EQ_ID_VAL::Value()'],['../struct_e_f_i___i_f_r___e_q___v_a_r___v_a_l.html#a9148edeb794bc5d6b0d4ddf7f011d46b',1,'EFI_IFR_EQ_VAR_VAL::Value()']]],
+  ['valuelist',['ValueList',['../struct_f_r_a_m_e_w_o_r_k___e_f_i___i_f_r___e_q___i_d___l_i_s_t.html#a93db135d119624fabebdbd6643f1b3ff',1,'FRAMEWORK_EFI_IFR_EQ_ID_LIST']]],
+  ['variableid',['VariableId',['../struct_e_f_i___i_f_r___e_q___v_a_r___v_a_l.html#a702edd2fda08e3d0dc9a6ae865e893ec',1,'EFI_IFR_EQ_VAR_VAL']]],
+  ['varid',['VarId',['../struct_f_r_a_m_e_w_o_r_k___e_f_i___i_f_r___v_a_r_s_t_o_r_e.html#a9faf47eda2286c6ef80465798a04639d',1,'FRAMEWORK_EFI_IFR_VARSTORE::VarId()'],['../struct_e_f_i___i_f_r___v_a_r_s_t_o_r_e___s_e_l_e_c_t.html#a1e81e92e044f227a4b1066f26e640b45',1,'EFI_IFR_VARSTORE_SELECT::VarId()'],['../struct_e_f_i___i_f_r___v_a_r_s_t_o_r_e___s_e_l_e_c_t___p_a_i_r.html#a076cf863d5d313b7628ce3b90888f5b2',1,'EFI_IFR_VARSTORE_SELECT_PAIR::VarId()']]],
+  ['vbe3',['Vbe3',['../struct_v_b_e___m_o_d_e___i_n_f_o.html#ae87f9c3cd3362bf53c75ae8e75ed2daa',1,'VBE_MODE_INFO::Vbe3()'],['../struct_v_b_e2___m_o_d_e___i_n_f_o.html#ab0fcaf36633ee049243bcb0eabd185a9',1,'VBE2_MODE_INFO::Vbe3()']]],
+  ['vccount',['VcCount',['../struct_s_e_v___e_s___p_e_r___c_p_u___d_a_t_a.html#aa738472eeeff6c9df51e9a32bd4e1901',1,'SEV_ES_PER_CPU_DATA']]],
+  ['vcpuhint',['VcpuHint',['../struct_p_v_s_c_s_i___r_i_n_g___r_e_q___d_e_s_c.html#ad459565343437f483490a8f987b72d8c',1,'PVSCSI_RING_REQ_DESC']]],
+  ['vcpuinfo',['VcpuInfo',['../structshared__info.html#af03583053eb22e186d9bb4a6886aa804',1,'shared_info']]],
+  ['vendorhdr',['VendorHdr',['../struct_q_e_m_u___p_c_i___b_r_i_d_g_e___c_a_p_a_b_i_l_i_t_y___h_d_r.html#a160a07faeca50104c58237185463fab1',1,'QEMU_PCI_BRIDGE_CAPABILITY_HDR::VendorHdr()'],['../struct_v_i_r_t_i_o___p_c_i___c_a_p.html#a9351698d2778177baa51481799ff736c',1,'VIRTIO_PCI_CAP::VendorHdr()']]],
+  ['vendornameaddress',['VendorNameAddress',['../struct_v_b_e___i_n_f_o___b_a_s_e.html#a8e27e28814377faa63abbb92f4f6bbcd',1,'VBE_INFO_BASE']]],
+  ['version',['Version',['../structvcpu__time__info.html#a05f9fa4d68256cb0374de9acfc76a0d3',1,'vcpu_time_info::Version()'],['../struct_p_c_i___c_a_p___i_n_f_o.html#aec9b7394e7ba317e6e18a7f87ccf9c08',1,'PCI_CAP_INFO::Version()'],['../structsetup__header.html#a89e178af382693736d3297241a44af0d',1,'setup_header::version()'],['../structhvm__start__info.html#a6921a06872753bbdb03830b128ac8319',1,'hvm_start_info::version()']]],
+  ['versionmajor',['VersionMajor',['../struct_e_f_i___x_e_n___i_n_f_o.html#a0428edc0fcca39d3f9e1462e10ab419a',1,'EFI_XEN_INFO']]],
+  ['versionminor',['VersionMinor',['../struct_e_f_i___x_e_n___i_n_f_o.html#aad6ccebca120e3fcd72b6e6187fa8888',1,'EFI_XEN_INFO']]],
+  ['vesa_5fattributes',['vesa_attributes',['../structscreen__info.html#adc48cd799019013c99589a0fc392dc4c',1,'screen_info']]],
+  ['vesapm_5foff',['vesapm_off',['../structscreen__info.html#a9b247ffd156f3e85c289e648a5ccdb13',1,'screen_info']]],
+  ['vesapm_5fseg',['vesapm_seg',['../structscreen__info.html#a790106feee92c9996b4b967ffebb84ce',1,'screen_info']]],
+  ['vesaversion',['VesaVersion',['../struct_v_b_e___i_n_f_o___b_a_s_e.html#ac754e469b876c7616aa9d014d0c3b9c3',1,'VBE_INFO_BASE']]],
+  ['vgamemorybar',['VgaMemoryBar',['../struct___e_f_i___v_g_a___m_i_n_i___p_o_r_t___p_r_o_t_o_c_o_l.html#a8165667f93da976bf4ffd3abc6e75826',1,'_EFI_VGA_MINI_PORT_PROTOCOL']]],
+  ['vgamemoryoffset',['VgaMemoryOffset',['../struct___e_f_i___v_g_a___m_i_n_i___p_o_r_t___p_r_o_t_o_c_o_l.html#aaa3f01501a42cdfbdbbf88ca45d2c555',1,'_EFI_VGA_MINI_PORT_PROTOCOL']]],
+  ['video_5fmode',['video_mode',['../structsetup__header.html#a983051d1ac830b935b1b3a543a28de90',1,'setup_header']]],
+  ['videomem64k',['VideoMem64K',['../struct_v_b_e___i_n_f_o___b_a_s_e.html#ac2eea3a1d602a3e221b8481346a49184',1,'VBE_INFO_BASE']]],
+  ['vm',['VM',['../struct_e_f_i___e_f_l_a_g_s___r_e_g.html#a2feb80166f91b229a868fd334ad25bb3',1,'EFI_EFLAGS_REG']]]
+];

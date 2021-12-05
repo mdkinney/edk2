@@ -1,0 +1,28 @@
+var _ipmi_net_fn_bridge_8h =
+[
+    [ "IPMI_BRIDGE_CLEAR_STATISTICS", "_ipmi_net_fn_bridge_8h.html#a12230b2f8077b4c948eca1ad7fdebfa8", null ],
+    [ "IPMI_BRIDGE_GET_ADDRESSES", "_ipmi_net_fn_bridge_8h.html#a49d59ce6d0f85c71ca8181570b0e6c00", null ],
+    [ "IPMI_BRIDGE_GET_BRIDGE_STATISTICS", "_ipmi_net_fn_bridge_8h.html#a29bd2766eefb3a98f298f2d45ebc456f", null ],
+    [ "IPMI_BRIDGE_GET_CHASSIS_DEVICEID", "_ipmi_net_fn_bridge_8h.html#a44b44197c590a9491c0e4f650432e962", null ],
+    [ "IPMI_BRIDGE_GET_EVENT_COUNT", "_ipmi_net_fn_bridge_8h.html#a47fc1450700e8b45491ac6656612f2ef", null ],
+    [ "IPMI_BRIDGE_GET_ICMB_ADDRESS", "_ipmi_net_fn_bridge_8h.html#aeeb4ee773a92d445629922cb6dae189b", null ],
+    [ "IPMI_BRIDGE_GET_ICMB_CAPABILITIES", "_ipmi_net_fn_bridge_8h.html#acd85f18d8dbd0410f85e64c1a61b1d97", null ],
+    [ "IPMI_BRIDGE_GET_ICMB_CONNECTION_ID", "_ipmi_net_fn_bridge_8h.html#aabe63eff1e3df20189a0c9f9f58b8816", null ],
+    [ "IPMI_BRIDGE_GET_ICMB_CONNECTOR_INFO", "_ipmi_net_fn_bridge_8h.html#a7e70c1ffde848ba7738b6fd4f3604d54", null ],
+    [ "IPMI_BRIDGE_GET_PROXY_ADDRESS", "_ipmi_net_fn_bridge_8h.html#a665499eba64be35cf0a3b22ae2c30f9c", null ],
+    [ "IPMI_BRIDGE_GET_STATE", "_ipmi_net_fn_bridge_8h.html#ac5d32bea77d09dbd0ca8f8dec7a56f62", null ],
+    [ "IPMI_BRIDGE_MESSAGE", "_ipmi_net_fn_bridge_8h.html#a32733d6b3a89242dbd621c17d3b30a17", null ],
+    [ "IPMI_BRIDGE_PREPARE_FOR_DISCOVERY", "_ipmi_net_fn_bridge_8h.html#a81f2c77cf85923e7efb42f0e3d14bdc4", null ],
+    [ "IPMI_BRIDGE_REQUEST", "_ipmi_net_fn_bridge_8h.html#aec66519a7b2b2cc4fb1f5321936e34f3", null ],
+    [ "IPMI_BRIDGE_SEND_ICMB_CONNECTION_ID", "_ipmi_net_fn_bridge_8h.html#a84b0772862d92ce6c0a2b376dd25aeaf", null ],
+    [ "IPMI_BRIDGE_SEND_ICMB_EVENT_MESSAGE", "_ipmi_net_fn_bridge_8h.html#a765aee92f2948c124728faeb5270ab4e", null ],
+    [ "IPMI_BRIDGE_SET_CHASSIS_DEVICEID", "_ipmi_net_fn_bridge_8h.html#ac88a44494266cf0037f0d1b24b31a826", null ],
+    [ "IPMI_BRIDGE_SET_DISCOVERED", "_ipmi_net_fn_bridge_8h.html#a96134a9b0ac0fb7a858af67894a4b1ac", null ],
+    [ "IPMI_BRIDGE_SET_EVENT_DESTINATION", "_ipmi_net_fn_bridge_8h.html#adb380303ef693391b04696bb8fb78bd5", null ],
+    [ "IPMI_BRIDGE_SET_EVENT_RECEPTION_STATE", "_ipmi_net_fn_bridge_8h.html#a81257c13b309853cd9161ba14649a887", null ],
+    [ "IPMI_BRIDGE_SET_EVENT_RECEPTION_STATE", "_ipmi_net_fn_bridge_8h.html#a81257c13b309853cd9161ba14649a887", null ],
+    [ "IPMI_BRIDGE_SET_ICMB_ADDRESS", "_ipmi_net_fn_bridge_8h.html#a9ed54b0438e8cae221acfd156a13568e", null ],
+    [ "IPMI_BRIDGE_SET_PROXY_ADDRESS", "_ipmi_net_fn_bridge_8h.html#ad3e17c12caa52de810bb955aabc09f94", null ],
+    [ "IPMI_BRIDGE_SET_STATE", "_ipmi_net_fn_bridge_8h.html#a4e6b6ed6c9266fd61cbd38368a9a27d5", null ],
+    [ "IPMI_NETFN_BRIDGE", "_ipmi_net_fn_bridge_8h.html#a04690f763477d51948c4ebf38c6be5d1", null ]
+];

@@ -1,0 +1,15 @@
+var searchData=
+[
+  ['rangemax',['RangeMax',['../struct_s_c_m_i___p_e_r_f_o_r_m_a_n_c_e___l_i_m_i_t_s.html#a27d0d5ed5cee22af589ae9d5c61acd31',1,'SCMI_PERFORMANCE_LIMITS']]],
+  ['rangemin',['RangeMin',['../struct_s_c_m_i___p_e_r_f_o_r_m_a_n_c_e___l_i_m_i_t_s.html#ac4a3fd58020fa1c43243f5efb4de5e06',1,'SCMI_PERFORMANCE_LIMITS']]],
+  ['rate',['Rate',['../struct_s_c_m_i___c_l_o_c_k___r_a_t_e___d_i_s_c_r_e_t_e.html#ad2cb44c7b8f330329241f55cee84ab4e',1,'SCMI_CLOCK_RATE_DISCRETE']]],
+  ['rateget',['RateGet',['../struct___s_c_m_i___c_l_o_c_k___p_r_o_t_o_c_o_l.html#afa761021b1f832ce0813d11378494436',1,'_SCMI_CLOCK_PROTOCOL::RateGet()'],['../struct___s_c_m_i___c_l_o_c_k2___p_r_o_t_o_c_o_l.html#adb91e765bdb510fe1fcae1538d6fa005',1,'_SCMI_CLOCK2_PROTOCOL::RateGet()']]],
+  ['ratelimit',['RateLimit',['../struct_s_c_m_i___p_e_r_f_o_r_m_a_n_c_e___d_o_m_a_i_n___a_t_t_r_i_b_u_t_e_s.html#a0f7c100586e6430c9bcffcd6be40a831',1,'SCMI_PERFORMANCE_DOMAIN_ATTRIBUTES']]],
+  ['rateset',['RateSet',['../struct___s_c_m_i___c_l_o_c_k___p_r_o_t_o_c_o_l.html#a3609f5620be4c277f25d014a6884d98c',1,'_SCMI_CLOCK_PROTOCOL::RateSet()'],['../struct___s_c_m_i___c_l_o_c_k2___p_r_o_t_o_c_o_l.html#a3ed7e76599b39055df5e246bccb6597d',1,'_SCMI_CLOCK2_PROTOCOL::RateSet()']]],
+  ['reserved',['Reserved',['../union_c_s_s_e_l_r___d_a_t_a.html#a089c3b729235121f988f7fa487472a62',1,'CSSELR_DATA::Reserved()'],['../union_c_c_s_i_d_r___d_a_t_a.html#a93319be7efcd8963baa4bf49d3308e72',1,'CCSIDR_DATA::Reserved()'],['../union_c_c_s_i_d_r2___d_a_t_a.html#ae21283c1f3458e0aa9778b44969b20ea',1,'CCSIDR2_DATA::Reserved()']]],
+  ['reserved1',['Reserved1',['../union_c_c_s_i_d_r___d_a_t_a.html#a8be7626db1e4b5cd6a518d594e37031d',1,'CCSIDR_DATA::Reserved1()'],['../struct_m_t_l___m_a_i_l_b_o_x.html#a3694f77bba3abe667538b10b29f346f9',1,'MTL_MAILBOX::Reserved1()']]],
+  ['reserved2',['Reserved2',['../union_c_c_s_i_d_r___d_a_t_a.html#abc3c79d686985d67274fe372d906fbd2',1,'CCSIDR_DATA::Reserved2()'],['../struct_m_t_l___m_a_i_l_b_o_x.html#aa7ad7431878e390c20c183b11eb42a4f',1,'MTL_MAILBOX::Reserved2()']]],
+  ['return',['Return',['../struct_o_p_t_e_e___m_e_s_s_a_g_e___a_r_g.html#a50af57569fb55d01a760e28b4b01d56c',1,'OPTEE_MESSAGE_ARG::Return()'],['../struct_o_p_t_e_e___o_p_e_n___s_e_s_s_i_o_n___a_r_g.html#a77ecfadbc715431317582aacdcdc0c77',1,'OPTEE_OPEN_SESSION_ARG::Return()'],['../struct_o_p_t_e_e___i_n_v_o_k_e___f_u_n_c_t_i_o_n___a_r_g.html#aa0d81ab7eadc1a1129d01affcc52ce47',1,'OPTEE_INVOKE_FUNCTION_ARG::Return()']]],
+  ['returnorigin',['ReturnOrigin',['../struct_o_p_t_e_e___m_e_s_s_a_g_e___a_r_g.html#aca4781bae0e6edc6361720dcd0fb4e9d',1,'OPTEE_MESSAGE_ARG::ReturnOrigin()'],['../struct_o_p_t_e_e___o_p_e_n___s_e_s_s_i_o_n___a_r_g.html#a3b8e7416c9d0d111d2b7c2efc8956c2a',1,'OPTEE_OPEN_SESSION_ARG::ReturnOrigin()'],['../struct_o_p_t_e_e___i_n_v_o_k_e___f_u_n_c_t_i_o_n___a_r_g.html#a346d2a66ffbd8e4f52ed39a2a21bcf79',1,'OPTEE_INVOKE_FUNCTION_ARG::ReturnOrigin()']]],
+  ['revision',['Revision',['../struct_a_r_m___p_r_o_c_e_s_s_o_r___t_a_b_l_e___h_e_a_d_e_r.html#aee9d599be79e40867455041093ec2d7f',1,'ARM_PROCESSOR_TABLE_HEADER']]]
+];

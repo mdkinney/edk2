@@ -1,0 +1,5 @@
+var struct_e_f_i___a_c_p_i__6__3___h_m_a_t___s_t_r_u_c_t_u_r_e___s_y_s_t_e_m___l_o_c_a_l_i_t_y___l_aa70c2ea2bbcdd00d5c4fa94369120076 =
+[
+    [ "MemoryHierarchy", "struct_e_f_i___a_c_p_i__6__3___h_m_a_t___s_t_r_u_c_t_u_r_e___s_y_s_t_e_m___l_o_c_a_l_i_t_y___l_aa70c2ea2bbcdd00d5c4fa94369120076.html#a424021d37baa78e3381a9dad3a44a426", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__6__3___h_m_a_t___s_t_r_u_c_t_u_r_e___s_y_s_t_e_m___l_o_c_a_l_i_t_y___l_aa70c2ea2bbcdd00d5c4fa94369120076.html#a43be090bc8eed86d086be5c1b8c4521f", null ]
+];

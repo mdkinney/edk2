@@ -1,0 +1,28 @@
+var struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g =
+[
+    [ "AvailableSpare", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#a2782b83d3d4f625e47fdddc4b148f89e", null ],
+    [ "AvailableSpareThreshold", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#a2c203ef67af705f1f3113358f701076c", null ],
+    [ "CompositeTemp", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#afc62fbdd6f7510b3947f3914a7a0da03", null ],
+    [ "ControllerBusyTime", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#ac20e6406a7122723a653997077b2938d", null ],
+    [ "CriticalCompositeTemperatureTime", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#a2af42fca91c31700ffd0cc07a54f495d", null ],
+    [ "CriticalWarningAvailableSpare", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#a586ef144a133b831e6eae555dbc9a1d6", null ],
+    [ "CriticalWarningMediaReadOnly", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#a1c53579ca77085b82ad37434bf79ada6", null ],
+    [ "CriticalWarningReliability", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#afe30822489a97e93b3014243e1eb45d8", null ],
+    [ "CriticalWarningReserved", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#aa6565d38a2d0c3975a24d2357808e208", null ],
+    [ "CriticalWarningTemperature", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#a5deda9b50d90c68714f7c755b776e5af", null ],
+    [ "CriticalWarningVolatileBackup", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#a9283131980c91c2248a56ad7e2239d7b", null ],
+    [ "DataUnitsRead", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#aaf290a55a5551b19a197fa1da53183a1", null ],
+    [ "DataUnitsWritten", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#a3c029bddd2be13f24825587914843a00", null ],
+    [ "HostReadCommands", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#af50af6c5a50614d29a68d4c5223cdc8d", null ],
+    [ "HostWriteCommands", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#acdbfc32150c39860b8899389b3df108d", null ],
+    [ "MediaAndDataIntegrityErrors", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#a4cdd3dbe2b4e0c0c3878ff1e2bd61ca3", null ],
+    [ "NumberErrorInformationLogEntries", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#a6b6033c4326fb29022ee71384a8efabb", null ],
+    [ "PercentageUsed", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#aa4f9c3fbee13262a76a80d3744dc37b9", null ],
+    [ "PowerCycles", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#a11ee20d0c824c17ea93cf99494c008d4", null ],
+    [ "PowerOnHours", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#a1280ae1f949aa1a94481f20305b6ab0b", null ],
+    [ "Reserved1", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#a67afc992b52107df2b08064944535016", null ],
+    [ "Reserved2", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#a05e90631833d1331ccda5c2eafd095ac", null ],
+    [ "TemperatureSensor", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#a6963fd4be7ec0fae69c6f602687bb7cf", null ],
+    [ "UnsafeShutdowns", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#affbd96642701c545434bf4251d4320fb", null ],
+    [ "WarningCompositeTemperatureTime", "struct_n_v_m_e___s_m_a_r_t___h_e_a_l_t_h___i_n_f_o___l_o_g.html#ab19aa01b063ebe332ecdc85ceec7bfc2", null ]
+];

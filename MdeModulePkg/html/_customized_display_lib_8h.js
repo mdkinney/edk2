@@ -1,0 +1,25 @@
+var _customized_display_lib_8h =
+[
+    [ "ClearDisplayPage", "_customized_display_lib_8h.html#a43240885237d8235e41e7cb1818c3adb", null ],
+    [ "ClearLines", "_customized_display_lib_8h.html#aaa9001c6f6e023d5a5b07de658b57120", null ],
+    [ "ConfirmDataChange", "_customized_display_lib_8h.html#a00eff3add2b11f385abe56f3003f05ac", null ],
+    [ "CreateDialog", "_customized_display_lib_8h.html#a609a546609bcbb337cdcdff0f4a8c876", null ],
+    [ "DisplayPageFrame", "_customized_display_lib_8h.html#ad5cf2684f4724ef9bcc05041a4017b37", null ],
+    [ "FormExitPolicy", "_customized_display_lib_8h.html#ae621d838d3127e53a4a039ab83c17030", null ],
+    [ "FormExitTimeout", "_customized_display_lib_8h.html#a1e0bc3bc6fab55b1f88401ac61104a85", null ],
+    [ "GetArrowColor", "_customized_display_lib_8h.html#a8d1c3b4e4f970c5c7b4133d3223092b7", null ],
+    [ "GetFieldTextColor", "_customized_display_lib_8h.html#a9fbca5b9897b58655cfee52c4cc21503", null ],
+    [ "GetGrayedTextColor", "_customized_display_lib_8h.html#a2a0c009d5cfff00aee0a59c69560f0be", null ],
+    [ "GetHelpTextColor", "_customized_display_lib_8h.html#ab547ef59c34e566ea959fef1d1e85705", null ],
+    [ "GetHighlightTextColor", "_customized_display_lib_8h.html#ab5f8024760180f5037b0523d588b5f1e", null ],
+    [ "GetInfoTextColor", "_customized_display_lib_8h.html#acb53f865a901167ee61ce322881664c7", null ],
+    [ "GetPickListColor", "_customized_display_lib_8h.html#ac68824e9d4145872ce31a6c166027aac", null ],
+    [ "GetPopupColor", "_customized_display_lib_8h.html#a5cb8c89f0efec608fa9ce8345e19d3ac", null ],
+    [ "GetPopupInverseColor", "_customized_display_lib_8h.html#a58bea1c4066c115c634eecc24912b2d3", null ],
+    [ "GetSubTitleTextColor", "_customized_display_lib_8h.html#a719d6a6d20cffac4eff5dbb526586c6f", null ],
+    [ "PrintCharAt", "_customized_display_lib_8h.html#a95693d988f4d8296905602fefa2738c7", null ],
+    [ "PrintStringAt", "_customized_display_lib_8h.html#a73e7bb18d15e1e7e1a734c4a6f921acb", null ],
+    [ "PrintStringAtWithWidth", "_customized_display_lib_8h.html#a6681c5e4cf74c0904cb791e1abbb946b", null ],
+    [ "RefreshKeyHelp", "_customized_display_lib_8h.html#a21a457eee1dfe0333ab80a86d1cde082", null ],
+    [ "UpdateStatusBar", "_customized_display_lib_8h.html#a6e972ecb62dfc0ca28d0522fcadc6247", null ]
+];

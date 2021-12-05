@@ -1,0 +1,385 @@
+/** \mainpage ArmPlatformPkg Package Document
+<br>
+  Copyright (c) 2011-2021, ARM Limited. All rights reserved.<br>
+  Copyright (c) 2015, Intel Corporation. All rights reserved.<br>
+<br>
+  SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>3308e0a0-1d94-11e0-915c-0002a5d5c51b</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ArmPlatformPkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+</ul>
+ **/
+/** \page ArmPlatformPkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_ArmPlatformLib "ArmPlatformLib" </li>
+<li>\subpage lc_LcdHwLib "LcdHwLib" </li>
+<li>\subpage lc_LcdPlatformLib "LcdPlatformLib" </li>
+<li>\subpage lc_NorFlashPlatformLib "NorFlashPlatformLib" </li>
+<li>\subpage lc_PL011UartClockLib "PL011UartClockLib" </li>
+<li>\subpage lc_PL011UartLib "PL011UartLib" </li>
+</ul>
+ **/
+/** \page lc_ArmPlatformLib ArmPlatformLib
+  @libraryclass  Provides an interface to query platform information.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/ArmPlatformLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_LcdHwLib LcdHwLib
+  @libraryclass  Provides an interface to initialize/shutdown a LCD screen.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/LcdHwLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_LcdPlatformLib LcdPlatformLib
+  @libraryclass  Provides an interface to configure a LCD screen.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/LcdPlatformLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_NorFlashPlatformLib NorFlashPlatformLib
+  @libraryclass  Provides a Nor flash interface.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/NorFlashPlatformLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_PL011UartClockLib PL011UartClockLib
+  @libraryclass  Provides an interface to the clock of a PL011 device.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/PL011UartClockLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_PL011UartLib PL011UartLib
+  @libraryclass  Provides an interface to a PL011 uart.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/PL011UartLib.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_root_page "PcdsDynamic" </li>
+<li>\subpage pcd_PcdsFeatureFlag_root_page "PcdsFeatureFlag" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_root_page PcdsDynamic
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_PcdPL031RtcBase "gArmPlatformTokenSpaceGuid.PcdPL031RtcBase" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdPL031RtcPpmAccuracy "gArmPlatformTokenSpaceGuid.PcdPL031RtcPpmAccuracy" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdWatchdogCount "gArmPlatformTokenSpaceGuid.PcdWatchdogCount" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPL031RtcBase gArmPlatformTokenSpaceGuid.PcdPL031RtcBase
+ PL031 RealTimeClock<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPL031RtcBase</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000024</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPL031RtcPpmAccuracy gArmPlatformTokenSpaceGuid.PcdPL031RtcPpmAccuracy
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPL031RtcPpmAccuracy</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000022</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>300000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdWatchdogCount gArmPlatformTokenSpaceGuid.PcdWatchdogCount
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdWatchdogCount</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000033</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_root_page PcdsFeatureFlag
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdGopDisableOnExitBootServices "gArmPlatformTokenSpaceGuid.PcdGopDisableOnExitBootServices" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdNorFlashCheckBlockLocked "gArmPlatformTokenSpaceGuid.PcdNorFlashCheckBlockLocked" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdSendSgiToBringUpSecondaryCores "gArmPlatformTokenSpaceGuid.PcdSendSgiToBringUpSecondaryCores" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdGopDisableOnExitBootServices gArmPlatformTokenSpaceGuid.PcdGopDisableOnExitBootServices
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGopDisableOnExitBootServices</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000003D</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdNorFlashCheckBlockLocked gArmPlatformTokenSpaceGuid.PcdNorFlashCheckBlockLocked
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdNorFlashCheckBlockLocked</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000003C</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdSendSgiToBringUpSecondaryCores gArmPlatformTokenSpaceGuid.PcdSendSgiToBringUpSecondaryCores
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSendSgiToBringUpSecondaryCores</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000004</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdArmHdLcdBase "gArmPlatformTokenSpaceGuid.PcdArmHdLcdBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdArmHdLcdSwapBlueRedSelect "gArmPlatformTokenSpaceGuid.PcdArmHdLcdSwapBlueRedSelect" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdArmLcdDdrFrameBufferBase "gArmPlatformTokenSpaceGuid.PcdArmLcdDdrFrameBufferBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdArmLcdDdrFrameBufferSize "gArmPlatformTokenSpaceGuid.PcdArmLcdDdrFrameBufferSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdArmMaliDpBase "gArmPlatformTokenSpaceGuid.PcdArmMaliDpBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdArmMaliDpMemoryRegionLength "gArmPlatformTokenSpaceGuid.PcdArmMaliDpMemoryRegionLength" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdClusterCount "gArmPlatformTokenSpaceGuid.PcdClusterCount" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCoreCount "gArmPlatformTokenSpaceGuid.PcdCoreCount" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCPUCorePrimaryStackSize "gArmPlatformTokenSpaceGuid.PcdCPUCorePrimaryStackSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCPUCoreSecondaryStackSize "gArmPlatformTokenSpaceGuid.PcdCPUCoreSecondaryStackSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCPUCoresStackBase "gArmPlatformTokenSpaceGuid.PcdCPUCoresStackBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdGopPixelFormat "gArmPlatformTokenSpaceGuid.PcdGopPixelFormat" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPL031RtcBase "gArmPlatformTokenSpaceGuid.PcdPL031RtcBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPL031RtcPpmAccuracy "gArmPlatformTokenSpaceGuid.PcdPL031RtcPpmAccuracy" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPL061GpioBase "gArmPlatformTokenSpaceGuid.PcdPL061GpioBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPL111LcdBase "gArmPlatformTokenSpaceGuid.PcdPL111LcdBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSerialDbgRegisterBase "gArmPlatformTokenSpaceGuid.PcdSerialDbgRegisterBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSerialDbgUartBaudRate "gArmPlatformTokenSpaceGuid.PcdSerialDbgUartBaudRate" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSerialDbgUartClkInHz "gArmPlatformTokenSpaceGuid.PcdSerialDbgUartClkInHz" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSP805WatchdogBase "gArmPlatformTokenSpaceGuid.PcdSP805WatchdogBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSP805WatchdogClockFrequencyInHz "gArmPlatformTokenSpaceGuid.PcdSP805WatchdogClockFrequencyInHz" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSP805WatchdogInterrupt "gArmPlatformTokenSpaceGuid.PcdSP805WatchdogInterrupt" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSystemMemoryUefiRegionSize "gArmPlatformTokenSpaceGuid.PcdSystemMemoryUefiRegionSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdWatchdogCount "gArmPlatformTokenSpaceGuid.PcdWatchdogCount" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PL011UartClkInHz "gArmPlatformTokenSpaceGuid.PL011UartClkInHz" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PL011UartFractional "gArmPlatformTokenSpaceGuid.PL011UartFractional" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PL011UartInteger "gArmPlatformTokenSpaceGuid.PL011UartInteger" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PL011UartInterrupt "gArmPlatformTokenSpaceGuid.PL011UartInterrupt" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PL011UartRegOffsetVariant "gArmPlatformTokenSpaceGuid.PL011UartRegOffsetVariant" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdArmHdLcdBase gArmPlatformTokenSpaceGuid.PcdArmHdLcdBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmHdLcdBase</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000027</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdArmHdLcdSwapBlueRedSelect gArmPlatformTokenSpaceGuid.PcdArmHdLcdSwapBlueRedSelect
+ If set, this will swap settings for HDLCD RED_SELECT and BLUE_SELECT registers<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmHdLcdSwapBlueRedSelect</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000045</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdArmLcdDdrFrameBufferBase gArmPlatformTokenSpaceGuid.PcdArmLcdDdrFrameBufferBase
+ If set, framebuffer memory will be reserved and mapped in the system RAM<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmLcdDdrFrameBufferBase</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000044</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdArmLcdDdrFrameBufferSize gArmPlatformTokenSpaceGuid.PcdArmLcdDdrFrameBufferSize
+ Default size for display modes upto 1920x1080 (1920 * 1080 * 4 Bytes Per Pixel)<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmLcdDdrFrameBufferSize</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000043</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x7E9000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdArmMaliDpBase gArmPlatformTokenSpaceGuid.PcdArmMaliDpBase
+ ARM Mali Display Processor DP500/DP550/DP650<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmMaliDpBase</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000050</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdArmMaliDpMemoryRegionLength gArmPlatformTokenSpaceGuid.PcdArmMaliDpMemoryRegionLength
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmMaliDpMemoryRegionLength</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000051</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdClusterCount gArmPlatformTokenSpaceGuid.PcdClusterCount
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdClusterCount</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000038</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>1</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCoreCount gArmPlatformTokenSpaceGuid.PcdCoreCount
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCoreCount</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000039</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>1</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCPUCorePrimaryStackSize gArmPlatformTokenSpaceGuid.PcdCPUCorePrimaryStackSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCPUCorePrimaryStackSize</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000037</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x10000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCPUCoreSecondaryStackSize gArmPlatformTokenSpaceGuid.PcdCPUCoreSecondaryStackSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCPUCoreSecondaryStackSize</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000A</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x1000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCPUCoresStackBase gArmPlatformTokenSpaceGuid.PcdCPUCoresStackBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCPUCoresStackBase</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000009</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdGopPixelFormat gArmPlatformTokenSpaceGuid.PcdGopPixelFormat
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGopPixelFormat</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000040</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000001</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPL031RtcBase gArmPlatformTokenSpaceGuid.PcdPL031RtcBase
+ PL031 RealTimeClock<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPL031RtcBase</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000024</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPL031RtcPpmAccuracy gArmPlatformTokenSpaceGuid.PcdPL031RtcPpmAccuracy
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPL031RtcPpmAccuracy</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000022</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>300000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPL061GpioBase gArmPlatformTokenSpaceGuid.PcdPL061GpioBase
+ PL061 GPIO<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPL061GpioBase</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000025</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPL111LcdBase gArmPlatformTokenSpaceGuid.PcdPL111LcdBase
+ PL111 Lcd & HdLcd<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPL111LcdBase</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000026</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSerialDbgRegisterBase gArmPlatformTokenSpaceGuid.PcdSerialDbgRegisterBase
+ PL011 Serial Debug UART<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSerialDbgRegisterBase</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000030</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSerialDbgUartBaudRate gArmPlatformTokenSpaceGuid.PcdSerialDbgUartBaudRate
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSerialDbgUartBaudRate</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000031</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSerialDbgUartClkInHz gArmPlatformTokenSpaceGuid.PcdSerialDbgUartClkInHz
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSerialDbgUartClkInHz</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000032</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSP805WatchdogBase gArmPlatformTokenSpaceGuid.PcdSP805WatchdogBase
+ SP805 Watchdog<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSP805WatchdogBase</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000023</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSP805WatchdogClockFrequencyInHz gArmPlatformTokenSpaceGuid.PcdSP805WatchdogClockFrequencyInHz
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSP805WatchdogClockFrequencyInHz</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000021</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>32000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSP805WatchdogInterrupt gArmPlatformTokenSpaceGuid.PcdSP805WatchdogInterrupt
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSP805WatchdogInterrupt</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000002E</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSystemMemoryUefiRegionSize gArmPlatformTokenSpaceGuid.PcdSystemMemoryUefiRegionSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSystemMemoryUefiRegionSize</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000015</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x08000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdWatchdogCount gArmPlatformTokenSpaceGuid.PcdWatchdogCount
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdWatchdogCount</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000033</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PL011UartClkInHz gArmPlatformTokenSpaceGuid.PL011UartClkInHz
+ PL011 UART<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PL011UartClkInHz</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001F</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>24000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PL011UartFractional gArmPlatformTokenSpaceGuid.PL011UartFractional
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PL011UartFractional</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000002D</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PL011UartInteger gArmPlatformTokenSpaceGuid.PL011UartInteger
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PL011UartInteger</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000020</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PL011UartInterrupt gArmPlatformTokenSpaceGuid.PL011UartInterrupt
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PL011UartInterrupt</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000002F</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PL011UartRegOffsetVariant gArmPlatformTokenSpaceGuid.PL011UartRegOffsetVariant
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PL011UartRegOffsetVariant</CAPTION></TD><TD><CAPTION>gArmPlatformTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000003E</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gArmPlatformTokenSpaceGuid "gArmPlatformTokenSpaceGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gArmPlatformTokenSpaceGuid gArmPlatformTokenSpaceGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gArmPlatformTokenSpaceGuid</TD><TD>{ 0x9c0aaed4, 0x74c5, 0x4043, { 0xb4, 0x17, 0xa3, 0x22, 0x38, 0x14, 0xce, 0x76 } }</TD></TR></TABLE>
+ **/

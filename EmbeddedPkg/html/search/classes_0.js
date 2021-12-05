@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['_5fandroid_5fbootimg_5fprotocol',['_ANDROID_BOOTIMG_PROTOCOL',['../struct___a_n_d_r_o_i_d___b_o_o_t_i_m_g___p_r_o_t_o_c_o_l.html',1,'']]],
+  ['_5fefi_5fhardware_5finterrupt2_5fprotocol',['_EFI_HARDWARE_INTERRUPT2_PROTOCOL',['../struct___e_f_i___h_a_r_d_w_a_r_e___i_n_t_e_r_r_u_p_t2___p_r_o_t_o_c_o_l.html',1,'']]],
+  ['_5fefi_5fhardware_5finterrupt_5fprotocol',['_EFI_HARDWARE_INTERRUPT_PROTOCOL',['../struct___e_f_i___h_a_r_d_w_a_r_e___i_n_t_e_r_r_u_p_t___p_r_o_t_o_c_o_l.html',1,'']]],
+  ['_5fefi_5fmmc_5fhost_5fprotocol',['_EFI_MMC_HOST_PROTOCOL',['../struct___e_f_i___m_m_c___h_o_s_t___p_r_o_t_o_c_o_l.html',1,'']]],
+  ['_5fembedded_5fexternal_5fdevice',['_EMBEDDED_EXTERNAL_DEVICE',['../struct___e_m_b_e_d_d_e_d___e_x_t_e_r_n_a_l___d_e_v_i_c_e.html',1,'']]],
+  ['_5fembedded_5fgpio',['_EMBEDDED_GPIO',['../struct___e_m_b_e_d_d_e_d___g_p_i_o.html',1,'']]],
+  ['_5fembedded_5fgpio_5fppi',['_EMBEDDED_GPIO_PPI',['../struct___e_m_b_e_d_d_e_d___g_p_i_o___p_p_i.html',1,'']]],
+  ['_5ffastboot_5fplatform_5fprotocol',['_FASTBOOT_PLATFORM_PROTOCOL',['../struct___f_a_s_t_b_o_o_t___p_l_a_t_f_o_r_m___p_r_o_t_o_c_o_l.html',1,'']]],
+  ['_5ffastboot_5ftransport_5fprotocol',['_FASTBOOT_TRANSPORT_PROTOCOL',['../struct___f_a_s_t_b_o_o_t___t_r_a_n_s_p_o_r_t___p_r_o_t_o_c_o_l.html',1,'']]],
+  ['_5ffdt_5fclient_5fprotocol',['_FDT_CLIENT_PROTOCOL',['../struct___f_d_t___c_l_i_e_n_t___p_r_o_t_o_c_o_l.html',1,'']]],
+  ['_5fgpio_5fcontroller',['_GPIO_CONTROLLER',['../struct___g_p_i_o___c_o_n_t_r_o_l_l_e_r.html',1,'']]],
+  ['_5fpe_5fcoff_5floader_5fprotocol',['_PE_COFF_LOADER_PROTOCOL',['../struct___p_e___c_o_f_f___l_o_a_d_e_r___p_r_o_t_o_c_o_l.html',1,'']]],
+  ['_5fplatform_5fboot_5fmanager_5fprotocol',['_PLATFORM_BOOT_MANAGER_PROTOCOL',['../struct___p_l_a_t_f_o_r_m___b_o_o_t___m_a_n_a_g_e_r___p_r_o_t_o_c_o_l.html',1,'']]],
+  ['_5fplatform_5fgpio_5fcontroller',['_PLATFORM_GPIO_CONTROLLER',['../struct___p_l_a_t_f_o_r_m___g_p_i_o___c_o_n_t_r_o_l_l_e_r.html',1,'']]],
+  ['_5fplatform_5fvirtual_5fkbd_5fprotocol',['_PLATFORM_VIRTUAL_KBD_PROTOCOL',['../struct___p_l_a_t_f_o_r_m___v_i_r_t_u_a_l___k_b_d___p_r_o_t_o_c_o_l.html',1,'']]],
+  ['_5fusb_5fdevice_5fprotocol',['_USB_DEVICE_PROTOCOL',['../struct___u_s_b___d_e_v_i_c_e___p_r_o_t_o_c_o_l.html',1,'']]],
+  ['_5fvirtual_5fkbd_5fkey',['_VIRTUAL_KBD_KEY',['../struct___v_i_r_t_u_a_l___k_b_d___k_e_y.html',1,'']]]
+];

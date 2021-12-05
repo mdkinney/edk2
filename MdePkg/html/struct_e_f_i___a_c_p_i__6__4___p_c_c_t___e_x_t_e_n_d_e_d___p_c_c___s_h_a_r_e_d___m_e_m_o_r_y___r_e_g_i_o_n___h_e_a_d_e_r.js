@@ -1,0 +1,7 @@
+var struct_e_f_i___a_c_p_i__6__4___p_c_c_t___e_x_t_e_n_d_e_d___p_c_c___s_h_a_r_e_d___m_e_m_o_r_y___r_e_g_i_o_n___h_e_a_d_e_r =
+[
+    [ "Command", "struct_e_f_i___a_c_p_i__6__4___p_c_c_t___e_x_t_e_n_d_e_d___p_c_c___s_h_a_r_e_d___m_e_m_o_r_y___r_e_g_i_o_n___h_e_a_d_e_r.html#abd6c1add0634b597457e608717438b66", null ],
+    [ "Flags", "struct_e_f_i___a_c_p_i__6__4___p_c_c_t___e_x_t_e_n_d_e_d___p_c_c___s_h_a_r_e_d___m_e_m_o_r_y___r_e_g_i_o_n___h_e_a_d_e_r.html#a98d8d6f810ac953bad24bd413b053540", null ],
+    [ "Length", "struct_e_f_i___a_c_p_i__6__4___p_c_c_t___e_x_t_e_n_d_e_d___p_c_c___s_h_a_r_e_d___m_e_m_o_r_y___r_e_g_i_o_n___h_e_a_d_e_r.html#af216bf4cf3cae1b0e022d96de8d236ac", null ],
+    [ "Signature", "struct_e_f_i___a_c_p_i__6__4___p_c_c_t___e_x_t_e_n_d_e_d___p_c_c___s_h_a_r_e_d___m_e_m_o_r_y___r_e_g_i_o_n___h_e_a_d_e_r.html#a4d0f31b24f698392c76ea2c82dc5a81b", null ]
+];

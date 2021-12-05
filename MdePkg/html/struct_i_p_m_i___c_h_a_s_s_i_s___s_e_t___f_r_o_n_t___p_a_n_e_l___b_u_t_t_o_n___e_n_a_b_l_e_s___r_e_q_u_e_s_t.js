@@ -1,0 +1,4 @@
+var struct_i_p_m_i___c_h_a_s_s_i_s___s_e_t___f_r_o_n_t___p_a_n_e_l___b_u_t_t_o_n___e_n_a_b_l_e_s___r_e_q_u_e_s_t =
+[
+    [ "FrontPanelButtonEnables", "struct_i_p_m_i___c_h_a_s_s_i_s___s_e_t___f_r_o_n_t___p_a_n_e_l___b_u_t_t_o_n___e_n_a_b_l_e_s___r_e_q_u_e_s_t.html#a51ea96a80528c0799ac9c7c74868ca1c", null ]
+];

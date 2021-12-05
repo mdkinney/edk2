@@ -1,0 +1,407 @@
+/** \mainpage FmpDevicePkg Package Document
+ Firmware Management Protocol Device Package<br>
+<br>
+ This package provides an implementation of a Firmware Management Protocol<br>
+ instance that supports the update of firmware storage devices using UEFI<br>
+ Capsules.  The behavior of the Firmware Management Protocol instance is<br>
+ customized using libraries and PCDs.<br>
+<br>
+ Copyright (c) 2016, Microsoft Corporation. All rights reserved.<BR><br>
+ Copyright (c) 2018 - 2020, Intel Corporation. All rights reserved.<BR><br>
+<br>
+ SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>080b5b4f-27c6-11e8-84d1-f8597177a00a</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage FmpDevicePkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+</ul>
+ **/
+/** \page FmpDevicePkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_CapsuleUpdatePolicyLib "CapsuleUpdatePolicyLib" </li>
+<li>\subpage lc_FmpDependencyCheckLib "FmpDependencyCheckLib" </li>
+<li>\subpage lc_FmpDependencyDeviceLib "FmpDependencyDeviceLib" </li>
+<li>\subpage lc_FmpDependencyLib "FmpDependencyLib" </li>
+<li>\subpage lc_FmpDeviceLib "FmpDeviceLib" </li>
+</ul>
+ **/
+/** \page lc_CapsuleUpdatePolicyLib CapsuleUpdatePolicyLib
+  @libraryclass  Provides platform policy services used during a capsule<br>
+                  update.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/CapsuleUpdatePolicyLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_FmpDependencyCheckLib FmpDependencyCheckLib
+  @libraryclass  Provides platform specific services to support dependency<br>
+                  check during update of firmware image.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/FmpDependencyCheckLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_FmpDependencyDeviceLib FmpDependencyDeviceLib
+  @libraryclass  Provides firmware device specific services to support<br>
+                  saving dependency to firmware device and getting dependency<br>
+                  from firmware device.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/FmpDependencyDeviceLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_FmpDependencyLib FmpDependencyLib
+  @libraryclass  Provides generic services to support capsule dependency<br>
+                  expression evaluation.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/FmpDependencyLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_FmpDeviceLib FmpDeviceLib
+  @libraryclass  Provides firmware device specific services to support<br>
+                  updates of a firmware image stored in a firmware device.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/FmpDeviceLib.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_root_page "PcdsDynamic" </li>
+<li>\subpage pcd_PcdsDynamicEx_root_page "PcdsDynamicEx" </li>
+<li>\subpage pcd_PcdsFeatureFlag_root_page "PcdsFeatureFlag" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+<li>\subpage pcd_PcdsPatchableInModule_root_page "PcdsPatchableInModule" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_root_page PcdsDynamic
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_PcdFmpDeviceLockEventGuid "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceLockEventGuid" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdFmpDevicePkcs7CertBufferXdr "gFmpDevicePkgTokenSpaceGuid.PcdFmpDevicePkcs7CertBufferXdr" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdFmpDeviceLockEventGuid gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceLockEventGuid
+ An event GUID that locks the firmware device when the event is signaled.<br>
+  If this PCD is not a valid GUID value, then the firmware device is locked<br>
+  when gEfiEndOfDxeEventGroupGuid (End of DXE Phase) is signaled.  The<br>
+  default value is empty, so by default the firmware device is locked at the<br>
+  end of the DXE phase.<br>
+ @Prompt Firmware Device Lock Event GUID.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceLockEventGuid</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000F</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdFmpDevicePkcs7CertBufferXdr gFmpDevicePkgTokenSpaceGuid.PcdFmpDevicePkcs7CertBufferXdr
+ One or more PKCS7 certificates used to verify a firmware device capsule<br>
+  update image.  Encoded using the Variable-Length Opaque Data format of RFC<br>
+  4506 External Data Representation Standard (XDR).  The default value is<br>
+  empty with 0 certificates.<br>
+ @Prompt One or more XDR encoded PKCS7 certificates used to verify firmware device capsule update images.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDevicePkcs7CertBufferXdr</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000E</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x0}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_root_page PcdsDynamicEx
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdFmpDeviceLockEventGuid "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceLockEventGuid" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdFmpDevicePkcs7CertBufferXdr "gFmpDevicePkgTokenSpaceGuid.PcdFmpDevicePkcs7CertBufferXdr" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdFmpDeviceLockEventGuid gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceLockEventGuid
+ An event GUID that locks the firmware device when the event is signaled.<br>
+  If this PCD is not a valid GUID value, then the firmware device is locked<br>
+  when gEfiEndOfDxeEventGroupGuid (End of DXE Phase) is signaled.  The<br>
+  default value is empty, so by default the firmware device is locked at the<br>
+  end of the DXE phase.<br>
+ @Prompt Firmware Device Lock Event GUID.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceLockEventGuid</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000F</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdFmpDevicePkcs7CertBufferXdr gFmpDevicePkgTokenSpaceGuid.PcdFmpDevicePkcs7CertBufferXdr
+ One or more PKCS7 certificates used to verify a firmware device capsule<br>
+  update image.  Encoded using the Variable-Length Opaque Data format of RFC<br>
+  4506 External Data Representation Standard (XDR).  The default value is<br>
+  empty with 0 certificates.<br>
+ @Prompt One or more XDR encoded PKCS7 certificates used to verify firmware device capsule update images.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDevicePkcs7CertBufferXdr</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000E</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x0}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_root_page PcdsFeatureFlag
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdFmpDeviceStorageAccessEnable "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceStorageAccessEnable" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdFmpDeviceStorageAccessEnable gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceStorageAccessEnable
+ Indicates if the Firmware Management Protocol supports access to<br>
+  to a firmware storage device.  If set to FALSE, then only GetImageInfo()<br>
+  is supported.  This is used by FMP drivers that require the smallest<br>
+  possible Firmware Management Protocol implementation that supports<br>
+  advertising the updatable firmware device in the ESRT.<BR><br>
+    TRUE  - All Firmware Management Protocol services supported.<BR><br>
+    FALSE - Firmware Management Protocol returns EFI_UNSUPPORTED for<br>
+            all services except GetImageInfo().<BR><br>
+ @Prompt Firmware Device Storage Access Enabled.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceStorageAccessEnable</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x40000011</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFmpDeviceBuildTimeLowestSupportedVersion "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceBuildTimeLowestSupportedVersion" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFmpDeviceImageIdName "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceImageIdName" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFmpDeviceImageTypeIdGuid "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceImageTypeIdGuid" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFmpDeviceLockEventGuid "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceLockEventGuid" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFmpDevicePkcs7CertBufferXdr "gFmpDevicePkgTokenSpaceGuid.PcdFmpDevicePkcs7CertBufferXdr" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFmpDeviceProgressColor "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceProgressColor" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFmpDeviceProgressWatchdogTimeInSeconds "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceProgressWatchdogTimeInSeconds" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFmpDeviceTestKeySha256Digest "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceTestKeySha256Digest" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFmpDeviceBuildTimeLowestSupportedVersion gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceBuildTimeLowestSupportedVersion
+ The build time value used to fill in the LowestSupportedVersion field of<br>
+  the EFI_FIRMWARE_IMAGE_DESCRIPTOR structure that is returned by the<br>
+  GetImageInfo() service of the Firmware Management Protocol.  This value is<br>
+  only used if the firmware device does not provide a method to report the<br>
+  lowest supported version value from the current firmware image and the<br>
+  UEFI variable used to provide the lowest supported version value does not<br>
+  exist.  The default value is 0.<br>
+ @Prompt Build Time Firmware Device Lowest Support Version.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceBuildTimeLowestSupportedVersion</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000C</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFmpDeviceImageIdName gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceImageIdName
+ The Null-terminated Unicode string used to fill in the ImageIdName field of<br>
+  the EFI_FIRMWARE_IMAGE_DESCRIPTOR structure that is returned by the<br>
+  GetImageInfo() service of the Firmware Management Protocol for the firmware<br>
+  device.  An ImageIdName string must be provided for each firmware device.<br>
+  The default value is an empty string.<br>
+ @Prompt Firmware Device ImageIdName string.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceImageIdName</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x40000007</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L""</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFmpDeviceImageTypeIdGuid gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceImageTypeIdGuid
+ The Image Type ID to use if one is not provided by FmpDeviceLib. If this<br>
+  PCD is not a valid GUID value, then gEfiCallerIdGuid is used.<br>
+ @Prompt Firmware Device Image Type ID<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceImageTypeIdGuid</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x40000010</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFmpDeviceLockEventGuid gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceLockEventGuid
+ An event GUID that locks the firmware device when the event is signaled.<br>
+  If this PCD is not a valid GUID value, then the firmware device is locked<br>
+  when gEfiEndOfDxeEventGroupGuid (End of DXE Phase) is signaled.  The<br>
+  default value is empty, so by default the firmware device is locked at the<br>
+  end of the DXE phase.<br>
+ @Prompt Firmware Device Lock Event GUID.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceLockEventGuid</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000F</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFmpDevicePkcs7CertBufferXdr gFmpDevicePkgTokenSpaceGuid.PcdFmpDevicePkcs7CertBufferXdr
+ One or more PKCS7 certificates used to verify a firmware device capsule<br>
+  update image.  Encoded using the Variable-Length Opaque Data format of RFC<br>
+  4506 External Data Representation Standard (XDR).  The default value is<br>
+  empty with 0 certificates.<br>
+ @Prompt One or more XDR encoded PKCS7 certificates used to verify firmware device capsule update images.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDevicePkcs7CertBufferXdr</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000E</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x0}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFmpDeviceProgressColor gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceProgressColor
+ The color of the progress bar during a firmware update.  Each firmware<br>
+  device can set its own color.  The default color is white.<BR><BR><br>
+  Bits  7..0  - Red<BR><br>
+  Bits 15..8  - Green<BR><br>
+  Bits 23..16 - Blue<BR><br>
+ @Prompt Firmware Device Progress Bar Color.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceProgressColor</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x40000004</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00FFFFFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFmpDeviceProgressWatchdogTimeInSeconds gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceProgressWatchdogTimeInSeconds
+ The time in seconds to arm a watchdog timer during the update of a firmware<br>
+  device.  The watchdog is re-armed each time the FmpDeviceLib calls the<br>
+  Progress() function passed into FmpDeviceSetImage() function.  The<br>
+  FmpDeviceLib calls Progress() to update the percent completion of a<br>
+  firmware update.  If the watchdog timer expires, the system reboots.  A<br>
+  value of 0 disables the watchdog timer.  The default value is 0 (watchdog<br>
+  disabled).<br>
+ @Prompt Firmware Device Watchdog Time in Seconds.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceProgressWatchdogTimeInSeconds</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000D</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFmpDeviceTestKeySha256Digest gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceTestKeySha256Digest
+ The SHA-256 hash of a PKCS7 test key that is used to detect if a test key<br>
+  is being used to authenticate capsules.  Test key detection is disabled by<br>
+  setting the value to {0}.<br>
+ @Prompt SHA-256 hash of PKCS7 test key.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceTestKeySha256Digest</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x40000009</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x2E, 0x97, 0x89, 0x1B, 0xDB, 0xE7, 0x08, 0xAA,  0x8C, 0xB2, 0x8F, 0xAD, 0x20, 0xA9, 0x83, 0xC7,  0x84, 0x7D, 0x4F, 0xEE, 0x48, 0x25, 0xE9, 0x4D,  0x39, 0xFA, 0x34, 0x9A, 0xB8, 0xB1, 0xC4, 0x26}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_root_page PcdsPatchableInModule
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFmpDeviceBuildTimeLowestSupportedVersion "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceBuildTimeLowestSupportedVersion" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFmpDeviceImageIdName "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceImageIdName" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFmpDeviceImageTypeIdGuid "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceImageTypeIdGuid" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFmpDeviceLockEventGuid "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceLockEventGuid" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFmpDevicePkcs7CertBufferXdr "gFmpDevicePkgTokenSpaceGuid.PcdFmpDevicePkcs7CertBufferXdr" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFmpDeviceProgressColor "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceProgressColor" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFmpDeviceProgressWatchdogTimeInSeconds "gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceProgressWatchdogTimeInSeconds" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFmpDeviceBuildTimeLowestSupportedVersion gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceBuildTimeLowestSupportedVersion
+ The build time value used to fill in the LowestSupportedVersion field of<br>
+  the EFI_FIRMWARE_IMAGE_DESCRIPTOR structure that is returned by the<br>
+  GetImageInfo() service of the Firmware Management Protocol.  This value is<br>
+  only used if the firmware device does not provide a method to report the<br>
+  lowest supported version value from the current firmware image and the<br>
+  UEFI variable used to provide the lowest supported version value does not<br>
+  exist.  The default value is 0.<br>
+ @Prompt Build Time Firmware Device Lowest Support Version.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceBuildTimeLowestSupportedVersion</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000C</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFmpDeviceImageIdName gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceImageIdName
+ The Null-terminated Unicode string used to fill in the ImageIdName field of<br>
+  the EFI_FIRMWARE_IMAGE_DESCRIPTOR structure that is returned by the<br>
+  GetImageInfo() service of the Firmware Management Protocol for the firmware<br>
+  device.  An ImageIdName string must be provided for each firmware device.<br>
+  The default value is an empty string.<br>
+ @Prompt Firmware Device ImageIdName string.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceImageIdName</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x40000007</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L""</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFmpDeviceImageTypeIdGuid gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceImageTypeIdGuid
+ The Image Type ID to use if one is not provided by FmpDeviceLib. If this<br>
+  PCD is not a valid GUID value, then gEfiCallerIdGuid is used.<br>
+ @Prompt Firmware Device Image Type ID<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceImageTypeIdGuid</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x40000010</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFmpDeviceLockEventGuid gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceLockEventGuid
+ An event GUID that locks the firmware device when the event is signaled.<br>
+  If this PCD is not a valid GUID value, then the firmware device is locked<br>
+  when gEfiEndOfDxeEventGroupGuid (End of DXE Phase) is signaled.  The<br>
+  default value is empty, so by default the firmware device is locked at the<br>
+  end of the DXE phase.<br>
+ @Prompt Firmware Device Lock Event GUID.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceLockEventGuid</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000F</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFmpDevicePkcs7CertBufferXdr gFmpDevicePkgTokenSpaceGuid.PcdFmpDevicePkcs7CertBufferXdr
+ One or more PKCS7 certificates used to verify a firmware device capsule<br>
+  update image.  Encoded using the Variable-Length Opaque Data format of RFC<br>
+  4506 External Data Representation Standard (XDR).  The default value is<br>
+  empty with 0 certificates.<br>
+ @Prompt One or more XDR encoded PKCS7 certificates used to verify firmware device capsule update images.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDevicePkcs7CertBufferXdr</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000E</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x0}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFmpDeviceProgressColor gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceProgressColor
+ The color of the progress bar during a firmware update.  Each firmware<br>
+  device can set its own color.  The default color is white.<BR><BR><br>
+  Bits  7..0  - Red<BR><br>
+  Bits 15..8  - Green<BR><br>
+  Bits 23..16 - Blue<BR><br>
+ @Prompt Firmware Device Progress Bar Color.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceProgressColor</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x40000004</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00FFFFFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFmpDeviceProgressWatchdogTimeInSeconds gFmpDevicePkgTokenSpaceGuid.PcdFmpDeviceProgressWatchdogTimeInSeconds
+ The time in seconds to arm a watchdog timer during the update of a firmware<br>
+  device.  The watchdog is re-armed each time the FmpDeviceLib calls the<br>
+  Progress() function passed into FmpDeviceSetImage() function.  The<br>
+  FmpDeviceLib calls Progress() to update the percent completion of a<br>
+  firmware update.  If the watchdog timer expires, the system reboots.  A<br>
+  value of 0 disables the watchdog timer.  The default value is 0 (watchdog<br>
+  disabled).<br>
+ @Prompt Firmware Device Watchdog Time in Seconds.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFmpDeviceProgressWatchdogTimeInSeconds</CAPTION></TD><TD><CAPTION>gFmpDevicePkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000D</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gFmpDevicePkgTokenSpaceGuid "gFmpDevicePkgTokenSpaceGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gFmpDevicePkgTokenSpaceGuid gFmpDevicePkgTokenSpaceGuid
+ Firmware Management Protocol Device Package Token Space GUID<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gFmpDevicePkgTokenSpaceGuid</TD><TD>{ 0x40b2d964, 0xfe11, 0x40dc, { 0x82, 0x83, 0x2e, 0xfb, 0xda, 0x29, 0x53, 0x56 } }</TD></TR></TABLE>
+ **/

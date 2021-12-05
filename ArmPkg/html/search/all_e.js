@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['public_20includes',['Public Includes',['../_arm_pkg_public_includes.html',1,'index']]],
+  ['pad',['Pad',['../struct_o_p_t_e_e___m_e_s_s_a_g_e___a_r_g.html#ae36f1bb5cd52ad9a7f5d401e5c9e5a6b',1,'OPTEE_MESSAGE_ARG']]],
+  ['params',['Params',['../struct_o_p_t_e_e___m_e_s_s_a_g_e___a_r_g.html#ac6d676bbfe6107a08c8b9310eec1cd28',1,'OPTEE_MESSAGE_ARG::Params()'],['../struct_o_p_t_e_e___i_n_v_o_k_e___f_u_n_c_t_i_o_n___a_r_g.html#afc4a293f1de34d2da845863d2936edca',1,'OPTEE_INVOKE_FUNCTION_ARG::Params()']]],
+  ['payload',['Payload',['../struct_m_t_l___m_a_i_l_b_o_x.html#a35a817f0e1770e5fa31cb89488fdf8d0',1,'MTL_MAILBOX']]],
+  ['pcdsdynamic',['PcdsDynamic',['../pcd__pcds_dynamic_root_page.html',1,'pcd_root_page']]],
+  ['pcdsdynamicex',['PcdsDynamicEx',['../pcd__pcds_dynamic_ex_root_page.html',1,'pcd_root_page']]],
+  ['pcdsfeatureflag',['PcdsFeatureFlag',['../pcd__pcds_feature_flag_root_page.html',1,'pcd_root_page']]],
+  ['pcdsfixedatbuild',['PcdsFixedAtBuild',['../pcd__pcds_fixed_at_build_root_page.html',1,'pcd_root_page']]],
+  ['pcdspatchableinmodule',['PcdsPatchableInModule',['../pcd__pcds_patchable_in_module_root_page.html',1,'pcd_root_page']]],
+  ['pcd',['PCD',['../pcd_root_page.html',1,'index']]],
+  ['perf_5flatency_5fmask',['PERF_LATENCY_MASK',['../_arm_scmi_performance_protocol_8h.html#acc2c2c1d4c59fb4feb273f837fee18eb',1,'ArmScmiPerformanceProtocol.h']]],
+  ['performance_5fprotocol_5fversion',['PERFORMANCE_PROTOCOL_VERSION',['../_arm_scmi_performance_protocol_8h.html#a0403a239324db6fe59bcddae483a7ad5',1,'ArmScmiPerformanceProtocol.h']]],
+  ['physicaladdress',['PhysicalAddress',['../struct_m_t_l___d_o_o_r_b_e_l_l.html#a2aaea0d94d67286e735be47804914f0a',1,'MTL_DOORBELL']]],
+  ['physicalbase',['PhysicalBase',['../struct_a_r_m___m_e_m_o_r_y___r_e_g_i_o_n___d_e_s_c_r_i_p_t_o_r.html#a70c44982e60b26c490adc265c65b396f',1,'ARM_MEMORY_REGION_DESCRIPTOR']]],
+  ['power_5fin_5fmw_5fmask',['POWER_IN_MW_MASK',['../_arm_scmi_performance_protocol_8h.html#a3855b394e6f9d0df7521f83e4b3d1e6c',1,'ArmScmiPerformanceProtocol.h']]],
+  ['power_5fin_5fmw_5fshift',['POWER_IN_MW_SHIFT',['../_arm_scmi_performance_protocol_8h.html#ac669bd477564ccf7583204c5e14ccd79',1,'ArmScmiPerformanceProtocol.h']]],
+  ['powercost',['PowerCost',['../struct_s_c_m_i___p_e_r_f_o_r_m_a_n_c_e___l_e_v_e_l.html#a51744783ad2c54c2f9c6342a145a500c',1,'SCMI_PERFORMANCE_LEVEL']]],
+  ['ppi',['PPI',['../ppi_root_page.html',1,'index']]],
+  ['preservemask',['PreserveMask',['../struct_m_t_l___d_o_o_r_b_e_l_l.html#a50bef1cce572c46472187ea061318b8c',1,'MTL_DOORBELL']]],
+  ['primary_5fcore_5fid',['PRIMARY_CORE_ID',['../_arm_lib_8h.html#a76d091efbcfe18f722bd77461f4e0ed1',1,'ArmLib.h']]],
+  ['productnametype01',['ProductNameType01',['../_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a980ad3c1012745bdf49a4204a4fb07bb',1,'OemMiscLib.h']]],
+  ['protocol',['PROTOCOL',['../protocol_root_page.html',1,'index']]],
+  ['protocollist',['ProtocolList',['../_arm_scmi_base_protocol_8h.html#a46f3db42a0069a679661f0cf8e73e948',1,'ArmScmiBaseProtocol.h']]],
+  ['protocollistsize',['ProtocolListSize',['../_arm_scmi_base_protocol_8h.html#a8f3db66da4e84d284d06252e155601a7',1,'ArmScmiBaseProtocol.h']]]
+];

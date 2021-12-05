@@ -1,0 +1,5 @@
+var struct_e_f_i___a_c_p_i__5__0___s_y_s_t_e_m___l_o_c_a_l_i_t_y___d_i_s_t_a_n_c_e___i_n_f_o_r_m_a_t8650ad07cf333acb893fe75b77c8c919 =
+[
+    [ "Header", "struct_e_f_i___a_c_p_i__5__0___s_y_s_t_e_m___l_o_c_a_l_i_t_y___d_i_s_t_a_n_c_e___i_n_f_o_r_m_a_t8650ad07cf333acb893fe75b77c8c919.html#a96bc19e4bbddc64f1937db8043096b58", null ],
+    [ "NumberOfSystemLocalities", "struct_e_f_i___a_c_p_i__5__0___s_y_s_t_e_m___l_o_c_a_l_i_t_y___d_i_s_t_a_n_c_e___i_n_f_o_r_m_a_t8650ad07cf333acb893fe75b77c8c919.html#a8a8584a4657ea576862fb9e31d62cf33", null ]
+];

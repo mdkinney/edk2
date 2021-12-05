@@ -1,0 +1,27 @@
+var _virtio_blk_8h =
+[
+    [ "VIRTIO_BLK_TOPOLOGY", "struct_v_i_r_t_i_o___b_l_k___t_o_p_o_l_o_g_y.html", "struct_v_i_r_t_i_o___b_l_k___t_o_p_o_l_o_g_y" ],
+    [ "VIRTIO_BLK_CONFIG", "struct_v_i_r_t_i_o___b_l_k___c_o_n_f_i_g.html", "struct_v_i_r_t_i_o___b_l_k___c_o_n_f_i_g" ],
+    [ "VIRTIO_BLK_REQ", "struct_v_i_r_t_i_o___b_l_k___r_e_q.html", "struct_v_i_r_t_i_o___b_l_k___r_e_q" ],
+    [ "OFFSET_OF_VBLK", "_virtio_blk_8h.html#aaf54ab2e6931b8ebe623056ab7bed3ca", null ],
+    [ "SIZE_OF_VBLK", "_virtio_blk_8h.html#a5c70b27485481560a5158280c66ca78a", null ],
+    [ "VIRTIO_BLK_F_BARRIER", "_virtio_blk_8h.html#a2f69cc9056fb4fd51be058a89e86fda5", null ],
+    [ "VIRTIO_BLK_F_BLK_SIZE", "_virtio_blk_8h.html#a51aa3d764df7bafb18e787a593a4f50a", null ],
+    [ "VIRTIO_BLK_F_FLUSH", "_virtio_blk_8h.html#ab44dc8cf0b6baafca5be1abadd1c4569", null ],
+    [ "VIRTIO_BLK_F_GEOMETRY", "_virtio_blk_8h.html#a1c767abbc7b6d15361c523a4285e3e76", null ],
+    [ "VIRTIO_BLK_F_RO", "_virtio_blk_8h.html#aa24486e8dd96dd86c415ad6e04221424", null ],
+    [ "VIRTIO_BLK_F_SCSI", "_virtio_blk_8h.html#aad7c44284dc8173499943e3402de5b1b", null ],
+    [ "VIRTIO_BLK_F_SEG_MAX", "_virtio_blk_8h.html#a3144e2fcc93d3e30c15b6b96baa4fe00", null ],
+    [ "VIRTIO_BLK_F_SIZE_MAX", "_virtio_blk_8h.html#a92ed7da9913861981425ad4343f8557a", null ],
+    [ "VIRTIO_BLK_F_TOPOLOGY", "_virtio_blk_8h.html#a2c7fae0ea3f71a3f0e8b9d046bb65e06", null ],
+    [ "VIRTIO_BLK_S_IOERR", "_virtio_blk_8h.html#aaeca75d39a935bd69efa776681e457af", null ],
+    [ "VIRTIO_BLK_S_OK", "_virtio_blk_8h.html#a56cccf76ad30c966cf9a48fd11738a16", null ],
+    [ "VIRTIO_BLK_S_UNSUPP", "_virtio_blk_8h.html#a5f8a370fee249678c073dec76783ea72", null ],
+    [ "VIRTIO_BLK_T_BARRIER", "_virtio_blk_8h.html#a6715bfc3379ded36c4766b212a96757a", null ],
+    [ "VIRTIO_BLK_T_FLUSH", "_virtio_blk_8h.html#a7637ed5da80f9d2166131e3bb3ae21e2", null ],
+    [ "VIRTIO_BLK_T_FLUSH_OUT", "_virtio_blk_8h.html#a7966e2d6910bcf2db1bd16eccd35a8b5", null ],
+    [ "VIRTIO_BLK_T_IN", "_virtio_blk_8h.html#a736c5cf3b8352bcec7c79ef42536a445", null ],
+    [ "VIRTIO_BLK_T_OUT", "_virtio_blk_8h.html#a47e0526d29f30098a2f665fb9f4b6d1f", null ],
+    [ "VIRTIO_BLK_T_SCSI_CMD", "_virtio_blk_8h.html#a75cd9e5a3472c34ffddd8fa90fc55c39", null ],
+    [ "VIRTIO_BLK_T_SCSI_CMD_OUT", "_virtio_blk_8h.html#af503ee8e36562df48ce5a18aee29e38c", null ]
+];

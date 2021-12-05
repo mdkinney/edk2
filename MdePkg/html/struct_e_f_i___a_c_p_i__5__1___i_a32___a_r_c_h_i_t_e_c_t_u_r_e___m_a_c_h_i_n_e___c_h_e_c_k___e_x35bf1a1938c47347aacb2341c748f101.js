@@ -1,0 +1,14 @@
+var struct_e_f_i___a_c_p_i__5__1___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_x35bf1a1938c47347aacb2341c748f101 =
+[
+    [ "Enabled", "struct_e_f_i___a_c_p_i__5__1___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_x35bf1a1938c47347aacb2341c748f101.html#aa0d7d7e3607f13aa6ab1c1b27f3de329", null ],
+    [ "Flags", "struct_e_f_i___a_c_p_i__5__1___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_x35bf1a1938c47347aacb2341c748f101.html#a124c033201de2167b2814f6099590a00", null ],
+    [ "GlobalCapabilityInitData", "struct_e_f_i___a_c_p_i__5__1___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_x35bf1a1938c47347aacb2341c748f101.html#a4440715c0ed4184f3ef55df34cd754cc", null ],
+    [ "GlobalControlInitData", "struct_e_f_i___a_c_p_i__5__1___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_x35bf1a1938c47347aacb2341c748f101.html#ac717b0d1154a2acdbf7040e9f8becfa3", null ],
+    [ "MaxSectionsPerRecord", "struct_e_f_i___a_c_p_i__5__1___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_x35bf1a1938c47347aacb2341c748f101.html#abbb6d81f191680165d09b34df8e539dc", null ],
+    [ "NumberOfHardwareBanks", "struct_e_f_i___a_c_p_i__5__1___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_x35bf1a1938c47347aacb2341c748f101.html#a944a7c7bf4605f7e2d7296b211f2bd89", null ],
+    [ "NumberOfRecordsToPreAllocate", "struct_e_f_i___a_c_p_i__5__1___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_x35bf1a1938c47347aacb2341c748f101.html#a3241e69745a7e849776011f12cfff872", null ],
+    [ "Reserved0", "struct_e_f_i___a_c_p_i__5__1___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_x35bf1a1938c47347aacb2341c748f101.html#a9786a3fc86f7b04906b0a0f8f8e95ff6", null ],
+    [ "Reserved1", "struct_e_f_i___a_c_p_i__5__1___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_x35bf1a1938c47347aacb2341c748f101.html#a2b8783e7fc744fff1edc81f82d523fb1", null ],
+    [ "SourceId", "struct_e_f_i___a_c_p_i__5__1___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_x35bf1a1938c47347aacb2341c748f101.html#a60128c3573723751bcbe2aa60303cfd0", null ],
+    [ "Type", "struct_e_f_i___a_c_p_i__5__1___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___m_a_c_h_i_n_e___c_h_e_c_k___e_x35bf1a1938c47347aacb2341c748f101.html#af2aded1b59123df3e3e25b794200f9a2", null ]
+];

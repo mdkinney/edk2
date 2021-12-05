@@ -1,0 +1,363 @@
+/** \mainpage UefiPayloadPkg Package Document
+ UEFI Payload Package<br>
+<br>
+ Provides drivers and definitions to create uefi payload for bootloaders.<br>
+<br>
+ Copyright (c) 2014 - 2021, Intel Corporation. All rights reserved.<BR><br>
+ SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>E0FC9D50-415E-4946-B686-9A130D5859E7</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+<li>\subpage ppi_root_page "PPI" </li>
+<li>\subpage protocol_root_page "PROTOCOL" </li>
+</ul>
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+<li>\subpage pcd_PcdsPatchableInModule_root_page "PcdsPatchableInModule" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdBootloaderParameter "gUefiPayloadPkgTokenSpaceGuid.PcdBootloaderParameter" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdMemoryTypeEfiACPIMemoryNVS "gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiACPIMemoryNVS" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdMemoryTypeEfiACPIReclaimMemory "gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiACPIReclaimMemory" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdMemoryTypeEfiReservedMemoryType "gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiReservedMemoryType" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdMemoryTypeEfiRuntimeServicesCode "gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiRuntimeServicesCode" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdMemoryTypeEfiRuntimeServicesData "gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiRuntimeServicesData" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdNvsDataFile  "gUefiPayloadPkgTokenSpaceGuid.PcdNvsDataFile " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPayloadFdMemBase "gUefiPayloadPkgTokenSpaceGuid.PcdPayloadFdMemBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPayloadFdMemSize "gUefiPayloadPkgTokenSpaceGuid.PcdPayloadFdMemSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPcdDriverFile "gUefiPayloadPkgTokenSpaceGuid.PcdPcdDriverFile" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdShellFile "gUefiPayloadPkgTokenSpaceGuid.PcdShellFile" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSystemMemoryUefiRegionSize "gUefiPayloadPkgTokenSpaceGuid.PcdSystemMemoryUefiRegionSize" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdBootloaderParameter gUefiPayloadPkgTokenSpaceGuid.PcdBootloaderParameter
+ Save bootloader parameter<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdBootloaderParameter</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000004</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdMemoryTypeEfiACPIMemoryNVS gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiACPIMemoryNVS
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMemoryTypeEfiACPIMemoryNVS</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000013</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x04</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdMemoryTypeEfiACPIReclaimMemory gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiACPIReclaimMemory
+ Used to help reduce fragmentation in the EFI memory map<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMemoryTypeEfiACPIReclaimMemory</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000012</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x08</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdMemoryTypeEfiReservedMemoryType gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiReservedMemoryType
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMemoryTypeEfiReservedMemoryType</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000014</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x04</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdMemoryTypeEfiRuntimeServicesCode gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiRuntimeServicesCode
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMemoryTypeEfiRuntimeServicesCode</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000016</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x80</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdMemoryTypeEfiRuntimeServicesData gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiRuntimeServicesData
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMemoryTypeEfiRuntimeServicesData</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000015</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xC0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdNvsDataFile  gUefiPayloadPkgTokenSpaceGuid.PcdNvsDataFile 
+ FFS filename to find the default variable initial data file.<br>
+ @Prompt FFS Name of variable initial data file<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdNvsDataFile </CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000025</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{ 0x1a, 0xf1, 0xb1, 0xae, 0x42, 0xcc, 0xcf, 0x4e, 0xac, 0x60, 0xdb, 0xab, 0xf6, 0xca, 0x69, 0xe6 }</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPayloadFdMemBase gUefiPayloadPkgTokenSpaceGuid.PcdPayloadFdMemBase
+ Indicates the base address of the payload binary in memory<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPayloadFdMemBase</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPayloadFdMemSize gUefiPayloadPkgTokenSpaceGuid.PcdPayloadFdMemSize
+ Provides the size of the payload binary in memory<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPayloadFdMemSize</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPcdDriverFile gUefiPayloadPkgTokenSpaceGuid.PcdPcdDriverFile
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPcdDriverFile</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000018</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{ 0x57, 0x72, 0xcf, 0x80, 0xab, 0x87, 0xf9, 0x47, 0xa3, 0xfe, 0xD5, 0x0B, 0x76, 0xd8, 0x95, 0x41 }</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdShellFile gUefiPayloadPkgTokenSpaceGuid.PcdShellFile
+ FFS filename to find the shell application.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellFile</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000005</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{ 0x83, 0xA5, 0x04, 0x7C, 0x3E, 0x9E, 0x1c, 0x4f, 0xAD, 0x65, 0xE0, 0x52, 0x68, 0xD0, 0xB4, 0xD1 }</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSystemMemoryUefiRegionSize gUefiPayloadPkgTokenSpaceGuid.PcdSystemMemoryUefiRegionSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSystemMemoryUefiRegionSize</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000017</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x02000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_root_page PcdsPatchableInModule
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdBootloaderParameter "gUefiPayloadPkgTokenSpaceGuid.PcdBootloaderParameter" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdMemoryTypeEfiACPIMemoryNVS "gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiACPIMemoryNVS" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdMemoryTypeEfiACPIReclaimMemory "gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiACPIReclaimMemory" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdMemoryTypeEfiReservedMemoryType "gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiReservedMemoryType" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdMemoryTypeEfiRuntimeServicesCode "gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiRuntimeServicesCode" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdMemoryTypeEfiRuntimeServicesData "gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiRuntimeServicesData" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdNvsDataFile  "gUefiPayloadPkgTokenSpaceGuid.PcdNvsDataFile " </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdPayloadFdMemBase "gUefiPayloadPkgTokenSpaceGuid.PcdPayloadFdMemBase" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdPayloadFdMemSize "gUefiPayloadPkgTokenSpaceGuid.PcdPayloadFdMemSize" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdPcdDriverFile "gUefiPayloadPkgTokenSpaceGuid.PcdPcdDriverFile" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdShellFile "gUefiPayloadPkgTokenSpaceGuid.PcdShellFile" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdSystemMemoryUefiRegionSize "gUefiPayloadPkgTokenSpaceGuid.PcdSystemMemoryUefiRegionSize" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdBootloaderParameter gUefiPayloadPkgTokenSpaceGuid.PcdBootloaderParameter
+ Save bootloader parameter<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdBootloaderParameter</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000004</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdMemoryTypeEfiACPIMemoryNVS gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiACPIMemoryNVS
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMemoryTypeEfiACPIMemoryNVS</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000013</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x04</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdMemoryTypeEfiACPIReclaimMemory gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiACPIReclaimMemory
+ Used to help reduce fragmentation in the EFI memory map<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMemoryTypeEfiACPIReclaimMemory</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000012</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x08</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdMemoryTypeEfiReservedMemoryType gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiReservedMemoryType
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMemoryTypeEfiReservedMemoryType</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000014</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x04</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdMemoryTypeEfiRuntimeServicesCode gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiRuntimeServicesCode
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMemoryTypeEfiRuntimeServicesCode</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000016</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x80</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdMemoryTypeEfiRuntimeServicesData gUefiPayloadPkgTokenSpaceGuid.PcdMemoryTypeEfiRuntimeServicesData
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMemoryTypeEfiRuntimeServicesData</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000015</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xC0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdNvsDataFile  gUefiPayloadPkgTokenSpaceGuid.PcdNvsDataFile 
+ FFS filename to find the default variable initial data file.<br>
+ @Prompt FFS Name of variable initial data file<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdNvsDataFile </CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000025</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{ 0x1a, 0xf1, 0xb1, 0xae, 0x42, 0xcc, 0xcf, 0x4e, 0xac, 0x60, 0xdb, 0xab, 0xf6, 0xca, 0x69, 0xe6 }</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdPayloadFdMemBase gUefiPayloadPkgTokenSpaceGuid.PcdPayloadFdMemBase
+ Indicates the base address of the payload binary in memory<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPayloadFdMemBase</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdPayloadFdMemSize gUefiPayloadPkgTokenSpaceGuid.PcdPayloadFdMemSize
+ Provides the size of the payload binary in memory<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPayloadFdMemSize</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdPcdDriverFile gUefiPayloadPkgTokenSpaceGuid.PcdPcdDriverFile
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPcdDriverFile</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000018</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{ 0x57, 0x72, 0xcf, 0x80, 0xab, 0x87, 0xf9, 0x47, 0xa3, 0xfe, 0xD5, 0x0B, 0x76, 0xd8, 0x95, 0x41 }</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdShellFile gUefiPayloadPkgTokenSpaceGuid.PcdShellFile
+ FFS filename to find the shell application.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdShellFile</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000005</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{ 0x83, 0xA5, 0x04, 0x7C, 0x3E, 0x9E, 0x1c, 0x4f, 0xAD, 0x65, 0xE0, 0x52, 0x68, 0xD0, 0xB4, 0xD1 }</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdSystemMemoryUefiRegionSize gUefiPayloadPkgTokenSpaceGuid.PcdSystemMemoryUefiRegionSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSystemMemoryUefiRegionSize</CAPTION></TD><TD><CAPTION>gUefiPayloadPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000017</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x02000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gBmpImageGuid "gBmpImageGuid" </li>
+<li>\subpage guid_common_gEdkiiBootManagerMenuFileGuid "gEdkiiBootManagerMenuFileGuid" </li>
+<li>\subpage guid_common_gLoaderMemoryMapInfoGuid "gLoaderMemoryMapInfoGuid" </li>
+<li>\subpage guid_common_gNvVariableInfoGuid "gNvVariableInfoGuid" </li>
+<li>\subpage guid_common_gS3CommunicationGuid "gS3CommunicationGuid" </li>
+<li>\subpage guid_common_gSmmRegisterInfoGuid "gSmmRegisterInfoGuid" </li>
+<li>\subpage guid_common_gSpiFlashInfoGuid "gSpiFlashInfoGuid" </li>
+<li>\subpage guid_common_gUefiAcpiBoardInfoGuid "gUefiAcpiBoardInfoGuid" </li>
+<li>\subpage guid_common_gUefiPayloadPkgTokenSpaceGuid "gUefiPayloadPkgTokenSpaceGuid" </li>
+<li>\subpage guid_common_gUefiSerialPortInfoGuid "gUefiSerialPortInfoGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gBmpImageGuid gBmpImageGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gBmpImageGuid</TD><TD>{ 0x878AC2CC, 0x5343, 0x46F2, { 0xB5, 0x63, 0x51, 0xF8, 0x9D, 0xAF, 0x56, 0xBA } }</TD></TR></TABLE>
+ **/
+/** \page guid_common_gEdkiiBootManagerMenuFileGuid gEdkiiBootManagerMenuFileGuid
+include/Guid/BootManagerMenu.h<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEdkiiBootManagerMenuFileGuid</TD><TD>{ 0xdf939333, 0x42fc, 0x4b2a, { 0xa5, 0x9e, 0xbb, 0xae, 0x82, 0x81, 0xfe, 0xef }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiPayloadPkg/Include/Guid/BootManagerMenu.h
+\endlink
+
+ **/
+/** \page guid_common_gLoaderMemoryMapInfoGuid gLoaderMemoryMapInfoGuid
+ \copydoc UefiPayloadPkg/Include/Guid/MemoryMapInfoGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gLoaderMemoryMapInfoGuid</TD><TD>{ 0xa1ff7424, 0x7a1a, 0x478e, { 0xa9, 0xe4, 0x92, 0xf3, 0x57, 0xd1, 0x28, 0x32 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiPayloadPkg/Include/Guid/MemoryMapInfoGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gNvVariableInfoGuid gNvVariableInfoGuid
+ \copydoc UefiPayloadPkg/Include/Guid/NvVariableInfoGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gNvVariableInfoGuid</TD><TD>{ 0x7a345dca, 0xc26, 0x4f2a,  { 0xa8, 0x9a, 0x57, 0xc0, 0x8d, 0xdd, 0x22, 0xee } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiPayloadPkg/Include/Guid/NvVariableInfoGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gS3CommunicationGuid gS3CommunicationGuid
+ \copydoc UefiPayloadPkg/Include/Guid/SmmS3CommunicationInfoGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gS3CommunicationGuid</TD><TD>{ 0x88e31ba1, 0x1856, 0x4b8b, { 0xbb, 0xdf, 0xf8, 0x16, 0xdd, 0x94, 0xa, 0xef } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiPayloadPkg/Include/Guid/SmmS3CommunicationInfoGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gSmmRegisterInfoGuid gSmmRegisterInfoGuid
+ \copydoc UefiPayloadPkg/Include/Guid/SmmRegisterInfoGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gSmmRegisterInfoGuid</TD><TD>{ 0xaa9bd7a7, 0xcafb, 0x4499, { 0xa4, 0xa9, 0xb, 0x34, 0x6b, 0x40, 0xa6, 0x22 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiPayloadPkg/Include/Guid/SmmRegisterInfoGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gSpiFlashInfoGuid gSpiFlashInfoGuid
+ \copydoc UefiPayloadPkg/Include/Guid/SpiFlashInfoGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gSpiFlashInfoGuid</TD><TD>{ 0x2d4aac1b, 0x91a5, 0x4cd5, { 0x9b, 0x5c, 0xb4, 0x0f, 0x5d, 0x28, 0x51, 0xa1 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiPayloadPkg/Include/Guid/SpiFlashInfoGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gUefiAcpiBoardInfoGuid gUefiAcpiBoardInfoGuid
+ \copydoc UefiPayloadPkg/Include/Guid/AcpiBoardInfoGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gUefiAcpiBoardInfoGuid</TD><TD>{0xad3d31b, 0xb3d8, 0x4506, {0xae, 0x71, 0x2e, 0xf1, 0x10, 0x6, 0xd9, 0xf}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiPayloadPkg/Include/Guid/AcpiBoardInfoGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gUefiPayloadPkgTokenSpaceGuid gUefiPayloadPkgTokenSpaceGuid
+ Defines the token space for the UEFI Payload Package PCDs.<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gUefiPayloadPkgTokenSpaceGuid</TD><TD>{0x1d127ea, 0xf6f1, 0x4ef6, {0x94, 0x15, 0x8a, 0x0, 0x0, 0x93, 0xf8, 0x9d}}</TD></TR></TABLE>
+ **/
+/** \page guid_common_gUefiSerialPortInfoGuid gUefiSerialPortInfoGuid
+ \copydoc UefiPayloadPkg/Include/Guid/SerialPortInfoGuid.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gUefiSerialPortInfoGuid</TD><TD>{ 0x6c6872fe, 0x56a9, 0x4403, { 0xbb, 0x98, 0x95, 0x8d, 0x62, 0xde, 0x87, 0xf1 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiPayloadPkg/Include/Guid/SerialPortInfoGuid.h
+\endlink
+
+ **/
+/** \page ppi_root_page PPI
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page ppi_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_page_gEfiPayLoadHobBasePpiGuid "gEfiPayLoadHobBasePpiGuid" </li>
+</ul>
+ **/
+/** \page ppi_page_gEfiPayLoadHobBasePpiGuid gEfiPayLoadHobBasePpiGuid
+ \section BasicPpiInfo PPI Information
+<TABLE><TR><TD><CAPTION>PPI's Guid Name</CAPTION></TD><TD><CAPTION>PPI's Guid</CAPTION></TD></TR><TR><TD>gEfiPayLoadHobBasePpiGuid</TD><TD>{ 0xdbe23aa1, 0xa342, 0x4b97, {0x85, 0xb6, 0xb2, 0x26, 0xf1, 0x61, 0x73, 0x89} }</TD></TR></TABLE>
+ **/
+/** \page protocol_root_page PROTOCOL
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page protocol_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_page_gPlatformGOPPolicyGuid "gPlatformGOPPolicyGuid" </li>
+<li>\subpage protocol_page_gUniversalPayloadPlatformBootManagerOverrideProtocolGuid "gUniversalPayloadPlatformBootManagerOverrideProtocolGuid" </li>
+</ul>
+ **/
+/** \page protocol_page_gPlatformGOPPolicyGuid gPlatformGOPPolicyGuid
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gPlatformGOPPolicyGuid</TD><TD>{ 0xec2e931b, 0x3281, 0x48a5, { 0x81, 0x07, 0xdf, 0x8a, 0x8b, 0xed, 0x3c, 0x5d } }</TD></TR></TABLE>
+ **/
+/** \page protocol_page_gUniversalPayloadPlatformBootManagerOverrideProtocolGuid gUniversalPayloadPlatformBootManagerOverrideProtocolGuid
+ \copydoc UefiPayloadPkg/Include/Protocol/PlatformBootManagerOverride.h <br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gUniversalPayloadPlatformBootManagerOverrideProtocolGuid</TD><TD>{ 0xdb3fc2df, 0x7376, 0x4a8d, { 0x82, 0xab, 0x91, 0x54, 0xa1, 0x36, 0xa6, 0x5a } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiPayloadPkg/Include/Protocol/PlatformBootManagerOverride.h
+\endlink
+
+ **/

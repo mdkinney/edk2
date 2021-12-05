@@ -1,0 +1,55 @@
+var _pi_dxe_cis_8h =
+[
+    [ "EFI_GCD_MEMORY_SPACE_DESCRIPTOR", "struct_e_f_i___g_c_d___m_e_m_o_r_y___s_p_a_c_e___d_e_s_c_r_i_p_t_o_r.html", "struct_e_f_i___g_c_d___m_e_m_o_r_y___s_p_a_c_e___d_e_s_c_r_i_p_t_o_r" ],
+    [ "EFI_GCD_IO_SPACE_DESCRIPTOR", "struct_e_f_i___g_c_d___i_o___s_p_a_c_e___d_e_s_c_r_i_p_t_o_r.html", "struct_e_f_i___g_c_d___i_o___s_p_a_c_e___d_e_s_c_r_i_p_t_o_r" ],
+    [ "DXE_SERVICES", "struct_d_x_e___s_e_r_v_i_c_e_s.html", "struct_d_x_e___s_e_r_v_i_c_e_s" ],
+    [ "DXE_SERVICES_REVISION", "_pi_dxe_cis_8h.html#aad0c4c3623d48d225b9e4b2cee8f6527", null ],
+    [ "DXE_SERVICES_SIGNATURE", "_pi_dxe_cis_8h.html#aa17551c9449516d7efa1890b6654c91d", null ],
+    [ "DXE_SPECIFICATION_MAJOR_REVISION", "_pi_dxe_cis_8h.html#ae43f01d4491587597c95f96fcc9b4a74", null ],
+    [ "DXE_SPECIFICATION_MINOR_REVISION", "_pi_dxe_cis_8h.html#ae511bd2cc18b453fc7995cd6110f9029", null ],
+    [ "Capabilities", "_pi_dxe_cis_8h.html#a195bb05f6439f8ba41109fcfd11e5fad", null ],
+    [ "EFI_ADD_IO_SPACE", "_pi_dxe_cis_8h.html#af67f883a31e208b40584e352cc648954", null ],
+    [ "EFI_ADD_MEMORY_SPACE", "_pi_dxe_cis_8h.html#ac6ae83404605259cfdf461bbf42a9b0f", null ],
+    [ "EFI_ALLOCATE_IO_SPACE", "_pi_dxe_cis_8h.html#afed77e825a9eeff93f7a3909edfc3dca", null ],
+    [ "EFI_ALLOCATE_MEMORY_SPACE", "_pi_dxe_cis_8h.html#a2a8514cb3974c1073c487496a6d8bf05", null ],
+    [ "EFI_DISPATCH", "_pi_dxe_cis_8h.html#a0fb5c1c5a41e460bf5197e0f285bc25d", null ],
+    [ "EFI_DXE_SERVICES", "_pi_dxe_cis_8h.html#a49e89b9044b9027faf316e780d2a2a52", null ],
+    [ "EFI_FREE_IO_SPACE", "_pi_dxe_cis_8h.html#ae8b9e8f4a015ca8e5400272d8073fde2", null ],
+    [ "EFI_FREE_MEMORY_SPACE", "_pi_dxe_cis_8h.html#a33917315b77ea4aca31755f81f53ead5", null ],
+    [ "EFI_GET_IO_SPACE_DESCRIPTOR", "_pi_dxe_cis_8h.html#a7b5b86a83eb3a39285de44079415bd9b", null ],
+    [ "EFI_GET_IO_SPACE_MAP", "_pi_dxe_cis_8h.html#ac463c237ce5e74e51aaeafe89292afeb", null ],
+    [ "EFI_GET_MEMORY_SPACE_DESCRIPTOR", "_pi_dxe_cis_8h.html#a7e41c835ae33299b0933552e4f5105b1", null ],
+    [ "EFI_GET_MEMORY_SPACE_MAP", "_pi_dxe_cis_8h.html#ac84a15a86956eb32962f8b619e218a06", null ],
+    [ "EFI_PROCESS_FIRMWARE_VOLUME", "_pi_dxe_cis_8h.html#a9c20ccdc56b332f665960fb9ac8b2340", null ],
+    [ "EFI_REMOVE_IO_SPACE", "_pi_dxe_cis_8h.html#a6facd746a6e93229c907d7735227c47f", null ],
+    [ "EFI_REMOVE_MEMORY_SPACE", "_pi_dxe_cis_8h.html#aa4d71448807f5117f4dd67c5a3b28ac0", null ],
+    [ "EFI_SCHEDULE", "_pi_dxe_cis_8h.html#a017dbdc2ae4f3f85d700644b855c2cba", null ],
+    [ "EFI_SET_MEMORY_SPACE_ATTRIBUTES", "_pi_dxe_cis_8h.html#a16c5c2944974b723de3dfbce451b0acf", null ],
+    [ "EFI_TRUST", "_pi_dxe_cis_8h.html#a0453aef38aa1a1b20681a00f772538e4", null ],
+    [ "Length", "_pi_dxe_cis_8h.html#a90ecfe7991c161d4ec083a30d2992f16", null ],
+    [ "EFI_GCD_ALLOCATE_TYPE", "_pi_dxe_cis_8h.html#a67d2ef57c1e9bc0f5bd6131bb99f5e06", [
+      [ "EfiGcdAllocateAnySearchBottomUp", "_pi_dxe_cis_8h.html#a67d2ef57c1e9bc0f5bd6131bb99f5e06ad3b656c3a6de3422159971850b0bc1d8", null ],
+      [ "EfiGcdAllocateMaxAddressSearchBottomUp", "_pi_dxe_cis_8h.html#a67d2ef57c1e9bc0f5bd6131bb99f5e06a1bbb43d032b56d8f69bcec510dd68979", null ],
+      [ "EfiGcdAllocateAddress", "_pi_dxe_cis_8h.html#a67d2ef57c1e9bc0f5bd6131bb99f5e06acc1fdb7458e268050b67015d344831bd", null ],
+      [ "EfiGcdAllocateAnySearchTopDown", "_pi_dxe_cis_8h.html#a67d2ef57c1e9bc0f5bd6131bb99f5e06a4947e9a9cc8d732f129b42ac13882972", null ],
+      [ "EfiGcdAllocateMaxAddressSearchTopDown", "_pi_dxe_cis_8h.html#a67d2ef57c1e9bc0f5bd6131bb99f5e06a2a51e038a3e31d166de22035c7962bdf", null ],
+      [ "EfiGcdMaxAllocateType", "_pi_dxe_cis_8h.html#a67d2ef57c1e9bc0f5bd6131bb99f5e06aea65b03aaa6026be199d976d466d04d0", null ]
+    ] ],
+    [ "EFI_GCD_IO_TYPE", "_pi_dxe_cis_8h.html#a9ff34c627835f9a1dd8c165472aadaa4", [
+      [ "EfiGcdIoTypeNonExistent", "_pi_dxe_cis_8h.html#a9ff34c627835f9a1dd8c165472aadaa4a56660201e4efe8aef385db035d94f3b2", null ],
+      [ "EfiGcdIoTypeReserved", "_pi_dxe_cis_8h.html#a9ff34c627835f9a1dd8c165472aadaa4ad650cc0c0fbe4d593f7a557ad2c886e4", null ],
+      [ "EfiGcdIoTypeIo", "_pi_dxe_cis_8h.html#a9ff34c627835f9a1dd8c165472aadaa4af0784df447aa4453cc9364eb5d3e0c12", null ],
+      [ "EfiGcdIoTypeMaximum", "_pi_dxe_cis_8h.html#a9ff34c627835f9a1dd8c165472aadaa4a8ac4a9ae4fcf153824f29b21bc0942fd", null ]
+    ] ],
+    [ "EFI_GCD_MEMORY_TYPE", "_pi_dxe_cis_8h.html#a263eaceeed25e0fe0dfebd217a85f4f9", [
+      [ "EfiGcdMemoryTypeNonExistent", "_pi_dxe_cis_8h.html#a263eaceeed25e0fe0dfebd217a85f4f9a58a6c65f65623581eb7697d21db3d56f", null ],
+      [ "EfiGcdMemoryTypeReserved", "_pi_dxe_cis_8h.html#a263eaceeed25e0fe0dfebd217a85f4f9a23f0a24695d11552cdb4bf1c2bbe5950", null ],
+      [ "EfiGcdMemoryTypeSystemMemory", "_pi_dxe_cis_8h.html#a263eaceeed25e0fe0dfebd217a85f4f9ae8a8dca513bbab11db4a77040a0853c2", null ],
+      [ "EfiGcdMemoryTypeMemoryMappedIo", "_pi_dxe_cis_8h.html#a263eaceeed25e0fe0dfebd217a85f4f9aef7d29167bb0c213dafac9ecc7d8dd23", null ],
+      [ "EfiGcdMemoryTypePersistent", "_pi_dxe_cis_8h.html#a263eaceeed25e0fe0dfebd217a85f4f9a763bb8b36dd6747289405b12ebe343f2", null ],
+      [ "EfiGcdMemoryTypePersistentMemory", "_pi_dxe_cis_8h.html#a263eaceeed25e0fe0dfebd217a85f4f9af785199c1590281659a0fe3c2b246938", null ],
+      [ "EfiGcdMemoryTypeMoreReliable", "_pi_dxe_cis_8h.html#a263eaceeed25e0fe0dfebd217a85f4f9a97193669fd265c01b63b57b691dc96dc", null ],
+      [ "EfiGcdMemoryTypeMaximum", "_pi_dxe_cis_8h.html#a263eaceeed25e0fe0dfebd217a85f4f9aab4c110cc212c1d57214accb152b17c8", null ]
+    ] ],
+    [ "EFI_STATUS", "_pi_dxe_cis_8h.html#af446bf62984f66da18f401b430df7308", null ]
+];

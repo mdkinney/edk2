@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['gemublockioprotocolguid',['gEmuBlockIoProtocolGuid',['../_emu_block_io_8h.html#ac2c4ceb321847d56d132c8db07056905',1,'EmuBlockIo.h']]],
+  ['gemugraphicswindowprotocolguid',['gEmuGraphicsWindowProtocolGuid',['../_emu_file_system_8h.html#aa022f9f7a29c136325c4bc80b02ad7db',1,'gEmuGraphicsWindowProtocolGuid():&#160;EmuFileSystem.h'],['../_emu_graphics_window_8h.html#aa022f9f7a29c136325c4bc80b02ad7db',1,'gEmuGraphicsWindowProtocolGuid():&#160;EmuGraphicsWindow.h']]],
+  ['gemuiothunkprotocolguid',['gEmuIoThunkProtocolGuid',['../_emu_io_thunk_8h.html#aaa9ba8404c18de535aba0cd92eccb5f3',1,'EmuIoThunk.h']]],
+  ['gemuphysicaldisksguid',['gEmuPhysicalDisksGuid',['../_emu_physical_disk_8h.html#a6d4607742edda545289dfdbba8c55392',1,'EmuPhysicalDisk.h']]],
+  ['gemusnpprotocolguid',['gEmuSnpProtocolGuid',['../_emu_snp_8h.html#af615b6f6986a47714baa021e8dc7e923',1,'EmuSnp.h']]],
+  ['gemusystemconfigguid',['gEmuSystemConfigGuid',['../_emu_system_config_8h.html#ace86e2db75e9407ec958c49806fd20dd',1,'EmuSystemConfig.h']]],
+  ['gemuthreadthunkprotocolguid',['gEmuThreadThunkProtocolGuid',['../_emu_thread_8h.html#a303c08ccb6f4dfdba9b724a2e28a3ce0',1,'EmuThread.h']]],
+  ['gemuthunk',['gEmuThunk',['../_emu_thunk_lib_8h.html#a63a0052e52b1ecd1572b333825843581',1,'EmuThunkLib.h']]],
+  ['gemuthunkppiguid',['gEmuThunkPpiGuid',['../_ppi_2_emu_thunk_8h.html#a74882f03655b17e165d3bc3c61bcc1c9',1,'EmuThunk.h']]],
+  ['gemuthunkprotocolguid',['gEmuThunkProtocolGuid',['../_protocol_2_emu_thunk_8h.html#a31e6b765b66e0e063c777cfe5f20f4c2',1,'EmuThunk.h']]],
+  ['gemuvirtualdisksguid',['gEmuVirtualDisksGuid',['../_emu_virtual_disk_8h.html#aaadb8842c490c19cdd156376b2d40294',1,'EmuVirtualDisk.h']]],
+  ['getkey',['GetKey',['../struct___e_m_u___g_r_a_p_h_i_c_s___w_i_n_d_o_w___p_r_o_t_o_c_o_l.html#a9c6e67e8fce7b589b10d1fdff676502c',1,'_EMU_GRAPHICS_WINDOW_PROTOCOL']]],
+  ['getnextprotocol',['GetNextProtocol',['../struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a0811966ca1cf2963b4fd4d4dd1415fe1',1,'_EMU_THUNK_PROTOCOL']]],
+  ['getpointerstate',['GetPointerState',['../struct___e_m_u___g_r_a_p_h_i_c_s___w_i_n_d_o_w___p_r_o_t_o_c_o_l.html#a673d0567f35024fcb699c38f34eb8d2b',1,'_EMU_GRAPHICS_WINDOW_PROTOCOL']]],
+  ['getstatus',['GetStatus',['../struct___e_m_u___s_n_p___p_r_o_t_o_c_o_l.html#a5d4aa33c87e64293d15cbe10b4e71d1b',1,'_EMU_SNP_PROTOCOL']]],
+  ['gettime',['GetTime',['../struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#aa5c86e871045fcadf267ecc0e7eea415',1,'_EMU_THUNK_PROTOCOL']]],
+  ['gppilist',['gPpiList',['../_ppi_list_lib_8h.html#a3162b1ed732c5427586d37e9694ae722',1,'PpiListLib.h']]],
+  ['gsmbios',['gSmbios',['../_smbios_lib_8h.html#a2a7df70332d318e776087380cbcbb0ba',1,'SmbiosLib.h']]]
+];

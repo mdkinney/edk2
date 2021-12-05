@@ -1,0 +1,6 @@
+var struct_e_f_i___a_c_p_i__5__0___p_m_m_t___s_o_c_k_e_t___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e =
+[
+    [ "Header", "struct_e_f_i___a_c_p_i__5__0___p_m_m_t___s_o_c_k_e_t___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e.html#a6783e9000f3ddf1761182fa6120e33c0", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__5__0___p_m_m_t___s_o_c_k_e_t___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e.html#af97a2f233523e68b72a52ea63dfd0215", null ],
+    [ "SocketIdentifier", "struct_e_f_i___a_c_p_i__5__0___p_m_m_t___s_o_c_k_e_t___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e.html#ac8eb887488da09d447fce224b6d8cf00", null ]
+];

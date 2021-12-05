@@ -1,0 +1,1562 @@
+/** \mainpage UefiCpuPkg Package Document
+ This Package provides UEFI compatible CPU modules and libraries.<br>
+<br>
+ Copyright (c) 2007 - 2021, Intel Corporation. All rights reserved.<BR><br>
+<br>
+ SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>2171df9b-0d39-45aa-ac37-2de190010d23</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage UefiCpuPkg_public_includes "Public Includes" </li>
+<li>\subpage UefiCpuPkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+<li>\subpage ppi_root_page "PPI" </li>
+<li>\subpage protocol_root_page "PROTOCOL" </li>
+</ul>
+ **/
+/** \page UefiCpuPkg_public_includes Public Includes
+<p> \section content_index INDEX
+<ul>
+<li>\subpage public_include_top "UefiCpuPkg/Include" </li>
+<li>\subpage public_include_Register "UefiCpuPkg/Include/Register" </li>
+</ul>
+ **/
+/** \page public_include_top UefiCpuPkg/Include
+<ul>
+<li> \link UefiCpuPkg/Include/StuffRsbNasm.inc\endlink </li>
+<li> \link UefiCpuPkg/Include/AcpiCpuData.h\endlink </li>
+<li> \link UefiCpuPkg/Include/CpuHotPlugData.h\endlink </li>
+</ul>
+
+ **/
+/** \page public_include_Register UefiCpuPkg/Include/Register
+<ul>
+<li> \link UefiCpuPkg/Include/Register/Cpuid.h \endlink </li>
+<li> \link UefiCpuPkg/Include/Register/SmramSaveStateMap.h \endlink </li>
+<li> \link UefiCpuPkg/Include/Register/ArchitecturalMsr.h \endlink </li>
+<li> \link UefiCpuPkg/Include/Register/Microcode.h \endlink </li>
+<li> \link UefiCpuPkg/Include/Register/LocalApic.h \endlink </li>
+<li> \link UefiCpuPkg/Include/Register/StmApi.h \endlink </li>
+<li> \link UefiCpuPkg/Include/Register/Msr.h \endlink </li>
+</ul>
+
+ **/
+/** \page UefiCpuPkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+<li>\subpage lc_IA32 "IA32" </li>
+<li>\subpage lc_X64 "X64" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_RegisterCpuFeaturesLib "RegisterCpuFeaturesLib" </li>
+<li>\subpage lc_UefiCpuLib "UefiCpuLib" </li>
+</ul>
+ **/
+/** \page lc_RegisterCpuFeaturesLib RegisterCpuFeaturesLib
+\copydoc Include/Library/RegisterCpuFeaturesLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/RegisterCpuFeaturesLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_UefiCpuLib UefiCpuLib
+\copydoc Include/Library/UefiCpuLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/UefiCpuLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_IA32 IA32
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_CpuCacheInfoLib "CpuCacheInfoLib" </li>
+<li>\subpage lc_LocalApicLib "LocalApicLib" </li>
+<li>\subpage lc_MicrocodeLib "MicrocodeLib" </li>
+<li>\subpage lc_MpInitLib "MpInitLib" </li>
+<li>\subpage lc_MtrrLib "MtrrLib" </li>
+<li>\subpage lc_PlatformSecLib "PlatformSecLib" </li>
+<li>\subpage lc_SmmCpuFeaturesLib "SmmCpuFeaturesLib" </li>
+<li>\subpage lc_SmmCpuPlatformHookLib "SmmCpuPlatformHookLib" </li>
+<li>\subpage lc_VmgExitLib "VmgExitLib" </li>
+</ul>
+ **/
+/** \page lc_CpuCacheInfoLib CpuCacheInfoLib
+  @libraryclass  Provides function to get CPU cache information.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/CpuCacheInfoLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_LocalApicLib LocalApicLib
+\copydoc Include/Library/LocalApicLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/LocalApicLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_MicrocodeLib MicrocodeLib
+  @libraryclass  Provides function for loading microcode.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/MicrocodeLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_MpInitLib MpInitLib
+\copydoc Include/Library/MpInitLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/MpInitLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_MtrrLib MtrrLib
+\copydoc Include/Library/MtrrLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/MtrrLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_PlatformSecLib PlatformSecLib
+\copydoc Include/Library/PlatformSecLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/PlatformSecLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_SmmCpuFeaturesLib SmmCpuFeaturesLib
+\copydoc Include/Library/SmmCpuFeaturesLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/SmmCpuFeaturesLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_SmmCpuPlatformHookLib SmmCpuPlatformHookLib
+\copydoc Include/Library/SmmCpuPlatformHookLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/SmmCpuPlatformHookLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_VmgExitLib VmgExitLib
+  @libraryclass  Provides function to support VMGEXIT processing.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/VmgExitLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_X64 X64
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_CpuCacheInfoLib "CpuCacheInfoLib" </li>
+<li>\subpage lc_LocalApicLib "LocalApicLib" </li>
+<li>\subpage lc_MicrocodeLib "MicrocodeLib" </li>
+<li>\subpage lc_MpInitLib "MpInitLib" </li>
+<li>\subpage lc_MtrrLib "MtrrLib" </li>
+<li>\subpage lc_PlatformSecLib "PlatformSecLib" </li>
+<li>\subpage lc_SmmCpuFeaturesLib "SmmCpuFeaturesLib" </li>
+<li>\subpage lc_SmmCpuPlatformHookLib "SmmCpuPlatformHookLib" </li>
+<li>\subpage lc_VmgExitLib "VmgExitLib" </li>
+</ul>
+ **/
+/** \page lc_CpuCacheInfoLib CpuCacheInfoLib
+  @libraryclass  Provides function to get CPU cache information.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/CpuCacheInfoLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_LocalApicLib LocalApicLib
+\copydoc Include/Library/LocalApicLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/LocalApicLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_MicrocodeLib MicrocodeLib
+  @libraryclass  Provides function for loading microcode.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/MicrocodeLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_MpInitLib MpInitLib
+\copydoc Include/Library/MpInitLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/MpInitLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_MtrrLib MtrrLib
+\copydoc Include/Library/MtrrLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/MtrrLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_PlatformSecLib PlatformSecLib
+\copydoc Include/Library/PlatformSecLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/PlatformSecLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_SmmCpuFeaturesLib SmmCpuFeaturesLib
+\copydoc Include/Library/SmmCpuFeaturesLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/SmmCpuFeaturesLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_SmmCpuPlatformHookLib SmmCpuPlatformHookLib
+\copydoc Include/Library/SmmCpuPlatformHookLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/SmmCpuPlatformHookLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_VmgExitLib VmgExitLib
+  @libraryclass  Provides function to support VMGEXIT processing.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/VmgExitLib.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_root_page "PcdsDynamic" </li>
+<li>\subpage pcd_PcdsDynamicEx_root_page "PcdsDynamicEx" </li>
+<li>\subpage pcd_PcdsFeatureFlag_root_page "PcdsFeatureFlag" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+<li>\subpage pcd_PcdsPatchableInModule_root_page "PcdsPatchableInModule" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_root_page PcdsDynamic
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_root_page "common" </li>
+<li>\subpage pcd_PcdsDynamic_X64_root_page "X64" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuApInitTimeOutInMicroSeconds "gUefiCpuPkgTokenSpaceGuid.PcdCpuApInitTimeOutInMicroSeconds" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuApLoopMode "gUefiCpuPkgTokenSpaceGuid.PcdCpuApLoopMode" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuApTargetCstate "gUefiCpuPkgTokenSpaceGuid.PcdCpuApTargetCstate" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuBootLogicalProcessorNumber "gUefiCpuPkgTokenSpaceGuid.PcdCpuBootLogicalProcessorNumber" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuClockModulationDutyCycle "gUefiCpuPkgTokenSpaceGuid.PcdCpuClockModulationDutyCycle" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuFeaturesCapability "gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesCapability" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuFeaturesSetting "gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesSetting" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuHotPlugDataAddress "gUefiCpuPkgTokenSpaceGuid.PcdCpuHotPlugDataAddress" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuMaxLogicalProcessorNumber "gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuMicrocodePatchAddress "gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchAddress" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuMicrocodePatchRegionSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchRegionSize" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuProcTraceMemSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuProcTraceMemSize" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuProcTraceOutputScheme "gUefiCpuPkgTokenSpaceGuid.PcdCpuProcTraceOutputScheme" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuS3DataAddress "gUefiCpuPkgTokenSpaceGuid.PcdCpuS3DataAddress" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuSmmApSyncTimeout "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmApSyncTimeout" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuSmmSyncMode "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmSyncMode" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdIsPowerOnReset "gUefiCpuPkgTokenSpaceGuid.PcdIsPowerOnReset" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdSevEsIsEnabled "gUefiCpuPkgTokenSpaceGuid.PcdSevEsIsEnabled" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuApInitTimeOutInMicroSeconds gUefiCpuPkgTokenSpaceGuid.PcdCpuApInitTimeOutInMicroSeconds
+ Specifies timeout value in microseconds for the BSP to detect all APs for the first time.<br>
+ @Prompt Timeout for the BSP to detect all APs for the first time.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApInitTimeOutInMicroSeconds</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000004</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>50000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuApLoopMode gUefiCpuPkgTokenSpaceGuid.PcdCpuApLoopMode
+ Specifies the AP wait loop state during POST phase.<br>
+  The value is defined as below.<BR><BR><br>
+  1: Place AP in the Hlt-Loop state.<BR><br>
+  2: Place AP in the Mwait-Loop state.<BR><br>
+  3: Place AP in the Run-Loop state.<BR><br>
+ @Prompt The AP wait loop state.<br>
+ @ValidRange  0x80000001 | 1 - 3<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApLoopMode</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60008006</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>1</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuApTargetCstate gUefiCpuPkgTokenSpaceGuid.PcdCpuApTargetCstate
+ Specifies the AP target C-state for Mwait during POST phase.<br>
+  The default value 0 means C1 state.<br>
+  The value is defined as below.<BR><BR><br>
+ @Prompt The specified AP target C-state for Mwait.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApTargetCstate</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000007</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuBootLogicalProcessorNumber gUefiCpuPkgTokenSpaceGuid.PcdCpuBootLogicalProcessorNumber
+ Specifies the number of Logical Processors that are available in the<br>
+  preboot environment after platform reset, including BSP and APs. Possible<br>
+  values:<BR><BR><br>
+  zero (default) - PcdCpuBootLogicalProcessorNumber is ignored, and<br>
+                   PcdCpuApInitTimeOutInMicroSeconds limits the initial AP<br>
+                   detection by the BSP.<BR><br>
+  nonzero        - PcdCpuApInitTimeOutInMicroSeconds is ignored. The initial<br>
+                   AP detection finishes only when the detected CPU count<br>
+                   (BSP plus APs) reaches the value of<br>
+                   PcdCpuBootLogicalProcessorNumber, regardless of how long<br>
+                   that takes.<BR><br>
+ @Prompt Number of Logical Processors available after platform reset.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuBootLogicalProcessorNumber</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000008</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuClockModulationDutyCycle gUefiCpuPkgTokenSpaceGuid.PcdCpuClockModulationDutyCycle
+ Specifies the On-demand clock modulation duty cycle when ACPI feature is enabled.<br>
+ @Prompt The encoded values for target duty cycle modulation.<br>
+ @ValidRange  0x80000001 | 0 - 15<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuClockModulationDutyCycle</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001A</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuFeaturesCapability gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesCapability
+ Indicates processor feature capabilities, each bit corresponding to a specific feature.<br>
+ @Prompt Processor feature capabilities.<br>
+ @ValidList   0x80000001 | 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuFeaturesCapability</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000018</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuFeaturesSetting gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesSetting
+ As output, specifies actual settings for processor features, each bit corresponding to a specific feature.<br>
+ @Prompt As input, specifies user's desired processor feature settings. As output, specifies actual processor feature settings.<br>
+ @ValidList   0x80000001 | 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuFeaturesSetting</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000019</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuHotPlugDataAddress gUefiCpuPkgTokenSpaceGuid.PcdCpuHotPlugDataAddress
+ Contains the pointer to a CPU Hot Plug Data structure if CPU hot-plug is supported.<br>
+ @Prompt The pointer to CPU Hot Plug Data.<br>
+ @ValidList   0x80000001 | 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuHotPlugDataAddress</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000011</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuMaxLogicalProcessorNumber gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber
+ Specifies max supported number of Logical Processors.<br>
+ @Prompt Configure max supported number of Logical Processors<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuMaxLogicalProcessorNumber</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>64</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuMicrocodePatchAddress gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchAddress
+ Specifies the base address of the first microcode Patch in the microcode Region.<br>
+ @Prompt Microcode Region base address.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuMicrocodePatchAddress</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000005</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuMicrocodePatchRegionSize gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchRegionSize
+ Specifies the size of the microcode Region.<br>
+ @Prompt Microcode Region size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuMicrocodePatchRegionSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000006</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuProcTraceMemSize gUefiCpuPkgTokenSpaceGuid.PcdCpuProcTraceMemSize
+ Contains the size of memory required when CPU processor trace is enabled.<BR><BR><br>
+  Processor trace is enabled through set BIT44(CPU_FEATURE_PROC_TRACE) in PcdCpuFeaturesSetting.<BR><BR><br>
+  This PCD is ignored if CPU processor trace is disabled.<BR><BR><br>
+  Default value is 0x00 which means 4KB of memory is allocated if CPU processor trace is enabled.<BR><br>
+  0x0  -  4K.<BR><br>
+  0x1  -  8K.<BR><br>
+  0x2  -  16K.<BR><br>
+  0x3  -  32K.<BR><br>
+  0x4  -  64K.<BR><br>
+  0x5  -  128K.<BR><br>
+  0x6  -  256K.<BR><br>
+  0x7  -  512K.<BR><br>
+  0x8  -  1M.<BR><br>
+  0x9  -  2M.<BR><br>
+  0xA  -  4M.<BR><br>
+  0xB  -  8M.<BR><br>
+  0xC  -  16M.<BR><br>
+  0xD  -  32M.<BR><br>
+  0xE  -  64M.<BR><br>
+  0xF  -  128M.<BR><br>
+ @Prompt The memory size used for processor trace if processor trace is enabled.<br>
+ @ValidRange  0x80000001 | 0 - 0xF<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuProcTraceMemSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000012</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuProcTraceOutputScheme gUefiCpuPkgTokenSpaceGuid.PcdCpuProcTraceOutputScheme
+ Contains the processor trace output scheme when CPU processor trace is enabled.<BR><BR><br>
+  Processor trace is enabled through set BIT44(CPU_FEATURE_PROC_TRACE) in PcdCpuFeaturesSetting.<BR><BR><br>
+  This PCD is ignored if CPU processor trace is disabled.<BR><BR><br>
+  Default value is 0 which means single range output scheme will be used if CPU processor trace is enabled.<BR><br>
+  0 - Single Range output scheme.<BR><br>
+  1 - ToPA(Table of physical address) scheme.<BR><br>
+ @Prompt The processor trace output scheme used when processor trace is enabled.<br>
+ @ValidRange  0x80000001 | 0 - 1<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuProcTraceOutputScheme</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000015</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuS3DataAddress gUefiCpuPkgTokenSpaceGuid.PcdCpuS3DataAddress
+ Contains the pointer to a CPU S3 data buffer of structure ACPI_CPU_DATA.<br>
+ @Prompt The pointer to a CPU S3 data buffer.<br>
+ @ValidList   0x80000001 | 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuS3DataAddress</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000010</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuSmmApSyncTimeout gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmApSyncTimeout
+ Specifies timeout value in microseconds for the BSP in SMM to wait for all APs to come into SMM.<br>
+ @Prompt AP synchronization timeout value in SMM.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmApSyncTimeout</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132104</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>1000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuSmmSyncMode gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmSyncMode
+ Indicates the CPU synchronization method used when processing an SMI.<br>
+   0x00  - Traditional CPU synchronization method.<BR><br>
+   0x01  - Relaxed CPU synchronization method.<BR><br>
+ @Prompt SMM CPU Synchronization Method.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmSyncMode</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000014</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x00</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdIsPowerOnReset gUefiCpuPkgTokenSpaceGuid.PcdIsPowerOnReset
+ Indicates if the current boot is a power-on reset.<BR><BR><br>
+   TRUE  - Current boot is a power-on reset.<BR><br>
+   FALSE - Current boot is not a power-on reset.<BR><br>
+ @Prompt Current boot is a power-on reset.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIsPowerOnReset</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001B</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdSevEsIsEnabled gUefiCpuPkgTokenSpaceGuid.PcdSevEsIsEnabled
+ This dynamic PCD indicates whether SEV-ES is enabled<br>
+   TRUE  - SEV-ES is enabled<br>
+   FALSE - SEV-ES is not enabled<br>
+ @Prompt SEV-ES Status<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSevEsIsEnabled</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000016</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_X64_root_page X64
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_X64_PcdCpuSmmRestrictedMemoryAccess "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmRestrictedMemoryAccess" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_X64_PcdCpuSmmRestrictedMemoryAccess gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmRestrictedMemoryAccess
+ Indicate access to non-SMRAM memory is restricted to reserved, runtime and ACPI NVS type after SmmReadyToLock.<br>
+  MMIO access is always allowed regardless of the value of this PCD.<br>
+  Loose of such restriction is only required by RAS components in X64 platforms.<br>
+  The PCD value is considered as constantly TRUE in IA32 platforms.<br>
+  When the PCD value is TRUE, page table is initialized to cover all memory spaces<br>
+  and the memory occupied by page table is protected by page table itself as read-only.<br>
+  In X64 build, it cannot be enabled at the same time with SMM profile feature (PcdCpuSmmProfileEnable).<br>
+  In X64 build, it could not be enabled also at the same time with heap guard feature for SMM<br>
+  (PcdHeapGuardPropertyMask in MdeModulePkg).<br>
+  In IA32 build, page table memory is not marked as read-only when either SMM profile feature (PcdCpuSmmProfileEnable)<br>
+  or heap guard feature for SMM (PcdHeapGuardPropertyMask in MdeModulePkg) is enabled.<br>
+   TRUE  - Access to non-SMRAM memory is restricted to reserved, runtime and ACPI NVS type after SmmReadyToLock.<BR><br>
+   FALSE - Access to any type of non-SMRAM memory after SmmReadyToLock is allowed.<BR><br>
+ @Prompt Access to non-SMRAM memory is restricted to reserved, runtime and ACPI NVS type after SmmReadyToLock.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmRestrictedMemoryAccess</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3213210F</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_root_page PcdsDynamicEx
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_root_page "common" </li>
+<li>\subpage pcd_PcdsDynamicEx_X64_root_page "X64" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuApInitTimeOutInMicroSeconds "gUefiCpuPkgTokenSpaceGuid.PcdCpuApInitTimeOutInMicroSeconds" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuApLoopMode "gUefiCpuPkgTokenSpaceGuid.PcdCpuApLoopMode" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuApTargetCstate "gUefiCpuPkgTokenSpaceGuid.PcdCpuApTargetCstate" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuBootLogicalProcessorNumber "gUefiCpuPkgTokenSpaceGuid.PcdCpuBootLogicalProcessorNumber" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuClockModulationDutyCycle "gUefiCpuPkgTokenSpaceGuid.PcdCpuClockModulationDutyCycle" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuFeaturesCapability "gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesCapability" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuFeaturesSetting "gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesSetting" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuHotPlugDataAddress "gUefiCpuPkgTokenSpaceGuid.PcdCpuHotPlugDataAddress" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuMaxLogicalProcessorNumber "gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuMicrocodePatchAddress "gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchAddress" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuMicrocodePatchRegionSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchRegionSize" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuProcTraceMemSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuProcTraceMemSize" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuProcTraceOutputScheme "gUefiCpuPkgTokenSpaceGuid.PcdCpuProcTraceOutputScheme" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuS3DataAddress "gUefiCpuPkgTokenSpaceGuid.PcdCpuS3DataAddress" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuSmmApSyncTimeout "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmApSyncTimeout" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuSmmSyncMode "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmSyncMode" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdIsPowerOnReset "gUefiCpuPkgTokenSpaceGuid.PcdIsPowerOnReset" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdSevEsIsEnabled "gUefiCpuPkgTokenSpaceGuid.PcdSevEsIsEnabled" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuApInitTimeOutInMicroSeconds gUefiCpuPkgTokenSpaceGuid.PcdCpuApInitTimeOutInMicroSeconds
+ Specifies timeout value in microseconds for the BSP to detect all APs for the first time.<br>
+ @Prompt Timeout for the BSP to detect all APs for the first time.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApInitTimeOutInMicroSeconds</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000004</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>50000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuApLoopMode gUefiCpuPkgTokenSpaceGuid.PcdCpuApLoopMode
+ Specifies the AP wait loop state during POST phase.<br>
+  The value is defined as below.<BR><BR><br>
+  1: Place AP in the Hlt-Loop state.<BR><br>
+  2: Place AP in the Mwait-Loop state.<BR><br>
+  3: Place AP in the Run-Loop state.<BR><br>
+ @Prompt The AP wait loop state.<br>
+ @ValidRange  0x80000001 | 1 - 3<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApLoopMode</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60008006</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>1</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuApTargetCstate gUefiCpuPkgTokenSpaceGuid.PcdCpuApTargetCstate
+ Specifies the AP target C-state for Mwait during POST phase.<br>
+  The default value 0 means C1 state.<br>
+  The value is defined as below.<BR><BR><br>
+ @Prompt The specified AP target C-state for Mwait.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApTargetCstate</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000007</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuBootLogicalProcessorNumber gUefiCpuPkgTokenSpaceGuid.PcdCpuBootLogicalProcessorNumber
+ Specifies the number of Logical Processors that are available in the<br>
+  preboot environment after platform reset, including BSP and APs. Possible<br>
+  values:<BR><BR><br>
+  zero (default) - PcdCpuBootLogicalProcessorNumber is ignored, and<br>
+                   PcdCpuApInitTimeOutInMicroSeconds limits the initial AP<br>
+                   detection by the BSP.<BR><br>
+  nonzero        - PcdCpuApInitTimeOutInMicroSeconds is ignored. The initial<br>
+                   AP detection finishes only when the detected CPU count<br>
+                   (BSP plus APs) reaches the value of<br>
+                   PcdCpuBootLogicalProcessorNumber, regardless of how long<br>
+                   that takes.<BR><br>
+ @Prompt Number of Logical Processors available after platform reset.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuBootLogicalProcessorNumber</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000008</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuClockModulationDutyCycle gUefiCpuPkgTokenSpaceGuid.PcdCpuClockModulationDutyCycle
+ Specifies the On-demand clock modulation duty cycle when ACPI feature is enabled.<br>
+ @Prompt The encoded values for target duty cycle modulation.<br>
+ @ValidRange  0x80000001 | 0 - 15<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuClockModulationDutyCycle</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001A</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuFeaturesCapability gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesCapability
+ Indicates processor feature capabilities, each bit corresponding to a specific feature.<br>
+ @Prompt Processor feature capabilities.<br>
+ @ValidList   0x80000001 | 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuFeaturesCapability</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000018</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuFeaturesSetting gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesSetting
+ As output, specifies actual settings for processor features, each bit corresponding to a specific feature.<br>
+ @Prompt As input, specifies user's desired processor feature settings. As output, specifies actual processor feature settings.<br>
+ @ValidList   0x80000001 | 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuFeaturesSetting</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000019</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuHotPlugDataAddress gUefiCpuPkgTokenSpaceGuid.PcdCpuHotPlugDataAddress
+ Contains the pointer to a CPU Hot Plug Data structure if CPU hot-plug is supported.<br>
+ @Prompt The pointer to CPU Hot Plug Data.<br>
+ @ValidList   0x80000001 | 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuHotPlugDataAddress</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000011</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuMaxLogicalProcessorNumber gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber
+ Specifies max supported number of Logical Processors.<br>
+ @Prompt Configure max supported number of Logical Processors<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuMaxLogicalProcessorNumber</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>64</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuMicrocodePatchAddress gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchAddress
+ Specifies the base address of the first microcode Patch in the microcode Region.<br>
+ @Prompt Microcode Region base address.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuMicrocodePatchAddress</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000005</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuMicrocodePatchRegionSize gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchRegionSize
+ Specifies the size of the microcode Region.<br>
+ @Prompt Microcode Region size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuMicrocodePatchRegionSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000006</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuProcTraceMemSize gUefiCpuPkgTokenSpaceGuid.PcdCpuProcTraceMemSize
+ Contains the size of memory required when CPU processor trace is enabled.<BR><BR><br>
+  Processor trace is enabled through set BIT44(CPU_FEATURE_PROC_TRACE) in PcdCpuFeaturesSetting.<BR><BR><br>
+  This PCD is ignored if CPU processor trace is disabled.<BR><BR><br>
+  Default value is 0x00 which means 4KB of memory is allocated if CPU processor trace is enabled.<BR><br>
+  0x0  -  4K.<BR><br>
+  0x1  -  8K.<BR><br>
+  0x2  -  16K.<BR><br>
+  0x3  -  32K.<BR><br>
+  0x4  -  64K.<BR><br>
+  0x5  -  128K.<BR><br>
+  0x6  -  256K.<BR><br>
+  0x7  -  512K.<BR><br>
+  0x8  -  1M.<BR><br>
+  0x9  -  2M.<BR><br>
+  0xA  -  4M.<BR><br>
+  0xB  -  8M.<BR><br>
+  0xC  -  16M.<BR><br>
+  0xD  -  32M.<BR><br>
+  0xE  -  64M.<BR><br>
+  0xF  -  128M.<BR><br>
+ @Prompt The memory size used for processor trace if processor trace is enabled.<br>
+ @ValidRange  0x80000001 | 0 - 0xF<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuProcTraceMemSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000012</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuProcTraceOutputScheme gUefiCpuPkgTokenSpaceGuid.PcdCpuProcTraceOutputScheme
+ Contains the processor trace output scheme when CPU processor trace is enabled.<BR><BR><br>
+  Processor trace is enabled through set BIT44(CPU_FEATURE_PROC_TRACE) in PcdCpuFeaturesSetting.<BR><BR><br>
+  This PCD is ignored if CPU processor trace is disabled.<BR><BR><br>
+  Default value is 0 which means single range output scheme will be used if CPU processor trace is enabled.<BR><br>
+  0 - Single Range output scheme.<BR><br>
+  1 - ToPA(Table of physical address) scheme.<BR><br>
+ @Prompt The processor trace output scheme used when processor trace is enabled.<br>
+ @ValidRange  0x80000001 | 0 - 1<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuProcTraceOutputScheme</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000015</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuS3DataAddress gUefiCpuPkgTokenSpaceGuid.PcdCpuS3DataAddress
+ Contains the pointer to a CPU S3 data buffer of structure ACPI_CPU_DATA.<br>
+ @Prompt The pointer to a CPU S3 data buffer.<br>
+ @ValidList   0x80000001 | 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuS3DataAddress</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000010</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuSmmApSyncTimeout gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmApSyncTimeout
+ Specifies timeout value in microseconds for the BSP in SMM to wait for all APs to come into SMM.<br>
+ @Prompt AP synchronization timeout value in SMM.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmApSyncTimeout</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132104</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>1000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuSmmSyncMode gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmSyncMode
+ Indicates the CPU synchronization method used when processing an SMI.<br>
+   0x00  - Traditional CPU synchronization method.<BR><br>
+   0x01  - Relaxed CPU synchronization method.<BR><br>
+ @Prompt SMM CPU Synchronization Method.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmSyncMode</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000014</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x00</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdIsPowerOnReset gUefiCpuPkgTokenSpaceGuid.PcdIsPowerOnReset
+ Indicates if the current boot is a power-on reset.<BR><BR><br>
+   TRUE  - Current boot is a power-on reset.<BR><br>
+   FALSE - Current boot is not a power-on reset.<BR><br>
+ @Prompt Current boot is a power-on reset.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIsPowerOnReset</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001B</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdSevEsIsEnabled gUefiCpuPkgTokenSpaceGuid.PcdSevEsIsEnabled
+ This dynamic PCD indicates whether SEV-ES is enabled<br>
+   TRUE  - SEV-ES is enabled<br>
+   FALSE - SEV-ES is not enabled<br>
+ @Prompt SEV-ES Status<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSevEsIsEnabled</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000016</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_X64_root_page X64
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_X64_PcdCpuSmmRestrictedMemoryAccess "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmRestrictedMemoryAccess" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_X64_PcdCpuSmmRestrictedMemoryAccess gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmRestrictedMemoryAccess
+ Indicate access to non-SMRAM memory is restricted to reserved, runtime and ACPI NVS type after SmmReadyToLock.<br>
+  MMIO access is always allowed regardless of the value of this PCD.<br>
+  Loose of such restriction is only required by RAS components in X64 platforms.<br>
+  The PCD value is considered as constantly TRUE in IA32 platforms.<br>
+  When the PCD value is TRUE, page table is initialized to cover all memory spaces<br>
+  and the memory occupied by page table is protected by page table itself as read-only.<br>
+  In X64 build, it cannot be enabled at the same time with SMM profile feature (PcdCpuSmmProfileEnable).<br>
+  In X64 build, it could not be enabled also at the same time with heap guard feature for SMM<br>
+  (PcdHeapGuardPropertyMask in MdeModulePkg).<br>
+  In IA32 build, page table memory is not marked as read-only when either SMM profile feature (PcdCpuSmmProfileEnable)<br>
+  or heap guard feature for SMM (PcdHeapGuardPropertyMask in MdeModulePkg) is enabled.<br>
+   TRUE  - Access to non-SMRAM memory is restricted to reserved, runtime and ACPI NVS type after SmmReadyToLock.<BR><br>
+   FALSE - Access to any type of non-SMRAM memory after SmmReadyToLock is allowed.<BR><br>
+ @Prompt Access to non-SMRAM memory is restricted to reserved, runtime and ACPI NVS type after SmmReadyToLock.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmRestrictedMemoryAccess</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3213210F</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_root_page PcdsFeatureFlag
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdCpuHotPlugSupport "gUefiCpuPkgTokenSpaceGuid.PcdCpuHotPlugSupport" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdCpuSmmBlockStartupThisAp "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmBlockStartupThisAp" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdCpuSmmDebug "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmDebug" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdCpuSmmEnableBspElection "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmEnableBspElection" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdCpuSmmFeatureControlMsrLock "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmFeatureControlMsrLock" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdCpuSmmProfileEnable "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmProfileEnable" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdCpuSmmProfileRingBuffer "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmProfileRingBuffer" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdCpuSmmStackGuard "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmStackGuard" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdCpuHotPlugSupport gUefiCpuPkgTokenSpaceGuid.PcdCpuHotPlugSupport
+ Indicates if CPU SMM hot-plug will be enabled.<BR><BR><br>
+   TRUE  - SMM CPU hot-plug will be enabled.<BR><br>
+   FALSE - SMM CPU hot-plug will be disabled.<BR><br>
+ @Prompt SMM CPU hot-plug.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuHotPlugSupport</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3213210C</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdCpuSmmBlockStartupThisAp gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmBlockStartupThisAp
+ Indicates if SMM Startup AP in a blocking fashion.<br>
+   TRUE  - SMM Startup AP in a blocking fashion.<BR><br>
+   FALSE - SMM Startup AP in a non-blocking fashion.<BR><br>
+ @Prompt SMM Startup AP in a blocking fashion.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmBlockStartupThisAp</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132108</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdCpuSmmDebug gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmDebug
+ Indicates if SMM Debug will be enabled.<br>
+  If enabled, hardware breakpoints in SMRAM can be set outside of SMM mode and take effect in SMM.<BR><BR><br>
+   TRUE  - SMM Debug will be enabled.<BR><br>
+   FALSE - SMM Debug will be disabled.<BR><br>
+ @Prompt Enable SMM Debug.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmDebug</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1000001B</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdCpuSmmEnableBspElection gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmEnableBspElection
+ Indicates if BSP election in SMM will be enabled.<br>
+  If enabled, a BSP will be dynamically elected among all processors in each SMI.<br>
+  Otherwise, processor 0 is always as BSP in each SMI.<BR><BR><br>
+   TRUE  - BSP election in SMM will be enabled.<BR><br>
+   FALSE - BSP election in SMM will be disabled.<BR><br>
+ @Prompt Enable BSP election in SMM.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmEnableBspElection</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132106</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdCpuSmmFeatureControlMsrLock gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmFeatureControlMsrLock
+ Indicates if lock SMM Feature Control MSR.<BR><BR><br>
+   TRUE  - SMM Feature Control MSR will be locked.<BR><br>
+   FALSE - SMM Feature Control MSR will not be locked.<BR><br>
+ @Prompt Lock SMM Feature Control MSR.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmFeatureControlMsrLock</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3213210B</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdCpuSmmProfileEnable gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmProfileEnable
+ Indicates if SMM Profile will be enabled.<br>
+  If enabled, instruction executions in and data accesses to memory outside of SMRAM will be logged.<br>
+  In X64 build, it could not be enabled when PcdCpuSmmRestrictedMemoryAccess is TRUE.<br>
+  In IA32 build, the page table memory is not marked as read-only when it is enabled.<br>
+  This PCD is only for validation purpose. It should be set to false in production.<BR><BR><br>
+   TRUE  - SMM Profile will be enabled.<BR><br>
+   FALSE - SMM Profile will be disabled.<BR><br>
+ @Prompt Enable SMM Profile.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmProfileEnable</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132109</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdCpuSmmProfileRingBuffer gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmProfileRingBuffer
+ Indicates if the SMM profile log buffer is a ring buffer.<br>
+  If disabled, no additional log can be done when the buffer is full.<BR><BR><br>
+   TRUE  - the SMM profile log buffer is a ring buffer.<BR><br>
+   FALSE - the SMM profile log buffer is a normal buffer.<BR><br>
+ @Prompt The SMM profile log buffer is a ring buffer.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmProfileRingBuffer</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3213210a</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdCpuSmmStackGuard gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmStackGuard
+ Indicates if SMM Stack Guard will be enabled.<br>
+  If enabled, stack overflow in SMM can be caught, preventing chaotic consequences.<BR><BR><br>
+   TRUE  - SMM Stack Guard will be enabled.<BR><br>
+   FALSE - SMM Stack Guard will be disabled.<BR><br>
+ @Prompt Enable SMM Stack Guard.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmStackGuard</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1000001C</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_X64_root_page "X64" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuApInitTimeOutInMicroSeconds "gUefiCpuPkgTokenSpaceGuid.PcdCpuApInitTimeOutInMicroSeconds" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuApLoopMode "gUefiCpuPkgTokenSpaceGuid.PcdCpuApLoopMode" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuApStackSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuApStackSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuApStatusCheckIntervalInMicroSeconds "gUefiCpuPkgTokenSpaceGuid.PcdCpuApStatusCheckIntervalInMicroSeconds" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuApTargetCstate "gUefiCpuPkgTokenSpaceGuid.PcdCpuApTargetCstate" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuBootLogicalProcessorNumber "gUefiCpuPkgTokenSpaceGuid.PcdCpuBootLogicalProcessorNumber" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuClockModulationDutyCycle "gUefiCpuPkgTokenSpaceGuid.PcdCpuClockModulationDutyCycle" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuCoreCrystalClockFrequency "gUefiCpuPkgTokenSpaceGuid.PcdCpuCoreCrystalClockFrequency" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuFeaturesInitAfterSmmRelocation "gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesInitAfterSmmRelocation" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuFeaturesInitOnS3Resume "gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesInitOnS3Resume" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuFeaturesSupport "gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesSupport" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuInitIpiDelayInMicroSeconds "gUefiCpuPkgTokenSpaceGuid.PcdCpuInitIpiDelayInMicroSeconds" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuKnownGoodStackSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuKnownGoodStackSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuLocalApicBaseAddress "gUefiCpuPkgTokenSpaceGuid.PcdCpuLocalApicBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuMaxLogicalProcessorNumber "gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuMicrocodePatchAddress "gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuMicrocodePatchRegionSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchRegionSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuMsegSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuMsegSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuNumberOfReservedVariableMtrrs "gUefiCpuPkgTokenSpaceGuid.PcdCpuNumberOfReservedVariableMtrrs" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuSmmApSyncTimeout "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmApSyncTimeout" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuSmmCodeAccessCheckEnable "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmCodeAccessCheckEnable" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuSmmMpTokenCountPerChunk "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmMpTokenCountPerChunk" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuSmmProfileSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmProfileSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuSmmShadowStackSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmShadowStackSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuSmmStackSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmStackSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuSmmStmExceptionStackSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmStmExceptionStackSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuSmmSyncMode "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmSyncMode" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuStackSwitchExceptionList "gUefiCpuPkgTokenSpaceGuid.PcdCpuStackSwitchExceptionList" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdIsPowerOnReset "gUefiCpuPkgTokenSpaceGuid.PcdIsPowerOnReset" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPeiTemporaryRamStackSize "gUefiCpuPkgTokenSpaceGuid.PcdPeiTemporaryRamStackSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSevEsWorkAreaBase "gUefiCpuPkgTokenSpaceGuid.PcdSevEsWorkAreaBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSevEsWorkAreaSize "gUefiCpuPkgTokenSpaceGuid.PcdSevEsWorkAreaSize" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuApInitTimeOutInMicroSeconds gUefiCpuPkgTokenSpaceGuid.PcdCpuApInitTimeOutInMicroSeconds
+ Specifies timeout value in microseconds for the BSP to detect all APs for the first time.<br>
+ @Prompt Timeout for the BSP to detect all APs for the first time.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApInitTimeOutInMicroSeconds</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000004</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>50000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuApLoopMode gUefiCpuPkgTokenSpaceGuid.PcdCpuApLoopMode
+ Specifies the AP wait loop state during POST phase.<br>
+  The value is defined as below.<BR><BR><br>
+  1: Place AP in the Hlt-Loop state.<BR><br>
+  2: Place AP in the Mwait-Loop state.<BR><br>
+  3: Place AP in the Run-Loop state.<BR><br>
+ @Prompt The AP wait loop state.<br>
+ @ValidRange  0x80000001 | 1 - 3<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApLoopMode</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60008006</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>1</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuApStackSize gUefiCpuPkgTokenSpaceGuid.PcdCpuApStackSize
+ aligns the address on a 4-KByte boundary.<br>
+ @Prompt Configure stack size for Application Processor (AP)<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApStackSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000003</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x8000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuApStatusCheckIntervalInMicroSeconds gUefiCpuPkgTokenSpaceGuid.PcdCpuApStatusCheckIntervalInMicroSeconds
+ Specifies the periodic interval value in microseconds for the status check<br>
+  of APs for StartupAllAPs() and StartupThisAP() executed in non-blocking<br>
+  mode in DXE phase.<br>
+ @Prompt Periodic interval value in microseconds for AP status check in DXE.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApStatusCheckIntervalInMicroSeconds</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001E</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>100000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuApTargetCstate gUefiCpuPkgTokenSpaceGuid.PcdCpuApTargetCstate
+ Specifies the AP target C-state for Mwait during POST phase.<br>
+  The default value 0 means C1 state.<br>
+  The value is defined as below.<BR><BR><br>
+ @Prompt The specified AP target C-state for Mwait.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApTargetCstate</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000007</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuBootLogicalProcessorNumber gUefiCpuPkgTokenSpaceGuid.PcdCpuBootLogicalProcessorNumber
+ Specifies the number of Logical Processors that are available in the<br>
+  preboot environment after platform reset, including BSP and APs. Possible<br>
+  values:<BR><BR><br>
+  zero (default) - PcdCpuBootLogicalProcessorNumber is ignored, and<br>
+                   PcdCpuApInitTimeOutInMicroSeconds limits the initial AP<br>
+                   detection by the BSP.<BR><br>
+  nonzero        - PcdCpuApInitTimeOutInMicroSeconds is ignored. The initial<br>
+                   AP detection finishes only when the detected CPU count<br>
+                   (BSP plus APs) reaches the value of<br>
+                   PcdCpuBootLogicalProcessorNumber, regardless of how long<br>
+                   that takes.<BR><br>
+ @Prompt Number of Logical Processors available after platform reset.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuBootLogicalProcessorNumber</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000008</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuClockModulationDutyCycle gUefiCpuPkgTokenSpaceGuid.PcdCpuClockModulationDutyCycle
+ Specifies the On-demand clock modulation duty cycle when ACPI feature is enabled.<br>
+ @Prompt The encoded values for target duty cycle modulation.<br>
+ @ValidRange  0x80000001 | 0 - 15<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuClockModulationDutyCycle</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001A</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuCoreCrystalClockFrequency gUefiCpuPkgTokenSpaceGuid.PcdCpuCoreCrystalClockFrequency
+ Specifies CPUID Leaf 0x15 Time Stamp Counter and Nominal Core Crystal Clock Frequency.<br>
+ TSC Frequency = ECX (core crystal clock frequency) * EBX/EAX.<br>
+   Intel Xeon Processor Scalable Family with CPUID signature 06_55H = 25000000 (25MHz)<br>
+   6th and 7th generation Intel Core processors and Intel Xeon W Processor Family = 24000000 (24MHz)<br>
+   Intel Atom processors based on Goldmont Microarchitecture with CPUID signature 06_5CH = 19200000 (19.2MHz)<br>
+ @Prompt This PCD is the nominal frequency of the core crystal clock in Hz as is CPUID Leaf 0x15:ECX<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuCoreCrystalClockFrequency</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132113</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>24000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuFeaturesInitAfterSmmRelocation gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesInitAfterSmmRelocation
+ Specifies if CPU features will be initialized after SMM relocation.<br>
+ @Prompt If CPU features will be initialized after SMM relocation.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuFeaturesInitAfterSmmRelocation</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001C</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuFeaturesInitOnS3Resume gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesInitOnS3Resume
+ Specifies if CPU features will be initialized during S3 resume.<br>
+ @Prompt If CPU features will be initialized during S3 resume.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuFeaturesInitOnS3Resume</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001D</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuFeaturesSupport gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesSupport
+ Specifies the supported CPU features bit in array.<br>
+ @Prompt Supported CPU features.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuFeaturesSupport</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000016</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuInitIpiDelayInMicroSeconds gUefiCpuPkgTokenSpaceGuid.PcdCpuInitIpiDelayInMicroSeconds
+ Specifies delay value in microseconds after sending out an INIT IPI.<br>
+ @Prompt Configure delay value after send an INIT IPI<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuInitIpiDelayInMicroSeconds</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>10000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuKnownGoodStackSize gUefiCpuPkgTokenSpaceGuid.PcdCpuKnownGoodStackSize
+ Size of good stack for an exception.<br>
+  This PCD will only take into effect if PcdCpuStackGuard is enabled.<br>
+ @Prompt Specify size of good stack of exception which need switching stack.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuKnownGoodStackSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30002001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>2048</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuLocalApicBaseAddress gUefiCpuPkgTokenSpaceGuid.PcdCpuLocalApicBaseAddress
+ This value is the CPU Local APIC base address, which aligns the address on a 4-KByte boundary.<br>
+ @Prompt Configure base address of CPU Local APIC<br>
+ @Expression  0x80000001 | (gUefiCpuPkgTokenSpaceGuid.PcdCpuLocalApicBaseAddress & 0xfff) == 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuLocalApicBaseAddress</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xfee00000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuMaxLogicalProcessorNumber gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber
+ Specifies max supported number of Logical Processors.<br>
+ @Prompt Configure max supported number of Logical Processors<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuMaxLogicalProcessorNumber</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>64</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuMicrocodePatchAddress gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchAddress
+ Specifies the base address of the first microcode Patch in the microcode Region.<br>
+ @Prompt Microcode Region base address.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuMicrocodePatchAddress</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000005</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuMicrocodePatchRegionSize gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchRegionSize
+ Specifies the size of the microcode Region.<br>
+ @Prompt Microcode Region size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuMicrocodePatchRegionSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000006</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuMsegSize gUefiCpuPkgTokenSpaceGuid.PcdCpuMsegSize
+ Specifies buffer size in bytes of MSEG. The value should be a multiple of 4KB.<br>
+ @Prompt MSEG size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuMsegSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132112</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x200000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuNumberOfReservedVariableMtrrs gUefiCpuPkgTokenSpaceGuid.PcdCpuNumberOfReservedVariableMtrrs
+ Specifies the number of variable MTRRs reserved for OS use. The default number of<br>
+  MTRRs reserved for OS use is 2.<br>
+ @Prompt Number of reserved variable MTRRs.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuNumberOfReservedVariableMtrrs</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000015</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x2</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuSmmApSyncTimeout gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmApSyncTimeout
+ Specifies timeout value in microseconds for the BSP in SMM to wait for all APs to come into SMM.<br>
+ @Prompt AP synchronization timeout value in SMM.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmApSyncTimeout</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132104</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>1000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuSmmCodeAccessCheckEnable gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmCodeAccessCheckEnable
+ Indicates if SMM Code Access Check is enabled.<br>
+  If enabled, the SMM handler cannot execute the code outside SMM regions.<br>
+  This PCD is suggested to TRUE in production image.<BR><BR><br>
+   TRUE  - SMM Code Access Check will be enabled.<BR><br>
+   FALSE - SMM Code Access Check will be disabled.<BR><br>
+ @Prompt SMM Code Access Check.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmCodeAccessCheckEnable</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000013</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuSmmMpTokenCountPerChunk gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmMpTokenCountPerChunk
+ Count of pre allocated SMM MP tokens per chunk.<br>
+ @Prompt Specify the count of pre allocated SMM MP tokens per chunk.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmMpTokenCountPerChunk</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30002002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>64</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuSmmProfileSize gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmProfileSize
+ Specifies buffer size in bytes to save SMM profile data. The value should be a multiple of 4KB.<br>
+ @Prompt SMM profile data buffer size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmProfileSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132107</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x200000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuSmmShadowStackSize gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmShadowStackSize
+ Specifies shadow stack size in bytes for each processor in SMM.<br>
+ @Prompt Processor shadow stack size in SMM.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmShadowStackSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3213210E</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x2000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuSmmStackSize gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmStackSize
+ Specifies stack size in bytes for each processor in SMM.<br>
+ @Prompt Processor stack size in SMM.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmStackSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132105</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x2000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuSmmStmExceptionStackSize gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmStmExceptionStackSize
+ Specifies buffer size in bytes for STM exception stack. The value should be a multiple of 4KB.<br>
+ @Prompt STM exception stack size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmStmExceptionStackSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132111</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x1000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuSmmSyncMode gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmSyncMode
+ Indicates the CPU synchronization method used when processing an SMI.<br>
+   0x00  - Traditional CPU synchronization method.<BR><br>
+   0x01  - Relaxed CPU synchronization method.<BR><br>
+ @Prompt SMM CPU Synchronization Method.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmSyncMode</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000014</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x00</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuStackSwitchExceptionList gUefiCpuPkgTokenSpaceGuid.PcdCpuStackSwitchExceptionList
+ List of exception vectors which need switching stack.<br>
+  This PCD will only take into effect if PcdCpuStackGuard is enabled.<br>
+PF(14) are supported.<br>
+ @Prompt Specify exception vectors which need switching stack.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuStackSwitchExceptionList</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30002000</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x08, 0x0E}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdIsPowerOnReset gUefiCpuPkgTokenSpaceGuid.PcdIsPowerOnReset
+ Indicates if the current boot is a power-on reset.<BR><BR><br>
+   TRUE  - Current boot is a power-on reset.<BR><br>
+   FALSE - Current boot is not a power-on reset.<BR><br>
+ @Prompt Current boot is a power-on reset.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIsPowerOnReset</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001B</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPeiTemporaryRamStackSize gUefiCpuPkgTokenSpaceGuid.PcdPeiTemporaryRamStackSize
+ Specifies stack size in the temporary RAM. 0 means half of TemporaryRamSize.<br>
+ @Prompt Stack size in the temporary RAM.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPeiTemporaryRamStackSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10001003</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSevEsWorkAreaBase gUefiCpuPkgTokenSpaceGuid.PcdSevEsWorkAreaBase
+ Area of memory where the SEV-ES work area block lives.<br>
+ @Prompt Configure the SEV-ES work area base<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSevEsWorkAreaBase</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30002005</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSevEsWorkAreaSize gUefiCpuPkgTokenSpaceGuid.PcdSevEsWorkAreaSize
+ Size of teh area of memory where the SEV-ES work area block lives.<br>
+ @Prompt Configure the SEV-ES work area base<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSevEsWorkAreaSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30002006</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_X64_root_page X64
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_X64_PcdCpuSmmRestrictedMemoryAccess "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmRestrictedMemoryAccess" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_X64_PcdCpuSmmRestrictedMemoryAccess gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmRestrictedMemoryAccess
+ Indicate access to non-SMRAM memory is restricted to reserved, runtime and ACPI NVS type after SmmReadyToLock.<br>
+  MMIO access is always allowed regardless of the value of this PCD.<br>
+  Loose of such restriction is only required by RAS components in X64 platforms.<br>
+  The PCD value is considered as constantly TRUE in IA32 platforms.<br>
+  When the PCD value is TRUE, page table is initialized to cover all memory spaces<br>
+  and the memory occupied by page table is protected by page table itself as read-only.<br>
+  In X64 build, it cannot be enabled at the same time with SMM profile feature (PcdCpuSmmProfileEnable).<br>
+  In X64 build, it could not be enabled also at the same time with heap guard feature for SMM<br>
+  (PcdHeapGuardPropertyMask in MdeModulePkg).<br>
+  In IA32 build, page table memory is not marked as read-only when either SMM profile feature (PcdCpuSmmProfileEnable)<br>
+  or heap guard feature for SMM (PcdHeapGuardPropertyMask in MdeModulePkg) is enabled.<br>
+   TRUE  - Access to non-SMRAM memory is restricted to reserved, runtime and ACPI NVS type after SmmReadyToLock.<BR><br>
+   FALSE - Access to any type of non-SMRAM memory after SmmReadyToLock is allowed.<BR><br>
+ @Prompt Access to non-SMRAM memory is restricted to reserved, runtime and ACPI NVS type after SmmReadyToLock.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmRestrictedMemoryAccess</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3213210F</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_root_page PcdsPatchableInModule
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_root_page "common" </li>
+<li>\subpage pcd_PcdsPatchableInModule_X64_root_page "X64" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuApInitTimeOutInMicroSeconds "gUefiCpuPkgTokenSpaceGuid.PcdCpuApInitTimeOutInMicroSeconds" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuApLoopMode "gUefiCpuPkgTokenSpaceGuid.PcdCpuApLoopMode" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuApStackSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuApStackSize" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuApStatusCheckIntervalInMicroSeconds "gUefiCpuPkgTokenSpaceGuid.PcdCpuApStatusCheckIntervalInMicroSeconds" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuApTargetCstate "gUefiCpuPkgTokenSpaceGuid.PcdCpuApTargetCstate" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuBootLogicalProcessorNumber "gUefiCpuPkgTokenSpaceGuid.PcdCpuBootLogicalProcessorNumber" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuClockModulationDutyCycle "gUefiCpuPkgTokenSpaceGuid.PcdCpuClockModulationDutyCycle" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuCoreCrystalClockFrequency "gUefiCpuPkgTokenSpaceGuid.PcdCpuCoreCrystalClockFrequency" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuFeaturesInitAfterSmmRelocation "gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesInitAfterSmmRelocation" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuFeaturesInitOnS3Resume "gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesInitOnS3Resume" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuFeaturesSupport "gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesSupport" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuInitIpiDelayInMicroSeconds "gUefiCpuPkgTokenSpaceGuid.PcdCpuInitIpiDelayInMicroSeconds" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuLocalApicBaseAddress "gUefiCpuPkgTokenSpaceGuid.PcdCpuLocalApicBaseAddress" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuMaxLogicalProcessorNumber "gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuMicrocodePatchAddress "gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchAddress" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuMicrocodePatchRegionSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchRegionSize" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuMsegSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuMsegSize" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuNumberOfReservedVariableMtrrs "gUefiCpuPkgTokenSpaceGuid.PcdCpuNumberOfReservedVariableMtrrs" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuSmmApSyncTimeout "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmApSyncTimeout" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuSmmCodeAccessCheckEnable "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmCodeAccessCheckEnable" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuSmmProfileSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmProfileSize" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuSmmShadowStackSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmShadowStackSize" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuSmmStackSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmStackSize" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuSmmStmExceptionStackSize "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmStmExceptionStackSize" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCpuSmmSyncMode "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmSyncMode" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdIsPowerOnReset "gUefiCpuPkgTokenSpaceGuid.PcdIsPowerOnReset" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdPeiTemporaryRamStackSize "gUefiCpuPkgTokenSpaceGuid.PcdPeiTemporaryRamStackSize" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuApInitTimeOutInMicroSeconds gUefiCpuPkgTokenSpaceGuid.PcdCpuApInitTimeOutInMicroSeconds
+ Specifies timeout value in microseconds for the BSP to detect all APs for the first time.<br>
+ @Prompt Timeout for the BSP to detect all APs for the first time.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApInitTimeOutInMicroSeconds</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000004</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>50000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuApLoopMode gUefiCpuPkgTokenSpaceGuid.PcdCpuApLoopMode
+ Specifies the AP wait loop state during POST phase.<br>
+  The value is defined as below.<BR><BR><br>
+  1: Place AP in the Hlt-Loop state.<BR><br>
+  2: Place AP in the Mwait-Loop state.<BR><br>
+  3: Place AP in the Run-Loop state.<BR><br>
+ @Prompt The AP wait loop state.<br>
+ @ValidRange  0x80000001 | 1 - 3<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApLoopMode</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60008006</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>1</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuApStackSize gUefiCpuPkgTokenSpaceGuid.PcdCpuApStackSize
+ aligns the address on a 4-KByte boundary.<br>
+ @Prompt Configure stack size for Application Processor (AP)<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApStackSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000003</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x8000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuApStatusCheckIntervalInMicroSeconds gUefiCpuPkgTokenSpaceGuid.PcdCpuApStatusCheckIntervalInMicroSeconds
+ Specifies the periodic interval value in microseconds for the status check<br>
+  of APs for StartupAllAPs() and StartupThisAP() executed in non-blocking<br>
+  mode in DXE phase.<br>
+ @Prompt Periodic interval value in microseconds for AP status check in DXE.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApStatusCheckIntervalInMicroSeconds</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001E</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>100000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuApTargetCstate gUefiCpuPkgTokenSpaceGuid.PcdCpuApTargetCstate
+ Specifies the AP target C-state for Mwait during POST phase.<br>
+  The default value 0 means C1 state.<br>
+  The value is defined as below.<BR><BR><br>
+ @Prompt The specified AP target C-state for Mwait.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuApTargetCstate</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000007</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuBootLogicalProcessorNumber gUefiCpuPkgTokenSpaceGuid.PcdCpuBootLogicalProcessorNumber
+ Specifies the number of Logical Processors that are available in the<br>
+  preboot environment after platform reset, including BSP and APs. Possible<br>
+  values:<BR><BR><br>
+  zero (default) - PcdCpuBootLogicalProcessorNumber is ignored, and<br>
+                   PcdCpuApInitTimeOutInMicroSeconds limits the initial AP<br>
+                   detection by the BSP.<BR><br>
+  nonzero        - PcdCpuApInitTimeOutInMicroSeconds is ignored. The initial<br>
+                   AP detection finishes only when the detected CPU count<br>
+                   (BSP plus APs) reaches the value of<br>
+                   PcdCpuBootLogicalProcessorNumber, regardless of how long<br>
+                   that takes.<BR><br>
+ @Prompt Number of Logical Processors available after platform reset.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuBootLogicalProcessorNumber</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000008</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuClockModulationDutyCycle gUefiCpuPkgTokenSpaceGuid.PcdCpuClockModulationDutyCycle
+ Specifies the On-demand clock modulation duty cycle when ACPI feature is enabled.<br>
+ @Prompt The encoded values for target duty cycle modulation.<br>
+ @ValidRange  0x80000001 | 0 - 15<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuClockModulationDutyCycle</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001A</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuCoreCrystalClockFrequency gUefiCpuPkgTokenSpaceGuid.PcdCpuCoreCrystalClockFrequency
+ Specifies CPUID Leaf 0x15 Time Stamp Counter and Nominal Core Crystal Clock Frequency.<br>
+ TSC Frequency = ECX (core crystal clock frequency) * EBX/EAX.<br>
+   Intel Xeon Processor Scalable Family with CPUID signature 06_55H = 25000000 (25MHz)<br>
+   6th and 7th generation Intel Core processors and Intel Xeon W Processor Family = 24000000 (24MHz)<br>
+   Intel Atom processors based on Goldmont Microarchitecture with CPUID signature 06_5CH = 19200000 (19.2MHz)<br>
+ @Prompt This PCD is the nominal frequency of the core crystal clock in Hz as is CPUID Leaf 0x15:ECX<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuCoreCrystalClockFrequency</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132113</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>24000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuFeaturesInitAfterSmmRelocation gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesInitAfterSmmRelocation
+ Specifies if CPU features will be initialized after SMM relocation.<br>
+ @Prompt If CPU features will be initialized after SMM relocation.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuFeaturesInitAfterSmmRelocation</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001C</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuFeaturesInitOnS3Resume gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesInitOnS3Resume
+ Specifies if CPU features will be initialized during S3 resume.<br>
+ @Prompt If CPU features will be initialized during S3 resume.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuFeaturesInitOnS3Resume</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001D</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuFeaturesSupport gUefiCpuPkgTokenSpaceGuid.PcdCpuFeaturesSupport
+ Specifies the supported CPU features bit in array.<br>
+ @Prompt Supported CPU features.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuFeaturesSupport</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000016</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuInitIpiDelayInMicroSeconds gUefiCpuPkgTokenSpaceGuid.PcdCpuInitIpiDelayInMicroSeconds
+ Specifies delay value in microseconds after sending out an INIT IPI.<br>
+ @Prompt Configure delay value after send an INIT IPI<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuInitIpiDelayInMicroSeconds</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>10000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuLocalApicBaseAddress gUefiCpuPkgTokenSpaceGuid.PcdCpuLocalApicBaseAddress
+ This value is the CPU Local APIC base address, which aligns the address on a 4-KByte boundary.<br>
+ @Prompt Configure base address of CPU Local APIC<br>
+ @Expression  0x80000001 | (gUefiCpuPkgTokenSpaceGuid.PcdCpuLocalApicBaseAddress & 0xfff) == 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuLocalApicBaseAddress</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xfee00000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuMaxLogicalProcessorNumber gUefiCpuPkgTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber
+ Specifies max supported number of Logical Processors.<br>
+ @Prompt Configure max supported number of Logical Processors<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuMaxLogicalProcessorNumber</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>64</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuMicrocodePatchAddress gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchAddress
+ Specifies the base address of the first microcode Patch in the microcode Region.<br>
+ @Prompt Microcode Region base address.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuMicrocodePatchAddress</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000005</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuMicrocodePatchRegionSize gUefiCpuPkgTokenSpaceGuid.PcdCpuMicrocodePatchRegionSize
+ Specifies the size of the microcode Region.<br>
+ @Prompt Microcode Region size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuMicrocodePatchRegionSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000006</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuMsegSize gUefiCpuPkgTokenSpaceGuid.PcdCpuMsegSize
+ Specifies buffer size in bytes of MSEG. The value should be a multiple of 4KB.<br>
+ @Prompt MSEG size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuMsegSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132112</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x200000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuNumberOfReservedVariableMtrrs gUefiCpuPkgTokenSpaceGuid.PcdCpuNumberOfReservedVariableMtrrs
+ Specifies the number of variable MTRRs reserved for OS use. The default number of<br>
+  MTRRs reserved for OS use is 2.<br>
+ @Prompt Number of reserved variable MTRRs.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuNumberOfReservedVariableMtrrs</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000015</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x2</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuSmmApSyncTimeout gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmApSyncTimeout
+ Specifies timeout value in microseconds for the BSP in SMM to wait for all APs to come into SMM.<br>
+ @Prompt AP synchronization timeout value in SMM.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmApSyncTimeout</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132104</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>1000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuSmmCodeAccessCheckEnable gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmCodeAccessCheckEnable
+ Indicates if SMM Code Access Check is enabled.<br>
+  If enabled, the SMM handler cannot execute the code outside SMM regions.<br>
+  This PCD is suggested to TRUE in production image.<BR><BR><br>
+   TRUE  - SMM Code Access Check will be enabled.<BR><br>
+   FALSE - SMM Code Access Check will be disabled.<BR><br>
+ @Prompt SMM Code Access Check.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmCodeAccessCheckEnable</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000013</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuSmmProfileSize gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmProfileSize
+ Specifies buffer size in bytes to save SMM profile data. The value should be a multiple of 4KB.<br>
+ @Prompt SMM profile data buffer size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmProfileSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132107</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x200000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuSmmShadowStackSize gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmShadowStackSize
+ Specifies shadow stack size in bytes for each processor in SMM.<br>
+ @Prompt Processor shadow stack size in SMM.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmShadowStackSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3213210E</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x2000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuSmmStackSize gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmStackSize
+ Specifies stack size in bytes for each processor in SMM.<br>
+ @Prompt Processor stack size in SMM.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmStackSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132105</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x2000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuSmmStmExceptionStackSize gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmStmExceptionStackSize
+ Specifies buffer size in bytes for STM exception stack. The value should be a multiple of 4KB.<br>
+ @Prompt STM exception stack size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmStmExceptionStackSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32132111</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x1000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCpuSmmSyncMode gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmSyncMode
+ Indicates the CPU synchronization method used when processing an SMI.<br>
+   0x00  - Traditional CPU synchronization method.<BR><br>
+   0x01  - Relaxed CPU synchronization method.<BR><br>
+ @Prompt SMM CPU Synchronization Method.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmSyncMode</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x60000014</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x00</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdIsPowerOnReset gUefiCpuPkgTokenSpaceGuid.PcdIsPowerOnReset
+ Indicates if the current boot is a power-on reset.<BR><BR><br>
+   TRUE  - Current boot is a power-on reset.<BR><br>
+   FALSE - Current boot is not a power-on reset.<BR><br>
+ @Prompt Current boot is a power-on reset.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIsPowerOnReset</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001B</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdPeiTemporaryRamStackSize gUefiCpuPkgTokenSpaceGuid.PcdPeiTemporaryRamStackSize
+ Specifies stack size in the temporary RAM. 0 means half of TemporaryRamSize.<br>
+ @Prompt Stack size in the temporary RAM.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPeiTemporaryRamStackSize</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10001003</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_X64_root_page X64
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_X64_PcdCpuSmmRestrictedMemoryAccess "gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmRestrictedMemoryAccess" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_X64_PcdCpuSmmRestrictedMemoryAccess gUefiCpuPkgTokenSpaceGuid.PcdCpuSmmRestrictedMemoryAccess
+ Indicate access to non-SMRAM memory is restricted to reserved, runtime and ACPI NVS type after SmmReadyToLock.<br>
+  MMIO access is always allowed regardless of the value of this PCD.<br>
+  Loose of such restriction is only required by RAS components in X64 platforms.<br>
+  The PCD value is considered as constantly TRUE in IA32 platforms.<br>
+  When the PCD value is TRUE, page table is initialized to cover all memory spaces<br>
+  and the memory occupied by page table is protected by page table itself as read-only.<br>
+  In X64 build, it cannot be enabled at the same time with SMM profile feature (PcdCpuSmmProfileEnable).<br>
+  In X64 build, it could not be enabled also at the same time with heap guard feature for SMM<br>
+  (PcdHeapGuardPropertyMask in MdeModulePkg).<br>
+  In IA32 build, page table memory is not marked as read-only when either SMM profile feature (PcdCpuSmmProfileEnable)<br>
+  or heap guard feature for SMM (PcdHeapGuardPropertyMask in MdeModulePkg) is enabled.<br>
+   TRUE  - Access to non-SMRAM memory is restricted to reserved, runtime and ACPI NVS type after SmmReadyToLock.<BR><br>
+   FALSE - Access to any type of non-SMRAM memory after SmmReadyToLock is allowed.<BR><br>
+ @Prompt Access to non-SMRAM memory is restricted to reserved, runtime and ACPI NVS type after SmmReadyToLock.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuSmmRestrictedMemoryAccess</CAPTION></TD><TD><CAPTION>gUefiCpuPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3213210F</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gEdkiiCpuFeaturesInitDoneGuid "gEdkiiCpuFeaturesInitDoneGuid" </li>
+<li>\subpage guid_common_gEdkiiCpuFeaturesSetDoneGuid "gEdkiiCpuFeaturesSetDoneGuid" </li>
+<li>\subpage guid_common_gEdkiiMicrocodePatchHobGuid "gEdkiiMicrocodePatchHobGuid" </li>
+<li>\subpage guid_common_gMsegSmramGuid "gMsegSmramGuid" </li>
+<li>\subpage guid_common_gUefiCpuPkgTokenSpaceGuid "gUefiCpuPkgTokenSpaceGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gEdkiiCpuFeaturesInitDoneGuid gEdkiiCpuFeaturesInitDoneGuid
+ Include/Guid/CpuFeaturesInitDone.h<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEdkiiCpuFeaturesInitDoneGuid</TD><TD>{ 0xc77c3a41, 0x61ab, 0x4143, { 0x98, 0x3e, 0x33, 0x39, 0x28, 0x6, 0x28, 0xe5 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiCpuPkg/Include/Guid/CpuFeaturesInitDone.h
+\endlink
+
+ **/
+/** \page guid_common_gEdkiiCpuFeaturesSetDoneGuid gEdkiiCpuFeaturesSetDoneGuid
+ Include/Guid/CpuFeaturesSetDone.h<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEdkiiCpuFeaturesSetDoneGuid</TD><TD>{ 0xa82485ce, 0xad6b, 0x4101, { 0x99, 0xd3, 0xe1, 0x35, 0x8c, 0x9e, 0x7e, 0x37 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiCpuPkg/Include/Guid/CpuFeaturesSetDone.h
+\endlink
+
+ **/
+/** \page guid_common_gEdkiiMicrocodePatchHobGuid gEdkiiMicrocodePatchHobGuid
+ Include/Guid/MicrocodePatchHob.h<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEdkiiMicrocodePatchHobGuid</TD><TD>{ 0xd178f11d, 0x8716, 0x418e, { 0xa1, 0x31, 0x96, 0x7d, 0x2a, 0xc4, 0x28, 0x43 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiCpuPkg/Include/Guid/MicrocodePatchHob.h
+\endlink
+
+ **/
+/** \page guid_common_gMsegSmramGuid gMsegSmramGuid
+ \copydoc UefiCpuPkg/Include/Guid/MsegSmram.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gMsegSmramGuid</TD><TD>{ 0x5802bce4, 0xeeee, 0x4e33, { 0xa1, 0x30, 0xeb, 0xad, 0x27, 0xf0, 0xe4, 0x39 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiCpuPkg/Include/Guid/MsegSmram.h
+\endlink
+
+ **/
+/** \page guid_common_gUefiCpuPkgTokenSpaceGuid gUefiCpuPkgTokenSpaceGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gUefiCpuPkgTokenSpaceGuid</TD><TD>{ 0xac05bf33, 0x995a, 0x4ed4, { 0xaa, 0xb8, 0xef, 0x7a, 0xe8, 0xf, 0x5c, 0xb0 }}</TD></TR></TABLE>
+ **/
+/** \page ppi_root_page PPI
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page ppi_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_page_gEdkiiPeiMpServices2PpiGuid "gEdkiiPeiMpServices2PpiGuid" </li>
+<li>\subpage ppi_page_gEdkiiPeiShadowMicrocodePpiGuid "gEdkiiPeiShadowMicrocodePpiGuid" </li>
+<li>\subpage ppi_page_gRepublishSecPpiPpiGuid "gRepublishSecPpiPpiGuid" </li>
+</ul>
+ **/
+/** \page ppi_page_gEdkiiPeiMpServices2PpiGuid gEdkiiPeiMpServices2PpiGuid
+ \copydoc UefiCpuPkg/Include/Ppi/MpServices2.h <br>
+ \section BasicPpiInfo PPI Information
+<TABLE><TR><TD><CAPTION>PPI's Guid Name</CAPTION></TD><TD><CAPTION>PPI's Guid</CAPTION></TD></TR><TR><TD>gEdkiiPeiMpServices2PpiGuid</TD><TD>{ 0x5cb9cb3d, 0x31a4, 0x480c, { 0x94, 0x98, 0x29, 0xd2, 0x69, 0xba, 0xcf, 0xba}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiCpuPkg/Include/Ppi/MpServices2.h
+\endlink
+
+ **/
+/** \page ppi_page_gEdkiiPeiShadowMicrocodePpiGuid gEdkiiPeiShadowMicrocodePpiGuid
+ Include/Ppi/ShadowMicrocode.h<br>
+ \section BasicPpiInfo PPI Information
+<TABLE><TR><TD><CAPTION>PPI's Guid Name</CAPTION></TD><TD><CAPTION>PPI's Guid</CAPTION></TD></TR><TR><TD>gEdkiiPeiShadowMicrocodePpiGuid</TD><TD>{ 0x430f6965, 0x9a69, 0x41c5, { 0x93, 0xed, 0x8b, 0xf0, 0x64, 0x35, 0xc1, 0xc6 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiCpuPkg/Include/Ppi/ShadowMicrocode.h
+\endlink
+
+ **/
+/** \page ppi_page_gRepublishSecPpiPpiGuid gRepublishSecPpiPpiGuid
+ Include/Ppi/RepublishSecPpi.h<br>
+ \section BasicPpiInfo PPI Information
+<TABLE><TR><TD><CAPTION>PPI's Guid Name</CAPTION></TD><TD><CAPTION>PPI's Guid</CAPTION></TD></TR><TR><TD>gRepublishSecPpiPpiGuid</TD><TD>{ 0x27a71b1e, 0x73ee, 0x43d6, { 0xac, 0xe3, 0x52, 0x1a, 0x2d, 0xc5, 0xd0, 0x92 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiCpuPkg/Include/Ppi/RepublishSecPpi.h
+\endlink
+
+ **/
+/** \page protocol_root_page PROTOCOL
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page protocol_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_page_gEfiSmmCpuServiceProtocolGuid "gEfiSmmCpuServiceProtocolGuid" </li>
+<li>\subpage protocol_page_gEfiSmMonitorInitProtocolGuid "gEfiSmMonitorInitProtocolGuid" </li>
+</ul>
+ **/
+/** \page protocol_page_gEfiSmmCpuServiceProtocolGuid gEfiSmmCpuServiceProtocolGuid
+ Include/Protocol/SmmCpuService.h<br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEfiSmmCpuServiceProtocolGuid</TD><TD>{ 0x1d202cab, 0xc8ab, 0x4d5c, { 0x94, 0xf7, 0x3c, 0xfc, 0xc0, 0xd3, 0xd3, 0x35 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiCpuPkg/Include/Protocol/SmmCpuService.h
+\endlink
+
+ **/
+/** \page protocol_page_gEfiSmMonitorInitProtocolGuid gEfiSmMonitorInitProtocolGuid
+ Include/Protocol/SmMonitorInit.h<br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEfiSmMonitorInitProtocolGuid</TD><TD>{ 0x228f344d, 0xb3de, 0x43bb, { 0xa4, 0xd7, 0xea, 0x20, 0xb, 0x1b, 0x14, 0x82 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link UefiCpuPkg/Include/Protocol/SmMonitorInit.h
+\endlink
+
+ **/

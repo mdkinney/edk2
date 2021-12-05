@@ -1,0 +1,38 @@
+var _eap_management_8h =
+[
+    [ "_EFI_EAPOL_PORT_INFO", "struct___e_f_i___e_a_p_o_l___p_o_r_t___i_n_f_o.html", "struct___e_f_i___e_a_p_o_l___p_o_r_t___i_n_f_o" ],
+    [ "_EFI_EAPOL_SUPPLICANT_PAE_CONFIGURATION", "struct___e_f_i___e_a_p_o_l___s_u_p_p_l_i_c_a_n_t___p_a_e___c_o_n_f_i_g_u_r_a_t_i_o_n.html", "struct___e_f_i___e_a_p_o_l___s_u_p_p_l_i_c_a_n_t___p_a_e___c_o_n_f_i_g_u_r_a_t_i_o_n" ],
+    [ "_EFI_EAPOL_SUPPLICANT_PAE_STATISTICS", "struct___e_f_i___e_a_p_o_l___s_u_p_p_l_i_c_a_n_t___p_a_e___s_t_a_t_i_s_t_i_c_s.html", "struct___e_f_i___e_a_p_o_l___s_u_p_p_l_i_c_a_n_t___p_a_e___s_t_a_t_i_s_t_i_c_s" ],
+    [ "_EFI_EAP_MANAGEMENT_PROTOCOL", "struct___e_f_i___e_a_p___m_a_n_a_g_e_m_e_n_t___p_r_o_t_o_c_o_l.html", "struct___e_f_i___e_a_p___m_a_n_a_g_e_m_e_n_t___p_r_o_t_o_c_o_l" ],
+    [ "AUTH_PERIOD_FIELD_VALID", "_eap_management_8h.html#a02091ebc5dc28ea54ae19f91d3721cc3", null ],
+    [ "EFI_EAP_MANAGEMENT_PROTOCOL_GUID", "_eap_management_8h.html#a374cdd81dc73fd62e78cabec3455e81c", null ],
+    [ "HELD_PERIOD_FIELD_VALID", "_eap_management_8h.html#a6067fc1b04f4a57a67cb339b2ca0778d", null ],
+    [ "MAX_START_FIELD_VALID", "_eap_management_8h.html#aa4126f0f84ea948510f6476933af324b", null ],
+    [ "PAE_SUPPORT_AUTHENTICATOR", "_eap_management_8h.html#af2a249f3c240364f7c775a4c7bdb28b2", null ],
+    [ "PAE_SUPPORT_SUPPLICANT", "_eap_management_8h.html#aef56e15af25c9ecf0ded2bc1445eece2", null ],
+    [ "START_PERIOD_FIELD_VALID", "_eap_management_8h.html#a328cce0482a7312a4e23e97b79e6fbf8", null ],
+    [ "EFI_EAP_GET_SUPPLICANT_STATISTICS", "_eap_management_8h.html#ab846f8078d43fc016a92434a466c74f7", null ],
+    [ "EFI_EAP_GET_SUPPLICANT_STATUS", "_eap_management_8h.html#a66e07dc34135512384f8672685da7bc6", null ],
+    [ "EFI_EAP_GET_SYSTEM_CONFIGURATION", "_eap_management_8h.html#ad8c2e7d978c80df2069f89576a172779", null ],
+    [ "EFI_EAP_INITIALIZE_PORT", "_eap_management_8h.html#ab19014c877f012df127fdc86976506a7", null ],
+    [ "EFI_EAP_MANAGEMENT_PROTOCOL", "_eap_management_8h.html#ac9861e3d45068cceb8d0f00c06b34adf", null ],
+    [ "EFI_EAP_SET_SUPPLICANT_CONFIGURATION", "_eap_management_8h.html#ad9b703a1ca23f545c3196c75aea9b0e7", null ],
+    [ "EFI_EAP_SET_SYSTEM_CONFIGURATION", "_eap_management_8h.html#afeeb7b11d709a3927d7dba877c33ff21", null ],
+    [ "EFI_EAP_USER_LOGOFF", "_eap_management_8h.html#aa2198979bd84709755e6a28ad7b017d0", null ],
+    [ "EFI_EAP_USER_LOGON", "_eap_management_8h.html#a6f017354d5a09d1f9cac230349397ec5", null ],
+    [ "EFI_EAPOL_PORT_INFO", "_eap_management_8h.html#a861a4c91fa4aad60e10b2389b3768480", null ],
+    [ "EFI_EAPOL_SUPPLICANT_PAE_CONFIGURATION", "_eap_management_8h.html#ab8e1370a1f057162b70e7a07848a1a9d", null ],
+    [ "EFI_EAPOL_SUPPLICANT_PAE_STATE", "_eap_management_8h.html#a51ed58291165e46a5a57c00a4b57af38", null ],
+    [ "EFI_EAPOL_SUPPLICANT_PAE_STATISTICS", "_eap_management_8h.html#a070c5fb160186f1f1ccbdaab95cd8b53", null ],
+    [ "_EFI_EAPOL_SUPPLICANT_PAE_STATE", "_eap_management_8h.html#a3ebc9ca175a515aa56591810bd6b64b3", [
+      [ "Logoff", "_eap_management_8h.html#a3ebc9ca175a515aa56591810bd6b64b3a655f30a6004f032f1bb52abd891ea02a", null ],
+      [ "Disconnected", "_eap_management_8h.html#a3ebc9ca175a515aa56591810bd6b64b3a84ab0fbbb76a8c897feb1cd806d56443", null ],
+      [ "Connecting", "_eap_management_8h.html#a3ebc9ca175a515aa56591810bd6b64b3a6ea90df6fe966852496b4846da497fb0", null ],
+      [ "Acquired", "_eap_management_8h.html#a3ebc9ca175a515aa56591810bd6b64b3a8b7f1ccd49c48a69ea787b1ca07bd48d", null ],
+      [ "Authenticating", "_eap_management_8h.html#a3ebc9ca175a515aa56591810bd6b64b3a3a447e013ee9159e6f006a730d8180cb", null ],
+      [ "Held", "_eap_management_8h.html#a3ebc9ca175a515aa56591810bd6b64b3a4df057cd48b807cab4733ddf473cec5b", null ],
+      [ "Authenticated", "_eap_management_8h.html#a3ebc9ca175a515aa56591810bd6b64b3a9d89ca0e6d86711fcc35fb1c6d947008", null ],
+      [ "MaxSupplicantPaeState", "_eap_management_8h.html#a3ebc9ca175a515aa56591810bd6b64b3a145405bf4c591d6069da4a26d7a21d72", null ]
+    ] ],
+    [ "gEfiEapManagementProtocolGuid", "_eap_management_8h.html#af63346840cb713cf4709822be7c7e3c0", null ]
+];

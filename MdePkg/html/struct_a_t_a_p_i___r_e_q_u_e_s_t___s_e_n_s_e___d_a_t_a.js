@@ -1,0 +1,25 @@
+var struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a =
+[
+    [ "addnl_sense_code", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#a37db3347e7dbcee299eff168fb425a01", null ],
+    [ "addnl_sense_code_qualifier", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#aa9063009c5e5f05dade3ecc8c4d8db80", null ],
+    [ "addnl_sense_length", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#a0107b9c7a7ace9548659fe2ba08fc92c", null ],
+    [ "error_code", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#a199db7e38e3afaddbeea41358874c10d", null ],
+    [ "field_replaceable_unit_code", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#aa6eac9a8eccfaeb49c83e71b134be356", null ],
+    [ "reserved_1", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#a0ee575899cf339043b5cd04c2fd1cfc5", null ],
+    [ "reserved_2", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#a04dc3a5a1654f1e178fb0f1378520b96", null ],
+    [ "sense_key", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#a1bf08d37e9a6d2f4529155f6020f235e", null ],
+    [ "sense_key_specific_15", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#a680a1c4fdded371e2ef99485d00fe2f6", null ],
+    [ "sense_key_specific_16", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#a9d4d484f494034d03d4cbb7012e49ab3", null ],
+    [ "sense_key_specific_17", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#a41a0516e9009bd89c8a1e0530fd10be3", null ],
+    [ "SKSV", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#acb728730628d98c64ef228b491f9699c", null ],
+    [ "valid", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#a65047bcbbe14f120ccbf4b7ef9b7afde", null ],
+    [ "Vendor_specifc_1", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#a16d0940d6ce955d447c12a6d13d3a8d3", null ],
+    [ "vendor_specific_10", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#ac6a16c6cd2dd1b7e1b45ba386eafc56d", null ],
+    [ "vendor_specific_11", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#af21d44844d2a6a86b6262b93bd0fb2fa", null ],
+    [ "vendor_specific_3", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#afbc976e125b51fc0b5e2c22a21ec3e97", null ],
+    [ "vendor_specific_4", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#a533e7240621a485d093091d2111e5ce7", null ],
+    [ "vendor_specific_5", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#a2a5aabe7e160b87598fb25e4163d2fb9", null ],
+    [ "vendor_specific_6", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#ac3ba9d0a701d8fb725762b26992481f1", null ],
+    [ "vendor_specific_8", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#a50d21c3f39ed41ef8ba550c5cb2d8cd9", null ],
+    [ "vendor_specific_9", "struct_a_t_a_p_i___r_e_q_u_e_s_t___s_e_n_s_e___d_a_t_a.html#af96303d0b61b8e036c6ffb07c13c8e10", null ]
+];

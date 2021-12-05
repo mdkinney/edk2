@@ -1,0 +1,27 @@
+var struct_b_b_s___t_a_b_l_e =
+[
+    [ "AdditionalIrq13Handler", "struct_b_b_s___t_a_b_l_e.html#a8c78dea6cbc0feda7cddbdfc96fd641f", null ],
+    [ "AdditionalIrq18Handler", "struct_b_b_s___t_a_b_l_e.html#a99f0f7b8b077c6febb26226dbb06ff86", null ],
+    [ "AdditionalIrq19Handler", "struct_b_b_s___t_a_b_l_e.html#a84421bf08694a2f48c6e0a79f1e34c06", null ],
+    [ "AdditionalIrq40Handler", "struct_b_b_s___t_a_b_l_e.html#aea1c9c64ff19d30da3dd9d69e16eef20", null ],
+    [ "AdditionalIrq41Handler", "struct_b_b_s___t_a_b_l_e.html#a198190fc41d527dd554cb05c1817892b", null ],
+    [ "AdditionalIrq46Handler", "struct_b_b_s___t_a_b_l_e.html#a826c84df4c867549badb487b58a3a46b", null ],
+    [ "AssignedDriveNumber", "struct_b_b_s___t_a_b_l_e.html#a6d00dde48ef45a1e6b5b13c0997ed354", null ],
+    [ "BootHandlerOffset", "struct_b_b_s___t_a_b_l_e.html#abadb22a4a896cef87a868be971f6f47e", null ],
+    [ "BootHandlerSegment", "struct_b_b_s___t_a_b_l_e.html#aa58b57ae3b5bbb8694f7be741149841b", null ],
+    [ "BootPriority", "struct_b_b_s___t_a_b_l_e.html#a822dec3d21122bd975f856c9e33a02b9", null ],
+    [ "Bus", "struct_b_b_s___t_a_b_l_e.html#ae04b4282236a29ecd417664e92fcaa1e", null ],
+    [ "Class", "struct_b_b_s___t_a_b_l_e.html#a06deef2341fdca0ebad67f134769e630", null ],
+    [ "DescStringOffset", "struct_b_b_s___t_a_b_l_e.html#ae90d0822e02b4d3df2fe5a7e4d7c578c", null ],
+    [ "DescStringSegment", "struct_b_b_s___t_a_b_l_e.html#a2b73c940b11adbb70ebbc55696f622dc", null ],
+    [ "Device", "struct_b_b_s___t_a_b_l_e.html#aa83542d088fdc53c0fa3f6c0202e1fe5", null ],
+    [ "DeviceType", "struct_b_b_s___t_a_b_l_e.html#a6d941c1f79f7cb00654778ec33cb7eba", null ],
+    [ "Function", "struct_b_b_s___t_a_b_l_e.html#a5dfc7adcc5cfb49deb8fb571278031c8", null ],
+    [ "IBV1", "struct_b_b_s___t_a_b_l_e.html#aee6af0b00c60f2b4992230652adb83f6", null ],
+    [ "IBV2", "struct_b_b_s___t_a_b_l_e.html#a3b5f037f2bd048e92e44a212ea0ff745", null ],
+    [ "InitPerReserved", "struct_b_b_s___t_a_b_l_e.html#ac97f337cb32853b503e1a7a8a3c68804", null ],
+    [ "MfgStringOffset", "struct_b_b_s___t_a_b_l_e.html#a8d219b36053f3b0b1652fea491b3fd59", null ],
+    [ "MfgStringSegment", "struct_b_b_s___t_a_b_l_e.html#a98f686360225a0ece15fbb9760116a9b", null ],
+    [ "StatusFlags", "struct_b_b_s___t_a_b_l_e.html#a7c384df21c42b97454c548f57dd4043d", null ],
+    [ "SubClass", "struct_b_b_s___t_a_b_l_e.html#a2cc4dcca85de4aa36577c2d7ad953e2a", null ]
+];

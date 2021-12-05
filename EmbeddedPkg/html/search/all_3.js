@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['classcode',['ClassCode',['../struct_e_m_b_e_d_d_e_d___d_e_v_i_c_e___p_r_o_t_o_c_o_l.html#ae31d211e11c5274c6cca7401c5b5b82b',1,'EMBEDDED_DEVICE_PROTOCOL']]],
+  ['clear',['Clear',['../struct___p_l_a_t_f_o_r_m___v_i_r_t_u_a_l___k_b_d___p_r_o_t_o_c_o_l.html#a1083b499870a26ddff796bf4a9979018',1,'_PLATFORM_VIRTUAL_KBD_PROTOCOL']]],
+  ['cmd',['Cmd',['../_mmc_host_8h.html#aac65bd2993b139ba7a6645fd1a4c836b',1,'MmcHost.h']]],
+  ['compatiblestring',['CompatibleString',['../_fdt_client_8h.html#a781d32da809f73ed5d750d3b7951b8b0',1,'FdtClient.h']]],
+  ['console_5fpref_5fformset_5fguid',['CONSOLE_PREF_FORMSET_GUID',['../_console_pref_form_set_8h.html#ac56d549b395fe92efd0a61f56f778d35',1,'ConsolePrefFormSet.h']]],
+  ['consoleprefformset_2eh',['ConsolePrefFormSet.h',['../_console_pref_form_set_8h.html',1,'']]],
+  ['cpu_5fto_5ffdt16',['cpu_to_fdt16',['../libfdt__env_8h.html#a0f452214af89a1072482c7af370025e1',1,'libfdt_env.h']]],
+  ['cpu_5fto_5ffdt32',['cpu_to_fdt32',['../libfdt__env_8h.html#a82240d8460fd910299cd9839f52c873f',1,'libfdt_env.h']]],
+  ['cpu_5fto_5ffdt64',['cpu_to_fdt64',['../libfdt__env_8h.html#a3daf68fbc00f48f2ff0878083ecb34fe',1,'libfdt_env.h']]],
+  ['createhob',['CreateHob',['../_pre_pi_lib_8h.html#af00489c89f7faee5511446e582538ec5',1,'PrePiLib.h']]],
+  ['currentposition',['CurrentPosition',['../struct_e_f_i___o_p_e_n___f_i_l_e.html#a196780cdb3aa4b4e06ece8303dfbbb25',1,'EFI_OPEN_FILE']]],
+  ['common',['common',['../guid_arch_root_common.html',1,'guid_root_page']]],
+  ['common',['common',['../lc_common.html',1,'EmbeddedPkg_libraryclass']]],
+  ['common',['common',['../pcd__pcds_dynamic_common_root_page.html',1,'pcd_PcdsDynamic_root_page']]],
+  ['common',['common',['../pcd__pcds_feature_flag_common_root_page.html',1,'pcd_PcdsFeatureFlag_root_page']]],
+  ['common',['common',['../pcd__pcds_fixed_at_build_common_root_page.html',1,'pcd_PcdsFixedAtBuild_root_page']]],
+  ['common',['common',['../ppi_arch_root_common.html',1,'ppi_root_page']]],
+  ['common',['common',['../protocol_arch_root_common.html',1,'protocol_root_page']]]
+];

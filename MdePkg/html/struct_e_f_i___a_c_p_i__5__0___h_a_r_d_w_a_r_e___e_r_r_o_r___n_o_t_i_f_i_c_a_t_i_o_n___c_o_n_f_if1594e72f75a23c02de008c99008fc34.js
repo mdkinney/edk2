@@ -1,0 +1,10 @@
+var struct_e_f_i___a_c_p_i__5__0___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_if1594e72f75a23c02de008c99008fc34 =
+[
+    [ "ErrorThresholdValue", "struct_e_f_i___a_c_p_i__5__0___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_if1594e72f75a23c02de008c99008fc34.html#aafbc04f9cc01c4319c12c6bffd4e163f", null ],
+    [ "ErrorThresholdWindow", "struct_e_f_i___a_c_p_i__5__0___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_if1594e72f75a23c02de008c99008fc34.html#aef06abb9bca3ab469c8cc88974f25bc1", null ],
+    [ "PollInterval", "struct_e_f_i___a_c_p_i__5__0___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_if1594e72f75a23c02de008c99008fc34.html#ab6c07e78cf3fd6c316f3991dced23e71", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__5__0___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_if1594e72f75a23c02de008c99008fc34.html#ae95326eab0d082a61e65a56a102e84a8", null ],
+    [ "SwitchToPollingThresholdValue", "struct_e_f_i___a_c_p_i__5__0___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_if1594e72f75a23c02de008c99008fc34.html#a0fe527d2ff9750b3c3573e4c77012ee7", null ],
+    [ "SwitchToPollingThresholdWindow", "struct_e_f_i___a_c_p_i__5__0___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_if1594e72f75a23c02de008c99008fc34.html#ad00af9b86f6ec25195b8eb29e88934f9", null ],
+    [ "Type", "struct_e_f_i___a_c_p_i__5__0___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_if1594e72f75a23c02de008c99008fc34.html#a67366ac9cfd5efe99bcf2ccd4a56ea57", null ]
+];

@@ -1,0 +1,7 @@
+var union_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___r_e_s_i_z_a_b_l_e___b_a_r___c_a_p_a_b_i_l_i_t_y =
+[
+    [ "BarSizeCapability", "union_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___r_e_s_i_z_a_b_l_e___b_a_r___c_a_p_a_b_i_l_i_t_y.html#a386140ecda1b5b5cb246cfc8aca0a21a", null ],
+    [ "Bits", "union_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___r_e_s_i_z_a_b_l_e___b_a_r___c_a_p_a_b_i_l_i_t_y.html#a701e6809869b6dd7860a4f0f3dda3268", null ],
+    [ "Reserved", "union_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___r_e_s_i_z_a_b_l_e___b_a_r___c_a_p_a_b_i_l_i_t_y.html#a464d93c9f5e54c28721da8c58e3c8374", null ],
+    [ "Uint32", "union_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___r_e_s_i_z_a_b_l_e___b_a_r___c_a_p_a_b_i_l_i_t_y.html#ac19ccd07c2b6f00040017d4fbc8ff1e5", null ]
+];

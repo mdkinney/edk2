@@ -1,0 +1,12 @@
+var struct_e_f_i___a_c_p_i__5__1___m_p_s_t___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n0ee32791994714a5048ae358ae1cd665 =
+[
+    [ "Command", "struct_e_f_i___a_c_p_i__5__1___m_p_s_t___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n0ee32791994714a5048ae358ae1cd665.html#a02a1c7798196a5a35e7c6fdf259a0bac", null ],
+    [ "ExpectedAveragePowerComsuned", "struct_e_f_i___a_c_p_i__5__1___m_p_s_t___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n0ee32791994714a5048ae358ae1cd665.html#a901347553a9db95dd6b2874cc7372de6", null ],
+    [ "MemoryEnergyConsumed", "struct_e_f_i___a_c_p_i__5__1___m_p_s_t___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n0ee32791994714a5048ae358ae1cd665.html#a14d510a7f2fbc5416b0e3bba917a1ee9", null ],
+    [ "MemoryPowerCommandRegister", "struct_e_f_i___a_c_p_i__5__1___m_p_s_t___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n0ee32791994714a5048ae358ae1cd665.html#ab35f8ffa610f96b2b13275186fd112e6", null ],
+    [ "MemoryPowerNodeId", "struct_e_f_i___a_c_p_i__5__1___m_p_s_t___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n0ee32791994714a5048ae358ae1cd665.html#a9eaf3abcc57058da5a224f194c123e9d", null ],
+    [ "MemoryPowerStatusRegister", "struct_e_f_i___a_c_p_i__5__1___m_p_s_t___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n0ee32791994714a5048ae358ae1cd665.html#aeab7c36a29d8391f0cb2e6200393fc44", null ],
+    [ "PowerStateId", "struct_e_f_i___a_c_p_i__5__1___m_p_s_t___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n0ee32791994714a5048ae358ae1cd665.html#aa944ac085b92c2304ce526d3cdedd6d1", null ],
+    [ "Signature", "struct_e_f_i___a_c_p_i__5__1___m_p_s_t___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n0ee32791994714a5048ae358ae1cd665.html#ad971d911feccf200b8dfc1d556360155", null ],
+    [ "Status", "struct_e_f_i___a_c_p_i__5__1___m_p_s_t___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n0ee32791994714a5048ae358ae1cd665.html#abb863278f37ca2700933120b0f315839", null ]
+];

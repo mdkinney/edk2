@@ -1,0 +1,25 @@
+var _ip_sec_8h =
+[
+    [ "_EFI_IPSEC_FRAGMENT_DATA", "struct___e_f_i___i_p_s_e_c___f_r_a_g_m_e_n_t___d_a_t_a.html", "struct___e_f_i___i_p_s_e_c___f_r_a_g_m_e_n_t___d_a_t_a" ],
+    [ "_EFI_IPSEC_PROTOCOL", "struct___e_f_i___i_p_s_e_c___p_r_o_t_o_c_o_l.html", "struct___e_f_i___i_p_s_e_c___p_r_o_t_o_c_o_l" ],
+    [ "_EFI_IPSEC2_PROTOCOL", "struct___e_f_i___i_p_s_e_c2___p_r_o_t_o_c_o_l.html", "struct___e_f_i___i_p_s_e_c2___p_r_o_t_o_c_o_l" ],
+    [ "EFI_IPSEC2_PROTOCOL_GUID", "_ip_sec_8h.html#acfef7722dd02fda40a3d1ad43d222002", null ],
+    [ "EFI_IPSEC_PROTOCOL_GUID", "_ip_sec_8h.html#ab66442088d23165372dce1da0ccb8fa2", null ],
+    [ "EFI_IPSEC2_PROTOCOL", "_ip_sec_8h.html#ace1993b048a59d6d6e0b026c798bef54", null ],
+    [ "EFI_IPSEC_FRAGMENT_DATA", "_ip_sec_8h.html#a7018ffa26c61502b77ccab5dd61cfb05", null ],
+    [ "EFI_IPSEC_PROCESS", "_ip_sec_8h.html#a70d9e13333f8c83057199ffc4fa27154", null ],
+    [ "EFI_IPSEC_PROTOCOL", "_ip_sec_8h.html#ab3181f7f07300f70b989d371ed325d36", null ],
+    [ "FragmentCount", "_ip_sec_8h.html#a94a60b1c37f6638b02c85abdb7b8f999", null ],
+    [ "FragmentTable", "_ip_sec_8h.html#a10b23dbcb3b64a2793ec63f24cd5a0d7", null ],
+    [ "IpHead", "_ip_sec_8h.html#a578e6110a21ad1be972a8043177d5862", null ],
+    [ "IpVer", "_ip_sec_8h.html#a0807e94e7e10e7ba4eaed2e049afcef2", null ],
+    [ "LastHead", "_ip_sec_8h.html#abec7d7c126d96d19600c2f510521f178", null ],
+    [ "NicHandle", "_ip_sec_8h.html#aa5bd3643713db5a06519e8b90072fea3", null ],
+    [ "OptionsBuffer", "_ip_sec_8h.html#abdb6dafe267c3a737772b0fe0ca861ac", null ],
+    [ "OptionsLength", "_ip_sec_8h.html#ab48f87d7171ac6d1d39f98c651eae4c7", null ],
+    [ "RecycleSignal", "_ip_sec_8h.html#a3f0ef978f4348f8e8518f46b5c1a5e39", null ],
+    [ "TrafficDirection", "_ip_sec_8h.html#aae891df382df49862ba3e4bb452b2bfc", null ],
+    [ "EFI_STATUS", "_ip_sec_8h.html#a714c656d0977cbd1b38930211b4f7802", null ],
+    [ "gEfiIpSec2ProtocolGuid", "_ip_sec_8h.html#a72721d93e836f1ca9df2639c730f6f5a", null ],
+    [ "gEfiIpSecProtocolGuid", "_ip_sec_8h.html#a2816e10b624e654383f816348f8c7c4a", null ]
+];

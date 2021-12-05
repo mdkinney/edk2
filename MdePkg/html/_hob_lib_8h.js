@@ -1,0 +1,28 @@
+var _hob_lib_8h =
+[
+    [ "END_OF_HOB_LIST", "_hob_lib_8h.html#a275a34e3ccf89e3e652e84b7dbe1d03c", null ],
+    [ "GET_GUID_HOB_DATA", "_hob_lib_8h.html#ad8c97114445f1025d010cb56e2e64a2e", null ],
+    [ "GET_GUID_HOB_DATA_SIZE", "_hob_lib_8h.html#ac3a824787ba01b0faea9c6fcf558128b", null ],
+    [ "GET_HOB_LENGTH", "_hob_lib_8h.html#ae3a946714014bbbfe73aed1ec5a887e0", null ],
+    [ "GET_HOB_TYPE", "_hob_lib_8h.html#a9b2908b540e1393f8bc123298be7cc7a", null ],
+    [ "GET_NEXT_HOB", "_hob_lib_8h.html#a155aabb804121c0ce90ced11fd65e8a5", null ],
+    [ "BuildBspStoreHob", "_hob_lib_8h.html#a90c817ddeb6334d13f79af4e490cfa8d", null ],
+    [ "BuildCpuHob", "_hob_lib_8h.html#a52645689e9ecb913660d358a0a50fd01", null ],
+    [ "BuildCvHob", "_hob_lib_8h.html#ace84803a19d89650b052a2a54dc528bc", null ],
+    [ "BuildFv2Hob", "_hob_lib_8h.html#a0481a6b9ac949b0548c6d6e4fb09f132", null ],
+    [ "BuildFv3Hob", "_hob_lib_8h.html#af978acba050c7e9d7c066b91d70f3c6b", null ],
+    [ "BuildFvHob", "_hob_lib_8h.html#a7e48ef18437fe8e5b3e6391c1fac4300", null ],
+    [ "BuildGuidDataHob", "_hob_lib_8h.html#aef920bbb761114e19582f52e365f3c97", null ],
+    [ "BuildGuidHob", "_hob_lib_8h.html#a68a01db985b2d2bb99ee7acc89b274c2", null ],
+    [ "BuildMemoryAllocationHob", "_hob_lib_8h.html#ac21ab3f90d79c2dd79c2b4855da28f57", null ],
+    [ "BuildModuleHob", "_hob_lib_8h.html#a4d7a0dcd8be8be0592317549c6d93dd1", null ],
+    [ "BuildResourceDescriptorHob", "_hob_lib_8h.html#a68c49930bd212412a9c33b5fb69e8013", null ],
+    [ "BuildResourceDescriptorWithOwnerHob", "_hob_lib_8h.html#aeea99655141dd369e6e9f6a86784e0b0", null ],
+    [ "BuildStackHob", "_hob_lib_8h.html#ae381b930907d8c46e8dfbac26db72360", null ],
+    [ "GetBootModeHob", "_hob_lib_8h.html#aeba7d8ad187093d20718ea4567c48011", null ],
+    [ "GetFirstGuidHob", "_hob_lib_8h.html#a76bd4a8b251d42532cb894d25fcc8fcf", null ],
+    [ "GetFirstHob", "_hob_lib_8h.html#a79d92525a704c76b3db24d42592b3407", null ],
+    [ "GetHobList", "_hob_lib_8h.html#a89e79c07463043e22e02479a26d227e9", null ],
+    [ "GetNextGuidHob", "_hob_lib_8h.html#a3a4c913b38d3f1c01ec936d5c98dc317", null ],
+    [ "GetNextHob", "_hob_lib_8h.html#a0fc456239da760e4c616ee13d43a605e", null ]
+];

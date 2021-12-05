@@ -1,0 +1,48 @@
+var _protocol_2_embedded_gpio_8h =
+[
+    [ "_EMBEDDED_GPIO", "struct___e_m_b_e_d_d_e_d___g_p_i_o.html", "struct___e_m_b_e_d_d_e_d___g_p_i_o" ],
+    [ "_GPIO_CONTROLLER", "struct___g_p_i_o___c_o_n_t_r_o_l_l_e_r.html", "struct___g_p_i_o___c_o_n_t_r_o_l_l_e_r" ],
+    [ "_PLATFORM_GPIO_CONTROLLER", "struct___p_l_a_t_f_o_r_m___g_p_i_o___c_o_n_t_r_o_l_l_e_r.html", "struct___p_l_a_t_f_o_r_m___g_p_i_o___c_o_n_t_r_o_l_l_e_r" ],
+    [ "GPIO", "_protocol_2_embedded_gpio_8h.html#addbf30282f8b54245b9eb8a7540c0d64", null ],
+    [ "GPIO_PIN", "_protocol_2_embedded_gpio_8h.html#a4b9313a14f58701b50a6b5a4324f2044", null ],
+    [ "GPIO_PORT", "_protocol_2_embedded_gpio_8h.html#a074c82bd5a07520652edbab0a6be4fd0", null ],
+    [ "Direction", "_protocol_2_embedded_gpio_8h.html#a6dfa4d0da89acc398265ca1959814538", null ],
+    [ "EMBEDDED_GPIO", "_protocol_2_embedded_gpio_8h.html#af0cba8612c2861dca8e167d982e525bf", null ],
+    [ "EMBEDDED_GPIO_PIN", "_protocol_2_embedded_gpio_8h.html#a50f2b9fcabf9df21271a79fc62c4aa9c", null ],
+    [ "Gpio", "_protocol_2_embedded_gpio_8h.html#a417f454eafeda17a69608bba8fd19dc5", null ],
+    [ "GPIO_CONTROLLER", "_protocol_2_embedded_gpio_8h.html#a5e7e4535d2f4c73f87922eff696f4bd8", null ],
+    [ "Mode", "_protocol_2_embedded_gpio_8h.html#a07ab85dce540291b3d453373277b0862", null ],
+    [ "PLATFORM_GPIO_CONTROLLER", "_protocol_2_embedded_gpio_8h.html#af20aea549a367b42f43c3742d8767af0", null ],
+    [ "Value", "_protocol_2_embedded_gpio_8h.html#aed647000b48db68a0bcabf32b0320809", null ],
+    [ "EMBEDDED_GPIO_MODE", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9", [
+      [ "GPIO_MODE_INPUT", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9a61ddb59c5e9a9cc6d9cf99d11a36920b", null ],
+      [ "GPIO_MODE_OUTPUT_0", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9a15d468863ffb5029bd24f5e540df61bf", null ],
+      [ "GPIO_MODE_OUTPUT_1", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9ab4c3c6ee86cfcf8e9d3afe0cbe9ea5c2", null ],
+      [ "GPIO_MODE_SPECIAL_FUNCTION_2", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9a66c964b6cd3dd7bb8f92951b34128a88", null ],
+      [ "GPIO_MODE_SPECIAL_FUNCTION_3", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9ad054ad60260b35a300f1c2cac9afed65", null ],
+      [ "GPIO_MODE_SPECIAL_FUNCTION_4", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9aab66f7ac3695db3615a573241f025e6f", null ],
+      [ "GPIO_MODE_SPECIAL_FUNCTION_5", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9a5e3ce63a390a844bc519d45eeb6bc5b9", null ],
+      [ "GPIO_MODE_SPECIAL_FUNCTION_6", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9aa025859fe0459f124522060e4f7da200", null ],
+      [ "GPIO_MODE_SPECIAL_FUNCTION_7", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9a35d407fab77fd1090555fdc36626a058", null ],
+      [ "GPIO_MODE_INPUT", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9a61ddb59c5e9a9cc6d9cf99d11a36920b", null ],
+      [ "GPIO_MODE_OUTPUT_0", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9a15d468863ffb5029bd24f5e540df61bf", null ],
+      [ "GPIO_MODE_OUTPUT_1", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9ab4c3c6ee86cfcf8e9d3afe0cbe9ea5c2", null ],
+      [ "GPIO_MODE_SPECIAL_FUNCTION_2", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9a66c964b6cd3dd7bb8f92951b34128a88", null ],
+      [ "GPIO_MODE_SPECIAL_FUNCTION_3", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9ad054ad60260b35a300f1c2cac9afed65", null ],
+      [ "GPIO_MODE_SPECIAL_FUNCTION_4", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9aab66f7ac3695db3615a573241f025e6f", null ],
+      [ "GPIO_MODE_SPECIAL_FUNCTION_5", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9a5e3ce63a390a844bc519d45eeb6bc5b9", null ],
+      [ "GPIO_MODE_SPECIAL_FUNCTION_6", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9aa025859fe0459f124522060e4f7da200", null ],
+      [ "GPIO_MODE_SPECIAL_FUNCTION_7", "_protocol_2_embedded_gpio_8h.html#a5916e4728f284b722b20d85e095e6cd9a35d407fab77fd1090555fdc36626a058", null ]
+    ] ],
+    [ "EMBEDDED_GPIO_PULL", "_protocol_2_embedded_gpio_8h.html#ad109b64760145827b3941286960c6e69", [
+      [ "GPIO_PULL_NONE", "_protocol_2_embedded_gpio_8h.html#ad109b64760145827b3941286960c6e69a30d0c1278ee190bdc8d66a3d95810728", null ],
+      [ "GPIO_PULL_UP", "_protocol_2_embedded_gpio_8h.html#ad109b64760145827b3941286960c6e69ae7d1b2a9078939dd744dd9a7cd61d9df", null ],
+      [ "GPIO_PULL_DOWN", "_protocol_2_embedded_gpio_8h.html#ad109b64760145827b3941286960c6e69a93970a9b4ab92816371682f4e537a8e2", null ],
+      [ "GPIO_PULL_NONE", "_protocol_2_embedded_gpio_8h.html#ad109b64760145827b3941286960c6e69a30d0c1278ee190bdc8d66a3d95810728", null ],
+      [ "GPIO_PULL_UP", "_protocol_2_embedded_gpio_8h.html#ad109b64760145827b3941286960c6e69ae7d1b2a9078939dd744dd9a7cd61d9df", null ],
+      [ "GPIO_PULL_DOWN", "_protocol_2_embedded_gpio_8h.html#ad109b64760145827b3941286960c6e69a93970a9b4ab92816371682f4e537a8e2", null ]
+    ] ],
+    [ "EFI_STATUS", "_protocol_2_embedded_gpio_8h.html#a968e99894b7998100af9edb2d33af74d", null ],
+    [ "gEmbeddedGpioProtocolGuid", "_protocol_2_embedded_gpio_8h.html#a7396c36cf061240680c4e8dfed95f597", null ],
+    [ "gPlatformGpioProtocolGuid", "_protocol_2_embedded_gpio_8h.html#aafedbaa181f9eaab7d0dfd985b28649e", null ]
+];

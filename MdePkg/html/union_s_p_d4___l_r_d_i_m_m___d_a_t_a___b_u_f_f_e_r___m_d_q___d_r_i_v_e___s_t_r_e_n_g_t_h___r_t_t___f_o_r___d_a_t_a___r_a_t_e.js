@@ -1,0 +1,7 @@
+var union_s_p_d4___l_r_d_i_m_m___d_a_t_a___b_u_f_f_e_r___m_d_q___d_r_i_v_e___s_t_r_e_n_g_t_h___r_t_t___f_o_r___d_a_t_a___r_a_t_e =
+[
+    [ "Bits", "union_s_p_d4___l_r_d_i_m_m___d_a_t_a___b_u_f_f_e_r___m_d_q___d_r_i_v_e___s_t_r_e_n_g_t_h___r_t_t___f_o_r___d_a_t_a___r_a_t_e.html#a2e96d647219fd3568248161cfee2677b", null ],
+    [ "Data", "union_s_p_d4___l_r_d_i_m_m___d_a_t_a___b_u_f_f_e_r___m_d_q___d_r_i_v_e___s_t_r_e_n_g_t_h___r_t_t___f_o_r___d_a_t_a___r_a_t_e.html#acf831432f5251d948a8ab59419181217", null ],
+    [ "DramInterfaceMdqDriveStrength", "union_s_p_d4___l_r_d_i_m_m___d_a_t_a___b_u_f_f_e_r___m_d_q___d_r_i_v_e___s_t_r_e_n_g_t_h___r_t_t___f_o_r___d_a_t_a___r_a_t_e.html#a519d794be41d6772c13bf11ac6a14201", null ],
+    [ "DramInterfaceMdqReadTerminationStrength", "union_s_p_d4___l_r_d_i_m_m___d_a_t_a___b_u_f_f_e_r___m_d_q___d_r_i_v_e___s_t_r_e_n_g_t_h___r_t_t___f_o_r___d_a_t_a___r_a_t_e.html#a01542ebab07282cae3bd4e97138395f8", null ]
+];

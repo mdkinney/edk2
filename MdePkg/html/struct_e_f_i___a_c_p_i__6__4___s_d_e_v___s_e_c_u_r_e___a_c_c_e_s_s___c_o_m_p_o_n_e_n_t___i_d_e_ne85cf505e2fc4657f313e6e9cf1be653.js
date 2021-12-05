@@ -1,0 +1,14 @@
+var struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___i_d_e_ne85cf505e2fc4657f313e6e9cf1be653 =
+[
+    [ "ClassCodePresent", "struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___i_d_e_ne85cf505e2fc4657f313e6e9cf1be653.html#a76418e272340bbea2795af8cd87a33e1", null ],
+    [ "HardwareIdentifierLength", "struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___i_d_e_ne85cf505e2fc4657f313e6e9cf1be653.html#a00b182ade48ba6011bafd28797724bc4", null ],
+    [ "HardwareIdentifierOffset", "struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___i_d_e_ne85cf505e2fc4657f313e6e9cf1be653.html#ab2ce3f8a769c8c054ee809f6a3af349f", null ],
+    [ "HardwareRevision", "struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___i_d_e_ne85cf505e2fc4657f313e6e9cf1be653.html#a254e32ba0af8c9391d965b2450ab4359", null ],
+    [ "HardwareRevisionPresent", "struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___i_d_e_ne85cf505e2fc4657f313e6e9cf1be653.html#a90149727c2daa651781db794eb5e5e6a", null ],
+    [ "Header", "struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___i_d_e_ne85cf505e2fc4657f313e6e9cf1be653.html#a9db0e24b165acd23736356f8e62786b5", null ],
+    [ "PciCompatibleBaseClass", "struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___i_d_e_ne85cf505e2fc4657f313e6e9cf1be653.html#ad72c111d1a96defd3b52a7742c590d56", null ],
+    [ "PciCompatibleProgrammingInterface", "struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___i_d_e_ne85cf505e2fc4657f313e6e9cf1be653.html#ad13b528337eba5311194ee38f425d194", null ],
+    [ "PciCompatibleSubClass", "struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___i_d_e_ne85cf505e2fc4657f313e6e9cf1be653.html#abffa3d46350dbe299432012cf3abb52d", null ],
+    [ "SubsystemIdentifierLength", "struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___i_d_e_ne85cf505e2fc4657f313e6e9cf1be653.html#a341cf44dcc886a63844fbb44ae915d08", null ],
+    [ "SubsystemIdentifierOffset", "struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___i_d_e_ne85cf505e2fc4657f313e6e9cf1be653.html#a608cf0787c037c3e3006f5bf646f9a71", null ]
+];

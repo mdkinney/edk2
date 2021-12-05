@@ -1,0 +1,203 @@
+/** \mainpage ArmVirtPkg Package Document
+<br>
+  Copyright (c) 2014, Linaro Limited. All rights reserved.<br>
+  Copyright (c) 2020, ARM Limited. All rights reserved.<br>
+<br>
+  SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>A0B31216-508E-4025-BEAB-56D836C66F0A</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ArmVirtPkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+</ul>
+ **/
+/** \page ArmVirtPkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_ArmVirtMemInfoLib "ArmVirtMemInfoLib" </li>
+</ul>
+ **/
+/** \page lc_ArmVirtMemInfoLib ArmVirtMemInfoLib
+\copydoc Include/Library/ArmVirtMemInfoLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/ArmVirtMemInfoLib.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_root_page "PcdsDynamic" </li>
+<li>\subpage pcd_PcdsFeatureFlag_root_page "PcdsFeatureFlag" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+<li>\subpage pcd_PcdsPatchableInModule_root_page "PcdsPatchableInModule" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_root_page PcdsDynamic
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_PcdForceNoAcpi "gArmVirtTokenSpaceGuid.PcdForceNoAcpi" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdForceNoAcpi gArmVirtTokenSpaceGuid.PcdForceNoAcpi
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdForceNoAcpi</CAPTION></TD><TD><CAPTION>gArmVirtTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000003</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_root_page PcdsFeatureFlag
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdTpm2SupportEnabled "gArmVirtTokenSpaceGuid.PcdTpm2SupportEnabled" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdTpm2SupportEnabled gArmVirtTokenSpaceGuid.PcdTpm2SupportEnabled
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdTpm2SupportEnabled</CAPTION></TD><TD><CAPTION>gArmVirtTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000004</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCloudHvAcpiRsdpBaseAddress "gArmVirtTokenSpaceGuid.PcdCloudHvAcpiRsdpBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdDeviceTreeAllocationPadding "gArmVirtTokenSpaceGuid.PcdDeviceTreeAllocationPadding" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdDeviceTreeInitialBaseAddress "gArmVirtTokenSpaceGuid.PcdDeviceTreeInitialBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdTerminalTypeGuidBuffer "gArmVirtTokenSpaceGuid.PcdTerminalTypeGuidBuffer" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCloudHvAcpiRsdpBaseAddress gArmVirtTokenSpaceGuid.PcdCloudHvAcpiRsdpBaseAddress
+ This is the physical address of Rsdp which is the core struct of Acpi.<br>
+ Cloud Hypervisor has no other way to pass Rsdp address to the guest except use a PCD.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCloudHvAcpiRsdpBaseAddress</CAPTION></TD><TD><CAPTION>gArmVirtTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000005</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdDeviceTreeAllocationPadding gArmVirtTokenSpaceGuid.PcdDeviceTreeAllocationPadding
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdDeviceTreeAllocationPadding</CAPTION></TD><TD><CAPTION>gArmVirtTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>256</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdDeviceTreeInitialBaseAddress gArmVirtTokenSpaceGuid.PcdDeviceTreeInitialBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdDeviceTreeInitialBaseAddress</CAPTION></TD><TD><CAPTION>gArmVirtTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000001</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdTerminalTypeGuidBuffer gArmVirtTokenSpaceGuid.PcdTerminalTypeGuidBuffer
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdTerminalTypeGuidBuffer</CAPTION></TD><TD><CAPTION>gArmVirtTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000007</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x65, 0x60, 0xA6, 0xDF, 0x19, 0xB4, 0xD3, 0x11, 0x9A, 0x2D, 0x00, 0x90, 0x27, 0x3F, 0xC1, 0x4D}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_root_page PcdsPatchableInModule
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdCloudHvAcpiRsdpBaseAddress "gArmVirtTokenSpaceGuid.PcdCloudHvAcpiRsdpBaseAddress" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdDeviceTreeAllocationPadding "gArmVirtTokenSpaceGuid.PcdDeviceTreeAllocationPadding" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdDeviceTreeInitialBaseAddress "gArmVirtTokenSpaceGuid.PcdDeviceTreeInitialBaseAddress" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdTerminalTypeGuidBuffer "gArmVirtTokenSpaceGuid.PcdTerminalTypeGuidBuffer" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdCloudHvAcpiRsdpBaseAddress gArmVirtTokenSpaceGuid.PcdCloudHvAcpiRsdpBaseAddress
+ This is the physical address of Rsdp which is the core struct of Acpi.<br>
+ Cloud Hypervisor has no other way to pass Rsdp address to the guest except use a PCD.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCloudHvAcpiRsdpBaseAddress</CAPTION></TD><TD><CAPTION>gArmVirtTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000005</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdDeviceTreeAllocationPadding gArmVirtTokenSpaceGuid.PcdDeviceTreeAllocationPadding
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdDeviceTreeAllocationPadding</CAPTION></TD><TD><CAPTION>gArmVirtTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>256</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdDeviceTreeInitialBaseAddress gArmVirtTokenSpaceGuid.PcdDeviceTreeInitialBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdDeviceTreeInitialBaseAddress</CAPTION></TD><TD><CAPTION>gArmVirtTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000001</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdTerminalTypeGuidBuffer gArmVirtTokenSpaceGuid.PcdTerminalTypeGuidBuffer
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdTerminalTypeGuidBuffer</CAPTION></TD><TD><CAPTION>gArmVirtTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000007</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x65, 0x60, 0xA6, 0xDF, 0x19, 0xB4, 0xD3, 0x11, 0x9A, 0x2D, 0x00, 0x90, 0x27, 0x3F, 0xC1, 0x4D}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gArmVirtTokenSpaceGuid "gArmVirtTokenSpaceGuid" </li>
+<li>\subpage guid_common_gArmVirtVariableGuid "gArmVirtVariableGuid" </li>
+<li>\subpage guid_common_gEarly16550UartBaseAddressGuid "gEarly16550UartBaseAddressGuid" </li>
+<li>\subpage guid_common_gEarlyPL011BaseAddressGuid "gEarlyPL011BaseAddressGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gArmVirtTokenSpaceGuid gArmVirtTokenSpaceGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gArmVirtTokenSpaceGuid</TD><TD>{ 0x0B6F5CA7, 0x4F53, 0x445A, { 0xB7, 0x6E, 0x2E, 0x36, 0x5B, 0x80, 0x63, 0x66 } }</TD></TR></TABLE>
+ **/
+/** \page guid_common_gArmVirtVariableGuid gArmVirtVariableGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gArmVirtVariableGuid</TD><TD>{ 0x50bea1e5, 0xa2c5, 0x46e9, { 0x9b, 0x3a, 0x59, 0x59, 0x65, 0x16, 0xb0, 0x0a } }</TD></TR></TABLE>
+ **/
+/** \page guid_common_gEarly16550UartBaseAddressGuid gEarly16550UartBaseAddressGuid
+ \copydoc ArmVirtPkg/Include/Guid/Early16550UartBaseAddress.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEarly16550UartBaseAddressGuid</TD><TD>{ 0xea67ca3e, 0x1f54, 0x436b, { 0x97, 0x88, 0xd4, 0xeb, 0x29, 0xc3, 0x42, 0x67 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ArmVirtPkg/Include/Guid/Early16550UartBaseAddress.h
+\endlink
+
+ **/
+/** \page guid_common_gEarlyPL011BaseAddressGuid gEarlyPL011BaseAddressGuid
+ \copydoc ArmVirtPkg/Include/Guid/EarlyPL011BaseAddress.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEarlyPL011BaseAddressGuid</TD><TD>{ 0xB199DEA9, 0xFD5C, 0x4A84, { 0x80, 0x82, 0x2F, 0x41, 0x70, 0x78, 0x03, 0x05 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ArmVirtPkg/Include/Guid/EarlyPL011BaseAddress.h
+\endlink
+
+ **/

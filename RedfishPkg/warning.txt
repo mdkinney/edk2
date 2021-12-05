@@ -1,0 +1,170 @@
+warning: source /home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Ppi is not a readable file or directory... skipping.
+warning: source /home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Guid is not a readable file or directory... skipping.
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Library/JsonLib.h:657: warning: The following parameters of JsonArrayGetValue(IN EDKII_JSON_ARRAY JsonArray, IN UINTN Index) are not documented:
+  parameter 'Index'
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Library/JsonLib.h:134: warning: Found unknown command `\u'
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Library/JsonLib.h:134: warning: Found unknown command `\u3E5A'
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Library/JsonLib.h:134: warning: Found unknown command `\u003F'
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Library/RedfishContentCodingLib.h:47: warning: argument 'ContentDecodedValue' of command @param is not found in the argument list of RedfishContentDecode(IN CHAR8 *ContentEncodedValue, IN VOID *ContentPointer, IN UINTN ContentLength, OUT VOID **DecodedContentPointer, OUT UINTN *DecodedLength)
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Library/RedfishContentCodingLib.h:47: warning: argument 'DecodedContentLength' of command @param is not found in the argument list of RedfishContentDecode(IN CHAR8 *ContentEncodedValue, IN VOID *ContentPointer, IN UINTN ContentLength, OUT VOID **DecodedContentPointer, OUT UINTN *DecodedLength)
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Library/RedfishContentCodingLib.h:47: warning: The following parameters of RedfishContentDecode(IN CHAR8 *ContentEncodedValue, IN VOID *ContentPointer, IN UINTN ContentLength, OUT VOID **DecodedContentPointer, OUT UINTN *DecodedLength) are not documented:
+  parameter 'ContentEncodedValue'
+  parameter 'DecodedLength'
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Library/RedfishContentCodingLib.h:13: warning: argument 'EncodedContentLength' of command @param is not found in the argument list of RedfishContentEncode(IN CHAR8 *ContentEncodedValue, IN CHAR8 *OriginalContent, IN UINTN OriginalContentLength, OUT VOID **EncodedContentPointer, OUT UINTN *EncodedLength)
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Library/RedfishContentCodingLib.h:13: warning: The following parameters of RedfishContentEncode(IN CHAR8 *ContentEncodedValue, IN CHAR8 *OriginalContent, IN UINTN OriginalContentLength, OUT VOID **EncodedContentPointer, OUT UINTN *EncodedLength) are not documented:
+  parameter 'EncodedLength'
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Library/RedfishHostInterfaceLib.h:34: warning: The following parameters of RedfishPlatformHostInterfaceProtocolData(IN OUT MC_HOST_INTERFACE_PROTOCOL_RECORD **ProtocolRecord, IN UINT8 IndexOfProtocolData) are not documented:
+  parameter 'IndexOfProtocolData'
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Protocol/EdkIIRedfishConfigHandler.h:56: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_REDFISH_CONFIG_HANDLER_PROTOCOL_INIT)
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Protocol/EdkIIRedfishConfigHandler.h:56: warning: argument 'RedfishServiceinfo' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_REDFISH_CONFIG_HANDLER_PROTOCOL_INIT)
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Protocol/EdkIIRedfishConfigHandler.h:56: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_REDFISH_CONFIG_HANDLER_PROTOCOL_INIT)
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Protocol/EdkIIRedfishConfigHandler.h:56: warning: The following parameters of EFI_STATUS(EFIAPI *EDKII_REDFISH_CONFIG_HANDLER_PROTOCOL_INIT) are not documented:
+  parameter 'EDKII_REDFISH_CONFIG_HANDLER_PROTOCOL_INIT'
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Protocol/EdkIIRedfishConfigHandler.h:56: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_REDFISH_CREDENTIAL_PROTOCOL_GET_AUTH_INFO)
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Protocol/EdkIIRedfishConfigHandler.h:56: warning: argument 'AuthMethod' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_REDFISH_CREDENTIAL_PROTOCOL_GET_AUTH_INFO)
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Protocol/EdkIIRedfishConfigHandler.h:56: warning: argument 'UserId' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_REDFISH_CREDENTIAL_PROTOCOL_GET_AUTH_INFO)
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Protocol/EdkIIRedfishConfigHandler.h:56: warning: argument 'Password' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_REDFISH_CREDENTIAL_PROTOCOL_GET_AUTH_INFO)
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Protocol/EdkIIRedfishConfigHandler.h:56: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_REDFISH_CREDENTIAL_PROTOCOL_GET_AUTH_INFO)
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Protocol/EdkIIRedfishConfigHandler.h:56: warning: argument 'ServiceStopType' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_REDFISH_CREDENTIAL_PROTOCOL_GET_AUTH_INFO)
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Protocol/EdkIIRedfishConfigHandler.h:56: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_REDFISH_CREDENTIAL_PROTOCOL_GET_AUTH_INFO)
+/home/runner/work/edk2/edk2/edk2/RedfishPkg/Include/Protocol/EdkIIRedfishConfigHandler.h:56: warning: The following parameters of EFI_STATUS(EFIAPI *EDKII_REDFISH_CREDENTIAL_PROTOCOL_GET_AUTH_INFO) are not documented:
+  parameter 'EDKII_REDFISH_CREDENTIAL_PROTOCOL_GET_AUTH_INFO'
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:31: warning: empty list!
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:64: warning: Found unknown command `\libraryclass'
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:73: warning: Found unknown command `\libraryclass'
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:82: warning: Found unknown command `\libraryclass'
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:91: warning: Found unknown command `\libraryclass'
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:100: warning: Found unknown command `\libraryclass'
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:109: warning: Found unknown command `\libraryclass'
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:142: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:148: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:154: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:174: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:180: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:186: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:202: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:202: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:202: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:202: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:220: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:220: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:220: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:220: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:225: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:225: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:225: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/edk2/Build/Doxygen/RedfishPkg/RedfishPkg.dec.decdoxygen:225: warning: Unexpected tag </caption> found

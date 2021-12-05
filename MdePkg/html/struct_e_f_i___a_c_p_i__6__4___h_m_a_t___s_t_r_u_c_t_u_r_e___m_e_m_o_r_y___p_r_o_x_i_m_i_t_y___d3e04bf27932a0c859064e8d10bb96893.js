@@ -1,0 +1,5 @@
+var struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___p_r_o_x_i_m_i_t_y___d3e04bf27932a0c859064e8d10bb96893 =
+[
+    [ "InitiatorProximityDomainValid", "struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___p_r_o_x_i_m_i_t_y___d3e04bf27932a0c859064e8d10bb96893.html#a0842ab029ca00937c91fff9f801c75ab", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___p_r_o_x_i_m_i_t_y___d3e04bf27932a0c859064e8d10bb96893.html#ab5e5f89d98fca0666817fda2bab93b2e", null ]
+];

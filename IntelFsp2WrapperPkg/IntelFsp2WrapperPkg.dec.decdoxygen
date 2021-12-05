@@ -1,0 +1,502 @@
+/** \mainpage IntelFsp2WrapperPkg Package Document
+ Provides drivers and definitions to support fsp in EDKII bios.<br>
+<br>
+ Copyright (c) 2014 - 2021, Intel Corporation. All rights reserved.<BR><br>
+ SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>FAFE06D4-7245-42D7-9FD2-E5D5E36AB0A0</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage IntelFsp2WrapperPkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+<li>\subpage ppi_root_page "PPI" </li>
+<li>\subpage protocol_root_page "PROTOCOL" </li>
+</ul>
+ **/
+/** \page IntelFsp2WrapperPkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_FspMeasurementLib "FspMeasurementLib" </li>
+<li>\subpage lc_FspWrapperApiLib "FspWrapperApiLib" </li>
+<li>\subpage lc_FspWrapperApiTestLib "FspWrapperApiTestLib" </li>
+<li>\subpage lc_FspWrapperHobProcessLib "FspWrapperHobProcessLib" </li>
+<li>\subpage lc_FspWrapperPlatformLib "FspWrapperPlatformLib" </li>
+</ul>
+ **/
+/** \page lc_FspMeasurementLib FspMeasurementLib
+  @libraryclass  Provide FSP TPM measurement related function.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/FspMeasurementLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_FspWrapperApiLib FspWrapperApiLib
+  @libraryclass  Provide FSP API related function.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/FspWrapperApiLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_FspWrapperApiTestLib FspWrapperApiTestLib
+\copydoc Include/Library/FspWrapperApiTestLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/FspWrapperApiTestLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_FspWrapperHobProcessLib FspWrapperHobProcessLib
+  @libraryclass  Provide FSP hob process related function.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/FspWrapperHobProcessLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_FspWrapperPlatformLib FspWrapperPlatformLib
+  @libraryclass  Provide FSP platform related function.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/FspWrapperPlatformLib.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_root_page "PcdsDynamic" </li>
+<li>\subpage pcd_PcdsDynamicEx_root_page "PcdsDynamicEx" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+<li>\subpage pcd_PcdsPatchableInModule_root_page "PcdsPatchableInModule" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_root_page PcdsDynamic
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_PcdFspmBaseAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspmBaseAddress" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdFspModeSelection "gIntelFsp2WrapperTokenSpaceGuid.PcdFspModeSelection" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdFspmUpdDataAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspmUpdDataAddress" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdFspsBaseAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspsBaseAddress" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdFspsUpdDataAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspsUpdDataAddress" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdFspmBaseAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspmBaseAddress
+ These are the base address of FSP-M/S<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspmBaseAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001000</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdFspModeSelection gIntelFsp2WrapperTokenSpaceGuid.PcdFspModeSelection
+ This PCD decides how Wrapper code utilizes FSP<br>
+ 0: DISPATCH mode (FSP Wrapper will load PeiCore from FSP without calling FSP API)<br>
+ 1: API mode (FSP Wrapper will call FSP API)<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspModeSelection</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000A</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x00000001</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdFspmUpdDataAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspmUpdDataAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspmUpdDataAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x50000000</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdFspsBaseAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspsBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspsBaseAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdFspsUpdDataAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspsUpdDataAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspsUpdDataAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x50000001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_root_page PcdsDynamicEx
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdFspmBaseAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspmBaseAddress" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdFspModeSelection "gIntelFsp2WrapperTokenSpaceGuid.PcdFspModeSelection" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdFspmUpdDataAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspmUpdDataAddress" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdFspsBaseAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspsBaseAddress" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdFspsUpdDataAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspsUpdDataAddress" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdFspmBaseAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspmBaseAddress
+ These are the base address of FSP-M/S<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspmBaseAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001000</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdFspModeSelection gIntelFsp2WrapperTokenSpaceGuid.PcdFspModeSelection
+ This PCD decides how Wrapper code utilizes FSP<br>
+ 0: DISPATCH mode (FSP Wrapper will load PeiCore from FSP without calling FSP API)<br>
+ 1: API mode (FSP Wrapper will call FSP API)<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspModeSelection</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000A</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x00000001</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdFspmUpdDataAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspmUpdDataAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspmUpdDataAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x50000000</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdFspsBaseAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspsBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspsBaseAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdFspsUpdDataAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspsUpdDataAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspsUpdDataAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x50000001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFlashCodeCacheAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFlashCodeCacheAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFlashCodeCacheSize "gIntelFsp2WrapperTokenSpaceGuid.PcdFlashCodeCacheSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspmBaseAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspmBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspMeasurementConfig "gIntelFsp2WrapperTokenSpaceGuid.PcdFspMeasurementConfig" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspModeSelection "gIntelFsp2WrapperTokenSpaceGuid.PcdFspModeSelection" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspmUpdDataAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspmUpdDataAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspsBaseAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspsBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFspsUpdDataAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspsUpdDataAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFsptBaseAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFsptBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPeiMinMemSize "gIntelFsp2WrapperTokenSpaceGuid.PcdPeiMinMemSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPeiRecoveryMinMemSize "gIntelFsp2WrapperTokenSpaceGuid.PcdPeiRecoveryMinMemSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSkipFspApi "gIntelFsp2WrapperTokenSpaceGuid.PcdSkipFspApi" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFlashCodeCacheAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFlashCodeCacheAddress
+ Provides the memory mapped base address of the BIOS CodeCache Flash Device.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFlashCodeCacheAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFFE00000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFlashCodeCacheSize gIntelFsp2WrapperTokenSpaceGuid.PcdFlashCodeCacheSize
+ Provides the size of the BIOS Flash Device.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFlashCodeCacheSize</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00200000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspmBaseAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspmBaseAddress
+ These are the base address of FSP-M/S<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspmBaseAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001000</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspMeasurementConfig gIntelFsp2WrapperTokenSpaceGuid.PcdFspMeasurementConfig
+ This PCD decides how FSP is measured<br>
+ 1) The BootGuard ACM may already measured the FSP component, such as FSPT/FSPM.<br>
+ We need a flag (PCD) to indicate if there is need to do such FSP measurement or NOT.<br>
+ 2) The FSP binary includes FSP code and FSP UPD region. The UPD region is considered<br>
+ as configuration block, and it may be updated by OEM by design.<br>
+ This flag (PCD) is to indicate if we need isolate the the UPD region from the FSP code region.<br>
+ BIT0: Need measure FSP. (for FSP1.x) - reserved in FSP2.<br>
+ BIT1: Need measure FSPT. (for FSP 2.x)<br>
+ BIT2: Need measure FSPM. (for FSP 2.x)<br>
+ BIT3: Need measure FSPS. (for FSP 2.x)<br>
+ BIT4~30: reserved.<br>
+ BIT31: Need isolate UPD region measurement.<br>
+0: measure FSP[T|M|S] as one binary in one record (PCR0).<br>
+1: measure FSP UPD region in one record (PCR1), the FSP code without UPD in another record (PCR0).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspMeasurementConfig</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000B</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspModeSelection gIntelFsp2WrapperTokenSpaceGuid.PcdFspModeSelection
+ This PCD decides how Wrapper code utilizes FSP<br>
+ 0: DISPATCH mode (FSP Wrapper will load PeiCore from FSP without calling FSP API)<br>
+ 1: API mode (FSP Wrapper will call FSP API)<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspModeSelection</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000A</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x00000001</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspmUpdDataAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspmUpdDataAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspmUpdDataAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x50000000</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspsBaseAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspsBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspsBaseAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFspsUpdDataAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspsUpdDataAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspsUpdDataAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x50000001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFsptBaseAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFsptBaseAddress
+ This is the base address of FSP-T<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFsptBaseAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000300</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPeiMinMemSize gIntelFsp2WrapperTokenSpaceGuid.PcdPeiMinMemSize
+ Indicate the PEI memory size platform want to report<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPeiMinMemSize</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x40000004</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x1800000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPeiRecoveryMinMemSize gIntelFsp2WrapperTokenSpaceGuid.PcdPeiRecoveryMinMemSize
+ Indicate the PEI memory size platform want to report<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPeiRecoveryMinMemSize</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x40000005</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x3000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSkipFspApi gIntelFsp2WrapperTokenSpaceGuid.PcdSkipFspApi
+ This PCD indicates if FSP APIs are skipped from FSP wrapper.<BR><BR><br>
+  If a bit is set, that means this FSP API is skipped.<BR><br>
+  If a bit is clear, that means this FSP API is NOT skipped.<BR><br>
+  NOTE: Only NotifyPhase Post PCI enumeration (BIT16) is implemented.<BR><br>
+  BIT[15:0] is for function:<BR><br>
+    BIT0    - Skip TempRamInit<BR><br>
+    BIT1    - Skip MemoryInit<BR><br>
+    BIT2    - Skip TempRamExit<BR><br>
+    BIT3    - Skip SiliconInit<BR><br>
+    BIT4    - Skip NotifyPhase<BR><br>
+  BIT[32:16] is for sub-function:<BR><br>
+    BIT16   - Skip NotifyPhase (AfterPciEnumeration)<BR><br>
+    BIT17   - Skip NotifyPhase (ReadyToBoot)<BR><br>
+    BIT18   - Skip NotifyPhase (EndOfFirmware)<BR><br>
+  Any undefined BITs are reserved for future use.<BR><br>
+ @Prompt Skip FSP API from FSP wrapper.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSkipFspApi</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x40000009</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_root_page PcdsPatchableInModule
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFlashCodeCacheAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFlashCodeCacheAddress" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFlashCodeCacheSize "gIntelFsp2WrapperTokenSpaceGuid.PcdFlashCodeCacheSize" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFspmBaseAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspmBaseAddress" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFspMeasurementConfig "gIntelFsp2WrapperTokenSpaceGuid.PcdFspMeasurementConfig" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFspModeSelection "gIntelFsp2WrapperTokenSpaceGuid.PcdFspModeSelection" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFspmUpdDataAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspmUpdDataAddress" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFspsBaseAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspsBaseAddress" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFspsUpdDataAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFspsUpdDataAddress" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFsptBaseAddress "gIntelFsp2WrapperTokenSpaceGuid.PcdFsptBaseAddress" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdPeiMinMemSize "gIntelFsp2WrapperTokenSpaceGuid.PcdPeiMinMemSize" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdPeiRecoveryMinMemSize "gIntelFsp2WrapperTokenSpaceGuid.PcdPeiRecoveryMinMemSize" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdSkipFspApi "gIntelFsp2WrapperTokenSpaceGuid.PcdSkipFspApi" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFlashCodeCacheAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFlashCodeCacheAddress
+ Provides the memory mapped base address of the BIOS CodeCache Flash Device.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFlashCodeCacheAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFFE00000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFlashCodeCacheSize gIntelFsp2WrapperTokenSpaceGuid.PcdFlashCodeCacheSize
+ Provides the size of the BIOS Flash Device.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFlashCodeCacheSize</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10000002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00200000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFspmBaseAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspmBaseAddress
+ These are the base address of FSP-M/S<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspmBaseAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001000</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFspMeasurementConfig gIntelFsp2WrapperTokenSpaceGuid.PcdFspMeasurementConfig
+ This PCD decides how FSP is measured<br>
+ 1) The BootGuard ACM may already measured the FSP component, such as FSPT/FSPM.<br>
+ We need a flag (PCD) to indicate if there is need to do such FSP measurement or NOT.<br>
+ 2) The FSP binary includes FSP code and FSP UPD region. The UPD region is considered<br>
+ as configuration block, and it may be updated by OEM by design.<br>
+ This flag (PCD) is to indicate if we need isolate the the UPD region from the FSP code region.<br>
+ BIT0: Need measure FSP. (for FSP1.x) - reserved in FSP2.<br>
+ BIT1: Need measure FSPT. (for FSP 2.x)<br>
+ BIT2: Need measure FSPM. (for FSP 2.x)<br>
+ BIT3: Need measure FSPS. (for FSP 2.x)<br>
+ BIT4~30: reserved.<br>
+ BIT31: Need isolate UPD region measurement.<br>
+0: measure FSP[T|M|S] as one binary in one record (PCR0).<br>
+1: measure FSP UPD region in one record (PCR1), the FSP code without UPD in another record (PCR0).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspMeasurementConfig</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000B</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFspModeSelection gIntelFsp2WrapperTokenSpaceGuid.PcdFspModeSelection
+ This PCD decides how Wrapper code utilizes FSP<br>
+ 0: DISPATCH mode (FSP Wrapper will load PeiCore from FSP without calling FSP API)<br>
+ 1: API mode (FSP Wrapper will call FSP API)<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspModeSelection</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x4000000A</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x00000001</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFspmUpdDataAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspmUpdDataAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspmUpdDataAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x50000000</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFspsBaseAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspsBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspsBaseAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFspsUpdDataAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFspsUpdDataAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFspsUpdDataAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x50000001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFsptBaseAddress gIntelFsp2WrapperTokenSpaceGuid.PcdFsptBaseAddress
+ This is the base address of FSP-T<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFsptBaseAddress</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000300</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdPeiMinMemSize gIntelFsp2WrapperTokenSpaceGuid.PcdPeiMinMemSize
+ Indicate the PEI memory size platform want to report<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPeiMinMemSize</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x40000004</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x1800000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdPeiRecoveryMinMemSize gIntelFsp2WrapperTokenSpaceGuid.PcdPeiRecoveryMinMemSize
+ Indicate the PEI memory size platform want to report<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPeiRecoveryMinMemSize</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x40000005</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x3000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdSkipFspApi gIntelFsp2WrapperTokenSpaceGuid.PcdSkipFspApi
+ This PCD indicates if FSP APIs are skipped from FSP wrapper.<BR><BR><br>
+  If a bit is set, that means this FSP API is skipped.<BR><br>
+  If a bit is clear, that means this FSP API is NOT skipped.<BR><br>
+  NOTE: Only NotifyPhase Post PCI enumeration (BIT16) is implemented.<BR><br>
+  BIT[15:0] is for function:<BR><br>
+    BIT0    - Skip TempRamInit<BR><br>
+    BIT1    - Skip MemoryInit<BR><br>
+    BIT2    - Skip TempRamExit<BR><br>
+    BIT3    - Skip SiliconInit<BR><br>
+    BIT4    - Skip NotifyPhase<BR><br>
+  BIT[32:16] is for sub-function:<BR><br>
+    BIT16   - Skip NotifyPhase (AfterPciEnumeration)<BR><br>
+    BIT17   - Skip NotifyPhase (ReadyToBoot)<BR><br>
+    BIT18   - Skip NotifyPhase (EndOfFirmware)<BR><br>
+  Any undefined BITs are reserved for future use.<BR><br>
+ @Prompt Skip FSP API from FSP wrapper.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSkipFspApi</CAPTION></TD><TD><CAPTION>gIntelFsp2WrapperTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x40000009</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gFspApiPerformanceGuid "gFspApiPerformanceGuid" </li>
+<li>\subpage guid_common_gFspHobGuid "gFspHobGuid" </li>
+<li>\subpage guid_common_gIntelFsp2WrapperTokenSpaceGuid "gIntelFsp2WrapperTokenSpaceGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gFspApiPerformanceGuid gFspApiPerformanceGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gFspApiPerformanceGuid</TD><TD>{ 0xc9122295, 0x56ed, 0x4d4e, { 0x06, 0xa6, 0x50, 0x8d, 0x89, 0x4d, 0x3e, 0x40 } }</TD></TR></TABLE>
+ **/
+/** \page guid_common_gFspHobGuid gFspHobGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gFspHobGuid</TD><TD>{ 0x6d86fb36, 0xba90, 0x472c, { 0xb5, 0x83, 0x3f, 0xbe, 0xd3, 0xfb, 0x20, 0x9a } }</TD></TR></TABLE>
+ **/
+/** \page guid_common_gIntelFsp2WrapperTokenSpaceGuid gIntelFsp2WrapperTokenSpaceGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gIntelFsp2WrapperTokenSpaceGuid</TD><TD>{ 0xa34cf082, 0xf50, 0x4f0d,  { 0x89, 0x8a, 0x3d, 0x39, 0x30, 0x2b, 0xc5, 0x1e } }</TD></TR></TABLE>
+ **/
+/** \page ppi_root_page PPI
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page ppi_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_page_gFspSiliconInitDonePpiGuid "gFspSiliconInitDonePpiGuid" </li>
+<li>\subpage ppi_page_gTopOfTemporaryRamPpiGuid "gTopOfTemporaryRamPpiGuid" </li>
+</ul>
+ **/
+/** \page ppi_page_gFspSiliconInitDonePpiGuid gFspSiliconInitDonePpiGuid
+ \copydoc IntelFsp2WrapperPkg/Include/Ppi/FspSiliconInitDone.h <br>
+ \section BasicPpiInfo PPI Information
+<TABLE><TR><TD><CAPTION>PPI's Guid Name</CAPTION></TD><TD><CAPTION>PPI's Guid</CAPTION></TD></TR><TR><TD>gFspSiliconInitDonePpiGuid</TD><TD>{ 0x4eb6e09c, 0xd256, 0x4e1e, { 0xb5, 0x0a, 0x87, 0x4b, 0xd2, 0x84, 0xb3, 0xde } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link IntelFsp2WrapperPkg/Include/Ppi/FspSiliconInitDone.h
+\endlink
+
+ **/
+/** \page ppi_page_gTopOfTemporaryRamPpiGuid gTopOfTemporaryRamPpiGuid
+ \copydoc IntelFsp2WrapperPkg/Include/Ppi/TopOfTemporaryRam.h <br>
+ \section BasicPpiInfo PPI Information
+<TABLE><TR><TD><CAPTION>PPI's Guid Name</CAPTION></TD><TD><CAPTION>PPI's Guid</CAPTION></TD></TR><TR><TD>gTopOfTemporaryRamPpiGuid</TD><TD>{ 0x2f3962b2, 0x57c5, 0x44ec, { 0x9e, 0xfc, 0xa6, 0x9f, 0xd3, 0x02, 0x03, 0x2b } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link IntelFsp2WrapperPkg/Include/Ppi/TopOfTemporaryRam.h
+\endlink
+
+ **/
+/** \page protocol_root_page PROTOCOL
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page protocol_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_page_gAddPerfRecordProtocolGuid "gAddPerfRecordProtocolGuid" </li>
+</ul>
+ **/
+/** \page protocol_page_gAddPerfRecordProtocolGuid gAddPerfRecordProtocolGuid
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gAddPerfRecordProtocolGuid</TD><TD>{ 0xc4a58d6d, 0x3677, 0x49cb, { 0xa0, 0x0a, 0x94, 0x70, 0x76, 0x5f, 0xb5, 0x5e } }</TD></TR></TABLE>
+ **/

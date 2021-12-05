@@ -1,0 +1,9 @@
+var struct_s_m_m___v_a_r_i_a_b_l_e___c_o_m_m_u_n_i_c_a_t_e___r_u_n_t_i_m_e___v_a_r_i_a_b_l_e___c_a_c_h_e___c_o_n_t_e_x_t =
+[
+    [ "HobFlushComplete", "struct_s_m_m___v_a_r_i_a_b_l_e___c_o_m_m_u_n_i_c_a_t_e___r_u_n_t_i_m_e___v_a_r_i_a_b_l_e___c_a_c_h_e___c_o_n_t_e_x_t.html#a51fb3f70cd78c50eeda9bd0731fe9841", null ],
+    [ "PendingUpdate", "struct_s_m_m___v_a_r_i_a_b_l_e___c_o_m_m_u_n_i_c_a_t_e___r_u_n_t_i_m_e___v_a_r_i_a_b_l_e___c_a_c_h_e___c_o_n_t_e_x_t.html#a115f2c06bfdc6954146f1d76556dd1c3", null ],
+    [ "ReadLock", "struct_s_m_m___v_a_r_i_a_b_l_e___c_o_m_m_u_n_i_c_a_t_e___r_u_n_t_i_m_e___v_a_r_i_a_b_l_e___c_a_c_h_e___c_o_n_t_e_x_t.html#a29e0b8af13eb27e2e8d5231fe0f8b6cf", null ],
+    [ "RuntimeHobCache", "struct_s_m_m___v_a_r_i_a_b_l_e___c_o_m_m_u_n_i_c_a_t_e___r_u_n_t_i_m_e___v_a_r_i_a_b_l_e___c_a_c_h_e___c_o_n_t_e_x_t.html#a67a81f34a3313a48bfac5c08d0b761f1", null ],
+    [ "RuntimeNvCache", "struct_s_m_m___v_a_r_i_a_b_l_e___c_o_m_m_u_n_i_c_a_t_e___r_u_n_t_i_m_e___v_a_r_i_a_b_l_e___c_a_c_h_e___c_o_n_t_e_x_t.html#ae401183da3d842c52a5a73506befe05a", null ],
+    [ "RuntimeVolatileCache", "struct_s_m_m___v_a_r_i_a_b_l_e___c_o_m_m_u_n_i_c_a_t_e___r_u_n_t_i_m_e___v_a_r_i_a_b_l_e___c_a_c_h_e___c_o_n_t_e_x_t.html#afa1fc39ffee5412e71c160d8d90a63b3", null ]
+];

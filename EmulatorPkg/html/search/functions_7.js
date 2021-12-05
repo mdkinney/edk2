@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['void',['VOID',['../_emu_thread_8h.html#a4e9d4c5ab2853b135263c82d7a59085d',1,'VOID(EFIAPI *THREAD_THUNK_EXIT_THREAD)(IN VOID *ValuePtr):&#160;EmuThread.h'],['../_emu_file_system_8h.html#a2f30fc5ba4cf968882c16dac575ae8f7',1,'VOID(EFIAPI *EMU_GRAPHICS_WINDOW_REGISTER_KEY_NOTIFY_CALLBACK)(IN VOID *Context:&#160;EmuFileSystem.h'],['../_emu_graphics_window_8h.html#a2f30fc5ba4cf968882c16dac575ae8f7',1,'VOID(EFIAPI *EMU_GRAPHICS_WINDOW_REGISTER_KEY_NOTIFY_CALLBACK)(IN VOID *Context:&#160;EmuGraphicsWindow.h'],['../_protocol_2_emu_thunk_8h.html#ad7e36f160eea0ce22b4b66b579e8061d',1,'VOID(EFIAPI *EMU_PE_COFF_RELOCATE_EXTRA_ACTION)(IN OUT PE_COFF_LOADER_IMAGE_CONTEXT *ImageContext):&#160;EmuThunk.h'],['../_protocol_2_emu_thunk_8h.html#a2d678c07e8a4bf6756ae8053dd43438e',1,'VOID(EFIAPI EMU_SET_TIMER_CALLBACK)(IN UINT64 DeltaMs):&#160;EmuThunk.h']]]
+];

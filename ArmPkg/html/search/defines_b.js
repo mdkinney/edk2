@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['optee_5ferror_5fcommunication',['OPTEE_ERROR_COMMUNICATION',['../_optee_lib_8h.html#aff7654b6ca00ee6f50a41fff0cc913b3',1,'OpteeLib.h']]],
+  ['optee_5fmax_5fcall_5fparams',['OPTEE_MAX_CALL_PARAMS',['../_optee_lib_8h.html#a3ab864bde63f6bb16470c95efa0cd1a7',1,'OpteeLib.h']]],
+  ['optee_5fmessage_5fattribute_5ftype_5fmask',['OPTEE_MESSAGE_ATTRIBUTE_TYPE_MASK',['../_optee_lib_8h.html#a49a89dfd33fba844f5d19e01462fbdb0',1,'OpteeLib.h']]],
+  ['optee_5fmessage_5fattribute_5ftype_5fmemory_5finout',['OPTEE_MESSAGE_ATTRIBUTE_TYPE_MEMORY_INOUT',['../_optee_lib_8h.html#a617026d9eada41c851f07ac7b7a8fb24',1,'OpteeLib.h']]],
+  ['optee_5fmessage_5fattribute_5ftype_5fmemory_5finput',['OPTEE_MESSAGE_ATTRIBUTE_TYPE_MEMORY_INPUT',['../_optee_lib_8h.html#a687bd4dcad162903aa050a4e8e049c00',1,'OpteeLib.h']]],
+  ['optee_5fmessage_5fattribute_5ftype_5fmemory_5foutput',['OPTEE_MESSAGE_ATTRIBUTE_TYPE_MEMORY_OUTPUT',['../_optee_lib_8h.html#a4f04febf267ac2c51911b8719cf78bd4',1,'OpteeLib.h']]],
+  ['optee_5fmessage_5fattribute_5ftype_5fnone',['OPTEE_MESSAGE_ATTRIBUTE_TYPE_NONE',['../_optee_lib_8h.html#ac7dee4a78b7ecc3ca186abd53b5939d5',1,'OpteeLib.h']]],
+  ['optee_5fmessage_5fattribute_5ftype_5fvalue_5finout',['OPTEE_MESSAGE_ATTRIBUTE_TYPE_VALUE_INOUT',['../_optee_lib_8h.html#ac7e07d228f3cb2cd92d4b5b58226d997',1,'OpteeLib.h']]],
+  ['optee_5fmessage_5fattribute_5ftype_5fvalue_5finput',['OPTEE_MESSAGE_ATTRIBUTE_TYPE_VALUE_INPUT',['../_optee_lib_8h.html#a374ce3284e116fdaae7bad02b34224c8',1,'OpteeLib.h']]],
+  ['optee_5fmessage_5fattribute_5ftype_5fvalue_5foutput',['OPTEE_MESSAGE_ATTRIBUTE_TYPE_VALUE_OUTPUT',['../_optee_lib_8h.html#aac189d0f4bbce6fe11942bb71c46398d',1,'OpteeLib.h']]],
+  ['optee_5forigin_5fcommunication',['OPTEE_ORIGIN_COMMUNICATION',['../_optee_lib_8h.html#aa72bdc1b19c18c756375ec64e127b2e3',1,'OpteeLib.h']]],
+  ['optee_5fos_5fuid0',['OPTEE_OS_UID0',['../_optee_lib_8h.html#aa2fc19c0d2427ab1f0ca6f5b48a20816',1,'OpteeLib.h']]],
+  ['optee_5fos_5fuid1',['OPTEE_OS_UID1',['../_optee_lib_8h.html#adc11eeaa76e6d0a2257fae075975bce8',1,'OpteeLib.h']]],
+  ['optee_5fos_5fuid2',['OPTEE_OS_UID2',['../_optee_lib_8h.html#a5aded98b406db780432a667861c5564e',1,'OpteeLib.h']]],
+  ['optee_5fos_5fuid3',['OPTEE_OS_UID3',['../_optee_lib_8h.html#ad1f45aacb2c3c415d57189f7623207c0',1,'OpteeLib.h']]],
+  ['optee_5fsuccess',['OPTEE_SUCCESS',['../_optee_lib_8h.html#ae2731be4ee460342b3eb916bdf75dc54',1,'OpteeLib.h']]]
+];

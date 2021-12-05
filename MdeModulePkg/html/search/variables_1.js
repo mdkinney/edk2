@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['base',['Base',['../struct_p_c_i___r_o_o_t___b_r_i_d_g_e___a_p_e_r_t_u_r_e.html#abc651dcc85c3e342c6000cdc049564d3',1,'PCI_ROOT_BRIDGE_APERTURE::Base()'],['../struct_u_n_i_v_e_r_s_a_l___p_a_y_l_o_a_d___e_x_t_r_a___d_a_t_a___e_n_t_r_y.html#aa49ca0068b94e4d4365dc3a069f634b2',1,'UNIVERSAL_PAYLOAD_EXTRA_DATA_ENTRY::Base()'],['../struct_u_n_i_v_e_r_s_a_l___p_a_y_l_o_a_d___p_c_i___r_o_o_t___b_r_i_d_g_e___a_p_e_r_t_u_r_e.html#a7823d2ca8196439475f2e1f03884b8f4',1,'UNIVERSAL_PAYLOAD_PCI_ROOT_BRIDGE_APERTURE::Base()']]],
+  ['baseaddress',['BaseAddress',['../struct_c_a_p_s_u_l_e___h_o_b___i_n_f_o.html#aed497751e0eb1b9ae977e186295d2628',1,'CAPSULE_HOB_INFO']]],
+  ['basicboot',['BasicBoot',['../struct_b_o_o_t___p_e_r_f_o_r_m_a_n_c_e___t_a_b_l_e.html#a174b7a31d52d9f82a7be121894d0368d',1,'BOOT_PERFORMANCE_TABLE']]],
+  ['baudrate',['BaudRate',['../struct_u_n_i_v_e_r_s_a_l___p_a_y_l_o_a_d___s_e_r_i_a_l___p_o_r_t___i_n_f_o.html#a51e796f27b195c87161d0ed8531cdaaf',1,'UNIVERSAL_PAYLOAD_SERIAL_PORT_INFO']]],
+  ['bootblockupdate',['BootBlockUpdate',['../struct_e_f_i___f_a_u_l_t___t_o_l_e_r_a_n_t___w_r_i_t_e___r_e_c_o_r_d.html#a1ac79a70667428ca21042bafbbb81506',1,'EFI_FAULT_TOLERANT_WRITE_RECORD']]],
+  ['bootoption',['BootOption',['../struct_e_f_i___b_o_o_t___m_a_n_a_g_e_r___k_e_y___o_p_t_i_o_n.html#aa9aea5a335e9325bab9936931becb56f',1,'EFI_BOOT_MANAGER_KEY_OPTION']]],
+  ['bootoptioncrc',['BootOptionCrc',['../struct_e_f_i___b_o_o_t___m_a_n_a_g_e_r___k_e_y___o_p_t_i_o_n.html#a44c6c100b72a77211d3144a60fad2704',1,'EFI_BOOT_MANAGER_KEY_OPTION']]],
+  ['bootperformance',['BootPerformance',['../struct_f_i_r_m_w_a_r_e___p_e_r_f_o_r_m_a_n_c_e___r_u_n_t_i_m_e___d_a_t_a.html#ac5c7267d6b6f2134188c43e0ac2937c8',1,'FIRMWARE_PERFORMANCE_RUNTIME_DATA']]],
+  ['bootperformancetablepointer',['BootPerformanceTablePointer',['../struct_f_i_r_m_w_a_r_e___p_e_r_f_o_r_m_a_n_c_e___v_a_r_i_a_b_l_e.html#a86201af1a84ff8662f8ce2fccff7bb02',1,'FIRMWARE_PERFORMANCE_VARIABLE']]],
+  ['bootpointerrecord',['BootPointerRecord',['../struct_f_i_r_m_w_a_r_e___p_e_r_f_o_r_m_a_n_c_e___t_a_b_l_e.html#af0d716afdfbe03217058941b7fd8949c',1,'FIRMWARE_PERFORMANCE_TABLE']]],
+  ['bootrecorddata',['BootRecordData',['../struct_s_m_m___b_o_o_t___r_e_c_o_r_d___c_o_m_m_u_n_i_c_a_t_e.html#a957abce384377c77a3e4cfa15c1c2f40',1,'SMM_BOOT_RECORD_COMMUNICATE']]],
+  ['bootrecordoffset',['BootRecordOffset',['../struct_s_m_m___b_o_o_t___r_e_c_o_r_d___c_o_m_m_u_n_i_c_a_t_e.html#a61b4d5754d4e768c2613dc95f8b3489e',1,'SMM_BOOT_RECORD_COMMUNICATE']]],
+  ['bootrecordsize',['BootRecordSize',['../struct_s_m_m___b_o_o_t___r_e_c_o_r_d___c_o_m_m_u_n_i_c_a_t_e.html#a34edc51aac23ad6e92f6da86b6e51c73',1,'SMM_BOOT_RECORD_COMMUNICATE']]],
+  ['bootscriptexecutorentrypoint',['BootScriptExecutorEntrypoint',['../struct_b_o_o_t___s_c_r_i_p_t___e_x_e_c_u_t_o_r___v_a_r_i_a_b_l_e.html#a73d434dd0c8bae8753f8026b3c762f33',1,'BOOT_SCRIPT_EXECUTOR_VARIABLE']]],
+  ['bootscriptstackbase',['BootScriptStackBase',['../struct_a_c_p_i___s3___c_o_n_t_e_x_t.html#a6ea1f5b96c56f8a01d18e3dff18f35cb',1,'ACPI_S3_CONTEXT']]],
+  ['bootscriptstacksize',['BootScriptStackSize',['../struct_a_c_p_i___s3___c_o_n_t_e_x_t.html#aca50414569a9bec418fa35075ce4b499',1,'ACPI_S3_CONTEXT']]],
+  ['browserstatus',['BrowserStatus',['../struct___f_o_r_m___d_i_s_p_l_a_y___e_n_g_i_n_e___f_o_r_m.html#a34667d50c1482cb30cc454f3c632bb4a',1,'_FORM_DISPLAY_ENGINE_FORM']]],
+  ['buffer',['Buffer',['../struct_m_e_m_o_r_y___p_r_o_f_i_l_e___a_l_l_o_c___i_n_f_o.html#a1a8f4941891dd0009629919d62662be4',1,'MEMORY_PROFILE_ALLOC_INFO::Buffer()'],['../struct_e_f_i___s_m_m___l_o_c_k___b_o_x___p_a_r_a_m_e_t_e_r___s_a_v_e.html#a1c3c248838b004f4edd9c9da86ace66e',1,'EFI_SMM_LOCK_BOX_PARAMETER_SAVE::Buffer()'],['../struct_e_f_i___s_m_m___l_o_c_k___b_o_x___p_a_r_a_m_e_t_e_r___u_p_d_a_t_e.html#a340f45990a26887dd0dda4a181e22ed8',1,'EFI_SMM_LOCK_BOX_PARAMETER_UPDATE::Buffer()'],['../struct_e_f_i___s_m_m___l_o_c_k___b_o_x___p_a_r_a_m_e_t_e_r___r_e_s_t_o_r_e.html#a7d3d417e0890729c0dbe773b5e288ee8',1,'EFI_SMM_LOCK_BOX_PARAMETER_RESTORE::Buffer()'],['../struct_e_f_i___h_i_i___v_a_l_u_e.html#a06fa617feaa4a39d8ca2a2e84634237b',1,'EFI_HII_VALUE::Buffer()']]],
+  ['bufferlen',['BufferLen',['../struct_e_f_i___h_i_i___v_a_l_u_e.html#a6bda8d356303fc388b1740e01b162330',1,'EFI_HII_VALUE']]],
+  ['buildversion',['BuildVersion',['../struct_p_c_d___d_a_t_a_b_a_s_e___i_n_i_t.html#a38f3fda8f2673fe20da4a16ba6ac5a4b',1,'PCD_DATABASE_INIT']]],
+  ['bulktransfer',['BulkTransfer',['../struct___p_e_i___u_s_b___h_o_s_t___c_o_n_t_r_o_l_l_e_r___p_p_i.html#a9158a290dc57988f4adbcf6451de2f4d',1,'_PEI_USB_HOST_CONTROLLER_PPI::BulkTransfer()'],['../struct___p_e_i___u_s_b2___h_o_s_t___c_o_n_t_r_o_l_l_e_r___p_p_i.html#a01b6f2893fe076d5e40d3221952c429b',1,'_PEI_USB2_HOST_CONTROLLER_PPI::BulkTransfer()']]],
+  ['bus',['Bus',['../struct_p_c_i___r_o_o_t___b_r_i_d_g_e.html#ae1d4f1f5d921d899082c7eddfd767f66',1,'PCI_ROOT_BRIDGE::Bus()'],['../struct_u_n_i_v_e_r_s_a_l___p_a_y_l_o_a_d___p_c_i___r_o_o_t___b_r_i_d_g_e.html#a33385744d2f2c9ef1db0f5384c84ec32',1,'UNIVERSAL_PAYLOAD_PCI_ROOT_BRIDGE::Bus()']]],
+  ['buswidth',['BusWidth',['../struct_e_d_k_i_i___s_d___m_m_c___o_p_e_r_a_t_i_n_g___p_a_r_a_m_e_t_e_r_s.html#a96b9423eb68ce98fe6d332bac033288e',1,'EDKII_SD_MMC_OPERATING_PARAMETERS']]]
+];

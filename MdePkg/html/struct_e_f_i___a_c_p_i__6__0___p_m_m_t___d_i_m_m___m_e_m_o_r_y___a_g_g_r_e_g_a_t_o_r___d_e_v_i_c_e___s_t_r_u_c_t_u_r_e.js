@@ -1,0 +1,8 @@
+var struct_e_f_i___a_c_p_i__6__0___p_m_m_t___d_i_m_m___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e =
+[
+    [ "Header", "struct_e_f_i___a_c_p_i__6__0___p_m_m_t___d_i_m_m___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e.html#a8c165e35524c5b788d9f43ee6bfa9006", null ],
+    [ "PhysicalComponentIdentifier", "struct_e_f_i___a_c_p_i__6__0___p_m_m_t___d_i_m_m___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e.html#aac73fee6c213fa9aba34fe33bd122fc0", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__6__0___p_m_m_t___d_i_m_m___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e.html#ae569fa638d2027eabc7050b6dde1f9e2", null ],
+    [ "SizeOfDimm", "struct_e_f_i___a_c_p_i__6__0___p_m_m_t___d_i_m_m___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e.html#acf04c8a10e3dc9551b3005792388dea8", null ],
+    [ "SmbiosHandle", "struct_e_f_i___a_c_p_i__6__0___p_m_m_t___d_i_m_m___m_e_m_o_r_y___a_g_g_r_e_g_a_t_o_r___d_e_v_i_c_e___s_t_r_u_c_t_u_r_e.html#a22b3ea4efb3480b9927fdf4eda599312", null ]
+];

@@ -1,0 +1,8 @@
+var union_p_c_i___e_x_p_r_e_s_s___r_e_g___p_h_y_s_i_c_a_l___l_a_y_e_r__32__0___r_c_v_d___m_o_d_i_f_i_e_d___t_s___d_a_t_a2 =
+[
+    [ "AltProtocolNegotiationStatus", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___p_h_y_s_i_c_a_l___l_a_y_e_r__32__0___r_c_v_d___m_o_d_i_f_i_e_d___t_s___d_a_t_a2.html#a5a9004e26a677ce24547e2fc4dcf47d2", null ],
+    [ "Bits", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___p_h_y_s_i_c_a_l___l_a_y_e_r__32__0___r_c_v_d___m_o_d_i_f_i_e_d___t_s___d_a_t_a2.html#aef8e0ef2fd3ec013571cc487bdc6aacf", null ],
+    [ "RcvdModifiedTSUsageInfo2", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___p_h_y_s_i_c_a_l___l_a_y_e_r__32__0___r_c_v_d___m_o_d_i_f_i_e_d___t_s___d_a_t_a2.html#ac0803d7ab88527b884a4b452017e4353", null ],
+    [ "Reserved", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___p_h_y_s_i_c_a_l___l_a_y_e_r__32__0___r_c_v_d___m_o_d_i_f_i_e_d___t_s___d_a_t_a2.html#a89157865a6f974989b511fb315624a67", null ],
+    [ "Uint32", "union_p_c_i___e_x_p_r_e_s_s___r_e_g___p_h_y_s_i_c_a_l___l_a_y_e_r__32__0___r_c_v_d___m_o_d_i_f_i_e_d___t_s___d_a_t_a2.html#ae549429182fe5c8242d7ff0777948bd0", null ]
+];

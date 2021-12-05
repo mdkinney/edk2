@@ -1,0 +1,35 @@
+var _pi_s3_boot_script_8h =
+[
+    [ "EFI_BOOT_SCRIPT_DISPATCH_2_OPCODE", "_pi_s3_boot_script_8h.html#a7ee9542571ca6785b67ad100b5c49862", null ],
+    [ "EFI_BOOT_SCRIPT_DISPATCH_OPCODE", "_pi_s3_boot_script_8h.html#ad26d1bc9d44ea335ce71160ef03c8d7b", null ],
+    [ "EFI_BOOT_SCRIPT_INFORMATION_OPCODE", "_pi_s3_boot_script_8h.html#a4184c0aa80ceee7e8caa01542a96420d", null ],
+    [ "EFI_BOOT_SCRIPT_IO_POLL_OPCODE", "_pi_s3_boot_script_8h.html#abbf4cc9137cc51fc8ab707db0867e59a", null ],
+    [ "EFI_BOOT_SCRIPT_IO_READ_WRITE_OPCODE", "_pi_s3_boot_script_8h.html#a85c2ffcb29e05259ea09afc8b3efa9ba", null ],
+    [ "EFI_BOOT_SCRIPT_IO_WRITE_OPCODE", "_pi_s3_boot_script_8h.html#a75ab26b6aee8cfb8b747cef823dd3361", null ],
+    [ "EFI_BOOT_SCRIPT_MEM_POLL_OPCODE", "_pi_s3_boot_script_8h.html#a133425de3fdc7d78a6c22ed49ebe8d92", null ],
+    [ "EFI_BOOT_SCRIPT_MEM_READ_WRITE_OPCODE", "_pi_s3_boot_script_8h.html#aa218d7f685eec587b56d6577e8c2b713", null ],
+    [ "EFI_BOOT_SCRIPT_MEM_WRITE_OPCODE", "_pi_s3_boot_script_8h.html#ab6aa1026dd34427625967aa3783bfef5", null ],
+    [ "EFI_BOOT_SCRIPT_PCI_CONFIG2_POLL_OPCODE", "_pi_s3_boot_script_8h.html#af7a0d9ffa081f9e598b2eb132830e6a3", null ],
+    [ "EFI_BOOT_SCRIPT_PCI_CONFIG2_READ_WRITE_OPCODE", "_pi_s3_boot_script_8h.html#a2eaeb489ce39e33bb6c96bb7a81b6e11", null ],
+    [ "EFI_BOOT_SCRIPT_PCI_CONFIG2_WRITE_OPCODE", "_pi_s3_boot_script_8h.html#a0f6c13f9e4bf7dc135c28cdf3c89d3c5", null ],
+    [ "EFI_BOOT_SCRIPT_PCI_CONFIG_POLL_OPCODE", "_pi_s3_boot_script_8h.html#a6a0c78374a3e7b871747ba5e1356dad3", null ],
+    [ "EFI_BOOT_SCRIPT_PCI_CONFIG_READ_WRITE_OPCODE", "_pi_s3_boot_script_8h.html#a549d5f4cfde6a4a921d20a0267eaa3b3", null ],
+    [ "EFI_BOOT_SCRIPT_PCI_CONFIG_WRITE_OPCODE", "_pi_s3_boot_script_8h.html#a800c1353c637c69c8bb48bc1d2a1830d", null ],
+    [ "EFI_BOOT_SCRIPT_SMBUS_EXECUTE_OPCODE", "_pi_s3_boot_script_8h.html#a5e38d4febb976720869fbfcdb2f8cba8", null ],
+    [ "EFI_BOOT_SCRIPT_STALL_OPCODE", "_pi_s3_boot_script_8h.html#a23702a1465519603977c64761f5f8512", null ],
+    [ "EFI_BOOT_SCRIPT_WIDTH", "_pi_s3_boot_script_8h.html#afa1d784980fa665be4bedd73a3b7d21a", [
+      [ "EfiBootScriptWidthUint8", "_pi_s3_boot_script_8h.html#afa1d784980fa665be4bedd73a3b7d21aa3938b1212676322e368dccadc428f8da", null ],
+      [ "EfiBootScriptWidthUint16", "_pi_s3_boot_script_8h.html#afa1d784980fa665be4bedd73a3b7d21aad33294bd078ac3ff27a13b51195b1856", null ],
+      [ "EfiBootScriptWidthUint32", "_pi_s3_boot_script_8h.html#afa1d784980fa665be4bedd73a3b7d21aac95cdb8894fdcc6f1b0ea89ce0b768aa", null ],
+      [ "EfiBootScriptWidthUint64", "_pi_s3_boot_script_8h.html#afa1d784980fa665be4bedd73a3b7d21aa9d257ce279bac9526b442362f1fa0ad1", null ],
+      [ "EfiBootScriptWidthFifoUint8", "_pi_s3_boot_script_8h.html#afa1d784980fa665be4bedd73a3b7d21aac380c46133634c9d039f907e93cfed81", null ],
+      [ "EfiBootScriptWidthFifoUint16", "_pi_s3_boot_script_8h.html#afa1d784980fa665be4bedd73a3b7d21aa1f56e624808491c71e42c38ae37bf3e7", null ],
+      [ "EfiBootScriptWidthFifoUint32", "_pi_s3_boot_script_8h.html#afa1d784980fa665be4bedd73a3b7d21aaa5505d6b552752e6b1d7a321ce2a35ba", null ],
+      [ "EfiBootScriptWidthFifoUint64", "_pi_s3_boot_script_8h.html#afa1d784980fa665be4bedd73a3b7d21aa935ab7cc254e75c75a9a181b1dc94b61", null ],
+      [ "EfiBootScriptWidthFillUint8", "_pi_s3_boot_script_8h.html#afa1d784980fa665be4bedd73a3b7d21aaf756c35dcc200259a81b0d7413a3748c", null ],
+      [ "EfiBootScriptWidthFillUint16", "_pi_s3_boot_script_8h.html#afa1d784980fa665be4bedd73a3b7d21aaaec1cbe7dd76fd5538ab9d3c67460fc2", null ],
+      [ "EfiBootScriptWidthFillUint32", "_pi_s3_boot_script_8h.html#afa1d784980fa665be4bedd73a3b7d21aac97ba026a2aaab89fe4b85655ca5fb1a", null ],
+      [ "EfiBootScriptWidthFillUint64", "_pi_s3_boot_script_8h.html#afa1d784980fa665be4bedd73a3b7d21aae86d74e2220f9fbe141d6b4030967b32", null ],
+      [ "EfiBootScriptWidthMaximum", "_pi_s3_boot_script_8h.html#afa1d784980fa665be4bedd73a3b7d21aa6bf76dbc44acaad08686a1a9f3830ec7", null ]
+    ] ]
+];

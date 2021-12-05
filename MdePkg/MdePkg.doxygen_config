@@ -1,0 +1,792 @@
+
+DOXYFILE_ENCODING      = UTF-8
+PROJECT_NAME           = MdePkg[all]
+PROJECT_NUMBER         = 1.08
+OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/MdePkg
+CREATE_SUBDIRS         = NO
+OUTPUT_LANGUAGE        = English
+BRIEF_MEMBER_DESC      = YES
+REPEAT_BRIEF           = YES
+ABBREVIATE_BRIEF       = "The $name class           " \
+                         "The $name widget           " \
+                         "The $name file           " \
+                         is \
+                         provides \
+                         specifies \
+                         contains \
+                         represents \
+                         a \
+                         an \
+                         the
+ALWAYS_DETAILED_SEC    = NO
+INLINE_INHERITED_MEMB  = NO
+FULL_PATH_NAMES        = YES
+STRIP_FROM_PATH        = /home/runner/work/edk2/edk2/edk2
+STRIP_FROM_INC_PATH    =
+SHORT_NAMES            = NO
+JAVADOC_AUTOBRIEF      = NO
+QT_AUTOBRIEF           = NO
+MULTILINE_CPP_IS_BRIEF = NO
+DETAILS_AT_TOP         = YES
+INHERIT_DOCS           = YES
+SEPARATE_MEMBER_PAGES  = NO
+TAB_SIZE               = 2
+ALIASES                =
+OPTIMIZE_OUTPUT_FOR_C  = YES
+OPTIMIZE_OUTPUT_JAVA   = NO
+BUILTIN_STL_SUPPORT    = NO
+CPP_CLI_SUPPORT        = NO
+SIP_SUPPORT            = NO
+DISTRIBUTE_GROUP_DOC   = YES
+SUBGROUPING            = YES
+TYPEDEF_HIDES_STRUCT   = NO
+
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+EXTRACT_LOCAL_CLASSES  = NO
+EXTRACT_LOCAL_METHODS  = NO
+EXTRACT_ANON_NSPACES   = NO
+HIDE_UNDOC_MEMBERS     = NO
+HIDE_UNDOC_CLASSES     = NO
+HIDE_FRIEND_COMPOUNDS  = NO
+HIDE_IN_BODY_DOCS      = NO
+INTERNAL_DOCS          = NO
+CASE_SENSE_NAMES       = NO
+HIDE_SCOPE_NAMES       = NO
+SHOW_INCLUDE_FILES     = NO
+INLINE_INFO            = YES
+SORT_MEMBER_DOCS       = YES
+SORT_BRIEF_DOCS        = NO
+SORT_BY_SCOPE_NAME     = YES
+GENERATE_TODOLIST      = YES
+GENERATE_TESTLIST      = YES
+GENERATE_BUGLIST       = YES
+GENERATE_DEPRECATEDLIST= YES
+ENABLED_SECTIONS       =
+MAX_INITIALIZER_LINES  = 30
+SHOW_USED_FILES        = NO
+SHOW_DIRECTORIES       = NO
+FILE_VERSION_FILTER    =
+
+QUIET                  = NO
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+WARN_NO_PARAMDOC       = YES
+WARN_FORMAT            = "$file:$line: $text           "
+WARN_LOGFILE           = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/MdePkg/warning.txt
+
+INPUT                  = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/MdePkg/MdePkg.dec.decdoxygen \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/PiDxe.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/PiPei.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Base.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/PiSmm.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Uefi.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/PiMm.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ia32/ProcessorBind.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ia32/Nasm.inc \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/MemoryOverwriteRequestControlLock.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Acpi10.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/LegacyBiosMpTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/TpmTis.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Acpi64.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Acpi.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Bluetooth.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/PciExpress31.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/TpmPtp.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/SmBus.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/SerialPortConsoleRedirectionTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Tpm20.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/IpmiFruInformationStorage.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/AcpiAml.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Hsti.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/TcgStorageOpal.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Pci22.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/IpmiNetFnTransport.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/MemoryMappedConfigurationSpaceAccessTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Udf.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Pci30.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/TcgPhysicalPresence.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/DmaRemappingReportingTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/IpmiNetFnChassis.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Emmc.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Scsi.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/IScsiBootFirmwareTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/PeImage.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/SdramSpdDdr4.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/PciCodeId.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/SdramSpdLpDdr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Bmp.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Cxl.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Acpi20.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Acpi30.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Dhcp.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/IpmiNetFnBridge.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Tpm2Acpi.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/IpmiNetFnGroupExtension.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Cxl11.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/ArmErrorSourceTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/IpmiNetFnFirmware.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/IpmiNetFnStorage.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/WatchdogResourceTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Nvme.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/LowPowerIdleTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/DebugPortTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Usb.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Atapi.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Acpi63.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Spdm.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Ipmi.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/PciExpress21.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/IpmiNetFnSensorEvent.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/ElTorito.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Pci.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Acpi50.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Tpm12.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/AlertStandardFormatTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/WatchdogActionTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Acpi62.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Pci23.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Mbr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Sd.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/DebugPort2Table.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Acpi51.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Acpi40.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/PciExpress30.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/SdramSpdDdr3.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/TcpaAcpi.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/PciExpress40.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/TcgStorageCore.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/UefiTcgPlatform.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/SdramSpd.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Acpi60.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/WindowsSmmSecurityMitigationTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/IoRemappingTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Acpi61.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/SmBios.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/ServiceProcessorManagementInterfaceTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/HighPrecisionEventTimerTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/WindowsUxCapsule.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Http11.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/IpmiNetFnApp.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/Tls1.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard/PciExpress50.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Pi/PiMmCis.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Pi/PiDependency.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Pi/PiMultiPhase.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Pi/PiSmmCis.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Pi/PiS3BootScript.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Pi/PiFirmwareVolume.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Pi/PiStatusCode.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Pi/PiHob.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Pi/PiFirmwareFile.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Pi/PiPeiCis.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Pi/PiDxeCis.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Pi/PiBootMode.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Pi/PiI2c.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/S3BootScriptLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PciSegmentInfoLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PciLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/IoLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/DevicePathLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PrintLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/SmmServicesTableLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/BaseMemoryLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/OrderedCollectionLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/UefiRuntimeServicesTableLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/UefiUsbLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/UefiScsiLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/DxeCoreEntryPoint.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/SmmLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PeCoffGetEntryPointLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/ReportStatusCodeLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/UnitTestLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/UefiBootServicesTableLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/S3PciLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/SafeIntLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PcdLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/S3PciSegmentLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/UefiLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/BaseLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/SmmIoLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PeCoffLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PerformanceLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/ResourcePublicationLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/DebugLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/CpuLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/TimerLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PostCodeLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PeimEntryPoint.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/UefiDecompressLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/StandaloneMmDriverEntryPoint.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PciSegmentLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/HobLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/S3SmbusLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/FileHandleLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/SmbusLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PeiServicesTablePointerLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PeiCoreEntryPoint.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/SerialPortLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/UefiDriverEntryPoint.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/RngLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/SynchronizationLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/DxeServicesLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/SmmPeriodicSmiLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/DxeServicesTableLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/SmiHandlerProfileLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/HstiLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PciExpressLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/SmmMemLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PciCf8Lib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/ExtractGuidedSectionLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/UefiRuntimeLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/MmServicesTableLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/MmUnblockMemoryLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/DebugPrintErrorLevelLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PeCoffExtraActionLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/S3StallLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/PeiServicesLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/CacheMaintenanceLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/RegisterFilterLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/S3IoLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/UefiApplicationEntryPoint.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library/MemoryAllocationLib.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/SecHobData.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/StatusCode.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/GuidedSectionExtraction.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/MemoryDiscovered.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/SecPlatformInformation.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/PcdInfo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/FirmwareVolumeInfo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/DeviceRecoveryModule.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/IsaHc.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/FirmwareVolume.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/PeiCoreFvLocation.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/Graphics.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/MmAccess.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/Reset.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/EndOfPeiPhase.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/SuperIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/MmControl.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/ReadOnlyVariable2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/Decompress.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/SecPlatformInformation2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/Capsule.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/TemporaryRamSupport.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/VectorHandoffInfo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/MpServices.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/Reset2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/DelayedDispatch.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/ReportStatusCodeHandler.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/S3Resume2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/RecoveryModule.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/BlockIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/Smbus2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/BootInRecoveryMode.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/Security2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/CpuIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/LoadImage.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/MmCommunication.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/PiPcdInfo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/PiPcd.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/PciCfg2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/BlockIo2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/MmConfiguration.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/LoadFile.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/MasterBootMode.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/FirmwareVolumeInfo2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/TemporaryRamDone.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/I2cMaster.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/Stall.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/DxeIpl.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi/Pcd.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/X64/ProcessorBind.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/X64/Nasm.inc \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/FileInfo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/MdePkgTokenSpace.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/WinCertificate.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/SmramMemoryReserve.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/Acpi.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/GraphicsInfoHob.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/RtPropertiesTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/Btt.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/ImageAuthentication.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/Apriori.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/Mps.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/Cper.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/AprioriFileName.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/DebugImageInfoTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/FirmwareContentsSigned.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/CapsuleReport.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/FileSystemInfo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/FmpCapsule.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/HiiFormMapMethodGuid.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/HobList.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/FirmwareFileSystem3.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/MemoryOverwriteControl.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/StatusCodeDataTypeId.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/HiiPlatformSetupFormset.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/HardwareErrorVariable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/DxeServices.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/GlobalVariable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/EventLegacyBios.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/FirmwareFileSystem2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/HiiKeyBoardLayout.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/MemoryAllocationHob.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/LinuxEfiInitrdMedia.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/EventGroup.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/VectorHandoffTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/SystemResourceTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/SmBios.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/PcAnsi.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/JsonCapsule.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/FileSystemVolumeLabelInfo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/Gpt.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid/MemoryAttributesTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/RiscV64/ProcessorBind.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Arm/ProcessorBind.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/AArch64/ProcessorBind.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ebc/ProcessorBind.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Cpuid.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/SmramSaveStateMap.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/ArchitecturalMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Microcode.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/LocalApic.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/StmStatusCode.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/StmApi.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/StmResourceDescriptor.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/PentiumMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/XeonE7Msr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/Xeon5600Msr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/SilvermontMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/Core2Msr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/XeonDMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/HaswellMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/GoldmontMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/GoldmontPlusMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/HaswellEMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/IvyBridgeMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/AtomMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/CoreMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/SandyBridgeMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/NehalemMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/P6Msr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/Pentium4Msr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/PentiumMMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/BroadwellMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/SkylakeMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Intel/Msr/XeonPhiMsr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Amd/Cpuid.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Amd/Fam17Msr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Amd/Ghcb.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Register/Amd/Msr.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Cpu.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmPeriodicTimerDispatch2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/ComponentName2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/StatusCode.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/HttpBootCallback.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/GuidedSectionExtraction.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/I2cBusConfigurationManagement.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Ip6Config.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MonotonicCounter.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmartCardEdge.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/RedfishDiscover.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/RestEx.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmStatusCode.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmbusHc.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Udp6.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/HiiPackageList.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Ip6.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/FormBrowser2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmAccess2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/BootManagerPolicy.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmUsbDispatch2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SerialIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/AtaPassThru.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Rest.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DriverConfiguration.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/EapManagement2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmCommunication.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmBase.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmSxDispatch.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Supplicant.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Ip4Config.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/AbsolutePointer.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/NvdimmLabel.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/NetworkInterfaceIdentifier.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmPowerButtonDispatch2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmIoTrapDispatch.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Timer.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmStandbyButtonDispatch.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/EdidActive.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/EapManagement.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmIoTrapDispatch2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/UnicodeCollation.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Metronome.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmGpiDispatch2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Hash.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/ShellParameters.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Mtftp4.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/IpSec.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/RamDisk.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PciOverride.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/AcpiTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Ftp4.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Timestamp.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SpiHc.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PciHotPlugInit.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmUsbDispatch.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/WiFi.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PcdInfo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/FirmwareVolume2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/S3SmmSaveState.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmSwDispatch.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/BlockIoCrypto.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/UsbIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Tls.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Smbios.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/StorageSecurityCommand.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/UserCredential.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/UserCredential2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/LegacySpiFlash.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Ebc.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PlatformDriverOverride.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DeferredImageLoad.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/UsbHostController.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SecurityPolicy.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/IsaHc.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DiskIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SpiSmmHc.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Security.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmMp.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/LegacyRegion2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/UgaIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DeviceIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/EraseBlock.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/VariableWrite.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/IdeControllerInit.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/NvmExpressPassthru.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/I2cIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmAccess.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Reset.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/UsbFunctionIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/TapeIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SimpleNetwork.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DiskIo2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Ip4.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/AcpiSystemDescriptionTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SimplePointer.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmStandbyButtonDispatch2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SuperIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/EapConfiguration.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmControl.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmPowerButtonDispatch.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Pkcs7Verify.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/BusSpecificDriverOverride.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PlatformToDriverConfiguration.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Http.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/ServiceBinding.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmStatusCode.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmGpiDispatch.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Decompress.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmPciRootBridgeIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/TlsConfig.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/UfsDeviceConfig.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Bis.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/S3SaveState.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Capsule.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/ResetNotification.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmCpuIo2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Eap.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/HiiImage.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/I2cEnumerate.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PartitionInfo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmBase2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/ScsiPassThruExt.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/ScsiIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Udp4.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmCpuIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Mtftp6.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Hash2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/HiiFont.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Bds.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/LegacySpiSmmFlash.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/WiFi2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SpiNorFlash.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/LegacySpiSmmController.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Dns6.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/ReportStatusCodeHandler.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmCpu.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/RestJsonStructure.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DriverDiagnostics.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/ScsiPassThru.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmCpu.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/BluetoothAttribute.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/RealTimeClock.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/BluetoothLeConfig.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmEndOfDxe.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/HiiString.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/BlockIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/HiiImageEx.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/IpSecConfig.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/LoadFile2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/FirmwareVolumeBlock.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/UserManager.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmConfiguration.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PciIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Dhcp6.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmEndOfDxe.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Dns4.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/TrEEProtocol.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmReadyToLock.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Tcp4.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PciRootBridgeIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DiskInfo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SimpleFileSystem.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PciEnumerationComplete.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DevicePathToText.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Runtime.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Ip4Config2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/EdidOverride.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DriverDiagnostics2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Security2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DriverFamilyOverride.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SpiSmmConfiguration.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/WatchdogTimer.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DriverHealth.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/HiiConfigKeyword.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmPeriodicTimerDispatch.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/UgaDraw.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Usb2HostController.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DriverConfiguration2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/LoadedImage.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Variable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Rng.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmCommunication.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PiPcdInfo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/HiiConfigRouting.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmartCardReader.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SpiIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Tcp6.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DxeMmReadyToLock.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/AuthenticationInfo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SuperIoControl.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PciHotPlugRequest.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmControl2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/HiiDatabase.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/GraphicsOutput.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PiPcd.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmReportStatusCodeHandler.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/BlockIo2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/IScsiInitiatorName.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/BluetoothHc.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Kms.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/HiiConfigAccess.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmConfiguration.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmCommunication2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/LoadFile.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Shell.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/TcgService.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DevicePath.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DriverBinding.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MmReadyToLock.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SpiConfiguration.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/RegularExpressionProtocol.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmReportStatusCodeHandler.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/ComponentName.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/BluetoothIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PciPlatform.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/HttpUtilities.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/EdidDiscovered.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmSxDispatch2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DriverSupportedEfiVersion.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SimpleTextInEx.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PxeBaseCode.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/VlanConfig.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/CpuIo2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DxeSmmReadyToLock.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/BluetoothConfig.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/AdapterInformation.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/HiiImageDecoder.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Dhcp4.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/I2cMaster.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/ShellDynamicCommand.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PxeBaseCodeCallBack.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/FirmwareManagement.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmPciRootBridgeIo.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SdMmcPassThru.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/I2cHost.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SmmSwDispatch2.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DebugSupport.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/PciHostBridgeResourceAllocation.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SpiSmmNorFlash.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DevicePathFromText.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SimpleTextIn.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/LegacySpiController.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Pcd.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DevicePathUtilities.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/DebugPort.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Tcg2Protocol.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/SimpleTextOut.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/Arp.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/HiiPopup.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/IncompatiblePciDeviceSupport.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/ManagedNetwork.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol/MpService.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Uefi/UefiMultiPhase.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Uefi/UefiSpec.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Uefi/UefiGpt.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Uefi/UefiPxe.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Uefi/UefiAcpiDataTable.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Uefi/UefiInternalFormRepresentation.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Uefi/UefiBaseType.h \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Test/UnitTest/Include/Library/UnitTestHostBaseLib.h
+INPUT_ENCODING         = UTF-8
+FILE_PATTERNS          = *.c \
+*.h \
+*.asm \
+*.s \
+.nasm \
+*.html \
+*.dox \
+*.decdoxygen
+RECURSIVE              = NO
+EXCLUDE                = *.svn
+EXCLUDE_SYMLINKS       = NO
+EXCLUDE_PATTERNS       = .svn
+EXCLUDE_SYMBOLS        =
+EXAMPLE_PATH           = 
+EXAMPLE_PATTERNS       = *
+EXAMPLE_RECURSIVE      = NO
+IMAGE_PATH             =
+INPUT_FILTER           =
+FILTER_PATTERNS        =
+FILTER_SOURCE_FILES    = NO
+
+SOURCE_BROWSER         = NO
+INLINE_SOURCES         = NO
+STRIP_CODE_COMMENTS    = YES
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+REFERENCES_LINK_SOURCE = NO
+USE_HTAGS              = NO
+VERBATIM_HEADERS       = NO
+
+ALPHABETICAL_INDEX     = NO
+COLS_IN_ALPHA_INDEX    = 5
+IGNORE_PREFIX          =
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_FILE_EXTENSION    = .html
+HTML_HEADER            =
+HTML_FOOTER            =
+HTML_STYLESHEET        =
+HTML_ALIGN_MEMBERS     = YES
+GENERATE_HTMLHELP      = NO
+HTML_DYNAMIC_SECTIONS  = NO
+CHM_FILE               = index.chm
+HHC_LOCATION           =
+GENERATE_CHI           = NO
+BINARY_TOC             = NO
+TOC_EXPAND             = NO
+DISABLE_INDEX          = NO
+ENUM_VALUES_PER_LINE   = 4
+GENERATE_TREEVIEW      = YES
+TREEVIEW_WIDTH         = 250
+
+GENERATE_LATEX         = NO
+LATEX_OUTPUT           = latex
+LATEX_CMD_NAME         = latex
+MAKEINDEX_CMD_NAME     = makeindex
+COMPACT_LATEX          = NO
+PAPER_TYPE             = a4wide
+EXTRA_PACKAGES         =
+LATEX_HEADER           =
+PDF_HYPERLINKS         = YES
+USE_PDFLATEX           = YES
+LATEX_BATCHMODE        = NO
+LATEX_HIDE_INDICES     = NO
+
+GENERATE_RTF           = NO
+RTF_OUTPUT             = rtf
+COMPACT_RTF            = NO
+RTF_HYPERLINKS         = NO
+RTF_STYLESHEET_FILE    =
+RTF_EXTENSIONS_FILE    =
+
+GENERATE_MAN           = NO
+MAN_OUTPUT             = man
+MAN_EXTENSION          = .3
+MAN_LINKS              = NO
+
+GENERATE_XML           = NO
+XML_OUTPUT             = xml
+XML_SCHEMA             =
+XML_DTD                =
+XML_PROGRAMLISTING     = YES
+
+GENERATE_AUTOGEN_DEF   = NO
+
+GENERATE_PERLMOD       = NO
+PERLMOD_LATEX          = NO
+PERLMOD_PRETTY         = YES
+PERLMOD_MAKEVAR_PREFIX =
+
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+SEARCH_INCLUDES        = YES
+INCLUDE_PATH           = /home/runner/work/edk2/edk2/edk2/MdePkg/Include \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Library \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Protocol \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ppi \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Guid \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/IndustryStandard \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Test/UnitTest/Include \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ia32 \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/X64 \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Ebc \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/Arm \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/AArch64 \
+/home/runner/work/edk2/edk2/edk2/MdePkg/Include/RiscV64
+INCLUDE_FILE_PATTERNS  = *.h
+PREDEFINED             = MDE_CPU_IA32 MDE_CPU_X64 MDE_CPU_IPF MDE_CPU_EBC MDE_CPU_ARM _MSC_EXTENSIONS __GNUC__ __INTEL_COMPILER ASM_PFX=  OPTIONAL= 
+EXPAND_AS_DEFINED      =
+SKIP_FUNCTION_MACROS   = NO
+
+TAGFILES               =
+GENERATE_TAGFILE       =
+ALLEXTERNALS           = NO
+EXTERNAL_GROUPS        = YES
+PERL_PATH              = /usr/bin/perl
+
+CLASS_DIAGRAMS         = NO
+MSCGEN_PATH            =
+HIDE_UNDOC_RELATIONS   = YES
+HAVE_DOT               = NO
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = YES
+GROUP_GRAPHS           = YES
+UML_LOOK               = NO
+TEMPLATE_RELATIONS     = NO
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+CALL_GRAPH             = NO
+CALLER_GRAPH           = NO
+GRAPHICAL_HIERARCHY    = YES
+DIRECTORY_GRAPH        = YES
+DOT_IMAGE_FORMAT       = png
+DOT_PATH               =
+DOTFILE_DIRS           =
+DOT_GRAPH_MAX_NODES    = 50
+MAX_DOT_GRAPH_DEPTH    = 1000
+DOT_TRANSPARENT        = YES
+DOT_MULTI_TARGETS      = NO
+GENERATE_LEGEND        = YES
+DOT_CLEANUP            = YES
+
+SEARCHENGINE           = YES
+

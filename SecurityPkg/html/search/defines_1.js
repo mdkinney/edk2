@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['edkii_5fpei_5ffirmware_5fvolume_5finfo_5fprehashed_5ffv_5fppi_5fguid',['EDKII_PEI_FIRMWARE_VOLUME_INFO_PREHASHED_FV_PPI_GUID',['../_firmware_volume_info_prehashed_f_v_8h.html#aa570593770ec9aaca774b21f452c1623',1,'FirmwareVolumeInfoPrehashedFV.h']]],
+  ['edkii_5fpei_5ffirmware_5fvolume_5finfo_5fstored_5fhash_5ffv_5fppi_5fguid',['EDKII_PEI_FIRMWARE_VOLUME_INFO_STORED_HASH_FV_PPI_GUID',['../_firmware_volume_info_stored_hash_fv_8h.html#aa792c25796c9fd1beee9568a37546261',1,'FirmwareVolumeInfoStoredHashFv.h']]],
+  ['edkii_5ftcg_5fpre_5fhash',['EDKII_TCG_PRE_HASH',['../_tcg_8h.html#ad1d14db7b886c7f98a60d181c7e0af5f',1,'Tcg.h']]],
+  ['edkii_5ftcg_5fpre_5fhash_5flog_5fonly',['EDKII_TCG_PRE_HASH_LOG_ONLY',['../_tcg_8h.html#a81d858fe4eecf4d93abd543e5831555b',1,'Tcg.h']]],
+  ['efi_5fcustom_5fmode_5fname',['EFI_CUSTOM_MODE_NAME',['../_authenticated_variable_format_8h.html#a1fffcc3a8578def0d8f4ec1f6eef1b55',1,'AuthenticatedVariableFormat.h']]],
+  ['efi_5fmeasured_5ffv_5fhob_5fguid',['EFI_MEASURED_FV_HOB_GUID',['../_measured_fv_hob_8h.html#a471f38f63ed1e6e1be664438e7abcaa9',1,'MeasuredFvHob.h']]],
+  ['efi_5fpei_5ffirmware_5fvolume_5finfo_5fmeasurement_5fexcluded_5fppi_5fguid',['EFI_PEI_FIRMWARE_VOLUME_INFO_MEASUREMENT_EXCLUDED_PPI_GUID',['../_firmware_volume_info_measurement_excluded_8h.html#ac34314f7223f7d7ab73811d64f83f6ed',1,'FirmwareVolumeInfoMeasurementExcluded.h']]],
+  ['efi_5fphysical_5fpresence_5fdata_5fguid',['EFI_PHYSICAL_PRESENCE_DATA_GUID',['../_physical_presence_data_8h.html#a87c51686ac21ece6b6048826e5d8c765',1,'PhysicalPresenceData.h']]],
+  ['efi_5fsecure_5fboot_5fenable_5fdisable',['EFI_SECURE_BOOT_ENABLE_DISABLE',['../_authenticated_variable_format_8h.html#a7b07102a80337a6bc51ce5a96dafc16e',1,'AuthenticatedVariableFormat.h']]],
+  ['efi_5fsecure_5fboot_5fenable_5fname',['EFI_SECURE_BOOT_ENABLE_NAME',['../_authenticated_variable_format_8h.html#ab29dfa57d003541beef3031c234533c7',1,'AuthenticatedVariableFormat.h']]],
+  ['efi_5ftcg2_5fphysical_5fpresence_5fdata_5fguid',['EFI_TCG2_PHYSICAL_PRESENCE_DATA_GUID',['../_tcg2_physical_presence_data_8h.html#ae4d135a95b7724c0ab8b86158c95eb0f',1,'Tcg2PhysicalPresenceData.h']]],
+  ['efi_5ftcg_5f800_5f155_5fplatform_5fid_5fevent_5fhob_5fguid',['EFI_TCG_800_155_PLATFORM_ID_EVENT_HOB_GUID',['../_tcg_event_hob_8h.html#acad76cc7108fa65aa725c7c1ed8e5bfc',1,'TcgEventHob.h']]],
+  ['efi_5ftcg_5fevent2_5fhob_5fguid',['EFI_TCG_EVENT2_HOB_GUID',['../_tcg_event_hob_8h.html#a16d23011799228f340895c2b6ab0722c',1,'TcgEventHob.h']]],
+  ['efi_5ftcg_5fevent_5fhob_5fguid',['EFI_TCG_EVENT_HOB_GUID',['../_tcg_event_hob_8h.html#a63d3c73c157aea6d97c530d342b452aa',1,'TcgEventHob.h']]],
+  ['efi_5ftpm2_5fstartup_5flocality_5fhob_5fguid',['EFI_TPM2_STARTUP_LOCALITY_HOB_GUID',['../_tcg_event_hob_8h.html#a2761db9d9cb3885c1c18955a16cec2b6',1,'TcgEventHob.h']]],
+  ['efi_5ftpm_5ferror_5fguid',['EFI_TPM_ERROR_GUID',['../_tcg_event_hob_8h.html#ac9d8d99a5827c82f216b284a2b12722a',1,'TcgEventHob.h']]],
+  ['efi_5fvendor_5fkeys_5fnv_5fvariable_5fname',['EFI_VENDOR_KEYS_NV_VARIABLE_NAME',['../_authenticated_variable_format_8h.html#aa9cae86b1762135cde43acd6c68a85af',1,'AuthenticatedVariableFormat.h']]],
+  ['error_5fcheck',['ERROR_CHECK',['../_tcg_storage_core_lib_8h.html#ae6f3459a501ef160af827d7a1cc0020c',1,'TcgStorageCoreLib.h']]]
+];

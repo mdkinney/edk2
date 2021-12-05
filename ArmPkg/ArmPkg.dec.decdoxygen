@@ -1,0 +1,1124 @@
+/** \mainpage ArmPkg Package Document
+ ARM processor package.<br>
+<br>
+ Copyright (c) 2009 - 2010, Apple Inc. All rights reserved.<BR><br>
+ Copyright (c) 2011 - 2021, ARM Limited. All rights reserved.<br>
+ Copyright (c) 2021, Ampere Computing LLC. All rights reserved.<br>
+<br>
+    SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>5CFBD99E-3C43-4E7F-8054-9CDEAFF7710F</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ArmPkg_public_includes "Public Includes" </li>
+<li>\subpage ArmPkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+<li>\subpage ppi_root_page "PPI" </li>
+<li>\subpage protocol_root_page "PROTOCOL" </li>
+</ul>
+ **/
+/** \page ArmPkg_public_includes Public Includes
+<p> \section content_index INDEX
+<ul>
+<li>\subpage public_include_top "ArmPkg/Include" </li>
+<li>\subpage public_include_Chipset "ArmPkg/Include/Chipset" </li>
+<li>\subpage public_include_IndustryStandard "ArmPkg/Include/IndustryStandard" </li>
+</ul>
+ **/
+/** \page public_include_top ArmPkg/Include
+<ul>
+<li> \link ArmPkg/Include/AsmMacroIoLib.h\endlink </li>
+<li> \link ArmPkg/Include/AsmMacroIoLibV8.h\endlink </li>
+<li> \link ArmPkg/Include/AsmMacroExport.inc\endlink </li>
+<li> \link ArmPkg/Include/AsmMacroIoLib.inc\endlink </li>
+</ul>
+
+ **/
+/** \page public_include_Chipset ArmPkg/Include/Chipset
+<ul>
+<li> \link ArmPkg/Include/Chipset/AArch64.h \endlink </li>
+<li> \link ArmPkg/Include/Chipset/ArmV7.h \endlink </li>
+<li> \link ArmPkg/Include/Chipset/ArmCortexA5x.h \endlink </li>
+<li> \link ArmPkg/Include/Chipset/AArch64Mmu.h \endlink </li>
+<li> \link ArmPkg/Include/Chipset/ArmCortexA9.h \endlink </li>
+<li> \link ArmPkg/Include/Chipset/ArmV7Mmu.h \endlink </li>
+</ul>
+
+ **/
+/** \page public_include_IndustryStandard ArmPkg/Include/IndustryStandard
+<ul>
+<li> \link ArmPkg/Include/IndustryStandard/ArmFfaSvc.h \endlink </li>
+<li> \link ArmPkg/Include/IndustryStandard/ArmCache.h \endlink </li>
+<li> \link ArmPkg/Include/IndustryStandard/ArmStdSmc.h \endlink </li>
+<li> \link ArmPkg/Include/IndustryStandard/ArmMmSvc.h \endlink </li>
+</ul>
+
+ **/
+/** \page ArmPkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_ArmDisassemblerLib "ArmDisassemblerLib" </li>
+<li>\subpage lc_ArmGenericTimerCounterLib "ArmGenericTimerCounterLib" </li>
+<li>\subpage lc_ArmGicArchLib "ArmGicArchLib" </li>
+<li>\subpage lc_ArmGicLib "ArmGicLib" </li>
+<li>\subpage lc_ArmHvcLib "ArmHvcLib" </li>
+<li>\subpage lc_ArmLib "ArmLib" </li>
+<li>\subpage lc_ArmMmuLib "ArmMmuLib" </li>
+<li>\subpage lc_ArmMtlLib "ArmMtlLib" </li>
+<li>\subpage lc_ArmSmcLib "ArmSmcLib" </li>
+<li>\subpage lc_ArmSvcLib "ArmSvcLib" </li>
+<li>\subpage lc_DefaultExceptionHandlerLib "DefaultExceptionHandlerLib" </li>
+<li>\subpage lc_OemMiscLib "OemMiscLib" </li>
+<li>\subpage lc_OpteeLib "OpteeLib" </li>
+<li>\subpage lc_SemihostLib "SemihostLib" </li>
+<li>\subpage lc_StandaloneMmMmuLib "StandaloneMmMmuLib" </li>
+</ul>
+ **/
+/** \page lc_ArmDisassemblerLib ArmDisassemblerLib
+  @libraryclass  Convert Arm instructions to a human readable format.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/ArmDisassemblerLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_ArmGenericTimerCounterLib ArmGenericTimerCounterLib
+  @libraryclass  Provides an interface to Arm generic counters.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/ArmGenericTimerCounterLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_ArmGicArchLib ArmGicArchLib
+  @libraryclass  Provides an interface to initialize a<br>
+   Generic Interrupt Controller (GIC).<br>
+
+ \section ref Refer to Header File
+\link Include/Library/ArmGicArchLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_ArmGicLib ArmGicLib
+  @libraryclass  Provides a Generic Interrupt Controller (GIC)<br>
+   configuration interface.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/ArmGicLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_ArmHvcLib ArmHvcLib
+  @libraryclass  Provides a HyperVisor Call (HVC) interface.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/ArmHvcLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_ArmLib ArmLib
+  @libraryclass  Provides an interface to Arm registers.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/ArmLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_ArmMmuLib ArmMmuLib
+  @libraryclass  Provides a Mmu interface.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/ArmMmuLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_ArmMtlLib ArmMtlLib
+  @libraryclass  Provides a Mailbox Transport Layer (MTL) interface<br>
+   for the System Control and Management Interface (SCMI).<br>
+
+ \section ref Refer to Header File
+\link Include/Library/ArmMtlLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_ArmSmcLib ArmSmcLib
+  @libraryclass  Provides a System Monitor Call (SMC) interface.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/ArmSmcLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_ArmSvcLib ArmSvcLib
+  @libraryclass  Provides a SuperVisor Call (SVC) interface.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/ArmSvcLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_DefaultExceptionHandlerLib DefaultExceptionHandlerLib
+  @libraryclass  Provides a default exception handler.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/DefaultExceptionHandlerLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_OemMiscLib OemMiscLib
+  @libraryclass  Provides an interface to query miscellaneous OEM<br>
+   information.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/OemMiscLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_OpteeLib OpteeLib
+  @libraryclass  Provides an OpTee interface.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/OpteeLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_SemihostLib SemihostLib
+  @libraryclass  Provides a semihosting interface.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/SemihostLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_StandaloneMmMmuLib StandaloneMmMmuLib
+  @libraryclass  Provides an interface for a StandaloneMm Mmu.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/StandaloneMmMmuLib.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_root_page "PcdsDynamic" </li>
+<li>\subpage pcd_PcdsDynamicEx_root_page "PcdsDynamicEx" </li>
+<li>\subpage pcd_PcdsFeatureFlag_root_page "PcdsFeatureFlag" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+<li>\subpage pcd_PcdsPatchableInModule_root_page "PcdsPatchableInModule" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_root_page PcdsDynamic
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_PcdArmArchTimerFreqInHz "gArmTokenSpaceGuid.PcdArmArchTimerFreqInHz" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdArmArchTimerHypIntrNum "gArmTokenSpaceGuid.PcdArmArchTimerHypIntrNum" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdArmArchTimerIntrNum "gArmTokenSpaceGuid.PcdArmArchTimerIntrNum" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdArmArchTimerSecIntrNum "gArmTokenSpaceGuid.PcdArmArchTimerSecIntrNum" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdArmArchTimerVirtIntrNum "gArmTokenSpaceGuid.PcdArmArchTimerVirtIntrNum" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdEmbeddedControllerFirmwareRelease "gArmTokenSpaceGuid.PcdEmbeddedControllerFirmwareRelease" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdGenericWatchdogControlBase "gArmTokenSpaceGuid.PcdGenericWatchdogControlBase" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdGenericWatchdogEl2IntrNum "gArmTokenSpaceGuid.PcdGenericWatchdogEl2IntrNum" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdGenericWatchdogRefreshBase "gArmTokenSpaceGuid.PcdGenericWatchdogRefreshBase" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdGicDistributorBase "gArmTokenSpaceGuid.PcdGicDistributorBase" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdGicInterruptInterfaceBase "gArmTokenSpaceGuid.PcdGicInterruptInterfaceBase" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdGicRedistributorsBase "gArmTokenSpaceGuid.PcdGicRedistributorsBase" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdGicSgiIntId "gArmTokenSpaceGuid.PcdGicSgiIntId" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdMmBufferBase "gArmTokenSpaceGuid.PcdMmBufferBase" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdMmBufferSize "gArmTokenSpaceGuid.PcdMmBufferSize" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdPciBusMax "gArmTokenSpaceGuid.PcdPciBusMax" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdPciBusMin "gArmTokenSpaceGuid.PcdPciBusMin" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdPciIoBase "gArmTokenSpaceGuid.PcdPciIoBase" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdPciIoSize "gArmTokenSpaceGuid.PcdPciIoSize" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdPciMmio32Base "gArmTokenSpaceGuid.PcdPciMmio32Base" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdPciMmio32Size "gArmTokenSpaceGuid.PcdPciMmio32Size" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdPciMmio64Base "gArmTokenSpaceGuid.PcdPciMmio64Base" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdPciMmio64Size "gArmTokenSpaceGuid.PcdPciMmio64Size" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdSystemBiosRelease "gArmTokenSpaceGuid.PcdSystemBiosRelease" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdSystemMemoryBase "gArmTokenSpaceGuid.PcdSystemMemoryBase" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdSystemMemorySize "gArmTokenSpaceGuid.PcdSystemMemorySize" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdArmArchTimerFreqInHz gArmTokenSpaceGuid.PcdArmArchTimerFreqInHz
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmArchTimerFreqInHz</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000034</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdArmArchTimerHypIntrNum gArmTokenSpaceGuid.PcdArmArchTimerHypIntrNum
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmArchTimerHypIntrNum</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000040</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>26</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdArmArchTimerIntrNum gArmTokenSpaceGuid.PcdArmArchTimerIntrNum
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmArchTimerIntrNum</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000036</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>30</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdArmArchTimerSecIntrNum gArmTokenSpaceGuid.PcdArmArchTimerSecIntrNum
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmArchTimerSecIntrNum</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000035</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>29</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdArmArchTimerVirtIntrNum gArmTokenSpaceGuid.PcdArmArchTimerVirtIntrNum
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmArchTimerVirtIntrNum</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000041</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>27</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdEmbeddedControllerFirmwareRelease gArmTokenSpaceGuid.PcdEmbeddedControllerFirmwareRelease
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmbeddedControllerFirmwareRelease</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000059</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0xFFFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdGenericWatchdogControlBase gArmTokenSpaceGuid.PcdGenericWatchdogControlBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGenericWatchdogControlBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000007</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x2A440000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdGenericWatchdogEl2IntrNum gArmTokenSpaceGuid.PcdGenericWatchdogEl2IntrNum
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGenericWatchdogEl2IntrNum</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000009</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>93</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdGenericWatchdogRefreshBase gArmTokenSpaceGuid.PcdGenericWatchdogRefreshBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGenericWatchdogRefreshBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000008</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x2A450000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdGicDistributorBase gArmTokenSpaceGuid.PcdGicDistributorBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGicDistributorBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000C</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdGicInterruptInterfaceBase gArmTokenSpaceGuid.PcdGicInterruptInterfaceBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGicInterruptInterfaceBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000D</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdGicRedistributorsBase gArmTokenSpaceGuid.PcdGicRedistributorsBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGicRedistributorsBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000E</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdGicSgiIntId gArmTokenSpaceGuid.PcdGicSgiIntId
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGicSgiIntId</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000025</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdMmBufferBase gArmTokenSpaceGuid.PcdMmBufferBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMmBufferBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000045</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdMmBufferSize gArmTokenSpaceGuid.PcdMmBufferSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMmBufferSize</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000046</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPciBusMax gArmTokenSpaceGuid.PcdPciBusMax
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciBusMax</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000005A</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPciBusMin gArmTokenSpaceGuid.PcdPciBusMin
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciBusMin</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000059</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPciIoBase gArmTokenSpaceGuid.PcdPciIoBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciIoBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000050</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPciIoSize gArmTokenSpaceGuid.PcdPciIoSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciIoSize</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000051</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPciMmio32Base gArmTokenSpaceGuid.PcdPciMmio32Base
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio32Base</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000053</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPciMmio32Size gArmTokenSpaceGuid.PcdPciMmio32Size
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio32Size</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000054</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPciMmio64Base gArmTokenSpaceGuid.PcdPciMmio64Base
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio64Base</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000056</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPciMmio64Size gArmTokenSpaceGuid.PcdPciMmio64Size
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio64Size</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000057</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdSystemBiosRelease gArmTokenSpaceGuid.PcdSystemBiosRelease
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSystemBiosRelease</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000058</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0xFFFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdSystemMemoryBase gArmTokenSpaceGuid.PcdSystemMemoryBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSystemMemoryBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000029</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdSystemMemorySize gArmTokenSpaceGuid.PcdSystemMemorySize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSystemMemorySize</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000002A</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_root_page PcdsDynamicEx
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdLinuxBootFileGuid "gArmTokenSpaceGuid.PcdLinuxBootFileGuid" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdLinuxBootFileGuid gArmTokenSpaceGuid.PcdLinuxBootFileGuid
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdLinuxBootFileGuid</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000005C</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>{0x0}</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_root_page PcdsFeatureFlag
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_AARCH64_root_page "AARCH64" </li>
+<li>\subpage pcd_PcdsFeatureFlag_ARM_root_page "ARM" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_AARCH64_root_page AARCH64
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_AARCH64_PcdFfaEnable "gArmTokenSpaceGuid.PcdFfaEnable" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_AARCH64_PcdFfaEnable gArmTokenSpaceGuid.PcdFfaEnable
+ Used to select method for requesting services from S-EL1.<BR><BR><br>
+   TRUE  - Selects FF-A calls for communication between S-EL0 and SPMC.<BR><br>
+   FALSE - Selects SVC calls for communication between S-EL0 and SPMC.<BR><br>
+ @Prompt Enable FF-A support.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFfaEnable</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000005B</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_ARM_root_page ARM
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_ARM_PcdFfaEnable "gArmTokenSpaceGuid.PcdFfaEnable" </li>
+<li>\subpage pcd_PcdsFeatureFlag_ARM_PcdNormalMemoryNonshareableOverride "gArmTokenSpaceGuid.PcdNormalMemoryNonshareableOverride" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_ARM_PcdFfaEnable gArmTokenSpaceGuid.PcdFfaEnable
+ Used to select method for requesting services from S-EL1.<BR><BR><br>
+   TRUE  - Selects FF-A calls for communication between S-EL0 and SPMC.<BR><br>
+   FALSE - Selects SVC calls for communication between S-EL0 and SPMC.<BR><br>
+ @Prompt Enable FF-A support.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFfaEnable</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000005B</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_ARM_PcdNormalMemoryNonshareableOverride gArmTokenSpaceGuid.PcdNormalMemoryNonshareableOverride
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdNormalMemoryNonshareableOverride</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000043</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdArmGicV3WithV2Legacy "gArmTokenSpaceGuid.PcdArmGicV3WithV2Legacy" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdCpuDxeProduceDebugSupport "gArmTokenSpaceGuid.PcdCpuDxeProduceDebugSupport" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdDebuggerExceptionSupport "gArmTokenSpaceGuid.PcdDebuggerExceptionSupport" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdRelocateVectorTable "gArmTokenSpaceGuid.PcdRelocateVectorTable" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdArmGicV3WithV2Legacy gArmTokenSpaceGuid.PcdArmGicV3WithV2Legacy
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmGicV3WithV2Legacy</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000042</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdCpuDxeProduceDebugSupport gArmTokenSpaceGuid.PcdCpuDxeProduceDebugSupport
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuDxeProduceDebugSupport</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000001</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdDebuggerExceptionSupport gArmTokenSpaceGuid.PcdDebuggerExceptionSupport
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdDebuggerExceptionSupport</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000032</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdRelocateVectorTable gArmTokenSpaceGuid.PcdRelocateVectorTable
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRelocateVectorTable</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000022</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_AARCH64_root_page "AARCH64" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_ARM_root_page "ARM" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_AARCH64_root_page AARCH64
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_AARCH64_PcdArmNonSecModeTransition "gArmTokenSpaceGuid.PcdArmNonSecModeTransition" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_AARCH64_PcdArmScr "gArmTokenSpaceGuid.PcdArmScr" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_AARCH64_PcdArmNonSecModeTransition gArmTokenSpaceGuid.PcdArmNonSecModeTransition
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmNonSecModeTransition</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000003E</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x3c9</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_AARCH64_PcdArmScr gArmTokenSpaceGuid.PcdArmScr
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmScr</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000038</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x501</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_ARM_root_page ARM
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_ARM_PcdArmNonSecModeTransition "gArmTokenSpaceGuid.PcdArmNonSecModeTransition" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_ARM_PcdArmNsacr "gArmTokenSpaceGuid.PcdArmNsacr" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_ARM_PcdArmScr "gArmTokenSpaceGuid.PcdArmScr" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_ARM_PcdArmNonSecModeTransition gArmTokenSpaceGuid.PcdArmNonSecModeTransition
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmNonSecModeTransition</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000003E</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_ARM_PcdArmNsacr gArmTokenSpaceGuid.PcdArmNsacr
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmNsacr</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000039</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xC00</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_ARM_PcdArmScr gArmTokenSpaceGuid.PcdArmScr
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmScr</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000038</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x31</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdArmArchTimerFreqInHz "gArmTokenSpaceGuid.PcdArmArchTimerFreqInHz" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdArmArchTimerHypIntrNum "gArmTokenSpaceGuid.PcdArmArchTimerHypIntrNum" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdArmArchTimerIntrNum "gArmTokenSpaceGuid.PcdArmArchTimerIntrNum" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdArmArchTimerSecIntrNum "gArmTokenSpaceGuid.PcdArmArchTimerSecIntrNum" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdArmArchTimerVirtIntrNum "gArmTokenSpaceGuid.PcdArmArchTimerVirtIntrNum" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdArmDmaDeviceOffset "gArmTokenSpaceGuid.PcdArmDmaDeviceOffset" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdArmPrimaryCore "gArmTokenSpaceGuid.PcdArmPrimaryCore" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdArmPrimaryCoreMask "gArmTokenSpaceGuid.PcdArmPrimaryCoreMask" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdBaseBoardManufacturer "gArmTokenSpaceGuid.PcdBaseBoardManufacturer" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdBaseBoardProductName "gArmTokenSpaceGuid.PcdBaseBoardProductName" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdBaseBoardVersion "gArmTokenSpaceGuid.PcdBaseBoardVersion" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuResetAddress "gArmTokenSpaceGuid.PcdCpuResetAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCpuVectorBaseAddress "gArmTokenSpaceGuid.PcdCpuVectorBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEmbeddedControllerFirmwareRelease "gArmTokenSpaceGuid.PcdEmbeddedControllerFirmwareRelease" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFdBaseAddress "gArmTokenSpaceGuid.PcdFdBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFdSize "gArmTokenSpaceGuid.PcdFdSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFvBaseAddress "gArmTokenSpaceGuid.PcdFvBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdFvSize "gArmTokenSpaceGuid.PcdFvSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdGenericWatchdogControlBase "gArmTokenSpaceGuid.PcdGenericWatchdogControlBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdGenericWatchdogEl2IntrNum "gArmTokenSpaceGuid.PcdGenericWatchdogEl2IntrNum" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdGenericWatchdogRefreshBase "gArmTokenSpaceGuid.PcdGenericWatchdogRefreshBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdGicDistributorBase "gArmTokenSpaceGuid.PcdGicDistributorBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdGicInterruptInterfaceBase "gArmTokenSpaceGuid.PcdGicInterruptInterfaceBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdGicRedistributorsBase "gArmTokenSpaceGuid.PcdGicRedistributorsBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdGicSgiIntId "gArmTokenSpaceGuid.PcdGicSgiIntId" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdHypFdBaseAddress "gArmTokenSpaceGuid.PcdHypFdBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdHypFdSize "gArmTokenSpaceGuid.PcdHypFdSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdHypFvBaseAddress "gArmTokenSpaceGuid.PcdHypFvBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdHypFvSize "gArmTokenSpaceGuid.PcdHypFvSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdL2x0ControllerBase "gArmTokenSpaceGuid.PcdL2x0ControllerBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdMmBufferBase "gArmTokenSpaceGuid.PcdMmBufferBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdMmBufferSize "gArmTokenSpaceGuid.PcdMmBufferSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPciBusMax "gArmTokenSpaceGuid.PcdPciBusMax" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPciBusMin "gArmTokenSpaceGuid.PcdPciBusMin" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPciIoBase "gArmTokenSpaceGuid.PcdPciIoBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPciIoSize "gArmTokenSpaceGuid.PcdPciIoSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPciMmio32Base "gArmTokenSpaceGuid.PcdPciMmio32Base" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPciMmio32Size "gArmTokenSpaceGuid.PcdPciMmio32Size" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPciMmio64Base "gArmTokenSpaceGuid.PcdPciMmio64Base" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPciMmio64Size "gArmTokenSpaceGuid.PcdPciMmio64Size" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdProcessorAssetTag "gArmTokenSpaceGuid.PcdProcessorAssetTag" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdProcessorManufacturer "gArmTokenSpaceGuid.PcdProcessorManufacturer" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdProcessorPartNumber "gArmTokenSpaceGuid.PcdProcessorPartNumber" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdProcessorSerialNumber "gArmTokenSpaceGuid.PcdProcessorSerialNumber" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdProcessorVersion "gArmTokenSpaceGuid.PcdProcessorVersion" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSecureFdBaseAddress "gArmTokenSpaceGuid.PcdSecureFdBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSecureFdSize "gArmTokenSpaceGuid.PcdSecureFdSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSecureFvBaseAddress "gArmTokenSpaceGuid.PcdSecureFvBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSecureFvSize "gArmTokenSpaceGuid.PcdSecureFvSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSystemBiosRelease "gArmTokenSpaceGuid.PcdSystemBiosRelease" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSystemMemoryBase "gArmTokenSpaceGuid.PcdSystemMemoryBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSystemMemorySize "gArmTokenSpaceGuid.PcdSystemMemorySize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSystemProductName "gArmTokenSpaceGuid.PcdSystemProductName" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSystemVersion "gArmTokenSpaceGuid.PcdSystemVersion" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdTrustzoneSupport "gArmTokenSpaceGuid.PcdTrustzoneSupport" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdVFPEnabled "gArmTokenSpaceGuid.PcdVFPEnabled" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdArmArchTimerFreqInHz gArmTokenSpaceGuid.PcdArmArchTimerFreqInHz
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmArchTimerFreqInHz</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000034</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdArmArchTimerHypIntrNum gArmTokenSpaceGuid.PcdArmArchTimerHypIntrNum
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmArchTimerHypIntrNum</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000040</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>26</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdArmArchTimerIntrNum gArmTokenSpaceGuid.PcdArmArchTimerIntrNum
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmArchTimerIntrNum</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000036</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>30</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdArmArchTimerSecIntrNum gArmTokenSpaceGuid.PcdArmArchTimerSecIntrNum
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmArchTimerSecIntrNum</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000035</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>29</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdArmArchTimerVirtIntrNum gArmTokenSpaceGuid.PcdArmArchTimerVirtIntrNum
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmArchTimerVirtIntrNum</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000041</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>27</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdArmDmaDeviceOffset gArmTokenSpaceGuid.PcdArmDmaDeviceOffset
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmDmaDeviceOffset</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000044</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdArmPrimaryCore gArmTokenSpaceGuid.PcdArmPrimaryCore
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmPrimaryCore</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000037</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdArmPrimaryCoreMask gArmTokenSpaceGuid.PcdArmPrimaryCoreMask
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdArmPrimaryCoreMask</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000031</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xF03</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdBaseBoardManufacturer gArmTokenSpaceGuid.PcdBaseBoardManufacturer
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdBaseBoardManufacturer</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000055</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L""</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdBaseBoardProductName gArmTokenSpaceGuid.PcdBaseBoardProductName
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdBaseBoardProductName</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000056</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L""</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdBaseBoardVersion gArmTokenSpaceGuid.PcdBaseBoardVersion
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdBaseBoardVersion</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000057</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L""</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuResetAddress gArmTokenSpaceGuid.PcdCpuResetAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuResetAddress</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000005</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCpuVectorBaseAddress gArmTokenSpaceGuid.PcdCpuVectorBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuVectorBaseAddress</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000004</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0xffff0000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEmbeddedControllerFirmwareRelease gArmTokenSpaceGuid.PcdEmbeddedControllerFirmwareRelease
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmbeddedControllerFirmwareRelease</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000059</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0xFFFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFdBaseAddress gArmTokenSpaceGuid.PcdFdBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFdBaseAddress</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000002B</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFdSize gArmTokenSpaceGuid.PcdFdSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFdSize</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000002C</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFvBaseAddress gArmTokenSpaceGuid.PcdFvBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFvBaseAddress</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000002D</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdFvSize gArmTokenSpaceGuid.PcdFvSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFvSize</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000002E</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdGenericWatchdogControlBase gArmTokenSpaceGuid.PcdGenericWatchdogControlBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGenericWatchdogControlBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000007</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x2A440000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdGenericWatchdogEl2IntrNum gArmTokenSpaceGuid.PcdGenericWatchdogEl2IntrNum
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGenericWatchdogEl2IntrNum</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000009</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>93</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdGenericWatchdogRefreshBase gArmTokenSpaceGuid.PcdGenericWatchdogRefreshBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGenericWatchdogRefreshBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000008</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x2A450000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdGicDistributorBase gArmTokenSpaceGuid.PcdGicDistributorBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGicDistributorBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000C</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdGicInterruptInterfaceBase gArmTokenSpaceGuid.PcdGicInterruptInterfaceBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGicInterruptInterfaceBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000D</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdGicRedistributorsBase gArmTokenSpaceGuid.PcdGicRedistributorsBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGicRedistributorsBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000E</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdGicSgiIntId gArmTokenSpaceGuid.PcdGicSgiIntId
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGicSgiIntId</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000025</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdHypFdBaseAddress gArmTokenSpaceGuid.PcdHypFdBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHypFdBaseAddress</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000003A</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdHypFdSize gArmTokenSpaceGuid.PcdHypFdSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHypFdSize</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000003B</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdHypFvBaseAddress gArmTokenSpaceGuid.PcdHypFvBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHypFvBaseAddress</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000003C</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdHypFvSize gArmTokenSpaceGuid.PcdHypFvSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHypFvSize</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000003D</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdL2x0ControllerBase gArmTokenSpaceGuid.PcdL2x0ControllerBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdL2x0ControllerBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001B</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdMmBufferBase gArmTokenSpaceGuid.PcdMmBufferBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMmBufferBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000045</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdMmBufferSize gArmTokenSpaceGuid.PcdMmBufferSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMmBufferSize</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000046</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPciBusMax gArmTokenSpaceGuid.PcdPciBusMax
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciBusMax</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000005A</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPciBusMin gArmTokenSpaceGuid.PcdPciBusMin
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciBusMin</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000059</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPciIoBase gArmTokenSpaceGuid.PcdPciIoBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciIoBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000050</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPciIoSize gArmTokenSpaceGuid.PcdPciIoSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciIoSize</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000051</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPciMmio32Base gArmTokenSpaceGuid.PcdPciMmio32Base
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio32Base</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000053</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPciMmio32Size gArmTokenSpaceGuid.PcdPciMmio32Size
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio32Size</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000054</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPciMmio64Base gArmTokenSpaceGuid.PcdPciMmio64Base
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio64Base</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000056</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPciMmio64Size gArmTokenSpaceGuid.PcdPciMmio64Size
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio64Size</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000057</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdProcessorAssetTag gArmTokenSpaceGuid.PcdProcessorAssetTag
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdProcessorAssetTag</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000074</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L""</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdProcessorManufacturer gArmTokenSpaceGuid.PcdProcessorManufacturer
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdProcessorManufacturer</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000071</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L""</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdProcessorPartNumber gArmTokenSpaceGuid.PcdProcessorPartNumber
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdProcessorPartNumber</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000075</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L""</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdProcessorSerialNumber gArmTokenSpaceGuid.PcdProcessorSerialNumber
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdProcessorSerialNumber</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000073</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L""</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdProcessorVersion gArmTokenSpaceGuid.PcdProcessorVersion
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdProcessorVersion</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000072</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L""</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSecureFdBaseAddress gArmTokenSpaceGuid.PcdSecureFdBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSecureFdBaseAddress</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000015</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSecureFdSize gArmTokenSpaceGuid.PcdSecureFdSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSecureFdSize</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000016</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSecureFvBaseAddress gArmTokenSpaceGuid.PcdSecureFvBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSecureFvBaseAddress</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000002F</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSecureFvSize gArmTokenSpaceGuid.PcdSecureFvSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSecureFvSize</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000030</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSystemBiosRelease gArmTokenSpaceGuid.PcdSystemBiosRelease
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSystemBiosRelease</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000058</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0xFFFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSystemMemoryBase gArmTokenSpaceGuid.PcdSystemMemoryBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSystemMemoryBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000029</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSystemMemorySize gArmTokenSpaceGuid.PcdSystemMemorySize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSystemMemorySize</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000002A</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSystemProductName gArmTokenSpaceGuid.PcdSystemProductName
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSystemProductName</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000053</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L""</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSystemVersion gArmTokenSpaceGuid.PcdSystemVersion
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSystemVersion</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000054</CAPTION></TD><TD><CAPTION>VOID*</CAPTION></TD><TD><CAPTION>L""</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdTrustzoneSupport gArmTokenSpaceGuid.PcdTrustzoneSupport
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdTrustzoneSupport</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000006</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdVFPEnabled gArmTokenSpaceGuid.PcdVFPEnabled
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdVFPEnabled</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000024</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_root_page PcdsPatchableInModule
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdEmbeddedControllerFirmwareRelease "gArmTokenSpaceGuid.PcdEmbeddedControllerFirmwareRelease" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFdBaseAddress "gArmTokenSpaceGuid.PcdFdBaseAddress" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdFvBaseAddress "gArmTokenSpaceGuid.PcdFvBaseAddress" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdMmBufferBase "gArmTokenSpaceGuid.PcdMmBufferBase" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdMmBufferSize "gArmTokenSpaceGuid.PcdMmBufferSize" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdSystemBiosRelease "gArmTokenSpaceGuid.PcdSystemBiosRelease" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdSystemMemoryBase "gArmTokenSpaceGuid.PcdSystemMemoryBase" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdSystemMemorySize "gArmTokenSpaceGuid.PcdSystemMemorySize" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdEmbeddedControllerFirmwareRelease gArmTokenSpaceGuid.PcdEmbeddedControllerFirmwareRelease
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmbeddedControllerFirmwareRelease</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000059</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0xFFFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFdBaseAddress gArmTokenSpaceGuid.PcdFdBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFdBaseAddress</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000002B</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdFvBaseAddress gArmTokenSpaceGuid.PcdFvBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdFvBaseAddress</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000002D</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdMmBufferBase gArmTokenSpaceGuid.PcdMmBufferBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMmBufferBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000045</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdMmBufferSize gArmTokenSpaceGuid.PcdMmBufferSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMmBufferSize</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000046</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdSystemBiosRelease gArmTokenSpaceGuid.PcdSystemBiosRelease
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSystemBiosRelease</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30000058</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0xFFFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdSystemMemoryBase gArmTokenSpaceGuid.PcdSystemMemoryBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSystemMemoryBase</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000029</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdSystemMemorySize gArmTokenSpaceGuid.PcdSystemMemorySize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSystemMemorySize</CAPTION></TD><TD><CAPTION>gArmTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000002A</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gArmMpCoreInfoGuid "gArmMpCoreInfoGuid" </li>
+<li>\subpage guid_common_gArmTokenSpaceGuid "gArmTokenSpaceGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gArmMpCoreInfoGuid gArmMpCoreInfoGuid
+ ARM MPCore table<br> Include/Guid/ArmMpCoreInfo.h<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gArmMpCoreInfoGuid</TD><TD>{ 0xa4ee0728, 0xe5d7, 0x4ac5,  {0xb2, 0x1e, 0x65, 0x8e, 0xd8, 0x57, 0xe8, 0x34} }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ArmPkg/Include/Ppi/ArmMpCoreInfo.h
+\endlink
+
+ **/
+/** \page guid_common_gArmTokenSpaceGuid gArmTokenSpaceGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gArmTokenSpaceGuid</TD><TD>{ 0xBB11ECFE, 0x820F, 0x4968, { 0xBB, 0xA6, 0xF7, 0x6A, 0xFE, 0x30, 0x25, 0x96 } }</TD></TR></TABLE>
+ **/
+/** \page ppi_root_page PPI
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page ppi_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_page_gArmMpCoreInfoPpiGuid "gArmMpCoreInfoPpiGuid" </li>
+</ul>
+ **/
+/** \page ppi_page_gArmMpCoreInfoPpiGuid gArmMpCoreInfoPpiGuid
+ Include/Ppi/ArmMpCoreInfo.h<br>
+ \section BasicPpiInfo PPI Information
+<TABLE><TR><TD><CAPTION>PPI's Guid Name</CAPTION></TD><TD><CAPTION>PPI's Guid</CAPTION></TD></TR><TR><TD>gArmMpCoreInfoPpiGuid</TD><TD>{ 0x6847cc74, 0xe9ec, 0x4f8f, {0xa2, 0x9d, 0xab, 0x44, 0xe7, 0x54, 0xa8, 0xfc} }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ArmPkg/Include/Ppi/ArmMpCoreInfo.h
+\endlink
+
+ **/
+/** \page protocol_root_page PROTOCOL
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page protocol_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_page_gArmScmiBaseProtocolGuid "gArmScmiBaseProtocolGuid" </li>
+<li>\subpage protocol_page_gArmScmiClock2ProtocolGuid "gArmScmiClock2ProtocolGuid" </li>
+<li>\subpage protocol_page_gArmScmiClockProtocolGuid "gArmScmiClockProtocolGuid" </li>
+<li>\subpage protocol_page_gArmScmiPerformanceProtocolGuid "gArmScmiPerformanceProtocolGuid" </li>
+</ul>
+ **/
+/** \page protocol_page_gArmScmiBaseProtocolGuid gArmScmiBaseProtocolGuid
+ ArmPkg/Include/Protocol/ArmScmiBaseProtocol.h<br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gArmScmiBaseProtocolGuid</TD><TD>{ 0xd7e5abe9, 0x33ab, 0x418e, { 0x9f, 0x91, 0x72, 0xda, 0xe2, 0xba, 0x8e, 0x2f } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ArmPkg/Include/Protocol/ArmScmiBaseProtocol.h
+\endlink
+
+ **/
+/** \page protocol_page_gArmScmiClock2ProtocolGuid gArmScmiClock2ProtocolGuid
+ \copydoc ArmPkg/Include/Protocol/ArmScmiClock2Protocol.h <br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gArmScmiClock2ProtocolGuid</TD><TD>{ 0xb8d8caf2, 0x9e94, 0x462c, { 0xa8, 0x34, 0x6c, 0x99, 0xfc, 0x05, 0xef, 0xcf } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ArmPkg/Include/Protocol/ArmScmiClock2Protocol.h
+\endlink
+
+ **/
+/** \page protocol_page_gArmScmiClockProtocolGuid gArmScmiClockProtocolGuid
+ ArmPkg/Include/Protocol/ArmScmiClockProtocol.h<br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gArmScmiClockProtocolGuid</TD><TD>{ 0x91ce67a8, 0xe0aa, 0x4012, { 0xb9, 0x9f, 0xb6, 0xfc, 0xf3, 0x4, 0x8e, 0xaa } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ArmPkg/Include/Protocol/ArmScmiClockProtocol.h
+\endlink
+
+ **/
+/** \page protocol_page_gArmScmiPerformanceProtocolGuid gArmScmiPerformanceProtocolGuid
+ ArmPkg/Include/Protocol/ArmScmiPerformanceProtocol.h<br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gArmScmiPerformanceProtocolGuid</TD><TD>{ 0x9b8ba84, 0x3dd3, 0x49a6, { 0xa0, 0x5a, 0x31, 0x34, 0xa5, 0xf0, 0x7b, 0xad } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link ArmPkg/Include/Protocol/ArmScmiPerformanceProtocol.h
+\endlink
+
+ **/

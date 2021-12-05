@@ -1,0 +1,17 @@
+var struct_e_f_i___a_c_p_i__6__1___g_e_n_e_r_i_c___h_a_r_d_w_a_r_e___e_r_r_o_r___s_o_u_r_c_e___v_e_r_s_i_o_n__2___s_t_r_u_c_t_u_r_e =
+[
+    [ "Enabled", "struct_e_f_i___a_c_p_i__6__1___g_e_n_e_r_i_c___h_a_r_d_w_a_r_e___e_r_r_o_r___s_o_u_r_c_e___v_e_r_s_i_o_n__2___s_t_r_u_c_t_u_r_e.html#a6c2d83f5038cb8a2ce1c3af1da8d9bdc", null ],
+    [ "ErrorStatusAddress", "struct_e_f_i___a_c_p_i__6__1___g_e_n_e_r_i_c___h_a_r_d_w_a_r_e___e_r_r_o_r___s_o_u_r_c_e___v_e_r_s_i_o_n__2___s_t_r_u_c_t_u_r_e.html#af8bd7aec99f10b63f4c63579926e7b5e", null ],
+    [ "ErrorStatusBlockLength", "struct_e_f_i___a_c_p_i__6__1___g_e_n_e_r_i_c___h_a_r_d_w_a_r_e___e_r_r_o_r___s_o_u_r_c_e___v_e_r_s_i_o_n__2___s_t_r_u_c_t_u_r_e.html#aff94af3c4241a7e42a9eb3940b6db3a2", null ],
+    [ "Flags", "struct_e_f_i___a_c_p_i__6__1___g_e_n_e_r_i_c___h_a_r_d_w_a_r_e___e_r_r_o_r___s_o_u_r_c_e___v_e_r_s_i_o_n__2___s_t_r_u_c_t_u_r_e.html#adc432f20f0844144d995ca51f0354303", null ],
+    [ "MaxRawDataLength", "struct_e_f_i___a_c_p_i__6__1___g_e_n_e_r_i_c___h_a_r_d_w_a_r_e___e_r_r_o_r___s_o_u_r_c_e___v_e_r_s_i_o_n__2___s_t_r_u_c_t_u_r_e.html#ad489b5958d07a252f3688ceb8b18f9b7", null ],
+    [ "MaxSectionsPerRecord", "struct_e_f_i___a_c_p_i__6__1___g_e_n_e_r_i_c___h_a_r_d_w_a_r_e___e_r_r_o_r___s_o_u_r_c_e___v_e_r_s_i_o_n__2___s_t_r_u_c_t_u_r_e.html#ab09214f9efbefeb4f8deb6de60355ca5", null ],
+    [ "NotificationStructure", "struct_e_f_i___a_c_p_i__6__1___g_e_n_e_r_i_c___h_a_r_d_w_a_r_e___e_r_r_o_r___s_o_u_r_c_e___v_e_r_s_i_o_n__2___s_t_r_u_c_t_u_r_e.html#a4e150cf279341d1d888c73e513b1a253", null ],
+    [ "NumberOfRecordsToPreAllocate", "struct_e_f_i___a_c_p_i__6__1___g_e_n_e_r_i_c___h_a_r_d_w_a_r_e___e_r_r_o_r___s_o_u_r_c_e___v_e_r_s_i_o_n__2___s_t_r_u_c_t_u_r_e.html#a1a81e4dcf89fee577b0091f16ebc4875", null ],
+    [ "ReadAckPreserve", "struct_e_f_i___a_c_p_i__6__1___g_e_n_e_r_i_c___h_a_r_d_w_a_r_e___e_r_r_o_r___s_o_u_r_c_e___v_e_r_s_i_o_n__2___s_t_r_u_c_t_u_r_e.html#a544d65db3599ea2596b8ef6bf994dbd9", null ],
+    [ "ReadAckRegister", "struct_e_f_i___a_c_p_i__6__1___g_e_n_e_r_i_c___h_a_r_d_w_a_r_e___e_r_r_o_r___s_o_u_r_c_e___v_e_r_s_i_o_n__2___s_t_r_u_c_t_u_r_e.html#a6bf4a3c4b0e35579659c503e331fd6ac", null ],
+    [ "ReadAckWrite", "struct_e_f_i___a_c_p_i__6__1___g_e_n_e_r_i_c___h_a_r_d_w_a_r_e___e_r_r_o_r___s_o_u_r_c_e___v_e_r_s_i_o_n__2___s_t_r_u_c_t_u_r_e.html#a34f16be9c371ff554e4735bcc400ed5d", null ],
+    [ "RelatedSourceId", "struct_e_f_i___a_c_p_i__6__1___g_e_n_e_r_i_c___h_a_r_d_w_a_r_e___e_r_r_o_r___s_o_u_r_c_e___v_e_r_s_i_o_n__2___s_t_r_u_c_t_u_r_e.html#a494070fb6b1a6f7b0fd4d5d6f90ade82", null ],
+    [ "SourceId", "struct_e_f_i___a_c_p_i__6__1___g_e_n_e_r_i_c___h_a_r_d_w_a_r_e___e_r_r_o_r___s_o_u_r_c_e___v_e_r_s_i_o_n__2___s_t_r_u_c_t_u_r_e.html#a0dc039b19fba498767d16bf32f3aa775", null ],
+    [ "Type", "struct_e_f_i___a_c_p_i__6__1___g_e_n_e_r_i_c___h_a_r_d_w_a_r_e___e_r_r_o_r___s_o_u_r_c_e___v_e_r_s_i_o_n__2___s_t_r_u_c_t_u_r_e.html#a8320bbefcc5a88f9c2d2005034d638a0", null ]
+];

@@ -1,0 +1,25 @@
+var struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l =
+[
+    [ "ConfigStdIn", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#aa33f47914f2772b39db87c65903491bb", null ],
+    [ "CpuSleep", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a107c06bd13de1cc84d9e5591d7e25bf5", null ],
+    [ "DisableInterrupt", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#ac5a347a9bb69d46a7a3af901aa9223d0", null ],
+    [ "EnableInterrupt", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a5a53c0360fa3429cf65d0e8230411e08", null ],
+    [ "Exit", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#aca5284dac5273e12c14594d7ee0ece3e", null ],
+    [ "Free", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a932b79fdbf8a8ab7c64c8e1bdc71ceda", null ],
+    [ "GetNextProtocol", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a0811966ca1cf2963b4fd4d4dd1415fe1", null ],
+    [ "GetTime", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#aa5c86e871045fcadf267ecc0e7eea415", null ],
+    [ "Malloc", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a5ad9acec9ff1bd323650a132e60856a1", null ],
+    [ "PeCoffGetEntryPoint", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#ab3fc6fe27267a99f04f9049018c4b507", null ],
+    [ "PeCoffRelocateImageExtraAction", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a00e55636726a76856fd7b409babf567b", null ],
+    [ "PeCoffUnloadImageExtraAction", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a40279519bf4320c4eb26a02fb6157653", null ],
+    [ "PollStdIn", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a1802a35831384ccbb91c658c1e06d710", null ],
+    [ "QueryPerformanceCounter", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#aa913daedac92887d97a8068b274e28d1", null ],
+    [ "QueryPerformanceFrequency", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#aeba3553cb5e76320cd8fe000c406ed17", null ],
+    [ "ReadStdIn", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a774a59af9c0156bb87a67034ef7634ed", null ],
+    [ "SetTime", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a6d01f91ad4afb25610486342a27a46c4", null ],
+    [ "SetTimer", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a4e710490050248ba81ec766981f4c92e", null ],
+    [ "Sleep", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#a34ba41c97f0c8e2569f2e6a5685661d8", null ],
+    [ "Valloc", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#aedb8c8eaaaa2a683eb5352690df94701", null ],
+    [ "WriteStdErr", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#ac2882943d09777af3626a5c1acd33f2a", null ],
+    [ "WriteStdOut", "struct___e_m_u___t_h_u_n_k___p_r_o_t_o_c_o_l.html#aeb1e4e94657ebc71fa84549ec7a98ba3", null ]
+];

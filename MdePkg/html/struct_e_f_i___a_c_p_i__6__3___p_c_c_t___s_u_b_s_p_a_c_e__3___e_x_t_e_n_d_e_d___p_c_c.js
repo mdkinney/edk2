@@ -1,0 +1,27 @@
+var struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c =
+[
+    [ "AddressLength", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#aac6e2e9dd27e35d52db726a3557934f2", null ],
+    [ "BaseAddress", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#a9dd92364630dc1aa8410c34d3c0f7e96", null ],
+    [ "CommandCompleteCheckMask", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#aaede43bdd8b18f8b34e5da855cdfe705", null ],
+    [ "CommandCompleteCheckRegister", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#a74db13c1169f7c78f3a4195c6f42e1da", null ],
+    [ "CommandCompleteUpdatePreserve", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#ab2721c37d44f196f553da71e52fd7756", null ],
+    [ "CommandCompleteUpdateRegister", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#ac0b1a491eb5dd3392bc3fe400514c683", null ],
+    [ "CommandCompleteUpdateSet", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#a2cf105d0b9212d8355473562ca960ad0", null ],
+    [ "DoorbellPreserve", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#adb52de58be5263add2ec5c010304fdea", null ],
+    [ "DoorbellRegister", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#ad042644a1d1203c447137720a33d6174", null ],
+    [ "DoorbellWrite", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#a7d9a13102fd2899c4d994eace3c529af", null ],
+    [ "ErrorStatusMask", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#a8c77a545693e4b42a3da89db45c90ade", null ],
+    [ "ErrorStatusRegister", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#a3c665766f85466d1be4fc2036baf230f", null ],
+    [ "Length", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#a59631e3abd92eeca5a8e2987bbe61165", null ],
+    [ "MaximumPeriodicAccessRate", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#abe3eeb3d2e927d3506e6b75ff474062f", null ],
+    [ "MinimumRequestTurnaroundTime", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#ad47a38b88769aa3d5fc6b4d74115ae4a", null ],
+    [ "NominalLatency", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#ac7cb6637cec9f67347b05b9b8ed59133", null ],
+    [ "PlatformInterrupt", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#a0e1361fb20f08bdf5f11c5a215a0fa89", null ],
+    [ "PlatformInterruptAckPreserve", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#a12355db8837f80bb6b43319650c9b903", null ],
+    [ "PlatformInterruptAckRegister", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#add6e3f007fc9a6faa134324a7d504f6a", null ],
+    [ "PlatformInterruptAckSet", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#abbdb7934fea58f87aa0d88d921b68bfa", null ],
+    [ "PlatformInterruptFlags", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#ab29b239d2bfa0e4018bb10ba0864cd29", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#a053530bb1476ab7665d58fdfac5de269", null ],
+    [ "Reserved1", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#a5f066fe25690286fe1e02a1e44cc6320", null ],
+    [ "Type", "struct_e_f_i___a_c_p_i__6__3___p_c_c_t___s_u_b_s_p_a_c_e__3___e_x_t_e_n_d_e_d___p_c_c.html#ae043cecd336a36633664c1224a708759", null ]
+];

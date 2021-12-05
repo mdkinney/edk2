@@ -1,0 +1,6 @@
+var struct_i_p_m_i___s_e_t___l_a_n___c_o_n_f_i_g_u_r_a_t_i_o_n___p_a_r_a_m_e_t_e_r_s___c_o_m_m_a_n_d___r_e_q_u_e_s_t =
+[
+    [ "ChannelNumber", "struct_i_p_m_i___s_e_t___l_a_n___c_o_n_f_i_g_u_r_a_t_i_o_n___p_a_r_a_m_e_t_e_r_s___c_o_m_m_a_n_d___r_e_q_u_e_s_t.html#ac0e55a4b16928161e7a51b02cdf4aea3", null ],
+    [ "ParameterData", "struct_i_p_m_i___s_e_t___l_a_n___c_o_n_f_i_g_u_r_a_t_i_o_n___p_a_r_a_m_e_t_e_r_s___c_o_m_m_a_n_d___r_e_q_u_e_s_t.html#a8584938fc15b08a489d61d563a27edc0", null ],
+    [ "ParameterSelector", "struct_i_p_m_i___s_e_t___l_a_n___c_o_n_f_i_g_u_r_a_t_i_o_n___p_a_r_a_m_e_t_e_r_s___c_o_m_m_a_n_d___r_e_q_u_e_s_t.html#af68dbfd0f1593f5ab58e99b664dccbaa", null ]
+];

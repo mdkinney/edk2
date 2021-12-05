@@ -1,0 +1,8 @@
+var struct_e_f_i___l_e_g_a_c_y___m_p___t_a_b_l_e___e_n_t_r_y___e_x_t___c_o_m_p_a_t___b_u_s___a_d_d_r___s_p_a_c_e___m_o_d_i_f_i_e_r =
+[
+    [ "AddrMode", "struct_e_f_i___l_e_g_a_c_y___m_p___t_a_b_l_e___e_n_t_r_y___e_x_t___c_o_m_p_a_t___b_u_s___a_d_d_r___s_p_a_c_e___m_o_d_i_f_i_e_r.html#a26ad6647c2a2543c95e6bcb915720caa", null ],
+    [ "BusId", "struct_e_f_i___l_e_g_a_c_y___m_p___t_a_b_l_e___e_n_t_r_y___e_x_t___c_o_m_p_a_t___b_u_s___a_d_d_r___s_p_a_c_e___m_o_d_i_f_i_e_r.html#a07d55143098fb4df1e6e4ef9b98ae8b0", null ],
+    [ "EntryType", "struct_e_f_i___l_e_g_a_c_y___m_p___t_a_b_l_e___e_n_t_r_y___e_x_t___c_o_m_p_a_t___b_u_s___a_d_d_r___s_p_a_c_e___m_o_d_i_f_i_e_r.html#aec49750cba8be44f6cee0bfc16cc0e22", null ],
+    [ "Length", "struct_e_f_i___l_e_g_a_c_y___m_p___t_a_b_l_e___e_n_t_r_y___e_x_t___c_o_m_p_a_t___b_u_s___a_d_d_r___s_p_a_c_e___m_o_d_i_f_i_e_r.html#a15c0c33eaa306eb0cd4272945f7fe48d", null ],
+    [ "PredefinedRangeList", "struct_e_f_i___l_e_g_a_c_y___m_p___t_a_b_l_e___e_n_t_r_y___e_x_t___c_o_m_p_a_t___b_u_s___a_d_d_r___s_p_a_c_e___m_o_d_i_f_i_e_r.html#ab972971cc89985cdbfde4dfb42a9cc12", null ]
+];

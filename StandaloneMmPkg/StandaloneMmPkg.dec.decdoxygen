@@ -1,0 +1,161 @@
+/** \mainpage StandaloneMmPkg Package Document
+ This package is a platform package that provide platform module/library<br>
+ required by Standalone MM platform.<br>
+<br>
+ Copyright (c) 2016-2021, Arm Ltd. All rights reserved.<BR><br>
+<br>
+ SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+<br>
+<br>
+<br>
+[Defines]<br>
+DEC_SPECIFICATION              = 0x0001001A<br>
+PACKAGE_NAME                   = StandaloneMmPkg<br>
+PACKAGE_GUID                   = 2AE82968-7769-4A85-A5BC-A0954CE54A5C<br>
+PACKAGE_VERSION                = 1.0<br>
+<br>
+[Includes]<br>
+Include<br>
+<br>
+[LibraryClasses]<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x0001001A</TD></TR><TR><TD><B>Package Guid</B></TD><TD>2AE82968-7769-4A85-A5BC-A0954CE54A5C</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage StandaloneMmPkg_libraryclass "Library Class" </li>
+<li>\subpage guid_root_page "GUID" </li>
+</ul>
+ **/
+/** \page StandaloneMmPkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_AArch64 "AArch64" </li>
+<li>\subpage lc_ARM "ARM" </li>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_AArch64 AArch64
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_StandaloneMmCoreEntryPoint "StandaloneMmCoreEntryPoint" </li>
+</ul>
+ **/
+/** \page lc_StandaloneMmCoreEntryPoint StandaloneMmCoreEntryPoint
+                 AArch64 and ARM.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/Arm/StandaloneMmCoreEntryPoint.h
+ \endlink<p>
+
+ **/
+/** \page lc_ARM ARM
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_StandaloneMmCoreEntryPoint "StandaloneMmCoreEntryPoint" </li>
+</ul>
+ **/
+/** \page lc_StandaloneMmCoreEntryPoint StandaloneMmCoreEntryPoint
+                 AArch64 and ARM.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/Arm/StandaloneMmCoreEntryPoint.h
+ \endlink<p>
+
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_FvLib "FvLib" </li>
+<li>\subpage lc_MemLib "MemLib" </li>
+<li>\subpage lc_StandaloneMmCoreEntryPoint "StandaloneMmCoreEntryPoint" </li>
+</ul>
+ **/
+/** \page lc_FvLib FvLib
+  @libraryclass  Defines a set of helper methods.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/FvLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_MemLib MemLib
+                 MM Memory Operation.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/StandaloneMmMemLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_StandaloneMmCoreEntryPoint StandaloneMmCoreEntryPoint
+  @libraryclass  Defines a set of interfaces for the MM core entrypoint.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/StandaloneMmCoreEntryPoint.h
+ \endlink<p>
+
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gEfiArmTfCpuDriverEpDescriptorGuid "gEfiArmTfCpuDriverEpDescriptorGuid" </li>
+<li>\subpage guid_common_gEfiMmPeiMmramMemoryReserveGuid "gEfiMmPeiMmramMemoryReserveGuid" </li>
+<li>\subpage guid_common_gEfiStandaloneMmNonSecureBufferGuid "gEfiStandaloneMmNonSecureBufferGuid" </li>
+<li>\subpage guid_common_gMmCoreDataHobGuid "gMmCoreDataHobGuid" </li>
+<li>\subpage guid_common_gMmFvDispatchGuid "gMmFvDispatchGuid" </li>
+<li>\subpage guid_common_gMpInformationHobGuid "gMpInformationHobGuid" </li>
+<li>\subpage guid_common_gStandaloneMmPkgTokenSpaceGuid "gStandaloneMmPkgTokenSpaceGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gEfiArmTfCpuDriverEpDescriptorGuid gEfiArmTfCpuDriverEpDescriptorGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEfiArmTfCpuDriverEpDescriptorGuid</TD><TD>{ 0x6ecbd5a1, 0xc0f8, 0x4702, { 0x83, 0x01, 0x4f, 0xc2, 0xc5, 0x47, 0x0a, 0x51 }}</TD></TR></TABLE>
+ **/
+/** \page guid_common_gEfiMmPeiMmramMemoryReserveGuid gEfiMmPeiMmramMemoryReserveGuid
+ Include/Guid/MmramMemoryReserve.h<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEfiMmPeiMmramMemoryReserveGuid</TD><TD>{ 0x0703f912, 0xbf8d, 0x4e2a, { 0xbe, 0x07, 0xab, 0x27, 0x25, 0x25, 0xc5, 0x92 }}</TD></TR></TABLE>
+ **/
+/** \page guid_common_gEfiStandaloneMmNonSecureBufferGuid gEfiStandaloneMmNonSecureBufferGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEfiStandaloneMmNonSecureBufferGuid</TD><TD>{ 0xf00497e3, 0xbfa2, 0x41a1, { 0x9d, 0x29, 0x54, 0xc2, 0xe9, 0x37, 0x21, 0xc5 }}</TD></TR></TABLE>
+ **/
+/** \page guid_common_gMmCoreDataHobGuid gMmCoreDataHobGuid
+ Include/Guid/MmCoreData.h<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gMmCoreDataHobGuid</TD><TD>{ 0xa160bf99, 0x2aa4, 0x4d7d, { 0x99, 0x93, 0x89, 0x9c, 0xb1, 0x2d, 0xf3, 0x76 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link StandaloneMmPkg/Include/Guid/MmCoreData.h
+\endlink
+
+ **/
+/** \page guid_common_gMmFvDispatchGuid gMmFvDispatchGuid
+ \copydoc StandaloneMmPkg/Include/Guid/MmFvDispatch.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gMmFvDispatchGuid</TD><TD>{ 0xb65694cc, 0x09e3, 0x4c3b, { 0xb5, 0xcd, 0x05, 0xf4, 0x4d, 0x3c, 0xdb, 0xff }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link StandaloneMmPkg/Include/Guid/MmFvDispatch.h
+\endlink
+
+ **/
+/** \page guid_common_gMpInformationHobGuid gMpInformationHobGuid
+ \copydoc StandaloneMmPkg/Include/Guid/MpInformation.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gMpInformationHobGuid</TD><TD>{ 0xba33f15d, 0x4000, 0x45c1, { 0x8e, 0x88, 0xf9, 0x16, 0x92, 0xd4, 0x57, 0xe3 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link StandaloneMmPkg/Include/Guid/MpInformation.h
+\endlink
+
+ **/
+/** \page guid_common_gStandaloneMmPkgTokenSpaceGuid gStandaloneMmPkgTokenSpaceGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gStandaloneMmPkgTokenSpaceGuid</TD><TD>{ 0x18fe7632, 0xf5c8, 0x4e63, { 0x8d, 0xe8, 0x17, 0xa5, 0x5c, 0x59, 0x13, 0xbd }}</TD></TR></TABLE>
+ **/

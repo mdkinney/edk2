@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['ufsexecuiccommand',['UfsExecUicCommand',['../struct___e_d_k_i_i___u_f_s___h_c___d_r_i_v_e_r___i_n_t_e_r_f_a_c_e.html#a99ec1aa619edc081f50661945eee398f',1,'_EDKII_UFS_HC_DRIVER_INTERFACE']]],
+  ['ufshcprotocol',['UfsHcProtocol',['../struct___e_d_k_i_i___u_f_s___h_c___d_r_i_v_e_r___i_n_t_e_r_f_a_c_e.html#ace77b2ba4ca21ab8e33a2c9f5d356ca2',1,'_EDKII_UFS_HC_DRIVER_INTERFACE']]],
+  ['uid',['UID',['../struct_u_n_i_v_e_r_s_a_l___p_a_y_l_o_a_d___p_c_i___r_o_o_t___b_r_i_d_g_e.html#af4e71db32b36fed507774a968b1d8942',1,'UNIVERSAL_PAYLOAD_PCI_ROOT_BRIDGE']]],
+  ['unicodebsprint',['UnicodeBSPrint',['../struct___e_f_i___p_r_i_n_t2___p_r_o_t_o_c_o_l.html#acaee19a024284a2ee3bf5c9194738729',1,'_EFI_PRINT2_PROTOCOL::UnicodeBSPrint()'],['../struct___e_f_i___p_r_i_n_t2_s___p_r_o_t_o_c_o_l.html#abdb40e6144b38ebb3672298495a573fa',1,'_EFI_PRINT2S_PROTOCOL::UnicodeBSPrint()']]],
+  ['unicodebsprintasciiformat',['UnicodeBSPrintAsciiFormat',['../struct___e_f_i___p_r_i_n_t2___p_r_o_t_o_c_o_l.html#a8c78fd48cf733fb42c0ac0d44dcac606',1,'_EFI_PRINT2_PROTOCOL::UnicodeBSPrintAsciiFormat()'],['../struct___e_f_i___p_r_i_n_t2_s___p_r_o_t_o_c_o_l.html#aab7600b90502f86752f7b6eeb1c50ab4',1,'_EFI_PRINT2S_PROTOCOL::UnicodeBSPrintAsciiFormat()']]],
+  ['unicodesprint',['UnicodeSPrint',['../struct___e_f_i___p_r_i_n_t2___p_r_o_t_o_c_o_l.html#a3aca5b6ed4067e0ed850de4cef6698ce',1,'_EFI_PRINT2_PROTOCOL::UnicodeSPrint()'],['../struct___e_f_i___p_r_i_n_t2_s___p_r_o_t_o_c_o_l.html#a4993d509d10a716384261fd17f7298a1',1,'_EFI_PRINT2S_PROTOCOL::UnicodeSPrint()']]],
+  ['unicodesprintasciiformat',['UnicodeSPrintAsciiFormat',['../struct___e_f_i___p_r_i_n_t2___p_r_o_t_o_c_o_l.html#ac82aefec2e41f769b52390e10c54dcf6',1,'_EFI_PRINT2_PROTOCOL::UnicodeSPrintAsciiFormat()'],['../struct___e_f_i___p_r_i_n_t2_s___p_r_o_t_o_c_o_l.html#aec54afffbdca3f293952f58934935fc5',1,'_EFI_PRINT2S_PROTOCOL::UnicodeSPrintAsciiFormat()']]],
+  ['unicodevaluetostring',['UnicodeValueToString',['../struct___e_f_i___p_r_i_n_t2___p_r_o_t_o_c_o_l.html#af153a3bff59557faff9abe2e415e7fd4',1,'_EFI_PRINT2_PROTOCOL']]],
+  ['unicodevaluetostrings',['UnicodeValueToStringS',['../struct___e_f_i___p_r_i_n_t2_s___p_r_o_t_o_c_o_l.html#a991d46d3e646a0a48465b52ecd9a2f9d',1,'_EFI_PRINT2S_PROTOCOL']]],
+  ['uninitdatabasesize',['UninitDataBaseSize',['../struct_p_c_d___d_a_t_a_b_a_s_e___i_n_i_t.html#af8dd408692de37ccca71e7c3cd6d46e3',1,'PCD_DATABASE_INIT']]],
+  ['unloadpeimage',['UnLoadPeImage',['../struct___e_f_i___p_e32___i_m_a_g_e___p_r_o_t_o_c_o_l.html#a047d4549c16fbdd1fe32b10476b60eb7',1,'_EFI_PE32_IMAGE_PROTOCOL']]],
+  ['unmap',['Unmap',['../struct___e_d_k_i_i___i_o_m_m_u___p_p_i.html#a0ce29b35c63b973a37cef7a7cbe6b8df',1,'_EDKII_IOMMU_PPI::Unmap()'],['../struct___e_d_k_i_i___i_o_m_m_u___p_r_o_t_o_c_o_l.html#af9285381e492693e2d0000f4e46fd505',1,'_EDKII_IOMMU_PROTOCOL::Unmap()'],['../struct___e_d_k_i_i___u_f_s___h_o_s_t___c_o_n_t_r_o_l_l_e_r___p_r_o_t_o_c_o_l.html#aec6cdfca6a10df0824de816dd236c615',1,'_EDKII_UFS_HOST_CONTROLLER_PROTOCOL::Unmap()']]],
+  ['unregisteresrtentry',['UnRegisterEsrtEntry',['../struct___e_s_r_t___m_a_n_a_g_e_m_e_n_t___p_r_o_t_o_c_o_l.html#aebe827453366fc948be3f036e3822296',1,'_ESRT_MANAGEMENT_PROTOCOL']]],
+  ['unregisterhandler',['UnregisterHandler',['../struct___s_m_i___h_a_n_d_l_e_r___p_r_o_f_i_l_e___p_r_o_t_o_c_o_l.html#ac9b1eb0dab19b4e118040c47386e54ac',1,'_SMI_HANDLER_PROFILE_PROTOCOL']]],
+  ['unregisterimage',['UnregisterImage',['../struct___e_d_k_i_i___m_e_m_o_r_y___p_r_o_f_i_l_e___p_r_o_t_o_c_o_l.html#ac52f9f690be7db3dfe089a7bb8014eeb',1,'_EDKII_MEMORY_PROFILE_PROTOCOL::UnregisterImage()'],['../struct___e_d_k_i_i___p_e_c_o_f_f___i_m_a_g_e___e_m_u_l_a_t_o_r___p_r_o_t_o_c_o_l.html#a1886d4798223ecf7ddc3e0f74d79edb8',1,'_EDKII_PECOFF_IMAGE_EMULATOR_PROTOCOL::UnregisterImage()']]],
+  ['updateesrtentry',['UpdateEsrtEntry',['../struct___e_s_r_t___m_a_n_a_g_e_m_e_n_t___p_r_o_t_o_c_o_l.html#ae7014b3c0a65a07d5e5e4fa2b821b484',1,'_ESRT_MANAGEMENT_PROTOCOL']]],
+  ['updatevariable',['UpdateVariable',['../struct_a_u_t_h___v_a_r___l_i_b___c_o_n_t_e_x_t___i_n.html#a199faa2744e26c06a47c306494e89766',1,'AUTH_VAR_LIB_CONTEXT_IN']]],
+  ['usbbulktransfer',['UsbBulkTransfer',['../struct___p_e_i___u_s_b___i_o___p_p_i.html#a925febba13df0aafe27b7b97d8ef7bae',1,'_PEI_USB_IO_PPI']]],
+  ['usbcontroltransfer',['UsbControlTransfer',['../struct___p_e_i___u_s_b___i_o___p_p_i.html#af10ee68bad2c36b3c556516c2da853df',1,'_PEI_USB_IO_PPI']]],
+  ['usbgetendpointdescriptor',['UsbGetEndpointDescriptor',['../struct___p_e_i___u_s_b___i_o___p_p_i.html#ab1bf5840b7322e6c0e28bcf3f5a9ea34',1,'_PEI_USB_IO_PPI']]],
+  ['usbgetinterfacedescriptor',['UsbGetInterfaceDescriptor',['../struct___p_e_i___u_s_b___i_o___p_p_i.html#ac6eeac62bae238f1fe8fd631f3b8b1a9',1,'_PEI_USB_IO_PPI']]],
+  ['usbportreset',['UsbPortReset',['../struct___p_e_i___u_s_b___i_o___p_p_i.html#a91fdf79c69c1c1bab8cd7f7eb89fdb46',1,'_PEI_USB_IO_PPI']]],
+  ['usemmio',['UseMmio',['../struct_u_n_i_v_e_r_s_a_l___p_a_y_l_o_a_d___s_e_r_i_a_l___p_o_r_t___i_n_f_o.html#aa7a108feed04f265e5ee57cdee0861fc',1,'UNIVERSAL_PAYLOAD_SERIAL_PORT_INFO']]]
+];

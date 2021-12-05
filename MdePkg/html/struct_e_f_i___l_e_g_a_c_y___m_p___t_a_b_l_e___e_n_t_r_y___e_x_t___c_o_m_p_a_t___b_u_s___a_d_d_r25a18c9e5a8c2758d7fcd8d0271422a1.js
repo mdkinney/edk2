@@ -1,0 +1,5 @@
+var struct_e_f_i___l_e_g_a_c_y___m_p___t_a_b_l_e___e_n_t_r_y___e_x_t___c_o_m_p_a_t___b_u_s___a_d_d_r25a18c9e5a8c2758d7fcd8d0271422a1 =
+[
+    [ "RangeMode", "struct_e_f_i___l_e_g_a_c_y___m_p___t_a_b_l_e___e_n_t_r_y___e_x_t___c_o_m_p_a_t___b_u_s___a_d_d_r25a18c9e5a8c2758d7fcd8d0271422a1.html#abfa0bce3d66b232f992e66fe8a516edb", null ],
+    [ "Reserved", "struct_e_f_i___l_e_g_a_c_y___m_p___t_a_b_l_e___e_n_t_r_y___e_x_t___c_o_m_p_a_t___b_u_s___a_d_d_r25a18c9e5a8c2758d7fcd8d0271422a1.html#ac66921f179eef922b0aca0cbdbed8347", null ]
+];

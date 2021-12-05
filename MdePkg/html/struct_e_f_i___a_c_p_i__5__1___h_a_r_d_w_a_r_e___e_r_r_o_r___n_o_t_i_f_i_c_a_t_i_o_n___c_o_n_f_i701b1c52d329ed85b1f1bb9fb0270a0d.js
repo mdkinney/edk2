@@ -1,0 +1,10 @@
+var struct_e_f_i___a_c_p_i__5__1___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_i701b1c52d329ed85b1f1bb9fb0270a0d =
+[
+    [ "ErrorThresholdValue", "struct_e_f_i___a_c_p_i__5__1___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_i701b1c52d329ed85b1f1bb9fb0270a0d.html#a3d8ea3fbf3c201c9be0e65445f2c8d6a", null ],
+    [ "ErrorThresholdWindow", "struct_e_f_i___a_c_p_i__5__1___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_i701b1c52d329ed85b1f1bb9fb0270a0d.html#ab3790729debc28d294b4b5099f57ad9e", null ],
+    [ "PollInterval", "struct_e_f_i___a_c_p_i__5__1___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_i701b1c52d329ed85b1f1bb9fb0270a0d.html#a42119bba9cff9958a45447319939ef9b", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__5__1___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_i701b1c52d329ed85b1f1bb9fb0270a0d.html#a9200eacbcbc17c9ad29e5ccf0d0e6408", null ],
+    [ "SwitchToPollingThresholdValue", "struct_e_f_i___a_c_p_i__5__1___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_i701b1c52d329ed85b1f1bb9fb0270a0d.html#a2d042a542b012adce8f2a09aea30713b", null ],
+    [ "SwitchToPollingThresholdWindow", "struct_e_f_i___a_c_p_i__5__1___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_i701b1c52d329ed85b1f1bb9fb0270a0d.html#a49733391e7f1565999505db49d7364b9", null ],
+    [ "Type", "struct_e_f_i___a_c_p_i__5__1___h_a_r_d_w_a_r_e___e_r_r_o_r___n_o_t_i_f_i_c_a_t_i_o_n___c_o_n_f_i701b1c52d329ed85b1f1bb9fb0270a0d.html#a9553a25322f89b3530f1d66c91dc9a7a", null ]
+];

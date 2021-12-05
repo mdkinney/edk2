@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['gedkiiconfigurationmanagerprotocolguid',['gEdkiiConfigurationManagerProtocolGuid',['../_configuration_manager_protocol_8h.html#a68649b063a8ed1bfc0a17135200c4789',1,'ConfigurationManagerProtocol.h']]],
+  ['gedkiidynamictablefactoryprotocolguid',['gEdkiiDynamicTableFactoryProtocolGuid',['../_dynamic_table_factory_protocol_8h.html#a84db3fadf6efceefc5c39f678c6a6b60',1,'DynamicTableFactoryProtocol.h']]],
+  ['generatorid',['GeneratorID',['../struct_dt_table_generator.html#a53afddfb399d67be1e7cc2ba21f36ce8',1,'DtTableGenerator::GeneratorID()'],['../struct_acpi_table_generator.html#a187941f9adad4155da9076de2df96f76',1,'AcpiTableGenerator::GeneratorID()'],['../struct_smbios_table_generator.html#a03ac75ccb9deb45db1c6619f8c869524',1,'SmbiosTableGenerator::GeneratorID()']]],
+  ['gerrinterrupt',['GerrInterrupt',['../struct_cm_arm_smmu_v3_node.html#aa2a572a66d5e5acf470a1a707f01a2e8',1,'CmArmSmmuV3Node']]],
+  ['getacpitablegenerator',['GetAcpiTableGenerator',['../struct_dynamic_table_factory_protocol.html#a2f030575a63e41261c50e6941545a92b',1,'DynamicTableFactoryProtocol']]],
+  ['getdttablegenerator',['GetDtTableGenerator',['../struct_dynamic_table_factory_protocol.html#a6a8aac20894e5f4a8bd5c51a7fb3ccaf',1,'DynamicTableFactoryProtocol']]],
+  ['getobject',['GetObject',['../struct_configuration_manager_protocol.html#a2244eec72ddd93a83fbe961117f2512b',1,'ConfigurationManagerProtocol']]],
+  ['getsmbiostablegenerator',['GetSmbiosTableGenerator',['../struct_dynamic_table_factory_protocol.html#a80e839528b355ab17449533a66aeb784',1,'DynamicTableFactoryProtocol']]],
+  ['gicctoken',['GicCToken',['../struct_cm_arm_proc_hierarchy_info.html#a5061420c2c9c87d873f85e16e7d81946',1,'CmArmProcHierarchyInfo']]],
+  ['gich',['GICH',['../struct_cm_arm_gic_c_info.html#a4862ee2ce4ddf936a8239ec6a240b1e1',1,'CmArmGicCInfo']]],
+  ['gicitsid',['GicItsId',['../struct_cm_arm_gic_its_info.html#aa48a8cf4f137e4bf00395541b6aad7a9',1,'CmArmGicItsInfo']]],
+  ['gicmsiframeid',['GicMsiFrameId',['../struct_cm_arm_gic_msi_frame_info.html#ac70dc9e835bd9a0185cb8514c1812dde',1,'CmArmGicMsiFrameInfo']]],
+  ['gicrbaseaddress',['GICRBaseAddress',['../struct_cm_arm_gic_c_info.html#a5cc3d07a2633ccca2e18a7d9e3c1ef58',1,'CmArmGicCInfo']]],
+  ['gicv',['GICV',['../struct_cm_arm_gic_c_info.html#ac2a582ca8bf786607330d2d09673d1c8',1,'CmArmGicCInfo']]],
+  ['gicversion',['GicVersion',['../struct_cm_arm_gic_d_info.html#a680ee9b7fad2677410415110f90d5011',1,'CmArmGicDInfo']]],
+  ['gtblockphysicaladdress',['GTBlockPhysicalAddress',['../struct_cm_arm_g_t_block_info.html#a0d3e2648ad9fd2dcc199c309219b36d7',1,'CmArmGTBlockInfo']]],
+  ['gtblocktimerframecount',['GTBlockTimerFrameCount',['../struct_cm_arm_g_t_block_info.html#a428126c072620691c7210f80fee55b93',1,'CmArmGTBlockInfo']]],
+  ['gtblocktimerframetoken',['GTBlockTimerFrameToken',['../struct_cm_arm_g_t_block_info.html#a93bf2497445f74045b8495802f08fb39',1,'CmArmGTBlockInfo']]]
+];

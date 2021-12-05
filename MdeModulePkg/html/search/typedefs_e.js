@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['save_5freminder',['SAVE_REMINDER',['../_form_browser_ex_8h.html#a53f00c8baa1d664557daffa217fc34f6',1,'FormBrowserEx.h']]],
+  ['scratchbuffer',['ScratchBuffer',['../_auth_variable_lib_8h.html#a170efa9c664b25a07efbd2f19bdc77cd',1,'AuthVariableLib.h']]],
+  ['sdmmchcslotcapability',['SdMmcHcSlotCapability',['../_sd_mmc_override_8h.html#a7137736626e0e007de10535df338cefa',1,'SdMmcOverride.h']]],
+  ['security_5ffile_5fauthentication_5fstate_5fhandler',['SECURITY_FILE_AUTHENTICATION_STATE_HANDLER',['../_security_management_lib_8h.html#a0645b6ed4d0b609299c95f70ec8651f2',1,'SecurityManagementLib.h']]],
+  ['securityprotocolid',['SecurityProtocolId',['../_storage_security_command_8h.html#a6fc3c2f10df0c8bf348697b8a9dc4705',1,'StorageSecurityCommand.h']]],
+  ['securityprotocolspecificdata',['SecurityProtocolSpecificData',['../_storage_security_command_8h.html#ab6de03b292a91419ed3c83a44f92280f',1,'StorageSecurityCommand.h']]],
+  ['size',['Size',['../_memory_profile_8h.html#afc0a709badc1205ac685db2cadf36b68',1,'MemoryProfile.h']]],
+  ['size_5finfo',['SIZE_INFO',['../_pcd_data_base_signature_guid_8h.html#a880682ac319aae17a803e9e1736f554f',1,'PcdDataBaseSignatureGuid.h']]],
+  ['sku_5fid',['SKU_ID',['../_pcd_data_base_signature_guid_8h.html#a5844c2a36be570cb66f3c55f257dc635',1,'PcdDataBaseSignatureGuid.h']]],
+  ['slot',['Slot',['../_sd_mmc_override_8h.html#a9bbabc1780a321849025547ee1b2862a',1,'SdMmcOverride.h']]],
+  ['smi_5fhandler_5fprofile_5fprotocol',['SMI_HANDLER_PROFILE_PROTOCOL',['../_smi_handler_profile_8h.html#adaab4608da1f79ec5c8b3b92e72a2a62',1,'SmiHandlerProfile.h']]],
+  ['smm_5fvariable_5fcommunicate_5flock_5fvariable',['SMM_VARIABLE_COMMUNICATE_LOCK_VARIABLE',['../_smm_variable_common_8h.html#a09fb321967176e71f8ac0cfae22d3cc5',1,'SmmVariableCommon.h']]],
+  ['sort_5fcompare',['SORT_COMPARE',['../_sort_lib_8h.html#a0d9a41ada9b456b4e225be4733cae4c3',1,'SortLib.h']]],
+  ['statement',['Statement',['../_display_protocol_8h.html#a40a769a6bd1901ad7ae8f77a5b1bbe23',1,'DisplayProtocol.h']]],
+  ['string_5fhead',['STRING_HEAD',['../_pcd_data_base_signature_guid_8h.html#a2bfd436460855404ae7c274cbf908cf6',1,'PcdDataBaseSignatureGuid.h']]],
+  ['sync_5fesrt_5ffmp',['SYNC_ESRT_FMP',['../_esrt_management_8h.html#ad0e0df486150736c6354a076b0dd5846',1,'EsrtManagement.h']]]
+];

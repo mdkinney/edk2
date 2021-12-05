@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['readunaligned16',['ReadUnaligned16',['../_base_lib_8h.html#a59c04a153a043a58e145a33a60323ea3',1,'BaseLib.h']]],
+  ['readunaligned24',['ReadUnaligned24',['../_base_lib_8h.html#ac683301d91cd0ff286776cfba2654004',1,'BaseLib.h']]],
+  ['readunaligned32',['ReadUnaligned32',['../_base_lib_8h.html#afe87bd2a2a723f5d89c9b4174e7faa8c',1,'BaseLib.h']]],
+  ['readunaligned64',['ReadUnaligned64',['../_base_lib_8h.html#a3eef2329755c697f80c4b93551ecee7a',1,'BaseLib.h']]],
+  ['reallocatepool',['ReallocatePool',['../_memory_allocation_lib_8h.html#ad57c40decf8f7802505ec6ec6939d571',1,'MemoryAllocationLib.h']]],
+  ['reallocatereservedpool',['ReallocateReservedPool',['../_memory_allocation_lib_8h.html#a09d0702f54157bb0fc11021898cad56c',1,'MemoryAllocationLib.h']]],
+  ['reallocateruntimepool',['ReallocateRuntimePool',['../_memory_allocation_lib_8h.html#a0ce087259d16d7a83f6b9fe43f68f4c3',1,'MemoryAllocationLib.h']]],
+  ['releasespinlock',['ReleaseSpinLock',['../_synchronization_lib_8h.html#aa94954fe981052640e47a2f8312bc384',1,'SynchronizationLib.h']]],
+  ['removeentrylist',['RemoveEntryList',['../_base_lib_8h.html#a188c99a83204fea0084753edf5f08d26',1,'BaseLib.h']]],
+  ['reportdebugcodeenabled',['ReportDebugCodeEnabled',['../_report_status_code_lib_8h.html#ade4f9e2fc3918ac099f487c28ca108dc',1,'ReportStatusCodeLib.h']]],
+  ['reporterrorcodeenabled',['ReportErrorCodeEnabled',['../_report_status_code_lib_8h.html#a38a06321dd1e6c1fd369052572e0eb25',1,'ReportStatusCodeLib.h']]],
+  ['reportprogresscodeenabled',['ReportProgressCodeEnabled',['../_report_status_code_lib_8h.html#a7d83b3d97ead5c025c0523d89a9e9cc6',1,'ReportStatusCodeLib.h']]],
+  ['reportstatuscode',['ReportStatusCode',['../_report_status_code_lib_8h.html#ad3409c6da81a08ba877fe6c28b45c645',1,'ReportStatusCodeLib.h']]],
+  ['reportstatuscodeex',['ReportStatusCodeEx',['../_report_status_code_lib_8h.html#a7442082d190378b16ca73f1427a4ef2e',1,'ReportStatusCodeLib.h']]],
+  ['reportstatuscodeextractassertinfo',['ReportStatusCodeExtractAssertInfo',['../_report_status_code_lib_8h.html#af817d2a7b8e9c802f920d2b1fd0e68bb',1,'ReportStatusCodeLib.h']]],
+  ['reportstatuscodeextractdebuginfo',['ReportStatusCodeExtractDebugInfo',['../_report_status_code_lib_8h.html#aee4ac467b7a7f067d9a2153d45e1e8d2',1,'ReportStatusCodeLib.h']]],
+  ['reportstatuscodewithdevicepath',['ReportStatusCodeWithDevicePath',['../_report_status_code_lib_8h.html#ac49327d7117040d4b7ac553c052463fd',1,'ReportStatusCodeLib.h']]],
+  ['reportstatuscodewithextendeddata',['ReportStatusCodeWithExtendedData',['../_report_status_code_lib_8h.html#a719dc56cc5ef79568ab4f42781fe4c44',1,'ReportStatusCodeLib.h']]],
+  ['rrotu32',['RRotU32',['../_base_lib_8h.html#a0c7568c04463016f3413d2b1a0945dd3',1,'BaseLib.h']]],
+  ['rrotu64',['RRotU64',['../_base_lib_8h.html#ab36738699d72a082e7ab40bc9d3cf228',1,'BaseLib.h']]],
+  ['rshiftu64',['RShiftU64',['../_base_lib_8h.html#a828bad213358fde251a46509ddaa9672',1,'BaseLib.h']]],
+  ['runalltestsuites',['RunAllTestSuites',['../_unit_test_lib_8h.html#a12bd81330cff037240ad1c99425fc313',1,'UnitTestLib.h']]]
+];

@@ -1,0 +1,4 @@
+var struct_s_p_d4___l_r_d_i_m_m___d_a_t_a___b_u_f_f_e_r___v_r_e_f_d_q___f_o_r___d_r_a_m___i_n_t_e_r_f_a_c_e =
+[
+    [ "DataBufferVrefDQforDramInterface", "struct_s_p_d4___l_r_d_i_m_m___d_a_t_a___b_u_f_f_e_r___v_r_e_f_d_q___f_o_r___d_r_a_m___i_n_t_e_r_f_a_c_e.html#a6067bedbad87211c39713bbfb48b354d", null ]
+];

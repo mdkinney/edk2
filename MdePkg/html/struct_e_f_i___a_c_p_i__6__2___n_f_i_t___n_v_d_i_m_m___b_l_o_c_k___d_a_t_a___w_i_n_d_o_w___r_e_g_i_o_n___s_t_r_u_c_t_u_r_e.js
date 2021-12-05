@@ -1,0 +1,11 @@
+var struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___b_l_o_c_k___d_a_t_a___w_i_n_d_o_w___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e =
+[
+    [ "BeginningAddressOfFirstBlockInBlockAccessibleMemory", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___b_l_o_c_k___d_a_t_a___w_i_n_d_o_w___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a2edb6776bbb719e2b191c2fbe6bbbb3f", null ],
+    [ "BlockAccessibleMemoryCapacity", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___b_l_o_c_k___d_a_t_a___w_i_n_d_o_w___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a780b0771b233a0d206611d3a2081222e", null ],
+    [ "BlockDataWindowStartOffset", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___b_l_o_c_k___d_a_t_a___w_i_n_d_o_w___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#ad5010ae51528cd7d633c7d2386a4816e", null ],
+    [ "Length", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___b_l_o_c_k___d_a_t_a___w_i_n_d_o_w___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a7c0b32d5995bae403546f4dbecdccbb8", null ],
+    [ "NumberOfBlockDataWindows", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___b_l_o_c_k___d_a_t_a___w_i_n_d_o_w___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a1854d06ef64e0493e315b307dc3a5dcd", null ],
+    [ "NVDIMMControlRegionStructureIndex", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___b_l_o_c_k___d_a_t_a___w_i_n_d_o_w___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#aa1345320a16739a05cd81b4eb6e3e630", null ],
+    [ "SizeOfBlockDataWindow", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___b_l_o_c_k___d_a_t_a___w_i_n_d_o_w___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#af143b519624e9e6e410fdd7ce1b2fff8", null ],
+    [ "Type", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___b_l_o_c_k___d_a_t_a___w_i_n_d_o_w___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a84d6ad244b487011a6916d700a7e21a9", null ]
+];

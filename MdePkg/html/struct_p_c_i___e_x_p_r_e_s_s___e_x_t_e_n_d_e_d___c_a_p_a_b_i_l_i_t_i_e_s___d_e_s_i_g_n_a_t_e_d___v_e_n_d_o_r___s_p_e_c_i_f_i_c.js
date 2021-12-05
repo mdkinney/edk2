@@ -1,0 +1,7 @@
+var struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___d_e_s_i_g_n_a_t_e_d___v_e_n_d_o_r___s_p_e_c_i_f_i_c =
+[
+    [ "DesignatedVendorSpecific", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___d_e_s_i_g_n_a_t_e_d___v_e_n_d_o_r___s_p_e_c_i_f_i_c.html#a7ce637a09f909f1c246754e99791ea7d", null ],
+    [ "DesignatedVendorSpecificHeader1", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___d_e_s_i_g_n_a_t_e_d___v_e_n_d_o_r___s_p_e_c_i_f_i_c.html#a4e4a511d7cf93bda214da84b412562b2", null ],
+    [ "DesignatedVendorSpecificHeader2", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___d_e_s_i_g_n_a_t_e_d___v_e_n_d_o_r___s_p_e_c_i_f_i_c.html#a5db6f84d8a6d6dc49936887f559a5896", null ],
+    [ "Header", "struct_p_c_i___e_x_p_r_e_s_s___e_x_t_e_n_d_e_d___c_a_p_a_b_i_l_i_t_i_e_s___d_e_s_i_g_n_a_t_e_d___v_e_n_d_o_r___s_p_e_c_i_f_i_c.html#a0a0dd9fcaa37678c143c71f5346a67ac", null ]
+];

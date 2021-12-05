@@ -1,0 +1,11 @@
+var struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___p_r_o_x_i_m_i_t_y___d7818bbe6890be13d5fe863a980c21a7a =
+[
+    [ "Flags", "struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___p_r_o_x_i_m_i_t_y___d7818bbe6890be13d5fe863a980c21a7a.html#a481abe736dfe05563f35d1f07477d58e", null ],
+    [ "InitiatorProximityDomain", "struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___p_r_o_x_i_m_i_t_y___d7818bbe6890be13d5fe863a980c21a7a.html#aaeb30ab77342ba07b4e5632b48311850", null ],
+    [ "Length", "struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___p_r_o_x_i_m_i_t_y___d7818bbe6890be13d5fe863a980c21a7a.html#afc3af36c04e35f83f4c2ef23c3a818d0", null ],
+    [ "MemoryProximityDomain", "struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___p_r_o_x_i_m_i_t_y___d7818bbe6890be13d5fe863a980c21a7a.html#ab88ef3b1eb0383b5372bcf7f5cb55701", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___p_r_o_x_i_m_i_t_y___d7818bbe6890be13d5fe863a980c21a7a.html#a8aab87cd70fc32c8090fbd2230259747", null ],
+    [ "Reserved1", "struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___p_r_o_x_i_m_i_t_y___d7818bbe6890be13d5fe863a980c21a7a.html#ab5bf845b0d503638e2f928ef4beb15b2", null ],
+    [ "Reserved2", "struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___p_r_o_x_i_m_i_t_y___d7818bbe6890be13d5fe863a980c21a7a.html#af6000e5644be1a961a16a0ab9140b938", null ],
+    [ "Type", "struct_e_f_i___a_c_p_i__6__4___h_m_a_t___s_t_r_u_c_t_u_r_e___m_e_m_o_r_y___p_r_o_x_i_m_i_t_y___d7818bbe6890be13d5fe863a980c21a7a.html#a7fdfa7c2ab02834ac2f6db0526ed667a", null ]
+];

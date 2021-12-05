@@ -1,0 +1,11 @@
+var struct_e_f_i___a_c_p_i__6__1___r_a_s_f___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n51310b14804d086f9d5fa65b1c07c775 =
+[
+    [ "Command", "struct_e_f_i___a_c_p_i__6__1___r_a_s_f___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n51310b14804d086f9d5fa65b1c07c775.html#a38694379fb1750c1940c423e85b13d90", null ],
+    [ "NumberOfRASFParameterBlocks", "struct_e_f_i___a_c_p_i__6__1___r_a_s_f___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n51310b14804d086f9d5fa65b1c07c775.html#a7bde91b6de21c3980984f63219a6b231", null ],
+    [ "RASCapabilities", "struct_e_f_i___a_c_p_i__6__1___r_a_s_f___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n51310b14804d086f9d5fa65b1c07c775.html#ac4ca568fc270bcd0882d00151e866702", null ],
+    [ "SetRASCapabilities", "struct_e_f_i___a_c_p_i__6__1___r_a_s_f___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n51310b14804d086f9d5fa65b1c07c775.html#aa013d21a3cde18404bc40f585f927fe4", null ],
+    [ "SetRASCapabilitiesStatus", "struct_e_f_i___a_c_p_i__6__1___r_a_s_f___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n51310b14804d086f9d5fa65b1c07c775.html#a354af20f3a6389d0ebfc5bbdcb0bfebb", null ],
+    [ "Signature", "struct_e_f_i___a_c_p_i__6__1___r_a_s_f___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n51310b14804d086f9d5fa65b1c07c775.html#aec324ecd42d9d017d37b8bb65796687f", null ],
+    [ "Status", "struct_e_f_i___a_c_p_i__6__1___r_a_s_f___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n51310b14804d086f9d5fa65b1c07c775.html#a4909447398f258348f55064518fa8253", null ],
+    [ "Version", "struct_e_f_i___a_c_p_i__6__1___r_a_s_f___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n51310b14804d086f9d5fa65b1c07c775.html#adfaa3f68e0fa4e121b53038e6bd5c7fd", null ]
+];

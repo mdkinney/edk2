@@ -1,0 +1,6 @@
+var struct_e_f_i___a_c_p_i__5__1___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n_e_l___t_a_b_l_e___h_e_a_d_e_r =
+[
+    [ "Flags", "struct_e_f_i___a_c_p_i__5__1___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n_e_l___t_a_b_l_e___h_e_a_d_e_r.html#a157112fcff94d2f7729daf183b9539a0", null ],
+    [ "Header", "struct_e_f_i___a_c_p_i__5__1___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n_e_l___t_a_b_l_e___h_e_a_d_e_r.html#a1c42b8a36aaba4bd612486936c412d6b", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__5__1___p_l_a_t_f_o_r_m___c_o_m_m_u_n_i_c_a_t_i_o_n___c_h_a_n_n_e_l___t_a_b_l_e___h_e_a_d_e_r.html#ad4df3a544f318be0cf3bdeca28329aed", null ]
+];

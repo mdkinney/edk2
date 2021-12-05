@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['id',['Id',['../struct_n_o_r___f_l_a_s_h___i_n_f_o.html#af4ff75377f325d7e607f343812b4db2a',1,'NOR_FLASH_INFO::Id()'],['../struct_a_n_d_r_o_i_d___b_o_o_t_i_m_g___h_e_a_d_e_r.html#a436d5bce65d55fcb20102e03a9aae60a',1,'ANDROID_BOOTIMG_HEADER::Id()']]],
+  ['idlen',['IdLen',['../struct_n_o_r___f_l_a_s_h___i_n_f_o.html#aa74bd9497149e118aafb5629a9e1f519',1,'NOR_FLASH_INFO']]],
+  ['imagesize',['ImageSize',['../_pe_coff_loader_8h.html#aaca3e976e49d5fc2478956b294eca6aa',1,'PeCoffLoader.h']]],
+  ['init',['Init',['../struct___f_a_s_t_b_o_o_t___p_l_a_t_f_o_r_m___p_r_o_t_o_c_o_l.html#a7a56354418473913b36d74a277f9c1f7',1,'_FASTBOOT_PLATFORM_PROTOCOL']]],
+  ['installfdtfromfv',['InstallFdtFromFv',['../_fdt_load_lib_8h.html#acf1e9e14effbcdcc4d1ebd5580e84e67',1,'FdtLoadLib.h']]],
+  ['installfdtfromsemihosting',['InstallFdtFromSemihosting',['../_fdt_load_lib_8h.html#a47314568e34442cc6db92ed622046a64',1,'FdtLoadLib.h']]],
+  ['internalgpiocount',['InternalGpioCount',['../struct___g_p_i_o___c_o_n_t_r_o_l_l_e_r.html#a3411d8609eaca0aaf513141bad388955',1,'_GPIO_CONTROLLER']]],
+  ['interruptstate',['InterruptState',['../_hardware_interrupt2_8h.html#a01c5d6b79a01f1a6151707589fe87418',1,'InterruptState():&#160;HardwareInterrupt2.h'],['../_hardware_interrupt_8h.html#a01c5d6b79a01f1a6151707589fe87418',1,'InterruptState():&#160;HardwareInterrupt.h']]],
+  ['is_5fpower_5fof_5f2',['IS_POWER_OF_2',['../_android_boot_img_lib_8h.html#a6c866b3d96d083a46f2b80d3771119fb',1,'AndroidBootImgLib.h']]],
+  ['is_5fvalid_5fandroid_5fpage_5fsize',['IS_VALID_ANDROID_PAGE_SIZE',['../_android_boot_img_lib_8h.html#a94e3455a65f44bb9caa3195de0d80a86',1,'AndroidBootImgLib.h']]],
+  ['isbuffervalid',['IsBufferValid',['../struct_e_f_i___o_p_e_n___f_i_l_e.html#a51d739d5cb08a57c6c5e8767bf4ae013',1,'EFI_OPEN_FILE']]],
+  ['iscardpresent',['IsCardPresent',['../struct___e_f_i___m_m_c___h_o_s_t___p_r_o_t_o_c_o_l.html#a89a323f1d1d8f1c6fb9b395d51708703',1,'_EFI_MMC_HOST_PROTOCOL']]],
+  ['isdayvalid',['IsDayValid',['../_time_base_lib_8h.html#aadb4b05c5822d138d168a7c095079559',1,'TimeBaseLib.h']]],
+  ['isdirty',['IsDirty',['../struct_e_f_i___o_p_e_n___f_i_l_e.html#a48f14253aa2257337a410779bd3f6a99',1,'EFI_OPEN_FILE']]],
+  ['isleapyear',['IsLeapYear',['../_time_base_lib_8h.html#ad090dbb192ba56550c17fffcdbdda503',1,'TimeBaseLib.h']]],
+  ['ismultiblock',['IsMultiBlock',['../struct___e_f_i___m_m_c___h_o_s_t___p_r_o_t_o_c_o_l.html#aacbcdbb073800cf24be3e5367402ad53',1,'_EFI_MMC_HOST_PROTOCOL']]],
+  ['isreadonly',['IsReadOnly',['../struct___e_f_i___m_m_c___h_o_s_t___p_r_o_t_o_c_o_l.html#afdaa9eff669d167ace29c0a6bb1d7661',1,'_EFI_MMC_HOST_PROTOCOL']]],
+  ['istimevalid',['IsTimeValid',['../_time_base_lib_8h.html#a740b039276c94996be60213563a1c150',1,'TimeBaseLib.h']]],
+  ['isvaliddaylight',['IsValidDaylight',['../_time_base_lib_8h.html#ab57b98c6d80c6cccb08a584833367dce',1,'TimeBaseLib.h']]],
+  ['isvalidtimezone',['IsValidTimeZone',['../_time_base_lib_8h.html#a49a8857c40b2fda2ed9a56ae81e330fc',1,'TimeBaseLib.h']]],
+  ['ia32',['IA32',['../pcd__pcds_fixed_at_build__i_a32_root_page.html',1,'pcd_PcdsFixedAtBuild_root_page']]]
+];

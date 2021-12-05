@@ -1,0 +1,25 @@
+var _bluetooth_io_8h =
+[
+    [ "EFI_BLUETOOTH_DEVICE_INFO", "struct_e_f_i___b_l_u_e_t_o_o_t_h___d_e_v_i_c_e___i_n_f_o.html", "struct_e_f_i___b_l_u_e_t_o_o_t_h___d_e_v_i_c_e___i_n_f_o" ],
+    [ "_EFI_BLUETOOTH_IO_PROTOCOL", "struct___e_f_i___b_l_u_e_t_o_o_t_h___i_o___p_r_o_t_o_c_o_l.html", "struct___e_f_i___b_l_u_e_t_o_o_t_h___i_o___p_r_o_t_o_c_o_l" ],
+    [ "EFI_BLUETOOTH_IO_PROTOCOL_GUID", "_bluetooth_io_8h.html#a568bdacac7622943331fbf31da3e5bce", null ],
+    [ "EFI_BLUETOOTH_IO_SERVICE_BINDING_PROTOCOL_GUID", "_bluetooth_io_8h.html#a8abcbc82c95747bde6efb5328adb4eca", null ],
+    [ "Context", "_bluetooth_io_8h.html#acb0dda87e9aef6fa5cfa753b76375c4a", null ],
+    [ "Data", "_bluetooth_io_8h.html#a631f90ab849a9595f244467e1598aca0", null ],
+    [ "DataLength", "_bluetooth_io_8h.html#a7ec43198464ecc00e8e05d9e35ec6ab5", null ],
+    [ "EFI_BLUETOOTH_IO_GET_DEVICE_INFO", "_bluetooth_io_8h.html#a915edb29d975f632fe45626212f2b6f4", null ],
+    [ "EFI_BLUETOOTH_IO_GET_SDP_INFO", "_bluetooth_io_8h.html#abe92918fe2c13b8c33885138b8b45819", null ],
+    [ "EFI_BLUETOOTH_IO_L2CAP_ASYNC_RECEIVE", "_bluetooth_io_8h.html#a7778cb0aa53d425984778d7a02a53331", null ],
+    [ "EFI_BLUETOOTH_IO_L2CAP_CONNECT", "_bluetooth_io_8h.html#af9778e0a2988a9db41d5dfd51afe0a79", null ],
+    [ "EFI_BLUETOOTH_IO_L2CAP_DISCONNECT", "_bluetooth_io_8h.html#a7c39943ad8bbc9bb3510e83ca45f3232", null ],
+    [ "EFI_BLUETOOTH_IO_L2CAP_RAW_ASYNC_RECEIVE", "_bluetooth_io_8h.html#a2dbea5080115c5b9b3ea7c7fc3f87ce9", null ],
+    [ "EFI_BLUETOOTH_IO_L2CAP_RAW_RECEIVE", "_bluetooth_io_8h.html#a2993028e2fbb13ddd4434578c22f133a", null ],
+    [ "EFI_BLUETOOTH_IO_L2CAP_RAW_SEND", "_bluetooth_io_8h.html#ae59ebdc0e0a273cb80c665788e1e82c7", null ],
+    [ "EFI_BLUETOOTH_IO_L2CAP_RECEIVE", "_bluetooth_io_8h.html#a31d90c01559d54e1afc20cfa038722de", null ],
+    [ "EFI_BLUETOOTH_IO_L2CAP_REGISTER_SERVICE", "_bluetooth_io_8h.html#a76511b554758e17812ad7f428039f7ae", null ],
+    [ "EFI_BLUETOOTH_IO_L2CAP_SEND", "_bluetooth_io_8h.html#aa8599b139bce8d0cd7d3f805e56d2ad7", null ],
+    [ "EFI_BLUETOOTH_IO_PROTOCOL", "_bluetooth_io_8h.html#a8a78cb436db54a99b15aa103f0b07d5b", null ],
+    [ "EFI_STATUS", "_bluetooth_io_8h.html#ad8466f02157f90baba9dd55c87ca3e65", null ],
+    [ "gEfiBluetoothIoProtocolGuid", "_bluetooth_io_8h.html#aae54feac8431beebcbc0a1fc77c9a989", null ],
+    [ "gEfiBluetoothIoServiceBindingProtocolGuid", "_bluetooth_io_8h.html#a80d41aeb72fe25b56512d3849efaf059", null ]
+];

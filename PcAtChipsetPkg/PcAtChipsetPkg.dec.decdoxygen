@@ -1,0 +1,716 @@
+/** \mainpage PcAtChipsetPkg Package Document
+ Public definitions for PcAtChipset package.<br>
+<br>
+ This package is designed to public interfaces and implementation which follows<br>
+ PcAt defacto standard.<br>
+<br>
+ Copyright (c) 2009 - 2019, Intel Corporation. All rights reserved.<BR><br>
+ Copyright (c) 2017, AMD Inc. All rights reserved.<BR><br>
+ Copyright (c) 2018 - 2020, ARM Limited. All rights reserved.<BR><br>
+<br>
+ SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>B728689A-52D3-4b8c-AE89-2CE5514CC6DC</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage PcAtChipsetPkg_public_includes "Public Includes" </li>
+<li>\subpage PcAtChipsetPkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+</ul>
+ **/
+/** \page PcAtChipsetPkg_public_includes Public Includes
+<p> \section content_index INDEX
+<ul>
+<li>\subpage public_include_top "PcAtChipsetPkg/Include" </li>
+<li>\subpage public_include_Register "PcAtChipsetPkg/Include/Register" </li>
+</ul>
+ **/
+/** \page public_include_top PcAtChipsetPkg/Include
+<ul>
+</ul>
+
+ **/
+/** \page public_include_Register PcAtChipsetPkg/Include/Register
+<ul>
+<li> \link PcAtChipsetPkg/Include/Register/IoApic.h \endlink </li>
+<li> \link PcAtChipsetPkg/Include/Register/Hpet.h \endlink </li>
+</ul>
+
+ **/
+/** \page PcAtChipsetPkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_IoApicLib "IoApicLib" </li>
+</ul>
+ **/
+/** \page lc_IoApicLib IoApicLib
+  @libraryclass  Provides functions to manage I/O APIC Redirection Table Entries.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/IoApicLib.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_root_page "PcdsDynamic" </li>
+<li>\subpage pcd_PcdsDynamicEx_root_page "PcdsDynamicEx" </li>
+<li>\subpage pcd_PcdsFeatureFlag_root_page "PcdsFeatureFlag" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+<li>\subpage pcd_PcdsPatchableInModule_root_page "PcdsPatchableInModule" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_root_page PcdsDynamic
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_PcdHpetBaseAddress "gPcAtChipsetPkgTokenSpaceGuid.PcdHpetBaseAddress" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdHpetDefaultTimerPeriod "gPcAtChipsetPkgTokenSpaceGuid.PcdHpetDefaultTimerPeriod" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdHpetLocalApicVector "gPcAtChipsetPkgTokenSpaceGuid.PcdHpetLocalApicVector" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdIoApicBaseAddress "gPcAtChipsetPkgTokenSpaceGuid.PcdIoApicBaseAddress" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdMaximalValidYear "gPcAtChipsetPkgTokenSpaceGuid.PcdMaximalValidYear" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdMinimalValidYear "gPcAtChipsetPkgTokenSpaceGuid.PcdMinimalValidYear" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdRtcIndexRegister64 "gPcAtChipsetPkgTokenSpaceGuid.PcdRtcIndexRegister64" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdRtcTargetRegister64 "gPcAtChipsetPkgTokenSpaceGuid.PcdRtcTargetRegister64" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdHpetBaseAddress gPcAtChipsetPkgTokenSpaceGuid.PcdHpetBaseAddress
+ This PCD specifies the base address of the HPET timer.<br>
+ @Prompt HPET base address.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHpetBaseAddress</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000009</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFED00000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdHpetDefaultTimerPeriod gPcAtChipsetPkgTokenSpaceGuid.PcdHpetDefaultTimerPeriod
+ This PCD specifies the default period of the HPET Timer in 100 ns units.<br>
+  The default value of 100000 100 ns units is the same as 10 ms.<br>
+ @Prompt Default period of HPET timer.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHpetDefaultTimerPeriod</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000B</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>100000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdHpetLocalApicVector gPcAtChipsetPkgTokenSpaceGuid.PcdHpetLocalApicVector
+ This PCD specifies the Local APIC Interrupt Vector for the HPET Timer.<br>
+ @Prompt HPET local APIC vector.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHpetLocalApicVector</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000A</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x40</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdIoApicBaseAddress gPcAtChipsetPkgTokenSpaceGuid.PcdIoApicBaseAddress
+ This PCD specifies the base address of the IO APIC.<br>
+ @Prompt IO APIC base address.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIoApicBaseAddress</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000C</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFEC00000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdMaximalValidYear gPcAtChipsetPkgTokenSpaceGuid.PcdMaximalValidYear
+ This PCD specifies the maximal valid year in RTC.<br>
+ @Prompt Maximal valid year in RTC.<br>
+ @Expression 0x80000001 | gPcAtChipsetPkgTokenSpaceGuid.PcdMaximalValidYear < gPcAtChipsetPkgTokenSpaceGuid.PcdMinimalValidYear + 100<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMaximalValidYear</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000E</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>2097</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdMinimalValidYear gPcAtChipsetPkgTokenSpaceGuid.PcdMinimalValidYear
+ This PCD specifies the minimal valid year in RTC.<br>
+ @Prompt Minimal valid year in RTC.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMinimalValidYear</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000D</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>1998</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdRtcIndexRegister64 gPcAtChipsetPkgTokenSpaceGuid.PcdRtcIndexRegister64
+ Specifies RTC Index Register address in MMIO space.<br>
+ @Prompt RTC Index Register address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRtcIndexRegister64</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000022</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdRtcTargetRegister64 gPcAtChipsetPkgTokenSpaceGuid.PcdRtcTargetRegister64
+ Specifies RTC Target Register address in MMIO space.<br>
+ @Prompt RTC Target Register address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRtcTargetRegister64</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000023</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_root_page PcdsDynamicEx
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdHpetBaseAddress "gPcAtChipsetPkgTokenSpaceGuid.PcdHpetBaseAddress" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdHpetDefaultTimerPeriod "gPcAtChipsetPkgTokenSpaceGuid.PcdHpetDefaultTimerPeriod" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdHpetLocalApicVector "gPcAtChipsetPkgTokenSpaceGuid.PcdHpetLocalApicVector" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdIoApicBaseAddress "gPcAtChipsetPkgTokenSpaceGuid.PcdIoApicBaseAddress" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdMaximalValidYear "gPcAtChipsetPkgTokenSpaceGuid.PcdMaximalValidYear" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdMinimalValidYear "gPcAtChipsetPkgTokenSpaceGuid.PcdMinimalValidYear" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdRtcIndexRegister64 "gPcAtChipsetPkgTokenSpaceGuid.PcdRtcIndexRegister64" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdRtcTargetRegister64 "gPcAtChipsetPkgTokenSpaceGuid.PcdRtcTargetRegister64" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdHpetBaseAddress gPcAtChipsetPkgTokenSpaceGuid.PcdHpetBaseAddress
+ This PCD specifies the base address of the HPET timer.<br>
+ @Prompt HPET base address.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHpetBaseAddress</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000009</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFED00000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdHpetDefaultTimerPeriod gPcAtChipsetPkgTokenSpaceGuid.PcdHpetDefaultTimerPeriod
+ This PCD specifies the default period of the HPET Timer in 100 ns units.<br>
+  The default value of 100000 100 ns units is the same as 10 ms.<br>
+ @Prompt Default period of HPET timer.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHpetDefaultTimerPeriod</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000B</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>100000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdHpetLocalApicVector gPcAtChipsetPkgTokenSpaceGuid.PcdHpetLocalApicVector
+ This PCD specifies the Local APIC Interrupt Vector for the HPET Timer.<br>
+ @Prompt HPET local APIC vector.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHpetLocalApicVector</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000A</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x40</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdIoApicBaseAddress gPcAtChipsetPkgTokenSpaceGuid.PcdIoApicBaseAddress
+ This PCD specifies the base address of the IO APIC.<br>
+ @Prompt IO APIC base address.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIoApicBaseAddress</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000C</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFEC00000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdMaximalValidYear gPcAtChipsetPkgTokenSpaceGuid.PcdMaximalValidYear
+ This PCD specifies the maximal valid year in RTC.<br>
+ @Prompt Maximal valid year in RTC.<br>
+ @Expression 0x80000001 | gPcAtChipsetPkgTokenSpaceGuid.PcdMaximalValidYear < gPcAtChipsetPkgTokenSpaceGuid.PcdMinimalValidYear + 100<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMaximalValidYear</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000E</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>2097</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdMinimalValidYear gPcAtChipsetPkgTokenSpaceGuid.PcdMinimalValidYear
+ This PCD specifies the minimal valid year in RTC.<br>
+ @Prompt Minimal valid year in RTC.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMinimalValidYear</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000D</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>1998</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdRtcIndexRegister64 gPcAtChipsetPkgTokenSpaceGuid.PcdRtcIndexRegister64
+ Specifies RTC Index Register address in MMIO space.<br>
+ @Prompt RTC Index Register address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRtcIndexRegister64</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000022</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdRtcTargetRegister64 gPcAtChipsetPkgTokenSpaceGuid.PcdRtcTargetRegister64
+ Specifies RTC Target Register address in MMIO space.<br>
+ @Prompt RTC Target Register address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRtcTargetRegister64</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000023</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_root_page PcdsFeatureFlag
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdHpetMsiEnable "gPcAtChipsetPkgTokenSpaceGuid.PcdHpetMsiEnable" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdRtcUseMmio "gPcAtChipsetPkgTokenSpaceGuid.PcdRtcUseMmio" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdHpetMsiEnable gPcAtChipsetPkgTokenSpaceGuid.PcdHpetMsiEnable
+ Indicates the HPET Timer will be configured to use MSI interrupts if the HPET timer supports them, or use I/O APIC interrupts.<BR><BR><br>
+   TRUE  - Configures the HPET Timer to use MSI interrupts if the HPET Timer supports them.<BR><br>
+   FALSE - Configures the HPET Timer to use I/O APIC interrupts.<BR><br>
+ @Prompt Configure HPET to use MSI.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHpetMsiEnable</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00001000</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdRtcUseMmio gPcAtChipsetPkgTokenSpaceGuid.PcdRtcUseMmio
+ Indicates the RTC port registers are in MMIO space, or in I/O space.<br>
+  Default is I/O space.<BR><BR><br>
+   TRUE  - RTC port registers are in MMIO space.<BR><br>
+   FALSE - RTC port registers are in I/O space.<BR><br>
+ @Prompt RTC port registers use MMIO.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRtcUseMmio</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000021</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdAcpiIoBarEnableMask            "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoBarEnableMask           " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdAcpiIoPciBarRegisterOffset     "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciBarRegisterOffset    " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdAcpiIoPciBusNumber             "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciBusNumber            " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdAcpiIoPciDeviceNumber          "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciDeviceNumber         " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdAcpiIoPciEnableRegisterOffset  "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciEnableRegisterOffset " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdAcpiIoPciFunctionNumber        "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciFunctionNumber       " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdAcpiIoPortBaseAddress          "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPortBaseAddress         " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdAcpiIoPortBaseAddressMask      "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPortBaseAddressMask     " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdAcpiPm1TmrOffset               "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiPm1TmrOffset              " </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdHpetBaseAddress "gPcAtChipsetPkgTokenSpaceGuid.PcdHpetBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdHpetDefaultTimerPeriod "gPcAtChipsetPkgTokenSpaceGuid.PcdHpetDefaultTimerPeriod" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdHpetLocalApicVector "gPcAtChipsetPkgTokenSpaceGuid.PcdHpetLocalApicVector" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdInitialValueRtcRegisterA "gPcAtChipsetPkgTokenSpaceGuid.PcdInitialValueRtcRegisterA" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdInitialValueRtcRegisterB "gPcAtChipsetPkgTokenSpaceGuid.PcdInitialValueRtcRegisterB" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdInitialValueRtcRegisterD "gPcAtChipsetPkgTokenSpaceGuid.PcdInitialValueRtcRegisterD" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdIoApicBaseAddress "gPcAtChipsetPkgTokenSpaceGuid.PcdIoApicBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdMaximalValidYear "gPcAtChipsetPkgTokenSpaceGuid.PcdMaximalValidYear" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdMinimalValidYear "gPcAtChipsetPkgTokenSpaceGuid.PcdMinimalValidYear" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdRealTimeClockUpdateTimeout "gPcAtChipsetPkgTokenSpaceGuid.PcdRealTimeClockUpdateTimeout" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdResetControlRegister "gPcAtChipsetPkgTokenSpaceGuid.PcdResetControlRegister" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdResetControlValueColdReset "gPcAtChipsetPkgTokenSpaceGuid.PcdResetControlValueColdReset" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdRtcIndexRegister "gPcAtChipsetPkgTokenSpaceGuid.PcdRtcIndexRegister" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdRtcIndexRegister64 "gPcAtChipsetPkgTokenSpaceGuid.PcdRtcIndexRegister64" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdRtcTargetRegister "gPcAtChipsetPkgTokenSpaceGuid.PcdRtcTargetRegister" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdRtcTargetRegister64 "gPcAtChipsetPkgTokenSpaceGuid.PcdRtcTargetRegister64" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdAcpiIoBarEnableMask            gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoBarEnableMask           
+ Defines the bit mask that must be set to enable the APIC hardware register BAR.<br>
+ @Prompt ACPI Hardware PCI Bar Enable BitMask<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoBarEnableMask           </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000015</CAPTION></TD><TD><CAPTION> UINT8</CAPTION></TD><TD><CAPTION>  0x00</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdAcpiIoPciBarRegisterOffset     gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciBarRegisterOffset    
+ Defines the PCI Register Offset of the PCI device that contains the BAR for ACPI hardware registers.<br>
+  The invalid 0xFFFF is as its default value. It must be configured to the real value.<br>
+ @Prompt ACPI Hardware PCI Bar Register Offset<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoPciBarRegisterOffset    </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000016</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0xFFFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdAcpiIoPciBusNumber             gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciBusNumber            
+ Defines the PCI Bus Number of the PCI device that contains the BAR and Enable for ACPI hardware registers.<br>
+ @Prompt ACPI Hardware PCI Bus Number<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoPciBusNumber            </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000011</CAPTION></TD><TD><CAPTION> UINT8</CAPTION></TD><TD><CAPTION>  0x00</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdAcpiIoPciDeviceNumber          gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciDeviceNumber         
+ Defines the PCI Device Number of the PCI device that contains the BAR and Enable for ACPI hardware registers.<br>
+  The invalid 0xFF is as its default value. It must be configured to the real value.<br>
+ @Prompt ACPI Hardware PCI Device Number<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoPciDeviceNumber         </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000012</CAPTION></TD><TD><CAPTION> UINT8</CAPTION></TD><TD><CAPTION>  0xFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdAcpiIoPciEnableRegisterOffset  gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciEnableRegisterOffset 
+ Defines the PCI Register Offset of the PCI device that contains the Enable for ACPI hardware registers.<br>
+  The invalid 0xFFFF is as its default value. It must be configured to the real value.<br>
+ @Prompt ACPI Hardware PCI Register Offset<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoPciEnableRegisterOffset </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000014</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0xFFFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdAcpiIoPciFunctionNumber        gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciFunctionNumber       
+ Defines the PCI Function Number of the PCI device that contains the BAR and Enable for ACPI hardware registers.<br>
+  The invalid 0xFF is as its default value. It must be configured to the real value.<br>
+ @Prompt ACPI Hardware PCI Function Number<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoPciFunctionNumber       </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000013</CAPTION></TD><TD><CAPTION> UINT8</CAPTION></TD><TD><CAPTION>  0xFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdAcpiIoPortBaseAddress          gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPortBaseAddress         
+ Defines the ACPI register set base address.<br>
+  The invalid 0xFFFF is as its default value. It must be configured to the real value.<br>
+ @Prompt ACPI Timer IO Port Address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoPortBaseAddress         </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000010</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0xFFFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdAcpiIoPortBaseAddressMask      gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPortBaseAddressMask     
+ Defines the bit mask to retrieve ACPI IO Port Base Address<br>
+ @Prompt ACPI IO Port Base Address Mask<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoPortBaseAddressMask     </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000018</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0xFFFE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdAcpiPm1TmrOffset               gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiPm1TmrOffset              
+ Defines the offset to the 32-bit Timer Value register that resides within the ACPI BAR.<br>
+ @Prompt Offset to 32-bit Timer register in ACPI BAR<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiPm1TmrOffset              </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000017</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0x0008</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdHpetBaseAddress gPcAtChipsetPkgTokenSpaceGuid.PcdHpetBaseAddress
+ This PCD specifies the base address of the HPET timer.<br>
+ @Prompt HPET base address.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHpetBaseAddress</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000009</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFED00000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdHpetDefaultTimerPeriod gPcAtChipsetPkgTokenSpaceGuid.PcdHpetDefaultTimerPeriod
+ This PCD specifies the default period of the HPET Timer in 100 ns units.<br>
+  The default value of 100000 100 ns units is the same as 10 ms.<br>
+ @Prompt Default period of HPET timer.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHpetDefaultTimerPeriod</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000B</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>100000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdHpetLocalApicVector gPcAtChipsetPkgTokenSpaceGuid.PcdHpetLocalApicVector
+ This PCD specifies the Local APIC Interrupt Vector for the HPET Timer.<br>
+ @Prompt HPET local APIC vector.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHpetLocalApicVector</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000A</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x40</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdInitialValueRtcRegisterA gPcAtChipsetPkgTokenSpaceGuid.PcdInitialValueRtcRegisterA
+ Specifies the initial value for Register_A in RTC.<br>
+ @Prompt Initial value for Register_A in RTC.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdInitialValueRtcRegisterA</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001B</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x26</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdInitialValueRtcRegisterB gPcAtChipsetPkgTokenSpaceGuid.PcdInitialValueRtcRegisterB
+ Specifies the initial value for Register_B in RTC.<br>
+ @Prompt Initial value for Register_B in RTC.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdInitialValueRtcRegisterB</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001C</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x02</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdInitialValueRtcRegisterD gPcAtChipsetPkgTokenSpaceGuid.PcdInitialValueRtcRegisterD
+ Specifies the initial value for Register_D in RTC.<br>
+ @Prompt Initial value for Register_D in RTC.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdInitialValueRtcRegisterD</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001D</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x00</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdIoApicBaseAddress gPcAtChipsetPkgTokenSpaceGuid.PcdIoApicBaseAddress
+ This PCD specifies the base address of the IO APIC.<br>
+ @Prompt IO APIC base address.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIoApicBaseAddress</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000C</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFEC00000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdMaximalValidYear gPcAtChipsetPkgTokenSpaceGuid.PcdMaximalValidYear
+ This PCD specifies the maximal valid year in RTC.<br>
+ @Prompt Maximal valid year in RTC.<br>
+ @Expression 0x80000001 | gPcAtChipsetPkgTokenSpaceGuid.PcdMaximalValidYear < gPcAtChipsetPkgTokenSpaceGuid.PcdMinimalValidYear + 100<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMaximalValidYear</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000E</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>2097</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdMinimalValidYear gPcAtChipsetPkgTokenSpaceGuid.PcdMinimalValidYear
+ This PCD specifies the minimal valid year in RTC.<br>
+ @Prompt Minimal valid year in RTC.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMinimalValidYear</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000D</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>1998</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdRealTimeClockUpdateTimeout gPcAtChipsetPkgTokenSpaceGuid.PcdRealTimeClockUpdateTimeout
+ RTC Update Timeout Value(microsecond).<br>
+ @Prompt RTC Update Timeout Value.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRealTimeClockUpdateTimeout</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000020</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>100000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdResetControlRegister gPcAtChipsetPkgTokenSpaceGuid.PcdResetControlRegister
+ Reset Control Register address in I/O space.<br>
+ @Prompt Reset Control Register address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdResetControlRegister</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000019</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x64</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdResetControlValueColdReset gPcAtChipsetPkgTokenSpaceGuid.PcdResetControlValueColdReset
+ 8bit Reset Control Register value for cold reset.<br>
+ @Prompt Reset Control Register value for cold reset<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdResetControlValueColdReset</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001A</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0xFE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdRtcIndexRegister gPcAtChipsetPkgTokenSpaceGuid.PcdRtcIndexRegister
+ Specifies RTC Index Register address in I/O space.<br>
+ @Prompt RTC Index Register address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRtcIndexRegister</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001E</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x70</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdRtcIndexRegister64 gPcAtChipsetPkgTokenSpaceGuid.PcdRtcIndexRegister64
+ Specifies RTC Index Register address in MMIO space.<br>
+ @Prompt RTC Index Register address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRtcIndexRegister64</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000022</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdRtcTargetRegister gPcAtChipsetPkgTokenSpaceGuid.PcdRtcTargetRegister
+ Specifies RTC Target Register address in I/O space.<br>
+ @Prompt RTC Target Register address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRtcTargetRegister</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001F</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x71</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdRtcTargetRegister64 gPcAtChipsetPkgTokenSpaceGuid.PcdRtcTargetRegister64
+ Specifies RTC Target Register address in MMIO space.<br>
+ @Prompt RTC Target Register address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRtcTargetRegister64</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000023</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_root_page PcdsPatchableInModule
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdAcpiIoBarEnableMask            "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoBarEnableMask           " </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdAcpiIoPciBarRegisterOffset     "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciBarRegisterOffset    " </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdAcpiIoPciBusNumber             "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciBusNumber            " </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdAcpiIoPciDeviceNumber          "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciDeviceNumber         " </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdAcpiIoPciEnableRegisterOffset  "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciEnableRegisterOffset " </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdAcpiIoPciFunctionNumber        "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciFunctionNumber       " </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdAcpiIoPortBaseAddress          "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPortBaseAddress         " </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdAcpiIoPortBaseAddressMask      "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPortBaseAddressMask     " </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdAcpiPm1TmrOffset               "gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiPm1TmrOffset              " </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdHpetBaseAddress "gPcAtChipsetPkgTokenSpaceGuid.PcdHpetBaseAddress" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdHpetDefaultTimerPeriod "gPcAtChipsetPkgTokenSpaceGuid.PcdHpetDefaultTimerPeriod" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdHpetLocalApicVector "gPcAtChipsetPkgTokenSpaceGuid.PcdHpetLocalApicVector" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdInitialValueRtcRegisterA "gPcAtChipsetPkgTokenSpaceGuid.PcdInitialValueRtcRegisterA" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdInitialValueRtcRegisterB "gPcAtChipsetPkgTokenSpaceGuid.PcdInitialValueRtcRegisterB" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdInitialValueRtcRegisterD "gPcAtChipsetPkgTokenSpaceGuid.PcdInitialValueRtcRegisterD" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdIoApicBaseAddress "gPcAtChipsetPkgTokenSpaceGuid.PcdIoApicBaseAddress" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdMaximalValidYear "gPcAtChipsetPkgTokenSpaceGuid.PcdMaximalValidYear" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdMinimalValidYear "gPcAtChipsetPkgTokenSpaceGuid.PcdMinimalValidYear" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdRealTimeClockUpdateTimeout "gPcAtChipsetPkgTokenSpaceGuid.PcdRealTimeClockUpdateTimeout" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdResetControlRegister "gPcAtChipsetPkgTokenSpaceGuid.PcdResetControlRegister" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdResetControlValueColdReset "gPcAtChipsetPkgTokenSpaceGuid.PcdResetControlValueColdReset" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdRtcIndexRegister "gPcAtChipsetPkgTokenSpaceGuid.PcdRtcIndexRegister" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdRtcIndexRegister64 "gPcAtChipsetPkgTokenSpaceGuid.PcdRtcIndexRegister64" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdRtcTargetRegister "gPcAtChipsetPkgTokenSpaceGuid.PcdRtcTargetRegister" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdRtcTargetRegister64 "gPcAtChipsetPkgTokenSpaceGuid.PcdRtcTargetRegister64" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdAcpiIoBarEnableMask            gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoBarEnableMask           
+ Defines the bit mask that must be set to enable the APIC hardware register BAR.<br>
+ @Prompt ACPI Hardware PCI Bar Enable BitMask<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoBarEnableMask           </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000015</CAPTION></TD><TD><CAPTION> UINT8</CAPTION></TD><TD><CAPTION>  0x00</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdAcpiIoPciBarRegisterOffset     gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciBarRegisterOffset    
+ Defines the PCI Register Offset of the PCI device that contains the BAR for ACPI hardware registers.<br>
+  The invalid 0xFFFF is as its default value. It must be configured to the real value.<br>
+ @Prompt ACPI Hardware PCI Bar Register Offset<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoPciBarRegisterOffset    </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000016</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0xFFFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdAcpiIoPciBusNumber             gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciBusNumber            
+ Defines the PCI Bus Number of the PCI device that contains the BAR and Enable for ACPI hardware registers.<br>
+ @Prompt ACPI Hardware PCI Bus Number<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoPciBusNumber            </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000011</CAPTION></TD><TD><CAPTION> UINT8</CAPTION></TD><TD><CAPTION>  0x00</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdAcpiIoPciDeviceNumber          gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciDeviceNumber         
+ Defines the PCI Device Number of the PCI device that contains the BAR and Enable for ACPI hardware registers.<br>
+  The invalid 0xFF is as its default value. It must be configured to the real value.<br>
+ @Prompt ACPI Hardware PCI Device Number<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoPciDeviceNumber         </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000012</CAPTION></TD><TD><CAPTION> UINT8</CAPTION></TD><TD><CAPTION>  0xFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdAcpiIoPciEnableRegisterOffset  gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciEnableRegisterOffset 
+ Defines the PCI Register Offset of the PCI device that contains the Enable for ACPI hardware registers.<br>
+  The invalid 0xFFFF is as its default value. It must be configured to the real value.<br>
+ @Prompt ACPI Hardware PCI Register Offset<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoPciEnableRegisterOffset </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000014</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0xFFFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdAcpiIoPciFunctionNumber        gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPciFunctionNumber       
+ Defines the PCI Function Number of the PCI device that contains the BAR and Enable for ACPI hardware registers.<br>
+  The invalid 0xFF is as its default value. It must be configured to the real value.<br>
+ @Prompt ACPI Hardware PCI Function Number<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoPciFunctionNumber       </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000013</CAPTION></TD><TD><CAPTION> UINT8</CAPTION></TD><TD><CAPTION>  0xFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdAcpiIoPortBaseAddress          gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPortBaseAddress         
+ Defines the ACPI register set base address.<br>
+  The invalid 0xFFFF is as its default value. It must be configured to the real value.<br>
+ @Prompt ACPI Timer IO Port Address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoPortBaseAddress         </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000010</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0xFFFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdAcpiIoPortBaseAddressMask      gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiIoPortBaseAddressMask     
+ Defines the bit mask to retrieve ACPI IO Port Base Address<br>
+ @Prompt ACPI IO Port Base Address Mask<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiIoPortBaseAddressMask     </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000018</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0xFFFE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdAcpiPm1TmrOffset               gPcAtChipsetPkgTokenSpaceGuid.PcdAcpiPm1TmrOffset              
+ Defines the offset to the 32-bit Timer Value register that resides within the ACPI BAR.<br>
+ @Prompt Offset to 32-bit Timer register in ACPI BAR<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdAcpiPm1TmrOffset              </CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000017</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0x0008</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdHpetBaseAddress gPcAtChipsetPkgTokenSpaceGuid.PcdHpetBaseAddress
+ This PCD specifies the base address of the HPET timer.<br>
+ @Prompt HPET base address.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHpetBaseAddress</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000009</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFED00000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdHpetDefaultTimerPeriod gPcAtChipsetPkgTokenSpaceGuid.PcdHpetDefaultTimerPeriod
+ This PCD specifies the default period of the HPET Timer in 100 ns units.<br>
+  The default value of 100000 100 ns units is the same as 10 ms.<br>
+ @Prompt Default period of HPET timer.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHpetDefaultTimerPeriod</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000B</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>100000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdHpetLocalApicVector gPcAtChipsetPkgTokenSpaceGuid.PcdHpetLocalApicVector
+ This PCD specifies the Local APIC Interrupt Vector for the HPET Timer.<br>
+ @Prompt HPET local APIC vector.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHpetLocalApicVector</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000A</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x40</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdInitialValueRtcRegisterA gPcAtChipsetPkgTokenSpaceGuid.PcdInitialValueRtcRegisterA
+ Specifies the initial value for Register_A in RTC.<br>
+ @Prompt Initial value for Register_A in RTC.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdInitialValueRtcRegisterA</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001B</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x26</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdInitialValueRtcRegisterB gPcAtChipsetPkgTokenSpaceGuid.PcdInitialValueRtcRegisterB
+ Specifies the initial value for Register_B in RTC.<br>
+ @Prompt Initial value for Register_B in RTC.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdInitialValueRtcRegisterB</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001C</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x02</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdInitialValueRtcRegisterD gPcAtChipsetPkgTokenSpaceGuid.PcdInitialValueRtcRegisterD
+ Specifies the initial value for Register_D in RTC.<br>
+ @Prompt Initial value for Register_D in RTC.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdInitialValueRtcRegisterD</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001D</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x00</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdIoApicBaseAddress gPcAtChipsetPkgTokenSpaceGuid.PcdIoApicBaseAddress
+ This PCD specifies the base address of the IO APIC.<br>
+ @Prompt IO APIC base address.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdIoApicBaseAddress</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000C</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xFEC00000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdMaximalValidYear gPcAtChipsetPkgTokenSpaceGuid.PcdMaximalValidYear
+ This PCD specifies the maximal valid year in RTC.<br>
+ @Prompt Maximal valid year in RTC.<br>
+ @Expression 0x80000001 | gPcAtChipsetPkgTokenSpaceGuid.PcdMaximalValidYear < gPcAtChipsetPkgTokenSpaceGuid.PcdMinimalValidYear + 100<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMaximalValidYear</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000E</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>2097</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdMinimalValidYear gPcAtChipsetPkgTokenSpaceGuid.PcdMinimalValidYear
+ This PCD specifies the minimal valid year in RTC.<br>
+ @Prompt Minimal valid year in RTC.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMinimalValidYear</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000D</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>1998</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdRealTimeClockUpdateTimeout gPcAtChipsetPkgTokenSpaceGuid.PcdRealTimeClockUpdateTimeout
+ RTC Update Timeout Value(microsecond).<br>
+ @Prompt RTC Update Timeout Value.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRealTimeClockUpdateTimeout</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000020</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>100000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdResetControlRegister gPcAtChipsetPkgTokenSpaceGuid.PcdResetControlRegister
+ Reset Control Register address in I/O space.<br>
+ @Prompt Reset Control Register address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdResetControlRegister</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000019</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x64</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdResetControlValueColdReset gPcAtChipsetPkgTokenSpaceGuid.PcdResetControlValueColdReset
+ 8bit Reset Control Register value for cold reset.<br>
+ @Prompt Reset Control Register value for cold reset<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdResetControlValueColdReset</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001A</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0xFE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdRtcIndexRegister gPcAtChipsetPkgTokenSpaceGuid.PcdRtcIndexRegister
+ Specifies RTC Index Register address in I/O space.<br>
+ @Prompt RTC Index Register address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRtcIndexRegister</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001E</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x70</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdRtcIndexRegister64 gPcAtChipsetPkgTokenSpaceGuid.PcdRtcIndexRegister64
+ Specifies RTC Index Register address in MMIO space.<br>
+ @Prompt RTC Index Register address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRtcIndexRegister64</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000022</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdRtcTargetRegister gPcAtChipsetPkgTokenSpaceGuid.PcdRtcTargetRegister
+ Specifies RTC Target Register address in I/O space.<br>
+ @Prompt RTC Target Register address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRtcTargetRegister</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000001F</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x71</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdRtcTargetRegister64 gPcAtChipsetPkgTokenSpaceGuid.PcdRtcTargetRegister64
+ Specifies RTC Target Register address in MMIO space.<br>
+ @Prompt RTC Target Register address<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdRtcTargetRegister64</CAPTION></TD><TD><CAPTION>gPcAtChipsetPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000023</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gPcAtChipsetPkgTokenSpaceGuid "gPcAtChipsetPkgTokenSpaceGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gPcAtChipsetPkgTokenSpaceGuid gPcAtChipsetPkgTokenSpaceGuid
+ \copydoc PcAtChipsetPkg/Include/Guid/PcAtChipsetTokenSpace.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gPcAtChipsetPkgTokenSpaceGuid</TD><TD>{ 0x326ae723, 0xae32, 0x4589, { 0x98, 0xb8, 0xca, 0xc2, 0x3c, 0xdc, 0xc1, 0xb1 } }</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link PcAtChipsetPkg/Include/Guid/PcAtChipsetTokenSpace.h
+\endlink
+
+ **/

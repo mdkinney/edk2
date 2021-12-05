@@ -1,0 +1,28 @@
+var union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r =
+[
+    [ "ErrorCode", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#a8ba1b0ba691f456f1ec4fb9d22f84431", null ],
+    [ "Features", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#af9a966c1bd7abc0272ede8224b29585e", null ],
+    [ "Function", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#a4dd97be2803ecc357e326d0d7b4b12c0", null ],
+    [ "Function", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#ad99466ee14fc73b9ed7ed3e6936f2e5c", null ],
+    [ "Ghcb", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#aa52fd91a25edb9a915492dda8114cf94", null ],
+    [ "GhcbGpaRegister", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#aa0a6c2e382c869b0bfe83cd8f2b97db0", null ],
+    [ "GhcbHypervisorFeatures", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#ade3c2cba69a4ec6f0a5f02b80a1544a6", null ],
+    [ "GhcbInfo", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#abcf6590f5081b671e8ccb9e6c764ca09", null ],
+    [ "GhcbPhysicalAddress", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#a2ac6c67f42e5e08a59298c2525a1fcc1", null ],
+    [ "GhcbProtocol", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#a48a28d7f65c0ddd8408c6bfd37fd49cd", null ],
+    [ "GhcbTerminate", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#a58ecd48fed238fc7acedb4b40811d920", null ],
+    [ "GuestFrameNumber", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#a5237906e0fffa845a451f5814ebe4716", null ],
+    [ "Operation", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#a141c47384128a34e545ed1c7a66b0eb1", null ],
+    [ "ReasonCode", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#a4e71c0b0031a5dccfb51773eccbb8269", null ],
+    [ "ReasonCodeSet", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#a99cb1469875dde850fba1727ee25da7f", null ],
+    [ "Reserved", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#a466be071aa5a76e89fe406f8f307a9d6", null ],
+    [ "Reserved", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#a8146156935998553b0b27064d4c700bc", null ],
+    [ "Reserved", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#ad3c46a042dcddd633e6bfd37f5f3fcb0", null ],
+    [ "Reserved1", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#ad57321d7d93adb8e665517a86aed7b9b", null ],
+    [ "Reserved2", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#a38517fd5b9b070dbffc25a5d5a94d422", null ],
+    [ "SevEncryptionBitPos", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#a967d882fc986fc630c859bb89f6d7a6a", null ],
+    [ "SevEsProtocolMax", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#ab63dbd755cf0de70b6c67f61e52e003f", null ],
+    [ "SevEsProtocolMin", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#a8667283de3af6564cc86a346db3d9872", null ],
+    [ "SnpPageStateChangeRequest", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#a74bb5f8a1a2ac072ef173fc33c4752f2", null ],
+    [ "SnpPageStateChangeResponse", "union_m_s_r___s_e_v___e_s___g_h_c_b___r_e_g_i_s_t_e_r.html#af1d35b97bf40e5fc31163f84729d57d8", null ]
+];

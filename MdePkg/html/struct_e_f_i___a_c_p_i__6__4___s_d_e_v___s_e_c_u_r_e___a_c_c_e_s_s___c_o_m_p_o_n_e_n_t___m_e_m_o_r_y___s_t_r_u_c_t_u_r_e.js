@@ -1,0 +1,7 @@
+var struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___m_e_m_o_r_y___s_t_r_u_c_t_u_r_e =
+[
+    [ "Header", "struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___m_e_m_o_r_y___s_t_r_u_c_t_u_r_e.html#aab5a984d8fe0c64c7ed00429a4232fa7", null ],
+    [ "MemoryAddressBase", "struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___m_e_m_o_r_y___s_t_r_u_c_t_u_r_e.html#abefbda8f45b0462d84d0d4edd1e42c60", null ],
+    [ "MemoryLength", "struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___m_e_m_o_r_y___s_t_r_u_c_t_u_r_e.html#abc127516fdaba6033f5124c6fb6b4a79", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__6__4___s_d_e_v___s_e_c_u_r_e___a_c_c_e_s_s___c_o_m_p_o_n_e_n_t___m_e_m_o_r_y___s_t_r_u_c_t_u_r_e.html#ae5ae7d11e6b857b97f67df36a79b40d0", null ]
+];

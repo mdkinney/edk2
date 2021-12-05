@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['parent',['Parent',['../struct_s_h_e_l_l___f_i_l_e___a_r_g.html#adef4c910e6ec1e1a149d2e17823e3f08',1,'SHELL_FILE_ARG']]],
+  ['parentdevicepath',['ParentDevicePath',['../struct_s_h_e_l_l___f_i_l_e___a_r_g.html#a2676af9c79b65215e06f2db6249b98fb',1,'SHELL_FILE_ARG']]],
+  ['parentname',['ParentName',['../struct_s_h_e_l_l___f_i_l_e___a_r_g.html#a770285873655417cda821ae5df5e4b26',1,'SHELL_FILE_ARG']]],
+  ['parse_5fhandle_5fdatabase_5fdevices',['PARSE_HANDLE_DATABASE_DEVICES',['../_handle_parsing_lib_8h.html#a98187bb7dc112a88fc7416e67a0f7f60',1,'HandleParsingLib.h']]],
+  ['parse_5fhandle_5fdatabase_5fmanaged_5fchildren',['PARSE_HANDLE_DATABASE_MANAGED_CHILDREN',['../_handle_parsing_lib_8h.html#a1a28eb764023adfc65ba45c0598e2e1c',1,'HandleParsingLib.h']]],
+  ['parse_5fhandle_5fdatabase_5fparents',['PARSE_HANDLE_DATABASE_PARENTS',['../_handle_parsing_lib_8h.html#a9b394582a88fb16b88286c9ef0139c91',1,'HandleParsingLib.h']]],
+  ['parse_5fhandle_5fdatabase_5fuefi_5fdrivers',['PARSE_HANDLE_DATABASE_UEFI_DRIVERS',['../_handle_parsing_lib_8h.html#ac0d6a96a16a560b717f5ac2033f92bd5',1,'HandleParsingLib.h']]],
+  ['parsehandledatabasebyrelationship',['ParseHandleDatabaseByRelationship',['../_handle_parsing_lib_8h.html#ad438538feeddeeccda3a23a18a06b137',1,'HandleParsingLib.h']]],
+  ['parsehandledatabasebyrelationshipwithtype',['ParseHandleDatabaseByRelationshipWithType',['../_handle_parsing_lib_8h.html#abe3b4cb10369a4bae56005a9038ee218',1,'HandleParsingLib.h']]],
+  ['parsehandledatabaseforchildcontrollers',['ParseHandleDatabaseForChildControllers',['../_handle_parsing_lib_8h.html#a214b51741cf1c2a8d8e7fd669a1ddd73',1,'HandleParsingLib.h']]],
+  ['parsehandledatabaseforchilddevices',['ParseHandleDatabaseForChildDevices',['../_handle_parsing_lib_8h.html#aa74c215643f50bfe9503dc7a9b48f958',1,'HandleParsingLib.h']]],
+  ['pcdsdynamic',['PcdsDynamic',['../pcd__pcds_dynamic_root_page.html',1,'pcd_root_page']]],
+  ['pcdsdynamicex',['PcdsDynamicEx',['../pcd__pcds_dynamic_ex_root_page.html',1,'pcd_root_page']]],
+  ['pcdsfeatureflag',['PcdsFeatureFlag',['../pcd__pcds_feature_flag_root_page.html',1,'pcd_root_page']]],
+  ['pcdsfixedatbuild',['PcdsFixedAtBuild',['../pcd__pcds_fixed_at_build_root_page.html',1,'pcd_root_page']]],
+  ['pcdspatchableinmodule',['PcdsPatchableInModule',['../pcd__pcds_patchable_in_module_root_page.html',1,'pcd_root_page']]],
+  ['pcd',['PCD',['../pcd_root_page.html',1,'index']]],
+  ['protocol_5finfo',['PROTOCOL_INFO',['../struct_p_r_o_t_o_c_o_l___i_n_f_o.html',1,'']]],
+  ['protocol_5finfo_5fenumerator',['PROTOCOL_INFO_ENUMERATOR',['../struct_p_r_o_t_o_c_o_l___i_n_f_o___e_n_u_m_e_r_a_t_o_r.html',1,'']]],
+  ['protocol_5finfo_5fsignature',['PROTOCOL_INFO_SIGNATURE',['../_efi_shell_environment2_8h.html#a85598962eabb825c7a842d96639444a6',1,'EfiShellEnvironment2.h']]],
+  ['protocol',['PROTOCOL',['../protocol_root_page.html',1,'index']]],
+  ['protocolid',['ProtocolId',['../struct_p_r_o_t_o_c_o_l___i_n_f_o.html#a0fbee2016695b107a4685caf8f696837',1,'PROTOCOL_INFO']]],
+  ['protocolinfoenumerator',['ProtocolInfoEnumerator',['../struct_e_f_i___s_h_e_l_l___e_n_v_i_r_o_n_m_e_n_t2.html#acc809e82fd9ab43cd5adf73cf8ca2c25',1,'EFI_SHELL_ENVIRONMENT2']]]
+];

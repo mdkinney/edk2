@@ -1,0 +1,28 @@
+var union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r =
+[
+    [ "AddressParityEnable", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a46ba881296210ae3371fb222b414b994", null ],
+    [ "APICClusterID", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a0cf67d6f47361f67566ed910dc3c3ebe", null ],
+    [ "BINIT_DriverEnable", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#adca2004a912e5dfe11a7941c9ba51bf4", null ],
+    [ "BINIT_ObservationEnabled", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a63bf5a3162881ef11e7c6edca7ae9b91", null ],
+    [ "Bits", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#acfa2eb54bb4f01dbc228bb3072717d16", null ],
+    [ "ClockFrequencyRatio", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a24ddada84aa4451e3f1d8a17785bcfa8", null ],
+    [ "DataErrorCheckingEnable", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a849d2b95bc2d0e90c371455ca15fd2b9", null ],
+    [ "ExecuteBIST", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#abd43c68e4eda48de9726c4ebad30a855", null ],
+    [ "MCERR_DriveEnable", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a91dbab2671f47924db2fbd37aacc0734", null ],
+    [ "MCERR_ObservationEnabled", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a46a78370ea9dcd48d99aaa9bf0cb6bd9", null ],
+    [ "OutputTriStateEnable", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a0277770d00b66741396c92d13ea59d6a", null ],
+    [ "Reserved1", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#ae8d66e1f69c5c0211a75021916c4a2a1", null ],
+    [ "Reserved2", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a8e2ee71c0e969aec6ec70172d8386f5e", null ],
+    [ "Reserved3", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a0ce322e64af4d39d9a64f1370023e023", null ],
+    [ "Reserved4", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a5efef49cb98601d48b614ff417ac5231", null ],
+    [ "Reserved5", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#af752ba4fa966437538f8a9ade8e7b2f0", null ],
+    [ "Reserved6", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#afc5999008ff5c44b38b6e32573a9c8ee", null ],
+    [ "Reserved7", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a9876ea92f1012ccb2f84e0e486454850", null ],
+    [ "Reserved8", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a4ba9ca5987e9d1e7431cd98b1656a5a9", null ],
+    [ "ResetVector", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#addd8da936d9570ee17ef17cf945ea1fe", null ],
+    [ "ResponseErrorCheckingEnable", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a21a772f819d0a9ad783259e9de245a84", null ],
+    [ "SymmetricArbitrationID", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a17d867e9b12bbc7be8e232d50a3fe385", null ],
+    [ "SystemBusFrequency", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#acf57de74f9763538cfeb4e3763befae0", null ],
+    [ "Uint32", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a4a098c3796b1b46ecd4a9cfa9ab68949", null ],
+    [ "Uint64", "union_m_s_r___p_e_n_t_i_u_m___m___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#aa90fc255903c4f8030de6257e8553f50", null ]
+];

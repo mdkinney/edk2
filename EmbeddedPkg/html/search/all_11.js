@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['realtimeclocklib',['RealTimeClockLib',['../lc__real_time_clock_lib.html',1,'lc_common']]],
+  ['ramdiskaddress',['RamdiskAddress',['../struct_a_n_d_r_o_i_d___b_o_o_t_i_m_g___h_e_a_d_e_r.html#abcf87a1a1a1cc4164b7ad14989c274b4',1,'ANDROID_BOOTIMG_HEADER']]],
+  ['ramdisksize',['RamdiskSize',['../struct_a_n_d_r_o_i_d___b_o_o_t_i_m_g___h_e_a_d_e_r.html#a5cb8fa5c46e1b5a6083cd08670978ddf',1,'ANDROID_BOOTIMG_HEADER']]],
+  ['read',['Read',['../struct___e_m_b_e_d_d_e_d___e_x_t_e_r_n_a_l___d_e_v_i_c_e.html#aa0975af0e39d737eb0694492be208c6a',1,'_EMBEDDED_EXTERNAL_DEVICE']]],
+  ['readblockdata',['ReadBlockData',['../struct___e_f_i___m_m_c___h_o_s_t___p_r_o_t_o_c_o_l.html#a09116b6062709fbe13224778a19889f6',1,'_EFI_MMC_HOST_PROTOCOL']]],
+  ['readfrommemory',['ReadFromMemory',['../struct___p_e___c_o_f_f___l_o_a_d_e_r___p_r_o_t_o_c_o_l.html#ad5ac5dd3f83f34419907eca66f6e3b93',1,'_PE_COFF_LOADER_PROTOCOL']]],
+  ['readsize',['ReadSize',['../_pe_coff_loader_8h.html#a8a0e0b3136e00be01c88a9d62cad66da',1,'PeCoffLoader.h']]],
+  ['realtimeclocklib_2eh',['RealTimeClockLib.h',['../_real_time_clock_lib_8h.html',1,'']]],
+  ['receive',['Receive',['../struct___f_a_s_t_b_o_o_t___t_r_a_n_s_p_o_r_t___p_r_o_t_o_c_o_l.html#a17edb90b3f02be47f029b46cca61936d',1,'_FASTBOOT_TRANSPORT_PROTOCOL']]],
+  ['receiveresponse',['ReceiveResponse',['../struct___e_f_i___m_m_c___h_o_s_t___p_r_o_t_o_c_o_l.html#a9d429846e4ab0ee9389659d7ef3c522f',1,'_EFI_MMC_HOST_PROTOCOL']]],
+  ['reg',['Reg',['../_fdt_client_8h.html#a0095635038037a584914e110172bd151',1,'FdtClient.h']]],
+  ['register',['Register',['../struct___p_l_a_t_f_o_r_m___v_i_r_t_u_a_l___k_b_d___p_r_o_t_o_c_o_l.html#a219a5d86354dc7a48bf0bb0dde49238b',1,'_PLATFORM_VIRTUAL_KBD_PROTOCOL::Register()'],['../_embedded_external_device_8h.html#adad50e32c2bbc87ebbab51fa66c75d4d',1,'Register():&#160;EmbeddedExternalDevice.h']]],
+  ['registerbase',['RegisterBase',['../struct___g_p_i_o___c_o_n_t_r_o_l_l_e_r.html#a8de4f54bf66ef4a1bf3045365fc0135b',1,'_GPIO_CONTROLLER']]],
+  ['registerinterruptsource',['RegisterInterruptSource',['../struct___e_f_i___h_a_r_d_w_a_r_e___i_n_t_e_r_r_u_p_t2___p_r_o_t_o_c_o_l.html#a478eaa225baae8ca270236ff3c8e74c7',1,'_EFI_HARDWARE_INTERRUPT2_PROTOCOL::RegisterInterruptSource()'],['../struct___e_f_i___h_a_r_d_w_a_r_e___i_n_t_e_r_r_u_p_t___p_r_o_t_o_c_o_l.html#a171b388fc469345eb1bb65dd9133b091',1,'_EFI_HARDWARE_INTERRUPT_PROTOCOL::RegisterInterruptSource()']]],
+  ['regsize',['RegSize',['../_fdt_client_8h.html#aeee1e136a2edb42519d975b156cc3f73',1,'FdtClient.h']]],
+  ['relocateimage',['RelocateImage',['../struct___p_e___c_o_f_f___l_o_a_d_e_r___p_r_o_t_o_c_o_l.html#a013ea73115d6e3a7250844332f5f5c63',1,'_PE_COFF_LOADER_PROTOCOL']]],
+  ['relocateimageforruntime',['RelocateImageForRuntime',['../struct___p_e___c_o_f_f___l_o_a_d_e_r___p_r_o_t_o_c_o_l.html#a10cd0bd54b11a39f44c35fe5765e3d63',1,'_PE_COFF_LOADER_PROTOCOL']]],
+  ['relocationdata',['RelocationData',['../_pe_coff_loader_8h.html#ad8b3eb449e6253a7a8928300209e6598',1,'PeCoffLoader.h']]],
+  ['reserved',['Reserved',['../struct_a_n_d_r_o_i_d___b_o_o_t_i_m_g___h_e_a_d_e_r.html#a5dd6214a3a2afbac2962bbf9059f4dab',1,'ANDROID_BOOTIMG_HEADER']]],
+  ['reset',['Reset',['../struct___p_l_a_t_f_o_r_m___v_i_r_t_u_a_l___k_b_d___p_r_o_t_o_c_o_l.html#a5e43ae0b7231b9fe984ff06e6b5b3fe0',1,'_PLATFORM_VIRTUAL_KBD_PROTOCOL']]],
+  ['return_5fstatus',['RETURN_STATUS',['../_pe_coff_loader_8h.html#ad47ec7f9d6dc2fa8266163d5f74496af',1,'PeCoffLoader.h']]],
+  ['revision',['Revision',['../struct___e_f_i___m_m_c___h_o_s_t___p_r_o_t_o_c_o_l.html#a29378db64c323d1c90e92c7e1a9778aa',1,'_EFI_MMC_HOST_PROTOCOL']]],
+  ['revisionid',['RevisionId',['../struct_e_m_b_e_d_d_e_d___d_e_v_i_c_e___p_r_o_t_o_c_o_l.html#a0f96c144a581f432b301956b33cfd646',1,'EMBEDDED_DEVICE_PROTOCOL']]]
+];

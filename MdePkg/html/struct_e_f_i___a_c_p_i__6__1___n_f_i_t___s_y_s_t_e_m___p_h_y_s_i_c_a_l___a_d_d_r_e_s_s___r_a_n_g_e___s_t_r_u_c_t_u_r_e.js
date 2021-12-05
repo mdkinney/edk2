@@ -1,0 +1,13 @@
+var struct_e_f_i___a_c_p_i__6__1___n_f_i_t___s_y_s_t_e_m___p_h_y_s_i_c_a_l___a_d_d_r_e_s_s___r_a_n_g_e___s_t_r_u_c_t_u_r_e =
+[
+    [ "AddressRangeMemoryMappingAttribute", "struct_e_f_i___a_c_p_i__6__1___n_f_i_t___s_y_s_t_e_m___p_h_y_s_i_c_a_l___a_d_d_r_e_s_s___r_a_n_g_e___s_t_r_u_c_t_u_r_e.html#a242689963ecc6f4294465008e561eb06", null ],
+    [ "AddressRangeTypeGUID", "struct_e_f_i___a_c_p_i__6__1___n_f_i_t___s_y_s_t_e_m___p_h_y_s_i_c_a_l___a_d_d_r_e_s_s___r_a_n_g_e___s_t_r_u_c_t_u_r_e.html#a250d072195c2c35a75158ca686276cfa", null ],
+    [ "Flags", "struct_e_f_i___a_c_p_i__6__1___n_f_i_t___s_y_s_t_e_m___p_h_y_s_i_c_a_l___a_d_d_r_e_s_s___r_a_n_g_e___s_t_r_u_c_t_u_r_e.html#accee111e754eab13a69c8833df5cccd5", null ],
+    [ "Length", "struct_e_f_i___a_c_p_i__6__1___n_f_i_t___s_y_s_t_e_m___p_h_y_s_i_c_a_l___a_d_d_r_e_s_s___r_a_n_g_e___s_t_r_u_c_t_u_r_e.html#a2bea6a297971496fba107560e677c703", null ],
+    [ "ProximityDomain", "struct_e_f_i___a_c_p_i__6__1___n_f_i_t___s_y_s_t_e_m___p_h_y_s_i_c_a_l___a_d_d_r_e_s_s___r_a_n_g_e___s_t_r_u_c_t_u_r_e.html#aa7ecbd3641d45b0152823931b97f66ad", null ],
+    [ "Reserved_8", "struct_e_f_i___a_c_p_i__6__1___n_f_i_t___s_y_s_t_e_m___p_h_y_s_i_c_a_l___a_d_d_r_e_s_s___r_a_n_g_e___s_t_r_u_c_t_u_r_e.html#a77c3d40c400b95936fb6bf46bd60b1ac", null ],
+    [ "SPARangeStructureIndex", "struct_e_f_i___a_c_p_i__6__1___n_f_i_t___s_y_s_t_e_m___p_h_y_s_i_c_a_l___a_d_d_r_e_s_s___r_a_n_g_e___s_t_r_u_c_t_u_r_e.html#a07c7db3af9f1524bb7f25ec53a58997c", null ],
+    [ "SystemPhysicalAddressRangeBase", "struct_e_f_i___a_c_p_i__6__1___n_f_i_t___s_y_s_t_e_m___p_h_y_s_i_c_a_l___a_d_d_r_e_s_s___r_a_n_g_e___s_t_r_u_c_t_u_r_e.html#a1104d30b782e5ac0ba844ce52ed7069b", null ],
+    [ "SystemPhysicalAddressRangeLength", "struct_e_f_i___a_c_p_i__6__1___n_f_i_t___s_y_s_t_e_m___p_h_y_s_i_c_a_l___a_d_d_r_e_s_s___r_a_n_g_e___s_t_r_u_c_t_u_r_e.html#a352bc5ff8a7a9ebfb2b2ffb7c62736d2", null ],
+    [ "Type", "struct_e_f_i___a_c_p_i__6__1___n_f_i_t___s_y_s_t_e_m___p_h_y_s_i_c_a_l___a_d_d_r_e_s_s___r_a_n_g_e___s_t_r_u_c_t_u_r_e.html#a9cee601f06949d411947c20f7bdaa61e", null ]
+];

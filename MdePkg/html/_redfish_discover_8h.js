@@ -1,0 +1,25 @@
+var _redfish_discover_8h =
+[
+    [ "EFI_REDFISH_DISCOVERED_INFORMATION", "struct_e_f_i___r_e_d_f_i_s_h___d_i_s_c_o_v_e_r_e_d___i_n_f_o_r_m_a_t_i_o_n.html", "struct_e_f_i___r_e_d_f_i_s_h___d_i_s_c_o_v_e_r_e_d___i_n_f_o_r_m_a_t_i_o_n" ],
+    [ "EFI_REDFISH_DISCOVERED_INSTANCE", "struct_e_f_i___r_e_d_f_i_s_h___d_i_s_c_o_v_e_r_e_d___i_n_s_t_a_n_c_e.html", "struct_e_f_i___r_e_d_f_i_s_h___d_i_s_c_o_v_e_r_e_d___i_n_s_t_a_n_c_e" ],
+    [ "EFI_REDFISH_DISCOVERED_LIST", "struct_e_f_i___r_e_d_f_i_s_h___d_i_s_c_o_v_e_r_e_d___l_i_s_t.html", "struct_e_f_i___r_e_d_f_i_s_h___d_i_s_c_o_v_e_r_e_d___l_i_s_t" ],
+    [ "EFI_REDFISH_DISCOVER_NETWORK_INTERFACE", "struct_e_f_i___r_e_d_f_i_s_h___d_i_s_c_o_v_e_r___n_e_t_w_o_r_k___i_n_t_e_r_f_a_c_e.html", "struct_e_f_i___r_e_d_f_i_s_h___d_i_s_c_o_v_e_r___n_e_t_w_o_r_k___i_n_t_e_r_f_a_c_e" ],
+    [ "EFI_REDFISH_DISCOVERED_TOKEN", "struct_e_f_i___r_e_d_f_i_s_h___d_i_s_c_o_v_e_r_e_d___t_o_k_e_n.html", "struct_e_f_i___r_e_d_f_i_s_h___d_i_s_c_o_v_e_r_e_d___t_o_k_e_n" ],
+    [ "_EFI_REDFISH_DISCOVER_PROTOCOL", "struct___e_f_i___r_e_d_f_i_s_h___d_i_s_c_o_v_e_r___p_r_o_t_o_c_o_l.html", "struct___e_f_i___r_e_d_f_i_s_h___d_i_s_c_o_v_e_r___p_r_o_t_o_c_o_l" ],
+    [ "EFI_REDFISH_DISCOVER_DURATION_MASK", "_redfish_discover_8h.html#a7b14e2e896a792846e5df2dbe3a8181c", null ],
+    [ "EFI_REDFISH_DISCOVER_HOST_INTERFACE", "_redfish_discover_8h.html#a20815e0f325efad95c283f35323f8e51", null ],
+    [ "EFI_REDFISH_DISCOVER_KEEP_ALIVE", "_redfish_discover_8h.html#aa3043ffa004d3b0aacd54f69c6c788bc", null ],
+    [ "EFI_REDFISH_DISCOVER_PROTOCOL_GUID", "_redfish_discover_8h.html#ab14f059c1c7fcc8af573ce0fd8cf56d0", null ],
+    [ "EFI_REDFISH_DISCOVER_RENEW", "_redfish_discover_8h.html#a050e1b964ad1abecc6ede7f59ac77077", null ],
+    [ "EFI_REDFISH_DISCOVER_SSDP", "_redfish_discover_8h.html#aeb22b8d15cafacd9b627f86870797ec8", null ],
+    [ "EFI_REDFISH_DISCOVER_SSDP_UDP6", "_redfish_discover_8h.html#ae151b0e35c99008286b15599d560d378", null ],
+    [ "EFI_REDFISH_DISCOVER_VALIDATION", "_redfish_discover_8h.html#a65c7fedcee06b712dfbe3503750d4b1f", null ],
+    [ "REDFISH_DISCOVER_TOKEN_SIGNATURE", "_redfish_discover_8h.html#aa46cd7ce7ca23fd6572a349b533e457b", null ],
+    [ "EFI_REDFISH_DISCOVER_ABORT_ACQUIRE", "_redfish_discover_8h.html#a8dfa9affd485eca21bfeb0e968ceda79", null ],
+    [ "EFI_REDFISH_DISCOVER_ACQUIRE_SERVICE", "_redfish_discover_8h.html#a2712a469e3cbed88293039c0c941eef0", null ],
+    [ "EFI_REDFISH_DISCOVER_FLAG", "_redfish_discover_8h.html#aee0c5925106316e89955e2e94994254c", null ],
+    [ "EFI_REDFISH_DISCOVER_NETWORK_LIST", "_redfish_discover_8h.html#a30605d9fe0ba479877e2fafa512eb585", null ],
+    [ "EFI_REDFISH_DISCOVER_PROTOCOL", "_redfish_discover_8h.html#a3cd1afbd8b6a2cc1e2ee5ef771a73e9e", null ],
+    [ "EFI_REDFISH_DISCOVER_RELEASE_SERVICE", "_redfish_discover_8h.html#aa825c949a7b77822e0e4a05da91926b8", null ],
+    [ "gEfiRedfishDiscoverProtocolGuid", "_redfish_discover_8h.html#a90cc82c692b0571d3d4dbdd3954ca979", null ]
+];

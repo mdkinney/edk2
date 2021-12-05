@@ -1,0 +1,310 @@
+/** \mainpage SourceLevelDebugPkg Package Document
+ This package provides target side modules to support source level debug.<br>
+ The target side components includes the Debug Agent Library instance<br>
+ to communicate with host side modules, Debug Communication Library and<br>
+ instances to provide the communication I/O functions between Debug Agent<br>
+ and host, PeCoffExtraActionLib instance to report symbol path information,<br>
+ etc.<br>
+<br>
+ Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR><br>
+ SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>DBF00C27-D8D7-443d-918B-4E85CDA1373B</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage SourceLevelDebugPkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+</ul>
+ **/
+/** \page SourceLevelDebugPkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_DebugCommunicationLib "DebugCommunicationLib" </li>
+</ul>
+ **/
+/** \page lc_DebugCommunicationLib DebugCommunicationLib
+\copydoc Include/Library/DebugCommunicationLib.h<p>
+ \section ref Refer to Header File
+\link Include/Library/DebugCommunicationLib.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+<li>\subpage pcd_PcdsPatchableInModule_root_page "PcdsPatchableInModule" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdDebugLoadImageMethod "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdDebugLoadImageMethod" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdDebugPortHandleBufferSize "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdDebugPortHandleBufferSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdExceptionsIgnoredByDebugger "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdExceptionsIgnoredByDebugger" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdTransferProtocolRevision "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdTransferProtocolRevision" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdUsbDebugPortMemorySpaceBase "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbDebugPortMemorySpaceBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdUsbEhciMemorySpaceBase "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbEhciMemorySpaceBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdUsbEhciPciAddress "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbEhciPciAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdUsbXhciDebugDetectTimeout "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbXhciDebugDetectTimeout" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdUsbXhciMemorySpaceBase "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbXhciMemorySpaceBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdUsbXhciPciAddress "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbXhciPciAddress" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdDebugLoadImageMethod gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdDebugLoadImageMethod
+ The method to issue break point to Debug Agent Library when Loading/UnLoading image.<BR><BR><br>
+  1: Use I/O Port 84 to issue hardware break point<BR><br>
+  2: Use INT3 to issue software break point<BR><br>
+ @Prompt Configure Loading/UnLoading image break method.<br>
+ @ValidRange  0x80000001 | 1 - 2<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdDebugLoadImageMethod</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000005</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x1</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdDebugPortHandleBufferSize gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdDebugPortHandleBufferSize
+ The data buffer size used by debug port in debug communication library instances.<br>
+  Its value is not suggested to be changed in platform DSC file.<br>
+ @Prompt Assign debug port buffer size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdDebugPortHandleBufferSize</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000006</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdExceptionsIgnoredByDebugger gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdExceptionsIgnoredByDebugger
+ The mask of exception numbers whose handlers would be ignored and cannot be replaced or<br>
+  hooked by Debug Agent Library. Masking INT1/INT3 is invalid.<br>
+ @Prompt Configure exception numbers not to be hooked by Debug Agent.<br>
+ @Expression  0x80000001 | (gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdExceptionsIgnoredByDebugger & 0xA) == 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdExceptionsIgnoredByDebugger</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000004</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdTransferProtocolRevision gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdTransferProtocolRevision
+ Default revision of the debug agent transfer protocol.<br>
+  The upper 16 bits indicate the major revision and the lower 16 bits indicate the minor revision.<br>
+  For example, a value of 0x00000004 stands for revision 0.4.<br>
+  Debug packet compression and decompression is supported since revision 0.4.<br>
+ @Prompt Default revision of the debug agent transfer protocol.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdTransferProtocolRevision</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000a</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000004</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdUsbDebugPortMemorySpaceBase gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbDebugPortMemorySpaceBase
+ The memory BAR of usb debug port, it may be different with the memory bar of ehci host controller.<br>
+  Note that the memory BAR address is only used before Pci bus resource allocation.<br>
+ @Prompt Configure usb debug port memory BAR.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbDebugPortMemorySpaceBase</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xd0000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdUsbEhciMemorySpaceBase gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbEhciMemorySpaceBase
+ The memory BAR of ehci host controller, in which usb debug feature is enabled.<br>
+  Note that the memory BAR address is only used before Pci bus resource allocation.<br>
+ @Prompt Configure ehci host controller memory BAR.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbEhciMemorySpaceBase</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xd0000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdUsbEhciPciAddress gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbEhciPciAddress
+ The pci address of ehci host controller, in which usb debug feature is enabled.<br>
+  The format of pci address is :<BR><br>
+      -----------------------------------------------------------------------<BR><br>
+      | Bits 28..31 | Bits 20..27 | Bits 15..19 | Bits 12..14 | Bits 00..11 |<BR><br>
+      -----------------------------------------------------------------------<BR><br>
+      |      0      |     Bus     |   Device    |   Function  |      0      |<BR><br>
+      -----------------------------------------------------------------------<BR><br>
+  For the value 0x000EF000, it means the pci address at bus 0x0, device 0x1D, function 0x7.<br>
+ @Prompt Configure ehci host controller pci address.<br>
+ @Expression  0x80000001 | (gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbEhciPciAddress & 0xF0000FFF) == 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbEhciPciAddress</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000003</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x000EF000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdUsbXhciDebugDetectTimeout gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbXhciDebugDetectTimeout
+ connection and the DbC Run transition to 1. This PCD specifies the timeout value in microsecond.<br>
+ @Prompt Configure debug device detection timeout value.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbXhciDebugDetectTimeout</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000009</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>3000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdUsbXhciMemorySpaceBase gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbXhciMemorySpaceBase
+ Note that the memory BAR address is only used before Pci bus resource allocation.<br>
+ @Prompt Configure xhci host controller memory BAR.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbXhciMemorySpaceBase</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000007</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0xD0000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdUsbXhciPciAddress gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbXhciPciAddress
+ The pci address of xhci host controller, in which usb debug feature is enabled.<br>
+  The format of pci address is :<BR><br>
+      -----------------------------------------------------------------------<BR><br>
+      | Bits 28..31 | Bits 20..27 | Bits 15..19 | Bits 12..14 | Bits 00..11 |<BR><br>
+      -----------------------------------------------------------------------<BR><br>
+      |      0      |     Bus     |   Device    |   Function  |      0      |<BR><br>
+      -----------------------------------------------------------------------<BR><br>
+  For the value 0x000A0000, it means the pci address at bus 0x0, device 0x14, function 0x0.<br>
+ @Prompt Configure xhci host controller pci address.<br>
+ @Expression  0x80000001 | (gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbXhciPciAddress & 0xF0000FFF) == 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbXhciPciAddress</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000008</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x000A0000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_root_page PcdsPatchableInModule
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdDebugLoadImageMethod "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdDebugLoadImageMethod" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdDebugPortHandleBufferSize "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdDebugPortHandleBufferSize" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdExceptionsIgnoredByDebugger "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdExceptionsIgnoredByDebugger" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdTransferProtocolRevision "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdTransferProtocolRevision" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdUsbDebugPortMemorySpaceBase "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbDebugPortMemorySpaceBase" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdUsbEhciMemorySpaceBase "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbEhciMemorySpaceBase" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdUsbEhciPciAddress "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbEhciPciAddress" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdUsbXhciDebugDetectTimeout "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbXhciDebugDetectTimeout" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdUsbXhciMemorySpaceBase "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbXhciMemorySpaceBase" </li>
+<li>\subpage pcd_PcdsPatchableInModule_common_PcdUsbXhciPciAddress "gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbXhciPciAddress" </li>
+</ul>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdDebugLoadImageMethod gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdDebugLoadImageMethod
+ The method to issue break point to Debug Agent Library when Loading/UnLoading image.<BR><BR><br>
+  1: Use I/O Port 84 to issue hardware break point<BR><br>
+  2: Use INT3 to issue software break point<BR><br>
+ @Prompt Configure Loading/UnLoading image break method.<br>
+ @ValidRange  0x80000001 | 1 - 2<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdDebugLoadImageMethod</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000005</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0x1</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdDebugPortHandleBufferSize gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdDebugPortHandleBufferSize
+ The data buffer size used by debug port in debug communication library instances.<br>
+  Its value is not suggested to be changed in platform DSC file.<br>
+ @Prompt Assign debug port buffer size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdDebugPortHandleBufferSize</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000006</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdExceptionsIgnoredByDebugger gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdExceptionsIgnoredByDebugger
+ The mask of exception numbers whose handlers would be ignored and cannot be replaced or<br>
+  hooked by Debug Agent Library. Masking INT1/INT3 is invalid.<br>
+ @Prompt Configure exception numbers not to be hooked by Debug Agent.<br>
+ @Expression  0x80000001 | (gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdExceptionsIgnoredByDebugger & 0xA) == 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdExceptionsIgnoredByDebugger</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000004</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdTransferProtocolRevision gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdTransferProtocolRevision
+ Default revision of the debug agent transfer protocol.<br>
+  The upper 16 bits indicate the major revision and the lower 16 bits indicate the minor revision.<br>
+  For example, a value of 0x00000004 stands for revision 0.4.<br>
+  Debug packet compression and decompression is supported since revision 0.4.<br>
+ @Prompt Default revision of the debug agent transfer protocol.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdTransferProtocolRevision</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x0000000a</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x00000004</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdUsbDebugPortMemorySpaceBase gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbDebugPortMemorySpaceBase
+ The memory BAR of usb debug port, it may be different with the memory bar of ehci host controller.<br>
+  Note that the memory BAR address is only used before Pci bus resource allocation.<br>
+ @Prompt Configure usb debug port memory BAR.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbDebugPortMemorySpaceBase</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000001</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xd0000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdUsbEhciMemorySpaceBase gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbEhciMemorySpaceBase
+ The memory BAR of ehci host controller, in which usb debug feature is enabled.<br>
+  Note that the memory BAR address is only used before Pci bus resource allocation.<br>
+ @Prompt Configure ehci host controller memory BAR.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbEhciMemorySpaceBase</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000002</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xd0000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdUsbEhciPciAddress gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbEhciPciAddress
+ The pci address of ehci host controller, in which usb debug feature is enabled.<br>
+  The format of pci address is :<BR><br>
+      -----------------------------------------------------------------------<BR><br>
+      | Bits 28..31 | Bits 20..27 | Bits 15..19 | Bits 12..14 | Bits 00..11 |<BR><br>
+      -----------------------------------------------------------------------<BR><br>
+      |      0      |     Bus     |   Device    |   Function  |      0      |<BR><br>
+      -----------------------------------------------------------------------<BR><br>
+  For the value 0x000EF000, it means the pci address at bus 0x0, device 0x1D, function 0x7.<br>
+ @Prompt Configure ehci host controller pci address.<br>
+ @Expression  0x80000001 | (gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbEhciPciAddress & 0xF0000FFF) == 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbEhciPciAddress</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000003</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x000EF000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdUsbXhciDebugDetectTimeout gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbXhciDebugDetectTimeout
+ connection and the DbC Run transition to 1. This PCD specifies the timeout value in microsecond.<br>
+ @Prompt Configure debug device detection timeout value.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbXhciDebugDetectTimeout</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000009</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>3000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdUsbXhciMemorySpaceBase gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbXhciMemorySpaceBase
+ Note that the memory BAR address is only used before Pci bus resource allocation.<br>
+ @Prompt Configure xhci host controller memory BAR.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbXhciMemorySpaceBase</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000007</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0xD0000000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsPatchableInModule_common_PcdUsbXhciPciAddress gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbXhciPciAddress
+ The pci address of xhci host controller, in which usb debug feature is enabled.<br>
+  The format of pci address is :<BR><br>
+      -----------------------------------------------------------------------<BR><br>
+      | Bits 28..31 | Bits 20..27 | Bits 15..19 | Bits 12..14 | Bits 00..11 |<BR><br>
+      -----------------------------------------------------------------------<BR><br>
+      |      0      |     Bus     |   Device    |   Function  |      0      |<BR><br>
+      -----------------------------------------------------------------------<BR><br>
+  For the value 0x000A0000, it means the pci address at bus 0x0, device 0x14, function 0x0.<br>
+ @Prompt Configure xhci host controller pci address.<br>
+ @Expression  0x80000001 | (gEfiSourceLevelDebugPkgTokenSpaceGuid.PcdUsbXhciPciAddress & 0xF0000FFF) == 0<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdUsbXhciPciAddress</CAPTION></TD><TD><CAPTION>gEfiSourceLevelDebugPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x00000008</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x000A0000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gEfiDebugAgentGuid "gEfiDebugAgentGuid" </li>
+<li>\subpage guid_common_gEfiSourceLevelDebugPkgTokenSpaceGuid "gEfiSourceLevelDebugPkgTokenSpaceGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gEfiDebugAgentGuid gEfiDebugAgentGuid
+ MdeModule package token space guid<br> Include/Guid/DebugAgentGuid.h<br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEfiDebugAgentGuid</TD><TD>{0x865a5a9b, 0xb85d, 0x474c, { 0x84, 0x55, 0x65, 0xd1, 0xbe, 0x84, 0x4b, 0xe2 }}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link SourceLevelDebugPkg/Include/Guid/DebugAgentGuid.h
+\endlink
+
+ **/
+/** \page guid_common_gEfiSourceLevelDebugPkgTokenSpaceGuid gEfiSourceLevelDebugPkgTokenSpaceGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEfiSourceLevelDebugPkgTokenSpaceGuid</TD><TD>{0x865a5aab, 0xb85d, 0x474c, { 0x84, 0x55, 0x65, 0xd1, 0xbe, 0x84, 0x4b, 0xe2 }}</TD></TR></TABLE>
+ **/

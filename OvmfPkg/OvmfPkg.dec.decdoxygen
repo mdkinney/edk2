@@ -1,0 +1,1391 @@
+/** \mainpage OvmfPkg Package Document
+  EFI/Framework Open Virtual Machine Firmware (OVMF) platform<br>
+<br>
+  Copyright (c) 2020, Rebecca Cran <rebecca@bsdio.com><br>
+  Copyright (c) 2006 - 2019, Intel Corporation. All rights reserved.<BR><br>
+  Copyright (c) 2014, Pluribus Networks, Inc.<br>
+<br>
+  SPDX-License-Identifier: BSD-2-Clause-Patent<br>
+
+ \section Known_Issue_section Known Issue
+<ul><li> OPTIONAL macro for function parameter can not be dealed with doxygen, so it disapear in this document! </li></ul>
+ \section PackageBasicInformation Package Basic Information
+<TABLE><TR><TD><B>Version of DEC file specification</B></TD><TD>0x00010005</TD></TR><TR><TD><B>Package Guid</B></TD><TD>2daf5f34-50e5-4b9d-b8e3-5562334d87e5</TD></TR></TABLE><br>
+<p> \section content_index INDEX
+<ul>
+<li>\subpage OvmfPkg_public_includes "Public Includes" </li>
+<li>\subpage OvmfPkg_libraryclass "Library Class" </li>
+<li>\subpage pcd_root_page "PCD" </li>
+<li>\subpage guid_root_page "GUID" </li>
+<li>\subpage ppi_root_page "PPI" </li>
+<li>\subpage protocol_root_page "PROTOCOL" </li>
+</ul>
+ **/
+/** \page OvmfPkg_public_includes Public Includes
+<p> \section content_index INDEX
+<ul>
+<li>\subpage public_include_top "OvmfPkg/Csm/Include" </li>
+<li>\subpage public_include_Framework "OvmfPkg/Csm/Include/Framework" </li>
+<li>\subpage public_include_top "OvmfPkg/Include" </li>
+<li>\subpage public_include_IndustryStandard "OvmfPkg/Include/IndustryStandard" </li>
+<li>\subpage public_include_Pcd "OvmfPkg/Include/Pcd" </li>
+<li>\subpage public_include_Register "OvmfPkg/Include/Register" </li>
+</ul>
+ **/
+/** \page public_include_top OvmfPkg/Csm/Include
+<ul>
+<li> \link OvmfPkg/Csm/Include/FrameworkDxe.h\endlink </li>
+</ul>
+
+ **/
+/** \page public_include_Framework OvmfPkg/Csm/Include/Framework
+<ul>
+<li> \link OvmfPkg/Csm/Include/Framework/StatusCode.h \endlink </li>
+<li> \link OvmfPkg/Csm/Include/Framework/FrameworkInternalFormRepresentation.h \endlink </li>
+<li> \link OvmfPkg/Csm/Include/Framework/FirmwareVolumeHeader.h \endlink </li>
+<li> \link OvmfPkg/Csm/Include/Framework/BootScript.h \endlink </li>
+<li> \link OvmfPkg/Csm/Include/Framework/FirmwareVolumeImageFormat.h \endlink </li>
+<li> \link OvmfPkg/Csm/Include/Framework/Hob.h \endlink </li>
+<li> \link OvmfPkg/Csm/Include/Framework/DxeCis.h \endlink </li>
+</ul>
+
+ **/
+/** \page public_include_top OvmfPkg/Include
+<ul>
+<li> \link OvmfPkg/Include/OvmfPlatforms.h\endlink </li>
+<li> \link OvmfPkg/Include/WorkArea.h\endlink </li>
+</ul>
+
+ **/
+/** \page public_include_IndustryStandard OvmfPkg/Include/IndustryStandard
+<ul>
+<li> \link OvmfPkg/Include/IndustryStandard/FusionMptScsi.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/VirtioNet.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/Q35MchIch9.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/QemuFwCfg.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/VirtioScsi.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/LinuxBzimage.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/LegacyVgaBios.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/Virtio095.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/PvScsi.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/VirtioGpu.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/Microvm.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/Virtio095Net.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/VirtioFs.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/Virtio.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/Xen \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/QemuPciBridgeCapabilities.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/InstructionParsing.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/E820.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/Virtio10.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/I440FxPiix4.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/Virtio10Net.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/VirtioBlk.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/QemuLoader.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/LsiScsi.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/Bhyve.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/PageTable.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/QemuCpuHotplug.h \endlink </li>
+<li> \link OvmfPkg/Include/IndustryStandard/QemuTpm.h \endlink </li>
+</ul>
+
+ **/
+/** \page public_include_Pcd OvmfPkg/Include/Pcd
+<ul>
+<li> \link OvmfPkg/Include/Pcd/CpuHotEjectData.h \endlink </li>
+</ul>
+
+ **/
+/** \page public_include_Register OvmfPkg/Include/Register
+<ul>
+<li> \link OvmfPkg/Include/Register/QemuSmramSaveStateMap.h \endlink </li>
+</ul>
+
+ **/
+/** \page OvmfPkg_libraryclass Library Class
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_common "common" </li>
+</ul>
+ **/
+/** \page lc_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage lc_BhyveFwCtlLib "BhyveFwCtlLib" </li>
+<li>\subpage lc_BlobVerifierLib "BlobVerifierLib" </li>
+<li>\subpage lc_LoadLinuxLib "LoadLinuxLib" </li>
+<li>\subpage lc_MemEncryptSevLib "MemEncryptSevLib" </li>
+<li>\subpage lc_NvVarsFileLib "NvVarsFileLib" </li>
+<li>\subpage lc_PciCapLib "PciCapLib" </li>
+<li>\subpage lc_PciCapPciIoLib "PciCapPciIoLib" </li>
+<li>\subpage lc_PciCapPciSegmentLib "PciCapPciSegmentLib" </li>
+<li>\subpage lc_PciHostBridgeUtilityLib "PciHostBridgeUtilityLib" </li>
+<li>\subpage lc_PlatformBmPrintScLib "PlatformBmPrintScLib" </li>
+<li>\subpage lc_PlatformFvbLib "PlatformFvbLib" </li>
+<li>\subpage lc_QemuBootOrderLib "QemuBootOrderLib" </li>
+<li>\subpage lc_QemuFwCfgLib "QemuFwCfgLib" </li>
+<li>\subpage lc_QemuFwCfgS3Lib "QemuFwCfgS3Lib" </li>
+<li>\subpage lc_QemuFwCfgSimpleParserLib "QemuFwCfgSimpleParserLib" </li>
+<li>\subpage lc_QemuLoadImageLib "QemuLoadImageLib" </li>
+<li>\subpage lc_SerializeVariablesLib "SerializeVariablesLib" </li>
+<li>\subpage lc_VirtioLib "VirtioLib" </li>
+<li>\subpage lc_VirtioMmioDeviceLib "VirtioMmioDeviceLib" </li>
+<li>\subpage lc_XenHypercallLib "XenHypercallLib" </li>
+<li>\subpage lc_XenIoMmioLib "XenIoMmioLib" </li>
+<li>\subpage lc_XenPlatformLib "XenPlatformLib" </li>
+</ul>
+ **/
+/** \page lc_BhyveFwCtlLib BhyveFwCtlLib
+  @libraryclass  Access bhyve's firmware control interface.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/BhyveFwCtlLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_BlobVerifierLib BlobVerifierLib
+  @libraryclass  Verify blobs read from the VMM<br>
+
+ \section ref Refer to Header File
+\link Include/Library/BlobVerifierLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_LoadLinuxLib LoadLinuxLib
+  @libraryclass  Loads and boots a Linux kernel image<br>
+
+ \section ref Refer to Header File
+\link Include/Library/LoadLinuxLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_MemEncryptSevLib MemEncryptSevLib
+  @libraryclass  Declares helper functions for Secure Encrypted<br>
+                  Virtualization (SEV) guests.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/MemEncryptSevLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_NvVarsFileLib NvVarsFileLib
+  @libraryclass  Save and restore variables using a file<br>
+
+ \section ref Refer to Header File
+\link Include/Library/NvVarsFileLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_PciCapLib PciCapLib
+  @libraryclass  Provides services to work with PCI capabilities in PCI<br>
+                  config space.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/PciCapLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_PciCapPciIoLib PciCapPciIoLib
+  @libraryclass  Layered on top of PciCapLib, allows clients to plug an<br>
+                  EFI_PCI_IO_PROTOCOL backend into PciCapLib, for config<br>
+                  space access.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/PciCapPciIoLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_PciCapPciSegmentLib PciCapPciSegmentLib
+  @libraryclass  Layered on top of PciCapLib, allows clients to plug a<br>
+                  PciSegmentLib backend into PciCapLib, for config space<br>
+                  access.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/PciCapPciSegmentLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_PciHostBridgeUtilityLib PciHostBridgeUtilityLib
+  @libraryclass  Provide common utility functions to PciHostBridgeLib<br>
+                  instances in ArmVirtPkg and OvmfPkg.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/PciHostBridgeUtilityLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_PlatformBmPrintScLib PlatformBmPrintScLib
+  @libraryclass  Register a status code handler for printing the Boot<br>
+                  Manager's LoadImage() and StartImage() preparations, and<br>
+                  return codes, to the UEFI console.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/PlatformBmPrintScLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_PlatformFvbLib PlatformFvbLib
+  @libraryclass  Customize FVB2 protocol member functions for a platform.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/PlatformFvbLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_QemuBootOrderLib QemuBootOrderLib
+  @libraryclass  Rewrite the BootOrder NvVar based on QEMU's "bootorder"<br>
+                  fw_cfg file.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/QemuBootOrderLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_QemuFwCfgLib QemuFwCfgLib
+  @libraryclass  Access QEMU's firmware configuration interface<br>
+
+ \section ref Refer to Header File
+\link Include/Library/QemuFwCfgLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_QemuFwCfgS3Lib QemuFwCfgS3Lib
+  @libraryclass  S3 support for QEMU fw_cfg<br>
+
+ \section ref Refer to Header File
+\link Include/Library/QemuFwCfgS3Lib.h
+ \endlink<p>
+
+ **/
+/** \page lc_QemuFwCfgSimpleParserLib QemuFwCfgSimpleParserLib
+  @libraryclass  Parse the contents of named fw_cfg files as simple<br>
+                  (scalar) data types.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/QemuFwCfgSimpleParserLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_QemuLoadImageLib QemuLoadImageLib
+  @libraryclass  Load a kernel image and command line passed to QEMU via<br>
+                  the command line<br>
+
+ \section ref Refer to Header File
+\link Include/Library/QemuLoadImageLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_SerializeVariablesLib SerializeVariablesLib
+  @libraryclass  Serialize (and deserialize) variables<br>
+
+ \section ref Refer to Header File
+\link Include/Library/SerializeVariablesLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_VirtioLib VirtioLib
+  @libraryclass  Declares utility functions for virtio device drivers.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/VirtioLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_VirtioMmioDeviceLib VirtioMmioDeviceLib
+  @libraryclass  Install Virtio Device Protocol instances on virtio-mmio<br>
+                  transports.<br>
+
+ \section ref Refer to Header File
+\link Include/Library/VirtioMmioDeviceLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_XenHypercallLib XenHypercallLib
+  @libraryclass  Invoke Xen hypercalls<br>
+
+ \section ref Refer to Header File
+\link Include/Library/XenHypercallLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_XenIoMmioLib XenIoMmioLib
+  @libraryclass  Manage XenBus device path and I/O handles<br>
+
+ \section ref Refer to Header File
+\link Include/Library/XenIoMmioLib.h
+ \endlink<p>
+
+ **/
+/** \page lc_XenPlatformLib XenPlatformLib
+  @libraryclass  Get information about Xen<br>
+
+ \section ref Refer to Header File
+\link Include/Library/XenPlatformLib.h
+ \endlink<p>
+
+ **/
+/** \page pcd_root_page PCD
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_root_page "PcdsDynamic" </li>
+<li>\subpage pcd_PcdsDynamicEx_root_page "PcdsDynamicEx" </li>
+<li>\subpage pcd_PcdsFeatureFlag_root_page "PcdsFeatureFlag" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_root_page "PcdsFixedAtBuild" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_root_page PcdsDynamic
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamic_common_PcdCpuHotEjectDataAddress "gUefiOvmfPkgTokenSpaceGuid.PcdCpuHotEjectDataAddress" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdEmuVariableEvent "gUefiOvmfPkgTokenSpaceGuid.PcdEmuVariableEvent" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdOvmfFlashVariablesEnable "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashVariablesEnable" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdOvmfHostBridgePciDevId "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfHostBridgePciDevId" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdPciIoBase "gUefiOvmfPkgTokenSpaceGuid.PcdPciIoBase" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdPciIoSize "gUefiOvmfPkgTokenSpaceGuid.PcdPciIoSize" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdPciMmio32Base "gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio32Base" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdPciMmio32Size "gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio32Size" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdPciMmio64Base "gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio64Base" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdPciMmio64Size "gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio64Size" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdQ35SmramAtDefaultSmbase "gUefiOvmfPkgTokenSpaceGuid.PcdQ35SmramAtDefaultSmbase" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdQ35TsegMbytes "gUefiOvmfPkgTokenSpaceGuid.PcdQ35TsegMbytes" </li>
+<li>\subpage pcd_PcdsDynamic_common_PcdQemuSmbiosValidated "gUefiOvmfPkgTokenSpaceGuid.PcdQemuSmbiosValidated" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdCpuHotEjectDataAddress gUefiOvmfPkgTokenSpaceGuid.PcdCpuHotEjectDataAddress
+ This PCD adds a communication channel between OVMF's SmmCpuFeaturesLib<br>
+  instance in PiSmmCpuDxeSmm, and CpuHotplugSmm.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuHotEjectDataAddress</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x46</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdEmuVariableEvent gUefiOvmfPkgTokenSpaceGuid.PcdEmuVariableEvent
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuVariableEvent</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>2</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdOvmfFlashVariablesEnable gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashVariablesEnable
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfFlashVariablesEnable</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdOvmfHostBridgePciDevId gUefiOvmfPkgTokenSpaceGuid.PcdOvmfHostBridgePciDevId
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfHostBridgePciDevId</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1b</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPciIoBase gUefiOvmfPkgTokenSpaceGuid.PcdPciIoBase
+ The IO port aperture shared by all PCI root bridges.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciIoBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x22</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPciIoSize gUefiOvmfPkgTokenSpaceGuid.PcdPciIoSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciIoSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x23</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPciMmio32Base gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio32Base
+ The 32-bit MMIO aperture shared by all PCI root bridges.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio32Base</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x24</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPciMmio32Size gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio32Size
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio32Size</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x25</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPciMmio64Base gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio64Base
+ The 64-bit MMIO aperture shared by all PCI root bridges.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio64Base</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x26</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdPciMmio64Size gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio64Size
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio64Size</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x27</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdQ35SmramAtDefaultSmbase gUefiOvmfPkgTokenSpaceGuid.PcdQ35SmramAtDefaultSmbase
+ Set to TRUE by PlatformPei if the Q35 board supports the "SMRAM at default<br>
+  SMBASE" feature.<br>
+  This PCD is only accessed if PcdSmmSmramRequire is TRUE (see below).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdQ35SmramAtDefaultSmbase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x34</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdQ35TsegMbytes gUefiOvmfPkgTokenSpaceGuid.PcdQ35TsegMbytes
+ The following setting controls how many megabytes we configure as TSEG on<br>
+  Q35, for SMRAM purposes. Permitted defaults are: 1, 2, 8. Other defaults<br>
+  cause undefined behavior. During boot, the PCD is updated by PlatformPei<br>
+  to reflect the extended TSEG size, if one is advertized by QEMU.<br>
+  This PCD is only accessed if PcdSmmSmramRequire is TRUE (see below).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdQ35TsegMbytes</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x20</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>8</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamic_common_PcdQemuSmbiosValidated gUefiOvmfPkgTokenSpaceGuid.PcdQemuSmbiosValidated
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdQemuSmbiosValidated</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x21</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_root_page PcdsDynamicEx
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdCpuHotEjectDataAddress "gUefiOvmfPkgTokenSpaceGuid.PcdCpuHotEjectDataAddress" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdEmuVariableEvent "gUefiOvmfPkgTokenSpaceGuid.PcdEmuVariableEvent" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdOvmfFlashVariablesEnable "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashVariablesEnable" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdOvmfHostBridgePciDevId "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfHostBridgePciDevId" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdPciIoBase "gUefiOvmfPkgTokenSpaceGuid.PcdPciIoBase" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdPciIoSize "gUefiOvmfPkgTokenSpaceGuid.PcdPciIoSize" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdPciMmio32Base "gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio32Base" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdPciMmio32Size "gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio32Size" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdPciMmio64Base "gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio64Base" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdPciMmio64Size "gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio64Size" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdQ35SmramAtDefaultSmbase "gUefiOvmfPkgTokenSpaceGuid.PcdQ35SmramAtDefaultSmbase" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdQ35TsegMbytes "gUefiOvmfPkgTokenSpaceGuid.PcdQ35TsegMbytes" </li>
+<li>\subpage pcd_PcdsDynamicEx_common_PcdQemuSmbiosValidated "gUefiOvmfPkgTokenSpaceGuid.PcdQemuSmbiosValidated" </li>
+</ul>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdCpuHotEjectDataAddress gUefiOvmfPkgTokenSpaceGuid.PcdCpuHotEjectDataAddress
+ This PCD adds a communication channel between OVMF's SmmCpuFeaturesLib<br>
+  instance in PiSmmCpuDxeSmm, and CpuHotplugSmm.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCpuHotEjectDataAddress</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x46</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdEmuVariableEvent gUefiOvmfPkgTokenSpaceGuid.PcdEmuVariableEvent
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEmuVariableEvent</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>2</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdOvmfFlashVariablesEnable gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashVariablesEnable
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfFlashVariablesEnable</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x10</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdOvmfHostBridgePciDevId gUefiOvmfPkgTokenSpaceGuid.PcdOvmfHostBridgePciDevId
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfHostBridgePciDevId</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1b</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdPciIoBase gUefiOvmfPkgTokenSpaceGuid.PcdPciIoBase
+ The IO port aperture shared by all PCI root bridges.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciIoBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x22</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdPciIoSize gUefiOvmfPkgTokenSpaceGuid.PcdPciIoSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciIoSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x23</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdPciMmio32Base gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio32Base
+ The 32-bit MMIO aperture shared by all PCI root bridges.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio32Base</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x24</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdPciMmio32Size gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio32Size
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio32Size</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x25</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdPciMmio64Base gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio64Base
+ The 64-bit MMIO aperture shared by all PCI root bridges.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio64Base</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x26</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdPciMmio64Size gUefiOvmfPkgTokenSpaceGuid.PcdPciMmio64Size
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPciMmio64Size</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x27</CAPTION></TD><TD><CAPTION>UINT64</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdQ35SmramAtDefaultSmbase gUefiOvmfPkgTokenSpaceGuid.PcdQ35SmramAtDefaultSmbase
+ Set to TRUE by PlatformPei if the Q35 board supports the "SMRAM at default<br>
+  SMBASE" feature.<br>
+  This PCD is only accessed if PcdSmmSmramRequire is TRUE (see below).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdQ35SmramAtDefaultSmbase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x34</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdQ35TsegMbytes gUefiOvmfPkgTokenSpaceGuid.PcdQ35TsegMbytes
+ The following setting controls how many megabytes we configure as TSEG on<br>
+  Q35, for SMRAM purposes. Permitted defaults are: 1, 2, 8. Other defaults<br>
+  cause undefined behavior. During boot, the PCD is updated by PlatformPei<br>
+  to reflect the extended TSEG size, if one is advertized by QEMU.<br>
+  This PCD is only accessed if PcdSmmSmramRequire is TRUE (see below).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdQ35TsegMbytes</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x20</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>8</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsDynamicEx_common_PcdQemuSmbiosValidated gUefiOvmfPkgTokenSpaceGuid.PcdQemuSmbiosValidated
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdQemuSmbiosValidated</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x21</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_root_page PcdsFeatureFlag
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdCsmEnable "gUefiOvmfPkgTokenSpaceGuid.PcdCsmEnable" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdQemuBootOrderMmioTranslation "gUefiOvmfPkgTokenSpaceGuid.PcdQemuBootOrderMmioTranslation" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdQemuBootOrderPciTranslation "gUefiOvmfPkgTokenSpaceGuid.PcdQemuBootOrderPciTranslation" </li>
+<li>\subpage pcd_PcdsFeatureFlag_common_PcdSmmSmramRequire "gUefiOvmfPkgTokenSpaceGuid.PcdSmmSmramRequire" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdCsmEnable gUefiOvmfPkgTokenSpaceGuid.PcdCsmEnable
+ Informs modules (including pre-DXE-phase modules) whether the platform<br>
+  firmware contains a CSM (Compatibility Support Module).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCsmEnable</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x35</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdQemuBootOrderMmioTranslation gUefiOvmfPkgTokenSpaceGuid.PcdQemuBootOrderMmioTranslation
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdQemuBootOrderMmioTranslation</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1d</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdQemuBootOrderPciTranslation gUefiOvmfPkgTokenSpaceGuid.PcdQemuBootOrderPciTranslation
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdQemuBootOrderPciTranslation</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1c</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFeatureFlag_common_PcdSmmSmramRequire gUefiOvmfPkgTokenSpaceGuid.PcdSmmSmramRequire
+ This feature flag enables SMM/SMRAM support. Note that it also requires<br>
+  such support from the underlying QEMU instance; if that support is not<br>
+  present, the firmware will reject continuing after a certain point.<br>
+  The flag also acts as a general "security switch"; when TRUE, many<br>
+  components will change behavior, with the goal of preventing a malicious<br>
+  runtime OS from tampering with firmware structures (special memory ranges<br>
+  used by OVMF, the varstore pflash chip, LockBox etc).<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSmmSmramRequire</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1e</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_root_page PcdsFixedAtBuild
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_root_page "common" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_root_page common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage pcd_PcdsFixedAtBuild_common_Pcd8259LegacyModeEdgeLevel "gUefiOvmfPkgTokenSpaceGuid.Pcd8259LegacyModeEdgeLevel" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_Pcd8259LegacyModeMask "gUefiOvmfPkgTokenSpaceGuid.Pcd8259LegacyModeMask" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdBfvBase "gUefiOvmfPkgTokenSpaceGuid.PcdBfvBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdBfvRawDataOffset "gUefiOvmfPkgTokenSpaceGuid.PcdBfvRawDataOffset" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdBfvRawDataSize "gUefiOvmfPkgTokenSpaceGuid.PcdBfvRawDataSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdBiosVideoCheckVbeEnable "gUefiOvmfPkgTokenSpaceGuid.PcdBiosVideoCheckVbeEnable" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdBiosVideoCheckVgaEnable "gUefiOvmfPkgTokenSpaceGuid.PcdBiosVideoCheckVgaEnable" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdBiosVideoSetTextVgaModeEnable "gUefiOvmfPkgTokenSpaceGuid.PcdBiosVideoSetTextVgaModeEnable" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCfvBase "gUefiOvmfPkgTokenSpaceGuid.PcdCfvBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCfvRawDataOffset "gUefiOvmfPkgTokenSpaceGuid.PcdCfvRawDataOffset" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdCfvRawDataSize "gUefiOvmfPkgTokenSpaceGuid.PcdCfvRawDataSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdDebugIoPort "gUefiOvmfPkgTokenSpaceGuid.PcdDebugIoPort" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEbdaReservedMemorySize "gUefiOvmfPkgTokenSpaceGuid.PcdEbdaReservedMemorySize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdEndOpromShadowAddress "gUefiOvmfPkgTokenSpaceGuid.PcdEndOpromShadowAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdGuidedExtractHandlerTableSize "gUefiOvmfPkgTokenSpaceGuid.PcdGuidedExtractHandlerTableSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdHighPmmMemorySize "gUefiOvmfPkgTokenSpaceGuid.PcdHighPmmMemorySize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdLegacyBiosCacheLegacyRegion "gUefiOvmfPkgTokenSpaceGuid.PcdLegacyBiosCacheLegacyRegion" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdLowPmmMemorySize "gUefiOvmfPkgTokenSpaceGuid.PcdLowPmmMemorySize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdLsiScsiMaxLunLimit "gUefiOvmfPkgTokenSpaceGuid.PcdLsiScsiMaxLunLimit" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdLsiScsiMaxTargetLimit "gUefiOvmfPkgTokenSpaceGuid.PcdLsiScsiMaxTargetLimit" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdLsiScsiStallPerPollUsec "gUefiOvmfPkgTokenSpaceGuid.PcdLsiScsiStallPerPollUsec" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdMptScsiMaxTargetLimit "gUefiOvmfPkgTokenSpaceGuid.PcdMptScsiMaxTargetLimit" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdMptScsiStallPerPollUsec "gUefiOvmfPkgTokenSpaceGuid.PcdMptScsiStallPerPollUsec" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOpromReservedMemoryBase "gUefiOvmfPkgTokenSpaceGuid.PcdOpromReservedMemoryBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOpromReservedMemorySize "gUefiOvmfPkgTokenSpaceGuid.PcdOpromReservedMemorySize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfConfidentialComputingWorkAreaHeader "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfConfidentialComputingWorkAreaHeader" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfDecompressionScratchEnd "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfDecompressionScratchEnd" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfDxeMemFvBase "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfDxeMemFvBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfDxeMemFvSize "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfDxeMemFvSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfFdBaseAddress "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFdBaseAddress" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfFirmwareBlockSize "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFirmwareBlockSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfFirmwareFdSize "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFirmwareFdSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfFlashNvStorageEventLogBase "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashNvStorageEventLogBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfFlashNvStorageEventLogSize "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashNvStorageEventLogSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfFlashNvStorageFtwSpareBase "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashNvStorageFtwSpareBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfFlashNvStorageFtwWorkingBase "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashNvStorageFtwWorkingBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfFlashNvStorageVariableBase "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashNvStorageVariableBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfLockBoxStorageBase "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfLockBoxStorageBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfLockBoxStorageSize "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfLockBoxStorageSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfPeiMemFvBase "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfPeiMemFvBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfPeiMemFvSize "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfPeiMemFvSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfSecGhcbBackupBase "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecGhcbBackupBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfSecGhcbBackupSize "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecGhcbBackupSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfSecGhcbBase "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecGhcbBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfSecGhcbPageTableBase "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecGhcbPageTableBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfSecGhcbPageTableSize "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecGhcbPageTableSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfSecGhcbSize "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecGhcbSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfSecPageTablesBase "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPageTablesBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfSecPageTablesSize "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPageTablesSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfSecPeiTempRamBase "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPeiTempRamBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfSecPeiTempRamSize "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPeiTempRamSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfWorkAreaBase "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfWorkAreaBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdOvmfWorkAreaSize "gUefiOvmfPkgTokenSpaceGuid.PcdOvmfWorkAreaSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPvScsiMaxLunLimit "gUefiOvmfPkgTokenSpaceGuid.PcdPvScsiMaxLunLimit" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPvScsiMaxTargetLimit "gUefiOvmfPkgTokenSpaceGuid.PcdPvScsiMaxTargetLimit" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdPvScsiWaitForCmpStallInUsecs "gUefiOvmfPkgTokenSpaceGuid.PcdPvScsiWaitForCmpStallInUsecs" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdQemuHashTableBase "gUefiOvmfPkgTokenSpaceGuid.PcdQemuHashTableBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdQemuHashTableSize "gUefiOvmfPkgTokenSpaceGuid.PcdQemuHashTableSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSevLaunchSecretBase "gUefiOvmfPkgTokenSpaceGuid.PcdSevLaunchSecretBase" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdSevLaunchSecretSize "gUefiOvmfPkgTokenSpaceGuid.PcdSevLaunchSecretSize" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdVirtioScsiMaxLunLimit "gUefiOvmfPkgTokenSpaceGuid.PcdVirtioScsiMaxLunLimit" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdVirtioScsiMaxTargetLimit "gUefiOvmfPkgTokenSpaceGuid.PcdVirtioScsiMaxTargetLimit" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdXenGrantFrames "gUefiOvmfPkgTokenSpaceGuid.PcdXenGrantFrames" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdXenPvhStartOfDayStructPtr "gUefiOvmfPkgTokenSpaceGuid.PcdXenPvhStartOfDayStructPtr" </li>
+<li>\subpage pcd_PcdsFixedAtBuild_common_PcdXenPvhStartOfDayStructPtrSize "gUefiOvmfPkgTokenSpaceGuid.PcdXenPvhStartOfDayStructPtrSize" </li>
+</ul>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_Pcd8259LegacyModeEdgeLevel gUefiOvmfPkgTokenSpaceGuid.Pcd8259LegacyModeEdgeLevel
+ Pcd8259LegacyModeEdgeLevel defines the default edge level for legacy<br>
+  mode's interrrupt controller.<br>
+  For the corresponding bits, 0 = Edge triggered and 1 = Level triggered.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>Pcd8259LegacyModeEdgeLevel</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x5</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0x0000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_Pcd8259LegacyModeMask gUefiOvmfPkgTokenSpaceGuid.Pcd8259LegacyModeMask
+ Pcd8259LegacyModeMask defines the default mask value for platform. This<br>
+  value is determined.<br>
+  1) If platform only support pure UEFI, value should be set to 0xFFFF or<br>
+     0xFFFE; Because only clock interrupt is allowed in legacy mode in pure<br>
+     UEFI platform.<br>
+  2) If platform install CSM and use thunk module:<br>
+     a) If thunk call provided by CSM binary requires some legacy interrupt<br>
+        support, the corresponding bit should be opened as 0.<br>
+        For example, if keyboard interfaces provided CSM binary use legacy<br>
+        keyboard interrupt in 8259 bit 1, then the value should be set to<br>
+        0xFFFC.<br>
+     b) If all thunk call provied by CSM binary do not require legacy<br>
+        interrupt support, value should be set to 0xFFFF or 0xFFFE.<br>
+  The default value of legacy mode mask could be changed by<br>
+  EFI_LEGACY_8259_PROTOCOL->SetMask(). But it is rarely need change it<br>
+  except some special cases such as when initializing the CSM binary, it<br>
+  should be set to 0xFFFF to mask all legacy interrupt. Please restore the<br>
+  original legacy mask value if changing is made for these special case.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>Pcd8259LegacyModeMask</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0xFFFF</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdBfvBase gUefiOvmfPkgTokenSpaceGuid.PcdBfvBase
+ The base address and size of the TDX Bfv base and size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdBfvBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x55</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdBfvRawDataOffset gUefiOvmfPkgTokenSpaceGuid.PcdBfvRawDataOffset
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdBfvRawDataOffset</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x56</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdBfvRawDataSize gUefiOvmfPkgTokenSpaceGuid.PcdBfvRawDataSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdBfvRawDataSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x57</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdBiosVideoCheckVbeEnable gUefiOvmfPkgTokenSpaceGuid.PcdBiosVideoCheckVbeEnable
+ Indicates if BiosVideo driver will check for VESA BIOS Extension service<br>
+  support.<br>
+   TRUE  - Check for VESA BIOS Extension service.<br>
+   FALSE - Does not check for VESA BIOS Extension service.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdBiosVideoCheckVbeEnable</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x29</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdBiosVideoCheckVgaEnable gUefiOvmfPkgTokenSpaceGuid.PcdBiosVideoCheckVgaEnable
+ Indicates if BiosVideo driver will check for VGA service support.<br>
+  NOTE: If both PcdBiosVideoCheckVbeEnable and PcdBiosVideoCheckVgaEnable<br>
+  are set to FALSE, that means Graphics Output protocol will not be<br>
+  installed, the VGA miniport protocol will be installed instead.<br>
+   TRUE  - Check for VGA service.<BR><br>
+   FALSE - Does not check for VGA service.<BR><br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdBiosVideoCheckVgaEnable</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x2a</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdBiosVideoSetTextVgaModeEnable gUefiOvmfPkgTokenSpaceGuid.PcdBiosVideoSetTextVgaModeEnable
+ Indicates if BiosVideo driver will switch to 80x25 Text VGA Mode when<br>
+  exiting boot service.<br>
+   TRUE  - Switch to Text VGA Mode.<br>
+   FALSE - Does not switch to Text VGA Mode.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdBiosVideoSetTextVgaModeEnable</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x28</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>FALSE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCfvBase gUefiOvmfPkgTokenSpaceGuid.PcdCfvBase
+ The base address and size of the TDX Cfv base and size.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCfvBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x52</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCfvRawDataOffset gUefiOvmfPkgTokenSpaceGuid.PcdCfvRawDataOffset
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCfvRawDataOffset</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x53</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdCfvRawDataSize gUefiOvmfPkgTokenSpaceGuid.PcdCfvRawDataSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdCfvRawDataSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x54</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdDebugIoPort gUefiOvmfPkgTokenSpaceGuid.PcdDebugIoPort
+ This flag is used to control the destination port for PlatformDebugLibIoPort<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdDebugIoPort</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>4</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>0x402</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEbdaReservedMemorySize gUefiOvmfPkgTokenSpaceGuid.PcdEbdaReservedMemorySize
+ Specify memory size with bytes to reserve EBDA below 640K for OPROM.<br>
+  The value should be a multiple of 4KB.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEbdaReservedMemorySize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x2c</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x8000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdEndOpromShadowAddress gUefiOvmfPkgTokenSpaceGuid.PcdEndOpromShadowAddress
+ Specify the end of address below 1MB for the OPROM.<br>
+  The last shadowed OpROM should not exceed this address.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdEndOpromShadowAddress</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x2f</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0xdffff</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdGuidedExtractHandlerTableSize gUefiOvmfPkgTokenSpaceGuid.PcdGuidedExtractHandlerTableSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdGuidedExtractHandlerTableSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1a</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdHighPmmMemorySize gUefiOvmfPkgTokenSpaceGuid.PcdHighPmmMemorySize
+ Specify the high PMM (Post Memory Manager) size with bytes above 1MB.<br>
+  The value should be a multiple of 4KB.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdHighPmmMemorySize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x31</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x400000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdLegacyBiosCacheLegacyRegion gUefiOvmfPkgTokenSpaceGuid.PcdLegacyBiosCacheLegacyRegion
+ Indicates if memory space for legacy region will be set as cacheable.<br>
+   TRUE  - Set cachebility for legacy region.<br>
+   FALSE - Does not set cachebility for legacy region.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdLegacyBiosCacheLegacyRegion</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x2b</CAPTION></TD><TD><CAPTION>BOOLEAN</CAPTION></TD><TD><CAPTION>TRUE</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdLowPmmMemorySize gUefiOvmfPkgTokenSpaceGuid.PcdLowPmmMemorySize
+ Specify the low PMM (Post Memory Manager) size with bytes below 1MB.<br>
+  The value should be a multiple of 4KB.<br>
+ @Prompt Low PMM (Post Memory Manager) Size<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdLowPmmMemorySize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x30</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x10000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdLsiScsiMaxLunLimit gUefiOvmfPkgTokenSpaceGuid.PcdLsiScsiMaxLunLimit
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdLsiScsiMaxLunLimit</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3c</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdLsiScsiMaxTargetLimit gUefiOvmfPkgTokenSpaceGuid.PcdLsiScsiMaxTargetLimit
+ Set the *inclusive* number of targets and LUNs that LsiScsi exposes for<br>
+  scan by ScsiBusDxe.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdLsiScsiMaxTargetLimit</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3b</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>7</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdLsiScsiStallPerPollUsec gUefiOvmfPkgTokenSpaceGuid.PcdLsiScsiStallPerPollUsec
+ Microseconds to stall between polling for LsiScsi request result<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdLsiScsiStallPerPollUsec</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3d</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>5</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdMptScsiMaxTargetLimit gUefiOvmfPkgTokenSpaceGuid.PcdMptScsiMaxTargetLimit
+ Set the *inclusive* number of targets that MptScsi exposes for scan<br>
+  by ScsiBusDxe.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMptScsiMaxTargetLimit</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x39</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>7</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdMptScsiStallPerPollUsec gUefiOvmfPkgTokenSpaceGuid.PcdMptScsiStallPerPollUsec
+ Microseconds to stall between polling for MptScsi request result<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdMptScsiStallPerPollUsec</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3a</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>5</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOpromReservedMemoryBase gUefiOvmfPkgTokenSpaceGuid.PcdOpromReservedMemoryBase
+ Specify memory base address for OPROM to find free memory.<br>
+  Some OPROMs do not use EBDA or PMM to allocate memory for its usage,<br>
+  instead they find the memory filled with zero from 0x20000.<br>
+  The value should be a multiple of 4KB.<br>
+  The range should be below the EBDA reserved range from<br>
+  (CONVENTIONAL_MEMORY_TOP - Reserved EBDA Memory Size) to<br>
+  CONVENTIONAL_MEMORY_TOP.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOpromReservedMemoryBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x2d</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x60000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOpromReservedMemorySize gUefiOvmfPkgTokenSpaceGuid.PcdOpromReservedMemorySize
+ Specify memory size with bytes for OPROM to find free memory.<br>
+  The value should be a multiple of 4KB. And the range should be below the<br>
+  EBDA reserved range from<br>
+  (CONVENTIONAL_MEMORY_TOP - Reserved EBDA Memory Size) to<br>
+  CONVENTIONAL_MEMORY_TOP.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOpromReservedMemorySize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x2e</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x28000</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfConfidentialComputingWorkAreaHeader gUefiOvmfPkgTokenSpaceGuid.PcdOvmfConfidentialComputingWorkAreaHeader
+ The work area contains a fixed size header in the Include/WorkArea.h.<br>
+ The size of this header is used early boot, and is provided through<br>
+ a fixed PCD. It need to be kept in sync with any changes to the<br>
+ header definition.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfConfidentialComputingWorkAreaHeader</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x51</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>4</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfDecompressionScratchEnd gUefiOvmfPkgTokenSpaceGuid.PcdOvmfDecompressionScratchEnd
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfDecompressionScratchEnd</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x1f</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfDxeMemFvBase gUefiOvmfPkgTokenSpaceGuid.PcdOvmfDxeMemFvBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfDxeMemFvBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x15</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfDxeMemFvSize gUefiOvmfPkgTokenSpaceGuid.PcdOvmfDxeMemFvSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfDxeMemFvSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x16</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfFdBaseAddress gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFdBaseAddress
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfFdBaseAddress</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xf</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfFirmwareBlockSize gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFirmwareBlockSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfFirmwareBlockSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xb</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfFirmwareFdSize gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFirmwareFdSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfFirmwareFdSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xa</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfFlashNvStorageEventLogBase gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashNvStorageEventLogBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfFlashNvStorageEventLogBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x8</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfFlashNvStorageEventLogSize gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashNvStorageEventLogSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfFlashNvStorageEventLogSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x9</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfFlashNvStorageFtwSpareBase gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashNvStorageFtwSpareBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfFlashNvStorageFtwSpareBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xd</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfFlashNvStorageFtwWorkingBase gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashNvStorageFtwWorkingBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfFlashNvStorageFtwWorkingBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xe</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfFlashNvStorageVariableBase gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashNvStorageVariableBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfFlashNvStorageVariableBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0xc</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfLockBoxStorageBase gUefiOvmfPkgTokenSpaceGuid.PcdOvmfLockBoxStorageBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfLockBoxStorageBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x18</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfLockBoxStorageSize gUefiOvmfPkgTokenSpaceGuid.PcdOvmfLockBoxStorageSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfLockBoxStorageSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x19</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfPeiMemFvBase gUefiOvmfPkgTokenSpaceGuid.PcdOvmfPeiMemFvBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfPeiMemFvBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfPeiMemFvSize gUefiOvmfPkgTokenSpaceGuid.PcdOvmfPeiMemFvSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfPeiMemFvSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>1</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfSecGhcbBackupBase gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecGhcbBackupBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfSecGhcbBackupBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x44</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfSecGhcbBackupSize gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecGhcbBackupSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfSecGhcbBackupSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x45</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfSecGhcbBase gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecGhcbBase
+ The base address of the SEC GHCB page used by SEV-ES.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfSecGhcbBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x40</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfSecGhcbPageTableBase gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecGhcbPageTableBase
+ Specify the extra page table needed to mark the GHCB as unencrypted.<br>
+  The value should be a multiple of 4KB for each.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfSecGhcbPageTableBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3e</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfSecGhcbPageTableSize gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecGhcbPageTableSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfSecGhcbPageTableSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x3f</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfSecGhcbSize gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecGhcbSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfSecGhcbSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x41</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfSecPageTablesBase gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPageTablesBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfSecPageTablesBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x11</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfSecPageTablesSize gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPageTablesSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfSecPageTablesSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x12</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfSecPeiTempRamBase gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPeiTempRamBase
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfSecPeiTempRamBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x13</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfSecPeiTempRamSize gUefiOvmfPkgTokenSpaceGuid.PcdOvmfSecPeiTempRamSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfSecPeiTempRamSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x14</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfWorkAreaBase gUefiOvmfPkgTokenSpaceGuid.PcdOvmfWorkAreaBase
+ The base address and size of the work area used during the SEC<br>
+ phase by the SEV and TDX supports.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfWorkAreaBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x49</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdOvmfWorkAreaSize gUefiOvmfPkgTokenSpaceGuid.PcdOvmfWorkAreaSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdOvmfWorkAreaSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x50</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPvScsiMaxLunLimit gUefiOvmfPkgTokenSpaceGuid.PcdPvScsiMaxLunLimit
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPvScsiMaxLunLimit</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x37</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPvScsiMaxTargetLimit gUefiOvmfPkgTokenSpaceGuid.PcdPvScsiMaxTargetLimit
+ Sets the *inclusive* number of targets and LUNs that PvScsi exposes for<br>
+  scan by ScsiBusDxe.<br>
+  As specified above for VirtioScsi, ScsiBusDxe scans all MaxTarget * MaxLun<br>
+  possible devices, which can take extremely long. Thus, the below constants<br>
+  are used so that scanning the number of devices given by their product<br>
+  is still acceptably fast.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPvScsiMaxTargetLimit</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x36</CAPTION></TD><TD><CAPTION>UINT8</CAPTION></TD><TD><CAPTION>64</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdPvScsiWaitForCmpStallInUsecs gUefiOvmfPkgTokenSpaceGuid.PcdPvScsiWaitForCmpStallInUsecs
+ After PvScsiDxe sends a SCSI request to the device, it waits for<br>
+  the request completion in a polling loop.<br>
+  This constant defines how many micro-seconds to wait between each<br>
+  polling loop iteration.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdPvScsiWaitForCmpStallInUsecs</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x38</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>5</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdQemuHashTableBase gUefiOvmfPkgTokenSpaceGuid.PcdQemuHashTableBase
+ The base address and size of a hash table confirming allowed<br>
+  parameters to be passed in via the Qemu firmware configuration<br>
+  device<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdQemuHashTableBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x47</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdQemuHashTableSize gUefiOvmfPkgTokenSpaceGuid.PcdQemuHashTableSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdQemuHashTableSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x48</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSevLaunchSecretBase gUefiOvmfPkgTokenSpaceGuid.PcdSevLaunchSecretBase
+ The base address and size of the SEV Launch Secret Area provisioned<br>
+  after remote attestation.  If this is set in the .fdf, the platform<br>
+  is responsible for protecting the area from DXE phase overwrites.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSevLaunchSecretBase</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x42</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdSevLaunchSecretSize gUefiOvmfPkgTokenSpaceGuid.PcdSevLaunchSecretSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdSevLaunchSecretSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x43</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdVirtioScsiMaxLunLimit gUefiOvmfPkgTokenSpaceGuid.PcdVirtioScsiMaxLunLimit
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdVirtioScsiMaxLunLimit</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>7</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>7</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdVirtioScsiMaxTargetLimit gUefiOvmfPkgTokenSpaceGuid.PcdVirtioScsiMaxTargetLimit
+ When VirtioScsiDxe is instantiated for a HBA, the numbers of targets and<br>
+  LUNs are retrieved from the host during virtio-scsi setup.<br>
+  MdeModulePkg/Bus/Scsi/ScsiBusDxe then scans all MaxTarget * MaxLun<br>
+  possible devices. This can take extremely long, for example with<br>
+  MaxTarget=255 and MaxLun=16383. The *inclusive* constants below limit<br>
+  MaxTarget and MaxLun, independently, should the host report higher values,<br>
+  so that scanning the number of devices given by their product is still<br>
+  acceptably fast.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdVirtioScsiMaxTargetLimit</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>6</CAPTION></TD><TD><CAPTION>UINT16</CAPTION></TD><TD><CAPTION>31</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdXenGrantFrames gUefiOvmfPkgTokenSpaceGuid.PcdXenGrantFrames
+ Number of page frames to use for storing grant table entries.<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdXenGrantFrames</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x33</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>4</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdXenPvhStartOfDayStructPtr gUefiOvmfPkgTokenSpaceGuid.PcdXenPvhStartOfDayStructPtr
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdXenPvhStartOfDayStructPtr</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x17</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page pcd_PcdsFixedAtBuild_common_PcdXenPvhStartOfDayStructPtrSize gUefiOvmfPkgTokenSpaceGuid.PcdXenPvhStartOfDayStructPtrSize
+<br>
+
+ \section PCDinformation PCD Information
+<TABLE><TR><TD><CAPTION>Name</CAPTION></TD><TD><CAPTION>Token Space</CAPTION></TD><TD><CAPTION>Token number</CAPTION></TD><TD><CAPTION>Data Type</CAPTION></TD><TD><CAPTION>Default Value</CAPTION></TD></TR><TR><TD><CAPTION>PcdXenPvhStartOfDayStructPtrSize</CAPTION></TD><TD><CAPTION>gUefiOvmfPkgTokenSpaceGuid</CAPTION></TD><TD><CAPTION>0x32</CAPTION></TD><TD><CAPTION>UINT32</CAPTION></TD><TD><CAPTION>0x0</CAPTION></TD></TR></TABLE>
+ **/
+/** \page guid_root_page GUID
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page guid_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage guid_common_gConfidentialComputingSecretGuid "gConfidentialComputingSecretGuid" </li>
+<li>\subpage guid_common_gEfiLegacyBiosGuid "gEfiLegacyBiosGuid" </li>
+<li>\subpage guid_common_gEfiLegacyDevOrderVariableGuid "gEfiLegacyDevOrderVariableGuid" </li>
+<li>\subpage guid_common_gEfiXenInfoGuid "gEfiXenInfoGuid" </li>
+<li>\subpage guid_common_gGrubFileGuid "gGrubFileGuid" </li>
+<li>\subpage guid_common_gMicrosoftVendorGuid "gMicrosoftVendorGuid" </li>
+<li>\subpage guid_common_gOvmfPkKek1AppPrefixGuid "gOvmfPkKek1AppPrefixGuid" </li>
+<li>\subpage guid_common_gOvmfPlatformConfigGuid "gOvmfPlatformConfigGuid" </li>
+<li>\subpage guid_common_gQemuKernelLoaderFsMediaGuid "gQemuKernelLoaderFsMediaGuid" </li>
+<li>\subpage guid_common_gQemuRamfbGuid "gQemuRamfbGuid" </li>
+<li>\subpage guid_common_gRootBridgesConnectedEventGroupGuid "gRootBridgesConnectedEventGroupGuid" </li>
+<li>\subpage guid_common_gUefiOvmfPkgTokenSpaceGuid "gUefiOvmfPkgTokenSpaceGuid" </li>
+<li>\subpage guid_common_gVirtioMmioTransportGuid "gVirtioMmioTransportGuid" </li>
+<li>\subpage guid_common_gXenBusRootDeviceGuid "gXenBusRootDeviceGuid" </li>
+</ul>
+ **/
+/** \page guid_common_gConfidentialComputingSecretGuid gConfidentialComputingSecretGuid
+ \copydoc OvmfPkg/Include/Guid/ConfidentialComputingSecret.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gConfidentialComputingSecretGuid</TD><TD>{0xadf956ad, 0xe98c, 0x484c, {0xae, 0x11, 0xb5, 0x1c, 0x7d, 0x33, 0x64, 0x47}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link OvmfPkg/Include/Guid/ConfidentialComputingSecret.h
+\endlink
+
+ **/
+/** \page guid_common_gEfiLegacyBiosGuid gEfiLegacyBiosGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEfiLegacyBiosGuid</TD><TD>{0x2E3044AC, 0x879F, 0x490F, {0x97, 0x60, 0xBB, 0xDF, 0xAF, 0x69, 0x5F, 0x50}}</TD></TR></TABLE>
+ **/
+/** \page guid_common_gEfiLegacyDevOrderVariableGuid gEfiLegacyDevOrderVariableGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEfiLegacyDevOrderVariableGuid</TD><TD>{0xa56074db, 0x65fe, 0x45f7, {0xbd, 0x21, 0x2d, 0x2b, 0xdd, 0x8e, 0x96, 0x52}}</TD></TR></TABLE>
+ **/
+/** \page guid_common_gEfiXenInfoGuid gEfiXenInfoGuid
+ \copydoc OvmfPkg/Include/Guid/XenInfo.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gEfiXenInfoGuid</TD><TD>{0xd3b46f3b, 0xd441, 0x1244, {0x9a, 0x12, 0x0, 0x12, 0x27, 0x3f, 0xc1, 0x4d}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link OvmfPkg/Include/Guid/XenInfo.h
+\endlink
+
+ **/
+/** \page guid_common_gGrubFileGuid gGrubFileGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gGrubFileGuid</TD><TD>{0xb5ae312c, 0xbc8a, 0x43b1, {0x9c, 0x62, 0xeb, 0xb8, 0x26, 0xdd, 0x5d, 0x07}}</TD></TR></TABLE>
+ **/
+/** \page guid_common_gMicrosoftVendorGuid gMicrosoftVendorGuid
+ \copydoc OvmfPkg/Include/Guid/MicrosoftVendor.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gMicrosoftVendorGuid</TD><TD>{0x77fa9abd, 0x0359, 0x4d32, {0xbd, 0x60, 0x28, 0xf4, 0xe7, 0x8f, 0x78, 0x4b}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link OvmfPkg/Include/Guid/MicrosoftVendor.h
+\endlink
+
+ **/
+/** \page guid_common_gOvmfPkKek1AppPrefixGuid gOvmfPkKek1AppPrefixGuid
+ \copydoc OvmfPkg/Include/Guid/OvmfPkKek1AppPrefix.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gOvmfPkKek1AppPrefixGuid</TD><TD>{0x4e32566d, 0x8e9e, 0x4f52, {0x81, 0xd3, 0x5b, 0xb9, 0x71, 0x5f, 0x97, 0x27}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link OvmfPkg/Include/Guid/OvmfPkKek1AppPrefix.h
+\endlink
+
+ **/
+/** \page guid_common_gOvmfPlatformConfigGuid gOvmfPlatformConfigGuid
+ \copydoc OvmfPkg/Include/Guid/OvmfPlatformConfig.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gOvmfPlatformConfigGuid</TD><TD>{0x7235c51c, 0x0c80, 0x4cab, {0x87, 0xac, 0x3b, 0x08, 0x4a, 0x63, 0x04, 0xb1}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link OvmfPkg/Include/Guid/OvmfPlatformConfig.h
+\endlink
+
+ **/
+/** \page guid_common_gQemuKernelLoaderFsMediaGuid gQemuKernelLoaderFsMediaGuid
+ \copydoc OvmfPkg/Include/Guid/QemuKernelLoaderFsMedia.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gQemuKernelLoaderFsMediaGuid</TD><TD>{0x1428f772, 0xb64a, 0x441e, {0xb8, 0xc3, 0x9e, 0xbd, 0xd7, 0xf8, 0x93, 0xc7}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link OvmfPkg/Include/Guid/QemuKernelLoaderFsMedia.h
+\endlink
+
+ **/
+/** \page guid_common_gQemuRamfbGuid gQemuRamfbGuid
+ \copydoc OvmfPkg/Include/Guid/QemuRamfb.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gQemuRamfbGuid</TD><TD>{0x557423a1, 0x63ab, 0x406c, {0xbe, 0x7e, 0x91, 0xcd, 0xbc, 0x08, 0xc4, 0x57}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link OvmfPkg/Include/Guid/QemuRamfb.h
+\endlink
+
+ **/
+/** \page guid_common_gRootBridgesConnectedEventGroupGuid gRootBridgesConnectedEventGroupGuid
+ \copydoc OvmfPkg/Include/Guid/RootBridgesConnectedEventGroup.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gRootBridgesConnectedEventGroupGuid</TD><TD>{0x24a2d66f, 0xeedd, 0x4086, {0x90, 0x42, 0xf2, 0x6e, 0x47, 0x97, 0xee, 0x69}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link OvmfPkg/Include/Guid/RootBridgesConnectedEventGroup.h
+\endlink
+
+ **/
+/** \page guid_common_gUefiOvmfPkgTokenSpaceGuid gUefiOvmfPkgTokenSpaceGuid
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gUefiOvmfPkgTokenSpaceGuid</TD><TD>{0x93bb96af, 0xb9f2, 0x4eb8, {0x94, 0x62, 0xe0, 0xba, 0x74, 0x56, 0x42, 0x36}}</TD></TR></TABLE>
+ **/
+/** \page guid_common_gVirtioMmioTransportGuid gVirtioMmioTransportGuid
+ \copydoc OvmfPkg/Include/Guid/VirtioMmioTransport.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gVirtioMmioTransportGuid</TD><TD>{0x837dca9e, 0xe874, 0x4d82, {0xb2, 0x9a, 0x23, 0xfe, 0x0e, 0x23, 0xd1, 0xe2}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link OvmfPkg/Include/Guid/VirtioMmioTransport.h
+\endlink
+
+ **/
+/** \page guid_common_gXenBusRootDeviceGuid gXenBusRootDeviceGuid
+ \copydoc OvmfPkg/Include/Guid/XenBusRootDevice.h <br>
+ \section BasicGuidInfo GUID Information
+<TABLE><TR><TD><CAPTION>GUID's Guid Name</CAPTION></TD><TD><CAPTION>GUID's Guid</CAPTION></TD></TR><TR><TD>gXenBusRootDeviceGuid</TD><TD>{0xa732241f, 0x383d, 0x4d9c, {0x8a, 0xe1, 0x8e, 0x09, 0x83, 0x75, 0x89, 0xd7}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link OvmfPkg/Include/Guid/XenBusRootDevice.h
+\endlink
+
+ **/
+/** \page ppi_root_page PPI
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page ppi_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage ppi_page_gOvmfTpmDiscoveredPpiGuid "gOvmfTpmDiscoveredPpiGuid" </li>
+<li>\subpage ppi_page_gOvmfTpmMmioAccessiblePpiGuid "gOvmfTpmMmioAccessiblePpiGuid" </li>
+</ul>
+ **/
+/** \page ppi_page_gOvmfTpmDiscoveredPpiGuid gOvmfTpmDiscoveredPpiGuid
+ \section BasicPpiInfo PPI Information
+<TABLE><TR><TD><CAPTION>PPI's Guid Name</CAPTION></TD><TD><CAPTION>PPI's Guid</CAPTION></TD></TR><TR><TD>gOvmfTpmDiscoveredPpiGuid</TD><TD>{0xb9a61ad0, 0x2802, 0x41f3, {0xb5, 0x13, 0x96, 0x51, 0xce, 0x6b, 0xd5, 0x75}}</TD></TR></TABLE>
+ **/
+/** \page ppi_page_gOvmfTpmMmioAccessiblePpiGuid gOvmfTpmMmioAccessiblePpiGuid
+ \section BasicPpiInfo PPI Information
+<TABLE><TR><TD><CAPTION>PPI's Guid Name</CAPTION></TD><TD><CAPTION>PPI's Guid</CAPTION></TD></TR><TR><TD>gOvmfTpmMmioAccessiblePpiGuid</TD><TD>{0x35c84ff2, 0x7bfe, 0x453d, {0x84, 0x5f, 0x68, 0x3a, 0x49, 0x2c, 0xf7, 0xb7}}</TD></TR></TABLE>
+ **/
+/** \page protocol_root_page PROTOCOL
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_arch_root_common "common" </li>
+</ul>
+ **/
+/** \page protocol_arch_root_common common
+<p> \section content_index INDEX
+<ul>
+<li>\subpage protocol_page_gEfiFirmwareVolumeProtocolGuid "gEfiFirmwareVolumeProtocolGuid" </li>
+<li>\subpage protocol_page_gEfiIsaAcpiProtocolGuid "gEfiIsaAcpiProtocolGuid" </li>
+<li>\subpage protocol_page_gEfiIsaIoProtocolGuid "gEfiIsaIoProtocolGuid" </li>
+<li>\subpage protocol_page_gEfiLegacy8259ProtocolGuid "gEfiLegacy8259ProtocolGuid" </li>
+<li>\subpage protocol_page_gEfiLegacyBiosPlatformProtocolGuid "gEfiLegacyBiosPlatformProtocolGuid" </li>
+<li>\subpage protocol_page_gEfiLegacyBiosProtocolGuid "gEfiLegacyBiosProtocolGuid" </li>
+<li>\subpage protocol_page_gEfiLegacyInterruptProtocolGuid "gEfiLegacyInterruptProtocolGuid" </li>
+<li>\subpage protocol_page_gEfiVgaMiniPortProtocolGuid "gEfiVgaMiniPortProtocolGuid" </li>
+<li>\subpage protocol_page_gIoMmuAbsentProtocolGuid "gIoMmuAbsentProtocolGuid" </li>
+<li>\subpage protocol_page_gOvmfLoadedX86LinuxKernelProtocolGuid "gOvmfLoadedX86LinuxKernelProtocolGuid" </li>
+<li>\subpage protocol_page_gVirtioDeviceProtocolGuid "gVirtioDeviceProtocolGuid" </li>
+<li>\subpage protocol_page_gXenBusProtocolGuid "gXenBusProtocolGuid" </li>
+<li>\subpage protocol_page_gXenIoProtocolGuid "gXenIoProtocolGuid" </li>
+</ul>
+ **/
+/** \page protocol_page_gEfiFirmwareVolumeProtocolGuid gEfiFirmwareVolumeProtocolGuid
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEfiFirmwareVolumeProtocolGuid</TD><TD>{0x389F751F, 0x1838, 0x4388, {0x83, 0x90, 0xcd, 0x81, 0x54, 0xbd, 0x27, 0xf8}}</TD></TR></TABLE>
+ **/
+/** \page protocol_page_gEfiIsaAcpiProtocolGuid gEfiIsaAcpiProtocolGuid
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEfiIsaAcpiProtocolGuid</TD><TD>{0x64a892dc, 0x5561, 0x4536, {0x92, 0xc7, 0x79, 0x9b, 0xfc, 0x18, 0x33, 0x55}}</TD></TR></TABLE>
+ **/
+/** \page protocol_page_gEfiIsaIoProtocolGuid gEfiIsaIoProtocolGuid
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEfiIsaIoProtocolGuid</TD><TD>{0x7ee2bd44, 0x3da0, 0x11d4, {0x9a, 0x38, 0x0, 0x90, 0x27, 0x3f, 0xc1, 0x4d}}</TD></TR></TABLE>
+ **/
+/** \page protocol_page_gEfiLegacy8259ProtocolGuid gEfiLegacy8259ProtocolGuid
+ \copydoc OvmfPkg/Include/Protocol/Legacy8259.h <br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEfiLegacy8259ProtocolGuid</TD><TD>{0x38321dba, 0x4fe0, 0x4e17, {0x8a, 0xec, 0x41, 0x30, 0x55, 0xea, 0xed, 0xc1}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link OvmfPkg/Include/Protocol/Legacy8259.h
+\endlink
+
+ **/
+/** \page protocol_page_gEfiLegacyBiosPlatformProtocolGuid gEfiLegacyBiosPlatformProtocolGuid
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEfiLegacyBiosPlatformProtocolGuid</TD><TD>{0x783658a3, 0x4172, 0x4421, {0xa2, 0x99, 0xe0, 0x09, 0x07, 0x9c, 0x0c, 0xb4}}</TD></TR></TABLE>
+ **/
+/** \page protocol_page_gEfiLegacyBiosProtocolGuid gEfiLegacyBiosProtocolGuid
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEfiLegacyBiosProtocolGuid</TD><TD>{0xdb9a1e3d, 0x45cb, 0x4abb, {0x85, 0x3b, 0xe5, 0x38, 0x7f, 0xdb, 0x2e, 0x2d}}</TD></TR></TABLE>
+ **/
+/** \page protocol_page_gEfiLegacyInterruptProtocolGuid gEfiLegacyInterruptProtocolGuid
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEfiLegacyInterruptProtocolGuid</TD><TD>{0x31ce593d, 0x108a, 0x485d, {0xad, 0xb2, 0x78, 0xf2, 0x1f, 0x29, 0x66, 0xbe}}</TD></TR></TABLE>
+ **/
+/** \page protocol_page_gEfiVgaMiniPortProtocolGuid gEfiVgaMiniPortProtocolGuid
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gEfiVgaMiniPortProtocolGuid</TD><TD>{0xc7735a2f, 0x88f5, 0x4882, {0xae, 0x63, 0xfa, 0xac, 0x8c, 0x8b, 0x86, 0xb3}}</TD></TR></TABLE>
+ **/
+/** \page protocol_page_gIoMmuAbsentProtocolGuid gIoMmuAbsentProtocolGuid
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gIoMmuAbsentProtocolGuid</TD><TD>{0xf8775d50, 0x8abd, 0x4adf, {0x92, 0xac, 0x85, 0x3e, 0x51, 0xf6, 0xc8, 0xdc}}</TD></TR></TABLE>
+ **/
+/** \page protocol_page_gOvmfLoadedX86LinuxKernelProtocolGuid gOvmfLoadedX86LinuxKernelProtocolGuid
+ \copydoc OvmfPkg/Include/Protocol/OvmfLoadedX86LinuxKernel.h <br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gOvmfLoadedX86LinuxKernelProtocolGuid</TD><TD>{0xa3edc05d, 0xb618, 0x4ff6, {0x95, 0x52, 0x76, 0xd7, 0x88, 0x63, 0x43, 0xc8}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link OvmfPkg/Include/Protocol/OvmfLoadedX86LinuxKernel.h
+\endlink
+
+ **/
+/** \page protocol_page_gVirtioDeviceProtocolGuid gVirtioDeviceProtocolGuid
+ \copydoc OvmfPkg/Include/Protocol/VirtioDevice.h <br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gVirtioDeviceProtocolGuid</TD><TD>{0xfa920010, 0x6785, 0x4941, {0xb6, 0xec, 0x49, 0x8c, 0x57, 0x9f, 0x16, 0x0a}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link OvmfPkg/Include/Protocol/VirtioDevice.h
+\endlink
+
+ **/
+/** \page protocol_page_gXenBusProtocolGuid gXenBusProtocolGuid
+ \copydoc OvmfPkg/Include/Protocol/XenBus.h <br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gXenBusProtocolGuid</TD><TD>{0x3d3ca290, 0xb9a5, 0x11e3, {0xb7, 0x5d, 0xb8, 0xac, 0x6f, 0x7d, 0x65, 0xe6}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link OvmfPkg/Include/Protocol/XenBus.h
+\endlink
+
+ **/
+/** \page protocol_page_gXenIoProtocolGuid gXenIoProtocolGuid
+ \copydoc OvmfPkg/Include/Protocol/XenIo.h <br>
+ \section BasicProtocolInfo PROTOCOL Information
+<TABLE><TR><TD><CAPTION>PROTOCOL's Guid Name</CAPTION></TD><TD><CAPTION>PROTOCOL's Guid</CAPTION></TD></TR><TR><TD>gXenIoProtocolGuid</TD><TD>{0x6efac84f, 0x0ab0, 0x4747, {0x81, 0xbe, 0x85, 0x55, 0x62, 0x59, 0x04, 0x49}}</TD></TR></TABLE>
+ \section ref Refer to Header File
+\link OvmfPkg/Include/Protocol/XenIo.h
+\endlink
+
+ **/

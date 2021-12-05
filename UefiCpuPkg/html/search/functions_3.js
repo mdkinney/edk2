@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['getapicid',['GetApicId',['../_local_apic_lib_8h.html#a200450815ccc1b73a92dcf1c3d81c458',1,'LocalApicLib.h']]],
+  ['getapicmode',['GetApicMode',['../_local_apic_lib_8h.html#a7a9aa3dd5d7d63f81d15afe95ae95ce7',1,'LocalApicLib.h']]],
+  ['getapicmsiaddress',['GetApicMsiAddress',['../_local_apic_lib_8h.html#a89283c1ba433ec480d54dac0aad2cb8d',1,'LocalApicLib.h']]],
+  ['getapicmsivalue',['GetApicMsiValue',['../_local_apic_lib_8h.html#ad30ff5cb28a4b2e7bc338b84eb52e4ef',1,'LocalApicLib.h']]],
+  ['getapictimercurrentcount',['GetApicTimerCurrentCount',['../_local_apic_lib_8h.html#ae1d77d94272cde87114bd30d2a6255f3',1,'LocalApicLib.h']]],
+  ['getapictimerinitcount',['GetApicTimerInitCount',['../_local_apic_lib_8h.html#ac2a3000e5b6b684ca5145592d108b1ff',1,'LocalApicLib.h']]],
+  ['getapictimerinterruptstate',['GetApicTimerInterruptState',['../_local_apic_lib_8h.html#a187f0f80646bd9d86fd0d99488d8e7c1',1,'LocalApicLib.h']]],
+  ['getapictimerstate',['GetApicTimerState',['../_local_apic_lib_8h.html#a29ff077f6e27602f4e2fbaec859f1f7a',1,'LocalApicLib.h']]],
+  ['getapicversion',['GetApicVersion',['../_local_apic_lib_8h.html#a17c9a5c63bb00813033488b444d29381',1,'LocalApicLib.h']]],
+  ['getcpucacheinfo',['GetCpuCacheInfo',['../_cpu_cache_info_lib_8h.html#a0f529dd2c0082de5415214e014bbf6db',1,'CpuCacheInfoLib.h']]],
+  ['getcpufamilymodel',['GetCpuFamilyModel',['../_uefi_cpu_lib_8h.html#aef81d483e326e8fd8b2fd5827caad8be',1,'UefiCpuLib.h']]],
+  ['getcpusteppingid',['GetCpuSteppingId',['../_uefi_cpu_lib_8h.html#ab16cb56d39aad7cabb4f94a09980ddc3',1,'UefiCpuLib.h']]],
+  ['getfirmwarevariablemtrrcount',['GetFirmwareVariableMtrrCount',['../_mtrr_lib_8h.html#a70eb6e8968409ea5ac315b2b9f946414',1,'MtrrLib.h']]],
+  ['getinitialapicid',['GetInitialApicId',['../_local_apic_lib_8h.html#a49503232c2cfb9579d279270e9ba29ec',1,'LocalApicLib.h']]],
+  ['getlocalapicbaseaddress',['GetLocalApicBaseAddress',['../_local_apic_lib_8h.html#ac2a3e0fe7ffbed6f294bda12cdde6f82',1,'LocalApicLib.h']]],
+  ['getmicrocodelength',['GetMicrocodeLength',['../_microcode_lib_8h.html#aa820c782b97937f801c685bdf503c44f',1,'MicrocodeLib.h']]],
+  ['getplatformpagetableattribute',['GetPlatformPageTableAttribute',['../_smm_cpu_platform_hook_lib_8h.html#aed8364752873821685cb9ee72c264e08',1,'SmmCpuPlatformHookLib.h']]],
+  ['getprocessorlocation2byapicid',['GetProcessorLocation2ByApicId',['../_local_apic_lib_8h.html#af97763d0c5dba3e571cf7bdfc5f25c1e',1,'LocalApicLib.h']]],
+  ['getprocessorlocationbyapicid',['GetProcessorLocationByApicId',['../_local_apic_lib_8h.html#a716a4d60cf416870fbdc90329e3688f6',1,'LocalApicLib.h']]],
+  ['getprocessormicrocodecpuid',['GetProcessorMicrocodeCpuId',['../_microcode_lib_8h.html#a27dfb16536e6d789350e300872d1ea60',1,'MicrocodeLib.h']]],
+  ['getprocessormicrocodesignature',['GetProcessorMicrocodeSignature',['../_microcode_lib_8h.html#aa9bbf315c277e26e45c75f6d8836301c',1,'MicrocodeLib.h']]],
+  ['getvariablemtrrcount',['GetVariableMtrrCount',['../_mtrr_lib_8h.html#a6a236a7c1941361aa64f9a72df2e5c8c',1,'MtrrLib.h']]]
+];

@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['cacheasramlib_2eh',['CacheAsRamLib.h',['../_cache_as_ram_lib_8h.html',1,'']]],
+  ['cachelib_2eh',['CacheLib.h',['../_cache_lib_8h.html',1,'']]],
+  ['callerid',['CallerId',['../_fsp_api_8h.html#ab7581d8a52d8fcee9ca00d6c648bee1b',1,'FspApi.h']]],
+  ['cfgregionoffset',['CfgRegionOffset',['../struct_f_s_p___i_n_f_o___h_e_a_d_e_r.html#a8dce8efb43dc23ebdb4fad6aed0abb32',1,'FSP_INFO_HEADER']]],
+  ['cfgregionsize',['CfgRegionSize',['../struct_f_s_p___i_n_f_o___h_e_a_d_e_r.html#a8e0d50fc88d843c3e702ae47382126af',1,'FSP_INFO_HEADER']]],
+  ['coderegionbase',['CodeRegionBase',['../struct_f_s_p___p_l_a_t___d_a_t_a.html#a788ca1cffaf2be0a0a3c2ee38b989b99',1,'FSP_PLAT_DATA']]],
+  ['coderegionsize',['CodeRegionSize',['../struct_f_s_p___p_l_a_t___d_a_t_a.html#ae81e2a163f83ce56ed14f5b0214d8960',1,'FSP_PLAT_DATA']]],
+  ['componentattribute',['ComponentAttribute',['../struct_f_s_p___i_n_f_o___h_e_a_d_e_r.html#a114825b198de88ae817efb98ddd871d7',1,'FSP_INFO_HEADER']]],
+  ['corestack',['CoreStack',['../struct_f_s_p___g_l_o_b_a_l___d_a_t_a.html#ae86541f2e02b2cab05c2350d3206cc93',1,'FSP_GLOBAL_DATA']]],
+  ['common',['common',['../guid_arch_root_common.html',1,'guid_root_page']]],
+  ['cacheasramlib',['CacheAsRamLib',['../lc__cache_as_ram_lib.html',1,'lc_common']]],
+  ['cachelib',['CacheLib',['../lc__cache_lib.html',1,'lc_common']]],
+  ['common',['common',['../lc_common.html',1,'IntelFsp2Pkg_libraryclass']]],
+  ['common',['common',['../pcd__pcds_dynamic_common_root_page.html',1,'pcd_PcdsDynamic_root_page']]],
+  ['common',['common',['../pcd__pcds_dynamic_ex_common_root_page.html',1,'pcd_PcdsDynamicEx_root_page']]],
+  ['common',['common',['../pcd__pcds_fixed_at_build_common_root_page.html',1,'pcd_PcdsFixedAtBuild_root_page']]],
+  ['common',['common',['../ppi_arch_root_common.html',1,'ppi_root_page']]]
+];

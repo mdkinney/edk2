@@ -1,0 +1,35 @@
+var _http_lib_8h =
+[
+    [ "HTTP_IO_HEADER", "struct_h_t_t_p___i_o___h_e_a_d_e_r.html", "struct_h_t_t_p___i_o___h_e_a_d_e_r" ],
+    [ "Context", "_http_lib_8h.html#a614c681cb7ee34010dfa245cba8c4cae", null ],
+    [ "Data", "_http_lib_8h.html#aeeba72a065a8fde8178c9a3f90e7d670", null ],
+    [ "Length", "_http_lib_8h.html#aad09305225e15cbf14b9b0ca30a076c2", null ],
+    [ "HTTP_BODY_PARSE_EVENT", "_http_lib_8h.html#a1939a98762edd8b5e805431ca4dbfdc5", [
+      [ "BodyParseEventOnData", "_http_lib_8h.html#a1939a98762edd8b5e805431ca4dbfdc5a0fcef1e5ae960b432933a32bf86093e7", null ],
+      [ "BodyParseEventOnComplete", "_http_lib_8h.html#a1939a98762edd8b5e805431ca4dbfdc5af7db67b35877774267e8d362ac387b7b", null ]
+    ] ],
+    [ "EFI_STATUS", "_http_lib_8h.html#a6f9bb93912ca15f74bb8cc1492b14ed1", null ],
+    [ "HttpFindHeader", "_http_lib_8h.html#af747274a8736566df9c67b5f9969529b", null ],
+    [ "HttpFreeHeaderFields", "_http_lib_8h.html#a756971f3ff3e5a35d7745ce05953839c", null ],
+    [ "HttpFreeMsgParser", "_http_lib_8h.html#ad9706a745af300dc89eb845e5f18b541", null ],
+    [ "HttpGenRequestMessage", "_http_lib_8h.html#aa774d53942186779d968f9db609037f3", null ],
+    [ "HttpGetEntityLength", "_http_lib_8h.html#ad3c7b4e017838a3c6597c63ab2f8b214", null ],
+    [ "HttpGetFieldNameAndValue", "_http_lib_8h.html#a83d4e083bd122fd6acf5daf507a1d8d6", null ],
+    [ "HttpInitMsgParser", "_http_lib_8h.html#a2c090849180343d457d3a177609d9805", null ],
+    [ "HttpIoCreateHeader", "_http_lib_8h.html#af475d9a1f79e2de6591360549dc01e47", null ],
+    [ "HttpIoFreeHeader", "_http_lib_8h.html#a390fc7d01232ec14d94276d895e04359", null ],
+    [ "HttpIoSetHeader", "_http_lib_8h.html#abff749671ecf469df7d7a6ef7e66b3a4", null ],
+    [ "HttpIsMessageComplete", "_http_lib_8h.html#afa55dc3560678adbf1cca14663a65cd6", null ],
+    [ "HttpIsValidHttpHeader", "_http_lib_8h.html#ac0cafb51a07b58b1d6012bfe077f9c81", null ],
+    [ "HttpMappingToStatusCode", "_http_lib_8h.html#aff21d982ddf2e5db4d5c6ccd7f3e6a37", null ],
+    [ "HttpParseMessageBody", "_http_lib_8h.html#abb5faed2b952f424f5baf0049fbbd5c6", null ],
+    [ "HttpParseUrl", "_http_lib_8h.html#ae176e8adb44c9a6339ab907ada164046", null ],
+    [ "HttpSetFieldNameAndValue", "_http_lib_8h.html#a0c5f2c3d99a3ae05c7d83dedee42fe19", null ],
+    [ "HttpUrlFreeParser", "_http_lib_8h.html#adbafa48b0be0e328358993b959b0916e", null ],
+    [ "HttpUrlGetHostName", "_http_lib_8h.html#a281db9ed3f2be7d58d9539f097aa948e", null ],
+    [ "HttpUrlGetIp4", "_http_lib_8h.html#a87f221cae908deae6134389f883a9241", null ],
+    [ "HttpUrlGetIp6", "_http_lib_8h.html#a989ac4622882ad660cc5e35f04053f97", null ],
+    [ "HttpUrlGetPath", "_http_lib_8h.html#a751fbe202a3b84594185ad1cee103d71", null ],
+    [ "HttpUrlGetPort", "_http_lib_8h.html#a44e64816e9409e717597411d7a40bc2e", null ],
+    [ "UriPercentDecode", "_http_lib_8h.html#a4214223befc03ee4dc6da1b773afb25e", null ]
+];

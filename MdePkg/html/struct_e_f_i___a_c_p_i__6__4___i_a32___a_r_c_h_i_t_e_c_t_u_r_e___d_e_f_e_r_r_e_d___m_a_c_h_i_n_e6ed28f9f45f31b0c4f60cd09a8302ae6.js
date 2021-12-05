@@ -1,0 +1,13 @@
+var struct_e_f_i___a_c_p_i__6__4___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___d_e_f_e_r_r_e_d___m_a_c_h_i_n_e6ed28f9f45f31b0c4f60cd09a8302ae6 =
+[
+    [ "Enabled", "struct_e_f_i___a_c_p_i__6__4___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___d_e_f_e_r_r_e_d___m_a_c_h_i_n_e6ed28f9f45f31b0c4f60cd09a8302ae6.html#abcae4fd1ee6cd53b1f09462292d4e932", null ],
+    [ "Flags", "struct_e_f_i___a_c_p_i__6__4___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___d_e_f_e_r_r_e_d___m_a_c_h_i_n_e6ed28f9f45f31b0c4f60cd09a8302ae6.html#a7642d9c76f6cc1363be984734f893e13", null ],
+    [ "MaxSectionsPerRecord", "struct_e_f_i___a_c_p_i__6__4___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___d_e_f_e_r_r_e_d___m_a_c_h_i_n_e6ed28f9f45f31b0c4f60cd09a8302ae6.html#afe749207c1e5755f86e9af275d119a40", null ],
+    [ "NotificationStructure", "struct_e_f_i___a_c_p_i__6__4___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___d_e_f_e_r_r_e_d___m_a_c_h_i_n_e6ed28f9f45f31b0c4f60cd09a8302ae6.html#a2477d1476c444a4c448011db01df2c77", null ],
+    [ "NumberOfHardwareBanks", "struct_e_f_i___a_c_p_i__6__4___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___d_e_f_e_r_r_e_d___m_a_c_h_i_n_e6ed28f9f45f31b0c4f60cd09a8302ae6.html#a07b17de04bf0b0eff2df49666c385236", null ],
+    [ "NumberOfRecordsToPreAllocate", "struct_e_f_i___a_c_p_i__6__4___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___d_e_f_e_r_r_e_d___m_a_c_h_i_n_e6ed28f9f45f31b0c4f60cd09a8302ae6.html#a04c0896f199776296233a3d15470c785", null ],
+    [ "Reserved0", "struct_e_f_i___a_c_p_i__6__4___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___d_e_f_e_r_r_e_d___m_a_c_h_i_n_e6ed28f9f45f31b0c4f60cd09a8302ae6.html#a9d49a074109a62a8a14aa66cd828cb9f", null ],
+    [ "Reserved1", "struct_e_f_i___a_c_p_i__6__4___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___d_e_f_e_r_r_e_d___m_a_c_h_i_n_e6ed28f9f45f31b0c4f60cd09a8302ae6.html#aca4bca1cfd8d2eb21e1bc8684b9e57d7", null ],
+    [ "SourceId", "struct_e_f_i___a_c_p_i__6__4___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___d_e_f_e_r_r_e_d___m_a_c_h_i_n_e6ed28f9f45f31b0c4f60cd09a8302ae6.html#ad451d9fa3dfd5e7f8f349bbf8604d64c", null ],
+    [ "Type", "struct_e_f_i___a_c_p_i__6__4___i_a32___a_r_c_h_i_t_e_c_t_u_r_e___d_e_f_e_r_r_e_d___m_a_c_h_i_n_e6ed28f9f45f31b0c4f60cd09a8302ae6.html#a3303941fbc94e7d7d4b7ae346ef9653a", null ]
+];

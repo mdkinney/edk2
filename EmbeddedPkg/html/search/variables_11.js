@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['secondstagebootloaderaddress',['SecondStageBootloaderAddress',['../struct_a_n_d_r_o_i_d___b_o_o_t_i_m_g___h_e_a_d_e_r.html#afc8792c75880bf8bf396e343f9eb2b2d',1,'ANDROID_BOOTIMG_HEADER']]],
+  ['secondstagebootloadersize',['SecondStageBootloaderSize',['../struct_a_n_d_r_o_i_d___b_o_o_t_i_m_g___h_e_a_d_e_r.html#a601389f77471b287d9684f483f7f9f72',1,'ANDROID_BOOTIMG_HEADER']]],
+  ['sectionextraction',['SectionExtraction',['../struct_e_x_t_r_a_c_t___s_e_c_t_i_o_n___d_a_t_a.html#a373916f4d283a59d5011526f22a1c003',1,'EXTRACT_SECTION_DATA']]],
+  ['sectiongetinfo',['SectionGetInfo',['../struct_e_x_t_r_a_c_t___s_e_c_t_i_o_n___d_a_t_a.html#a890890facac472ab792e5575b44fbd7d',1,'EXTRACT_SECTION_DATA']]],
+  ['sectorcount',['SectorCount',['../struct_n_o_r___f_l_a_s_h___i_n_f_o.html#a8dac6af250870c1ac3895b4b8b3d8b50',1,'NOR_FLASH_INFO']]],
+  ['sectorsize',['SectorSize',['../struct_n_o_r___f_l_a_s_h___i_n_f_o.html#acb68554d2a96e4c043f9a7da182b7fa9',1,'NOR_FLASH_INFO']]],
+  ['send',['Send',['../struct___u_s_b___d_e_v_i_c_e___p_r_o_t_o_c_o_l.html#ab103ac444052f2b2ed80d9caa31c2daa',1,'_USB_DEVICE_PROTOCOL::Send()'],['../struct___f_a_s_t_b_o_o_t___t_r_a_n_s_p_o_r_t___p_r_o_t_o_c_o_l.html#a0c22ef26ca60dd7f8414b204d6b08c79',1,'_FASTBOOT_TRANSPORT_PROTOCOL::Send()']]],
+  ['sendcommand',['SendCommand',['../struct___e_f_i___m_m_c___h_o_s_t___p_r_o_t_o_c_o_l.html#a3c15ec666e7ac942e12e6a2527844c55',1,'_EFI_MMC_HOST_PROTOCOL']]],
+  ['serverip',['ServerIp',['../struct_e_f_i___o_p_e_n___f_i_l_e.html#afa4ab728ab189d243bff4a0115cd504b',1,'EFI_OPEN_FILE']]],
+  ['set',['Set',['../struct___e_m_b_e_d_d_e_d___g_p_i_o___p_p_i.html#a2ecad39a98ad604957a80149ed9a216f',1,'_EMBEDDED_GPIO_PPI::Set()'],['../struct___e_m_b_e_d_d_e_d___g_p_i_o.html#ac6643f428940828d4b67679af04b9791',1,'_EMBEDDED_GPIO::Set()']]],
+  ['setios',['SetIos',['../struct___e_f_i___m_m_c___h_o_s_t___p_r_o_t_o_c_o_l.html#ac0627504101b937f1ce18404600e43ed',1,'_EFI_MMC_HOST_PROTOCOL']]],
+  ['setnodeproperty',['SetNodeProperty',['../struct___f_d_t___c_l_i_e_n_t___p_r_o_t_o_c_o_l.html#a48c54fb96b951ee54718445e0e005e4e',1,'_FDT_CLIENT_PROTOCOL']]],
+  ['setpull',['SetPull',['../struct___e_m_b_e_d_d_e_d___g_p_i_o___p_p_i.html#af88a3b48325641d8416bc044b71758a6',1,'_EMBEDDED_GPIO_PPI::SetPull()'],['../struct___e_m_b_e_d_d_e_d___g_p_i_o.html#a2db3bf3de478fcfc0b6b376dedc14e85',1,'_EMBEDDED_GPIO::SetPull()']]],
+  ['settriggertype',['SetTriggerType',['../struct___e_f_i___h_a_r_d_w_a_r_e___i_n_t_e_r_r_u_p_t2___p_r_o_t_o_c_o_l.html#aa791cfcf487bfdcd11c123939f2585eb',1,'_EFI_HARDWARE_INTERRUPT2_PROTOCOL']]],
+  ['signature',['Signature',['../struct___v_i_r_t_u_a_l___k_b_d___k_e_y.html#af2285dd014070392b18d8d21f522ecc7',1,'_VIRTUAL_KBD_KEY']]],
+  ['size',['Size',['../struct_e_f_i___o_p_e_n___f_i_l_e.html#a024548e73f60b049a8eea42d62a31d04',1,'EFI_OPEN_FILE::Size()'],['../structfdt__reserve__entry.html#ace12399f157bc46877fbcddec98da67e',1,'fdt_reserve_entry::size()']]],
+  ['size_5fdt_5fstrings',['size_dt_strings',['../structfdt__header.html#a64c5ed9e447a81137bf30a6bc3c627ee',1,'fdt_header']]],
+  ['size_5fdt_5fstruct',['size_dt_struct',['../structfdt__header.html#a5d7585b3780d6e983fe0924a0e23ffcb',1,'fdt_header']]],
+  ['start',['Start',['../struct___u_s_b___d_e_v_i_c_e___p_r_o_t_o_c_o_l.html#a764021fcdeb86b13d2dedbdb78e11d80',1,'_USB_DEVICE_PROTOCOL::Start()'],['../struct___f_a_s_t_b_o_o_t___t_r_a_n_s_p_o_r_t___p_r_o_t_o_c_o_l.html#afbee52218fef93a782c55bd44ef96343',1,'_FASTBOOT_TRANSPORT_PROTOCOL::Start()']]],
+  ['stop',['Stop',['../struct___f_a_s_t_b_o_o_t___t_r_a_n_s_p_o_r_t___p_r_o_t_o_c_o_l.html#a6677a151b2fffd7c820c81239d534c8d',1,'_FASTBOOT_TRANSPORT_PROTOCOL']]],
+  ['subsystemid',['SubsystemId',['../struct_e_m_b_e_d_d_e_d___d_e_v_i_c_e___p_r_o_t_o_c_o_l.html#a317b1aa2c91c8c64549b162034625180',1,'EMBEDDED_DEVICE_PROTOCOL']]],
+  ['subsystemvendorid',['SubsystemVendorId',['../struct_e_m_b_e_d_d_e_d___d_e_v_i_c_e___p_r_o_t_o_c_o_l.html#a32a3a55cc7e76f88ed95ac41218bd14c',1,'EMBEDDED_DEVICE_PROTOCOL']]]
+];

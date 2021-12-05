@@ -1,0 +1,26 @@
+var struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e =
+[
+    [ "CommandRegisterOffsetInBlockControlWindow", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a5a2b23a4dc2759cb5a5c4f4e1a5f130d", null ],
+    [ "DeviceID", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a2bc59440831bbe516a71e85135c1e925", null ],
+    [ "Length", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#ad79082b827da9c3c79033218b90ade02", null ],
+    [ "ManufacturingDate", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a9c5fb9210ec643d0ee3e658cd35206d5", null ],
+    [ "ManufacturingLocation", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a1d93a5aeb43632a65257c7090c6e9b5f", null ],
+    [ "NumberOfBlockControlWindows", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a18ed14dfc5ae78ebc325d1374e5c036e", null ],
+    [ "NVDIMMControlRegionFlag", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#adfdd60e2166a2b7153d61dde24d25adf", null ],
+    [ "NVDIMMControlRegionStructureIndex", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#ad3b94b4aea8ec2ba6d19f3eb8973cb72", null ],
+    [ "RegionFormatInterfaceCode", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#ab29610642bcb8b02b1f9a17a826ca7cd", null ],
+    [ "Reserved_22", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a297cc006dd133c9ac962e97f68d863a7", null ],
+    [ "Reserved_74", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#ab1bdd1d68635d5cad076d7a30103287a", null ],
+    [ "RevisionID", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a621324bf7ba3fd878a9178266db9f9a2", null ],
+    [ "SerialNumber", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a1e45f30aba73450757a9e5d0aa735ca6", null ],
+    [ "SizeOfBlockControlWindow", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#ac0b30f07aa0e63b50dfad0d8b95f45da", null ],
+    [ "SizeOfCommandRegisterInBlockControlWindows", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a9e90471d725315c14db158ab9bc7a110", null ],
+    [ "SizeOfStatusRegisterInBlockControlWindows", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#ad271e996f1741abce3c95a9ece2ad62a", null ],
+    [ "StatusRegisterOffsetInBlockControlWindow", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#af6f324192306c077523dc13ccf252603", null ],
+    [ "SubsystemDeviceID", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a0a89eced848282dbd1c49a9c2447855b", null ],
+    [ "SubsystemRevisionID", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a53deffddb3e5c188ed7d45214b4f7b31", null ],
+    [ "SubsystemVendorID", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#af9ce4a82c11b0ac4d031a1e53f6454e3", null ],
+    [ "Type", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#acec00b0bf6a570eceaedc78fb8080fb9", null ],
+    [ "ValidFields", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a6eb448a15e9e48ae29d483142cdbcb94", null ],
+    [ "VendorID", "struct_e_f_i___a_c_p_i__6__2___n_f_i_t___n_v_d_i_m_m___c_o_n_t_r_o_l___r_e_g_i_o_n___s_t_r_u_c_t_u_r_e.html#a2679db43a19c23e2c01c91d10553858d", null ]
+];

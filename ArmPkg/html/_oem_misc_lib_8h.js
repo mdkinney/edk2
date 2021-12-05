@@ -1,0 +1,48 @@
+var _oem_misc_lib_8h =
+[
+    [ "OEM_MISC_PROCESSOR_DATA", "struct_o_e_m___m_i_s_c___p_r_o_c_e_s_s_o_r___d_a_t_a.html", "struct_o_e_m___m_i_s_c___p_r_o_c_e_s_s_o_r___d_a_t_a" ],
+    [ "OEM_MISC_CPU_CACHE_LEVEL", "_oem_misc_lib_8h.html#a0489878e48e075b004095f5fdf75c967", [
+      [ "CpuCacheL1", "_oem_misc_lib_8h.html#a0489878e48e075b004095f5fdf75c967a8cd0d557da339ad555c0dc28b031de50", null ],
+      [ "CpuCacheL2", "_oem_misc_lib_8h.html#a0489878e48e075b004095f5fdf75c967a9f7cefb5466f7cf3674fb1b95e2bee93", null ],
+      [ "CpuCacheL3", "_oem_misc_lib_8h.html#a0489878e48e075b004095f5fdf75c967ad1085c3eb15d3462836704514b9eb1e2", null ],
+      [ "CpuCacheL4", "_oem_misc_lib_8h.html#a0489878e48e075b004095f5fdf75c967afcba705c23b97cdfcf393623444273f0", null ],
+      [ "CpuCacheL5", "_oem_misc_lib_8h.html#a0489878e48e075b004095f5fdf75c967a2890dbcf376cc8f265b863ad19d921aa", null ],
+      [ "CpuCacheL6", "_oem_misc_lib_8h.html#a0489878e48e075b004095f5fdf75c967a816ad35d24f73a1356a1c8b6f2e6b400", null ],
+      [ "CpuCacheL7", "_oem_misc_lib_8h.html#a0489878e48e075b004095f5fdf75c967abf7a1aaba1c46c7331d004900c126d2d", null ],
+      [ "CpuCacheLevelMax", "_oem_misc_lib_8h.html#a0489878e48e075b004095f5fdf75c967a8208b0990b2034a49adabaea7773d08d", null ]
+    ] ],
+    [ "OEM_MISC_SMBIOS_HII_STRING_FIELD", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3", [
+      [ "ProductNameType01", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a980ad3c1012745bdf49a4204a4fb07bb", null ],
+      [ "SerialNumType01", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a18eb74db914d3750cf6589004a87da1e", null ],
+      [ "UuidType01", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3ae1acdec6e83bcddbd49a8262ce387796", null ],
+      [ "SystemManufacturerType01", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a9fd9f40c007a129855df0eb283522347", null ],
+      [ "SkuNumberType01", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3ad0585b96c82cb6cc73910706ab8e9f36", null ],
+      [ "FamilyType01", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a8b0ec00c730a610fcdbf5d9ff85390c8", null ],
+      [ "AssertTagType02", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a4867613d335664c00f01cb2c7f549a01", null ],
+      [ "SerialNumberType02", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a6856aca2a7116fcdd73f118c3ba81e84", null ],
+      [ "BoardManufacturerType02", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a3d926c31c630c1dba9c1cc560beb0888", null ],
+      [ "SkuNumberType02", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3ad8dc9c1b1ec8bda6533d8e21810b99db", null ],
+      [ "ChassisLocationType02", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a9d6baf3ab5c60db807659c0aff24e053", null ],
+      [ "AssetTagType03", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a0680f89c813fe8babf3948a9d20f2fcb", null ],
+      [ "SerialNumberType03", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a4a6c26de72d6dce091733ccb071a7f65", null ],
+      [ "VersionType03", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a0a84e0c52943d6de8e418feb9d86bb16", null ],
+      [ "ChassisTypeType03", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a66a38323b481aafc7add787e206742e0", null ],
+      [ "ManufacturerType03", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3a6cb217888ef6da1439aa5f269fae5de1", null ],
+      [ "SkuNumberType03", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3ad8971702d8621edd76d1da7aacd208ac", null ],
+      [ "SmbiosHiiStringFieldMax", "_oem_misc_lib_8h.html#a6144d5165dc0190dca710804b93939f3ade31a90645e8c470538ab9b097c517ca", null ]
+    ] ],
+    [ "OemGetBootStatus", "_oem_misc_lib_8h.html#a288d0b4229a058bd90c71ec15f540674", null ],
+    [ "OemGetCacheInformation", "_oem_misc_lib_8h.html#ac32de0e9da194b4414743c55118d5db3", null ],
+    [ "OemGetChassisBootupState", "_oem_misc_lib_8h.html#a0b7d5daa2aef5576fddb1200faad969f", null ],
+    [ "OemGetChassisHeight", "_oem_misc_lib_8h.html#a46fbed9d1024425e028fa10c4be2ce91", null ],
+    [ "OemGetChassisNumPowerCords", "_oem_misc_lib_8h.html#a25110fa76578710f008d4271cadaa7f3", null ],
+    [ "OemGetChassisPowerSupplyState", "_oem_misc_lib_8h.html#ac4bfca57253bd212d584a2a02832dd1f", null ],
+    [ "OemGetChassisSecurityStatus", "_oem_misc_lib_8h.html#a5780b6d3c19e34b3f83a8b53a745d3c2", null ],
+    [ "OemGetChassisThermalState", "_oem_misc_lib_8h.html#ad49323b0de6c031a9080d2669d0abc6e", null ],
+    [ "OemGetChassisType", "_oem_misc_lib_8h.html#aa23204c75e8e84905c881391962620bf", null ],
+    [ "OemGetCpuFreq", "_oem_misc_lib_8h.html#a7fb289be1e7cbce01c179051686451d6", null ],
+    [ "OemGetMaxProcessors", "_oem_misc_lib_8h.html#aecdd4cf5bdb79bc52e00447311cca81f", null ],
+    [ "OemGetProcessorInformation", "_oem_misc_lib_8h.html#a381b5c08b8a0be8251d8427021868c05", null ],
+    [ "OemIsProcessorPresent", "_oem_misc_lib_8h.html#a1ce6a8bdc626a0fec2c3dfc67cc50692", null ],
+    [ "OemUpdateSmbiosInfo", "_oem_misc_lib_8h.html#a28118baa1d43058f7787c260af072905", null ]
+];

@@ -1,0 +1,11 @@
+var searchData=
+[
+  ['len',['Len',['../struct_n_e_t___b_l_o_c_k.html#af0f922aea4722ecdd8c318f3895ba1ac',1,'NET_BLOCK::Len()'],['../struct_n_e_t___v_e_c_t_o_r.html#ac56ddedc848bfa28e141edac5ff9edd9',1,'NET_VECTOR::Len()'],['../struct_n_e_t___p_s_e_u_d_o___h_d_r.html#a613fd7bbc80fe30505f7fad6efca8274',1,'NET_PSEUDO_HDR::Len()'],['../struct_n_e_t___i_p6___p_s_e_u_d_o___h_d_r.html#acd3b555a54f135d3a10f2c6a9c860ba5',1,'NET_IP6_PSEUDO_HDR::Len()'],['../struct_n_e_t___f_r_a_g_m_e_n_t.html#af5d95e476a401168ea4f9b8bbb439f3a',1,'NET_FRAGMENT::Len()']]],
+  ['length',['Length',['../struct_h_t_t_p___i_o___c_h_u_n_k_s.html#a54f0dd9f51ec707be3862ced0218a3c5',1,'HTTP_IO_CHUNKS::Length()'],['../struct_e_f_i___u_d_p___h_e_a_d_e_r.html#a75dfae32d9d77ae06734752db661f4b4',1,'EFI_UDP_HEADER::Length()']]],
+  ['link',['Link',['../struct_u_d_p___t_x___t_o_k_e_n.html#a8ab4d66938725d416fee4f94bf512cda',1,'UDP_TX_TOKEN::Link()'],['../struct___u_d_p___i_o.html#a55685e1b318c3bef3672682660a57c50',1,'_UDP_IO::Link()'],['../struct_n_e_t___m_a_p___i_t_e_m.html#ab98409438e1d851a7a861a79cdafa4a9',1,'NET_MAP_ITEM::Link()']]],
+  ['list',['List',['../struct_n_e_t___b_u_f.html#a0fa5f76d71fa476177b33fd4a6d16312',1,'NET_BUF::List()'],['../struct_n_e_t___b_u_f___q_u_e_u_e.html#a02e164eb3c60a1fb43c36eb512e3b2be',1,'NET_BUF_QUEUE::List()']]],
+  ['listentoken',['ListenToken',['../struct_t_c_p___i_o.html#a1af75ddd235d621df9a5391aa48b626f',1,'TCP_IO']]],
+  ['localaddr',['LocalAddr',['../struct_u_d_p___e_n_d___p_o_i_n_t.html#a1083aacdb7d4fa81833f6ab4e97b843f',1,'UDP_END_POINT']]],
+  ['localip',['LocalIp',['../struct_t_c_p4___i_o___c_o_n_f_i_g___d_a_t_a.html#ace986b5528ac9697dd05606835533f96',1,'TCP4_IO_CONFIG_DATA::LocalIp()'],['../struct_h_t_t_p4___i_o___c_o_n_f_i_g___d_a_t_a.html#ad9a185ef635906a830417ad8f6f2fd57',1,'HTTP4_IO_CONFIG_DATA::LocalIp()'],['../struct_h_t_t_p6___i_o___c_o_n_f_i_g___d_a_t_a.html#acb289e735f4e62a5100d7b9b78629ed0',1,'HTTP6_IO_CONFIG_DATA::LocalIp()']]],
+  ['localport',['LocalPort',['../struct_u_d_p___e_n_d___p_o_i_n_t.html#af8d27295ed68545abf4f17b6e97e7c37',1,'UDP_END_POINT::LocalPort()'],['../struct_h_t_t_p4___i_o___c_o_n_f_i_g___d_a_t_a.html#a1ba5e43b88148df57f225e9c2e669579',1,'HTTP4_IO_CONFIG_DATA::LocalPort()'],['../struct_h_t_t_p6___i_o___c_o_n_f_i_g___d_a_t_a.html#a40788fbd0da8ca68d90233cd8bdaa77b',1,'HTTP6_IO_CONFIG_DATA::LocalPort()']]]
+];

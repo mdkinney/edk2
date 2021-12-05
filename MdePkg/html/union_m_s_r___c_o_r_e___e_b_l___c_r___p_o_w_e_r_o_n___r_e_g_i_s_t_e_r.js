@@ -1,0 +1,28 @@
+var union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r =
+[
+    [ "AddressParityEnable", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#aa926ef847d8f0d0eb749499918c6c36f", null ],
+    [ "APICClusterID", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a495d86209dc94de921f315183367ad75", null ],
+    [ "BINIT_DriverEnable", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a2f5ee2058a0e5b7fa3d4ce00db77a492", null ],
+    [ "BINIT_ObservationEnabled", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#aadcc1c1480f7a62b1774aee898f0dcb9", null ],
+    [ "Bits", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a985cf7d28472c00b0d7cdada3959530f", null ],
+    [ "ClockFrequencyRatio", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#adb939601478a287b36bf070962a7fd5a", null ],
+    [ "DataErrorCheckingEnable", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a2c04c42f9a390004d910981359bb13e5", null ],
+    [ "ExecuteBIST", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#aa8a0feecd46602a4a5479a95c74470c5", null ],
+    [ "MCERR_DriveEnable", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a209962bc76fb0fac615d687a86d9fd13", null ],
+    [ "MCERR_ObservationEnabled", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a272b01cc273e06a988590a72ac81ed72", null ],
+    [ "OutputTriStateEnable", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#ad087a9b362ddd4059de06c82c6ed6a6d", null ],
+    [ "Reserved1", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#af020983fd7d76c9f3ba6f9d05c88eb5e", null ],
+    [ "Reserved2", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a0d16d78f8a43a9601cb5d020c09da9ae", null ],
+    [ "Reserved3", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#aa65499aa813ce459d3838aa02d53bf73", null ],
+    [ "Reserved4", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a1d4e23f69f30fd72fc63d9f1d1bf6af9", null ],
+    [ "Reserved5", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a29b0fcafebbc683faedf397953fb98a0", null ],
+    [ "Reserved6", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#ac4e0609320407df8149f38f52c096cef", null ],
+    [ "Reserved7", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a1db20f13d2c70e3144f1005aa7afc5f9", null ],
+    [ "Reserved8", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a7daeda3196505b2a552536d9626d54e4", null ],
+    [ "ResetVector", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a4b9124619a9bf0f677d5e603495418e5", null ],
+    [ "ResponseErrorCheckingEnable", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a850cd89ce5d0955ad1ea2d146093a8d5", null ],
+    [ "SymmetricArbitrationID", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#aa53d234e70a6f764cdae5244ba69bcd2", null ],
+    [ "SystemBusFrequency", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a1741794ee4d75510439e9367e9d7458c", null ],
+    [ "Uint32", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#a79b212c865135e2bad314b12f059e41f", null ],
+    [ "Uint64", "union_m_s_r___c_o_r_e___e_b_l___c_r___p_o_w_e_r_o_n___r_e_g_i_s_t_e_r.html#afe6133122027c200fa508b2a43344270", null ]
+];

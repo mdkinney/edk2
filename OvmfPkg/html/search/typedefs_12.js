@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['xen_5fadd_5fto_5fphysmap_5ft',['xen_add_to_physmap_t',['../memory_8h.html#afe3890ecc3ae521c121d3bcdf1e4b39b',1,'memory.h']]],
+  ['xen_5fcallback_5ft',['xen_callback_t',['../arch-arm_2xen_8h.html#a9dd3d4cf3f98d2a18f11456dcef04f6f',1,'xen.h']]],
+  ['xen_5fhvm_5fparam_5ft',['xen_hvm_param_t',['../hvm__op_8h.html#af8a7ad2e0c2c0be2175f3fc396e41a0e',1,'hvm_op.h']]],
+  ['xen_5fmemory_5fmap_5ft',['xen_memory_map_t',['../memory_8h.html#a6ae94ed2a978be80408f20b27f4fcc37',1,'memory.h']]],
+  ['xen_5fpfn_5ft',['xen_pfn_t',['../arch-x86_2xen_8h.html#a7bb8328d919369591e73958849079a7c',1,'xen_pfn_t():&#160;xen.h'],['../arch-arm_2xen_8h.html#a3f8356179ee2b4913ddeb02a3638dfce',1,'xen_pfn_t():&#160;xen.h']]],
+  ['xen_5fremove_5ffrom_5fphysmap_5ft',['xen_remove_from_physmap_t',['../memory_8h.html#a7ac5899f2de1e9d6d775142c9ee4616b',1,'memory.h']]],
+  ['xen_5fshared_5finfo',['XEN_SHARED_INFO',['../xen_8h.html#abeb18333a4f5476a3d4b88baad140380',1,'xen.h']]],
+  ['xen_5fulong_5ft',['xen_ulong_t',['../arch-x86_2xen_8h.html#a9a750e8c9f4379677bc6fbb93d794f54',1,'xen_ulong_t():&#160;xen.h'],['../arch-arm_2xen_8h.html#afbf578d4da1a83caf0305e83f17f99b8',1,'xen_ulong_t():&#160;xen.h']]],
+  ['xen_5fvcpu_5ftime_5finfo',['XEN_VCPU_TIME_INFO',['../xen_8h.html#ab8906d0caa1a5a97890691d9e3a477c3',1,'xen.h']]],
+  ['xenbus_5fgrant_5faccess',['XENBUS_GRANT_ACCESS',['../_xen_bus_8h.html#a41b5a15ed4c33b2858469048f7ddc6c2',1,'XenBus.h']]],
+  ['xenbus_5fgrant_5fend_5faccess',['XENBUS_GRANT_END_ACCESS',['../_xen_bus_8h.html#a4a6cd3c00d149dc58514dec74c2bbe54',1,'XenBus.h']]],
+  ['xenbus_5fprotocol',['XENBUS_PROTOCOL',['../_xen_bus_8h.html#afe355a32a71384d9f10bedfc189b7454',1,'XenBus.h']]],
+  ['xenbus_5fset_5fstate',['XENBUS_SET_STATE',['../_xen_bus_8h.html#ae67d97d6d76347c33bae1ca4e22100c6',1,'XenBus.h']]],
+  ['xenbus_5fxs_5fbackend_5fread',['XENBUS_XS_BACKEND_READ',['../_xen_bus_8h.html#a8921778aeee8a5172f8cdc09ad4150ae',1,'XenBus.h']]],
+  ['xenbus_5fxs_5fread',['XENBUS_XS_READ',['../_xen_bus_8h.html#a4097181b47d4d74d68046fedb5b9b268',1,'XenBus.h']]],
+  ['xenbus_5fxs_5ftransaction_5fstart',['XENBUS_XS_TRANSACTION_START',['../_xen_bus_8h.html#ad77d4ef929d6b3c7685b6183293ea7d5',1,'XenBus.h']]],
+  ['xenbusstate',['XenbusState',['../xenbus_8h.html#aeacd6b07a69a31e1d5db2ad885b0c530',1,'XenbusState():&#160;xenbus.h'],['../_xen_bus_8h.html#ab38cb3344fa4a3624f40084f2ed939c6',1,'XenBusState():&#160;XenBus.h']]],
+  ['xencons_5fring_5fidx',['XENCONS_RING_IDX',['../console_8h.html#a3275612e9906d89de8b296455af50717',1,'console.h']]],
+  ['xenio_5fprotocol',['XENIO_PROTOCOL',['../_xen_io_8h.html#abf4b39c4408b3db6c65d3cb6a5830d24',1,'XenIo.h']]],
+  ['xenstore_5fring_5fidx',['XENSTORE_RING_IDX',['../xs__wire_8h.html#aec663ebe15881101fe4a2d93a2e4f8a8',1,'xs_wire.h']]],
+  ['xenstore_5fstatus',['XENSTORE_STATUS',['../_xen_bus_8h.html#a7c2e3a7bbef55121ac5a434431ebf6d3',1,'XenBus.h']]]
+];

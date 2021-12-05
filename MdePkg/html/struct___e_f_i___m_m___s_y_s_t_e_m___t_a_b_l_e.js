@@ -1,0 +1,28 @@
+var struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e =
+[
+    [ "CpuSaveState", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a7d79e1802d28ee690a426b992c8f283a", null ],
+    [ "CpuSaveStateSize", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a9c3dd2909e64e9dc58c5707089552b57", null ],
+    [ "CurrentlyExecutingCpu", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a53a4686e33570d364a23295dd5eeea18", null ],
+    [ "Hdr", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a3919d6ec5ad1509086950b087bb59e2d", null ],
+    [ "MmAllocatePages", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a62f78325ae67637a389c34eebed569d4", null ],
+    [ "MmAllocatePool", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#ada74b8281ee57442b0e1f49f05c45259", null ],
+    [ "MmConfigurationTable", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a57de89e6b4ef89e58d0b38243aa38f24", null ],
+    [ "MmFirmwareRevision", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#adf01ed62c59668ef2bc1ef9291b0a26d", null ],
+    [ "MmFirmwareVendor", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#aeb8cbe184318c98295fdb91a485e3b9e", null ],
+    [ "MmFreePages", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a7ca2af84f08ca0f96c1a02169e151c0b", null ],
+    [ "MmFreePool", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a3271d8ab14413c54ba699d86e6001cda", null ],
+    [ "MmHandleProtocol", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a46a378a576a9d9a4d84bbfa6fea9809d", null ],
+    [ "MmiHandlerRegister", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#ace3d18467959d859b27dcbc6f619aeac", null ],
+    [ "MmiHandlerUnRegister", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a776dabda3796492f2042e2cdcb047607", null ],
+    [ "MmiManage", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a59f9b02b53f0028f25cfcc155fb584e9", null ],
+    [ "MmInstallConfigurationTable", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#ad2e2fdfb8b9488287a66b7578f8b8d28", null ],
+    [ "MmInstallProtocolInterface", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a1ac88b0bf2ff3d6ae48c6b73384f247c", null ],
+    [ "MmIo", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a1e5f3c0ef05be544b89b297a31d3159a", null ],
+    [ "MmLocateHandle", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#aa01e2d59d113500ac208fdeff95f2b03", null ],
+    [ "MmLocateProtocol", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a9ff38fa89ef5b3faef9763b4fc7037e1", null ],
+    [ "MmRegisterProtocolNotify", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a3eaa61acc31cff14926fdb18203d6f96", null ],
+    [ "MmStartupThisAp", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#ae58fc8e59af6c15d006585ed8e9c8836", null ],
+    [ "MmUninstallProtocolInterface", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a9c02a341a5188f1205dc7a0e9e2e864e", null ],
+    [ "NumberOfCpus", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#a84ff9276eb1b985b6b2f17b4d499a69f", null ],
+    [ "NumberOfTableEntries", "struct___e_f_i___m_m___s_y_s_t_e_m___t_a_b_l_e.html#af99c97e32b43518969c0fd364941b571", null ]
+];

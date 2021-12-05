@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['page1baseaddress',['Page1BaseAddress',['../struct_cm_arm_pmcg_node.html#afe1eb603238e9c6121f81e1b67baa344',1,'CmArmPmcgNode']]],
+  ['parenttoken',['ParentToken',['../struct_cm_arm_proc_hierarchy_info.html#a8df3be2c9637067c364100c8f39a9346',1,'CmArmProcHierarchyInfo']]],
+  ['parkedaddress',['ParkedAddress',['../struct_cm_arm_gic_c_info.html#a8f03be49e74702d98549a659f0b1ae04',1,'CmArmGicCInfo']]],
+  ['parkingprotocolversion',['ParkingProtocolVersion',['../struct_cm_arm_gic_c_info.html#aa2ebb038545685599d34d48b68546f13',1,'CmArmGicCInfo']]],
+  ['pcisegmentgroupnumber',['PciSegmentGroupNumber',['../struct_cm_arm_pci_config_space_info.html#af8aec21295538daa1cec3f914e2505d8',1,'CmArmPciConfigSpaceInfo']]],
+  ['pcisegmentnumber',['PciSegmentNumber',['../struct_cm_arm_root_complex_node.html#a9788d6fb5304d431d941624a1636977b',1,'CmArmRootComplexNode']]],
+  ['performanceinterruptgsiv',['PerformanceInterruptGsiv',['../struct_cm_arm_gic_c_info.html#a7fb6636349891b6e88573eb857a82573',1,'CmArmGicCInfo']]],
+  ['periphbaseaddress',['PeriphBaseAddress',['../struct_cm_arm_cmn600_info.html#a9e39c903df4329aae0a53e280dff4f05',1,'CmArmCmn600Info']]],
+  ['periphbaseaddresslength',['PeriphBaseAddressLength',['../struct_cm_arm_cmn600_info.html#a4a9c97d7d0e837fd6fde3e9a3242d9da',1,'CmArmCmn600Info']]],
+  ['physicaladdresscntbase',['PhysicalAddressCntBase',['../struct_cm_arm_g_t_block_timer_frame_info.html#acc82322e3f0ee1fe01678b24f120eb48',1,'CmArmGTBlockTimerFrameInfo']]],
+  ['physicaladdresscntel0base',['PhysicalAddressCntEL0Base',['../struct_cm_arm_g_t_block_timer_frame_info.html#ad207f2cf7a8a3d6ef1ea702c340c8403',1,'CmArmGTBlockTimerFrameInfo']]],
+  ['physicalbaseaddress',['PhysicalBaseAddress',['../struct_cm_arm_gic_c_info.html#a1a350bff16799a2235441935e020cabe',1,'CmArmGicCInfo::PhysicalBaseAddress()'],['../struct_cm_arm_gic_d_info.html#a6eddd07c4a739c37fef2b3af7c6b7656',1,'CmArmGicDInfo::PhysicalBaseAddress()'],['../struct_cm_arm_gic_msi_frame_info.html#ac173b26b2b803532110e21cbcd37e8d1',1,'CmArmGicMsiFrameInfo::PhysicalBaseAddress()'],['../struct_cm_arm_gic_its_info.html#a521539beac4afbb671745b6d74c2e521',1,'CmArmGicItsInfo::PhysicalBaseAddress()']]],
+  ['physicaltimerflags',['PhysicalTimerFlags',['../struct_cm_arm_g_t_block_timer_frame_info.html#a784daf684d0a4736ec6691bf7bc241da',1,'CmArmGTBlockTimerFrameInfo']]],
+  ['physicaltimergsiv',['PhysicalTimerGSIV',['../struct_cm_arm_g_t_block_timer_frame_info.html#a6dcceae769c844cef57f88f34506736f',1,'CmArmGTBlockTimerFrameInfo']]],
+  ['platrepoinfo',['PlatRepoInfo',['../struct_configuration_manager_protocol.html#af1d657e48ecb11b0fd5e40b5ecc5ef0b',1,'ConfigurationManagerProtocol']]],
+  ['pmuinterruptcount',['PmuInterruptCount',['../struct_cm_arm_smmu_v1_smmu_v2_node.html#aa37e9edff1603aee160450f2822d0409',1,'CmArmSmmuV1SmmuV2Node']]],
+  ['pmuinterrupttoken',['PmuInterruptToken',['../struct_cm_arm_smmu_v1_smmu_v2_node.html#a0cf22facfd26b130859c6ab6852e3776',1,'CmArmSmmuV1SmmuV2Node']]],
+  ['portsubtype',['PortSubtype',['../struct_cm_arm_serial_port_info.html#a1d4c4e9c3798e49f6f4e2762004d0f01',1,'CmArmSerialPortInfo']]],
+  ['powermanagementprofile',['PowerManagementProfile',['../struct_cm_arm_power_management_profile_info.html#a3f15660a4307338d03e07580c8ac281a',1,'CmArmPowerManagementProfileInfo']]],
+  ['priinterrupt',['PriInterrupt',['../struct_cm_arm_smmu_v3_node.html#acda9b32139f99c13e701ebdb43cf00b4',1,'CmArmSmmuV3Node']]],
+  ['privateresourcesarraytoken',['PrivateResourcesArrayToken',['../struct_cm_arm_proc_hierarchy_info.html#a99d645753e4a6fa3b974a8bd9468cb84',1,'CmArmProcHierarchyInfo']]],
+  ['processorpowerefficiencyclass',['ProcessorPowerEfficiencyClass',['../struct_cm_arm_gic_c_info.html#aa9b285fcc3269579e17dc2c076d9b011',1,'CmArmGicCInfo']]],
+  ['proximitydomain',['ProximityDomain',['../struct_cm_arm_gic_c_info.html#a168a3b883b511d6e1a7e7c10e5b40914',1,'CmArmGicCInfo::ProximityDomain()'],['../struct_cm_arm_gic_its_info.html#aa45747139d1db419aa65746ca719861b',1,'CmArmGicItsInfo::ProximityDomain()'],['../struct_cm_arm_smmu_v3_node.html#a2d809bbe74c969387d4739bb9a60f017',1,'CmArmSmmuV3Node::ProximityDomain()'],['../struct_cm_arm_memory_affinity_info.html#a230a012dd68080e44d6f03584927bf8f',1,'CmArmMemoryAffinityInfo::ProximityDomain()'],['../struct_cm_arm_generic_initiator_affinity_info.html#ab400748fe2f7e36f96493d2b2a30e780',1,'CmArmGenericInitiatorAffinityInfo::ProximityDomain()']]]
+];

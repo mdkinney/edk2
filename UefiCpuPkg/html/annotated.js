@@ -1,0 +1,26 @@
+var annotated =
+[
+    [ "_EDKII_PEI_MP_SERVICES2_PPI", "struct___e_d_k_i_i___p_e_i___m_p___s_e_r_v_i_c_e_s2___p_p_i.html", "struct___e_d_k_i_i___p_e_i___m_p___s_e_r_v_i_c_e_s2___p_p_i" ],
+    [ "_EDKII_PEI_SHADOW_MICROCODE_PPI", "struct___e_d_k_i_i___p_e_i___s_h_a_d_o_w___m_i_c_r_o_c_o_d_e___p_p_i.html", "struct___e_d_k_i_i___p_e_i___s_h_a_d_o_w___m_i_c_r_o_c_o_d_e___p_p_i" ],
+    [ "_EFI_SM_MONITOR_INIT_PROTOCOL", "struct___e_f_i___s_m___m_o_n_i_t_o_r___i_n_i_t___p_r_o_t_o_c_o_l.html", "struct___e_f_i___s_m___m_o_n_i_t_o_r___i_n_i_t___p_r_o_t_o_c_o_l" ],
+    [ "_EFI_SMM_CPU_SERVICE_PROTOCOL", "struct___e_f_i___s_m_m___c_p_u___s_e_r_v_i_c_e___p_r_o_t_o_c_o_l.html", "struct___e_f_i___s_m_m___c_p_u___s_e_r_v_i_c_e___p_r_o_t_o_c_o_l" ],
+    [ "_MTRR_FIXED_SETTINGS_", "struct___m_t_r_r___f_i_x_e_d___s_e_t_t_i_n_g_s__.html", "struct___m_t_r_r___f_i_x_e_d___s_e_t_t_i_n_g_s__" ],
+    [ "_MTRR_SETTINGS_", "struct___m_t_r_r___s_e_t_t_i_n_g_s__.html", "struct___m_t_r_r___s_e_t_t_i_n_g_s__" ],
+    [ "_MTRR_VARIABLE_SETTING_", "struct___m_t_r_r___v_a_r_i_a_b_l_e___s_e_t_t_i_n_g__.html", "struct___m_t_r_r___v_a_r_i_a_b_l_e___s_e_t_t_i_n_g__" ],
+    [ "_MTRR_VARIABLE_SETTINGS_", "struct___m_t_r_r___v_a_r_i_a_b_l_e___s_e_t_t_i_n_g_s__.html", "struct___m_t_r_r___v_a_r_i_a_b_l_e___s_e_t_t_i_n_g_s__" ],
+    [ "_REPUBLISH_SEC_PPI_PPI", "struct___r_e_p_u_b_l_i_s_h___s_e_c___p_p_i___p_p_i.html", "struct___r_e_p_u_b_l_i_s_h___s_e_c___p_p_i___p_p_i" ],
+    [ "ACPI_CPU_DATA", "struct_a_c_p_i___c_p_u___d_a_t_a.html", "struct_a_c_p_i___c_p_u___d_a_t_a" ],
+    [ "CPU_CACHE_INFO", "struct_c_p_u___c_a_c_h_e___i_n_f_o.html", "struct_c_p_u___c_a_c_h_e___i_n_f_o" ],
+    [ "CPU_FEATURE_INIT_DATA", "struct_c_p_u___f_e_a_t_u_r_e___i_n_i_t___d_a_t_a.html", "struct_c_p_u___f_e_a_t_u_r_e___i_n_i_t___d_a_t_a" ],
+    [ "CPU_HOT_PLUG_DATA", "struct_c_p_u___h_o_t___p_l_u_g___d_a_t_a.html", "struct_c_p_u___h_o_t___p_l_u_g___d_a_t_a" ],
+    [ "CPU_REGISTER_TABLE", "struct_c_p_u___r_e_g_i_s_t_e_r___t_a_b_l_e.html", "struct_c_p_u___r_e_g_i_s_t_e_r___t_a_b_l_e" ],
+    [ "CPU_REGISTER_TABLE_ENTRY", "struct_c_p_u___r_e_g_i_s_t_e_r___t_a_b_l_e___e_n_t_r_y.html", "struct_c_p_u___r_e_g_i_s_t_e_r___t_a_b_l_e___e_n_t_r_y" ],
+    [ "CPU_STATUS_INFORMATION", "struct_c_p_u___s_t_a_t_u_s___i_n_f_o_r_m_a_t_i_o_n.html", "struct_c_p_u___s_t_a_t_u_s___i_n_f_o_r_m_a_t_i_o_n" ],
+    [ "EDKII_MICROCODE_PATCH_HOB", "struct_e_d_k_i_i___m_i_c_r_o_c_o_d_e___p_a_t_c_h___h_o_b.html", "struct_e_d_k_i_i___m_i_c_r_o_c_o_d_e___p_a_t_c_h___h_o_b" ],
+    [ "EDKII_PEI_MICROCODE_CPU_ID", "struct_e_d_k_i_i___p_e_i___m_i_c_r_o_c_o_d_e___c_p_u___i_d.html", "struct_e_d_k_i_i___p_e_i___m_i_c_r_o_c_o_d_e___c_p_u___i_d" ],
+    [ "FIXED_MTRR", "struct_f_i_x_e_d___m_t_r_r.html", "struct_f_i_x_e_d___m_t_r_r" ],
+    [ "MTRR_MEMORY_RANGE", "struct_m_t_r_r___m_e_m_o_r_y___r_a_n_g_e.html", "struct_m_t_r_r___m_e_m_o_r_y___r_a_n_g_e" ],
+    [ "REGISTER_CPU_FEATURE_FIRST_PROCESSOR", "struct_r_e_g_i_s_t_e_r___c_p_u___f_e_a_t_u_r_e___f_i_r_s_t___p_r_o_c_e_s_s_o_r.html", "struct_r_e_g_i_s_t_e_r___c_p_u___f_e_a_t_u_r_e___f_i_r_s_t___p_r_o_c_e_s_s_o_r" ],
+    [ "REGISTER_CPU_FEATURE_INFORMATION", "struct_r_e_g_i_s_t_e_r___c_p_u___f_e_a_t_u_r_e___i_n_f_o_r_m_a_t_i_o_n.html", "struct_r_e_g_i_s_t_e_r___c_p_u___f_e_a_t_u_r_e___i_n_f_o_r_m_a_t_i_o_n" ],
+    [ "VARIABLE_MTRR", "struct_v_a_r_i_a_b_l_e___m_t_r_r.html", "struct_v_a_r_i_a_b_l_e___m_t_r_r" ]
+];

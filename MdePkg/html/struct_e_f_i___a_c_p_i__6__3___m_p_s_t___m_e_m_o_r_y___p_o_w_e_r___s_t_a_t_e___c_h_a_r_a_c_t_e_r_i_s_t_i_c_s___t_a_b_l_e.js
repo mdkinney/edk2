@@ -1,0 +1,5 @@
+var struct_e_f_i___a_c_p_i__6__3___m_p_s_t___m_e_m_o_r_y___p_o_w_e_r___s_t_a_t_e___c_h_a_r_a_c_t_e_r_i_s_t_i_c_s___t_a_b_l_e =
+[
+    [ "MemoryPowerStateCharacteristicsCount", "struct_e_f_i___a_c_p_i__6__3___m_p_s_t___m_e_m_o_r_y___p_o_w_e_r___s_t_a_t_e___c_h_a_r_a_c_t_e_r_i_s_t_i_c_s___t_a_b_l_e.html#a6831dcd3e087012e06a8230a9fc7435c", null ],
+    [ "Reserved", "struct_e_f_i___a_c_p_i__6__3___m_p_s_t___m_e_m_o_r_y___p_o_w_e_r___s_t_a_t_e___c_h_a_r_a_c_t_e_r_i_s_t_i_c_s___t_a_b_l_e.html#a4e543090e1437a3d0286249a747f365c", null ]
+];

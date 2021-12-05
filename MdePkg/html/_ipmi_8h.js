@@ -1,0 +1,28 @@
+var _ipmi_8h =
+[
+    [ "IPMI_COMP_CODE_BMC_INIT_IN_PROGRESS", "_ipmi_8h.html#a2e0361e7acc7cc4b492d29da6744139e", null ],
+    [ "IPMI_COMP_CODE_CANNOT_RETURN", "_ipmi_8h.html#a6699568f0a21d15ce623c57fe5b2d101", null ],
+    [ "IPMI_COMP_CODE_CMD_RESP_NOT_PROVIDED", "_ipmi_8h.html#ad24711b4a07b7c013ee216629595cee1", null ],
+    [ "IPMI_COMP_CODE_COMMAND_ILLEGAL", "_ipmi_8h.html#aab2252d1cebbd6bffcb6c403355b7c16", null ],
+    [ "IPMI_COMP_CODE_DEST_UNAVAILABLE", "_ipmi_8h.html#a618ca153d2029c6d9163eddabe351889", null ],
+    [ "IPMI_COMP_CODE_DEV_IN_FW_UPDATE_MODE", "_ipmi_8h.html#a8006b5406dd9ddbb8185efb9fd2c43fb", null ],
+    [ "IPMI_COMP_CODE_FAIL_DUP_REQUEST", "_ipmi_8h.html#a4c7bb530f1c5f17a23c70b9e75f2ae20", null ],
+    [ "IPMI_COMP_CODE_INSUFFICIENT_PRIVILEGE", "_ipmi_8h.html#ad0b2e9253926c0b845aa301dd9d3e30f", null ],
+    [ "IPMI_COMP_CODE_INVALID_COMMAND", "_ipmi_8h.html#a248bafe93c394396a53685830aaea8c5", null ],
+    [ "IPMI_COMP_CODE_INVALID_DATA_FIELD", "_ipmi_8h.html#a10bd5592cb02afbdcccb7759e57bb6a6", null ],
+    [ "IPMI_COMP_CODE_INVALID_FOR_GIVEN_LUN", "_ipmi_8h.html#a74b2bf00f22c62862b973ff5245f78fe", null ],
+    [ "IPMI_COMP_CODE_INVALID_REQUEST_DATA_LENGTH", "_ipmi_8h.html#a39f77a013c52ff0db7c51173ab0765c3", null ],
+    [ "IPMI_COMP_CODE_NODE_BUSY", "_ipmi_8h.html#a40b8fe1d27690d86f1b6636761e2dbf8", null ],
+    [ "IPMI_COMP_CODE_NORMAL", "_ipmi_8h.html#aaefdb7a7c8e7091b6527ce1ac94e8cc6", null ],
+    [ "IPMI_COMP_CODE_NOT_PRESENT", "_ipmi_8h.html#a3fb4aa971f954389be7ab436414335a8", null ],
+    [ "IPMI_COMP_CODE_OUT_OF_RANGE", "_ipmi_8h.html#aea6fa0dcebe14ffd8f186dc7d803a2ba", null ],
+    [ "IPMI_COMP_CODE_OUT_OF_SPACE", "_ipmi_8h.html#a3ee59e2f37728565171cfcee5e5e98b5", null ],
+    [ "IPMI_COMP_CODE_REQUEST_DATA_TRUNCATED", "_ipmi_8h.html#aac3585c120c7548721048a9770586db6", null ],
+    [ "IPMI_COMP_CODE_REQUEST_EXCEED_LIMIT", "_ipmi_8h.html#abdcca826d11ee064b88e00d7f1948068", null ],
+    [ "IPMI_COMP_CODE_RESERVATION_CANCELED_OR_INVALID", "_ipmi_8h.html#a25ceb300310f26f39ec73c5044993513", null ],
+    [ "IPMI_COMP_CODE_SDR_REP_IN_UPDATE_MODE", "_ipmi_8h.html#aaadde4c5b4a689de3b808e81782291c9", null ],
+    [ "IPMI_COMP_CODE_SUBFUNCTION_DISABLED", "_ipmi_8h.html#af8d0e996bf8cd73a977d1ba01f5ab0d9", null ],
+    [ "IPMI_COMP_CODE_TIMEOUT", "_ipmi_8h.html#a6a27bc1a3953b6020e37c901d2315a04", null ],
+    [ "IPMI_COMP_CODE_UNSPECIFIED", "_ipmi_8h.html#af9bd9cf07a6e859c24dbc3602ce1fbd9", null ],
+    [ "IPMI_COMP_CODE_UNSUPPORTED_IN_PRESENT_STATE", "_ipmi_8h.html#a70a2142d6587871698df8f8f95386aaf", null ]
+];

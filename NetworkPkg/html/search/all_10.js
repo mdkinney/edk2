@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['rcvdcontext',['RcvdContext',['../struct___i_p___i_o.html#a1db69801c8fa822ff988442de7b3fd4f',1,'_IP_IO::RcvdContext()'],['../struct___i_p___i_o___o_p_e_n___d_a_t_a.html#ac6694e87a95f8d2c0ea815821b018682',1,'_IP_IO_OPEN_DATA::RcvdContext()']]],
+  ['rcvtoken',['RcvToken',['../struct___i_p___i_o.html#a61bf181a54b663c201ad4cacb15c7be3',1,'_IP_IO']]],
+  ['recvrequest',['RecvRequest',['../struct___u_d_p___i_o.html#ad668c649cc96e74b20af4b35e73cf665',1,'_UDP_IO']]],
+  ['recycled',['Recycled',['../struct_n_e_t___m_a_p.html#a2709b0ab6372ba9d29974dabc2214625',1,'NET_MAP']]],
+  ['refcnt',['RefCnt',['../struct___u_d_p___i_o.html#a191cdfff55ce83e01897f9bb1d5e0803',1,'_UDP_IO::RefCnt()'],['../struct___i_p___i_o___i_p___i_n_f_o.html#aeab52d7228887f1629528377054e38b5',1,'_IP_IO_IP_INFO::RefCnt()'],['../struct_n_e_t___v_e_c_t_o_r.html#a383201bec1c638ec691349b9a34d5ef2',1,'NET_VECTOR::RefCnt()'],['../struct_n_e_t___b_u_f.html#a269748cf648e22201bb7ab0faccbf7b7',1,'NET_BUF::RefCnt()'],['../struct_n_e_t___b_u_f___q_u_e_u_e.html#a088ea9fbef8864777d4451c6e2325766',1,'NET_BUF_QUEUE::RefCnt()']]],
+  ['remoteaddr',['RemoteAddr',['../struct_u_d_p___e_n_d___p_o_i_n_t.html#a8b4d0b3c981fe1c94856afa18ea09b24',1,'UDP_END_POINT']]],
+  ['remoteip',['RemoteIp',['../struct_t_c_p4___i_o___c_o_n_f_i_g___d_a_t_a.html#a1b9b9de02ecbe49dae8e973c417981c8',1,'TCP4_IO_CONFIG_DATA::RemoteIp()'],['../struct_t_c_p6___i_o___c_o_n_f_i_g___d_a_t_a.html#ae33a8c475d80aebfcb7878625b9c5896',1,'TCP6_IO_CONFIG_DATA::RemoteIp()']]],
+  ['remoteport',['RemotePort',['../struct_t_c_p4___i_o___c_o_n_f_i_g___d_a_t_a.html#a4c49029f29161fdc5a830e3143e6a811',1,'TCP4_IO_CONFIG_DATA::RemotePort()'],['../struct_t_c_p6___i_o___c_o_n_f_i_g___d_a_t_a.html#a6203727fd80483ac359850fcc060e13d',1,'TCP6_IO_CONFIG_DATA::RemotePort()'],['../struct_u_d_p___e_n_d___p_o_i_n_t.html#ac53ac24a072cf7218bfcf6b6dbe8397e',1,'UDP_END_POINT::RemotePort()']]],
+  ['reqmessage',['ReqMessage',['../struct_h_t_t_p___i_o.html#a83b9b5e2d0de40af0eb6e38b28cabeb3',1,'HTTP_IO']]],
+  ['reqtoken',['ReqToken',['../struct_h_t_t_p___i_o.html#a5410701fe19d2ca696c18f60c81a2df0',1,'HTTP_IO']]],
+  ['requesttimeout',['RequestTimeOut',['../struct_h_t_t_p4___i_o___c_o_n_f_i_g___d_a_t_a.html#aae252e254303ba9915af5040857a0b52',1,'HTTP4_IO_CONFIG_DATA::RequestTimeOut()'],['../struct_h_t_t_p6___i_o___c_o_n_f_i_g___d_a_t_a.html#a63ce09b7c70c21e3e6aa1ed122986d88',1,'HTTP6_IO_CONFIG_DATA::RequestTimeOut()']]],
+  ['res',['Res',['../struct_t_c_p___h_e_a_d.html#abd5d82f3e331c3f0b28c81fafabf2c14',1,'TCP_HEAD']]],
+  ['reserved',['Reserved',['../struct_n_e_t___p_s_e_u_d_o___h_d_r.html#adb281880b39d4e4b98f8ca5e43914a05',1,'NET_PSEUDO_HDR::Reserved()'],['../struct_n_e_t___i_p6___p_s_e_u_d_o___h_d_r.html#a88ea461dbd8d068520d8014f3590b65b',1,'NET_IP6_PSEUDO_HDR::Reserved()']]],
+  ['response',['Response',['../struct_h_t_t_p___i_o___r_e_s_p_o_n_s_e___d_a_t_a.html#a4e341dd60d3ce4093351e3ebc9489cbf',1,'HTTP_IO_RESPONSE_DATA']]],
+  ['responsetimeout',['ResponseTimeOut',['../struct_h_t_t_p4___i_o___c_o_n_f_i_g___d_a_t_a.html#a10ff0b634649c89f4706b9b644b0ef1f',1,'HTTP4_IO_CONFIG_DATA']]],
+  ['rspmessage',['RspMessage',['../struct_h_t_t_p___i_o.html#a7184547261530ed7da82792ce3c135b2',1,'HTTP_IO']]],
+  ['rsptoken',['RspToken',['../struct_h_t_t_p___i_o.html#a19f028ef99c4519d574167fc2123a325',1,'HTTP_IO']]],
+  ['rxtoken',['RxToken',['../struct_t_c_p___i_o.html#a7a5cead3401ed95d53d59ce6bc7fe3df',1,'TCP_IO']]]
+];
