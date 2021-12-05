@@ -42,7 +42,6 @@ jobs:
       with:
         repository: ${{ github.event.inputs.repo }}
         ref: ${{ github.event.inputs.ref }}
-        path: edk2
         submodules: false
     - name: Install Doxygen 1.8.6
       run: |
@@ -52,7 +51,6 @@ jobs:
         /usr/bin/doxygen --version
     - name: Build HTML package documents
       run: |
-        cd edk2
         . edksetup.sh
         mkdir $WORKSPACE/Build
         mkdir $WORKSPACE/Build/Doxygen
@@ -99,8 +97,8 @@ jobs:
     - name: Publish HTML package documents
       uses: JamesIves/github-pages-deploy-action@4.1.7
       with:
-        branch: gh-pages # The branch the action should deploy to.
-        folder: edk2/Build/Doxygen # The folder the action should deploy.
+        branch: ${{github.event.inputs.publish_branch}} # The branch the action should deploy to.
+        folder: Build/Doxygen # The folder the action should deploy.
         repositoryName: ${{github.event.inputs.publish_repo}}.git
 #    - name: Publish HTML package documents
 #      run: |
