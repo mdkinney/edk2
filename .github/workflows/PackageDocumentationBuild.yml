@@ -92,7 +92,7 @@ jobs:
           UnitTestFrameworkPkg
         do
           python3 BaseTools/Scripts/PackageDocumentTools/packagedoc_cli.py -w $WORKSPACE -p $WORKSPACE/$Pkg/$Pkg.dec -x /usr/bin/doxygen -a ALL -i -o $WORKSPACE/Build/Doxygen/$Pkg
-          echo "    <a href=\"${Pkg}/html/index.html\">${Pkg}</a><br>"       >> $WORKSPACE/Build/Doxygen/index.html
+          echo "    <a style="font-size:20px" href=\"${Pkg}/html/index.html\">${Pkg}</a><br>"       >> $WORKSPACE/Build/Doxygen/index.html
         done
         echo "  </body>"       >> $WORKSPACE/Build/Doxygen/index.html
         echo "</html>"       >> $WORKSPACE/Build/Doxygen/index.html
