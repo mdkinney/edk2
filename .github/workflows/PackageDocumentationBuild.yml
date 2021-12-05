@@ -56,6 +56,7 @@ jobs:
         . edksetup.sh
         mkdir $WORKSPACE/Build
         mkdir $WORKSPACE/Build/Doxygen
+        echo .nojekyll                                                   > $WORKSPACE/Build/Doxygen/.nojekyll
         echo "<!DOCTYPE html>"                                           > $WORKSPACE/Build/Doxygen/index.html
         echo "<html>"                                                   >> $WORKSPACE/Build/Doxygen/index.html
         echo "  <head>"                                                 >> $WORKSPACE/Build/Doxygen/index.html
