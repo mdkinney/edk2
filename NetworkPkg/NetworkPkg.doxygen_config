@@ -2,7 +2,7 @@
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = NetworkPkg[all]
 PROJECT_NUMBER         = 0.98
-OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/NetworkPkg
+OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/Build/Doxygen/NetworkPkg
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
@@ -21,7 +21,7 @@ ABBREVIATE_BRIEF       = "The $name class           " \
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
-STRIP_FROM_PATH        = /home/runner/work/edk2/edk2/edk2
+STRIP_FROM_PATH        = /home/runner/work/edk2/edk2
 STRIP_FROM_INC_PATH    =
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = NO
@@ -75,28 +75,28 @@ WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
 WARN_NO_PARAMDOC       = YES
 WARN_FORMAT            = "$file:$line: $text           "
-WARN_LOGFILE           = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/NetworkPkg/warning.txt
+WARN_LOGFILE           = /home/runner/work/edk2/edk2/Build/Doxygen/NetworkPkg/warning.txt
 
-INPUT                  = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/NetworkPkg/NetworkPkg.dec.decdoxygen \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Library/TcpIoLib.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Library/UdpIoLib.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Library/HttpLib.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Library/DpcLib.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Library/HttpIoLib.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Library/IpIoLib.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Library/NetLib.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Guid/IScsiConfigHii.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Guid/HttpBootConfigHii.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Guid/TlsAuthentication.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Guid/Ip4IScsiConfigHii.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Guid/Ip4Config2Hii.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Guid/VlanConfigHii.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Guid/WifiConnectionManagerConfigHii.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Guid/Ip6ConfigHii.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Guid/TlsAuthConfigHii.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Guid/HttpTlsCipherList.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Protocol/Dpc.h \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Protocol/HttpCallback.h
+INPUT                  = /home/runner/work/edk2/edk2/Build/Doxygen/NetworkPkg/NetworkPkg.dec.decdoxygen \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Library/TcpIoLib.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Library/UdpIoLib.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Library/HttpLib.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Library/DpcLib.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Library/HttpIoLib.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Library/IpIoLib.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Library/NetLib.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Guid/IScsiConfigHii.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Guid/HttpBootConfigHii.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Guid/TlsAuthentication.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Guid/Ip4IScsiConfigHii.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Guid/Ip4Config2Hii.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Guid/VlanConfigHii.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Guid/WifiConnectionManagerConfigHii.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Guid/Ip6ConfigHii.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Guid/TlsAuthConfigHii.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Guid/HttpTlsCipherList.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Protocol/Dpc.h \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Protocol/HttpCallback.h
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
 *.h \
@@ -193,12 +193,12 @@ ENABLE_PREPROCESSING   = YES
 MACRO_EXPANSION        = YES
 EXPAND_ONLY_PREDEF     = YES
 SEARCH_INCLUDES        = YES
-INCLUDE_PATH           = /home/runner/work/edk2/edk2/edk2/NetworkPkg/Include \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Library \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Protocol \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Ppi \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/Guid \
-/home/runner/work/edk2/edk2/edk2/NetworkPkg/Include/IndustryStandard
+INCLUDE_PATH           = /home/runner/work/edk2/edk2/NetworkPkg/Include \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Library \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Protocol \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Ppi \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/Guid \
+/home/runner/work/edk2/edk2/NetworkPkg/Include/IndustryStandard
 INCLUDE_FILE_PATTERNS  = *.h
 PREDEFINED             = MDE_CPU_IA32 MDE_CPU_X64 MDE_CPU_IPF MDE_CPU_EBC MDE_CPU_ARM _MSC_EXTENSIONS __GNUC__ __INTEL_COMPILER ASM_PFX=  OPTIONAL= 
 EXPAND_AS_DEFINED      =

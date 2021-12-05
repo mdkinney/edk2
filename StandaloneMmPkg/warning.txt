@@ -1,45 +1,45 @@
-warning: source /home/runner/work/edk2/edk2/edk2/StandaloneMmPkg/Include/Protocol is not a readable file or directory... skipping.
-warning: source /home/runner/work/edk2/edk2/edk2/StandaloneMmPkg/Include/Ppi is not a readable file or directory... skipping.
-warning: source /home/runner/work/edk2/edk2/edk2/StandaloneMmPkg/Include/IndustryStandard is not a readable file or directory... skipping.
-/home/runner/work/edk2/edk2/edk2/StandaloneMmPkg/Include/Library/FvLib.h:41: warning: argument 'SearchType' of command @param is not found in the argument list of FfsFindSection(IN EFI_SECTION_TYPE SectionType, IN EFI_FFS_FILE_HEADER *FfsFileHeader, IN OUT EFI_COMMON_SECTION_HEADER **SectionHeader)
-/home/runner/work/edk2/edk2/edk2/StandaloneMmPkg/Include/Library/FvLib.h:41: warning: The following parameters of FfsFindSection(IN EFI_SECTION_TYPE SectionType, IN EFI_FFS_FILE_HEADER *FfsFileHeader, IN OUT EFI_COMMON_SECTION_HEADER **SectionHeader) are not documented:
+warning: source /home/runner/work/edk2/edk2/StandaloneMmPkg/Include/Protocol is not a readable file or directory... skipping.
+warning: source /home/runner/work/edk2/edk2/StandaloneMmPkg/Include/Ppi is not a readable file or directory... skipping.
+warning: source /home/runner/work/edk2/edk2/StandaloneMmPkg/Include/IndustryStandard is not a readable file or directory... skipping.
+/home/runner/work/edk2/edk2/StandaloneMmPkg/Include/Library/FvLib.h:41: warning: argument 'SearchType' of command @param is not found in the argument list of FfsFindSection(IN EFI_SECTION_TYPE SectionType, IN EFI_FFS_FILE_HEADER *FfsFileHeader, IN OUT EFI_COMMON_SECTION_HEADER **SectionHeader)
+/home/runner/work/edk2/edk2/StandaloneMmPkg/Include/Library/FvLib.h:41: warning: The following parameters of FfsFindSection(IN EFI_SECTION_TYPE SectionType, IN EFI_FFS_FILE_HEADER *FfsFileHeader, IN OUT EFI_COMMON_SECTION_HEADER **SectionHeader) are not documented:
   parameter 'SectionType'
-/home/runner/work/edk2/edk2/edk2/StandaloneMmPkg/Include/Library/FvLib.h:83: warning: argument 'SearchType' of command @param is not found in the argument list of FfsFindSectionData(IN EFI_SECTION_TYPE SectionType, IN EFI_FFS_FILE_HEADER *FfsFileHeader, OUT VOID **SectionData, OUT UINTN *SectionDataSize)
-/home/runner/work/edk2/edk2/edk2/StandaloneMmPkg/Include/Library/FvLib.h:83: warning: The following parameters of FfsFindSectionData(IN EFI_SECTION_TYPE SectionType, IN EFI_FFS_FILE_HEADER *FfsFileHeader, OUT VOID **SectionData, OUT UINTN *SectionDataSize) are not documented:
+/home/runner/work/edk2/edk2/StandaloneMmPkg/Include/Library/FvLib.h:83: warning: argument 'SearchType' of command @param is not found in the argument list of FfsFindSectionData(IN EFI_SECTION_TYPE SectionType, IN EFI_FFS_FILE_HEADER *FfsFileHeader, OUT VOID **SectionData, OUT UINTN *SectionDataSize)
+/home/runner/work/edk2/edk2/StandaloneMmPkg/Include/Library/FvLib.h:83: warning: The following parameters of FfsFindSectionData(IN EFI_SECTION_TYPE SectionType, IN EFI_FFS_FILE_HEADER *FfsFileHeader, OUT VOID **SectionData, OUT UINTN *SectionDataSize) are not documented:
   parameter 'SectionType'
-/home/runner/work/edk2/edk2/edk2/StandaloneMmPkg/Include/Library/StandaloneMmCoreEntryPoint.h:55: warning: argument 'SystemTable' of command @param is not found in the argument list of ProcessLibraryConstructorList(IN EFI_HANDLE ImageHandle, IN EFI_MM_SYSTEM_TABLE *MmSystemTable)
-/home/runner/work/edk2/edk2/edk2/StandaloneMmPkg/Include/Library/StandaloneMmCoreEntryPoint.h:55: warning: The following parameters of ProcessLibraryConstructorList(IN EFI_HANDLE ImageHandle, IN EFI_MM_SYSTEM_TABLE *MmSystemTable) are not documented:
+/home/runner/work/edk2/edk2/StandaloneMmPkg/Include/Library/StandaloneMmCoreEntryPoint.h:55: warning: argument 'SystemTable' of command @param is not found in the argument list of ProcessLibraryConstructorList(IN EFI_HANDLE ImageHandle, IN EFI_MM_SYSTEM_TABLE *MmSystemTable)
+/home/runner/work/edk2/edk2/StandaloneMmPkg/Include/Library/StandaloneMmCoreEntryPoint.h:55: warning: The following parameters of ProcessLibraryConstructorList(IN EFI_HANDLE ImageHandle, IN EFI_MM_SYSTEM_TABLE *MmSystemTable) are not documented:
   parameter 'MmSystemTable'
-/home/runner/work/edk2/edk2/edk2/StandaloneMmPkg/Include/Library/Arm/StandaloneMmCoreEntryPoint.h:176: warning: argument 'SystemTable' of command @param is not found in the argument list of ProcessLibraryConstructorList(IN EFI_HANDLE ImageHandle, IN EFI_MM_SYSTEM_TABLE *MmSystemTable)
-/home/runner/work/edk2/edk2/edk2/StandaloneMmPkg/Include/Library/Arm/StandaloneMmCoreEntryPoint.h:176: warning: The following parameters of ProcessLibraryConstructorList(IN EFI_HANDLE ImageHandle, IN EFI_MM_SYSTEM_TABLE *MmSystemTable) are not documented:
+/home/runner/work/edk2/edk2/StandaloneMmPkg/Include/Library/Arm/StandaloneMmCoreEntryPoint.h:176: warning: argument 'SystemTable' of command @param is not found in the argument list of ProcessLibraryConstructorList(IN EFI_HANDLE ImageHandle, IN EFI_MM_SYSTEM_TABLE *MmSystemTable)
+/home/runner/work/edk2/edk2/StandaloneMmPkg/Include/Library/Arm/StandaloneMmCoreEntryPoint.h:176: warning: The following parameters of ProcessLibraryConstructorList(IN EFI_HANDLE ImageHandle, IN EFI_MM_SYSTEM_TABLE *MmSystemTable) are not documented:
   parameter 'MmSystemTable'
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:101: warning: Found unknown command `\libraryclass'
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:79: warning: Found unknown command `\libraryclass'
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:122: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:122: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:122: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:122: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:127: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:127: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:127: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:127: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:131: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:131: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:131: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:131: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:136: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:136: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:136: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:136: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:153: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:153: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:153: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:153: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:164: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:164: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:164: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:164: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:162: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:162: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:162: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:162: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:101: warning: Found unknown command `\libraryclass'
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:79: warning: Found unknown command `\libraryclass'
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:122: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:122: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:122: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:122: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:127: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:127: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:127: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:127: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:131: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:131: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:131: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:131: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:136: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:136: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:136: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:136: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:153: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:153: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:153: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:153: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:164: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:164: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:164: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:164: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:162: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:162: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:162: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/StandaloneMmPkg/StandaloneMmPkg.dec.decdoxygen:162: warning: Unexpected tag </caption> found

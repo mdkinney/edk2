@@ -1,68 +1,68 @@
-warning: source /home/runner/work/edk2/edk2/edk2/CryptoPkg/Include/Protocol is not a readable file or directory... skipping.
-warning: source /home/runner/work/edk2/edk2/edk2/CryptoPkg/Include/Ppi is not a readable file or directory... skipping.
-warning: source /home/runner/work/edk2/edk2/edk2/CryptoPkg/Include/Guid is not a readable file or directory... skipping.
-warning: source /home/runner/work/edk2/edk2/edk2/CryptoPkg/Include/IndustryStandard is not a readable file or directory... skipping.
-/home/runner/work/edk2/edk2/edk2/CryptoPkg/Include/Library/BaseCryptLib.h:2019: warning: argument 'Pkcs7SignatureSize' of command @param is not found in the argument list of VerifyEKUsInPkcs7Signature(IN CONST UINT8 *Pkcs7Signature, IN CONST UINT32 SignatureSize, IN CONST CHAR8 *RequiredEKUs[], IN CONST UINT32 RequiredEKUsSize, IN BOOLEAN RequireAllPresent)
-/home/runner/work/edk2/edk2/edk2/CryptoPkg/Include/Library/BaseCryptLib.h:2019: warning: The following parameters of VerifyEKUsInPkcs7Signature(IN CONST UINT8 *Pkcs7Signature, IN CONST UINT32 SignatureSize, IN CONST CHAR8 *RequiredEKUs[], IN CONST UINT32 RequiredEKUsSize, IN BOOLEAN RequireAllPresent) are not documented:
+warning: source /home/runner/work/edk2/edk2/CryptoPkg/Include/Protocol is not a readable file or directory... skipping.
+warning: source /home/runner/work/edk2/edk2/CryptoPkg/Include/Ppi is not a readable file or directory... skipping.
+warning: source /home/runner/work/edk2/edk2/CryptoPkg/Include/Guid is not a readable file or directory... skipping.
+warning: source /home/runner/work/edk2/edk2/CryptoPkg/Include/IndustryStandard is not a readable file or directory... skipping.
+/home/runner/work/edk2/edk2/CryptoPkg/Include/Library/BaseCryptLib.h:2019: warning: argument 'Pkcs7SignatureSize' of command @param is not found in the argument list of VerifyEKUsInPkcs7Signature(IN CONST UINT8 *Pkcs7Signature, IN CONST UINT32 SignatureSize, IN CONST CHAR8 *RequiredEKUs[], IN CONST UINT32 RequiredEKUsSize, IN BOOLEAN RequireAllPresent)
+/home/runner/work/edk2/edk2/CryptoPkg/Include/Library/BaseCryptLib.h:2019: warning: The following parameters of VerifyEKUsInPkcs7Signature(IN CONST UINT8 *Pkcs7Signature, IN CONST UINT32 SignatureSize, IN CONST CHAR8 *RequiredEKUs[], IN CONST UINT32 RequiredEKUsSize, IN BOOLEAN RequireAllPresent) are not documented:
   parameter 'SignatureSize'
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:35: warning: empty list!
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:66: warning: Found unknown command `\libraryclass'
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:104: warning: Found unknown command `\Prompt'
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:119: warning: Found unknown command `\Prompt'
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:120: warning: Found unknown command `\ValidList'
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:140: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:140: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:140: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:140: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:157: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:157: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:157: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:157: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:175: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:175: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:175: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:175: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:180: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:180: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:180: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:180: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:35: warning: empty list!
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:66: warning: Found unknown command `\libraryclass'
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:104: warning: Found unknown command `\Prompt'
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:119: warning: Found unknown command `\Prompt'
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:120: warning: Found unknown command `\ValidList'
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:123: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:140: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:140: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:140: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:140: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:157: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:157: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:157: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:157: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:175: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:175: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:175: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:175: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:180: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:180: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:180: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/CryptoPkg/CryptoPkg.dec.decdoxygen:180: warning: Unexpected tag </caption> found

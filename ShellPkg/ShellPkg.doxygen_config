@@ -2,7 +2,7 @@
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = ShellPkg[all]
 PROJECT_NUMBER         = 1.02
-OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/ShellPkg
+OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/Build/Doxygen/ShellPkg
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
@@ -21,7 +21,7 @@ ABBREVIATE_BRIEF       = "The $name class           " \
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
-STRIP_FROM_PATH        = /home/runner/work/edk2/edk2/edk2
+STRIP_FROM_PATH        = /home/runner/work/edk2/edk2
 STRIP_FROM_INC_PATH    =
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = NO
@@ -75,23 +75,23 @@ WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
 WARN_NO_PARAMDOC       = YES
 WARN_FORMAT            = "$file:$line: $text           "
-WARN_LOGFILE           = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/ShellPkg/warning.txt
+WARN_LOGFILE           = /home/runner/work/edk2/edk2/Build/Doxygen/ShellPkg/warning.txt
 
-INPUT                  = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/ShellPkg/ShellPkg.dec.decdoxygen \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Library/ShellCEntryLib.h \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Library/ShellLib.h \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Library/ShellCommandLib.h \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Library/AcpiViewCommandLib.h \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Library/HandleParsingLib.h \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Library/BcfgCommandLib.h \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Guid/ShellPkgTokenSpace.h \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Guid/ShellVariableGuid.h \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Guid/ShellAliasGuid.h \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Guid/ShellLibHiiGuid.h \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Guid/ShellMapGuid.h \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Guid/ShellEnvironment2Ext.h \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Protocol/EfiShellEnvironment2.h \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Protocol/EfiShellInterface.h
+INPUT                  = /home/runner/work/edk2/edk2/Build/Doxygen/ShellPkg/ShellPkg.dec.decdoxygen \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Library/ShellCEntryLib.h \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Library/ShellLib.h \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Library/ShellCommandLib.h \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Library/AcpiViewCommandLib.h \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Library/HandleParsingLib.h \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Library/BcfgCommandLib.h \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Guid/ShellPkgTokenSpace.h \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Guid/ShellVariableGuid.h \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Guid/ShellAliasGuid.h \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Guid/ShellLibHiiGuid.h \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Guid/ShellMapGuid.h \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Guid/ShellEnvironment2Ext.h \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Protocol/EfiShellEnvironment2.h \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Protocol/EfiShellInterface.h
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
 *.h \
@@ -188,12 +188,12 @@ ENABLE_PREPROCESSING   = YES
 MACRO_EXPANSION        = YES
 EXPAND_ONLY_PREDEF     = YES
 SEARCH_INCLUDES        = YES
-INCLUDE_PATH           = /home/runner/work/edk2/edk2/edk2/ShellPkg/Include \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Library \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Protocol \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Ppi \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/Guid \
-/home/runner/work/edk2/edk2/edk2/ShellPkg/Include/IndustryStandard
+INCLUDE_PATH           = /home/runner/work/edk2/edk2/ShellPkg/Include \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Library \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Protocol \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Ppi \
+/home/runner/work/edk2/edk2/ShellPkg/Include/Guid \
+/home/runner/work/edk2/edk2/ShellPkg/Include/IndustryStandard
 INCLUDE_FILE_PATTERNS  = *.h
 PREDEFINED             = MDE_CPU_IA32 MDE_CPU_X64 MDE_CPU_IPF MDE_CPU_EBC MDE_CPU_ARM _MSC_EXTENSIONS __GNUC__ __INTEL_COMPILER ASM_PFX=  OPTIONAL= 
 EXPAND_AS_DEFINED      =

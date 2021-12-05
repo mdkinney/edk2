@@ -2,7 +2,7 @@
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = MdeModulePkg[all]
 PROJECT_NUMBER         = 0.98
-OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/MdeModulePkg
+OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/Build/Doxygen/MdeModulePkg
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
@@ -21,7 +21,7 @@ ABBREVIATE_BRIEF       = "The $name class           " \
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
-STRIP_FROM_PATH        = /home/runner/work/edk2/edk2/edk2
+STRIP_FROM_PATH        = /home/runner/work/edk2/edk2
 STRIP_FROM_INC_PATH    =
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = NO
@@ -75,171 +75,171 @@ WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
 WARN_NO_PARAMDOC       = YES
 WARN_FORMAT            = "$file:$line: $text           "
-WARN_LOGFILE           = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/MdeModulePkg/warning.txt
+WARN_LOGFILE           = /home/runner/work/edk2/edk2/Build/Doxygen/MdeModulePkg/warning.txt
 
-INPUT                  = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/MdeModulePkg/MdeModulePkg.dec.decdoxygen \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/SmmCorePlatformHookLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/CustomizedDisplayLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/HiiLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/BootLogoLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/CapsuleLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/FmpAuthenticationLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/PlatformBootManagerLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/NonDiscoverableDeviceRegistrationLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/SecurityManagementLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/ResetSystemLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/UefiHiiServicesLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/AuthVariableLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/IpmiLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/TpmMeasurementLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/MemoryProfileLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/LockBoxLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/PlatformHookLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/CpuExceptionHandlerLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/UefiBootManagerLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/FrameBufferBltLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/DebugAgentLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/OemHookStatusCodeLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/VariablePolicyLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/ResetUtilityLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/BmpSupportLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/SortLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/PlatformVarCleanupLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/VarCheckLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/VariablePolicyHelperLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/DisplayUpdateProgressLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/FileExplorerLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library/PciHostBridgeLib.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/SecPerformance.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/NvmExpressPassThru.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/IoMmu.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/NvmExpressHostController.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/AtaAhciController.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/AtaController.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/CapsuleOnDisk.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/PlatformSpecificResetFilter.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/AtaPassThru.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/SmmCommunication.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/IpmiPpi.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/PlatformSpecificResetHandler.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/PlatformSpecificResetNotification.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/UsbIo.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/StorageSecurityCommand.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/UsbHostController.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/UfsHostController.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/SerialPortPei.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/SmmControl.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/SdMmcHostController.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/SmmAccess.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/Usb2HostController.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/PostBootScriptTable.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/UsbController.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi/Debug.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/RamDiskHii.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/PlatformHasAcpi.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/BootDiscoveryPolicy.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/SystemNvDataGuid.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/PiSmmMemoryAttributesTable.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/NonDiscoverableDevice.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/DriverSampleHii.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/PerformanceMeasurement.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/VariableFormat.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/DebugMask.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/MemoryTypeInformation.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/ZeroGuid.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/ExtendedFirmwarePerformance.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/LzmaDecompress.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/HiiResourceSampleHii.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/StatusCodeDataTypeDebug.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/SmiHandlerProfile.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/MdeModulePkgTokenSpace.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/EndOfS3Resume.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/MemoryStatusCodeRecord.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/CapsuleVendor.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/VarErrorFlag.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/Crc32GuidedSectionExtraction.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/StandardErrorDevice.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/RecoveryDevice.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/AcpiS3Context.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/EventExitBootServiceFailed.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/IdleLoopEvent.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/SerialPortLibVendor.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/MemoryProfile.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/PlatDriOverrideHii.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/MtcVendor.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/VariableIndexTable.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/PiSmmCommunicationRegionTable.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/BootScriptExecutorVariable.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/PcdDataBaseSignatureGuid.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/TtyTerm.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/ConsoleInDevice.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/FirmwarePerformance.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/PcdDataBaseHobGuid.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/LoadModuleAtFixedAddress.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/ConnectConInEvent.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/FaultTolerantWrite.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/MigratedFvInfo.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/Performance.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/ConsoleOutDevice.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/StatusCodeCallbackGuid.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/SmmVariableCommon.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/S3StorageDeviceInitList.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/UsbKeyBoardLayout.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/StatusCodeDataTypeVariable.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/SmmLockBox.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/MdeModuleHii.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/S3SmmInitDone.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/VarCheckPolicyMmi.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid/HiiBootMaintenanceFormset.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/UniversalPayload/UniversalPayload.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/UniversalPayload/AcpiTable.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/UniversalPayload/SerialPortInfo.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/UniversalPayload/ExtraData.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/UniversalPayload/PciRootBridges.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/UniversalPayload/SmbiosTable.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/VarCheck.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/IpmiProtocol.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/IoMmu.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/BootLogo.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/NonDiscoverableDevice.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/UfsHostControllerPlatform.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/PeCoffImageEmulator.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/EsrtManagement.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/PlatformSpecificResetFilter.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/EbcSimpleDebugger.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/SmmMemoryAttribute.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/FileExplorer.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/PlatformSpecificResetHandler.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/FormBrowserEx2.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/SmmLegacyBoot.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/SdMmcOverride.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/GenericMemoryTest.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/SmmVarCheck.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/UfsHostController.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/SmmFaultTolerantWrite.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/DebuggerConfiguration.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/LoadPe32Image.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/VariableLock.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/Print2.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/FormBrowserEx.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/SmmExitBootServices.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/EbcVmTest.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/BootLogo2.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/Ps2Policy.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/SmmFirmwareVolumeBlock.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/SmmVariable.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/SwapAddressRange.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/FaultTolerantWrite.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/LockBox.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/AtaAtapiPolicy.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/VariablePolicy.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/DeviceSecurity.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/PlatformLogo.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/SmmSwapAddressRange.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/FirmwareManagementProgress.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/DisplayProtocol.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/SmmReadyToBoot.h \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol/PlatformBootManager.h
+INPUT                  = /home/runner/work/edk2/edk2/Build/Doxygen/MdeModulePkg/MdeModulePkg.dec.decdoxygen \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/SmmCorePlatformHookLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/CustomizedDisplayLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/HiiLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/BootLogoLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/CapsuleLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/FmpAuthenticationLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/PlatformBootManagerLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/NonDiscoverableDeviceRegistrationLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/SecurityManagementLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/ResetSystemLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/UefiHiiServicesLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/AuthVariableLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/IpmiLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/TpmMeasurementLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/MemoryProfileLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/LockBoxLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/PlatformHookLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/CpuExceptionHandlerLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/UefiBootManagerLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/FrameBufferBltLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/DebugAgentLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/OemHookStatusCodeLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/VariablePolicyLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/ResetUtilityLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/BmpSupportLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/SortLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/PlatformVarCleanupLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/VarCheckLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/VariablePolicyHelperLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/DisplayUpdateProgressLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/FileExplorerLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library/PciHostBridgeLib.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/SecPerformance.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/NvmExpressPassThru.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/IoMmu.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/NvmExpressHostController.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/AtaAhciController.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/AtaController.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/CapsuleOnDisk.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/PlatformSpecificResetFilter.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/AtaPassThru.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/SmmCommunication.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/IpmiPpi.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/PlatformSpecificResetHandler.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/PlatformSpecificResetNotification.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/UsbIo.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/StorageSecurityCommand.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/UsbHostController.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/UfsHostController.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/SerialPortPei.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/SmmControl.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/SdMmcHostController.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/SmmAccess.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/Usb2HostController.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/PostBootScriptTable.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/UsbController.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi/Debug.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/RamDiskHii.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/PlatformHasAcpi.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/BootDiscoveryPolicy.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/SystemNvDataGuid.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/PiSmmMemoryAttributesTable.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/NonDiscoverableDevice.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/DriverSampleHii.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/PerformanceMeasurement.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/VariableFormat.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/DebugMask.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/MemoryTypeInformation.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/ZeroGuid.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/ExtendedFirmwarePerformance.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/LzmaDecompress.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/HiiResourceSampleHii.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/StatusCodeDataTypeDebug.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/SmiHandlerProfile.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/MdeModulePkgTokenSpace.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/EndOfS3Resume.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/MemoryStatusCodeRecord.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/CapsuleVendor.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/VarErrorFlag.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/Crc32GuidedSectionExtraction.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/StandardErrorDevice.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/RecoveryDevice.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/AcpiS3Context.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/EventExitBootServiceFailed.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/IdleLoopEvent.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/SerialPortLibVendor.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/MemoryProfile.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/PlatDriOverrideHii.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/MtcVendor.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/VariableIndexTable.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/PiSmmCommunicationRegionTable.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/BootScriptExecutorVariable.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/PcdDataBaseSignatureGuid.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/TtyTerm.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/ConsoleInDevice.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/FirmwarePerformance.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/PcdDataBaseHobGuid.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/LoadModuleAtFixedAddress.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/ConnectConInEvent.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/FaultTolerantWrite.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/MigratedFvInfo.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/Performance.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/ConsoleOutDevice.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/StatusCodeCallbackGuid.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/SmmVariableCommon.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/S3StorageDeviceInitList.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/UsbKeyBoardLayout.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/StatusCodeDataTypeVariable.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/SmmLockBox.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/MdeModuleHii.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/S3SmmInitDone.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/VarCheckPolicyMmi.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid/HiiBootMaintenanceFormset.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/UniversalPayload/UniversalPayload.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/UniversalPayload/AcpiTable.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/UniversalPayload/SerialPortInfo.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/UniversalPayload/ExtraData.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/UniversalPayload/PciRootBridges.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/UniversalPayload/SmbiosTable.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/VarCheck.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/IpmiProtocol.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/IoMmu.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/BootLogo.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/NonDiscoverableDevice.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/UfsHostControllerPlatform.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/PeCoffImageEmulator.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/EsrtManagement.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/PlatformSpecificResetFilter.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/EbcSimpleDebugger.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/SmmMemoryAttribute.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/FileExplorer.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/PlatformSpecificResetHandler.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/FormBrowserEx2.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/SmmLegacyBoot.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/SdMmcOverride.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/GenericMemoryTest.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/SmmVarCheck.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/UfsHostController.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/SmmFaultTolerantWrite.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/DebuggerConfiguration.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/LoadPe32Image.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/VariableLock.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/Print2.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/FormBrowserEx.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/SmmExitBootServices.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/EbcVmTest.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/BootLogo2.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/Ps2Policy.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/SmmFirmwareVolumeBlock.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/SmmVariable.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/SwapAddressRange.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/FaultTolerantWrite.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/LockBox.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/AtaAtapiPolicy.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/VariablePolicy.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/DeviceSecurity.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/PlatformLogo.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/SmmSwapAddressRange.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/FirmwareManagementProgress.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/DisplayProtocol.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/SmmReadyToBoot.h \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol/PlatformBootManager.h
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
 *.h \
@@ -336,12 +336,12 @@ ENABLE_PREPROCESSING   = YES
 MACRO_EXPANSION        = YES
 EXPAND_ONLY_PREDEF     = YES
 SEARCH_INCLUDES        = YES
-INCLUDE_PATH           = /home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Library \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Protocol \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Ppi \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/Guid \
-/home/runner/work/edk2/edk2/edk2/MdeModulePkg/Include/IndustryStandard
+INCLUDE_PATH           = /home/runner/work/edk2/edk2/MdeModulePkg/Include \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Library \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Protocol \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Ppi \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/Guid \
+/home/runner/work/edk2/edk2/MdeModulePkg/Include/IndustryStandard
 INCLUDE_FILE_PATTERNS  = *.h
 PREDEFINED             = MDE_CPU_IA32 MDE_CPU_X64 MDE_CPU_IPF MDE_CPU_EBC MDE_CPU_ARM _MSC_EXTENSIONS __GNUC__ __INTEL_COMPILER ASM_PFX=  OPTIONAL= 
 EXPAND_AS_DEFINED      =

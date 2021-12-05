@@ -1,138 +1,138 @@
-warning: source /home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Ppi is not a readable file or directory... skipping.
-warning: source /home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Guid is not a readable file or directory... skipping.
-warning: source /home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/IndustryStandard is not a readable file or directory... skipping.
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Library/AmlLib/AmlLib.h:13: warning: found more than one \mainpage comment block! Skipping this block.
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/ConfigurationManagerHelper.h:15: warning: argument 'CfgMgrProtocol' of command @param is not found in the argument list of GET_OBJECT_LIST(CmObjectNameSpace, CmObjectId, Type)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/ConfigurationManagerHelper.h:15: warning: argument 'Token' of command @param is not found in the argument list of GET_OBJECT_LIST(CmObjectNameSpace, CmObjectId, Type)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/ConfigurationManagerHelper.h:15: warning: argument 'List' of command @param is not found in the argument list of GET_OBJECT_LIST(CmObjectNameSpace, CmObjectId, Type)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/ConfigurationManagerHelper.h:15: warning: argument 'Count' of command @param is not found in the argument list of GET_OBJECT_LIST(CmObjectNameSpace, CmObjectId, Type)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Library/AmlLib/AmlLib.h:469: warning: argument 'DefinitionBlockTerm' of command @param is not found in the argument list of AmlCodeGenDefinitionBlock(IN CONST CHAR8 *TableSignature, IN CONST CHAR8 *OemId, IN CONST CHAR8 *OemTableId, IN UINT32 OemRevision, OUT AML_ROOT_NODE_HANDLE *NewRootNode)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Library/AmlLib/AmlLib.h:469: warning: The following parameters of AmlCodeGenDefinitionBlock(IN CONST CHAR8 *TableSignature, IN CONST CHAR8 *OemId, IN CONST CHAR8 *OemTableId, IN UINT32 OemRevision, OUT AML_ROOT_NODE_HANDLE *NewRootNode) are not documented:
+warning: source /home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Ppi is not a readable file or directory... skipping.
+warning: source /home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Guid is not a readable file or directory... skipping.
+warning: source /home/runner/work/edk2/edk2/DynamicTablesPkg/Include/IndustryStandard is not a readable file or directory... skipping.
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Library/AmlLib/AmlLib.h:13: warning: found more than one \mainpage comment block! Skipping this block.
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/ConfigurationManagerHelper.h:15: warning: argument 'CfgMgrProtocol' of command @param is not found in the argument list of GET_OBJECT_LIST(CmObjectNameSpace, CmObjectId, Type)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/ConfigurationManagerHelper.h:15: warning: argument 'Token' of command @param is not found in the argument list of GET_OBJECT_LIST(CmObjectNameSpace, CmObjectId, Type)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/ConfigurationManagerHelper.h:15: warning: argument 'List' of command @param is not found in the argument list of GET_OBJECT_LIST(CmObjectNameSpace, CmObjectId, Type)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/ConfigurationManagerHelper.h:15: warning: argument 'Count' of command @param is not found in the argument list of GET_OBJECT_LIST(CmObjectNameSpace, CmObjectId, Type)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Library/AmlLib/AmlLib.h:469: warning: argument 'DefinitionBlockTerm' of command @param is not found in the argument list of AmlCodeGenDefinitionBlock(IN CONST CHAR8 *TableSignature, IN CONST CHAR8 *OemId, IN CONST CHAR8 *OemTableId, IN UINT32 OemRevision, OUT AML_ROOT_NODE_HANDLE *NewRootNode)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Library/AmlLib/AmlLib.h:469: warning: The following parameters of AmlCodeGenDefinitionBlock(IN CONST CHAR8 *TableSignature, IN CONST CHAR8 *OemId, IN CONST CHAR8 *OemTableId, IN UINT32 OemRevision, OUT AML_ROOT_NODE_HANDLE *NewRootNode) are not documented:
   parameter 'NewRootNode'
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'CmObjectId' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Token' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'CmObject' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'CmObjectId' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Token' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'CmObject' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: The following parameters of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT) are not documented:
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'CmObjectId' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Token' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'CmObject' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'CmObjectId' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Token' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'CmObject' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: The following parameters of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT) are not documented:
   parameter 'EDKII_CONFIGURATION_MANAGER_SET_OBJECT'
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'TableId' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'TableId' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'TableId' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'CmObjectId' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Token' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'CmObject' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: The following parameters of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT) are not documented:
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'TableId' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'TableId' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'TableId' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Generator' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'This' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'CmObjectId' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'Token' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: argument 'CmObject' of command @param is not found in the argument list of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT)
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h:65: warning: The following parameters of EFI_STATUS(EFIAPI *EDKII_CONFIGURATION_MANAGER_SET_OBJECT) are not documented:
   parameter 'EDKII_CONFIGURATION_MANAGER_SET_OBJECT'
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:38: warning: Found unknown command `\libraryclass'
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:47: warning: Found unknown command `\libraryclass'
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:55: warning: Found unknown command `\libraryclass'
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:63: warning: Found unknown command `\libraryclass'
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:129: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:129: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:129: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:129: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:156: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:156: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:156: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:156: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:166: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:166: warning: Unexpected tag </caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:166: warning: Unexpected tag <caption> found
-/home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:166: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:38: warning: Found unknown command `\libraryclass'
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:47: warning: Found unknown command `\libraryclass'
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:55: warning: Found unknown command `\libraryclass'
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:63: warning: Found unknown command `\libraryclass'
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:95: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:101: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:107: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:113: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:129: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:129: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:129: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:129: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:156: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:156: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:156: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:156: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:166: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:166: warning: Unexpected tag </caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:166: warning: Unexpected tag <caption> found
+/home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen:166: warning: Unexpected tag </caption> found

@@ -2,7 +2,7 @@
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = IntelFsp2WrapperPkg[all]
 PROJECT_NUMBER         = 0.1
-OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/IntelFsp2WrapperPkg
+OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/Build/Doxygen/IntelFsp2WrapperPkg
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
@@ -21,7 +21,7 @@ ABBREVIATE_BRIEF       = "The $name class           " \
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
-STRIP_FROM_PATH        = /home/runner/work/edk2/edk2/edk2
+STRIP_FROM_PATH        = /home/runner/work/edk2/edk2
 STRIP_FROM_INC_PATH    =
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = NO
@@ -75,16 +75,16 @@ WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
 WARN_NO_PARAMDOC       = YES
 WARN_FORMAT            = "$file:$line: $text           "
-WARN_LOGFILE           = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/IntelFsp2WrapperPkg/warning.txt
+WARN_LOGFILE           = /home/runner/work/edk2/edk2/Build/Doxygen/IntelFsp2WrapperPkg/warning.txt
 
-INPUT                  = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dec.decdoxygen \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2WrapperPkg/Include/Library/FspWrapperApiLib.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2WrapperPkg/Include/Library/FspWrapperApiTestLib.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2WrapperPkg/Include/Library/FspWrapperHobProcessLib.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2WrapperPkg/Include/Library/FspMeasurementLib.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2WrapperPkg/Include/Library/FspWrapperPlatformLib.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2WrapperPkg/Include/Ppi/TopOfTemporaryRam.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2WrapperPkg/Include/Ppi/FspSiliconInitDone.h
+INPUT                  = /home/runner/work/edk2/edk2/Build/Doxygen/IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dec.decdoxygen \
+/home/runner/work/edk2/edk2/IntelFsp2WrapperPkg/Include/Library/FspWrapperApiLib.h \
+/home/runner/work/edk2/edk2/IntelFsp2WrapperPkg/Include/Library/FspWrapperApiTestLib.h \
+/home/runner/work/edk2/edk2/IntelFsp2WrapperPkg/Include/Library/FspWrapperHobProcessLib.h \
+/home/runner/work/edk2/edk2/IntelFsp2WrapperPkg/Include/Library/FspMeasurementLib.h \
+/home/runner/work/edk2/edk2/IntelFsp2WrapperPkg/Include/Library/FspWrapperPlatformLib.h \
+/home/runner/work/edk2/edk2/IntelFsp2WrapperPkg/Include/Ppi/TopOfTemporaryRam.h \
+/home/runner/work/edk2/edk2/IntelFsp2WrapperPkg/Include/Ppi/FspSiliconInitDone.h
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
 *.h \
@@ -181,12 +181,12 @@ ENABLE_PREPROCESSING   = YES
 MACRO_EXPANSION        = YES
 EXPAND_ONLY_PREDEF     = YES
 SEARCH_INCLUDES        = YES
-INCLUDE_PATH           = /home/runner/work/edk2/edk2/edk2/IntelFsp2WrapperPkg/Include \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2WrapperPkg/Include/Library \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2WrapperPkg/Include/Protocol \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2WrapperPkg/Include/Ppi \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2WrapperPkg/Include/Guid \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2WrapperPkg/Include/IndustryStandard
+INCLUDE_PATH           = /home/runner/work/edk2/edk2/IntelFsp2WrapperPkg/Include \
+/home/runner/work/edk2/edk2/IntelFsp2WrapperPkg/Include/Library \
+/home/runner/work/edk2/edk2/IntelFsp2WrapperPkg/Include/Protocol \
+/home/runner/work/edk2/edk2/IntelFsp2WrapperPkg/Include/Ppi \
+/home/runner/work/edk2/edk2/IntelFsp2WrapperPkg/Include/Guid \
+/home/runner/work/edk2/edk2/IntelFsp2WrapperPkg/Include/IndustryStandard
 INCLUDE_FILE_PATTERNS  = *.h
 PREDEFINED             = MDE_CPU_IA32 MDE_CPU_X64 MDE_CPU_IPF MDE_CPU_EBC MDE_CPU_ARM _MSC_EXTENSIONS __GNUC__ __INTEL_COMPILER ASM_PFX=  OPTIONAL= 
 EXPAND_AS_DEFINED      =

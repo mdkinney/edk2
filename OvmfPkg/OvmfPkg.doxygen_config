@@ -2,7 +2,7 @@
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = OvmfPkg[all]
 PROJECT_NUMBER         = 0.1
-OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/OvmfPkg
+OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/Build/Doxygen/OvmfPkg
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
@@ -21,7 +21,7 @@ ABBREVIATE_BRIEF       = "The $name class           " \
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
-STRIP_FROM_PATH        = /home/runner/work/edk2/edk2/edk2
+STRIP_FROM_PATH        = /home/runner/work/edk2/edk2
 STRIP_FROM_INC_PATH    =
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = NO
@@ -75,113 +75,113 @@ WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
 WARN_NO_PARAMDOC       = YES
 WARN_FORMAT            = "$file:$line: $text           "
-WARN_LOGFILE           = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/OvmfPkg/warning.txt
+WARN_LOGFILE           = /home/runner/work/edk2/edk2/Build/Doxygen/OvmfPkg/warning.txt
 
-INPUT                  = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/OvmfPkg/OvmfPkg.dec.decdoxygen \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/OvmfPlatforms.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/WorkArea.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/FusionMptScsi.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/VirtioNet.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Q35MchIch9.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/QemuFwCfg.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/VirtioScsi.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/LinuxBzimage.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/LegacyVgaBios.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Virtio095.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/PvScsi.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/VirtioGpu.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Microvm.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Virtio095Net.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/VirtioFs.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Virtio.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/QemuPciBridgeCapabilities.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/InstructionParsing.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/E820.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Virtio10.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/I440FxPiix4.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Virtio10Net.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/VirtioBlk.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/QemuLoader.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/LsiScsi.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Bhyve.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/PageTable.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/QemuCpuHotplug.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/QemuTpm.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/memory.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/README \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/grant_table.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/event_channel.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/xen-compat.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/xen.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/hvm/params.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/hvm/hvm_op.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/io/ring.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/io/blkif.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/io/xs_wire.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/io/console.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/io/protocols.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/io/xenbus.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/arch-x86/xen-x86_64.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/arch-x86/xen.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/arch-x86/xen-x86_32.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/arch-x86/hvm/start_info.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/arch-arm/xen.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/PlatformFvbLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/QemuFwCfgLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/NvVarsFileLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/QemuFwCfgSimpleParserLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/BlobVerifierLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/QemuFwCfgS3Lib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/XenHypercallLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/VirtioMmioDeviceLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/QemuBootOrderLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/PciHostBridgeUtilityLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/BhyveFwCtlLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/VirtioLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/PlatformBmPrintScLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/LoadLinuxLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/XenIoMmioLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/PciCapPciIoLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/MemEncryptSevLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/PciCapPciSegmentLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/QemuLoadImageLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/PciCapLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/SerializeVariablesLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library/XenPlatformLib.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Pcd/CpuHotEjectData.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Guid/RootBridgesConnectedEventGroup.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Guid/QemuKernelLoaderFsMedia.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Guid/OvmfPkKek1AppPrefix.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Guid/ConfidentialComputingSecret.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Guid/XenInfo.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Guid/MicrosoftVendor.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Guid/XenBusRootDevice.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Guid/VirtioMmioTransport.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Guid/OvmfPlatformConfig.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Guid/QemuRamfb.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Register/QemuSmramSaveStateMap.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Protocol/XenIo.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Protocol/XenBus.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Protocol/VirtioDevice.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Protocol/Legacy8259.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Protocol/OvmfLoadedX86LinuxKernel.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/FrameworkDxe.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Guid/LegacyBios.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Guid/LegacyDevOrder.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Framework/StatusCode.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Framework/FrameworkInternalFormRepresentation.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Framework/FirmwareVolumeHeader.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Framework/BootScript.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Framework/FirmwareVolumeImageFormat.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Framework/Hob.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Framework/DxeCis.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Protocol/LegacyBios.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Protocol/VgaMiniPort.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Protocol/LegacyBiosPlatform.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Protocol/LegacyInterrupt.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Protocol/FirmwareVolume.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Protocol/IsaAcpi.h \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include/Protocol/IsaIo.h
+INPUT                  = /home/runner/work/edk2/edk2/Build/Doxygen/OvmfPkg/OvmfPkg.dec.decdoxygen \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/OvmfPlatforms.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/WorkArea.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/FusionMptScsi.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/VirtioNet.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Q35MchIch9.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/QemuFwCfg.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/VirtioScsi.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/LinuxBzimage.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/LegacyVgaBios.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Virtio095.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/PvScsi.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/VirtioGpu.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Microvm.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Virtio095Net.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/VirtioFs.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Virtio.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/QemuPciBridgeCapabilities.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/InstructionParsing.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/E820.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Virtio10.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/I440FxPiix4.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Virtio10Net.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/VirtioBlk.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/QemuLoader.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/LsiScsi.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Bhyve.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/PageTable.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/QemuCpuHotplug.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/QemuTpm.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/memory.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/README \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/grant_table.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/event_channel.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/xen-compat.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/xen.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/hvm/params.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/hvm/hvm_op.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/io/ring.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/io/blkif.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/io/xs_wire.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/io/console.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/io/protocols.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/io/xenbus.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/arch-x86/xen-x86_64.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/arch-x86/xen.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/arch-x86/xen-x86_32.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/arch-x86/hvm/start_info.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard/Xen/arch-arm/xen.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/PlatformFvbLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/QemuFwCfgLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/NvVarsFileLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/QemuFwCfgSimpleParserLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/BlobVerifierLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/QemuFwCfgS3Lib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/XenHypercallLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/VirtioMmioDeviceLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/QemuBootOrderLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/PciHostBridgeUtilityLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/BhyveFwCtlLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/VirtioLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/PlatformBmPrintScLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/LoadLinuxLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/XenIoMmioLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/PciCapPciIoLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/MemEncryptSevLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/PciCapPciSegmentLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/QemuLoadImageLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/PciCapLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/SerializeVariablesLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library/XenPlatformLib.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Pcd/CpuHotEjectData.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Guid/RootBridgesConnectedEventGroup.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Guid/QemuKernelLoaderFsMedia.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Guid/OvmfPkKek1AppPrefix.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Guid/ConfidentialComputingSecret.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Guid/XenInfo.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Guid/MicrosoftVendor.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Guid/XenBusRootDevice.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Guid/VirtioMmioTransport.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Guid/OvmfPlatformConfig.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Guid/QemuRamfb.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Register/QemuSmramSaveStateMap.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Protocol/XenIo.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Protocol/XenBus.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Protocol/VirtioDevice.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Protocol/Legacy8259.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Protocol/OvmfLoadedX86LinuxKernel.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/FrameworkDxe.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Guid/LegacyBios.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Guid/LegacyDevOrder.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Framework/StatusCode.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Framework/FrameworkInternalFormRepresentation.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Framework/FirmwareVolumeHeader.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Framework/BootScript.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Framework/FirmwareVolumeImageFormat.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Framework/Hob.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Framework/DxeCis.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Protocol/LegacyBios.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Protocol/VgaMiniPort.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Protocol/LegacyBiosPlatform.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Protocol/LegacyInterrupt.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Protocol/FirmwareVolume.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Protocol/IsaAcpi.h \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include/Protocol/IsaIo.h
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
 *.h \
@@ -278,13 +278,13 @@ ENABLE_PREPROCESSING   = YES
 MACRO_EXPANSION        = YES
 EXPAND_ONLY_PREDEF     = YES
 SEARCH_INCLUDES        = YES
-INCLUDE_PATH           = /home/runner/work/edk2/edk2/edk2/OvmfPkg/Include \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Library \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Protocol \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Ppi \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/Guid \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Include/IndustryStandard \
-/home/runner/work/edk2/edk2/edk2/OvmfPkg/Csm/Include
+INCLUDE_PATH           = /home/runner/work/edk2/edk2/OvmfPkg/Include \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Library \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Protocol \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Ppi \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/Guid \
+/home/runner/work/edk2/edk2/OvmfPkg/Include/IndustryStandard \
+/home/runner/work/edk2/edk2/OvmfPkg/Csm/Include
 INCLUDE_FILE_PATTERNS  = *.h
 PREDEFINED             = MDE_CPU_IA32 MDE_CPU_X64 MDE_CPU_IPF MDE_CPU_EBC MDE_CPU_ARM _MSC_EXTENSIONS __GNUC__ __INTEL_COMPILER ASM_PFX=  OPTIONAL= 
 EXPAND_AS_DEFINED      =

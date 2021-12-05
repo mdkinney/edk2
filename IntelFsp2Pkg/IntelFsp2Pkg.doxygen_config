@@ -2,7 +2,7 @@
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = IntelFsp2Pkg[all]
 PROJECT_NUMBER         = 0.1
-OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/IntelFsp2Pkg
+OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/Build/Doxygen/IntelFsp2Pkg
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
@@ -21,7 +21,7 @@ ABBREVIATE_BRIEF       = "The $name class           " \
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
-STRIP_FROM_PATH        = /home/runner/work/edk2/edk2/edk2
+STRIP_FROM_PATH        = /home/runner/work/edk2/edk2
 STRIP_FROM_INC_PATH    =
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = NO
@@ -75,26 +75,26 @@ WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
 WARN_NO_PARAMDOC       = YES
 WARN_FORMAT            = "$file:$line: $text           "
-WARN_LOGFILE           = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/IntelFsp2Pkg/warning.txt
+WARN_LOGFILE           = /home/runner/work/edk2/edk2/Build/Doxygen/IntelFsp2Pkg/warning.txt
 
-INPUT                  = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/IntelFsp2Pkg/IntelFsp2Pkg.dec.decdoxygen \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/FspStatusCode.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/FspEas.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/FspGlobalData.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/FspMeasurePointId.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/FspEas/FspApi.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Library/FspCommonLib.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Library/CacheAsRamLib.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Library/FspSecPlatformLib.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Library/FspSwitchStackLib.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Library/FspPlatformLib.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Library/DebugDeviceLib.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Library/CacheLib.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Ppi/TempRamExitPpi.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Ppi/FspmArchConfigPpi.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Guid/FspHeaderFile.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Guid/FspNonVolatileStorageHob2.h \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Guid/GuidHobFspEas.h
+INPUT                  = /home/runner/work/edk2/edk2/Build/Doxygen/IntelFsp2Pkg/IntelFsp2Pkg.dec.decdoxygen \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/FspStatusCode.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/FspEas.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/FspGlobalData.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/FspMeasurePointId.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/FspEas/FspApi.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Library/FspCommonLib.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Library/CacheAsRamLib.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Library/FspSecPlatformLib.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Library/FspSwitchStackLib.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Library/FspPlatformLib.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Library/DebugDeviceLib.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Library/CacheLib.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Ppi/TempRamExitPpi.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Ppi/FspmArchConfigPpi.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Guid/FspHeaderFile.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Guid/FspNonVolatileStorageHob2.h \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Guid/GuidHobFspEas.h
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
 *.h \
@@ -191,12 +191,12 @@ ENABLE_PREPROCESSING   = YES
 MACRO_EXPANSION        = YES
 EXPAND_ONLY_PREDEF     = YES
 SEARCH_INCLUDES        = YES
-INCLUDE_PATH           = /home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Library \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Protocol \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Ppi \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/Guid \
-/home/runner/work/edk2/edk2/edk2/IntelFsp2Pkg/Include/IndustryStandard
+INCLUDE_PATH           = /home/runner/work/edk2/edk2/IntelFsp2Pkg/Include \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Library \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Protocol \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Ppi \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/Guid \
+/home/runner/work/edk2/edk2/IntelFsp2Pkg/Include/IndustryStandard
 INCLUDE_FILE_PATTERNS  = *.h
 PREDEFINED             = MDE_CPU_IA32 MDE_CPU_X64 MDE_CPU_IPF MDE_CPU_EBC MDE_CPU_ARM _MSC_EXTENSIONS __GNUC__ __INTEL_COMPILER ASM_PFX=  OPTIONAL= 
 EXPAND_AS_DEFINED      =

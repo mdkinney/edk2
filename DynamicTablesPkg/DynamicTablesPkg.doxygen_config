@@ -2,7 +2,7 @@
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = DynamicTablesPkg[all]
 PROJECT_NUMBER         = 1.0
-OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg
+OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
@@ -21,7 +21,7 @@ ABBREVIATE_BRIEF       = "The $name class           " \
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
-STRIP_FROM_PATH        = /home/runner/work/edk2/edk2/edk2
+STRIP_FROM_PATH        = /home/runner/work/edk2/edk2
 STRIP_FROM_INC_PATH    =
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = NO
@@ -75,23 +75,23 @@ WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
 WARN_NO_PARAMDOC       = YES
 WARN_FORMAT            = "$file:$line: $text           "
-WARN_LOGFILE           = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/warning.txt
+WARN_LOGFILE           = /home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/warning.txt
 
-INPUT                  = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/ConfigurationManagerHelper.h \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/DeviceTreeTableGenerator.h \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/AcpiTableGenerator.h \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/ArmNameSpaceObjects.h \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/TableGenerator.h \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/StandardNameSpaceObjects.h \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/ConfigurationManagerObject.h \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/SmbiosTableGenerator.h \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Library/AcpiHelperLib.h \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Library/TableHelperLib.h \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Library/SsdtSerialPortFixupLib.h \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Library/AmlLib/AmlLib.h \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/DynamicTableFactoryProtocol.h \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h
+INPUT                  = /home/runner/work/edk2/edk2/Build/Doxygen/DynamicTablesPkg/DynamicTablesPkg.dec.decdoxygen \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/ConfigurationManagerHelper.h \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/DeviceTreeTableGenerator.h \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/AcpiTableGenerator.h \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/ArmNameSpaceObjects.h \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/TableGenerator.h \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/StandardNameSpaceObjects.h \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/ConfigurationManagerObject.h \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/SmbiosTableGenerator.h \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Library/AcpiHelperLib.h \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Library/TableHelperLib.h \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Library/SsdtSerialPortFixupLib.h \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Library/AmlLib/AmlLib.h \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/DynamicTableFactoryProtocol.h \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol/ConfigurationManagerProtocol.h
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
 *.h \
@@ -188,12 +188,12 @@ ENABLE_PREPROCESSING   = YES
 MACRO_EXPANSION        = YES
 EXPAND_ONLY_PREDEF     = YES
 SEARCH_INCLUDES        = YES
-INCLUDE_PATH           = /home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Library \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Protocol \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Ppi \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/Guid \
-/home/runner/work/edk2/edk2/edk2/DynamicTablesPkg/Include/IndustryStandard
+INCLUDE_PATH           = /home/runner/work/edk2/edk2/DynamicTablesPkg/Include \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Library \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Protocol \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Ppi \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/Guid \
+/home/runner/work/edk2/edk2/DynamicTablesPkg/Include/IndustryStandard
 INCLUDE_FILE_PATTERNS  = *.h
 PREDEFINED             = MDE_CPU_IA32 MDE_CPU_X64 MDE_CPU_IPF MDE_CPU_EBC MDE_CPU_ARM _MSC_EXTENSIONS __GNUC__ __INTEL_COMPILER ASM_PFX=  OPTIONAL= 
 EXPAND_AS_DEFINED      =

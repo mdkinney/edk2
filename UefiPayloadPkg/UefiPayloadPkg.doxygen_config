@@ -2,7 +2,7 @@
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = UefiPayloadPkg[all]
 PROJECT_NUMBER         = 0.1
-OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/UefiPayloadPkg
+OUTPUT_DIRECTORY       = /home/runner/work/edk2/edk2/Build/Doxygen/UefiPayloadPkg
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
@@ -21,7 +21,7 @@ ABBREVIATE_BRIEF       = "The $name class           " \
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
-STRIP_FROM_PATH        = /home/runner/work/edk2/edk2/edk2
+STRIP_FROM_PATH        = /home/runner/work/edk2/edk2
 STRIP_FROM_INC_PATH    =
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = NO
@@ -75,24 +75,24 @@ WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
 WARN_NO_PARAMDOC       = YES
 WARN_FORMAT            = "$file:$line: $text           "
-WARN_LOGFILE           = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/UefiPayloadPkg/warning.txt
+WARN_LOGFILE           = /home/runner/work/edk2/edk2/Build/Doxygen/UefiPayloadPkg/warning.txt
 
-INPUT                  = /home/runner/work/edk2/edk2/edk2/Build/Doxygen/UefiPayloadPkg/UefiPayloadPkg.dec.decdoxygen \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Coreboot.h \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Library/FlashDeviceLib.h \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Library/BlParseLib.h \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Library/SpiFlashLib.h \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Library/PlatformSupportLib.h \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Library/DxeHobListLib.h \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Guid/SmmRegisterInfoGuid.h \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Guid/SpiFlashInfoGuid.h \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Guid/MemoryMapInfoGuid.h \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Guid/SmmS3CommunicationInfoGuid.h \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Guid/SerialPortInfoGuid.h \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Guid/AcpiBoardInfoGuid.h \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Guid/NvVariableInfoGuid.h \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Guid/BootManagerMenu.h \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Protocol/PlatformBootManagerOverride.h
+INPUT                  = /home/runner/work/edk2/edk2/Build/Doxygen/UefiPayloadPkg/UefiPayloadPkg.dec.decdoxygen \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Coreboot.h \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Library/FlashDeviceLib.h \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Library/BlParseLib.h \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Library/SpiFlashLib.h \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Library/PlatformSupportLib.h \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Library/DxeHobListLib.h \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Guid/SmmRegisterInfoGuid.h \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Guid/SpiFlashInfoGuid.h \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Guid/MemoryMapInfoGuid.h \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Guid/SmmS3CommunicationInfoGuid.h \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Guid/SerialPortInfoGuid.h \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Guid/AcpiBoardInfoGuid.h \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Guid/NvVariableInfoGuid.h \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Guid/BootManagerMenu.h \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Protocol/PlatformBootManagerOverride.h
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
 *.h \
@@ -189,12 +189,12 @@ ENABLE_PREPROCESSING   = YES
 MACRO_EXPANSION        = YES
 EXPAND_ONLY_PREDEF     = YES
 SEARCH_INCLUDES        = YES
-INCLUDE_PATH           = /home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Library \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Protocol \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Ppi \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/Guid \
-/home/runner/work/edk2/edk2/edk2/UefiPayloadPkg/Include/IndustryStandard
+INCLUDE_PATH           = /home/runner/work/edk2/edk2/UefiPayloadPkg/Include \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Library \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Protocol \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Ppi \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/Guid \
+/home/runner/work/edk2/edk2/UefiPayloadPkg/Include/IndustryStandard
 INCLUDE_FILE_PATTERNS  = *.h
 PREDEFINED             = MDE_CPU_IA32 MDE_CPU_X64 MDE_CPU_IPF MDE_CPU_EBC MDE_CPU_ARM _MSC_EXTENSIONS __GNUC__ __INTEL_COMPILER ASM_PFX=  OPTIONAL= 
 EXPAND_AS_DEFINED      =
