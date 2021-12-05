@@ -97,11 +97,11 @@ jobs:
         echo "  </body>"       >> $WORKSPACE/Build/Doxygen/index.html
         echo "</html>"       >> $WORKSPACE/Build/Doxygen/index.html
     - name: Publish HTML package documents
-        uses: JamesIves/github-pages-deploy-action@4.1.7
-        with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: edk2/Build/Doxygen # The folder the action should deploy.
-          repositoryName: ${{github.event.inputs.publish_repo}}.git
+      uses: JamesIves/github-pages-deploy-action@4.1.7
+      with:
+        branch: gh-pages # The branch the action should deploy to.
+        folder: edk2/Build/Doxygen # The folder the action should deploy.
+        repositoryName: ${{github.event.inputs.publish_repo}}.git
 #    - name: Publish HTML package documents
 #      run: |
 #        git clone -b ${{github.event.inputs.publish_branch}} https://${{secrets.PACKAGE_DOCUMENTATION_PERSONAL_TOKEN}}@github.com/${{github.event.inputs.publish_repo}}.git Publish
