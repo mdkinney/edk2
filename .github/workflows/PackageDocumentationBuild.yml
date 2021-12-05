@@ -97,11 +97,11 @@ jobs:
         echo "</html>"       >> $WORKSPACE/Build/Doxygen/index.html
     - name: Publish HTML package documents
       run: |
-        git clone -b ${{github.event.inputs.publish_branch}} https://${{github.actor}}:${{secrets.PACKAGE_DOCUMENTATION_PERSONAL_TOKEN}}@github.com/${{github.event.inputs.publish_repo}}.git Publish
+        git clone -b ${{github.event.inputs.publish_branch}} https://${{secrets.PACKAGE_DOCUMENTATION_PERSONAL_TOKEN}}@github.com/${{github.event.inputs.publish_repo}}.git Publish
         cp -rfp edk2/Build/Doxygen/. Publish
         cd Publish
         git config --local user.name  ${{github.actor}}
         git config --local user.email ${{github.actor}}@users.noreply.github.com
         git add .
         git commit -m "Publish package documentation"
-        git push https://${{github.actor}}:${{secrets.PACKAGE_DOCUMENTATION_PERSONAL_TOKEN}}@github.com/${{github.event.inputs.publish_repo}}.git  ${{github.event.inputs.publish_branch}}:${{github.event.inputs.publish_branch}}
+        git push https://${{secrets.PACKAGE_DOCUMENTATION_PERSONAL_TOKEN}}@github.com/${{github.event.inputs.publish_repo}}.git  ${{github.event.inputs.publish_branch}}:${{github.event.inputs.publish_branch}}
