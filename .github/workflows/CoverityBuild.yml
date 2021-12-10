@@ -101,7 +101,17 @@ jobs:
       run: |
         . edksetup.sh
         make -C BaseTools
-    - name: Build with cov-build
+    - name: Build with cov-build OvmfXen
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
+        cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a X64                                      -p OvmfPkg/OvmfXen.dsc
+    - name: Build with cov-build UefiCpuPkg
+      continue-on-error: true
       run: |
         export PATH="${PWD}/cov-analysis/bin:${PATH}"
         . edksetup.sh
@@ -109,39 +119,302 @@ jobs:
         cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
         cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64                              -p UefiCpuPkg/UefiCpuPkg.dsc
+    - name: Build with cov-build PcAtChipsetPkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64                              -p PcAtChipsetPkg/PcAtChipsetPkg.dsc
+    - name: Build with cov-build MdePkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p MdePkg/MdePkg.dsc
+    - name: Build with cov-build MdeModukePkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64        -a AARCH64 -a RISCV64 -p MdeModulePkg/MdeModulePkg.dsc
+    - name: Build with cov-build ShellPkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p ShellPkg/ShellPkg.dsc
+    - name: Build with cov-build FatPkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FatPkg/FatPkg.dsc
+    - name: Build with cov-build ArmPkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM -a AARCH64                           -p ArmPkg/ArmPkg.dsc
+    - name: Build with cov-build ArmPlatformPkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM -a AARCH64                           -p ArmPlatformPkg/ArmPlatformPkg.dsc
+    - name: Build with cov-build AARCH64 ArmVirtCloudHv
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a AARCH64                                  -p ArmVirtPkg/ArmVirtCloudHv.dsc
+    - name: Build with cov-build ARM ArmVirtCloudHv
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM                                      -p ArmVirtPkg/ArmVirtCloudHv.dsc
+    - name: Build with cov-build AARCH64 ArmVirtQemu
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a AARCH64                                  -p ArmVirtPkg/ArmVirtQemu.dsc
+    - name: Build with cov-build ARM ArmVirtQemu
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM                                      -p ArmVirtPkg/ArmVirtQemu.dsc
+    - name: Build with cov-build AARCH64 ArmVirtQemuKernel
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a AARCH64                                  -p ArmVirtPkg/ArmVirtQemuKernel.dsc
+    - name: Build with cov-build ARM ArmVirtQemuKernel
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM                                      -p ArmVirtPkg/ArmVirtQemuKernel.dsc
+    - name: Build with cov-build AARCH64 ArmVirtXen
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a AARCH64                                  -p ArmVirtPkg/ArmVirtXen.dsc
+    - name: Build with cov-build ARM ArmVirtXen
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM                                      -p ArmVirtPkg/ArmVirtXen.dsc
+    - name: Build with cov-build CryptoPkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p CryptoPkg/CryptoPkg.dsc
+    - name: Build with cov-build DynamicTablesPkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a ARM -a AARCH64                           -p DynamicTablesPkg/DynamicTablesPkg.dsc
+    - name: Build with cov-build EmbeddedPkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64            -p EmbeddedPkg/EmbeddedPkg.dsc
+    - name: Build with cov-build FmpDevicePkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p FmpDevicePkg/FmpDevicePkg.dsc
+    - name: Build with cov-build IntelFsp2Pkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32                                     -p IntelFsp2Pkg/IntelFsp2Pkg.dsc
+    - name: Build with cov-build IntelFsp2WrapperPkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64                              -p IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dsc
+    - name: Build with cov-build NetworkPkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p NetworkPkg/NetworkPkg.dsc
+    - name: Build with cov-build IA32 OvmfPkgIa32
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32                                     -p OvmfPkg/OvmfPkgIa32.dsc
+    - name: Build with cov-build IA32 X64 OvmfPkgIa32X64
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64                              -p OvmfPkg/OvmfPkgIa32X64.dsc
+    - name: Build with cov-build X64 OvmfPkgX64
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a X64                                      -p OvmfPkg/OvmfPkgX64.dsc
-        cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a X64                                      -p OvmfPkg/OvmfXen.dsc
+    - name: Build with cov-build BhyveX64
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a X64                                      -p OvmfPkg/Bhyve/BhyveX64.dsc
+    - name: Build with cov-build MicrovmX64
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a X64                                      -p OvmfPkg/Microvm/MicrovmX64.dsc
+    - name: Build with cov-build RedfishPkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p RedfishPkg/RedfishPkg.dsc
+    - name: Build with cov-build SecurityPkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV64 -p SecurityPkg/SecurityPkg.dsc
+    - name: Build with cov-build SignedCapsulePkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a AARCH64 -a ARM            -p SignedCapsulePkg/SignedCapsulePkg.dsc
+    - name: Build with cov-build SourceLevelDebugPkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64                              -p SourceLevelDebugPkg/SourceLevelDebugPkg.dsc
+    - name: Build with cov-build UefiPayloadPkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64                              -p UefiPayloadPkg/UefiPayloadPkg.dsc
+    - name: Build with cov-build UnitTestFrameworkPkg
+      continue-on-error: true
+      run: |
+        export PATH="${PWD}/cov-analysis/bin:${PATH}"
+        . edksetup.sh
+        cov-configure --compiler aarch64-linux-gnu-gcc --comptype gcc --template
+        cov-configure --compiler arm-none-eabi-gcc     --comptype gcc --template
+        cov-configure --compiler riscv64-linux-gnu-gcc --comptype gcc --template
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV   -p UnitTestFrameworkPkg/UnitTestFrameworkPkg.dsc
     - name: Submit results to Coverity Scan
       run: |
