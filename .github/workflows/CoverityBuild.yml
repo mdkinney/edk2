@@ -48,7 +48,7 @@ on:
         default: '-n 4 --quiet'
         required: false
       upload:
-        description: 'True to submit results to Coverity Scan'
+        description: 'Submit results to Coverity Scan'
         default: false
         required: true
         type: boolean
