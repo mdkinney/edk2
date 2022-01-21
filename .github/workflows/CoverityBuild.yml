@@ -47,6 +47,11 @@ on:
         description: 'Extra options to add to end of build command (e.g. --quiet, --verbose)'
         default: '-n 4 --quiet'
         required: false
+      upload:
+        description: 'True to submit results to Coverity Scan'
+        default: false
+        required: true
+        type: boolean
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -283,6 +288,7 @@ jobs:
         . edksetup.sh
         cov-build --dir cov-int --append-log ${{ github.event.inputs.coverityoptions }} build -t GCC5 ${{ github.event.inputs.buildoptions }} -b NOOPT -a IA32 -a X64 -a ARM -a AARCH64 -a RISCV   -p UnitTestFrameworkPkg/UnitTestFrameworkPkg.dsc
     - name: Submit results to Coverity Scan
+      if: ${{ github.event.inputs.upload }}
       run: |
         tar -czvf cov-int.tgz cov-int
         curl \
