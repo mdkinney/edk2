@@ -578,6 +578,8 @@ struct _LIST_ENTRY {
 **/
 #define _INT_SIZE_OF(n)  ((sizeof (n) + sizeof (UINTN) - 1) &~(sizeof (UINTN) - 1))
 
+#define NO_BUILTIN_VA_FUNCS 1
+
 #if defined (__CC_ARM)
 //
 // RVCT ARM variable argument list support.
@@ -622,7 +624,7 @@ typedef char *VA_LIST;
 #define VA_END(Marker)               (Marker = (VA_LIST) 0)
 #define VA_COPY(Dest, Start)         ((void)((Dest) = (Start)))
 
-#elif defined (__GNUC__) || defined (__clang__)
+#elif (defined (__GNUC__) || defined (__clang__)) && !defined (NO_BUILTIN_VA_FUNCS)
 
   #if defined (MDE_CPU_X64) && !defined (NO_MSABI_VA_FUNCS)
 //
