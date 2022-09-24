@@ -69,6 +69,7 @@
   SynchronizationLib|MdePkg/Library/BaseSynchronizationLib/BaseSynchronizationLib.inf
 
 [LibraryClasses.ARM, LibraryClasses.AARCH64]
+  ArmLib|ArmPkg/Library/ArmLib/ArmBaseLib.inf
   #
   # It is not possible to prevent the ARM compiler for generic intrinsic functions.
   # This library provides the instrinsic functions generate by a given compiler.
@@ -92,7 +93,7 @@
   MemoryAllocationLib|MdePkg/Library/SmmMemoryAllocationLib/SmmMemoryAllocationLib.inf
   MmServicesTableLib|MdePkg/Library/MmServicesTableLib/MmServicesTableLib.inf
 
-!if $(CRYPTO_SERVICES) IN "ALL NONE MIN_PEI MIN_DXE_MIN_SMM"
+!if $(CRYPTO_SERVICES) IN "PACKAGE ALL NONE MIN_PEI MIN_DXE_MIN_SMM"
 [LibraryClasses]
   MemoryAllocationLib|MdePkg/Library/UefiMemoryAllocationLib/UefiMemoryAllocationLib.inf
   DebugLib|MdeModulePkg/Library/PeiDxeDebugLibReportStatusCode/PeiDxeDebugLibReportStatusCode.inf
@@ -102,8 +103,6 @@
   DevicePathLib|MdePkg/Library/UefiDevicePathLib/UefiDevicePathLib.inf
   PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
   TimerLib|MdePkg/Library/BaseTimerLibNullTemplate/BaseTimerLibNullTemplate.inf
-  UefiRuntimeServicesTableLib|MdePkg/Library/UefiRuntimeServicesTableLib/UefiRuntimeServicesTableLib.inf  #???
-  IoLib|MdePkg/Library/BaseIoLibIntrinsic/BaseIoLibIntrinsic.inf                                          #???
   OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLib.inf
   IntrinsicLib|CryptoPkg/Library/IntrinsicLib/IntrinsicLib.inf
   SafeIntLib|MdePkg/Library/BaseSafeIntLib/BaseSafeIntLib.inf
@@ -129,6 +128,7 @@
 [LibraryClasses.common.DXE_DRIVER]
   ReportStatusCodeLib|MdeModulePkg/Library/DxeReportStatusCodeLib/DxeReportStatusCodeLib.inf
   BaseCryptLib|CryptoPkg/Library/BaseCryptLib/BaseCryptLib.inf
+  UefiRuntimeServicesTableLib|MdePkg/Library/UefiRuntimeServicesTableLib/UefiRuntimeServicesTableLib.inf
   TlsLib|CryptoPkg/Library/TlsLib/TlsLib.inf
 
 [LibraryClasses.common.DXE_SMM_DRIVER]
@@ -242,7 +242,6 @@
 #
 ###################################################################################################
 [Components]
-  CryptoPkg/Library/BaseCryptLib/BaseCryptLib.inf
   CryptoPkg/Test/UnitTest/Library/BaseCryptLib/TestBaseCryptLibShell.inf
 
 !if $(CRYPTO_SERVICES) == PACKAGE
@@ -256,13 +255,18 @@
   CryptoPkg/Library/IntrinsicLib/IntrinsicLib.inf
   CryptoPkg/Library/TlsLib/TlsLib.inf
   CryptoPkg/Library/TlsLibNull/TlsLibNull.inf
-  CryptoPkg/Library/OpensslLib/OpensslLib.inf
   CryptoPkg/Library/OpensslLib/OpensslLibCrypto.inf
+  CryptoPkg/Library/OpensslLib/OpensslLib.inf
+  CryptoPkg/Library/OpensslLib/OpensslLibFull.inf
   CryptoPkg/Library/BaseHashApiLib/BaseHashApiLib.inf
 
   CryptoPkg/Library/BaseCryptLibOnProtocolPpi/PeiCryptLib.inf
   CryptoPkg/Library/BaseCryptLibOnProtocolPpi/DxeCryptLib.inf
   CryptoPkg/Library/BaseCryptLibOnProtocolPpi/SmmCryptLib.inf
+
+[Components.IA32, Components.X64]
+  CryptoPkg/Library/OpensslLib/OpensslLibAccel.inf
+  CryptoPkg/Library/OpensslLib/OpensslLibFullAccel.inf
 !endif
 
 !if $(CRYPTO_SERVICES) IN "PACKAGE ALL NONE MIN_PEI"
@@ -277,10 +281,35 @@
         FILE_GUID = 0F5827A9-35FD-4F41-8D38-9BAFCE594D31
       !endif
   }
+[Components.IA32, Components.X64]
+  #
+  # CryptoPei with IA32/X64 performance optimized OpensslLib instance
+  # IA32/X64 assembly optimizations required larger alignments
+  #
+  CryptoPkg/Driver/CryptoPei.inf {
+    <Defines>
+      !if $(CRYPTO_SERVICES) == PACKAGE
+        FILE_GUID = 9CF0D6AF-F01F-49D7-83AB-F391B37B9462
+      !elseif $(CRYPTO_SERVICES) == ALL
+        FILE_GUID = 592BAA4C-7122-43A5-B2A6-51771224AFED
+      !elseif $(CRYPTO_SERVICES) == NONE
+        FILE_GUID = 4F9CAE0F-0E79-4B58-AF68-926FB3C83C7A
+      !elseif $(CRYPTO_SERVICES) == MIN_PEI
+        FILE_GUID = B4CCB98D-AD42-4A2A-95EC-B0A5467CFD7B
+      !endif
+    <LibraryClasses>
+      OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibAccel.inf
+    <BuildOptions>
+      MSFT:*_*_IA32_DLINK_FLAGS = /ALIGN:64
+      MSFT:*_*_X64_DLINK_FLAGS  = /ALIGN:256
+  }
 !endif
 
 !if $(CRYPTO_SERVICES) IN "PACKAGE ALL NONE MIN_DXE_MIN_SMM"
 [Components.IA32, Components.X64, Components.AARCH64]
+  #
+  # CryptoDxe with OpensslLib instance with TLS feature enabled.
+  #
   CryptoPkg/Driver/CryptoDxe.inf {
     <Defines>
       !if $(CRYPTO_SERVICES) == ALL
@@ -292,7 +321,75 @@
       !endif
   }
 
+  #
+  # CryptoDxe with OpensslLib instance with TLS and EC features enabled.
+  #
+  CryptoPkg/Driver/CryptoDxe.inf {
+    <Defines>
+      !if $(CRYPTO_SERVICES) == PACKAGE
+        FILE_GUID = 438F8E0E-E299-48E8-BFF8-760C209A9C19
+      !elseif $(CRYPTO_SERVICES) == ALL
+        FILE_GUID = 01BC3FAD-C001-4C40-85B8-2133837A2872
+      !elseif $(CRYPTO_SERVICES) == NONE
+        FILE_GUID = 3C2B36CA-7E82-4984-9F42-549F362368B0
+      !elseif $(CRYPTO_SERVICES) == MIN_DXE_MIN_SMM
+        FILE_GUID = 9D362115-D618-4FAB-AC50-80C37AE5CBC2
+      !endif
+    <LibraryClasses>
+      OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibFull.inf
+  }
+
+
 [Components.IA32, Components.X64]
+  #
+  # CryptoDxe with IA32/X64 performance optimized OpensslLib instance
+  # with TLS feature enabled.
+  # IA32/X64 assembly optimizations required larger alignments
+  #
+  CryptoPkg/Driver/CryptoDxe.inf {
+    <Defines>
+      !if $(CRYPTO_SERVICES) == PACKAGE
+        FILE_GUID = E18D4D2B-FA16-467E-8DDB-E99658F126FF
+      !elseif $(CRYPTO_SERVICES) == ALL
+        FILE_GUID = B1E19F0A-ECBB-4785-A51B-C564AD62851B
+      !elseif $(CRYPTO_SERVICES) == NONE
+        FILE_GUID = 0309A6A4-50CD-48F8-BACE-40CD393BDE89
+      !elseif $(CRYPTO_SERVICES) == MIN_DXE_MIN_SMM
+        FILE_GUID = B2CCD52F-8B2A-463F-B2BE-25B9EB99C8B0
+      !endif
+    <LibraryClasses>
+      OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibAccel.inf
+    <BuildOptions>
+      MSFT:*_*_IA32_DLINK_FLAGS = /ALIGN:64
+      MSFT:*_*_X64_DLINK_FLAGS  = /ALIGN:256
+  }
+
+  #
+  # CryptoDxe with IA32/X64 performance optimized OpensslLib instance
+  # with TLS and EC features enabled.
+  # IA32/X64 assembly optimizations required larger alignments
+  #
+  CryptoPkg/Driver/CryptoDxe.inf {
+    <Defines>
+      !if $(CRYPTO_SERVICES) == PACKAGE
+        FILE_GUID = 36F0418B-0D96-46E1-A8A6-DC9A7A6FD69A
+      !elseif $(CRYPTO_SERVICES) == ALL
+        FILE_GUID = D445B878-2197-4EBC-8355-5037B349AAEA
+      !elseif $(CRYPTO_SERVICES) == NONE
+        FILE_GUID = EC031A9D-CE2C-4D0A-9E8B-010C0ACFFDAD
+      !elseif $(CRYPTO_SERVICES) == MIN_DXE_MIN_SMM
+        FILE_GUID = 4008002C-6C59-4D51-9847-F4E2ED756BF1
+      !endif
+    <LibraryClasses>
+      OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibFullAccel.inf
+    <BuildOptions>
+      MSFT:*_*_IA32_DLINK_FLAGS = /ALIGN:64
+      MSFT:*_*_X64_DLINK_FLAGS  = /ALIGN:256
+  }
+
+  #
+  # CryptoDxe with OpensslLib instance with TLS feature enabled.
+  #
   CryptoPkg/Driver/CryptoSmm.inf {
     <Defines>
       !if $(CRYPTO_SERVICES) == ALL
@@ -303,12 +400,30 @@
         FILE_GUID = 85F7EA15-3A2B-474A-8875-180542CD6BF3
       !endif
   }
+
+  #
+  # CryptoSmm with IA32/X64 performance optimized OpensslLib instance
+  # with TLS feature enabled.
+  # IA32/X64 assembly optimizations required larger alignments
+  #
+  CryptoPkg/Driver/CryptoSmm.inf {
+    <Defines>
+      !if $(CRYPTO_SERVICES) == PACKAGE
+        FILE_GUID = A7012ED1-5569-46B3-9588-357EFC9A5316
+      !elseif $(CRYPTO_SERVICES) == ALL
+        FILE_GUID = 8927A51A-E7CF-40F3-9D3D-B8E7EB65A053
+      !elseif $(CRYPTO_SERVICES) == NONE
+        FILE_GUID = 71FAFF46-D0E0-41A0-9A89-26D071788DFC
+      !elseif $(CRYPTO_SERVICES) == MIN_DXE_MIN_SMM
+        FILE_GUID = 4FE74253-5562-48B9-A49A-D65E8B70455D
+      !endif
+    <LibraryClasses>
+      OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibAccel.inf
+    <BuildOptions>
+      MSFT:*_*_IA32_DLINK_FLAGS = /ALIGN:64
+      MSFT:*_*_X64_DLINK_FLAGS  = /ALIGN:256
+  }
 !endif
 
 [BuildOptions]
   *_*_*_CC_FLAGS = -D DISABLE_NEW_DEPRECATED_INTERFACES
-!if $(CRYPTO_SERVICES) IN "PACKAGE ALL"
-  MSFT:*_*_*_CC_FLAGS = /D ENABLE_MD5_DEPRECATED_INTERFACES
-  INTEL:*_*_*_CC_FLAGS = /D ENABLE_MD5_DEPRECATED_INTERFACES
-  GCC:*_*_*_CC_FLAGS = -D ENABLE_MD5_DEPRECATED_INTERFACES
-!endif

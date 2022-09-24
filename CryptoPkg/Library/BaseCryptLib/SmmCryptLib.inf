@@ -86,7 +86,6 @@
 
 [LibraryClasses]
   BaseLib
-  IoLib
   BaseMemoryLib
   MemoryAllocationLib
   OpensslLib
@@ -94,9 +93,6 @@
   PrintLib
   MmServicesTableLib
   SynchronizationLib
-
-[FixedPcd]
-  gEfiCryptoPkgTokenSpaceGuid.PcdOpensslEcEnabled
 
 #
 # Remove these [BuildOptions] after this library is cleaned up
