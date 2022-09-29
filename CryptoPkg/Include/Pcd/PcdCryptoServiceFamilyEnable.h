@@ -1,6 +1,19 @@
 /** @file
   Defines the PCD_CRYPTO_SERVICE_FAMILY_ENABLE structure associated with
-  gEfiCryptoPkgTokenSpaceGuid.PcdCryptoServiceFamilyEnable.
+  gEfiCryptoPkgTokenSpaceGuid.PcdCryptoServiceFamilyEnable that is used
+  to enable/disable crypto services at either the family scope or the
+  individual service scope.  Platforms can minimize the number of enabled
+  services to reduce size.
+
+  The following services have been deprecated and must never be enabled.
+  The associated fields in this data structure are never removed or replaced
+  to preseve the binary layout of the data structure.  New services are
+  always added to the end of the data structure.
+  * HmacMd5, HmacSha1, Md4, Md5, Tdes, Arc4, Aes.EcbEncrypt, Aes.EcbDecrypt
+
+  Is is recommended that the following services always be disabled and may
+  be deprecated in the future.
+  * Sha1
 
   Copyright (c) 2019 - 2022, Intel Corporation. All rights reserved.<BR>
   SPDX-License-Identifier: BSD-2-Clause-Patent
@@ -25,25 +38,25 @@
 typedef struct {
   union {
     struct {
-      UINT8    New       : 1;
-      UINT8    Free      : 1;
-      UINT8    SetKey    : 1;
-      UINT8    Duplicate : 1;
-      UINT8    Update    : 1;
-      UINT8    Final     : 1;
+      UINT8    New       : 1;  // Deprecated
+      UINT8    Free      : 1;  // Deprecated
+      UINT8    SetKey    : 1;  // Deprecated
+      UINT8    Duplicate : 1;  // Deprecated
+      UINT8    Update    : 1;  // Deprecated
+      UINT8    Final     : 1;  // Deprecated
     } Services;
-    UINT32    Family;
+    UINT32    Family;          // Deprecated
   } HmacMd5;
   union {
     struct {
-      UINT8    New       : 1;
-      UINT8    Free      : 1;
-      UINT8    SetKey    : 1;
-      UINT8    Duplicate : 1;
-      UINT8    Update    : 1;
-      UINT8    Final     : 1;
+      UINT8    New       : 1;  // Deprecated
+      UINT8    Free      : 1;  // Deprecated
+      UINT8    SetKey    : 1;  // Deprecated
+      UINT8    Duplicate : 1;  // Deprecated
+      UINT8    Update    : 1;  // Deprecated
+      UINT8    Final     : 1;  // Deprecated
     } Services;
-    UINT32    Family;
+    UINT32    Family;          // Deprecated
   } HmacSha1;
   union {
     struct {
@@ -71,26 +84,26 @@ typedef struct {
   } HmacSha384;
   union {
     struct {
-      UINT8    GetContextSize : 1;
-      UINT8    Init           : 1;
-      UINT8    Duplicate      : 1;
-      UINT8    Update         : 1;
-      UINT8    Final          : 1;
-      UINT8    HashAll        : 1;
+      UINT8    GetContextSize : 1;  // Deprecated
+      UINT8    Init           : 1;  // Deprecated
+      UINT8    Duplicate      : 1;  // Deprecated
+      UINT8    Update         : 1;  // Deprecated
+      UINT8    Final          : 1;  // Deprecated
+      UINT8    HashAll        : 1;  // Deprecated
     } Services;
-    UINT32    Family;
+    UINT32    Family;               // Deprecated
   } Md4;
   union {
     struct {
-      UINT8    GetContextSize : 1;
-      UINT8    Init           : 1;
-      UINT8    Duplicate      : 1;
-      UINT8    Update         : 1;
-      UINT8    Final          : 1;
-      UINT8    HashAll        : 1;
+      UINT8    GetContextSize : 1;  // Deprecated
+      UINT8    Init           : 1;  // Deprecated
+      UINT8    Duplicate      : 1;  // Deprecated
+      UINT8    Update         : 1;  // Deprecated
+      UINT8    Final          : 1;  // Deprecated
+      UINT8    HashAll        : 1;  // Deprecated
     } Services;
     UINT32    Family;
-  } Md5;
+  } Md5;                            // Deprecated
   union {
     struct {
       UINT8    Pkcs1v2Encrypt             : 1;
@@ -143,14 +156,14 @@ typedef struct {
   } Rsa;
   union {
     struct {
-      UINT8    GetContextSize : 1;
-      UINT8    Init           : 1;
-      UINT8    Duplicate      : 1;
-      UINT8    Update         : 1;
-      UINT8    Final          : 1;
-      UINT8    HashAll        : 1;
+      UINT8    GetContextSize : 1;  // Recommend disable
+      UINT8    Init           : 1;  // Recommend disable
+      UINT8    Duplicate      : 1;  // Recommend disable
+      UINT8    Update         : 1;  // Recommend disable
+      UINT8    Final          : 1;  // Recommend disable
+      UINT8    HashAll        : 1;  // Recommend disable
     } Services;
-    UINT32    Family;
+    UINT32    Family;               // Recommend disable
   } Sha1;
   union {
     struct {
@@ -202,21 +215,21 @@ typedef struct {
   } X509;
   union {
     struct {
-      UINT8    GetContextSize : 1;
-      UINT8    Init           : 1;
-      UINT8    EcbEncrypt     : 1;
-      UINT8    EcbDecrypt     : 1;
-      UINT8    CbcEncrypt     : 1;
-      UINT8    CbcDecrypt     : 1;
+      UINT8    GetContextSize : 1;  // Deprecated
+      UINT8    Init           : 1;  // Deprecated
+      UINT8    EcbEncrypt     : 1;  // Deprecated
+      UINT8    EcbDecrypt     : 1;  // Deprecated
+      UINT8    CbcEncrypt     : 1;  // Deprecated
+      UINT8    CbcDecrypt     : 1;  // Deprecated
     } Services;
-    UINT32    Family;
+    UINT32    Family;               // Deprecated
   } Tdes;
   union {
     struct {
       UINT8    GetContextSize : 1;
       UINT8    Init           : 1;
-      UINT8    EcbEncrypt     : 1;
-      UINT8    EcbDecrypt     : 1;
+      UINT8    EcbEncrypt     : 1;  // Deprecated
+      UINT8    EcbDecrypt     : 1;  // Deprecated
       UINT8    CbcEncrypt     : 1;
       UINT8    CbcDecrypt     : 1;
     } Services;
@@ -224,13 +237,13 @@ typedef struct {
   } Aes;
   union {
     struct {
-      UINT8    GetContextSize : 1;
-      UINT8    Init           : 1;
-      UINT8    Encrypt        : 1;
-      UINT8    Decrypt        : 1;
-      UINT8    Reset          : 1;
+      UINT8    GetContextSize : 1;  // Deprecated
+      UINT8    Init           : 1;  // Deprecated
+      UINT8    Encrypt        : 1;  // Deprecated
+      UINT8    Decrypt        : 1;  // Deprecated
+      UINT8    Reset          : 1;  // Deprecated
     } Services;
-    UINT32    Family;
+    UINT32    Family;               // Deprecated
   } Arc4;
   union {
     struct {
