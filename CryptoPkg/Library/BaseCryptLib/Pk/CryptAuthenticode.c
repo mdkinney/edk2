@@ -23,7 +23,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 //
 // OID ASN.1 Value for SPC_INDIRECT_DATA_OBJID
 //
-UINT8  mSpcIndirectOidValue[] = {
+GLOBAL_REMOVE_IF_UNREFERENCED const UINT8  mSpcIndirectOidValue[] = {
   0x2B, 0x06, 0x01, 0x04, 0x01, 0x82, 0x37, 0x02, 0x01, 0x04
 };
 
@@ -72,6 +72,11 @@ AuthenticodeVerify (
   UINT8        Asn1Byte;
   UINTN        ContentSize;
   CONST UINT8  *SpcIndirectDataOid;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Pkcs.Services.AuthenticodeVerify, FALSE);
 
   //
   // Check input parameters.

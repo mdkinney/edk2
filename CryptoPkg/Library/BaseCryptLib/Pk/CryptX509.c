@@ -36,6 +36,11 @@ X509ConstructCertificate (
   CONST UINT8  *Temp;
 
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (X509.Services.ConstructCertificate, FALSE);
+
+  //
   // Check input parameters.
   //
   if ((Cert == NULL) || (SingleX509Cert == NULL) || (CertSize > INT_MAX)) {
@@ -89,6 +94,11 @@ X509ConstructCertificateStackV (
   STACK_OF (X509)  *CertStack;
   BOOLEAN  Status;
   UINTN    Index;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (X509.Services.ConstructCertificateStackV, FALSE);
 
   //
   // Check input parameters.
@@ -182,6 +192,11 @@ X509ConstructCertificateStack (
   VA_LIST  Args;
   BOOLEAN  Result;
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (X509.Services.ConstructCertificateStack, FALSE);
+
   VA_START (Args, X509Stack);
   Result = X509ConstructCertificateStackV (X509Stack, Args);
   VA_END (Args);
@@ -202,6 +217,11 @@ X509Free (
   IN  VOID  *X509Cert
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (X509.Services.Free, );
+
   //
   // Check input parameters.
   //
@@ -229,6 +249,11 @@ X509StackFree (
   IN  VOID  *X509Stack
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (X509.Services.StackFree, );
+
   //
   // Check input parameters.
   //
@@ -272,6 +297,11 @@ X509GetSubjectName (
   X509       *X509Cert;
   X509_NAME  *X509Name;
   UINTN      X509NameSize;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (X509.Services.GetSubjectName, FALSE);
 
   //
   // Check input parameters.
@@ -351,7 +381,7 @@ _Exit:
   @retval RETURN_UNSUPPORTED       The operation is not supported.
 
 **/
-STATIC
+static
 RETURN_STATUS
 InternalX509GetNIDName (
   IN      CONST UINT8  *Cert,
@@ -505,6 +535,11 @@ X509GetCommonName (
   IN OUT  UINTN        *CommonNameSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (X509.Services.GetCommonName, RETURN_UNSUPPORTED);
+
   return InternalX509GetNIDName (Cert, CertSize, NID_commonName, CommonName, CommonNameSize);
 }
 
@@ -543,6 +578,11 @@ X509GetOrganizationName (
   IN OUT  UINTN        *NameBufferSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (X509.Services.GetOrganizationName, RETURN_UNSUPPORTED);
+
   return InternalX509GetNIDName (Cert, CertSize, NID_organizationName, NameBuffer, NameBufferSize);
 }
 
@@ -573,6 +613,11 @@ RsaGetPublicKeyFromX509 (
   BOOLEAN   Status;
   EVP_PKEY  *Pkey;
   X509      *X509Cert;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Rsa.Services.GetPublicKeyFromX509, FALSE);
 
   //
   // Check input parameters.
@@ -655,6 +700,11 @@ X509VerifyCert (
   X509            *X509CACert;
   X509_STORE      *CertStore;
   X509_STORE_CTX  *CertCtx;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (X509.Services.VerifyCert, FALSE);
 
   //
   // Check input parameters.
@@ -793,6 +843,11 @@ X509GetTBSCert (
   UINT32       Asn1Tag;
   UINT32       ObjClass;
   UINTN        Length;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (X509.Services.GetTBSCert, FALSE);
 
   //
   // Check input parameters.

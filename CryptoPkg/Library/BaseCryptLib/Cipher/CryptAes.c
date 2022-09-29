@@ -22,6 +22,11 @@ AesGetContextSize (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Aes.Services.GetContextSize, 0);
+
+  //
   // AES uses different key contexts for encryption and decryption, so here memory
   // for 2 copies of AES_KEY is allocated.
   //
@@ -57,6 +62,11 @@ AesInit (
   )
 {
   AES_KEY  *AesKey;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Aes.Services.Init, FALSE);
 
   //
   // Check input parameters.
@@ -121,6 +131,11 @@ AesCbcEncrypt (
   UINT8    IvecBuffer[AES_BLOCK_SIZE];
 
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Aes.Services.CbcEncrypt, FALSE);
+
+  //
   // Check input parameters.
   //
   if ((AesContext == NULL) || (Input == NULL) || ((InputSize % AES_BLOCK_SIZE) != 0)) {
@@ -181,6 +196,11 @@ AesCbcDecrypt (
 {
   AES_KEY  *AesKey;
   UINT8    IvecBuffer[AES_BLOCK_SIZE];
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Aes.Services.CbcDecrypt, FALSE);
 
   //
   // Check input parameters.

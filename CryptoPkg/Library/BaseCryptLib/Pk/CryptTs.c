@@ -21,7 +21,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 //
 // OID ASN.1 Value for SPC_RFC3161_OBJID ("1.3.6.1.4.1.311.3.3.1")
 //
-UINT8  mSpcRFC3161OidValue[] = {
+GLOBAL_REMOVE_IF_UNREFERENCED const UINT8  mSpcRFC3161OidValue[] = {
   0x2b, 0x06, 0x01, 0x04, 0x01, 0x82, 0x37, 0x03, 0x03, 0x01
 };
 
@@ -43,7 +43,7 @@ typedef struct {
 //
 // ASN.1 Functions for TS_MESSAGE_IMPRINT
 //
-DECLARE_ASN1_FUNCTIONS (TS_MESSAGE_IMPRINT)
+GLOBAL_REMOVE_IF_UNREFERENCED DECLARE_ASN1_FUNCTIONS (TS_MESSAGE_IMPRINT)
 ASN1_SEQUENCE (TS_MESSAGE_IMPRINT) = {
   ASN1_SIMPLE (TS_MESSAGE_IMPRINT, HashAlgorithm, X509_ALGOR),
   ASN1_SIMPLE (TS_MESSAGE_IMPRINT, HashedMessage, ASN1_OCTET_STRING)
@@ -68,7 +68,7 @@ typedef struct {
 //
 // ASN.1 Functions for TS_ACCURACY
 //
-DECLARE_ASN1_FUNCTIONS (TS_ACCURACY)
+GLOBAL_REMOVE_IF_UNREFERENCED DECLARE_ASN1_FUNCTIONS (TS_ACCURACY)
 ASN1_SEQUENCE (TS_ACCURACY) = {
   ASN1_OPT (TS_ACCURACY,     Seconds, ASN1_INTEGER),
   ASN1_IMP_OPT (TS_ACCURACY, Millis,  ASN1_INTEGER, 0),
@@ -114,7 +114,7 @@ typedef struct {
 //
 // ASN.1 Functions for TS_TST_INFO
 //
-DECLARE_ASN1_FUNCTIONS (TS_TST_INFO)
+GLOBAL_REMOVE_IF_UNREFERENCED DECLARE_ASN1_FUNCTIONS (TS_TST_INFO)
 ASN1_SEQUENCE (TS_TST_INFO) = {
   ASN1_SIMPLE (TS_TST_INFO,              Version,        ASN1_INTEGER),
   ASN1_SIMPLE (TS_TST_INFO,              Policy,         ASN1_OBJECT),
@@ -139,8 +139,8 @@ IMPLEMENT_ASN1_FUNCTIONS (TS_TST_INFO)
   @retval  FALSE  Invalid parameters.
 
 **/
+static
 BOOLEAN
-EFIAPI
 ConvertAsn1TimeToEfiTime (
   IN  ASN1_TIME  *Asn1Time,
   OUT EFI_TIME   *EfiTime
@@ -222,8 +222,8 @@ ConvertAsn1TimeToEfiTime (
   @retval  FALSE  Invalid TimeStamp Token Information.
 
 **/
+static
 BOOLEAN
-EFIAPI
 CheckTSTInfo (
   IN  CONST TS_TST_INFO  *TstInfo,
   IN  CONST UINT8        *TimestampedData,
@@ -352,8 +352,8 @@ _Exit:
   @retval  FALSE  Invalid timestamp token.
 
 **/
+static
 BOOLEAN
-EFIAPI
 TimestampTokenVerify (
   IN  CONST UINT8  *TSToken,
   IN  UINTN        TokenSize,
@@ -557,6 +557,11 @@ ImageTimestampVerify (
   ASN1_OCTET_STRING  *EncDigest;
   UINT8              *TSToken;
   UINTN              TokenSize;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Pkcs.Services.ImageTimestampVerify, FALSE);
 
   //
   // Input Parameters Checking.

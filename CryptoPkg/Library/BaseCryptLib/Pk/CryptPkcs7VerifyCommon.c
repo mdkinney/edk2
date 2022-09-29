@@ -22,7 +22,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #include <openssl/x509v3.h>
 #include <openssl/pkcs7.h>
 
-UINT8  mOidValue[9] = { 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x07, 0x02 };
+GLOBAL_REMOVE_IF_UNREFERENCED const UINT8  mOidValue[9] = { 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x07, 0x02 };
 
 /**
   Check input P7Data is a wrapped ContentInfo structure or not. If not construct
@@ -145,6 +145,7 @@ WrapPkcs7Data (
   @retval     FALSE           The pop operation failed.
 
 **/
+static
 BOOLEAN
 X509PopCertificate (
   IN  VOID   *X509Stack,
@@ -274,6 +275,11 @@ Pkcs7GetSigners (
   UINTN  OldSize;
   UINT8  *SingleCert;
   UINTN  SingleCertSize;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Pkcs.Services.Pkcs7GetSigners, FALSE);
 
   if ((P7Data == NULL) || (CertStack == NULL) || (StackLength == NULL) ||
       (TrustedCert == NULL) || (CertLength == NULL) || (P7Length > INT_MAX))
@@ -422,6 +428,11 @@ Pkcs7FreeSigners (
   IN  UINT8  *Certs
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Pkcs.Services.Pkcs7FreeSigners, );
+
   if (Certs == NULL) {
     return;
   }
@@ -485,6 +496,11 @@ Pkcs7GetCertificatesList (
   UINTN      OldSize;
   UINT8      *SingleCert;
   UINTN      CertSize;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Pkcs.Services.Pkcs7GetCertificatesList, FALSE);
 
   //
   // Initializations
@@ -790,6 +806,11 @@ Pkcs7Verify (
   CONST UINT8  *Temp;
   UINTN        SignedDataSize;
   BOOLEAN      Wrapped;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Pkcs.Services.Pkcs7Verify, FALSE);
 
   //
   // Check input parameters.

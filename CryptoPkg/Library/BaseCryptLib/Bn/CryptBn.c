@@ -19,6 +19,11 @@ BigNumInit (
   VOID
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.Init, NULL);
+
   return BN_new ();
 }
 
@@ -37,6 +42,11 @@ BigNumFromBin (
   IN UINTN        Len
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.FromBin, NULL);
+
   return BN_bin2bn (Buf, (INT32)Len, NULL);
 }
 
@@ -56,6 +66,11 @@ BigNumToBin (
   OUT UINT8      *Buf
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.ToBin, -1);
+
   return BN_bn2bin (Bn, Buf);
 }
 
@@ -72,6 +87,11 @@ BigNumFree (
   IN BOOLEAN  Clear
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.Free, );
+
   if (Clear) {
     BN_clear_free (Bn);
   } else {
@@ -99,6 +119,11 @@ BigNumAdd (
   OUT VOID       *BnRes
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.Add, FALSE);
+
   return (BOOLEAN)BN_add (BnRes, BnA, BnB);
 }
 
@@ -122,6 +147,11 @@ BigNumSub (
   OUT VOID       *BnRes
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.Sub, FALSE);
+
   return (BOOLEAN)BN_sub (BnRes, BnA, BnB);
 }
 
@@ -147,6 +177,11 @@ BigNumMod (
 {
   BOOLEAN  RetVal;
   BN_CTX   *Ctx;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.Mod, FALSE);
 
   Ctx = BN_CTX_new ();
   if (Ctx == NULL) {
@@ -184,6 +219,11 @@ BigNumExpMod (
   BOOLEAN  RetVal;
   BN_CTX   *Ctx;
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.ExpMod, FALSE);
+
   Ctx = BN_CTX_new ();
   if (Ctx == NULL) {
     return FALSE;
@@ -217,6 +257,11 @@ BigNumInverseMod (
 {
   BOOLEAN  RetVal;
   BN_CTX   *Ctx;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.InverseMod, FALSE);
 
   Ctx = BN_CTX_new ();
   if (Ctx == NULL) {
@@ -255,6 +300,11 @@ BigNumDiv (
   BOOLEAN  RetVal;
   BN_CTX   *Ctx;
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.Div, FALSE);
+
   Ctx = BN_CTX_new ();
   if (Ctx == NULL) {
     return FALSE;
@@ -291,6 +341,11 @@ BigNumMulMod (
   BOOLEAN  RetVal;
   BN_CTX   *Ctx;
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.MulMod, FALSE);
+
   Ctx = BN_CTX_new ();
   if (Ctx == NULL) {
     return FALSE;
@@ -319,6 +374,11 @@ BigNumCmp (
   IN CONST VOID  *BnB
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.Cmp, 0);
+
   return BN_cmp (BnA, BnB);
 }
 
@@ -335,6 +395,11 @@ BigNumBits (
   IN CONST VOID  *Bn
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.Bits, 0);
+
   return BN_num_bits (Bn);
 }
 
@@ -351,6 +416,11 @@ BigNumBytes (
   IN CONST VOID  *Bn
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.Bytes, 0);
+
   return BN_num_bytes (Bn);
 }
 
@@ -370,6 +440,11 @@ BigNumIsWord (
   IN UINTN       Num
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.IsWord, FALSE);
+
   return (BOOLEAN)BN_is_word (Bn, Num);
 }
 
@@ -387,6 +462,11 @@ BigNumIsOdd (
   IN CONST VOID  *Bn
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.IsOdd, FALSE);
+
   return (BOOLEAN)BN_is_odd (Bn);
 }
 
@@ -406,6 +486,11 @@ BigNumCopy (
   IN CONST VOID  *BnSrc
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.Copy, NULL);
+
   return BN_copy (BnDst, BnSrc);
 }
 
@@ -421,6 +506,11 @@ BigNumValueOne (
   VOID
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.ValueOne, NULL);
+
   return BN_value_one ();
 }
 
@@ -444,6 +534,11 @@ BigNumRShift (
   OUT VOID       *BnRes
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.RShift, FALSE);
+
   return (BOOLEAN)BN_rshift (BnRes, Bn, (INT32)N);
 }
 
@@ -460,6 +555,11 @@ BigNumConstTime (
   IN VOID  *Bn
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.ConstTime, );
+
   BN_set_flags (Bn, BN_FLG_CONSTTIME);
 }
 
@@ -486,6 +586,11 @@ BigNumSqrMod (
   BOOLEAN  RetVal;
   BN_CTX   *Ctx;
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.SqrMod, FALSE);
+
   Ctx = BN_CTX_new ();
   if (Ctx == NULL) {
     return FALSE;
@@ -510,6 +615,11 @@ BigNumNewContext (
   VOID
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.NewContext, NULL);
+
   return BN_CTX_new ();
 }
 
@@ -524,6 +634,11 @@ BigNumContextFree (
   IN VOID  *BnCtx
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.ContextFree, );
+
   BN_CTX_free (BnCtx);
 }
 
@@ -543,6 +658,11 @@ BigNumSetUint (
   IN UINTN  Val
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.SetUint, FALSE);
+
   return (BOOLEAN)BN_set_word (Bn, Val);
 }
 
@@ -568,6 +688,11 @@ BigNumAddMod (
 {
   BOOLEAN  RetVal;
   BN_CTX   *Ctx;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Bn.Services.AddMod, FALSE);
 
   Ctx = BN_CTX_new ();
   if (Ctx == NULL) {

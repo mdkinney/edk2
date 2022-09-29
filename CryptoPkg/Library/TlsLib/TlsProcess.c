@@ -31,6 +31,11 @@ TlsInHandshake (
 {
   TLS_CONNECTION  *TlsConn;
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Tls.Services.InHandshake, FALSE);
+
   TlsConn = (TLS_CONNECTION *)Tls;
   if ((TlsConn == NULL) || (TlsConn->Ssl == NULL)) {
     return FALSE;
@@ -82,6 +87,11 @@ TlsDoHandshake (
   UINTN           PendingBufferSize;
   INTN            Ret;
   UINTN           ErrorCode;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Tls.Services.DoHandshake, EFI_UNSUPPORTED);
 
   TlsConn           = (TLS_CONNECTION *)Tls;
   PendingBufferSize = 0;
@@ -208,6 +218,11 @@ TlsHandleAlert (
   UINT8           *TempBuffer;
   INTN            Ret;
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Tls.Services.HandleAlert, EFI_UNSUPPORTED);
+
   TlsConn           = (TLS_CONNECTION *)Tls;
   PendingBufferSize = 0;
   TempBuffer        = NULL;
@@ -286,6 +301,11 @@ TlsCloseNotify (
   TLS_CONNECTION  *TlsConn;
   UINTN           PendingBufferSize;
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Tls.Services.CloseNotify, EFI_UNSUPPORTED);
+
   TlsConn           = (TLS_CONNECTION *)Tls;
   PendingBufferSize = 0;
 
@@ -344,6 +364,11 @@ TlsCtrlTrafficOut (
 {
   TLS_CONNECTION  *TlsConn;
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Tls.Services.CtrlTrafficOut, 0);
+
   TlsConn = (TLS_CONNECTION *)Tls;
   if ((TlsConn == NULL) || (TlsConn->OutBio == 0)) {
     return -1;
@@ -378,6 +403,11 @@ TlsCtrlTrafficIn (
   )
 {
   TLS_CONNECTION  *TlsConn;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Tls.Services.CtrlTrafficIn, 0);
 
   TlsConn = (TLS_CONNECTION *)Tls;
   if ((TlsConn == NULL) || (TlsConn->InBio == 0)) {
@@ -415,6 +445,11 @@ TlsRead (
 {
   TLS_CONNECTION  *TlsConn;
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Tls.Services.Read, 0);
+
   TlsConn = (TLS_CONNECTION *)Tls;
   if ((TlsConn == NULL) || (TlsConn->Ssl == NULL)) {
     return -1;
@@ -450,6 +485,11 @@ TlsWrite (
   )
 {
   TLS_CONNECTION  *TlsConn;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Tls.Services.Write, 0);
 
   TlsConn = (TLS_CONNECTION *)Tls;
   if ((TlsConn == NULL) || (TlsConn->Ssl == NULL)) {

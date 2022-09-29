@@ -22,6 +22,11 @@ Sha384GetContextSize (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha384.Services.GetContextSize, 0);
+
+  //
   // Retrieves OpenSSL SHA-384 Context Size
   //
   return (UINTN)(sizeof (SHA512_CTX));
@@ -45,6 +50,11 @@ Sha384Init (
   OUT  VOID  *Sha384Context
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha384.Services.Init, FALSE);
+
   //
   // Check input parameters.
   //
@@ -80,6 +90,11 @@ Sha384Duplicate (
   OUT  VOID        *NewSha384Context
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha384.Services.Duplicate, FALSE);
+
   //
   // Check input parameters.
   //
@@ -118,6 +133,11 @@ Sha384Update (
   IN      UINTN       DataSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha384.Services.Update, FALSE);
+
   //
   // Check input parameters.
   //
@@ -166,6 +186,11 @@ Sha384Final (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha384.Services.Final, FALSE);
+
+  //
   // Check input parameters.
   //
   if ((Sha384Context == NULL) || (HashValue == NULL)) {
@@ -205,6 +230,11 @@ Sha384HashAll (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha384.Services.HashAll, FALSE);
+
+  //
   // Check input parameters.
   //
   if (HashValue == NULL) {
@@ -238,6 +268,11 @@ Sha512GetContextSize (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha512.Services.GetContextSize, 0);
+
+  //
   // Retrieves OpenSSL SHA-512 Context Size
   //
   return (UINTN)(sizeof (SHA512_CTX));
@@ -261,6 +296,11 @@ Sha512Init (
   OUT  VOID  *Sha512Context
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha512.Services.Init, FALSE);
+
   //
   // Check input parameters.
   //
@@ -296,6 +336,11 @@ Sha512Duplicate (
   OUT  VOID        *NewSha512Context
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha512.Services.Duplicate, FALSE);
+
   //
   // Check input parameters.
   //
@@ -334,6 +379,11 @@ Sha512Update (
   IN      UINTN       DataSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha512.Services.Update, FALSE);
+
   //
   // Check input parameters.
   //
@@ -382,6 +432,11 @@ Sha512Final (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha512.Services.Final, FALSE);
+
+  //
   // Check input parameters.
   //
   if ((Sha512Context == NULL) || (HashValue == NULL)) {
@@ -420,6 +475,11 @@ Sha512HashAll (
   OUT  UINT8       *HashValue
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha512.Services.HashAll, FALSE);
+
   //
   // Check input parameters.
   //

@@ -60,6 +60,11 @@ Pkcs7Sign (
   UINT8     *Tmp;
 
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Pkcs.Services.Pkcs7Sign, FALSE);
+
+  //
   // Check input parameters.
   //
   if ((PrivateKey == NULL) || (KeyPassword == NULL) || (InData == NULL) ||

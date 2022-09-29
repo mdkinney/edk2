@@ -65,6 +65,11 @@ Pkcs1v2Encrypt (
   UINTN         OutDataSize;
 
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Pkcs.Services.Pkcs1v2Encrypt, FALSE);
+
+  //
   // Check input parameters.
   //
   if ((PublicKey == NULL) || (InData == NULL) ||

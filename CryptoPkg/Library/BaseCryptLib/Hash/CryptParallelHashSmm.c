@@ -12,14 +12,14 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 
 #define PARALLELHASH_CUSTOMIZATION  "ParallelHash"
 
-UINTN      mBlockNum;
-UINTN      mBlockSize;
-UINTN      mLastBlockSize;
-UINT8      *mInput;
-UINTN      mBlockResultSize;
-UINT8      *mBlockHashResult;
-BOOLEAN    *mBlockIsCompleted;
-SPIN_LOCK  *mSpinLockList;
+GLOBAL_REMOVE_IF_UNREFERENCED UINTN      mBlockNum;
+GLOBAL_REMOVE_IF_UNREFERENCED UINTN      mBlockSize;
+GLOBAL_REMOVE_IF_UNREFERENCED UINTN      mLastBlockSize;
+GLOBAL_REMOVE_IF_UNREFERENCED UINT8      *mInput;
+GLOBAL_REMOVE_IF_UNREFERENCED UINTN      mBlockResultSize;
+GLOBAL_REMOVE_IF_UNREFERENCED UINT8      *mBlockHashResult;
+GLOBAL_REMOVE_IF_UNREFERENCED BOOLEAN    *mBlockIsCompleted;
+GLOBAL_REMOVE_IF_UNREFERENCED SPIN_LOCK  *mSpinLockList;
 
 /**
   Complete computation of digest of each block.
@@ -28,6 +28,7 @@ SPIN_LOCK  *mSpinLockList;
 
   @param[in] ProcedureArgument Argument of the procedure.
 **/
+static
 VOID
 EFIAPI
 ParallelHashApExecute (
@@ -73,8 +74,8 @@ ParallelHashApExecute (
   Dispatch the block task to each AP in SMM mode.
 
 **/
+static
 VOID
-EFIAPI
 MmDispatchBlockToAP (
   VOID
   )
@@ -131,6 +132,11 @@ ParallelHash256HashAll (
   BOOLEAN  AllCompleted;
   UINTN    Offset;
   BOOLEAN  ReturnValue;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (ParallelHash.Services.HashAll, FALSE);
 
   if ((InputByteLen == 0) || (OutputByteLen == 0) || (BlockSize == 0)) {
     return FALSE;

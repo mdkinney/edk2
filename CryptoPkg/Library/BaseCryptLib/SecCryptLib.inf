@@ -14,6 +14,7 @@
 [Defines]
   INF_VERSION                    = 0x00010005
   BASE_NAME                      = SecCryptLib
+  MODULE_UNI_FILE                = SecCryptLib.uni
   FILE_GUID                      = 3689D343-0D32-4284-8053-BF10537990E8
   MODULE_TYPE                    = BASE
   VERSION_STRING                 = 1.0
@@ -27,35 +28,51 @@
 
 [Sources]
   InternalCryptLib.h
+  Hash/CryptMd5.c
+  Hash/CryptSha1.c
+  Hash/CryptSha256.c
   Hash/CryptSha512.c
-
-  Hash/CryptMd5Null.c
-  Hash/CryptSha1Null.c
-  Hash/CryptSha256Null.c
-  Hash/CryptSm3Null.c
+  Hash/CryptSm3.c
   Hash/CryptParallelHashNull.c
-  Hmac/CryptHmacNull.c
-  Kdf/CryptHkdfNull.c
-  Cipher/CryptAesNull.c
-  Pk/CryptRsaBasicNull.c
-  Pk/CryptRsaExtNull.c
-  Pk/CryptPkcs1OaepNull.c
-  Pk/CryptPkcs5Pbkdf2Null.c
-  Pk/CryptPkcs7SignNull.c
-  Pk/CryptPkcs7VerifyNull.c
-  Pk/CryptPkcs7VerifyEkuNull.c
-  Pk/CryptDhNull.c
-  Pk/CryptX509Null.c
-  Pk/CryptAuthenticodeNull.c
-  Pk/CryptTsNull.c
-  Pem/CryptPemNull.c
-  Rand/CryptRandNull.c
-  Pk/CryptRsaPssNull.c
-  Pk/CryptRsaPssSignNull.c
+  Hmac/CryptHmac.c
+  Kdf/CryptHkdf.c
+  Cipher/CryptAes.c
+  Cipher/CryptAeadAesGcm.c
+  Pk/CryptRsaBasic.c
+  Pk/CryptRsaExt.c
+  Pk/CryptPkcs1Oaep.c
+  Pk/CryptPkcs5Pbkdf2.c
+  Pk/CryptPkcs7Sign.c
+  Pk/CryptPkcs7VerifyCommon.c
+  Pk/CryptPkcs7VerifyBase.c
+  Pk/CryptPkcs7VerifyEku.c
+  Pk/CryptDh.c
+  Pk/CryptX509.c
+  Pk/CryptAuthenticode.c
+  Pk/CryptTs.c
+  Pk/CryptRsaPss.c
+  Pk/CryptEc.c
+  Pem/CryptPem.c
+  Bn/CryptBn.c
 
   SysCall/CrtWrapper.c
   SysCall/ConstantTimeClock.c
   SysCall/BaseMemAllocation.c
+
+[Sources.Ia32]
+  Rand/CryptRandTsc.c
+
+[Sources.X64]
+  Rand/CryptRandTsc.c
+
+[Sources.ARM]
+  Rand/CryptRand.c
+
+[Sources.AARCH64]
+  Rand/CryptRand.c
+
+[Sources.RISCV64]
+  Rand/CryptRand.c
 
 [Packages]
   MdePkg/MdePkg.dec
@@ -68,6 +85,10 @@
   DebugLib
   OpensslLib
   IntrinsicLib
+  PcdLib
+
+[FixedPcd]
+  gEfiCryptoPkgTokenSpaceGuid.PcdCryptoServiceFamilyEnable
 
 #
 # Remove these [BuildOptions] after this library is cleaned up
@@ -75,11 +96,7 @@
 [BuildOptions]
   #
   # suppress the following warnings so we do not break the build with warnings-as-errors:
-  # C4090: 'function' : different 'const' qualifiers
-  # C4718: 'function call' : recursive call has no side effects, deleting
   #
-  MSFT:*_*_*_CC_FLAGS = /wd4090 /wd4718
-
   # -JCryptoPkg/Include : To disable the use of the system includes provided by RVCT
   # --diag_remark=1     : Reduce severity of "#1-D: last line of file ends without a newline"
   RVCT:*_*_ARM_CC_FLAGS = -JCryptoPkg/Include --diag_remark=1

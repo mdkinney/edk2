@@ -24,6 +24,11 @@ DhNew (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Dh.Services.New, NULL);
+
+  //
   // Allocates & Initializes DH Context by OpenSSL DH_new()
   //
   return (VOID *)DH_new ();
@@ -43,6 +48,11 @@ DhFree (
   IN  VOID  *DhContext
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Dh.Services.Free, );
+
   //
   // Free OpenSSL DH Context
   //
@@ -82,6 +92,11 @@ DhGenerateParameter (
 {
   BOOLEAN  RetVal;
   BIGNUM   *BnP;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Dh.Services.GenerateParameter, FALSE);
 
   //
   // Check input parameters.
@@ -138,6 +153,11 @@ DhSetParameter (
   DH      *Dh;
   BIGNUM  *BnP;
   BIGNUM  *BnG;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Dh.Services.SetParameter, FALSE);
 
   //
   // Check input parameters.
@@ -203,6 +223,11 @@ DhGenerateKey (
   DH       *Dh;
   BIGNUM   *DhPubKey;
   INTN     Size;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Dh.Services.GenerateKey, FALSE);
 
   //
   // Check input parameters.
@@ -272,6 +297,11 @@ DhComputeKey (
 {
   BIGNUM  *Bn;
   INTN    Size;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Dh.Services.ComputeKey, FALSE);
 
   //
   // Check input parameters.

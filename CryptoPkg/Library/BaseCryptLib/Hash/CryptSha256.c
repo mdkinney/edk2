@@ -22,6 +22,11 @@ Sha256GetContextSize (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha256.Services.GetContextSize, 0);
+
+  //
   // Retrieves OpenSSL SHA-256 Context Size
   //
   return (UINTN)(sizeof (SHA256_CTX));
@@ -45,6 +50,11 @@ Sha256Init (
   OUT  VOID  *Sha256Context
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha1.Services.Init, FALSE);
+
   //
   // Check input parameters.
   //
@@ -78,6 +88,11 @@ Sha256Duplicate (
   OUT  VOID        *NewSha256Context
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha1.Services.Duplicate, FALSE);
+
   //
   // Check input parameters.
   //
@@ -116,6 +131,11 @@ Sha256Update (
   IN      UINTN       DataSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha1.Services.Update, FALSE);
+
   //
   // Check input parameters.
   //
@@ -164,6 +184,11 @@ Sha256Final (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha1.Services.Final, FALSE);
+
+  //
   // Check input parameters.
   //
   if ((Sha256Context == NULL) || (HashValue == NULL)) {
@@ -202,6 +227,11 @@ Sha256HashAll (
   OUT  UINT8       *HashValue
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha1.Services.HashAll, FALSE);
+
   //
   // Check input parameters.
   //

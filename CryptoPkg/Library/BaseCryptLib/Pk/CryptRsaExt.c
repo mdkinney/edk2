@@ -59,6 +59,11 @@ RsaGetKey (
   UINTN   Size;
 
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Rsa.Services.GetKey, FALSE);
+
+  //
   // Check input parameters.
   //
   if ((RsaContext == NULL) || (BnSize == NULL)) {
@@ -187,6 +192,11 @@ RsaGenerateKey (
   BOOLEAN  RetVal;
 
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Rsa.Services.GenerateKey, FALSE);
+
+  //
   // Check input parameters.
   //
   if ((RsaContext == NULL) || (ModulusLength > INT_MAX) || (PublicExponentSize > INT_MAX)) {
@@ -247,6 +257,11 @@ RsaCheckKey (
   UINTN  Reason;
 
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Rsa.Services.CheckKey, FALSE);
+
+  //
   // Check input parameters.
   //
   if (RsaContext == NULL) {
@@ -305,6 +320,11 @@ RsaPkcs1Sign (
   RSA    *Rsa;
   UINTN  Size;
   INT32  DigestType;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Rsa.Services.Pkcs1Sign, FALSE);
 
   //
   // Check input parameters.

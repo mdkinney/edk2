@@ -62,6 +62,7 @@
   @retval EFI_NOT_FOUND             The number of signers found was not 1.
 
 **/
+static
 EFI_STATUS
 GetSignerCertificate (
   IN CONST PKCS7  *CertChain,
@@ -132,6 +133,7 @@ Exit:
   @retval EFI_NOT_FOUND             One or more EKU's were not found in the signature.
 
 **/
+static
 EFI_STATUS
 IsEkuInCertificate (
   IN CONST X509   *Cert,
@@ -255,6 +257,7 @@ Exit:
   @retval EFI_INVALID_PARAMETER     A parameter was invalid.
   @retval EFI_NOT_FOUND             One or more EKU's were not found in the signature.
 **/
+static
 EFI_STATUS
 CheckEKUs (
   IN CONST X509    *SignerCert,
@@ -381,6 +384,11 @@ VerifyEKUsInPkcs7Signature (
   UINTN    SignedDataSize;
   BOOLEAN  IsWrapped;
   BOOLEAN  Ok;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Pkcs.Services.VerifyEKUsInPkcs7Signature, RETURN_UNSUPPORTED);
 
   Status                 = EFI_SUCCESS;
   Pkcs7                  = NULL;

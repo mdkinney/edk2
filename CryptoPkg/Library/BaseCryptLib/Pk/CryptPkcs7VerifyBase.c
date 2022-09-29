@@ -23,7 +23,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
   @retval TRUE  If the type is others.
   @retval FALSE If the type is expected.
 **/
-STATIC
+static
 BOOLEAN
 Pkcs7TypeIsOther (
   IN PKCS7  *P7
@@ -56,7 +56,7 @@ Pkcs7TypeIsOther (
 
   @return ASN1_OCTET_STRING ASN.1 string.
 **/
-STATIC
+static
 ASN1_OCTET_STRING *
 Pkcs7GetOctetString (
   IN PKCS7  *P7
@@ -111,6 +111,11 @@ Pkcs7GetAttachedContent (
   BOOLEAN            Wrapped;
   CONST UINT8        *Temp;
   ASN1_OCTET_STRING  *OctStr;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Pkcs.Services.Pkcs7GetAttachedContent, FALSE);
 
   //
   // Check input parameter.

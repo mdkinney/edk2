@@ -59,6 +59,11 @@ AeadAesGcmEncrypt (
   UINTN             TempOutSize;
   BOOLEAN           RetValue;
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (AeadAesGcm.Services.Encrypt, FALSE);
+
   if (DataInSize > INT_MAX) {
     return FALSE;
   }
@@ -191,6 +196,11 @@ AeadAesGcmDecrypt (
   CONST EVP_CIPHER  *Cipher;
   UINTN             TempOutSize;
   BOOLEAN           RetValue;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (AeadAesGcm.Services.Decrypt, FALSE);
 
   if (DataInSize > INT_MAX) {
     return FALSE;

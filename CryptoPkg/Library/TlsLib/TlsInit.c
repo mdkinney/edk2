@@ -29,6 +29,11 @@ TlsInitialize (
   INTN  Ret;
 
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Tls.Services.Initialize, FALSE);
+
+  //
   // Performs initialization of crypto and ssl library, and loads required
   // algorithms.
   //
@@ -58,6 +63,11 @@ TlsCtxFree (
   IN   VOID  *TlsCtx
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Tls.Services.CtxFree, );
+
   if (TlsCtx == NULL) {
     return;
   }
@@ -87,6 +97,11 @@ TlsCtxNew (
 {
   SSL_CTX  *TlsCtx;
   UINT16   ProtoVersion;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Tls.Services.CtxNew, NULL);
 
   ProtoVersion = (MajorVer << 8) | MinorVer;
 
@@ -126,6 +141,11 @@ TlsFree (
 {
   TLS_CONNECTION  *TlsConn;
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Tls.Services.Free, );
+
   TlsConn = (TLS_CONNECTION *)Tls;
   if (TlsConn == NULL) {
     return;
@@ -163,6 +183,11 @@ TlsNew (
   TLS_CONNECTION  *TlsConn;
   SSL_CTX         *SslCtx;
   X509_STORE      *X509Store;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Tls.Services.New, NULL);
 
   TlsConn = NULL;
 

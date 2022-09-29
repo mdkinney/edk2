@@ -103,7 +103,8 @@
   DevicePathLib|MdePkg/Library/UefiDevicePathLib/UefiDevicePathLib.inf
   PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
   TimerLib|MdePkg/Library/BaseTimerLibNullTemplate/BaseTimerLibNullTemplate.inf
-  OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLib.inf
+#  OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLib.inf
+  OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibFull.inf
   IntrinsicLib|CryptoPkg/Library/IntrinsicLib/IntrinsicLib.inf
   SafeIntLib|MdePkg/Library/BaseSafeIntLib/BaseSafeIntLib.inf
 
@@ -172,7 +173,7 @@
   gEfiCryptoPkgTokenSpaceGuid.PcdCryptoServiceFamilyEnable.ParallelHash.Family                      | PCD_CRYPTO_SERVICE_ENABLE_FAMILY
   gEfiCryptoPkgTokenSpaceGuid.PcdCryptoServiceFamilyEnable.AeadAesGcm.Family                        | PCD_CRYPTO_SERVICE_ENABLE_FAMILY
   gEfiCryptoPkgTokenSpaceGuid.PcdCryptoServiceFamilyEnable.Bn.Family                                | PCD_CRYPTO_SERVICE_ENABLE_FAMILY
-  gEfiCryptoPkgTokenSpaceGuid.PcdCryptoServiceFamilyEnable.Ec.Family                                | 0
+  gEfiCryptoPkgTokenSpaceGuid.PcdCryptoServiceFamilyEnable.Ec.Family                                | PCD_CRYPTO_SERVICE_ENABLE_FAMILY
 !endif
 
 !if $(CRYPTO_SERVICES) == MIN_PEI
@@ -298,7 +299,8 @@
         FILE_GUID = B4CCB98D-AD42-4A2A-95EC-B0A5467CFD7B
       !endif
     <LibraryClasses>
-      OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibAccel.inf
+#      OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibAccel.inf
+      OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibFullAccel.inf
     <BuildOptions>
       MSFT:*_*_IA32_DLINK_FLAGS = /ALIGN:64
       MSFT:*_*_X64_DLINK_FLAGS  = /ALIGN:256
@@ -358,7 +360,8 @@
         FILE_GUID = B2CCD52F-8B2A-463F-B2BE-25B9EB99C8B0
       !endif
     <LibraryClasses>
-      OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibAccel.inf
+#      OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibAccel.inf
+      OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibFullAccel.inf
     <BuildOptions>
       MSFT:*_*_IA32_DLINK_FLAGS = /ALIGN:64
       MSFT:*_*_X64_DLINK_FLAGS  = /ALIGN:256
@@ -418,7 +421,8 @@
         FILE_GUID = 4FE74253-5562-48B9-A49A-D65E8B70455D
       !endif
     <LibraryClasses>
-      OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibAccel.inf
+#      OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibAccel.inf
+      OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibFullAccel.inf
     <BuildOptions>
       MSFT:*_*_IA32_DLINK_FLAGS = /ALIGN:64
       MSFT:*_*_X64_DLINK_FLAGS  = /ALIGN:256
@@ -426,4 +430,5 @@
 !endif
 
 [BuildOptions]
-  *_*_*_CC_FLAGS = -D DISABLE_NEW_DEPRECATED_INTERFACES
+  RELEASE_*_*_CC_FLAGS = -DMDEPKG_NDEBUG
+  *_*_*_CC_FLAGS       = -D DISABLE_NEW_DEPRECATED_INTERFACES

@@ -16,6 +16,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
            If the allocations fails, HmacMdNew() returns NULL.
 
 **/
+static
 VOID *
 HmacMdNew (
   VOID
@@ -33,6 +34,7 @@ HmacMdNew (
   @param[in]  HmacMdCtx  Pointer to the HMAC_CTX context to be released.
 
 **/
+static
 VOID
 HmacMdFree (
   IN  VOID  *HmacMdCtx
@@ -59,6 +61,7 @@ HmacMdFree (
   @retval FALSE  The Key is set unsuccessfully.
 
 **/
+static
 BOOLEAN
 HmacMdSetKey (
   IN   CONST EVP_MD  *Md,
@@ -94,6 +97,7 @@ HmacMdSetKey (
   @retval FALSE  HMAC-MD context copy failed.
 
 **/
+static
 BOOLEAN
 HmacMdDuplicate (
   IN   CONST VOID  *HmacMdContext,
@@ -132,6 +136,7 @@ HmacMdDuplicate (
   @retval FALSE  HMAC-MD data digest failed.
 
 **/
+static
 BOOLEAN
 HmacMdUpdate (
   IN OUT  VOID        *HmacMdContext,
@@ -183,6 +188,7 @@ HmacMdUpdate (
   @retval FALSE  HMAC-MD digest computation failed.
 
 **/
+static
 BOOLEAN
 HmacMdFinal (
   IN OUT  VOID   *HmacMdContext,
@@ -233,6 +239,7 @@ HmacMdFinal (
   @retval FALSE  This interface is not supported.
 
 **/
+static
 BOOLEAN
 HmacMdAll (
   IN   CONST EVP_MD  *Md,
@@ -291,6 +298,11 @@ HmacSha256New (
   VOID
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (HmacSha256.Services.New, NULL);
+
   return HmacMdNew ();
 }
 
@@ -306,6 +318,11 @@ HmacSha256Free (
   IN  VOID  *HmacSha256Ctx
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (HmacSha256.Services.Free, );
+
   HmacMdFree (HmacSha256Ctx);
 }
 
@@ -331,6 +348,11 @@ HmacSha256SetKey (
   IN   UINTN        KeySize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (HmacSha256.Services.SetKey, FALSE);
+
   return HmacMdSetKey (EVP_sha256 (), HmacSha256Context, Key, KeySize);
 }
 
@@ -354,6 +376,11 @@ HmacSha256Duplicate (
   OUT  VOID        *NewHmacSha256Context
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (HmacSha256.Services.Duplicate, FALSE);
+
   return HmacMdDuplicate (HmacSha256Context, NewHmacSha256Context);
 }
 
@@ -383,6 +410,11 @@ HmacSha256Update (
   IN      UINTN       DataSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (HmacSha256.Services.Update, FALSE);
+
   return HmacMdUpdate (HmacSha256Context, Data, DataSize);
 }
 
@@ -413,6 +445,11 @@ HmacSha256Final (
   OUT     UINT8  *HmacValue
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (HmacSha256.Services.Final, FALSE);
+
   return HmacMdFinal (HmacSha256Context, HmacValue);
 }
 
@@ -446,6 +483,11 @@ HmacSha256All (
   OUT  UINT8        *HmacValue
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (HmacSha256.Services.All, FALSE);
+
   return HmacMdAll (EVP_sha256 (), Data, DataSize, Key, KeySize, HmacValue);
 }
 
@@ -462,6 +504,11 @@ HmacSha384New (
   VOID
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (HmacSha384.Services.New, NULL);
+
   return HmacMdNew ();
 }
 
@@ -477,6 +524,11 @@ HmacSha384Free (
   IN  VOID  *HmacSha384Ctx
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (HmacSha384.Services.Free, );
+
   HmacMdFree (HmacSha384Ctx);
 }
 
@@ -504,6 +556,11 @@ HmacSha384SetKey (
   IN   UINTN        KeySize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (HmacSha384.Services.SetKey, FALSE);
+
   return HmacMdSetKey (EVP_sha384 (), HmacSha384Context, Key, KeySize);
 }
 
@@ -529,6 +586,11 @@ HmacSha384Duplicate (
   OUT  VOID        *NewHmacSha384Context
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (HmacSha384.Services.Duplicate, FALSE);
+
   return HmacMdDuplicate (HmacSha384Context, NewHmacSha384Context);
 }
 
@@ -560,6 +622,11 @@ HmacSha384Update (
   IN      UINTN       DataSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (HmacSha384.Services.Update, FALSE);
+
   return HmacMdUpdate (HmacSha384Context, Data, DataSize);
 }
 
@@ -592,6 +659,11 @@ HmacSha384Final (
   OUT     UINT8  *HmacValue
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (HmacSha384.Services.Final, FALSE);
+
   return HmacMdFinal (HmacSha384Context, HmacValue);
 }
 
@@ -625,5 +697,10 @@ HmacSha384All (
   OUT  UINT8        *HmacValue
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (HmacSha384.Services.All, FALSE);
+
   return HmacMdAll (EVP_sha384 (), Data, DataSize, Key, KeySize, HmacValue);
 }

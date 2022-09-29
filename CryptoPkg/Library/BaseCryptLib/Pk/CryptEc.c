@@ -24,7 +24,7 @@
   @retval !=-1    On success.
   @retval -1      ECC curve not supported.
 **/
-STATIC
+static
 INT32
 CryptoNidToOpensslNid (
   IN UINTN  CryptoNid
@@ -68,6 +68,11 @@ EcGroupInit (
 {
   INT32  Nid;
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.GroupInit, NULL);
+
   Nid = CryptoNidToOpensslNid (CryptoNid);
 
   if (Nid < 0) {
@@ -102,6 +107,11 @@ EcGroupGetCurve (
   IN VOID        *BnCtx
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.GroupGetCurve, FALSE);
+
   return (BOOLEAN)EC_GROUP_get_curve (EcGroup, BnPrime, BnA, BnB, BnCtx);
 }
 
@@ -124,6 +134,11 @@ EcGroupGetOrder (
   OUT VOID  *BnOrder
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.GroupGetOrder, FALSE);
+
   return (BOOLEAN)EC_GROUP_get_order (EcGroup, BnOrder, NULL);
 }
 
@@ -138,6 +153,11 @@ EcGroupFree (
   IN VOID  *EcGroup
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.Free, );
+
   EC_GROUP_free (EcGroup);
 }
 
@@ -156,6 +176,11 @@ EcPointInit (
   IN CONST VOID  *EcGroup
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.PointInit, NULL);
+
   return EC_POINT_new (EcGroup);
 }
 
@@ -172,6 +197,11 @@ EcPointDeInit (
   IN BOOLEAN  Clear
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.PointDeInit, );
+
   if (Clear) {
     EC_POINT_clear_free (EcPoint);
   } else {
@@ -204,6 +234,11 @@ EcPointGetAffineCoordinates (
   IN VOID        *BnCtx
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.PointGetAffineCoordinates, FALSE);
+
   return (BOOLEAN)EC_POINT_get_affine_coordinates (EcGroup, EcPoint, BnX, BnY, BnCtx);
 }
 
@@ -229,6 +264,11 @@ EcPointSetAffineCoordinates (
   IN VOID        *BnCtx
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.PointSetAffineCoordinates, FALSE);
+
   return (BOOLEAN)EC_POINT_set_affine_coordinates (EcGroup, EcPoint, BnX, BnY, BnCtx);
 }
 
@@ -255,6 +295,11 @@ EcPointAdd (
   IN VOID        *BnCtx
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.PointAdd, FALSE);
+
   return (BOOLEAN)EC_POINT_add (EcGroup, EcPointResult, EcPointA, EcPointB, BnCtx);
 }
 
@@ -281,6 +326,11 @@ EcPointMul (
   IN VOID        *BnCtx
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.PointMul, FALSE);
+
   return (BOOLEAN)EC_POINT_mul (EcGroup, EcPointResult, NULL, EcPoint, BnPScalar, BnCtx);
 }
 
@@ -302,6 +352,11 @@ EcPointInvert (
   IN VOID        *BnCtx
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.PointInvert, FALSE);
+
   return (BOOLEAN)EC_POINT_invert (EcGroup, EcPoint, BnCtx);
 }
 
@@ -323,6 +378,11 @@ EcPointIsOnCurve (
   IN VOID        *BnCtx
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.PointIsOnCurve, FALSE);
+
   return EC_POINT_is_on_curve (EcGroup, EcPoint, BnCtx) == 1;
 }
 
@@ -342,6 +402,11 @@ EcPointIsAtInfinity (
   IN CONST VOID  *EcPoint
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.PointIsAtInfinity, FALSE);
+
   return EC_POINT_is_at_infinity (EcGroup, EcPoint) == 1;
 }
 
@@ -365,6 +430,11 @@ EcPointEqual (
   IN VOID        *BnCtx
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.PointEqual, FALSE);
+
   return EC_POINT_cmp (EcGroup, EcPointA, EcPointB, BnCtx) == 0;
 }
 
@@ -395,6 +465,11 @@ EcPointSetCompressedCoordinates (
   IN VOID        *BnCtx
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.PointSetCompressedCoordinates, FALSE);
+
   return (BOOLEAN)EC_POINT_set_compressed_coordinates (EcGroup, EcPoint, BnX, YBit, BnCtx);
 }
 
@@ -419,6 +494,11 @@ EcNewByNid (
 {
   INT32  OpenSslNid;
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.NewByNid, NULL);
+
   OpenSslNid = CryptoNidToOpensslNid (Nid);
   if (OpenSslNid < 0) {
     return NULL;
@@ -438,6 +518,11 @@ EcFree (
   IN  VOID  *EcContext
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.Free, );
+
   EC_KEY_free ((EC_KEY *)EcContext);
 }
 
@@ -484,6 +569,11 @@ EcGenerateKey (
   UINTN           HalfSize;
   INTN            XSize;
   INTN            YSize;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.GenerateKey, FALSE);
 
   if ((EcContext == NULL) || (PublicKeySize == NULL)) {
     return FALSE;
@@ -576,6 +666,11 @@ EcGetPubKey (
   INTN            XSize;
   INTN            YSize;
   BOOLEAN         RetVal;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.GetPubKey, FALSE);
 
   if ((EcContext == NULL) || (PublicKeySize == NULL)) {
     return FALSE;
@@ -679,6 +774,11 @@ EcDhComputeKey (
   EC_POINT        *Point;
   INT32           OpenSslNid;
   UINTN           HalfSize;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Ec.Services.DhComputeKey, FALSE);
 
   if ((EcContext == NULL) || (PeerPublic == NULL) || (KeySize == NULL)) {
     return FALSE;

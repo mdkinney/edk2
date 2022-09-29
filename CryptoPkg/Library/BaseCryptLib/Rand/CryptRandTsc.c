@@ -36,6 +36,11 @@ RandomSeed (
 {
   CHAR8  DefaultSeed[128];
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Random.Services.Seed, FALSE);
+
   if (SeedSize > INT_MAX) {
     return FALSE;
   }
@@ -94,6 +99,11 @@ RandomBytes (
   IN   UINTN  Size
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Random.Services.Bytes, FALSE);
+
   //
   // Check input parameters.
   //

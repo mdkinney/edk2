@@ -32,6 +32,11 @@ RsaNew (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Rsa.Services.New, NULL);
+
+  //
   // Allocates & Initializes RSA Context by OpenSSL RSA_new()
   //
   return (VOID *)RSA_new ();
@@ -49,6 +54,11 @@ RsaFree (
   IN  VOID  *RsaContext
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Rsa.Services.Free, );
+
   //
   // Free OpenSSL RSA Context
   //
@@ -95,6 +105,11 @@ RsaSetKey (
   BIGNUM  *BnDp;
   BIGNUM  *BnDq;
   BIGNUM  *BnQInv;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Rsa.Services.SetKey, FALSE);
 
   //
   // Check input parameters.
@@ -283,6 +298,11 @@ RsaPkcs1Verify (
 {
   INT32  DigestType;
   UINT8  *SigBuf;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Rsa.Services.Pkcs1Verify, FALSE);
 
   //
   // Check input parameters.

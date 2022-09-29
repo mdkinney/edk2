@@ -6,7 +6,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 
 **/
 
-#include <Library/BaseCryptLib.h>
+#include "InternalCryptLib.h"
 #include <openssl/evp.h>
 #include <openssl/kdf.h>
 
@@ -27,6 +27,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
   @retval FALSE  Hkdf generation failed.
 
 **/
+static
 BOOLEAN
 HkdfMdExtractAndExpand (
   IN   CONST EVP_MD  *Md,
@@ -95,6 +96,7 @@ HkdfMdExtractAndExpand (
   @retval false  Hkdf generation failed.
 
 **/
+static
 BOOLEAN
 HkdfMdExtract (
   IN CONST EVP_MD  *Md,
@@ -174,6 +176,7 @@ HkdfMdExtract (
   @retval FALSE  Hkdf generation failed.
 
 **/
+static
 BOOLEAN
 HkdfMdExpand (
   IN   CONST EVP_MD  *Md,
@@ -254,6 +257,11 @@ HkdfSha256ExtractAndExpand (
   IN   UINTN        OutSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Hkdf.Services.Sha256ExtractAndExpand, FALSE);
+
   return HkdfMdExtractAndExpand (EVP_sha256 (), Key, KeySize, Salt, SaltSize, Info, InfoSize, Out, OutSize);
 }
 
@@ -282,6 +290,11 @@ HkdfSha256Extract (
   UINTN           PrkOutSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Hkdf.Services.Sha256Extract, FALSE);
+
   return HkdfMdExtract (
            EVP_sha256 (),
            Key,
@@ -318,6 +331,11 @@ HkdfSha256Expand (
   IN   UINTN        OutSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Hkdf.Services.Sha256Expand, FALSE);
+
   return HkdfMdExpand (EVP_sha256 (), Prk, PrkSize, Info, InfoSize, Out, OutSize);
 }
 
@@ -350,6 +368,11 @@ HkdfSha384ExtractAndExpand (
   IN   UINTN        OutSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Hkdf.Services.Sha384ExtractAndExpand, FALSE);
+
   return HkdfMdExtractAndExpand (EVP_sha384 (), Key, KeySize, Salt, SaltSize, Info, InfoSize, Out, OutSize);
 }
 
@@ -378,6 +401,11 @@ HkdfSha384Extract (
   UINTN           PrkOutSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Hkdf.Services.Sha384Extract, FALSE);
+
   return HkdfMdExtract (
            EVP_sha384 (),
            Key,
@@ -414,5 +442,10 @@ HkdfSha384Expand (
   IN   UINTN        OutSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Hkdf.Services.Sha384Expand, FALSE);
+
   return HkdfMdExpand (EVP_sha384 (), Prk, PrkSize, Info, InfoSize, Out, OutSize);
 }

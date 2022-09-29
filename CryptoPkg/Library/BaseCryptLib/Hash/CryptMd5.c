@@ -24,6 +24,11 @@ Md5GetContextSize (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Md5.Services.GetContextSize, 0);
+
+  //
   // Retrieves the OpenSSL MD5 Context Size
   //
   return (UINTN)(sizeof (MD5_CTX));
@@ -47,6 +52,11 @@ Md5Init (
   OUT  VOID  *Md5Context
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Md5.Services.Init, FALSE);
+
   //
   // Check input parameters.
   //
@@ -80,6 +90,11 @@ Md5Duplicate (
   OUT  VOID        *NewMd5Context
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Md5.Services.Duplicate, FALSE);
+
   //
   // Check input parameters.
   //
@@ -118,6 +133,11 @@ Md5Update (
   IN      UINTN       DataSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Md5.Services.Update, FALSE);
+
   //
   // Check input parameters.
   //
@@ -166,6 +186,11 @@ Md5Final (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Md5.Services.Final, FALSE);
+
+  //
   // Check input parameters.
   //
   if ((Md5Context == NULL) || (HashValue == NULL)) {
@@ -204,6 +229,11 @@ Md5HashAll (
   OUT  UINT8       *HashValue
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Md5.Services.HashAll, FALSE);
+
   //
   // Check input parameters.
   //

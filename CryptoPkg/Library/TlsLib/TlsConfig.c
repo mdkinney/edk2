@@ -446,7 +446,7 @@ FreeCipherString:
   FreePool (CipherString);
 
 FreeMappedCipher:
-  FreePool (MappedCipher);
+  FreePool ((VOID *)MappedCipher);
 
   return Status;
 }

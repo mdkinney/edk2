@@ -6,13 +6,6 @@
 #  This external input must be validated carefully to avoid security issues such as
 #  buffer overflow or integer overflow.
 #
-#  Note:
-#  HMAC-SHA256 functions, AES functions, RSA external
-#  functions, PKCS#7 SignedData sign functions, Diffie-Hellman functions, X.509
-#  certificate handler functions, authenticode signature verification functions,
-#  PEM handler functions, and pseudorandom number generator functions are not
-#  supported in this instance.
-#
 #  Copyright (c) 2010 - 2022, Intel Corporation. All rights reserved.<BR>
 #  SPDX-License-Identifier: BSD-2-Clause-Patent
 #
@@ -38,35 +31,48 @@
   Hash/CryptMd5.c
   Hash/CryptSha1.c
   Hash/CryptSha256.c
-  Hash/CryptSm3.c
   Hash/CryptSha512.c
+  Hash/CryptSm3.c
   Hash/CryptParallelHashNull.c
   Hmac/CryptHmac.c
   Kdf/CryptHkdf.c
-  Cipher/CryptAesNull.c
-  Cipher/CryptAeadAesGcmNull.c
+  Cipher/CryptAes.c
+  Cipher/CryptAeadAesGcm.c
   Pk/CryptRsaBasic.c
-  Pk/CryptRsaExtNull.c
-  Pk/CryptPkcs1OaepNull.c
-  Pk/CryptPkcs5Pbkdf2Null.c
-  Pk/CryptPkcs7SignNull.c
+  Pk/CryptRsaExt.c
+  Pk/CryptPkcs1Oaep.c
+  Pk/CryptPkcs5Pbkdf2.c
+  Pk/CryptPkcs7Sign.c
   Pk/CryptPkcs7VerifyCommon.c
   Pk/CryptPkcs7VerifyBase.c
   Pk/CryptPkcs7VerifyEku.c
-  Pk/CryptDhNull.c
-  Pk/CryptX509Null.c
-  Pk/CryptAuthenticodeNull.c
-  Pk/CryptTsNull.c
+  Pk/CryptDh.c
+  Pk/CryptX509.c
+  Pk/CryptAuthenticode.c
+  Pk/CryptTs.c
   Pk/CryptRsaPss.c
-  Pk/CryptRsaPssSignNull.c
-  Pk/CryptEcNull.c
-  Pem/CryptPemNull.c
-  Rand/CryptRandNull.c
-  Bn/CryptBnNull.c
+  Pk/CryptEc.c
+  Pem/CryptPem.c
+  Bn/CryptBn.c
 
   SysCall/CrtWrapper.c
   SysCall/ConstantTimeClock.c
   SysCall/BaseMemAllocation.c
+
+[Sources.Ia32]
+  Rand/CryptRandTsc.c
+
+[Sources.X64]
+  Rand/CryptRandTsc.c
+
+[Sources.ARM]
+  Rand/CryptRand.c
+
+[Sources.AARCH64]
+  Rand/CryptRand.c
+
+[Sources.RISCV64]
+  Rand/CryptRand.c
 
 [Packages]
   MdePkg/MdePkg.dec
@@ -79,6 +85,10 @@
   DebugLib
   OpensslLib
   IntrinsicLib
+  PcdLib
+
+[FixedPcd]
+  gEfiCryptoPkgTokenSpaceGuid.PcdCryptoServiceFamilyEnable
 
 #
 # Remove these [BuildOptions] after this library is cleaned up
@@ -86,11 +96,7 @@
 [BuildOptions]
   #
   # suppress the following warnings so we do not break the build with warnings-as-errors:
-  # C4090: 'function' : different 'const' qualifiers
-  # C4718: 'function call' : recursive call has no side effects, deleting
   #
-  MSFT:*_*_*_CC_FLAGS = /wd4090 /wd4718
-
   GCC:*_CLANG35_*_CC_FLAGS = -std=c99
   GCC:*_CLANG38_*_CC_FLAGS = -std=c99
   GCC:*_CLANGPDB_*_CC_FLAGS = -std=c99 -Wno-error=incompatible-pointer-types

@@ -50,6 +50,11 @@ Pkcs5HashPassword (
 {
   CONST EVP_MD  *HashAlg;
 
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Pkcs.Services.Pkcs5HashPassword, FALSE);
+
   HashAlg = NULL;
 
   //

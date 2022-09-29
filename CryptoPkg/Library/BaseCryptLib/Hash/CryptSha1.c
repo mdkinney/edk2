@@ -24,6 +24,11 @@ Sha1GetContextSize (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha1.Services.GetContextSize, 0);
+
+  //
   // Retrieves OpenSSL SHA Context Size
   //
   return (UINTN)(sizeof (SHA_CTX));
@@ -47,6 +52,11 @@ Sha1Init (
   OUT  VOID  *Sha1Context
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha1.Services.Init, FALSE);
+
   //
   // Check input parameters.
   //
@@ -80,6 +90,11 @@ Sha1Duplicate (
   OUT  VOID        *NewSha1Context
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha1.Services.Duplicate, FALSE);
+
   //
   // Check input parameters.
   //
@@ -118,6 +133,11 @@ Sha1Update (
   IN      UINTN       DataSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha1.Services.Update, FALSE);
+
   //
   // Check input parameters.
   //
@@ -166,6 +186,11 @@ Sha1Final (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha1.Services.Final, FALSE);
+
+  //
   // Check input parameters.
   //
   if ((Sha1Context == NULL) || (HashValue == NULL)) {
@@ -204,6 +229,11 @@ Sha1HashAll (
   OUT  UINT8       *HashValue
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sha1.Services.HashAll, FALSE);
+
   //
   // Check input parameters.
   //

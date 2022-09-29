@@ -74,6 +74,11 @@ RsaGetPrivateKeyFromPem (
   BIO      *PemBio;
 
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Rsa.Services.GetPrivateKeyFromPem, FALSE);
+
+  //
   // Check input parameters.
   //
   if ((PemData == NULL) || (RsaContext == NULL) || (PemSize > INT_MAX)) {

@@ -22,6 +22,11 @@ Sm3GetContextSize (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sm3.Services.GetContextSize, 0);
+
+  //
   // Retrieves Openssl SM3 Context Size
   //
   return (UINTN)(sizeof (SM3_CTX));
@@ -45,6 +50,11 @@ Sm3Init (
   OUT  VOID  *Sm3Context
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sm3.Services.Init, FALSE);
+
   //
   // Check input parameters.
   //
@@ -81,6 +91,11 @@ Sm3Duplicate (
   OUT  VOID        *NewSm3Context
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sm3.Services.Duplicate, FALSE);
+
   //
   // Check input parameters.
   //
@@ -119,6 +134,11 @@ Sm3Update (
   IN      UINTN       DataSize
   )
 {
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sm3.Services.Update, FALSE);
+
   //
   // Check input parameters.
   //
@@ -169,6 +189,11 @@ Sm3Final (
   )
 {
   //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sm3.Services.Final, FALSE);
+
+  //
   // Check input parameters.
   //
   if ((Sm3Context == NULL) || (HashValue == NULL)) {
@@ -210,6 +235,11 @@ Sm3HashAll (
   )
 {
   SM3_CTX  Ctx;
+
+  //
+  // Check if service is enabled
+  //
+  IS_EDKII_CRYPTO_SERVICE_ENABLED (Sm3.Services.HashAll, FALSE);
 
   //
   // Check input parameters.
