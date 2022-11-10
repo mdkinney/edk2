@@ -16,3 +16,8 @@
   RegisterFilterLib|MdePkg/Library/RegisterFilterLibNull/RegisterFilterLibNull.inf
   CpuLib|MdePkg/Library/BaseCpuLib/BaseCpuLib.inf
   SmmCpuRendezvousLib|MdePkg/Library/SmmCpuRendezvousLibNull/SmmCpuRendezvousLibNull.inf
+
+#if MDEPKG_DEBUGANSI
+[BuildOptions]
+*_*_*_CC_FLAGS = -D MDEPKG_DEBUGANSI
+#endif

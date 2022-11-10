@@ -103,7 +103,11 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #ifdef DEBUG_EXPRESSION_STRING_VALUE
 #define DEBUG_EXPRESSION_STRING(Expression)  DEBUG_EXPRESSION_STRING_VALUE
 #else
+  #if !defined (MDEPKG_DEBUGANSI)
 #define DEBUG_EXPRESSION_STRING(Expression)  #Expression
+  #else
+#define DEBUG_EXPRESSION_STRING(Expression)  "\033[41;1m"#Expression"\033[0m"
+  #endif
 #endif
 
 /**
@@ -364,12 +368,31 @@ UnitTestDebugAssert (
 **/
 
 #if !defined (MDE_CPU_EBC) && (!defined (_MSC_VER) || _MSC_VER > 1400)
+  #if !defined (MDEPKG_DEBUGANSI)
 #define _DEBUG_PRINT(PrintLevel, ...)              \
     do {                                             \
       if (DebugPrintLevelEnabled (PrintLevel)) {     \
         DebugPrint (PrintLevel, ##__VA_ARGS__);      \
       }                                              \
     } while (FALSE)
+  #else
+#define _DEBUG_PRINT(PrintLevel, Format, ...)              \
+    do {                                                   \
+      if (DebugPrintLevelEnabled (PrintLevel)) {           \
+        if (((PrintLevel) & DEBUG_ERROR) != 0) {           \
+          DebugPrint (PrintLevel, "\033[31m");             \
+        } else if (((PrintLevel) & DEBUG_WARN) != 0) {     \
+          DebugPrint (PrintLevel, "\033[33m");             \
+        } else if (((PrintLevel) & DEBUG_LOAD) != 0) {     \
+          DebugPrint (PrintLevel, "\033[36m");             \
+        } else if (((PrintLevel) & DEBUG_VERBOSE) != 0) {  \
+          DebugPrint (PrintLevel, "\033[35m");             \
+        }                                                  \
+        DebugPrint (PrintLevel, Format, ##__VA_ARGS__);    \
+        DebugPrint (PrintLevel, "\033[0m");                \
+      }                                                    \
+    } while (FALSE)
+  #endif
 #define _DEBUG(Expression)  _DEBUG_PRINT Expression
 #else
 #define _DEBUG(Expression)  DebugPrint Expression
