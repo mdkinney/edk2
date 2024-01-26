@@ -176,6 +176,10 @@ CoreInitializeTimer (
   ASSERT_EFI_ERROR (Status);
 }
 
+static volatile UINTN  mNumTicks = 0;
+static volatile UINTN  mDepth = 0;
+static volatile UINTN  mDepthCounter[10];
+
 /**
   Called by the platform code to process a tick.
 
@@ -190,6 +194,21 @@ CoreTimerTick (
   )
 {
   IEVENT  *Event;
+
+  DEBUG_CODE (
+    mNumTicks++;
+    mDepth++;
+    ASSERT (mDepth < ARRAY_SIZE (mDepthCounter));
+    mDepthCounter[mDepth]++;
+    if ((mNumTicks % 100) == 0) {
+      UINTN  Index;
+      DEBUG ((DEBUG_ERROR, "CoreTimerTick: NumTicks = %6d  DepthCounter[", mNumTicks));
+      for (Index = 1; Index < ARRAY_SIZE(mDepthCounter) && mDepthCounter[Index] > 0; Index++) {
+        DEBUG ((DEBUG_ERROR, "%6d", mDepthCounter[Index]));
+      }
+      DEBUG ((DEBUG_ERROR, "]\n"));
+    }
+  );
 
   //
   // Check runtiem flag in case there are ticks while exiting boot services
@@ -214,6 +233,11 @@ CoreTimerTick (
   }
 
   CoreReleaseLock (&mEfiSystemTimeLock);
+
+  DEBUG_CODE (
+    ASSERT (mDepth > 0);
+    mDepth--;
+  );
 }
 
 /**
