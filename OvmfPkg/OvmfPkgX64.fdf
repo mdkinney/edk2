@@ -245,7 +245,12 @@ INF  UefiCpuPkg/CpuIo2Dxe/CpuIo2Dxe.inf
 INF  UefiCpuPkg/CpuDxe/CpuDxe.inf
 INF  FILE_GUID = $(UP_CPU_DXE_GUID) UefiCpuPkg/CpuDxe/CpuDxe.inf
 
+!if $(TIMER) == "LOCAL_APIC"
 INF  OvmfPkg/LocalApicTimerDxe/LocalApicTimerDxe.inf
+!endif
+!if $(TIMER) == "HPET"
+INF  PcAtChipsetPkg/HpetTimerDxe/HpetTimerDxe.inf
+!endif
 INF  OvmfPkg/IncompatiblePciDeviceSupportDxe/IncompatiblePciDeviceSupport.inf
 INF  OvmfPkg/PciHotPlugInitDxe/PciHotPlugInit.inf
 INF  MdeModulePkg/Bus/Pci/PciHostBridgeDxe/PciHostBridgeDxe.inf
@@ -327,6 +332,9 @@ INF  OvmfPkg/LinuxInitrdDynamicShellCommand/LinuxInitrdDynamicShellCommand.inf
 !if $(BUILD_SHELL) == TRUE
 INF  ShellPkg/Application/Shell/Shell.inf
 !endif
+
+INF  ShellPkg/Application/PeriodicTimers/PeriodicTimers.inf
+INF  MdeModulePkg/Universal/FvSimpleFileSystemDxe/FvSimpleFileSystemDxe.inf
 
 INF MdeModulePkg/Logo/LogoDxe.inf
 

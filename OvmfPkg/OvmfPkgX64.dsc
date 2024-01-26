@@ -84,6 +84,12 @@
   DEFINE UP_CPU_PEI_GUID  = 280251c4-1d09-4035-9062-839acb5f18c1
   DEFINE UP_CPU_DXE_GUID  = 6490f1c5-ebcc-4665-8892-0075b9bb49b7
 
+  DEFINE TIMER = LOCAL_APIC
+!if $(TIMER) in "LOCAL_APIC HPET"
+!else
+  !error TIMER must be LOCAL_APIC or HPET
+!endif
+
 !include OvmfPkg/Include/Dsc/OvmfPkg.dsc.inc
 
 [BuildOptions]
@@ -224,6 +230,7 @@
 !endif
 
   LocalApicLib|UefiCpuPkg/Library/BaseXApicX2ApicLib/BaseXApicX2ApicLib.inf
+  IoApicLib|PcAtChipsetPkg/Library/BaseIoApicLib/BaseIoApicLib.inf
   DebugPrintErrorLevelLib|MdePkg/Library/BaseDebugPrintErrorLevelLib/BaseDebugPrintErrorLevelLib.inf
 
   IntrinsicLib|CryptoPkg/Library/IntrinsicLib/IntrinsicLib.inf
@@ -830,7 +837,12 @@
       NULL|OvmfPkg/Library/MpInitLibDepLib/DxeMpInitLibUpDepLib.inf
   }
 
+!if $(TIMER) == "LOCAL_APIC"
   OvmfPkg/LocalApicTimerDxe/LocalApicTimerDxe.inf
+!endif
+!if $(TIMER) == "HPET"
+  PcAtChipsetPkg/HpetTimerDxe/HpetTimerDxe.inf
+!endif
   OvmfPkg/IncompatiblePciDeviceSupportDxe/IncompatiblePciDeviceSupport.inf
   OvmfPkg/PciHotPlugInitDxe/PciHotPlugInit.inf
   MdeModulePkg/Bus/Pci/PciHostBridgeDxe/PciHostBridgeDxe.inf {
@@ -998,6 +1010,9 @@
       gEfiMdePkgTokenSpaceGuid.PcdUefiLibMaxPrintBufferSize|8000
   }
 !endif
+
+  ShellPkg/Application/PeriodicTimers/PeriodicTimers.inf
+  MdeModulePkg/Universal/FvSimpleFileSystemDxe/FvSimpleFileSystemDxe.inf
 
 !if $(SECURE_BOOT_ENABLE) == TRUE
   SecurityPkg/VariableAuthenticated/SecureBootConfigDxe/SecureBootConfigDxe.inf
