@@ -1,0 +1,33 @@
+## @file
+# Run BaseTools/Scripts/PatchCheck.py on PR
+#
+# Copyright (c) 2024, Intel Corporation. All rights reserved.<BR>
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+name: Run BaseTools/Scripts/PatchCheck.py on PR
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches:
+      - CiEnabled
+
+jobs:
+  patchcheck:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - name: Install Python Dependencies
+        run: pip install -r pip-requirements.txt
+      - name: Run PatchCheck
+        run: python BaseTools/Scripts/PatchCheck.py ${{ github.event.pull_request.base.sha }}..
