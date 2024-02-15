@@ -28,6 +28,7 @@ class Verbose:
 
 class PatchCheckConf:
     ignore_change_id = False
+    ignore_multi_package = False
 
 class EmailAddressCheck:
     """Checks an email address."""
@@ -686,7 +687,8 @@ class CheckGitCommits:
             self.ok &= EmailAddressCheck(email, 'Committer').ok
             patch = self.read_patch_from_git(commit)
             self.ok &= CheckOnePatch(commit, patch).ok
-            self.ok &= self.check_parent_packages (dec_files, commit)
+            if not PatchCheckConf.ignore_multi_package:
+                self.ok &= self.check_parent_packages (dec_files, commit)
 
         if not commits:
             print("Couldn't find commit matching: '{}'".format(rev_spec))
@@ -847,6 +849,9 @@ class PatchCheckApp:
         group.add_argument("--ignore-change-id",
                            action="store_true",
                            help="Ignore the presence of 'Change-Id:' tags in commit message")
+        group.add_argument("--ignore-multi-package",
+                           action="store_true",
+                           help="Ignore if commit modifies files in multiple packages")
         self.args = parser.parse_args()
         if self.args.oneline:
             Verbose.level = Verbose.ONELINE
@@ -854,6 +859,8 @@ class PatchCheckApp:
             Verbose.level = Verbose.SILENT
         if self.args.ignore_change_id:
             PatchCheckConf.ignore_change_id = True
+        if self.args.ignore_multi_package:
+            PatchCheckConf.ignore_multi_package = True
 
 if __name__ == "__main__":
     sys.exit(PatchCheckApp().retval)
