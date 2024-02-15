@@ -1,11 +1,11 @@
 ## @file
-# Run BaseTools/Scripts/PatchCheck.py on PR
+# Run PatchCheck on all commits in a pull request
 #
 # Copyright (c) 2024, Intel Corporation. All rights reserved.<BR>
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
 
-name: Run BaseTools/Scripts/PatchCheck.py on PR
+name: PatchCheck
 
 on:
   pull_request:
@@ -29,5 +29,9 @@ jobs:
           fetch-depth: 0
       - name: Install Python Dependencies
         run: pip install -r pip-requirements.txt
-      - name: Run PatchCheck
+      - name: PatchCheck
+        if: ${{ !contains(github.event.pull_request.labels.*.name, 'ignore-multi-package') }}
         run: python BaseTools/Scripts/PatchCheck.py ${{ github.event.pull_request.base.sha }}..
+      - name: PatchCheck --ignore-multi-package
+        if: ${{ contains(github.event.pull_request.labels.*.name, 'ignore-multi-package') }}
+        run: python BaseTools/Scripts/PatchCheck.py --ignore-multi-package ${{ github.event.pull_request.base.sha }}..
