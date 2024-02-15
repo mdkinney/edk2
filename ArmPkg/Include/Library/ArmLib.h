@@ -11,6 +11,9 @@
 #ifndef ARM_LIB_H_
 #define ARM_LIB_H_
 
+// Add extra comment
+
+
 #include <Uefi/UefiBaseType.h>
 
 #ifdef MDE_CPU_ARM
