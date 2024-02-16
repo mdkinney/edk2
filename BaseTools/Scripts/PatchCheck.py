@@ -687,11 +687,26 @@ class CheckGitCommits:
             self.ok &= EmailAddressCheck(email, 'Committer').ok
             patch = self.read_patch_from_git(commit)
             self.ok &= CheckOnePatch(commit, patch).ok
-            if not PatchCheckConf.ignore_multi_package:
-                self.ok &= self.check_parent_packages (dec_files, commit)
+            self.ok &= self.check_parent_packages (dec_files, commit)
 
         if not commits:
             print("Couldn't find commit matching: '{}'".format(rev_spec))
+
+    def check_parent_packages(self, dec_files, commit):
+        warn = 'WARNING: ' if PatchCheckConf.ignore_multi_package else ''
+        modified = self.get_parent_packages (dec_files, commit, 'AM')
+        if len (modified) > 1:
+            print("{}The commit adds/modifies files in multiple packages:".format(warn))
+            print(" *", '\n * '.join(modified))
+            if not PatchCheckConf.ignore_multi_package:
+                self.ok = False
+        deleted = self.get_parent_packages (dec_files, commit, 'D')
+        if len (deleted) > 1:
+            print("{}The commit deletes files from multiple packages:".format(warn))
+            print(" *", '\n * '.join(deleted))
+            if not PatchCheckConf.ignore_multi_package:
+                self.ok = False
+        return self.ok
 
     def get_parent_packages(self, dec_files, commit, filter):
         filelist = self.read_files_modified_from_git (commit, filter)
@@ -707,19 +722,6 @@ class CheckGitCommits:
                 # Covers BaseTools, .github, .azurepipelines, .pytool
                 parents.add(file.split('/')[0])
         return list(parents)
-
-    def check_parent_packages(self, dec_files, commit):
-        modified = self.get_parent_packages (dec_files, commit, 'AM')
-        if len (modified) > 1:
-            print("The commit adds/modifies files in multiple packages:\n *",
-                  '\n * '.join(modified))
-            self.ok = False
-        deleted = self.get_parent_packages (dec_files, commit, 'D')
-        if len (deleted) > 1:
-            print("The commit deletes files from multiple packages:\n *",
-                  '\n * '.join(deleted))
-            self.ok = False
-        return self.ok
 
     def read_dec_files_from_git(self):
         # run git ls-files *.dec
