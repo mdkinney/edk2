@@ -9,29 +9,39 @@ name: PatchCheck
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
+    types: [opened, synchronize, reopened, ready_for_review, labeled, unlabeled]
     branches:
       - CiEnabled
+
+env:
+  RunPatchCheck: True
+  PatchCheckOptions: ''
 
 jobs:
   patchcheck:
     if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
+      - name: IsLabel
+        if: ${{ contains(fromJSON('["labeled", "unlabeled"]'), github.event.action) && (github.event.label.name != 'ignore-multi-package') }}
+        run: echo "RunPatchCheck=False" >> $GITHUB_ENV
+      - name: IsIgnoreMultiPackage
+        if: ${{ env.RunPatchCheck == 'True' && contains(github.event.pull_request.labels.*.name, 'ignore-multi-package')}}
+        run: echo "PatchCheckOptions=--ignore-multi-package" >> $GITHUB_ENV
       - name: Install Python
+        if: ${{ env.RunPatchCheck == 'True' }}
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
       - name: Checkout PR
+        if: ${{ env.RunPatchCheck == 'True' }}
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
       - name: Install Python Dependencies
+        if: ${{ env.RunPatchCheck == 'True' }}
         run: pip install -r pip-requirements.txt
       - name: PatchCheck
-        if: ${{ !contains(github.event.pull_request.labels.*.name, 'ignore-multi-package') }}
-        run: python BaseTools/Scripts/PatchCheck.py ${{ github.event.pull_request.base.sha }}..
-      - name: PatchCheck --ignore-multi-package
-        if: ${{ contains(github.event.pull_request.labels.*.name, 'ignore-multi-package') }}
-        run: python BaseTools/Scripts/PatchCheck.py --ignore-multi-package ${{ github.event.pull_request.base.sha }}..
+        if: ${{ env.RunPatchCheck == 'True' }}
+        run: python BaseTools/Scripts/PatchCheck.py ${{ env.PatchCheckOptions }} ${{ github.event.pull_request.base.sha }}..
