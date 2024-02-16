@@ -1,21 +1,21 @@
 ## @file
-# Run PatchCheck on all commits in a pull request
+# Run PatchCheck on a label change in a pull request
 #
 # Copyright (c) 2024, Intel Corporation. All rights reserved.<BR>
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
 
-name: PatchCheck
+name: PatchCheckOnLabelChange
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
+    types: [labeled, unlabeled]
     branches:
       - CiEnabled
 
 jobs:
   patchcheck:
-    if: github.event.pull_request.draft == false
+    if: ${{ (github.event.pull_request.draft == false) && (github.event.label.name == 'ignore-multi-package') }}
     runs-on: ubuntu-latest
     steps:
       - name: Install Python
