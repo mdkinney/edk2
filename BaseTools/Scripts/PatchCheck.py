@@ -99,6 +99,7 @@ class CommitMessageCheck:
 
     def __init__(self, subject, message, author_email):
         self.ok = True
+        self.ignore_multi_package = False
 
         if subject is None and  message is None:
             self.error('Commit message is missing!')
@@ -121,6 +122,7 @@ class CommitMessageCheck:
             self.check_overall_format()
             if not PatchCheckConf.ignore_change_id:
                 self.check_change_id_format()
+            self.check_ci_options_format()
         self.report_message_result()
 
     url = 'https://github.com/tianocore/tianocore.github.io/wiki/Commit-Message-Format'
@@ -322,6 +324,15 @@ class CommitMessageCheck:
         if self.msg.find(cid) != -1:
             self.error('\"%s\" found in commit message:' % cid)
             return
+
+    def check_ci_options_format(self):
+        cio='Continuous-Integration-Options:'
+        for line in self.msg.splitlines():
+            if not line.startswith(cio):
+                continue
+            options = line.split(':', 1)[1].split()
+            if 'PatchCheck.ignore-multi-package' in options:
+                self.ignore_multi_package = True
 
 (START, PRE_PATCH, PATCH) = range(3)
 
@@ -560,6 +571,7 @@ class CheckOnePatch:
 
         msg_check = CommitMessageCheck(self.commit_subject, self.commit_msg, self.author_email)
         msg_ok = msg_check.ok
+        self.ignore_multi_package = msg_check.ignore_multi_package
 
         diff_ok = True
         if self.diff is not None:
@@ -686,27 +698,32 @@ class CheckGitCommits:
             email = self.read_committer_email_address_from_git(commit)
             self.ok &= EmailAddressCheck(email, 'Committer').ok
             patch = self.read_patch_from_git(commit)
-            self.ok &= CheckOnePatch(commit, patch).ok
-            self.ok &= self.check_parent_packages (dec_files, commit)
+            check_patch = CheckOnePatch(commit, patch)
+            self.ok &= check_patch.ok
+            ignore_multi_package = check_patch.ignore_multi_package
+            if PatchCheckConf.ignore_multi_package:
+                ignore_multi_package = True
+            prefix = 'WARNING: ' if ignore_multi_package else ''
+            check_parent = self.check_parent_packages (dec_files, commit, prefix)
+            if not ignore_multi_package:
+                self.ok &= check_parent
 
         if not commits:
             print("Couldn't find commit matching: '{}'".format(rev_spec))
 
-    def check_parent_packages(self, dec_files, commit):
-        warn = 'WARNING: ' if PatchCheckConf.ignore_multi_package else ''
+    def check_parent_packages(self, dec_files, commit, prefix):
+        ok = True
         modified = self.get_parent_packages (dec_files, commit, 'AM')
         if len (modified) > 1:
-            print("{}The commit adds/modifies files in multiple packages:".format(warn))
+            print("{}The commit adds/modifies files in multiple packages:".format(prefix))
             print(" *", '\n * '.join(modified))
-            if not PatchCheckConf.ignore_multi_package:
-                self.ok = False
+            ok = False
         deleted = self.get_parent_packages (dec_files, commit, 'D')
         if len (deleted) > 1:
-            print("{}The commit deletes files from multiple packages:".format(warn))
+            print("{}The commit deletes files from multiple packages:".format(prefix))
             print(" *", '\n * '.join(deleted))
-            if not PatchCheckConf.ignore_multi_package:
-                self.ok = False
-        return self.ok
+            ok = False
+        return ok
 
     def get_parent_packages(self, dec_files, commit, filter):
         filelist = self.read_files_modified_from_git (commit, filter)
