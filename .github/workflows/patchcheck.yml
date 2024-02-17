@@ -13,50 +13,28 @@ on:
     branches:
       - CiEnabled
 
-env:
-  RunPatchCheck: True
-  PatchCheckOptions: ''
-
 jobs:
-  patchcheck:
+  evaluate:
+    name: Evaluate Pull Request Event
     if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
+    outputs:
+      SkipPatchCheck:     ${{ steps.skip.outputs.SkipPatchCheck }}
+      PatchCheckOptions: ${{ steps.options.outputs.PatchCheckOptions }}
     steps:
       - name: IsLabel
+        id: skip
         if: ${{ contains(fromJSON('["labeled", "unlabeled"]'), github.event.action) && (github.event.label.name != 'ignore-multi-package') }}
-        run: echo "RunPatchCheck=False" >> $GITHUB_ENV
+        run: echo "SkipPatchCheck=true" >> $GITHUB_OUTPUT
       - name: IsIgnoreMultiPackage
-        if: ${{ env.RunPatchCheck == 'True' && contains(github.event.pull_request.labels.*.name, 'ignore-multi-package')}}
-        run: echo "PatchCheckOptions=--ignore-multi-package" >> $GITHUB_ENV
-      - name: Fetch Depth
-        if: ${{ env.RunPatchCheck == 'True' }}
-        run: echo "FetchDepth=$((${{ github.event.pull_request.commits }} + 1))" >> $GITHUB_ENV
-      - name: Fetch PR
-        if: ${{ env.RunPatchCheck == 'True' }}
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: ${{ env.FetchDepth }}
-          sparse-checkout: |
-            pip-requirements.txt
-            BaseTools/Scripts/PatchCheck.py
-      - name: Checkout Base
-        if: ${{ env.RunPatchCheck == 'True' }}
-        run: git checkout ${{ github.event.pull_request.base.sha }}
-      - name: Install Python
-        if: ${{ env.RunPatchCheck == 'True' }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-      - name: Cache Python Dependencies
-        id: cache-python-dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.pythonLocation }}
-          key: ${{ env.pythonLocation }}-${{ hashFiles('pip-requirements.txt') }}
-      - name: Install Python Dependencies
-        if: ${{ env.RunPatchCheck == 'True' && steps.cache-python-dependencies.outputs.cache-hit != 'true'}}
-        run: pip install -r pip-requirements.txt
-      - name: PatchCheck
-        if: ${{ env.RunPatchCheck == 'True' }}
-        run: python BaseTools/Scripts/PatchCheck.py ${{ env.PatchCheckOptions }} ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }}..${{ github.event.pull_request.head.sha }}
+        id: options
+        if: ${{ contains(github.event.pull_request.labels.*.name, 'ignore-multi-package')}}
+        run: echo "PatchCheckOptions=--ignore-multi-package" >> $GITHUB_OUTPUT
+
+  patchcheck:
+    name: PatchCheck
+    needs: evaluate
+    if: needs.evaluate.outputs.SkipPatchCheck != 'true'
+    uses: ./.github/workflows/patchcheck_call.yml
+    with:
+      PatchCheckOptions: ${{ needs.evaluate.outputs.PatchCheckOptions }}
