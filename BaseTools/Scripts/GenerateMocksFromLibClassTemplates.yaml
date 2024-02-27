@@ -1,0 +1,96 @@
+### @file
+# YAML file with templates used to generate mock libraries from EDK II include
+# files.
+#
+# Copyright (C) 2024, Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+###
+
+%YAML 1.2
+---
+version: 0.0.1
+
+filelist:
+  -
+    path: "Library/GoogleTest/Mock{LibName}"
+    name: "Mock{LibName}.inf"
+    type: library-inf
+    content: |2
+      ## @file
+      # Google Test mocks for {LibName}
+      #
+      # {Copyright}
+      # SPDX-License-Identifier: BSD-2-Clause-Patent
+      ##
+
+      [Defines]
+        INF_VERSION                    = 0x00010005
+        BASE_NAME                      = Mock{LibName}
+        FILE_GUID                      = {FileGuid}
+        MODULE_TYPE                    = HOST_APPLICATION
+        VERSION_STRING                 = 1.0
+        LIBRARY_CLASS                  = {LibName}
+
+      #
+      # The following information is for reference only and not required by the build tools.
+      #
+      #  VALID_ARCHITECTURES           = IA32 X64
+      #
+
+      [Sources]
+        Mock{LibName}.cpp
+
+      [Packages]
+        {PackageDecFiles}
+
+      [LibraryClasses]
+        GoogleTestLib
+
+      [BuildOptions]
+        MSFT:*_*_*_CC_FLAGS = /EHs /bigobj
+  -
+    path: "Library/GoogleTest/Mock{LibName}"
+    name: "Mock{LibName}.cpp"
+    type: library-cpp
+    content: |2
+      /** @file
+        Google Test mocks for {LibName}
+
+        {Copyright}
+        SPDX-License-Identifier: BSD-2-Clause-Patent
+      **/
+
+      extern "C" {
+        #include <Base.h>
+        #include <Library/{LibName}.h>{GlobalVariables}
+      }
+      #include <GoogleTest/Library/Mock{LibName}.h>
+
+      MOCK_INTERFACE_DEFINITION (Mock{LibName});{MockFunctionDefinitions}
+  -
+    path: "Include/GoogleTest/Library"
+    name: "Mock{LibName}.h"
+    type: library-h
+    content: |2
+      /** @file
+        Google Test mocks for {LibName}
+
+        {Copyright}
+        SPDX-License-Identifier: BSD-2-Clause-Patent
+      **/
+
+      #ifndef MOCK_{LIB_NAME}_H_
+      #define MOCK_{LIB_NAME}_H_
+
+      #include <Library/GoogleTestLib.h>
+      #include <Library/FunctionMockLib.h>
+      extern "C" {
+        #include <Base.h>
+        #include <Library/{LibName}.h>
+      }
+
+      struct Mock{LibName} {
+        MOCK_INTERFACE_DECLARATION (Mock{LibName});{MockFunctionDeclarations}
+      };
+
+      #endif
