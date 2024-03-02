@@ -9,6 +9,9 @@
 #ifndef SSDT_PCIE_SUPPORT_LIB_H_
 #define SSDT_PCIE_SUPPORT_LIB_H_
 
+#include <ArmNameSpaceObjects.h>
+#include <Library/AmlLib/AmlLib.h>
+
 #pragma pack(1)
 
 /** Structure used to map integer to an index.

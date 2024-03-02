@@ -13,6 +13,7 @@
 #define TABLE_HELPER_LIB_H_
 
 #include <Library/AmlLib/AmlLib.h>
+#include <ConfigurationManagerObject.h>
 
 /** The GetCgfMgrInfo function gets the CM_STD_OBJ_CONFIGURATION_MANAGER_INFO
     object from the Configuration Manager.

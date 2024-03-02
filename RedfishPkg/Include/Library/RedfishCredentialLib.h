@@ -11,6 +11,7 @@
 #define REDFISH_CREDENTIAL_LIB_H_
 
 #include <Uefi.h>
+#include <Protocol/EdkIIRedfishCredential.h>
 
 /**
   Notification of Exit Boot Service.

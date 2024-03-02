@@ -103,14 +103,14 @@ LibCapsuleVirtualAddressChangeEvent (
 
 EFI_STATUS
 LibUpdateCapsule (
-  IN UEFI_CAPSULE_HEADER   **CapsuleHeaderArray,
+  IN EFI_CAPSULE_HEADER    **CapsuleHeaderArray,
   IN UINTN                 CapsuleCount,
   IN EFI_PHYSICAL_ADDRESS  ScatterGatherList OPTIONAL
   );
 
 EFI_STATUS
 QueryCapsuleCapabilities (
-  IN  UEFI_CAPSULE_HEADER  **CapsuleHeaderArray,
+  IN  EFI_CAPSULE_HEADER   **CapsuleHeaderArray,
   IN  UINTN                CapsuleCount,
   OUT UINT64               *MaxiumCapsuleSize,
   OUT EFI_RESET_TYPE       *ResetType

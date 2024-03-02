@@ -9,6 +9,8 @@
 #ifndef GOOGLE_TEST_LIB_H_
 #define GOOGLE_TEST_LIB_H_
 
+#if defined (__cplusplus)
+
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <cstring>
@@ -126,5 +128,7 @@ MATCHER_P (
   *result_listener << "strings match";
   return true;
 }
+
+#endif
 
 #endif

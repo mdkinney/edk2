@@ -9,6 +9,8 @@
 #ifndef ACPI_VIEW_COMMAND_LIB_H_
 #define ACPI_VIEW_COMMAND_LIB_H_
 
+#include <Protocol/Shell.h>
+
 /**
   Dump a buffer to a file. Print error message if a file cannot be created.
 

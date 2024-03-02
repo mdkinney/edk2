@@ -9,6 +9,8 @@
 #ifndef SSDT_SERIAL_PORT_LIB_H_
 #define SSDT_SERIAL_PORT_LIB_H_
 
+#include <ConfigurationManagerObject.h>
+
 /** Build a SSDT table describing the input serial port.
 
   The table created by this function must be freed by FreeSsdtSerialTable.

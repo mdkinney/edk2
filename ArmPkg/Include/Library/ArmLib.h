@@ -18,7 +18,17 @@
 #elif defined (MDE_CPU_AARCH64)
   #include <Chipset/AArch64.h>
 #else
-  #error "Unknown chipset."
+  #if EDKII_UNIT_TEST_FRAMEWORK_ENABLED
+    #if defined (MDE_CPU_IA32)
+      #include <Chipset/ArmV7.h>
+    #elif defined (MDE_CPU_X64)
+      #include <Chipset/AArch64.h>
+    #else
+      #error "Unknown chipset."
+    #endif
+  #else
+    #error "Unknown chipset."
+  #endif
 #endif
 
 #define EFI_MEMORY_CACHETYPE_MASK  (EFI_MEMORY_UC | EFI_MEMORY_WC |  \

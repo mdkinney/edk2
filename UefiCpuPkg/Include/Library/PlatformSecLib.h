@@ -10,6 +10,8 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #ifndef __PLATFORM_SEC_LIB_H__
 #define __PLATFORM_SEC_LIB_H__
 
+#include <Ppi/SecPlatformInformation.h>
+
 /**
   A developer supplied function to perform platform specific operations.
 
