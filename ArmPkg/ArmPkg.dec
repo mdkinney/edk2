@@ -26,6 +26,7 @@
 ################################################################################
 [Includes.common]
   Include                        # Root include for the package
+  Test/MockNew/Include
 
 [LibraryClasses.common]
   ##  @libraryclass  Convert Arm instructions to a human readable format.

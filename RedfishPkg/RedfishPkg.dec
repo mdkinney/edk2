@@ -17,6 +17,7 @@
 
 [Includes]
   Include
+  Test/MockNew/Include
 
 [Includes.Common.Private]
   PrivateInclude/Crt            # Private header files for C RTL.

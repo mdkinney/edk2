@@ -24,6 +24,7 @@
 ################################################################################
 [Includes.common]
   Include                        # Root include for the package
+  Test/MockNew/Include
 
 [LibraryClasses]
   ArmVirtMemInfoLib|Include/Library/ArmVirtMemInfoLib.h

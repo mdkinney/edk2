@@ -24,6 +24,7 @@
 ################################################################################
 [Includes.common]
   Include                        # Root include for the package
+  Test/MockNew/Include
 
 [LibraryClasses]
   ##  @libraryclass  Provides an interface to query platform information.

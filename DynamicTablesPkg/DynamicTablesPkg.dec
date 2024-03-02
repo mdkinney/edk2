@@ -15,6 +15,7 @@
 
 [Includes]
   Include
+  Test/MockNew/Include
 
 [LibraryClasses]
   ##  @libraryclass  Defines a set of Acpi helper methods

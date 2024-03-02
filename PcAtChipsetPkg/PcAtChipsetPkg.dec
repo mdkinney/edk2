@@ -21,6 +21,7 @@
 
 [Includes]
   Include
+  Test/MockNew/Include
 
 [LibraryClasses]
   ##  @libraryclass  Provides functions to manage I/O APIC Redirection Table Entries.

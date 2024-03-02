@@ -28,7 +28,8 @@
 ################################################################################
 [Includes.common]
   Include                        # Root include for the package
-  Test/Mock/Include
+#  Test/Mock/Include
+  Test/MockNew/Include
 
 [LibraryClasses.common]
   PrePiLib|Include/Library/PrePiLib.h

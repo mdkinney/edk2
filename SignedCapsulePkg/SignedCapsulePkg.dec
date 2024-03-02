@@ -15,6 +15,7 @@
 
 [Includes]
   Include
+  Test/MockNew/Include
 
 [LibraryClasses]
   ## @libraryclass  Provides services for EDKII system FMP capsule.

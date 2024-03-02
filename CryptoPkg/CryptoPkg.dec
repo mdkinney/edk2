@@ -18,6 +18,7 @@
 
 [Includes]
   Include
+  Test/MockNew/Include
 
 [Includes.Common.Private]
   Private

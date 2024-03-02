@@ -20,6 +20,7 @@
 
 [Includes]
   Include
+  Test/MockNew/Include
 
 [Includes.IA32]
   Include/Ia32

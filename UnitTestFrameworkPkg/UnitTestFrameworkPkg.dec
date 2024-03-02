@@ -21,6 +21,7 @@
   Library/GoogleTestLib/googletest/googletest/include
   Library/GoogleTestLib/googletest/googlemock/include
   Library/SubhookLib/subhook
+  Test/MockNew/Include
 
 [Includes.Common.Private]
   PrivateInclude
