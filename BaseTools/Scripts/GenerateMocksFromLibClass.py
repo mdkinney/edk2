@@ -3,6 +3,32 @@
 #
 # Copyright (C) 2024, Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+# Known Limitations
+# -----------------
+# 1) Vararg functions are skipped by the parser and no mock function is
+#    generated.  If '...' argument is replaced, then a mock function can be
+#    generated, but the mock library can not be compiled because the mocked
+#    function and the C declaration of the function do not match. The '...'
+#    replacement can be done by calling CParser() with a replace argument set
+#        replace = {r",\s*\.\.\.\s*\)": ")"}
+#
+# 2) const, CONST global variables are skipped because they require initial
+#    values and this generator does not know what value to assign from the the
+#    library include file alone. If unit tests depend on mocks of const global
+#    variables, then the unit test must provide the const global variable.
+#
+# 3) Function with parameters that are function pointers declared inline are
+#    skipped by the parser. The workaround is to declare a function pointer type
+#    and use the function pointer type name in the parameter.  Example:
+#
+#      void qsort(void *,size_t,size_t,int (*)(const void *, const void *));
+#
+#    Change to:
+#
+#      typedef int (qsort_callback *)(const void *, const void *);
+#      void qsort(void *,size_t,size_t,qsort_callback);
+#
 ###
 
 import os
@@ -21,6 +47,9 @@ __prog__ = "GenerateMocks"
 __copyright__ = "Copyright (c) 2024, Intel Corporation."
 __description__ = "Generate Google Test mocks from EDK II include files.\n"
 
+#
+# All mock libraries depend on MdePkg and UnitTestFrameworkPkg
+#
 EDKII_DEFAULT_PACKAGES = [
     "MdePkg/MdePkg.dec",
     "UnitTestFrameworkPkg/UnitTestFrameworkPkg.dec",
@@ -31,12 +60,14 @@ class IncludeFileParser:
     #
     # Regular expression to replace variable argument list declaration ... with
     # nothing so a variable argument function is converted to a mock function
-    # with no variable argument parameters.
+    # with no variable argument parameters. This is only used when CheckUnparsed
+    # is enabled to check for any additional unparsed content after variable
+    # argument function are converted to non variable argument functions.
     #
     STRIP_VARARGS = {r",\s*\.\.\.\s*\)": ")"}
 
     #
-    # Replace OPTIONAL keyword with an array with size __OPTIONAL__
+    # Replace OPTIONAL keyword with an array of size __OPTIONAL__
     #
     OPTIONAL_ARRAY_SIZE = "___OPTIONAL___"
 
@@ -60,21 +91,12 @@ class IncludeFileParser:
     #
     CPU_TYPE_LIST = ["IA32", "X64", "ARM", "AARCH64", "RISCV64", "LOONGARCH64"]
 
-    def __init__(
-        self,
-        FileName,
-        CpuTypeList=CPU_TYPE_LIST,
-        Replace=STRIP_VARARGS,
-        Macros=EDKII_MACROS,
-        Verbose=False,
-        CheckUnparsed=False,
-    ):
+    def __init__(self, FileName, CpuTypeList=CPU_TYPE_LIST, Replace={}, Macros={}):
         self.FileName = FileName
         self.CpuTypeList = ["COMMON"]
         self.Replace = Replace
-        self.Macros = Macros
-        self.Verbose = Verbose
-        self.CheckUnparsed = CheckUnparsed
+        self.Macros = IncludeFileParser.EDKII_MACROS.copy()
+        self.Macros.update(Macros)
         self.Include = OrderedDict()
         self.Tokens = OrderedDict()
         self.MockVariables = OrderedDict()
@@ -84,17 +106,22 @@ class IncludeFileParser:
         self.CollectCpuTypes(CpuTypeList)
 
         for CpuType in self.CpuTypeList:
-            self.ParseCpuType(CpuType)
-            if self.CheckUnparsed:
-                if self.Verbose:
+            if args.CheckUnparsed:
+                if args.Verbose:
                     print("  Check Unparsed")
-                Unparsed = self.CollectUnparsed(CpuType)
+                Replace = IncludeFileParser.STRIP_VARARGS.copy()
+                Replace.update(self.Replace)
+                Unparsed = self.ParseCpuType(CpuType, Replace=Replace, Unparsed=True)
+                Unparsed = Unparsed.strip()
                 if Unparsed:
                     for Line in Unparsed.splitlines():
-                        print("  * ", Line)
+                        print("  ERROR: * ", Line)
                     self.Unparsed[CpuType] = Unparsed
+            self.Tokens[CpuType] = self.ParseCpuType(
+                CpuType, Replace=self.Replace, Unparsed=False
+            )
         if self.Unparsed:
-            sys.exit(f"Error parsing {self.FileName}")
+            sys.exit(f"  ERROR: Unparsed content in {self.FileName}")
 
         self.CollectVariables()
         self.CollectFunctions()
@@ -106,29 +133,31 @@ class IncludeFileParser:
                 if CpuType in Buffer:
                     self.CpuTypeList.append(CpuType)
 
-    def ParseCpuType(self, CpuType):
-        print(f"Parse {self.FileName} for CPU Type {CpuType}")
+    def ParseCpuType(self, CpuType, Replace={}, Unparsed=False):
+        if args.Verbose:
+            print(f"{__prog__}: Parse {self.FileName} for CPU Type {CpuType}")
+        else:
+            print(
+                f"{__prog__}: Parse {self.FileName} for CPU Type {CpuType}",
+                end="\033[K\r",
+            )
         EdkiiMacros = self.Macros.copy()
         if CpuType != "COMMON":
-            EdkiiMacros[CpuType] = "1"
-        if self.Verbose:
+            EdkiiMacros[CpuType] = ""
+        if args.Verbose:
             print("  Create Parser")
         self.Include[CpuType] = CParser(
-            self.FileName, replace=self.Replace, macros=EdkiiMacros, process_all=False
+            self.FileName, replace=Replace, macros=EdkiiMacros, process_all=False
         )
-        if self.Verbose:
+        if args.Verbose:
             print("  Remove Comments")
         self.Include[CpuType].remove_comments(self.FileName)
-        if self.Verbose:
+        if args.Verbose:
             print("  Preprocess Macros")
         self.Include[CpuType].preprocess(self.FileName)
-        if self.Verbose:
+        if args.Verbose:
             print("  Parse Definitions")
-        self.Tokens[CpuType] = self.Include[CpuType].parse_defs(self.FileName)
-
-    def CollectUnparsed(self, CpuType):
-        Unparsed = self.Include[CpuType].parse_defs(self.FileName, return_unparsed=True)
-        return Unparsed.strip()
+        return self.Include[CpuType].parse_defs(self.FileName, return_unparsed=Unparsed)
 
     def CollectVariables(self):
         for CpuType in self.CpuTypeList:
@@ -136,9 +165,13 @@ class IncludeFileParser:
             for VariableName in self.Include[CpuType].defs["variables"]:
                 if CpuType != "COMMON" and VariableName in self.MockVariables["COMMON"]:
                     continue
-                self.MockVariables[CpuType][VariableName] = self.MockVariable(
-                    self, CpuType, VariableName
-                )
+                Var = self.MockVariable(self, CpuType, VariableName)
+                Skip = False
+                for Qual in ["CONST", "const", "STATIC", "static"]:
+                    if Qual in Var.Quals:
+                        Skip = True
+                if not Skip:
+                    self.MockVariables[CpuType][VariableName] = Var
             if not self.MockVariables[CpuType]:
                 self.MockVariables.pop(CpuType)
         # Determine column width for variable qualifiers and variable types
@@ -163,8 +196,8 @@ class IncludeFileParser:
             if not self.MockFunctions[CpuType]:
                 self.MockFunctions.pop(CpuType)
 
-    def _ParseTypeQuals(TypeQuals, Exclude=[]):
-        def ParseTypeQualsRecursive(TypeQuals, Result, Exclude=[]):
+    def _ParseStrings(TypeQuals):
+        def _ParseStringsRecursive(TypeQuals, Result, Exclude=[]):
             if isinstance(TypeQuals, str):
                 TypeQuals = TypeQuals.strip()
                 if TypeQuals and TypeQuals not in Exclude:
@@ -172,13 +205,12 @@ class IncludeFileParser:
                 return Result
             try:
                 for Item in TypeQuals:
-                    Result = ParseTypeQualsRecursive(Item, Result, Exclude)
+                    Result = _ParseStringsRecursive(Item, Result, Exclude)
             except:
                 pass
             return Result
 
-        Exclude = ["__", "__attribute__"] + Exclude
-        Quals = ParseTypeQualsRecursive(TypeQuals, [], Exclude)
+        Quals = _ParseStringsRecursive(TypeQuals, [], ["__", "__attribute__"])
         return " ".join(Quals)
 
     class MockVariable:
@@ -192,19 +224,14 @@ class IncludeFileParser:
                         Pointer += Item
                         continue
                     if isinstance(Item, list):
+                        if Item == [-1]:
+                            Item = []
                         self.VariableName += str(Item)
                         continue
                     sys.exit(f"Unsupported variable type: {Item}")
                 self.VariableName = Pointer + self.VariableName
 
-            #
-            # Remove static and const attributes from mocked variables so they can
-            # be visible and modified by unit tests
-            #
-            Exclude = ["const", "CONST", "STATIC"]
-            self.Quals = IncludeFileParser._ParseTypeQuals(
-                self.Variable[1].type_quals, Exclude
-            )
+            self.Quals = IncludeFileParser._ParseStrings(self.Variable[1].type_quals)
             self.QualsWidth = len(self.Quals)
             self.Type = self.Variable[1][0]
             self.TypeWidth = len(self.Type)
@@ -217,29 +244,48 @@ class IncludeFileParser:
 
     class MockFunction:
         class MockParameter:
-            def __init__(self, Parameter, ArraySubscripts=[]):
+            def __init__(self, Parameter, ParameterTokens):
                 self.Parameter = Parameter
-                self.ParameterName = self.Parameter[0]
+                self.ParameterTokens = ParameterTokens
+                self.ParameterName = ""
+                if Parameter[0]:
+                    self.ParameterName = self.Parameter[0]
                 self.Optional = False
-                if len(self.Parameter[1]) > 1:
-                    Pointer = ""
-                    if ArraySubscripts:
-                        if ArraySubscripts[-1] == IncludeFileParser.OPTIONAL_ARRAY_SIZE:
-                            self.Optional = True
-                            ArraySubscripts = ArraySubscripts[:-1]
-                        if ArraySubscripts:
-                            self.ParameterName += "[" + "][".join(ArraySubscripts) + "]"
-                    for Item in Parameter[1][1:]:
-                        if isinstance(Item, str):
-                            Pointer += Item
-                            continue
-                        if isinstance(Item, list):
-                            continue
-                        sys.exit(f"Unsupported parameter type: {Item}")
-                    self.ParameterName = Pointer + self.ParameterName
-                self.Quals = IncludeFileParser._ParseTypeQuals(Parameter[1].type_quals)
+                ArraySubscripts = ParameterTokens.decl[0].arrays
+                if ArraySubscripts:
+                    if ArraySubscripts[-1] == IncludeFileParser.OPTIONAL_ARRAY_SIZE:
+                        self.Optional = True
+                        ArraySubscripts = ArraySubscripts[:-1]
+                if ArraySubscripts:
+                    for Subscript in ArraySubscripts:
+                        if Subscript == "-1":
+                            # Convert [-1] to []
+                            Subscript = ""
+                        self.ParameterName += f"[{Subscript}]"
+                Pointers = ""
+                for Pointer in ParameterTokens.decl[0].ptrs:
+                    Pointers += "*"
+                    Qualifier = IncludeFileParser._ParseStrings(Pointer).strip()
+                    if Qualifier:
+                        Pointers += Qualifier + " "
+                Pointers = Pointers.strip()
+                if not Pointers.endswith("*"):
+                    Pointers = Pointers + " "
+                self.ParameterName = Pointers + self.ParameterName
+
+                FirstTypeQual = IncludeFileParser._ParseStrings(
+                    ParameterTokens.decl[0].first_typequal
+                ).strip()
+                if FirstTypeQual:
+                    self.ParameterName = FirstTypeQual + " " + self.ParameterName
+
+                self.ParameterName = self.ParameterName.strip()
+
+                self.Quals = IncludeFileParser._ParseStrings(
+                    ParameterTokens.type.pre_qual
+                )
                 self.QualsWidth = len(self.Quals)
-                self.Type = Parameter[1][0]
+                self.Type = ParameterTokens.type.name
                 self.TypeWidth = len(self.Type)
 
             def GenerateDeclaration(self):
@@ -253,27 +299,38 @@ class IncludeFileParser:
         def __init__(self, Parser, CpuType, FunctionName):
             self.FunctionName = FunctionName
             self.Function = Parser.Include[CpuType].defs["functions"][FunctionName]
-            self.Tokens = Parser.Tokens[CpuType]
-            self.CallingConvention = IncludeFileParser._ParseTypeQuals(
+            self.Tokens = None
+            for Tokens in Parser.Tokens[CpuType]:
+                try:
+                    if Tokens[0].decl_list[0].name == FunctionName:
+                        self.Tokens = Tokens
+                except:
+                    pass
+            self.CallingConvention = IncludeFileParser._ParseStrings(
                 self.Function[0].type_quals
             )
             self.ReturnType = "".join(self.Function[0][:])
             self.ReturnType = " *".join(self.ReturnType.split("*", 1))
-            self.ParameterList = OrderedDict()
+            self.ReturnType = (self.CallingConvention + " " + self.ReturnType).replace(
+                "EFIAPI", ""
+            )
+            self.ReturnType = " ".join(self.ReturnType.split())
+            if "EFIAPI" in self.CallingConvention:
+                self.CallingConvention = "EFIAPI"
+            else:
+                self.CallingConvention = ""
+            self.ParameterList = []
+            ArgIndex = 0
             for Parameter in self.Function[1]:
-                ParameterName = Parameter[0]
-                if not ParameterName:
-                    continue
-                ArraySubscripts = self._FindArrayDeclaration(
-                    FunctionName, ParameterName, self.Tokens
-                )
-                self.ParameterList[ParameterName] = self.MockParameter(
-                    Parameter, ArraySubscripts
-                )
+                ParameterTokens = self.Tokens[0].decl_list[0].args[ArgIndex]
+                P = self.MockParameter(Parameter, ParameterTokens)
+                if not (P.ParameterName == "" and P.Type.lower() == "void"):
+                    self.ParameterList.append(P)
+                ArgIndex += 1
             if self.ParameterList:
-                QualsWidth = max([x.QualsWidth for x in self.ParameterList.values()])
-                TypeWidth = max([x.TypeWidth for x in self.ParameterList.values()])
-                for Parameter in self.ParameterList.values():
+                QualsWidth = max([x.QualsWidth for x in self.ParameterList])
+                TypeWidth = max([x.TypeWidth for x in self.ParameterList])
+                for Parameter in self.ParameterList:
                     Parameter.QualsWidth = QualsWidth
                     Parameter.TypeWidth = TypeWidth
 
@@ -281,7 +338,7 @@ class IncludeFileParser:
             return f"MOCK_FUNCTION_DEFINITION (Mock{{LibName}}, {self.FunctionName}, {len(self.ParameterList)}, {self.CallingConvention});"
 
         def GenerateDeclaration(self):
-            Parameters = [x.GenerateDeclaration() for x in self.ParameterList.values()]
+            Parameters = [x.GenerateDeclaration() for x in self.ParameterList]
             Parameters = ",\n     ".join(Parameters)
             return f"""
   MOCK_FUNCTION_DECLARATION (
@@ -289,62 +346,6 @@ class IncludeFileParser:
     {self.FunctionName},
     ({Parameters})
     );"""
-
-        def _FindArrayDeclaration(
-            self, FunctionName, ParamName, t, value=None, depth=0, index=0
-        ):
-            if not t:
-                return None
-            if isinstance(t, (float, int, str)):
-                if value:
-                    res = self._FindArrayDeclaration(
-                        FunctionName, ParamName, value, value=None, depth=depth + 1
-                    )
-                    if res:
-                        return res
-                return None
-            for Attribute in [
-                "pre_qual",
-                "first_typequal",
-                "ptrs",
-                "name",
-                "value",
-                "arrays",
-            ]:
-                if hasattr(t, Attribute):
-                    token = getattr(t, Attribute)
-                    if token:
-                        if Attribute == "arrays":
-                            return token
-                        # Hardcoded depth of 3.  May change for non library use cases.
-                        if Attribute == "name" and depth == 3 and token != FunctionName:
-                            return None
-                        # Hardcoded depth of 6.  May change for non library use cases.
-                        if Attribute == "name" and depth == 6 and token != ParamName:
-                            return None
-            if isinstance(t, dict):
-                for item, value in t:
-                    res = self._FindArrayDeclaration(
-                        FunctionName, ParamName, item, value=value, depth=depth + 1
-                    )
-                    if res:
-                        return res
-                return None
-            if isinstance(t, (list, tuple)) or len(t) > 0:
-                index = 0
-                for item in t:
-                    res = self._FindArrayDeclaration(
-                        FunctionName,
-                        ParamName,
-                        item,
-                        value=None,
-                        depth=depth + 1,
-                        index=index,
-                    )
-                    if res:
-                        return res
-                    index = index + 1
-                return None
 
 
 class Template:
@@ -355,7 +356,8 @@ class Template:
             with open(YamlFile) as f:
                 yaml_file = yaml.load_all(f, Loader=yaml.loader.SafeLoader)
                 for yaml_doc in yaml_file:
-                    print(__prog__, ": YAML file version: " + yaml_doc["version"])
+                    if args.Verbose:
+                        print(__prog__, ": YAML file version: " + yaml_doc["version"])
                     self.yaml_doc.append(yaml_doc)
             if len(self.yaml_doc) != 1:
                 raise
@@ -377,7 +379,7 @@ class Template:
                 continue
             return self.ApplyValues(file["content"])
 
-    def WriteTemplate(self, templatetype, rootpath, filecontent, force=False):
+    def WriteTemplate(self, templatetype, rootpath, filecontent):
         for file in self.yaml_doc[0]["filelist"]:
             filetype = file["type"]
             if templatetype not in filetype:
@@ -386,25 +388,29 @@ class Template:
             filename = self.ApplyValues(file["name"])
             fullpath = os.path.normpath(os.path.join(rootpath, filepath))
             fullpathfile = os.path.normpath(os.path.join(fullpath, filename))
-            print(__prog__, ": Output: " + fullpathfile)
+            if args.Verbose:
+                print(f"{__prog__}: Output: {fullpathfile}")
             if not os.path.exists(fullpath):
                 os.makedirs(fullpath, exist_ok=True)
-            if os.path.exists(fullpathfile) and not force:
-                print("ERROR: File already exists.  Use --force to force overwrite.")
-                return
+            if os.path.exists(fullpathfile) and not args.Force:
+                print(
+                    f"{__prog__}: ERROR: {fullpathfile} already exists.  Use -f/--force to force overwrite."
+                )
+                return fullpathfile
             with open(fullpathfile, "w") as outputfile:
                 outputfile.write(filecontent)
+            return fullpathfile
 
 
 class MockLibraryGenerator:
-    def __init__(self, Templates, Include, OutputDirectory=".", Force=False):
+    def __init__(self, Templates, Include, OutputDirectory="."):
         self.Templates = Templates
         self.Include = Include
         self.OutputDirectory = OutputDirectory
-        self.Force = Force
         self.IncludeFileTemplateType = "library-h"
         self.CppFileTemplateType = "library-cpp"
         self.InfFileTemplateType = "library-inf"
+        self.DscFileTemplateType = "library-dsc"
 
     def GenerateMockIncludeFile(self):
         FuncDecl = []
@@ -420,11 +426,11 @@ class MockLibraryGenerator:
             self.Templates.SetValue(
                 "{MockFunctionDeclarations}", "\n" + "\n".join(FuncDecl)
             )
-        self.Templates.WriteTemplate(
+
+        return self.Templates.WriteTemplate(
             self.IncludeFileTemplateType,
             self.OutputDirectory,
             self.Templates.ApplyTemplate(self.IncludeFileTemplateType),
-            self.Force,
         )
 
     def GenerateMockCppFile(self):
@@ -438,7 +444,7 @@ class MockLibraryGenerator:
                 VarDef.append(f"#endif // defined ({CpuType})")
         self.Templates.SetValue("{GlobalVariables}", "")
         if VarDef:
-            self.Templates.SetValue("{GlobalVariables}", "\n  " + "\n  ".join(VarDef))
+            self.Templates.SetValue("{GlobalVariables}", "\n" + "\n".join(VarDef))
 
         FuncDef = []
         for CpuType in self.Include.MockFunctions:
@@ -453,21 +459,41 @@ class MockLibraryGenerator:
         if FuncDef:
             self.Templates.SetValue("{MockFunctionDefinitions}", "\n\n" + FuncDef)
 
-        self.Templates.WriteTemplate(
+        return self.Templates.WriteTemplate(
             self.CppFileTemplateType,
             self.OutputDirectory,
             self.Templates.ApplyTemplate(self.CppFileTemplateType),
-            self.Force,
         )
 
     def GenerateMockInfFile(self):
-        self.Templates.WriteTemplate(
+        return self.Templates.WriteTemplate(
             self.InfFileTemplateType,
             self.OutputDirectory,
             self.Templates.ApplyTemplate(self.InfFileTemplateType),
-            self.Force,
         )
 
+def FindParentDecFile(File):
+    if not os.path.isfile(File):
+        return ''
+    Split = os.path.split(File)
+    while Split[0]:
+        if not os.path.isdir(Split[0]):
+            return ''
+        for File in os.listdir(Split[0]):
+            if os.path.splitext(File)[1] in [".dec"]:
+                return os.path.join(Split[0], File)
+        Split = os.path.split(Split[0])
+    return ''
+
+def NormalizePackageDecFilePath(DecFile):
+    if not DecFile:
+        return ''
+    DecFile = os.path.split(DecFile)
+    PackageDir = os.path.split(DecFile[0])[1]
+    return PackageDir + '/' + DecFile[1]
+
+def FindParentPackage(File):
+    return NormalizePackageDecFilePath(FindParentDecFile(File))
 
 def ParseBaseName(FileName):
     BaseName = os.path.splitext(os.path.basename(FileName))[0]
@@ -480,14 +506,8 @@ def ParseBaseName(FileName):
     return BaseName, BASE_NAME
 
 
-def ProcessFiles(
-    Templates,
-    FileList,
-    OutputDirectory,
-    Force,
-    Verbose,
-    CheckUnparsed,
-):
+def ProcessFiles(Templates, FileList, OutputDirectory):
+    InfFileList = []
     for FileName in FileList:
         LibName, LIB_NAME = ParseBaseName(FileName)
 
@@ -495,25 +515,21 @@ def ProcessFiles(
         Templates.SetValue("{LIB_NAME}", LIB_NAME)
         Templates.SetValue("{FileGuid}", str(uuid.uuid5(uuid.NAMESPACE_DNS, LibName)))
 
-        Include = IncludeFileParser(
-            FileName, Verbose=Verbose, CheckUnparsed=CheckUnparsed
-        )
+        Include = IncludeFileParser(FileName, Macros=args.Defines)
+        if not Include.MockVariables and not Include.MockFunctions:
+            print(f"{__prog__}: Skip {FileName} with no functions or global variables")
+            continue
 
-        Generator = MockLibraryGenerator(Templates, Include, OutputDirectory, Force)
+        Generator = MockLibraryGenerator(Templates, Include, OutputDirectory)
         Generator.GenerateMockIncludeFile()
         Generator.GenerateMockCppFile()
-        Generator.GenerateMockInfFile()
+        InfFile = Generator.GenerateMockInfFile()
+        InfFileList.append(InfFile)
+    return InfFileList
 
 
 def main():
-    #
-    # Load code templates
-    #
-    TemplateFileName = os.path.join(
-        os.path.realpath(os.path.dirname(__file__)),
-        "GenerateMocksFromLibClassTemplates.yaml",
-    )
-    Templates = Template(TemplateFileName)
+    global args
 
     #
     # Create command line argument parser object
@@ -527,23 +543,58 @@ def main():
     group.add_argument(
         "-i",
         "--input",
-        dest="InputFile",
+        dest="InputPath",
+        action="extend",
         nargs="*",
         default=[],
-        help="Input EDK II include file to generate mocks.",
-    )
-    group.add_argument(
-        "-d",
-        "--directory",
-        dest="InputDirectory",
-        nargs="*",
-        help="Input EDK II directory of include files to generate mocks.",
+        help="Input EDK II include file or directory paths to generate mocks.",
     )
     group.add_argument(
         "-r",
         "--repository",
-        dest="InputRepository",
+        dest="RepositoryPath",
         help="Input EDK II repository to scan for include files to generate mocks.",
+    )
+    parser.add_argument(
+        "-y",
+        "--yaml",
+        dest="InputYaml",
+        help="Input YAML files that provides all options.",
+    )
+    parser.add_argument(
+        "-s",
+        "--skip-package",
+        dest="SkipPackages",
+        action="extend",
+        nargs="*",
+        default=[],
+        help="Package DEC files to skip when generating mocks for a repository.",
+    )
+    parser.add_argument(
+        "-D",
+        dest="Defines",
+        action="extend",
+        nargs="*",
+        default=[],
+        help="Defines to set when parsing EDK II include files.",
+    )
+    parser.add_argument(
+        "-p",
+        "--package-dependency",
+        dest="PackageDependencies",
+        action="extend",
+        nargs="*",
+        default=[],
+        help="Extra package dependencies for EDK II INF [Packages] sections.",
+    )
+    parser.add_argument(
+        "-e",
+        "--extra-define",
+        dest="ExtraDefines",
+        action="extend",
+        nargs="*",
+        default=[],
+        help="Extra defines for generated mock include files.",
     )
     parser.add_argument(
         "-o",
@@ -553,10 +604,16 @@ def main():
         help="Output EDK II Test directory for generate mocks.  Package relative path for -r/--repository",
     )
     parser.add_argument(
+        "-t",
+        "--test-dsc",
+        dest="TestDsc",
+        default="",
+        help="Output DSC file to test build of generated mocks.",
+    )
+    parser.add_argument(
         "-c",
         "--copyright",
         dest="Copyright",
-        required=True,
         help="Copyright to apply to generated output files.",
     )
     parser.add_argument(
@@ -571,7 +628,7 @@ def main():
         "--unparsed",
         dest="CheckUnparsed",
         action="store_true",
-        help="Generate error if unparsable content is detected",
+        help="Print warning if unparsable content is detected. VARAGS are not parsable",
     )
     parser.add_argument(
         "-v",
@@ -602,58 +659,259 @@ def main():
     #
     args = parser.parse_args()
 
+    #
+    # Convert args.PackageDependencies to match parsed YAML format so the YAML
+    # and command line settings can be merged
+    #
+    if args.PackageDependencies:
+        Deps = []
+        for Package in args.PackageDependencies:
+            Package = Package.split("=", 1)
+            if len(Package) == 1:
+                sys.exit(f"{__prog__}: Invalid package dependency {Package}")
+            if not Package[1]:
+                sys.exit(f"{__prog__}: Invalid package dependency {Package}")
+            Item = {}
+            Item["PackageName"] = Package[0]
+            Item["Dependencies"] = Package[1].split(",")
+            Deps.append(Item)
+        args.PackageDependencies = Deps
+
+    if args.Verbose:
+        #
+        # Print arguments from command line
+        #
+        print("Command line options")
+        for Option in vars(args):
+            print(f"  {Option}: {getattr(args, Option)}")
+
+    if args.InputYaml:
+        #
+        # Parse settings from YAML file
+        #
+        config = []
+        try:
+            with open(args.InputYaml) as f:
+                yaml_file = yaml.load_all(f, Loader=yaml.loader.SafeLoader)
+                for doc in yaml_file:
+                    config.append(doc)
+        except Exception as exc:
+            sys.exit(f"{__prog__}: Error parsing YAML file {args.InputYaml}\n{exc}")
+        if len(config) != 1:
+            sys.exit(f"{__prog__}: Invalid YAML file {args.InputYaml}")
+        config = config[0]
+
+        #
+        # Update args with settings from YAML file.
+        # Settings from command line override YAML settings
+        #
+        for Option in config:
+            if Option not in vars(args):
+                sys.exit(f"{__prog__}: Unsupported option {Option} in {args.InputYaml}.")
+        for Option in vars(args):
+            if Option in config:
+                if not getattr(args, Option):
+                    setattr(args, Option, config[Option])
+                    continue
+                if isinstance(getattr(args, Option), list):
+                    setattr(args, Option, config[Option] + getattr(args, Option))
+
+    #
+    # Copyright argument is always required to generate any files
+    #
+    if not args.Copyright:
+        parser.print_help()
+        sys.exit(f"{__prog__}: -c/--copyright option not specified.")
+
+    #
+    # OutputDirectory argument is always required to generate any files
+    #
+    if not args.OutputDirectory:
+        parser.print_help()
+        sys.exit(f"{__prog__}: -o/--output option not specified.")
+
+    #
+    # Convert YAML and command line defines settings into a dictionary for use
+    # by CParser
+    #
+    Macros = {}
+    for Define in args.Defines:
+        Define = Define.split("=", 1)
+        if len(Define) == 1:
+            Macros[Define[0]] = ""
+        else:
+            Macros[Define[0]] = Define[1]
+    args.Defines = Macros
+
+    #
+    # Convert YAML and command line extra defines settings into a list of
+    # #define statements
+    #
+    ExtraDefines = []
+    for Define in args.ExtraDefines:
+        Define = Define.split("=", 1)
+        if len(Define) == 1:
+            sys.exit(f"{__prog__}: Extra define missing value {Define}")
+        if not Define[1]:
+            sys.exit(f"{__prog__}: Extra define missing value {Define}")
+        ExtraDefines.append(f"#define {Define[0]}  {Define[1]}")
+    args.ExtraDefines = ExtraDefines
+
+    if args.Verbose:
+        #
+        # Print arguments from command line
+        #
+        print("Command line options merged with YAML settings")
+        for Option in vars(args):
+            print(f"  {Option}: {getattr(args, Option)}")
+
+    #
+    # Load code templates
+    #
+    TemplateFileName = os.path.join(
+        os.path.realpath(os.path.dirname(__file__)),
+        "GenerateMocksFromLibClassTemplates.yaml",
+    )
+    Templates = Template(TemplateFileName)
+
+    #
+    # Set the Copyright for template processing
+    #
     Templates.SetValue("{Copyright}", args.Copyright)
 
-    if args.InputRepository:
-        SearchPath = os.path.join(args.InputRepository, "**", "*.dec")
-        DecFiles = [f for f in glob.glob(SearchPath, recursive=True)]
+    #
+    # Set the extra defines for template processing
+    #
+    Templates.SetValue("{ExtraDefines}", "")
+    if args.ExtraDefines:
+        Templates.SetValue("{ExtraDefines}", "\n  ".join(args.ExtraDefines) + "\n  ")
+
+    MockLibraryInfFiles = []
+    if args.RepositoryPath:
+        if not os.path.isdir(args.RepositoryPath):
+            sys.exit(
+                f"{__prog__}: ERROR: Repository path {args.RepositoryPath} does not exist."
+            )
+
+        #
+        # Recursively search for all DEC file in RepositoryPath
+        #
+        SearchPath = os.path.join(args.RepositoryPath, "**", "*.dec")
+        DecFiles = {}
+        for DecFile in glob.glob(SearchPath, recursive=True):
+            DecFiles[NormalizePackageDecFilePath(DecFile)] = DecFile
+
+        #
+        # Verify all PackageDependencies map to DEC files in the repository
+        #
+        PackageDependencyDict = {}
+        for Item in args.PackageDependencies:
+            Package = NormalizePackageDecFilePath(Item["PackageName"])
+            if Package not in DecFiles:
+                sys.exit(f"{__prog__}: Invalid package dependency {Package}")
+            PackageDependencyList = []
+            for Dependency in Item["Dependencies"]:
+                Dependency = NormalizePackageDecFilePath(Dependency)
+                if Dependency not in DecFiles:
+                    sys.exit(f"{__prog__}: Invalid package dependency {Dependency}")
+                PackageDependencyList.append(Dependency)
+            PackageDependencyDict[Package] = PackageDependencyList
+
+        #
+        # Verify all SkipPackages map to DEC files in the repository
+        #
+        for Skip in args.SkipPackages:
+            Skip = NormalizePackageDecFilePath(Skip)
+            if Skip not in DecFiles:
+                sys.exit(f"{__prog__}: Invalid skip package {Skip}")
+            DecFiles.pop(Skip)
+
+        #
+        # Process all unskipped packages in the repository
+        #
         for DecFile in DecFiles:
-            PackageDir = os.path.split(DecFile)[0]
+            PackageDir = os.path.split(DecFiles[DecFile])[0]
+            PackageDir = os.path.join(args.RepositoryPath, PackageDir)
             LibIncludeDir = os.path.join(PackageDir, "Include", "Library")
-            if os.path.exists(LibIncludeDir):
-                LibIncludeFiles = []
-                for File in os.listdir(LibIncludeDir):
-                    if os.path.splitext(File)[1] in [".h", ".H"]:
-                        LibIncludeFiles.append(os.path.join(LibIncludeDir, File))
-                if LibIncludeFiles:
-                    if args.OutputDirectory:
-                        MockOutputDir = os.path.join(PackageDir, args.OutputDirectory)
-                    else:
-                        MockOutputDir = os.path.join(PackageDir, "Test", "Mock")
+            if not os.path.exists(LibIncludeDir):
+                continue
+            LibIncludeFiles = []
+            for File in os.listdir(LibIncludeDir):
+                if os.path.splitext(File)[1] in [".h", ".H"]:
+                    LibIncludeFiles.append(os.path.join(LibIncludeDir, File))
+            if not LibIncludeFiles:
+                continue
+            MockOutputDir = os.path.join(PackageDir, args.OutputDirectory)
 
-                    PackageDecFiles = EDKII_DEFAULT_PACKAGES.copy()
-                    DecFile = os.path.relpath(DecFile).replace('\\','/')
-                    if DecFile not in PackageDecFiles:
-                        PackageDecFiles.append(DecFile)
-                    Templates.SetValue(
-                        "{PackageDecFiles}", "\n  ".join(PackageDecFiles)
-                    )
+            #
+            # [Packages] is EDKII_DEFAULT_PACKAGES with additional dependencies
+            # for that specific package from YAML file and command line followed
+            # by the current package with no duplicates added.
+            #
+            PackageDecFiles = EDKII_DEFAULT_PACKAGES.copy()
+            if DecFile in PackageDependencyDict:
+                for Package in PackageDependencyDict[DecFile]:
+                    if Package not in PackageDecFiles:
+                        PackageDecFiles.append(Package)
+            if DecFile not in PackageDecFiles:
+                PackageDecFiles.append(DecFile)
+            Templates.SetValue("{PackageDecFiles}", "\n  ".join(PackageDecFiles))
 
-                    ProcessFiles(
-                        Templates,
-                        LibIncludeFiles,
-                        MockOutputDir,
-                        args.Force,
-                        args.Verbose,
-                        args.CheckUnparsed,
-                    )
+            InfFiles = ProcessFiles(Templates, LibIncludeFiles, MockOutputDir)
+            MockLibraryInfFiles += InfFiles
     else:
-        Templates.SetValue("{PackageDecFiles}", "\n  ".join(EDKII_DEFAULT_PACKAGES))
+        SkipPackages = []
+        for Skip in args.SkipPackages:
+            SkipPackages.append(NormalizePackageDecFilePath(Skip))
 
-        FileList = args.InputFile
-        if args.InputDirectory:
-            for Directory in args.InputDirectory:
-                Files = os.listdir(Directory)
-                for File in Files:
+        PackageDependencyDict = {}
+        for Item in args.PackageDependencies:
+            Package = NormalizePackageDecFilePath(Item["PackageName"])
+            PackageDependencyList = []
+            for Dependency in Item["Dependencies"]:
+                Dependency = NormalizePackageDecFilePath(Dependency)
+                PackageDependencyList.append(Dependency)
+            PackageDependencyDict[Package] = PackageDependencyList
+
+        FileList = []
+        for Path in args.InputPath:
+            if os.path.isfile(Path):
+                FileList.append(Path)
+            elif os.path.isdir(Path):
+                for File in os.listdir(Path):
                     if os.path.splitext(File)[1] in [".h", ".H"]:
-                        FileList.append(os.path.join(Directory, File))
-        ProcessFiles(
-            Templates,
-            FileList,
-            args.OutputDirectory,
-            args.Force,
-            args.Verbose,
-            args.CheckUnparsed,
+                        FileList.append(os.path.join(Path, File))
+            else:
+                sys.exit(f"{__prog__}: ERROR: Input path {Path} does not exist.")
+
+        for File in FileList:
+            DecFile = FindParentPackage(File)
+            if DecFile in SkipPackages:
+                continue
+
+            #
+            # [Packages] is EDKII_DEFAULT_PACKAGES with additional dependencies
+            # for that specific package from YAML file and command line followed
+            # by the current package with no duplicates added.
+            #
+            PackageDecFiles = EDKII_DEFAULT_PACKAGES.copy()
+            if DecFile in PackageDependencyDict:
+                for Package in PackageDependencyDict[DecFile]:
+                    if Package not in PackageDecFiles:
+                        PackageDecFiles.append(Package)
+            if DecFile not in PackageDecFiles:
+                PackageDecFiles.append(DecFile)
+            Templates.SetValue("{PackageDecFiles}", "\n  ".join(PackageDecFiles))
+
+            InfFiles = ProcessFiles(Templates, [File], args.OutputDirectory)
+            MockLibraryInfFiles += InfFiles
+
+    if args.TestDsc:
+        Templates.SetValue("{MockLibrariesTestDsc}", args.TestDsc)
+        MockLibraryInfFiles = [x.replace("\\", "/") for x in MockLibraryInfFiles]
+        Templates.SetValue("{MockLibraryInfPaths}", "\n  ".join(MockLibraryInfFiles))
+        Templates.WriteTemplate(
+            "library-dsc", ".", Templates.ApplyTemplate("library-dsc")
         )
 
 

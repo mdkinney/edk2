@@ -1,0 +1,38 @@
+## @file
+# Generate Google Mocks from Library Class configuration for edk2 repository
+#
+# Copyright (c) 2024, Intel Corporation. All rights reserved.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+RepositoryPath: .
+SkipPackages:
+  - CryptoPkg/CryptoPkg.dec
+  - RedfishPkg/RedfishPkg.dec
+PackageDependencies:
+  -
+    PackageName: ArmVirtPkg/ArmVirtPkg.dec
+    Dependencies:
+      - ArmPkg/ArmPkg.dec
+  -
+    PackageName: ArmPlatformPkg/ArmPlatformPkg.dec
+    Dependencies:
+      - ArmPkg/ArmPkg.dec
+  -
+    PackageName: IntelFsp2WrapperPkg/IntelFsp2WrapperPkg.dec
+    Dependencies:
+      - IntelFsp2Pkg/IntelFsp2Pkg.dec
+  -
+    PackageName: OvmfPkg/OvmfPkg.dec
+    Dependencies:
+      - MdeModulePkg/MdeModulePkg.dec
+  -
+    PackageName: UefiPayloadPkg/UefiPayloadPkg.dec
+    Dependencies:
+      - MdeModulePkg/MdeModulePkg.dec
+OutputDirectory: Test/MockNew
+TestDsc: MockLibrariesTestBuild.dsc
+Copyright: Copyright (c) 2024, Intel Corporation. All rights reserved.
+ExtraDefines:
+  - operator=operator_
+  - xor=xor_

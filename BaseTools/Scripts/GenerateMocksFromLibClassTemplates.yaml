@@ -60,11 +60,11 @@ filelist:
         SPDX-License-Identifier: BSD-2-Clause-Patent
       **/
 
-      extern "C" {
-        #include <Base.h>
-        #include <Library/{LibName}.h>{GlobalVariables}
-      }
       #include <GoogleTest/Library/Mock{LibName}.h>
+
+      //
+      // Global Variables that are not const
+      //{GlobalVariables}
 
       MOCK_INTERFACE_DEFINITION (Mock{LibName});{MockFunctionDefinitions}
   -
@@ -85,7 +85,11 @@ filelist:
       #include <Library/GoogleTestLib.h>
       #include <Library/FunctionMockLib.h>
       extern "C" {
-        #include <Base.h>
+        {ExtraDefines}#include <PiPei.h>
+        #include <PiDxe.h>
+        #include <PiSmm.h>
+        #include <PiMm.h>
+        #include <Uefi.h>
         #include <Library/{LibName}.h>
       }
 
@@ -94,3 +98,29 @@ filelist:
       };
 
       #endif
+  -
+    path: "."
+    name: "{MockLibrariesTestDsc}"
+    type: library-dsc
+    content: |2
+      ## @file
+      # DSC file to test build of mock libraries.
+      #
+      # {Copyright}
+      # SPDX-License-Identifier: BSD-2-Clause-Patent
+      ##
+
+      [Defines]
+        PLATFORM_NAME           = MockLibrariesTestBuild
+        PLATFORM_GUID           = 5EEC2B9E-8541-4B3D-9451-48298AF375D1
+        PLATFORM_VERSION        = 0.1
+        DSC_SPECIFICATION       = 0x00010005
+        OUTPUT_DIRECTORY        = Build/MockLibrariesTestBuild/HostTest
+        SUPPORTED_ARCHITECTURES = IA32|X64
+        BUILD_TARGETS           = NOOPT
+        SKUID_IDENTIFIER        = DEFAULT
+
+      !include UnitTestFrameworkPkg/UnitTestFrameworkPkgHost.dsc.inc
+
+      [Components]
+        {MockLibraryInfPaths}
