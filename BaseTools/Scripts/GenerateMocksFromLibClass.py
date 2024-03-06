@@ -29,6 +29,16 @@
 #      typedef int (qsort_callback *)(const void *, const void *);
 #      void qsort(void *,size_t,size_t,qsort_callback);
 #
+# 4) Packages that provide a gasket to a standard C library are not compatible
+#    with host based build of mock libraries that use standard C includes.  The
+#    standard C includes from the package is used instead of the host compiler.
+#    The include path ordering is -I options are higher priority than the C
+#    compiler standard include paths. The only way to resolve this issue is to
+#    explicitly list the C compiler standard include paths ith -I options before
+#    the -I options from the packages are added.  The packages impacted by this
+#    limitation are:
+#      * CryptoPkg
+#      * RedfishPkg
 ###
 
 import os
