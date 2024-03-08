@@ -124,12 +124,23 @@ class IncludeFileParser:
                 Unparsed = self.ParseCpuType(CpuType, Replace=Replace, Unparsed=True)
                 Unparsed = Unparsed.strip()
                 if Unparsed:
+                    print("")
                     for Line in Unparsed.splitlines():
                         print("  ERROR: * ", Line)
                     self.Unparsed[CpuType] = Unparsed
+                self.Tokens[CpuType] = self.ParseCpuType(
+                    CpuType, Replace=Replace, Unparsed=False
+                )
+                MockFunctionsWithVarArgs = self.Include[CpuType].defs["functions"]
             self.Tokens[CpuType] = self.ParseCpuType(
                 CpuType, Replace=self.Replace, Unparsed=False
             )
+            if args.CheckUnparsed:
+                Skipped = set(MockFunctionsWithVarArgs) - set(self.Include[CpuType].defs["functions"])
+                if Skipped:
+                    print("")
+                for Item in Skipped:
+                    print (f"  WARNING: * Skipped VARARG Function: {Item}")
         if self.Unparsed:
             sys.exit(f"  ERROR: Unparsed content in {self.FileName}")
 
@@ -253,6 +264,57 @@ class IncludeFileParser:
             return f"{quals}{self.Type:<{self.TypeWidth + 2}}{self.VariableName};"
 
     class MockFunction:
+        class MockReturn:
+            def __init__(self, Return, ReturnTokens):
+                self.Return = Return
+                self.ReturnTokens = ReturnTokens
+                self.ReturnName = ""
+                self.CallingConvention = ''
+                if getattr(Return, 'type_quals', ''):
+                    for Index in range(0, len(Return.type_quals)):
+                        TypeQual = IncludeFileParser._ParseStrings(Return.type_quals[Index]).strip()
+                        if TypeQual:
+                            if 'EFIAPI' in TypeQual:
+                                self.CallingConvention = 'EFIAPI'
+                                TypeQual = TypeQual.replace('EFIAPI','').strip()
+                            if TypeQual:
+                                self.ReturnName += TypeQual + ' '
+                        if Index == 0:
+                            self.ReturnName += Return.type_spec + ' '
+
+                        if Index < len(Return.declarators):
+                            Declarator = IncludeFileParser._ParseStrings(Return.declarators[Index]).strip()
+                            if Declarator:
+                                self.ReturnName += Declarator + ' '
+                while '* *' in self.ReturnName:
+                    self.ReturnName = self.ReturnName.replace('* *', '**')
+
+                Item = ReturnTokens
+                if getattr(Item, 'arrays', ''):
+                    ArraySubscripts = Item.arrays
+                    if ArraySubscripts:
+                        for Subscript in ArraySubscripts:
+                            if Subscript == "-1":
+                                # Convert [-1] to []
+                                Subscript = ""
+                            self.ReturnName += f"[{Subscript}]"
+
+                for Item in ReturnTokens:
+                    if getattr(Item, 'arrays', ''):
+                        ArraySubscripts = Item.arrays
+                        if ArraySubscripts:
+                            for Subscript in ArraySubscripts:
+                                if Subscript == "-1":
+                                    # Convert [-1] to []
+                                    Subscript = ""
+                                self.ReturnName += f"[{Subscript}]"
+                if '[' in self.ReturnName:
+                    self.ReturnName = self.ReturnName.split('[',1)
+                    self.ReturnName = self.ReturnName[0].strip() + ')[' + self.ReturnName[1]
+                    self.ReturnName = self.ReturnName.split('*',1)
+                    self.ReturnName = self.ReturnName[0].strip() + ' (*' + self.ReturnName[1]
+                self.ReturnName = self.ReturnName.strip()
+
         class MockParameter:
             def __init__(self, Parameter, ParameterTokens):
                 self.Parameter = Parameter
@@ -309,31 +371,30 @@ class IncludeFileParser:
         def __init__(self, Parser, CpuType, FunctionName):
             self.FunctionName = FunctionName
             self.Function = Parser.Include[CpuType].defs["functions"][FunctionName]
-            self.Tokens = None
+            self.ReturnTokens = None
+            self.ArgTokens = None
             for Tokens in Parser.Tokens[CpuType]:
                 try:
                     if Tokens[0].decl_list[0].name == FunctionName:
-                        self.Tokens = Tokens
+                        self.ReturnTokens = Tokens[0].decl_list[0]
+                        self.ArgTokens = Tokens[0].decl_list[0]
+                        break
                 except:
                     pass
-            self.CallingConvention = IncludeFileParser._ParseStrings(
-                self.Function[0].type_quals
-            )
-            self.ReturnType = "".join(self.Function[0][:])
-            self.ReturnType = " *".join(self.ReturnType.split("*", 1))
-            self.ReturnType = (self.CallingConvention + " " + self.ReturnType).replace(
-                "EFIAPI", ""
-            )
-            self.ReturnType = " ".join(self.ReturnType.split())
-            if "EFIAPI" in self.CallingConvention:
-                self.CallingConvention = "EFIAPI"
-            else:
-                self.CallingConvention = ""
+                try:
+                    if Tokens[0].decl_list[0].center[0].name == FunctionName:
+                        self.ReturnTokens = Tokens[0].decl_list[0]
+                        self.ArgTokens = Tokens[0].decl_list[0].center[0]
+                        break
+                except:
+                    pass
+            R = self.MockReturn(self.Function[0], self.ReturnTokens)
+            self.ReturnType = R.ReturnName
+            self.CallingConvention = R.CallingConvention
             self.ParameterList = []
             ArgIndex = 0
             for Parameter in self.Function[1]:
-                ParameterTokens = self.Tokens[0].decl_list[0].args[ArgIndex]
-                P = self.MockParameter(Parameter, ParameterTokens)
+                P = self.MockParameter(Parameter, self.ArgTokens.args[ArgIndex])
                 if not (P.ParameterName == "" and P.Type.lower() == "void"):
                     self.ParameterList.append(P)
                 ArgIndex += 1
