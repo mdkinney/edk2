@@ -65,6 +65,10 @@ EDKII_DEFAULT_PACKAGES = [
     "UnitTestFrameworkPkg/UnitTestFrameworkPkg.dec",
 ]
 
+#
+# UEFI Specification calling convention keyword
+#
+UEFI_CALLING_CONVENTION = 'EFIAPI'
 
 class IncludeFileParser:
     #
@@ -87,7 +91,7 @@ class IncludeFileParser:
     #
     EDKII_MACROS = {
         "RETURNS_TWICE": "__attribute__(RETURNS_TWICE)",
-        "EFIAPI": "__attribute__(EFIAPI)",
+        UEFI_CALLING_CONVENTION: f"__attribute__({UEFI_CALLING_CONVENTION})",
         "STATIC": "__attribute__(STATIC)",
         "IN": "__attribute__(IN)",
         "OUT": "__attribute__(OUT)",
@@ -211,14 +215,21 @@ class IncludeFileParser:
             for FunctionName in self.Include[CpuType].defs["functions"]:
                 if CpuType != "COMMON" and FunctionName in self.MockFunctions["COMMON"]:
                     continue
-                self.MockFunctions[CpuType][FunctionName] = self.MockFunction(
-                    self, CpuType, FunctionName
-                )
+                F = self.MockFunction(self, CpuType, FunctionName)
+                if len(F.ParameterList) > 15:
+                    print(f"  WARNING: * Skipped Function: {FunctionName} with {len(F.ParameterList)} parameters")
+                    continue
+                self.MockFunctions[CpuType][FunctionName] = F
             if not self.MockFunctions[CpuType]:
                 self.MockFunctions.pop(CpuType)
 
     def _ParseStrings(TypeQuals):
         def _ParseStringsRecursive(TypeQuals, Result, Exclude=[]):
+            if isinstance(TypeQuals, int) or TypeQuals is None:
+                TypeQuals = str(TypeQuals)
+                if TypeQuals and TypeQuals not in Exclude:
+                    Result.append(f"[{TypeQuals}]")
+                return Result
             if isinstance(TypeQuals, str):
                 TypeQuals = TypeQuals.strip()
                 if TypeQuals and TypeQuals not in Exclude:
@@ -234,27 +245,80 @@ class IncludeFileParser:
         Quals = _ParseStringsRecursive(TypeQuals, [], ["__", "__attribute__"])
         return " ".join(Quals)
 
+    def _GetArraySubscriptsFromItem(Item):
+        Result = []
+        if getattr(Item, 'arrays', ''):
+            for Subscript in Item.arrays:
+                if Subscript == "-1":
+                    # Convert [-1] to []
+                    Subscript = ""
+                Result.append(Subscript)
+        return Result
+
+    def _ParseTokensForArraySubscripts(Tokens):
+        Result = IncludeFileParser._GetArraySubscriptsFromItem (Tokens)
+        for Item in Tokens:
+            Result += IncludeFileParser._GetArraySubscriptsFromItem (Item)
+        return Result
+
+    def _ParseTypeQuals(Declaration, Tokens, ItemName, ParseType=''):
+        SubscriptList = IncludeFileParser._ParseTokensForArraySubscripts(Tokens)
+        Type = Declaration.type_spec
+        CallingConvention = set()
+        Optional = False
+        Subscripts = ''
+        Quals = []
+        DecList = []
+        PointerAtEnd = False
+        DeclaratorsIndex = 0
+        SubscriptIndex = 0
+        for TypeQual in Declaration.type_quals:
+            TypeQual = IncludeFileParser._ParseStrings(TypeQual).split()
+            CallingConvention |= set(TypeQual) & set(args.CallingConventions)
+            TypeQual = [item for item in TypeQual if item not in args.CallingConventions]
+            if DeclaratorsIndex == 0:
+                Quals += TypeQual
+            else:
+                DecList += TypeQual
+
+            if DeclaratorsIndex < len(Declaration.declarators):
+                Declarator = IncludeFileParser._ParseStrings(Declaration.declarators[DeclaratorsIndex]).strip()
+                PointerAtEnd = Declarator == '*'
+                if Declarator.startswith('[') and Declarator.endswith(']'):
+                    if SubscriptIndex < len(SubscriptList):
+                        if SubscriptList[SubscriptIndex] == IncludeFileParser.OPTIONAL_ARRAY_SIZE:
+                            Optional = True
+                        else:
+                            Subscripts += f"[{SubscriptList[SubscriptIndex]}]"
+                        SubscriptIndex += 1
+                else:
+                    DecList.append(Declarator)
+            DeclaratorsIndex += 1
+
+        if len(CallingConvention) > 1:
+            sys.exit(f"{__prog__}: Multiple calling conventions detected {CallingConvention}")
+
+        Result = f"{' '.join(DecList)} {ItemName}"
+        if PointerAtEnd and Subscripts:
+            if ParseType == "Return" or not Subscripts.endswith("[]"):
+                Result = "(" + Result + ")"
+        Result = (Result + Subscripts).replace('* ', '*')
+
+        return ''.join(list(CallingConvention)), ' '.join(Quals), Type.strip(), Result.strip(), Optional
+
     class MockVariable:
         def __init__(self, Parser, CpuType, VariableName):
             self.VariableName = VariableName
             self.Variable = Parser.Include[CpuType].defs["variables"][VariableName]
-            if len(self.Variable[1]) > 1:
-                Pointer = ""
-                for Item in self.Variable[1][1:]:
-                    if isinstance(Item, str):
-                        Pointer += Item
-                        continue
-                    if isinstance(Item, list):
-                        if Item == [-1]:
-                            Item = []
-                        self.VariableName += str(Item)
-                        continue
-                    sys.exit(f"Unsupported variable type: {Item}")
-                self.VariableName = Pointer + self.VariableName
-
-            self.Quals = IncludeFileParser._ParseStrings(self.Variable[1].type_quals)
+            for Tokens in Parser.Tokens[CpuType]:
+                try:
+                    if Tokens[0].decl_list[0].name == VariableName:
+                        self.VariableTokens = Tokens[0].decl_list[0]
+                        break
+                except:
+                    pass
+            Conv, self.Quals, self.Type, self.VariableName, Optional = IncludeFileParser._ParseTypeQuals(self.Variable[1], self.VariableTokens, VariableName, ParseType="Variable")
             self.QualsWidth = len(self.Quals)
-            self.Type = self.Variable[1][0]
             self.TypeWidth = len(self.Type)
 
         def GenerateDefinition(self):
@@ -268,96 +332,18 @@ class IncludeFileParser:
             def __init__(self, Return, ReturnTokens):
                 self.Return = Return
                 self.ReturnTokens = ReturnTokens
-                self.ReturnName = ""
-                self.CallingConvention = ''
-                if getattr(Return, 'type_quals', ''):
-                    for Index in range(0, len(Return.type_quals)):
-                        TypeQual = IncludeFileParser._ParseStrings(Return.type_quals[Index]).strip()
-                        if TypeQual:
-                            if 'EFIAPI' in TypeQual:
-                                self.CallingConvention = 'EFIAPI'
-                                TypeQual = TypeQual.replace('EFIAPI','').strip()
-                            if TypeQual:
-                                self.ReturnName += TypeQual + ' '
-                        if Index == 0:
-                            self.ReturnName += Return.type_spec + ' '
-
-                        if Index < len(Return.declarators):
-                            Declarator = IncludeFileParser._ParseStrings(Return.declarators[Index]).strip()
-                            if Declarator:
-                                self.ReturnName += Declarator + ' '
-                while '* *' in self.ReturnName:
-                    self.ReturnName = self.ReturnName.replace('* *', '**')
-
-                Item = ReturnTokens
-                if getattr(Item, 'arrays', ''):
-                    ArraySubscripts = Item.arrays
-                    if ArraySubscripts:
-                        for Subscript in ArraySubscripts:
-                            if Subscript == "-1":
-                                # Convert [-1] to []
-                                Subscript = ""
-                            self.ReturnName += f"[{Subscript}]"
-
-                for Item in ReturnTokens:
-                    if getattr(Item, 'arrays', ''):
-                        ArraySubscripts = Item.arrays
-                        if ArraySubscripts:
-                            for Subscript in ArraySubscripts:
-                                if Subscript == "-1":
-                                    # Convert [-1] to []
-                                    Subscript = ""
-                                self.ReturnName += f"[{Subscript}]"
-                if '[' in self.ReturnName:
-                    self.ReturnName = self.ReturnName.split('[',1)
-                    self.ReturnName = self.ReturnName[0].strip() + ')[' + self.ReturnName[1]
-                    self.ReturnName = self.ReturnName.split('*',1)
-                    self.ReturnName = self.ReturnName[0].strip() + ' (*' + self.ReturnName[1]
-                self.ReturnName = self.ReturnName.strip()
+                self.CallingConvention, Quals, Type, Name, Optional = IncludeFileParser._ParseTypeQuals(Return, ReturnTokens, "", ParseType="Return")
+                self.ReturnName = f"{Quals} {Type} {Name}".strip()
 
         class MockParameter:
             def __init__(self, Parameter, ParameterTokens):
                 self.Parameter = Parameter
                 self.ParameterTokens = ParameterTokens
-                self.ParameterName = ""
+                Name = ""
                 if Parameter[0]:
-                    self.ParameterName = self.Parameter[0]
-                self.Optional = False
-                ArraySubscripts = ParameterTokens.decl[0].arrays
-                if ArraySubscripts:
-                    if ArraySubscripts[-1] == IncludeFileParser.OPTIONAL_ARRAY_SIZE:
-                        self.Optional = True
-                        ArraySubscripts = ArraySubscripts[:-1]
-                if ArraySubscripts:
-                    for Subscript in ArraySubscripts:
-                        if Subscript == "-1":
-                            # Convert [-1] to []
-                            Subscript = ""
-                        self.ParameterName += f"[{Subscript}]"
-                Pointers = ""
-                for Pointer in ParameterTokens.decl[0].ptrs:
-                    Pointers += "*"
-                    Qualifier = IncludeFileParser._ParseStrings(Pointer).strip()
-                    if Qualifier:
-                        Pointers += Qualifier + " "
-                Pointers = Pointers.strip()
-                if not Pointers.endswith("*"):
-                    Pointers = Pointers + " "
-                self.ParameterName = Pointers + self.ParameterName
-
-                FirstTypeQual = IncludeFileParser._ParseStrings(
-                    ParameterTokens.decl[0].first_typequal
-                ).strip()
-                if FirstTypeQual:
-                    self.ParameterName = FirstTypeQual + " " + self.ParameterName
-
-                self.ParameterName = self.ParameterName.strip()
-
-                self.Quals = IncludeFileParser._ParseStrings(
-                    ParameterTokens.type.pre_qual
-                )
+                    Name = self.Parameter[0]
+                C, self.Quals,self.Type,self.ParameterName,self.Optional = IncludeFileParser._ParseTypeQuals(Parameter[1], ParameterTokens, Name, ParseType="Param")
                 self.QualsWidth = len(self.Quals)
-                self.Type = ParameterTokens.type.name
                 self.TypeWidth = len(self.Type)
 
             def GenerateDeclaration(self):
@@ -543,6 +529,21 @@ class MockLibraryGenerator:
             self.Templates.ApplyTemplate(self.InfFileTemplateType),
         )
 
+def MergeDefines(Defines, OverrideDefines):
+    Dict = OrderedDict()
+    for Item in Defines:
+        Item = Item.split()
+        Dict[Item[1]] = Item[2]
+    OverrideDict = OrderedDict()
+    for Item in OverrideDefines:
+        Item = Item.split()
+        OverrideDict[Item[1]] = Item[2]
+    Dict.update(OverrideDict)
+    Result = []
+    for Item in Dict:
+        Result.append(f"#define {Item} {Dict[Item]}")
+    return Result
+
 def FindParentDecFile(File):
     if not os.path.isfile(File):
         return ''
@@ -584,7 +585,7 @@ def ProcessFiles(Templates, FileList, OutputDirectory):
 
         Templates.SetValue("{LibName}", LibName)
         Templates.SetValue("{LIB_NAME}", LIB_NAME)
-        Templates.SetValue("{FileGuid}", str(uuid.uuid5(uuid.NAMESPACE_DNS, LibName)))
+        Templates.SetValue("{FileGuid}", str(uuid.uuid5(uuid.NAMESPACE_DNS, FileName)))
 
         Include = IncludeFileParser(FileName, Macros=args.Defines)
         if not Include.MockVariables and not Include.MockFunctions:
@@ -650,13 +651,22 @@ def main():
         help="Defines to set when parsing EDK II include files.",
     )
     parser.add_argument(
+        "-g",
+        "--global-package-dependency",
+        dest="GlobalPackageDependencies",
+        action="extend",
+        nargs="*",
+        default=EDKII_DEFAULT_PACKAGES,
+        help="Extra package dependencies for all EDK II INF [Packages] sections.",
+    )
+    parser.add_argument(
         "-p",
         "--package-dependency",
         dest="PackageDependencies",
         action="extend",
         nargs="*",
         default=[],
-        help="Extra package dependencies for EDK II INF [Packages] sections.",
+        help="Extra package dependencies for package specific EDK II INF [Packages] sections.",
     )
     parser.add_argument(
         "-e",
@@ -666,6 +676,15 @@ def main():
         nargs="*",
         default=[],
         help="Extra defines for generated mock include files.",
+    )
+    parser.add_argument(
+        "-a",
+        "--calling-convention",
+        dest="CallingConventions",
+        action="extend",
+        nargs="*",
+        default=[UEFI_CALLING_CONVENTION],
+        help="Calling convention attribute keywords for generated mock libraries.",
     )
     parser.add_argument(
         "-o",
@@ -745,6 +764,7 @@ def main():
             Item = {}
             Item["PackageName"] = Package[0]
             Item["Dependencies"] = Package[1].split(",")
+            Item["ExtraDefines"] = []
             Deps.append(Item)
         args.PackageDependencies = Deps
 
@@ -828,6 +848,33 @@ def main():
         ExtraDefines.append(f"#define {Define[0]}  {Define[1]}")
     args.ExtraDefines = ExtraDefines
 
+    #
+    # Convert YAML package specific extra defines settings into a list of
+    # #define statements
+    #
+    for Package in args.PackageDependencies:
+        if "ExtraDefines" not in Package:
+            continue
+        ExtraDefines = []
+        for Define in Package["ExtraDefines"]:
+            Define = Define.split("=", 1)
+            if len(Define) == 1:
+                sys.exit(f"{__prog__}: Extra define missing value {Define}")
+            if not Define[1]:
+                sys.exit(f"{__prog__}: Extra define missing value {Define}")
+            ExtraDefines.append(f"#define {Define[0]}  {Define[1]}")
+        Package["ExtraDefines"] = ExtraDefines
+
+    #
+    # Remove duplicate GlobalPackageDependencies attribute keywords
+    #
+    args.GlobalPackageDependencies = list(dict.fromkeys(args.GlobalPackageDependencies))
+
+    #
+    # Remove duplicate CallingConvention attribute keywords
+    #
+    args.CallingConventions = list(dict.fromkeys(args.CallingConventions))
+
     if args.Verbose:
         #
         # Print arguments from command line
@@ -873,20 +920,35 @@ def main():
             DecFiles[NormalizePackageDecFilePath(DecFile)] = DecFile
 
         #
+        # Verify all GlobalPackageDependencies map to DEC files in the
+        # repository
+        #
+        for Package in args.GlobalPackageDependencies:
+            Package = NormalizePackageDecFilePath(Package)
+            if Package not in DecFiles:
+                if args.Verbose:
+                    print(f"{__prog__}: WARNING: Global package dependency {Package} not into repository.")
+
+        #
         # Verify all PackageDependencies map to DEC files in the repository
         #
         PackageDependencyDict = {}
+        PackageExtraDefinesDict = {}
         for Item in args.PackageDependencies:
             Package = NormalizePackageDecFilePath(Item["PackageName"])
             if Package not in DecFiles:
                 sys.exit(f"{__prog__}: Invalid package dependency {Package}")
-            PackageDependencyList = []
-            for Dependency in Item["Dependencies"]:
-                Dependency = NormalizePackageDecFilePath(Dependency)
-                if Dependency not in DecFiles:
-                    sys.exit(f"{__prog__}: Invalid package dependency {Dependency}")
-                PackageDependencyList.append(Dependency)
-            PackageDependencyDict[Package] = PackageDependencyList
+            if "Dependencies" in Item:
+                PackageDependencyList = []
+                for Dependency in Item["Dependencies"]:
+                    Dependency = NormalizePackageDecFilePath(Dependency)
+                    if Dependency not in DecFiles:
+                        if args.Verbose:
+                            print(f"{__prog__}: WARNING: Dependent package {Dependency} not into repository.")
+                    PackageDependencyList.append(Dependency)
+                PackageDependencyDict[Package] = PackageDependencyList
+            if "ExtraDefines" in Item:
+                PackageExtraDefinesDict[Package] = Item["ExtraDefines"]
 
         #
         # Verify all SkipPackages map to DEC files in the repository
@@ -909,7 +971,9 @@ def main():
             LibIncludeFiles = []
             for File in os.listdir(LibIncludeDir):
                 if os.path.splitext(File)[1] in [".h", ".H"]:
-                    LibIncludeFiles.append(os.path.join(LibIncludeDir, File))
+                    LibIncludeFilePath = os.path.join(LibIncludeDir, File)
+                    if LibIncludeFilePath not in LibIncludeFiles:
+                        LibIncludeFiles.append(LibIncludeFilePath)
             if not LibIncludeFiles:
                 continue
             MockOutputDir = os.path.join(PackageDir, args.OutputDirectory)
@@ -919,14 +983,22 @@ def main():
             # for that specific package from YAML file and command line followed
             # by the current package with no duplicates added.
             #
-            PackageDecFiles = EDKII_DEFAULT_PACKAGES.copy()
+            PackageDecFiles = []
+            PackageDecFiles.append(DecFile)
             if DecFile in PackageDependencyDict:
                 for Package in PackageDependencyDict[DecFile]:
                     if Package not in PackageDecFiles:
                         PackageDecFiles.append(Package)
-            if DecFile not in PackageDecFiles:
-                PackageDecFiles.append(DecFile)
+            PackageDecFiles += args.GlobalPackageDependencies
+
             Templates.SetValue("{PackageDecFiles}", "\n  ".join(PackageDecFiles))
+
+            Templates.SetValue("{ExtraDefines}", "")
+            ExtraDefines = args.ExtraDefines
+            if DecFile in PackageExtraDefinesDict:
+                ExtraDefines = MergeDefines(ExtraDefines, PackageExtraDefinesDict[DecFile])
+            if ExtraDefines:
+                Templates.SetValue("{ExtraDefines}", "\n  ".join(ExtraDefines) + "\n  ")
 
             InfFiles = ProcessFiles(Templates, LibIncludeFiles, MockOutputDir)
             MockLibraryInfFiles += InfFiles
@@ -936,13 +1008,17 @@ def main():
             SkipPackages.append(NormalizePackageDecFilePath(Skip))
 
         PackageDependencyDict = {}
+        PackageExtraDefinesDict = {}
         for Item in args.PackageDependencies:
             Package = NormalizePackageDecFilePath(Item["PackageName"])
-            PackageDependencyList = []
-            for Dependency in Item["Dependencies"]:
-                Dependency = NormalizePackageDecFilePath(Dependency)
-                PackageDependencyList.append(Dependency)
-            PackageDependencyDict[Package] = PackageDependencyList
+            if "Dependencies" in Item:
+                PackageDependencyList = []
+                for Dependency in Item["Dependencies"]:
+                    Dependency = NormalizePackageDecFilePath(Dependency)
+                    PackageDependencyList.append(Dependency)
+                PackageDependencyDict[Package] = PackageDependencyList
+            if "ExtraDefines" in Item:
+                PackageExtraDefinesDict[Package] = Item["ExtraDefines"]
 
         FileList = []
         for Path in args.InputPath:
@@ -965,14 +1041,22 @@ def main():
             # for that specific package from YAML file and command line followed
             # by the current package with no duplicates added.
             #
-            PackageDecFiles = EDKII_DEFAULT_PACKAGES.copy()
+            PackageDecFiles = []
+            PackageDecFiles.append(DecFile)
             if DecFile in PackageDependencyDict:
                 for Package in PackageDependencyDict[DecFile]:
                     if Package not in PackageDecFiles:
                         PackageDecFiles.append(Package)
-            if DecFile not in PackageDecFiles:
-                PackageDecFiles.append(DecFile)
+            PackageDecFiles += args.GlobalPackageDependencies
+
             Templates.SetValue("{PackageDecFiles}", "\n  ".join(PackageDecFiles))
+
+            Templates.SetValue("{ExtraDefines}", "")
+            ExtraDefines = args.ExtraDefines
+            if DecFile in PackageExtraDefinesDict:
+                ExtraDefines = MergeDefines(ExtraDefines, PackageExtraDefinesDict[DecFile])
+            if ExtraDefines:
+                Templates.SetValue("{ExtraDefines}", "\n  ".join(ExtraDefines) + "\n  ")
 
             InfFiles = ProcessFiles(Templates, [File], args.OutputDirectory)
             MockLibraryInfFiles += InfFiles
