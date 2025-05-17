@@ -1,0 +1,61 @@
+# @file
+# A workflow that builds packages using clang and upload it's artifacts.
+#
+# Copyright (c) Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: CLANG Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_windows_clang:
+    name: Build Windows CLANGPDB
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: 'Install/Upgrade pip modules'
+        run: pip install --upgrade -r pip-requirements.txt
+      - name: 'Clone Submodules'
+        run: stuart_setup -c ".pytool/CISettings.py"
+      - name: 'Download External Dependencies'
+        run: stuart_update -c ".pytool/CISettings.py"
+      - name: 'Build BaseTools'
+        run: python BaseTools/Edk2ToolsBuild.py -t VS2022
+      - name: 'Build Platform'
+        run: stuart_build -c ".pytool/CISettings.py" TARGET=DEBUG TOOL_CHAIN_TAG="CLANGPDB"
+      - name: Upload Build Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Build Logs CLANGPDB DEBUG"
+          path: |
+            Build/*.txt
+            BaseTools/BaseToolsBuild/*
+        if: always()
+
+  build_linux_clang:
+    name: Build Linux CLANG
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: 'Install/Upgrade pip modules'
+        run: pip install --upgrade -r pip-requirements.txt
+      - name: 'Clone Submodules'
+        run: stuart_setup -c ".pytool/CISettings.py"
+      - name: 'Download External Dependencies'
+        run: stuart_update -c ".pytool/CISettings.py"
+      - name: 'Build BaseTools'
+        run: python BaseTools/Edk2ToolsBuild.py -t GCC
+      - name: 'Build Platform'
+        run: stuart_build -c ".pytool/CISettings.py" TARGET=DEBUG TOOL_CHAIN_TAG=CLANGDWARF
+      - name: Upload Build Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: Build Logs CLANG DEBUG
+          path: |
+            Build/*.txt
+            BaseTools/BaseToolsBuild/*
+        if: always()
