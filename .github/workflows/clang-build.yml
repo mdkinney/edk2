@@ -16,16 +16,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
       - name: 'Install/Upgrade pip modules'
         run: pip install --upgrade -r pip-requirements.txt
       - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py"
+        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py"
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
       - name: 'Build Platform'
-        run: stuart_build -c ".pytool/CISettings.py" TARGET=DEBUG TOOL_CHAIN_TAG="CLANGPDB"
+        run: stuart_build -c ".pytool/CISettings.py" TARGET=DEBUG TOOL_CHAIN_TAG=CLANGPDB
       - name: Upload Build Logs
         uses: actions/upload-artifact@v4
         with:
@@ -44,9 +48,9 @@ jobs:
       - name: 'Install/Upgrade pip modules'
         run: pip install --upgrade -r pip-requirements.txt
       - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py"
+        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGDWARF
       - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py"
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGDWARF
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t GCC
       - name: 'Build Platform'
