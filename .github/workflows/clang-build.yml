@@ -48,7 +48,7 @@ jobs:
       - name: 'Install/Upgrade pip modules'
         run: pip install --upgrade -r pip-requirements.txt
       - name: Install Mono
-        run: sudo apt-get update && sudo apt-get install -y mono-complete
+        run: sudo apt-get update && sudo apt-get install -y mono-complete build-essential uuid-dev
       - name: 'Clone Submodules'
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGDWARF
       - name: 'Download External Dependencies'
