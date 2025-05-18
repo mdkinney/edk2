@@ -21,12 +21,14 @@ jobs:
         run: |
           choco install llvm --version=20.1.0 -y
           refreshenv
-      - name: Set up Python 3.11
+      - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
       - name: 'Install/Upgrade pip modules'
-        run: pip install --upgrade -r pip-requirements.txt
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade -r pip-requirements.txt
       - name: 'Clone Submodules'
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Download External Dependencies'
@@ -53,7 +55,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: 'Install/Upgrade pip modules'
-        run: pip install --upgrade -r pip-requirements.txt
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade -r pip-requirements.txt
       - name: 'Clone Submodules'
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGDWARF
       - name: 'Download External Dependencies'
