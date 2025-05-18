@@ -46,6 +46,7 @@ jobs:
 
   build_linux_clang:
     name: Build Linux CLANGDWARF
+    runs-on: ubuntu-latest
     container:
       image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
     steps:
