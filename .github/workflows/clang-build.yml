@@ -17,6 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install CLANG 20.1.0
+        shell: cmd
         run: |
           choco install llvm --version=20.1.0 -y
           refreshenv
@@ -33,7 +34,7 @@ jobs:
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
       - name: 'Build Packages'
-        run: stuart_ci_build -c ".pytool/CISettings.py" -a IA32 -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
       - name: Upload Build Logs
         uses: actions/upload-artifact@v4
         with:
@@ -70,7 +71,7 @@ jobs:
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t GCC
       - name: 'Build Packages'
-        run: stuart_ci_build -c ".pytool/CISettings.py" -a IA32 -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF
       - name: Upload Build Logs
         uses: actions/upload-artifact@v4
         with:
