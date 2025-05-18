@@ -39,6 +39,7 @@ jobs:
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
       - name: 'Build Packages'
         run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
+        if: always()
       - name: Upload Build Logs
         uses: actions/upload-artifact@v4
         with:
@@ -70,8 +71,10 @@ jobs:
         run: python BaseTools/Edk2ToolsBuild.py -t GCC
       - name: 'Build Packages CLANGDWARF'
         run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF
+        if: always()
       - name: 'Build Packages CLANGPDB'
         run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
+        if: always()
       - name: Upload Build Logs
         uses: actions/upload-artifact@v4
         with:
