@@ -46,38 +46,21 @@ jobs:
 
   build_linux_clang:
     name: Build Linux CLANGDWARF
-    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install Mono
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y mono-complete build-essential uuid-dev
-      - name: Install CLANG 20.1.0
-        run: |
-          sudo apt-get install -y wget gnupg lsb-release
-          wget https://apt.llvm.org/llvm.sh
-          chmod +x llvm.sh
-          sudo ./llvm.sh 20
-          sudo ln -sf /usr/bin/clang-20 /usr/bin/clang
-          sudo ln -sf /usr/bin/clang++-20 /usr/bin/clang++
-          # Install cross-compilers for IA32 (x86), ARM, and AArch64
-          sudo apt-get install -y gcc-multilib g++-multilib                # IA32 (x86)
-          sudo apt-get install -y gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf     # ARM (armhf)
-          sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu         # AArch64 (arm64)
-          sudo apt-get install -y llvm
-          clang --version
-      - name: 'Install/Upgrade pip modules'
-        run: pip install --upgrade -r pip-requirements.txt
       - name: 'Clone Submodules'
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGDWARF
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGDWARF
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t GCC
-      - name: 'Build Packages'
+      - name: 'Build Packages CLANGDWARF'
         run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF
+      - name: 'Build Packages CLANGPDB'
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
       - name: Upload Build Logs
         uses: actions/upload-artifact@v4
         with:
