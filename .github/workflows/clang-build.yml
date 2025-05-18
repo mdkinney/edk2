@@ -66,6 +66,7 @@ jobs:
           sudo apt-get install -y gcc-multilib g++-multilib                # IA32 (x86)
           sudo apt-get install -y gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf     # ARM (armhf)
           sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu         # AArch64 (arm64)
+          sudo apt-get install -y llvm
           clang --version
       - name: 'Install/Upgrade pip modules'
         run: pip install --upgrade -r pip-requirements.txt
