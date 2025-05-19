@@ -141,6 +141,9 @@ def CheckEnvVariable():
     GlobalData.gGlobalDefines["WORKSPACE"]  = WorkspaceDir
     GlobalData.gGlobalDefines["EDK_TOOLS_PATH"] = os.environ["EDK_TOOLS_PATH"]
 
+    # Set EDK_SOURCE_DATE_EPOCH to the current time in seconds at start of build
+    os.environ["EDK_SOURCE_DATE_EPOCH"] = str(int(time.time()))
+
 ## Get normalized file path
 #
 # Convert the path to be local format, and remove the WORKSPACE path at the
