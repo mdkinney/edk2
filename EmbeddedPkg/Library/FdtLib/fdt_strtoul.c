@@ -30,7 +30,7 @@ strtoul (
   }
 
   if (RETURN_ERROR (Status)) {
-    return MAX_UINTN;
+    return (unsigned long)MAX_UINTN;
   }
 
   return ReturnValue;
