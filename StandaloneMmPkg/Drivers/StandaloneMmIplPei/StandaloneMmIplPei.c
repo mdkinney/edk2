@@ -408,6 +408,7 @@ CreatMmHobList (
   //
   // Get platform HOBs
   //
+  PlatformHobList = NULL;
   PlatformHobSize = 0;
   Status          = CreateMmPlatformHob (NULL, &PlatformHobSize);
   if (Status == RETURN_BUFFER_TOO_SMALL) {
@@ -429,6 +430,11 @@ CreatMmHobList (
   }
 
   ASSERT_EFI_ERROR (Status);
+
+  if (PlatformHobList == NULL) {
+    DEBUG ((DEBUG_ERROR, "%a: Platform MM HOBs not found\n", __func__));
+    return NULL;
+  }
 
   //
   // Build memory allocation HOB in PEI HOB list for MM profile data.
