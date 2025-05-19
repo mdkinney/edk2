@@ -37,13 +37,20 @@ jobs:
         run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
-      - name: 'Build Packages'
-        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Build Packages CLANGPDB'
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
+          mv Build/CI_BUILD_LOG.txt Build/CI_BUILD_LOG_CLANGPDB.txt
         if: always()
-      - name: Upload Build Logs
+      - name: 'Build Packages CLANGDWARF'
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF
+          mv Build/CI_BUILD_LOG.txt Build/CI_BUILD_LOG_CLANGDWARF.txt
+        if: always()
+      - name: Upload Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Build Logs CLANGPDB DEBUG"
+          name: "Upload Logs"
           path: |
             Build/*.txt
             BaseTools/BaseToolsBuild/*
@@ -70,15 +77,19 @@ jobs:
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t GCC
       - name: 'Build Packages CLANGDWARF'
-        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF
+          mv Build/CI_BUILD_LOG.txt Build/CI_BUILD_LOG_CLANGDWARF.txt
         if: always()
       - name: 'Build Packages CLANGPDB'
-        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
+          mv Build/CI_BUILD_LOG.txt Build/CI_BUILD_LOG_CLANGPDB.txt
         if: always()
-      - name: Upload Build Logs
+      - name: Upload Logs
         uses: actions/upload-artifact@v4
         with:
-          name: Build Logs CLANG DEBUG
+          name: Upload Logs
           path: |
             Build/*.txt
             BaseTools/BaseToolsBuild/*
