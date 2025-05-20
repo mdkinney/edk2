@@ -23,6 +23,11 @@ jobs:
         run: |
           choco install llvm --version=20.1.0 -y
           refreshenv
+      - name: Install make
+        shell: cmd
+        run: |
+          choco install make -y
+          refreshenv
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
