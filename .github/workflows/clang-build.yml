@@ -11,7 +11,7 @@ on:
 
 jobs:
   build_windows_clang:
-    name: Build Windows CLANGPDB
+    name: Build Windows
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -40,12 +40,12 @@ jobs:
       - name: 'Build Packages CLANGPDB'
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
-          mv Build/CI_BUILD_LOG.txt Build/CI_BUILD_LOG_CLANGPDB.txt
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_CLANGPDB.txt
         if: always()
       - name: 'Build Packages CLANGDWARF'
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF
-          mv Build/CI_BUILD_LOG.txt Build/CI_BUILD_LOG_CLANGDWARF.txt
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_CLANGDWARF.txt
         if: always()
       - name: Upload Logs
         uses: actions/upload-artifact@v4
@@ -57,7 +57,7 @@ jobs:
         if: always()
 
   build_linux_clang:
-    name: Build Linux CLANGDWARF
+    name: Build Linux
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
@@ -79,12 +79,12 @@ jobs:
       - name: 'Build Packages CLANGDWARF'
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF
-          mv Build/CI_BUILD_LOG.txt Build/CI_BUILD_LOG_CLANGDWARF.txt
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_CLANGDWARF.txt
         if: always()
       - name: 'Build Packages CLANGPDB'
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
-          mv Build/CI_BUILD_LOG.txt Build/CI_BUILD_LOG_CLANGPDB.txt
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_CLANGPDB.txt
         if: always()
       - name: Upload Logs
         uses: actions/upload-artifact@v4
