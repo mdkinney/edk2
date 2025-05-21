@@ -43,16 +43,16 @@ jobs:
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
       - name: 'Build Packages CLANGDWARF'
-        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF -v
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF
         if: always()
       - name: 'Rename log file CLANGDWARF'
-        run: mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_CLANGDWARF.txt
+        run: mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_WINDOWS_CLANGDWARF.txt
         if: always()
       - name: 'Build Packages CLANGPDB'
-        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB -v
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
         if: always()
       - name: 'Rename log file CLANGPDB'
-        run: mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_CLANGPDB.txt
+        run: mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_WINDOWS_CLANGPDB.txt
         if: always()
       - name: Upload Logs
         uses: actions/upload-artifact@v4
@@ -84,16 +84,16 @@ jobs:
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t GCC
       - name: 'Build Packages CLANGPDB'
-        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB -v
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
         if: always()
       - name: 'Rename build logCLANGPDB'
-        run: mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_CLANGPDB.txt
+        run: mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_LINUX_CLANGPDB.txt
         if: always()
       - name: 'Build Packages CLANGDWARF'
-        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF -v
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF
         if: always()
       - name: 'Rename build log CLANGDWARF'
-        run: mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_CLANGDWARF.txt
+        run: mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_LINUX_CLANGDWARF.txt
         if: always()
       - name: Upload Logs
         uses: actions/upload-artifact@v4
