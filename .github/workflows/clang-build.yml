@@ -27,7 +27,7 @@ jobs:
         shell: cmd
         run: |
           choco -y install make
-          run: echo %GITHUB_PATH%;C:\ProgramData\chocolatey\lib\make\tools\install\bin>>%GITHUB_PATH%
+          echo C:\ProgramData\chocolatey\lib\make\tools\install\bin>>%GITHUB_PATH%
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
