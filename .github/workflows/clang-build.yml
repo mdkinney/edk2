@@ -21,12 +21,12 @@ jobs:
       - name: Install CLANG 20.1.0
         shell: cmd
         run: |
-          choco install llvm --version=20.1.0 -y
+          choco -y install llvm --version=20.1.0
           refreshenv
       - name: Install make
         shell: cmd
         run: |
-          choco install make -y
+          choco -y install make
           refreshenv
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
