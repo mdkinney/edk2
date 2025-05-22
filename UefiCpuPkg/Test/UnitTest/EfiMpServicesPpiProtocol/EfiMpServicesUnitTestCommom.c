@@ -261,6 +261,7 @@ StoreCpuNumbers (
   @param[in,out] Buffer   The pointer to private data buffer.
 **/
 VOID
+EFIAPI
 StoreAPsExecutionOrder (
   IN OUT VOID  *Buffer
   )
