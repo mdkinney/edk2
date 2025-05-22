@@ -231,6 +231,7 @@ FreeUTContext (
   @param[in,out] Buffer   The pointer to private data buffer.
 **/
 VOID
+EFIAPI
 StoreCpuNumbers (
   IN OUT VOID  *Buffer
   )
@@ -290,6 +291,7 @@ StoreAPsExecutionOrder (
   @param[in,out] Buffer   The pointer to private data buffer.
 **/
 VOID
+EFIAPI
 InfiniteLoopProcedure (
   IN OUT VOID  *Buffer
   )
@@ -308,6 +310,7 @@ InfiniteLoopProcedure (
   @param[in,out] Buffer   The pointer to private data buffer.
 **/
 VOID
+EFIAPI
 EmptyProcedure (
   IN OUT VOID  *Buffer
   )
@@ -320,6 +323,7 @@ EmptyProcedure (
   @param[in,out] Buffer   The pointer to private data buffer.
 **/
 VOID
+EFIAPI
 RunMpServiceGetNumberOfProcessorsOnAp (
   IN OUT VOID  *Buffer
   )
@@ -343,6 +347,7 @@ RunMpServiceGetNumberOfProcessorsOnAp (
   @param[in,out] Buffer   The pointer to private data buffer.
 **/
 VOID
+EFIAPI
 RunMpServiceGetProcessorInfoOnAp (
   IN OUT VOID  *Buffer
   )
@@ -365,6 +370,7 @@ RunMpServiceGetProcessorInfoOnAp (
   @param[in,out] Buffer   The pointer to private data buffer.
 **/
 VOID
+EFIAPI
 RunMpServiceEnableDisableAPOnAp (
   IN OUT VOID  *Buffer
   )
@@ -387,6 +393,7 @@ RunMpServiceEnableDisableAPOnAp (
   @param[in,out] Buffer   The pointer to private data buffer.
 **/
 VOID
+EFIAPI
 RunMpServiceStartupThisAPOnAp (
   IN OUT VOID  *Buffer
   )
@@ -410,6 +417,7 @@ RunMpServiceStartupThisAPOnAp (
   @param[in,out] Buffer   The pointer to private data buffer.
 **/
 VOID
+EFIAPI
 RunMpServiceStartupAllAPsOnAp (
   IN OUT VOID  *Buffer
   )
@@ -433,6 +441,7 @@ RunMpServiceStartupAllAPsOnAp (
   @param[in,out] Buffer   The pointer to private data buffer.
 **/
 VOID
+EFIAPI
 RunMpServiceSwitchBSPOnAp (
   IN OUT VOID  *Buffer
   )
