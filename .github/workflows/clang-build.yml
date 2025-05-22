@@ -13,21 +13,24 @@ jobs:
   build_windows_clang:
     name: Build Windows
     runs-on: windows-latest
+    defaults:
+      run:
+      shell: cmd
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Install CLANG 20.1.0
-        shell: cmd
         run: |
           choco -y install llvm --version=20.1.0
           refreshenv
+          set
       - name: Install make
-        shell: cmd
         run: |
           choco -y install make
           refreshenv
+          set
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
@@ -37,27 +40,22 @@ jobs:
           pip install --upgrade pip
           pip install --upgrade -r pip-requirements.txt
       - name: 'Clone Submodules'
-        shell: cmd
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Download External Dependencies'
-        shell: cmd
         run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Build BaseTools'
-        shell: cmd
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
       - name: 'Build Packages CLANGDWARF'
-        shell: cmd
         run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF
         if: always()
       - name: 'Rename log file CLANGDWARF'
-        run: mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_WINDOWS_CLANGDWARF.txt
+        run: rename Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_WINDOWS_CLANGDWARF.txt
         if: always()
       - name: 'Build Packages CLANGPDB'
-        shell: cmd
         run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
         if: always()
       - name: 'Rename log file CLANGPDB'
-        run: mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_WINDOWS_CLANGPDB.txt
+        run: rename Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_WINDOWS_CLANGPDB.txt
         if: always()
       - name: Upload Logs
         uses: actions/upload-artifact@v4
