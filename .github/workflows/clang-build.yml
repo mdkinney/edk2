@@ -51,7 +51,7 @@ jobs:
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF
         if: always()
       - name: 'Rename log file CLANGDWARF'
-        run: rename Build\CI_BUILDLOG.txt Build\CI_BUILDLOG_WINDOWS_CLANGDWARF.txt
+        run: mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_WINDOWS_CLANGDWARF.txt
         if: always()
       - name: 'Build Packages CLANGPDB'
         run: |
@@ -59,7 +59,7 @@ jobs:
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
         if: always()
       - name: 'Rename log file CLANGPDB'
-        run: rename Build\CI_BUILDLOG.txt Build\CI_BUILDLOG_WINDOWS_CLANGPDB.txt
+        run: mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_WINDOWS_CLANGPDB.txt
         if: always()
       - name: Upload Logs
         uses: actions/upload-artifact@v4
