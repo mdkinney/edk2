@@ -58,10 +58,10 @@ jobs:
       - name: 'Rename log file CLANGPDB'
         run: mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_WINDOWS_CLANGPDB.txt
         if: always()
-      - name: Upload Logs
+      - name: Upload Windows Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Logs"
+          name: "Upload Windows Logs"
           path: |
             Build/*.txt
             BaseTools/BaseToolsBuild/*
@@ -99,10 +99,10 @@ jobs:
       - name: 'Rename build log CLANGDWARF'
         run: mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_LINUX_CLANGDWARF.txt
         if: always()
-      - name: Upload Logs
+      - name: Upload Linux Logs
         uses: actions/upload-artifact@v4
         with:
-          name: Upload Logs
+          name: Upload Linux Logs
           path: |
             Build/*.txt
             BaseTools/BaseToolsBuild/*
