@@ -19,11 +19,13 @@ jobs:
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Install CLANG 20.1.0
+        shell: cmd
         run: |
           choco -y install llvm --version=20.1.0
           refreshenv
           env
       - name: Install make
+        shell: cmd
         run: |
           choco -y install make
           refreshenv
@@ -37,12 +39,16 @@ jobs:
           pip install --upgrade pip
           pip install --upgrade -r pip-requirements.txt
       - name: 'Clone Submodules'
+        shell: cmd
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Download External Dependencies'
+        shell: cmd
         run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Build BaseTools'
+        shell: cmd
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
       - name: 'Build Packages CLANGDWARF'
+        shell: cmd
         run: |
           env
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGDWARF
@@ -51,6 +57,7 @@ jobs:
         run: mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_WINDOWS_CLANGDWARF.txt
         if: always()
       - name: 'Build Packages CLANGPDB'
+        shell: cmd
         run: |
           env
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t DEBUG TOOL_CHAIN_TAG=CLANGPDB
