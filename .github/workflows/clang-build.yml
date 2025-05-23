@@ -29,7 +29,13 @@ jobs:
         run: |
           choco -y install make
           refreshenv
+          echo "C:\ProgramData\chocolatey\lib\make\tools\install\bin" >> $GITHUB_PATH
           env
+      - name: Print make version
+        shell: cmd
+        run: |
+          env
+          make --version
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
