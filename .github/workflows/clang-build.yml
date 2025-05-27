@@ -1,0 +1,114 @@
+# @file
+# A workflow that builds packages using clang and upload it's artifacts.
+#
+# Copyright (c) Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: CLANG Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_windows_clang:
+    name: Build Windows (${{ join(matrix.*, ' - ') }})
+    runs-on: windows-latest
+    env:
+      CLANG_HOST_BIN: n
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: [DEBUG, RELEASE, NOOPT, NO-TARGET]
+        build_arch:
+          - IA32
+          - X64
+        build_package:
+          - CryptoPkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,FatPkg,FmpDevicePkg,NetworkPkg,RedfishPkg,PcAtChipsetPkg
+          - MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg
+          - PrmPkg,SecurityPkg,ShellPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg
+        exclude:
+          - build_arch: IA32
+            build_type: NO-TARGET
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Install CLANG 20.1.0
+        run: |
+          choco -y install llvm --version=20.1.0
+          refreshenv
+          env
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: 'Install/Upgrade pip modules'
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade -r pip-requirements.txt
+      - name: 'Clone Submodules'
+        shell: cmd
+        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Download External Dependencies'
+        shell: cmd
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Build BaseTools'
+        shell: cmd
+        run: python BaseTools/Edk2ToolsBuild.py -t VS2022
+      - name: 'Build Packages CLANGPDB'
+        shell: cmd
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
+      - name: Upload Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Windows Logs (${{ join(matrix.*, ' - ') }})"
+          path: |
+            Build/*.txt
+        if: always()
+
+  build_linux_clang:
+    name: Build Linux (${{ join(matrix.*, ' - ') }})
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: [DEBUG, RELEASE, NOOPT, NO-TARGET]
+        build_arch:
+          - IA32
+          - X64
+        build_package:
+          - CryptoPkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,FatPkg,FmpDevicePkg,NetworkPkg,RedfishPkg,PcAtChipsetPkg
+          - MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg
+          - PrmPkg,SecurityPkg,ShellPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg
+        exclude:
+          - build_arch: IA32
+            build_type: NO-TARGET
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: 'Install/Upgrade pip modules'
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade -r pip-requirements.txt
+      - name: 'Clone Submodules'
+        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Download External Dependencies'
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGDPDB
+      - name: 'Build BaseTools'
+        run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
+      - name: 'Build Packages CLANGPDB'
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
+      - name: Upload Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Linux Logs (${{ join(matrix.*, ' - ') }})"
+          path: |
+            Build/*.txt
+        if: always()
