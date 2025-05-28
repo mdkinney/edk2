@@ -18,6 +18,16 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - NO-TARGET
+        build_arch:
+          - X64
+        build_package:
+          - CryptoPkg,ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,FatPkg,FmpDevicePkg,NetworkPkg,RedfishPkg,PcAtChipsetPkg,MdeModulePkg,MdePkg,OvmfPkg,ArmVirtPkg
+          - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,SecurityPkg,ShellPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
     steps:
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -43,11 +53,11 @@ jobs:
       - name: 'Build BaseTools'
         run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
       - name: 'Build Packages CLANGPDB NO-TARGET'
-        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NO-TARGET TOOL_CHAIN_TAG=CLANGPDB
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
       - name: Upload Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Linux NO-TARGET Logs"
+          name: "Upload Linux NO-TARGET Logs (${{ join(matrix.*, ' - ') }})"
           path: |
             Build/*.txt
         if: always()
