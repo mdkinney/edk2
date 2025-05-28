@@ -23,6 +23,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Install cspell
+        run: npm install -g cspell
       - name: Checkout
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
