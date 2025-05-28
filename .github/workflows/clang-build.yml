@@ -121,7 +121,6 @@ jobs:
         run: |
           choco -y install llvm --version=20.1.0
           refreshenv
-          env
       - name: Set up Python 3.13
         uses: actions/setup-python@v5
         with:
@@ -240,7 +239,10 @@ jobs:
         run: |
           choco -y install llvm --version=20.1.0
           refreshenv
-          env
+      - name: Install OpenCppCoverage
+        run: |
+          choco -y install OpenCppCoverage
+          refreshenv
       - name: Set up Python 3.13
         uses: actions/setup-python@v5
         with:
