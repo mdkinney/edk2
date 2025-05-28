@@ -48,7 +48,7 @@ TEST_F (SetSecureBootModeTest, SetVarError) {
 // Test SetSecureBootMode() API from SecureBootVariableLib to verify the
 // expected secure boot mode is written to the correct variable in the call
 // to gRT->SetVariable().
-TEST_F (SetSecureBootModeTest, PropogateModeToSetVar) {
+TEST_F (SetSecureBootModeTest, PropagateModeToSetVar) {
   EXPECT_CALL (
     RtServicesMock,
     gRT_SetVariable (
