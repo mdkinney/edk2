@@ -19,6 +19,10 @@ jobs:
     container:
       image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: Checkout
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
@@ -67,7 +71,9 @@ jobs:
       - name: 'Build BaseTools'
         run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
       - name: 'Build OVMF Platform'
-        run: build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE
+        run: |
+          . edksetup.sh
+          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE
       - name: Upload Logs
         uses: actions/upload-artifact@v4
         with:
