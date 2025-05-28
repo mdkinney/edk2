@@ -26,8 +26,8 @@ jobs:
         build_arch:
           - X64
         build_package:
-          - CryptoPkg,ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,FatPkg,FmpDevicePkg,NetworkPkg,RedfishPkg,PcAtChipsetPkg,MdeModulePkg,MdePkg,OvmfPkg,ArmVirtPkg
-          - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,SecurityPkg,ShellPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
+          - CryptoPkg,ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,FatPkg,FmpDevicePkg,NetworkPkg,RedfishPkg,PcAtChipsetPkg,MdeModulePkg,MdePkg
+          - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,SecurityPkg,ShellPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg,OvmfPkg,ArmVirtPkg
     steps:
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -110,8 +110,8 @@ jobs:
           - IA32
           - X64
         build_package:
-          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg
-          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg,SignedCapsulePkg
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -215,6 +215,52 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: "Upload Linux GCC NOOPT Unit Test Logs"
+          path: |
+            Build/*.txt
+        if: always()
+
+  build_windows_noopt_unit_tests:
+    needs: [build_linux_noopt_unit_tests]
+    name: Build Windows (${{ join(matrix.*, ' - ') }})
+    runs-on: windows-latest
+    env:
+      CLANG_HOST_BIN: n
+    strategy:
+      fail-fast: false
+      matrix:
+        build_package:
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg,SignedCapsulePkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Install CLANG 20.1.0
+        run: |
+          choco -y install llvm --version=20.1.0
+          refreshenv
+          env
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: 'Install/Upgrade pip modules'
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade -r pip-requirements.txt
+      - name: 'Clone Submodules'
+        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=VS2022
+      - name: 'Download External Dependencies'
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=VS2022
+      - name: 'Build BaseTools'
+        run: python BaseTools/Edk2ToolsBuild.py -t VS2022
+      - name: 'Build Packages CLANGPDB'
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=VS2022 -p "${{ matrix.build_package }}"
+      - name: Upload Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Windows VS2022 Unit Test Logs (${{ join(matrix.*, ' - ') }})"
           path: |
             Build/*.txt
         if: always()
