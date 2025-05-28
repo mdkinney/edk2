@@ -110,7 +110,8 @@ jobs:
           - IA32
           - X64
         build_package:
-          - CryptoPkg,ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,FatPkg,FmpDevicePkg,NetworkPkg,RedfishPkg,PcAtChipsetPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,SecurityPkg,ShellPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg,SignedCapsulePkg
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -182,7 +183,7 @@ jobs:
       - name: Upload Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Linux Logs (${{ join(matrix.*, ' - ') }})"
+          name: "Upload Linux Logs (${{ matrix.build_arch}} - ${{ matrix.build_type }})"
           path: |
             Build/*.txt
         if: always()
