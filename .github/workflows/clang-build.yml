@@ -8,9 +8,76 @@ name: CLANG Build
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - sandbox/master
 
 jobs:
+  build_linux_clang_precheck:
+    name: Build Linux CLANGPDB NO-TARGET PreCheck
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: 'Install/Upgrade pip modules'
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade -r pip-requirements.txt
+      - name: PatchCheck
+        if: github.event_name == 'pull_request'
+        run: python BaseTools/Scripts/PatchCheck.py ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
+      - name: 'Clone Submodules'
+        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Download External Dependencies'
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGDPDB
+      - name: 'Build BaseTools'
+        run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
+      - name: 'Build Packages CLANGPDB NO-TARGET'
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NO-TARGET TOOL_CHAIN_TAG=CLANGPDB
+      - name: Upload Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Linux NO-TARGET Logs"
+          path: |
+            Build/*.txt
+        if: always()
+
+  build_linux_clang_ovmf_precheck:
+    name: Build Linux CLANGPDB OVMF PreCheck
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: 'Install/Upgrade pip modules'
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade -r pip-requirements.txt
+      - name: 'Clone Submodules'
+        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Download External Dependencies'
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGDPDB
+      - name: 'Build BaseTools'
+        run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
+      - name: 'Build OVMF Platform'
+        run: build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE
+      - name: Upload Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Linux OVMF Precheck Logs"
+          path: |
+            Build/*.txt
+        if: always()
+
   build_windows_clang:
+    needs: [build_linux_clang_precheck, build_linux_clang_ovmf_precheck]
     name: Build Windows (${{ join(matrix.*, ' - ') }})
     runs-on: windows-latest
     env:
@@ -18,18 +85,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: [DEBUG, RELEASE, NOOPT, NO-TARGET]
+        build_type:
+          - DEBUG
+          - RELEASE
         build_arch:
           - IA32
           - X64
         build_package:
-          - CryptoPkg
-          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,FatPkg,FmpDevicePkg,NetworkPkg,RedfishPkg,PcAtChipsetPkg
-          - MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg
-          - PrmPkg,SecurityPkg,ShellPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg
-        exclude:
-          - build_arch: IA32
-            build_type: NO-TARGET
+          - CryptoPkg,ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,FatPkg,FmpDevicePkg,NetworkPkg,RedfishPkg,PcAtChipsetPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,SecurityPkg,ShellPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -49,16 +112,12 @@ jobs:
           pip install --upgrade pip
           pip install --upgrade -r pip-requirements.txt
       - name: 'Clone Submodules'
-        shell: cmd
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Download External Dependencies'
-        shell: cmd
         run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Build BaseTools'
-        shell: cmd
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
       - name: 'Build Packages CLANGPDB'
-        shell: cmd
         run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
       - name: Upload Logs
         uses: actions/upload-artifact@v4
@@ -69,6 +128,7 @@ jobs:
         if: always()
 
   build_linux_clang:
+    needs: [build_linux_clang_precheck, build_linux_clang_ovmf_precheck]
     name: Build Linux (${{ join(matrix.*, ' - ') }})
     runs-on: ubuntu-latest
     container:
@@ -76,18 +136,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: [DEBUG, RELEASE, NOOPT, NO-TARGET]
+        build_type:
+          - DEBUG
+          - RELEASE
         build_arch:
           - IA32
           - X64
         build_package:
-          - CryptoPkg
-          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,FatPkg,FmpDevicePkg,NetworkPkg,RedfishPkg,PcAtChipsetPkg
-          - MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg
-          - PrmPkg,SecurityPkg,ShellPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg
-        exclude:
-          - build_arch: IA32
-            build_type: NO-TARGET
+          - CryptoPkg,ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,FatPkg,FmpDevicePkg,NetworkPkg,RedfishPkg,PcAtChipsetPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,SecurityPkg,ShellPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -109,6 +165,37 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: "Upload Linux Logs (${{ join(matrix.*, ' - ') }})"
+          path: |
+            Build/*.txt
+        if: always()
+
+  build_linux_noopt_unit_tests:
+    needs: [build_linux_clang_precheck, build_linux_clang_ovmf_precheck]
+    name: Build Linux GCC NOOPT unit tests
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: 'Install/Upgrade pip modules'
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade -r pip-requirements.txt
+      - name: 'Clone Submodules'
+        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=GCC
+      - name: 'Download External Dependencies'
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=GCC
+      - name: 'Build BaseTools'
+        run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
+      - name: 'Build Packages GCC NOOPT'
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=GCC
+      - name: Upload Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Linux GCC NOOPT Unit Test Logs"
           path: |
             Build/*.txt
         if: always()
