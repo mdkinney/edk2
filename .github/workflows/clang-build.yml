@@ -77,7 +77,7 @@ jobs:
         run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
       - name: 'Build OVMF Platform'
         run: |
-          . edksetup.sh
+          . ./edksetup.sh
           build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE
       - name: Upload Logs
         uses: actions/upload-artifact@v4
