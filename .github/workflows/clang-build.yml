@@ -33,9 +33,12 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install --upgrade -r pip-requirements.txt
-      - name: PatchCheck
+      - name: PatchCheck PR
         if: github.event_name == 'pull_request'
         run: python BaseTools/Scripts/PatchCheck.py ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
+      - name: PatchCheck HEAD
+        if: github.event_name != 'pull_request'
+        run: python BaseTools/Scripts/PatchCheck.py
       - name: 'Clone Submodules'
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Download External Dependencies'
