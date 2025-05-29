@@ -118,10 +118,10 @@ jobs:
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Install CLANG 20.1.0
-        shell: powershell
+        shell: cmd
         run: |
-          choco -y install llvm --version=20.1.0
-          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+          choco install -y llvm --version=20.1.0
+          refreshenv
       - name: Set up Python 3.13
         uses: actions/setup-python@v5
         with:
@@ -237,15 +237,15 @@ jobs:
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Install CLANG 20.1.0
-        shell: powershell
+        shell: cmd
         run: |
-          choco -y install llvm --version=20.1.0
-          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+          choco install -y llvm --version=20.1.0
+          refreshenv
       - name: Install OpenCppCoverage
-        shell: powershell
+        shell: cmd
         run: |
           choco install -y OpenCppCoverage
-          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+          echo "C:\Program Files\OpenCppCoverage" >> $GITHUB_PATH
           opencppcoverage
       - name: Set up Python 3.13
         uses: actions/setup-python@v5
