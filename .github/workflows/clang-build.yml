@@ -246,14 +246,11 @@ jobs:
         run: |
           env
           choco install -y OpenCppCoverage
-          refreshenv
-          env
-      - name: Set Path OpenCppCoverage
-        shell: cmd
+      - name: Setup
+        shell: powershell
         run: |
-          env
-          echo "C:\Program Files\OpenCppCoverage" >> $GITHUB_PATH
-          env
+          "" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          "C:\Program Files\OpenCppCoverage" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
       - name: Check OpenCppCoverage
         shell: cmd
         run: |
