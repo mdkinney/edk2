@@ -118,7 +118,6 @@ jobs:
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Install CLANG 20.1.0
-        shell: cmd
         run: |
           choco -y install llvm --version=20.1.0
           refreshenv
@@ -237,15 +236,13 @@ jobs:
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Install CLANG 20.1.0
-        shell: cmd
         run: |
           choco -y install llvm --version=20.1.0
           refreshenv
       - name: Install OpenCppCoverage
-        shell: cmd
         run: |
-          choco -y install OpenCppCoverage
-          echo "C:\Program Files\OpenCppCoverage" >> $GITHUB_PATH
+          choco install -y OpenCppCoverage
+          refreshenv
       - name: Set up Python 3.13
         uses: actions/setup-python@v5
         with:
