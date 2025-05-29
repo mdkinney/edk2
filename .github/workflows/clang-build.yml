@@ -121,7 +121,7 @@ jobs:
         shell: powershell
         run: |
           choco -y install llvm --version=20.1.0
-          refreshenv
+          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
       - name: Set up Python 3.13
         uses: actions/setup-python@v5
         with:
@@ -240,12 +240,12 @@ jobs:
         shell: powershell
         run: |
           choco -y install llvm --version=20.1.0
-          refreshenv
+          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
       - name: Install OpenCppCoverage
         shell: powershell
         run: |
           choco install -y OpenCppCoverage
-          refreshenv
+          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
           opencppcoverage
       - name: Set up Python 3.13
         uses: actions/setup-python@v5
