@@ -248,6 +248,10 @@ jobs:
           choco install -y OpenCppCoverage
           refreshenv
           env
+      - name: Set Path OpenCppCoverage
+        shell: cmd
+        run: |
+          env
           echo "C:\Program Files\OpenCppCoverage" >> $GITHUB_PATH
           env
       - name: Check OpenCppCoverage
