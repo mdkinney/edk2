@@ -246,7 +246,9 @@ jobs:
         run: |
           choco install -y OpenCppCoverage
           echo "C:\Program Files\OpenCppCoverage" >> $GITHUB_PATH
-          opencppcoverage
+      - name: Check OpenCppCoverage
+        shell: cmd
+        run: opencppcoverage
       - name: Set up Python 3.13
         uses: actions/setup-python@v5
         with:
