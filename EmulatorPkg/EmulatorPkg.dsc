@@ -17,7 +17,11 @@
   PLATFORM_GUID                  = 05FD064D-1073-E844-936C-A0E16317107D
   PLATFORM_VERSION               = 0.3
   DSC_SPECIFICATION              = 0x00010005
+!if $(WIN_MINGW32_BUILD)
+  OUTPUT_DIRECTORY               = Build/Emulator$(ARCH)Mingw
+!else
   OUTPUT_DIRECTORY               = Build/Emulator$(ARCH)
+!endif
 
   SUPPORTED_ARCHITECTURES        = X64|IA32
   BUILD_TARGETS                  = DEBUG|RELEASE|NOOPT
@@ -45,6 +49,7 @@
   0|DEFAULT
 
 !include MdePkg/MdeLibs.dsc.inc
+!include CryptoPkg/CryptoPkgFeatureFlagPcds.dsc.inc
 
 [LibraryClasses]
   #
@@ -129,7 +134,8 @@
   ImagePropertiesRecordLib|MdeModulePkg/Library/ImagePropertiesRecordLib/ImagePropertiesRecordLib.inf
   RngLib|MdeModulePkg/Library/BaseRngLibTimerLib/BaseRngLibTimerLib.inf
   IntrinsicLib|CryptoPkg/Library/IntrinsicLib/IntrinsicLib.inf
-  OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibCrypto.inf
+#  OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibCrypto.inf
+  OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLibFullAccel.inf
   BaseCryptLib|CryptoPkg/Library/BaseCryptLib/BaseCryptLib.inf
 
 !if $(SECURE_BOOT_ENABLE) == TRUE
@@ -152,7 +158,7 @@
   DebugLib|MdePkg/Library/BaseDebugLibSerialPort/BaseDebugLibSerialPort.inf
   TimerLib|EmulatorPkg/Library/PeiTimerLib/PeiTimerLib.inf
 
-[LibraryClasses.common.USER_DEFINED, LibraryClasses.common.BASE]
+[LibraryClasses.common.HOST_APPLICATION, LibraryClasses.common.BASE]
   DebugLib|MdePkg/Library/BaseDebugLibNull/BaseDebugLibNull.inf
   PeCoffExtraActionLib|MdePkg/Library/BasePeCoffExtraActionLibNull/BasePeCoffExtraActionLibNull.inf
   MemoryAllocationLib|MdePkg/Library/PeiMemoryAllocationLib/PeiMemoryAllocationLib.inf
@@ -163,7 +169,7 @@
   PeCoffGetEntryPointLib|MdePkg/Library/BasePeCoffGetEntryPointLib/BasePeCoffGetEntryPointLib.inf
   PpiListLib|EmulatorPkg/Library/SecPpiListLib/SecPpiListLib.inf
   PeiServicesLib|EmulatorPkg/Library/SecPeiServicesLib/SecPeiServicesLib.inf
-
+  StackCheckLib|MdePkg/Library/StackCheckLibNull/StackCheckLibNullHostApplication.inf
 
 [LibraryClasses.common.PEIM, LibraryClasses.common.PEI_CORE]
   HobLib|MdePkg/Library/PeiHobLib/PeiHobLib.inf
@@ -216,6 +222,7 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdDxeIplSwitchToLongMode|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdPeiCoreImageLoaderSearchTeSectionFirst|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdDxeIplBuildPageTables|FALSE
+  gEmulatorPkgTokenSpaceGuid.PcdEmulatorLazyLoadSymbols|FALSE
 
 [PcdsFixedAtBuild]
   gEfiMdeModulePkgTokenSpaceGuid.PcdImageProtectionPolicy|0x00000000
@@ -314,23 +321,15 @@
 
 [Components]
 !if "IA32" in $(ARCH) || "X64" in $(ARCH)
-  !if "MSFT" in $(FAMILY) || $(WIN_HOST_BUILD) == TRUE
+  !if $(WIN_HOST_BUILD)
     ##
     #  Emulator, OS WIN application
-    #  CLANGPDB is cross OS tool chain. It depends on WIN_HOST_BUILD flag
-    #  to build WinHost application.
     #
-    # USER_DEFINED components skip normal NULL lib linking, so we have to link this
-    # specially here for the libs that have stack guard enabled
-    ##
     EmulatorPkg/Win/Host/WinHost.inf
   !else
     ##
     #  Emulator, OS POSIX application
     #
-    # USER_DEFINED components skip normal NULL lib linking, so we have to link this
-    # specially here for the libs that have stack guard enabled
-    ##
     EmulatorPkg/Unix/Host/Host.inf
   !endif
 !endif
@@ -521,25 +520,206 @@
 !endif
 !include RedfishPkg/Redfish.dsc.inc
 
+#
+# Fail with error message if the OS/Compiler combination is not supported
+#
+# Operating System and Compiler Compatibility Matrix for EmulatorPkg
+#
+# +---------------+--------+----------+------------+-----+----+--------+
+# | OS/Compiler   | VS2019 | CLANGPDB | CLANGDWARF |   GCC    | XCODE5 |
+# |               | VS2022 |          |            |   GCC5   |        |
+# |               |        |          |            | GCCNOLTO |        |
+# +---------------+--------+----------+------------+----------+--------+
+# | Windows/VS    |   Y    |    Y     |            |          |        |
+# | Windows/Mingw |        |          |     Y      |          |        |
+# | Linux         |        |          |     Y      |    Y     |        |
+# | macOS         |        |          |     Y      |    Y     |   Y    |
+# +---------------+--------+----------+------------+----------+--------+
+#
+!if $(WIN_MINGW32_BUILD)
+  !if $(TOOL_CHAIN_TAG) in "VS2019 VS2022"
+    !error EmulatorPkg not supported for Mingw/VS20xx builds
+  !endif
+  !if $(TOOL_CHAIN_TAG) in "CLANGPDB"
+    !error EmulatorPkg not supported for Mingw/CLANGPDB builds
+  !endif
+  !if $(TOOL_CHAIN_TAG) in "GCC GCC5 GCCNOLTO"
+    !error EmulatorPkg not supported for Mingw/GCC builds
+  !endif
+!else
+  !if $(WIN_HOST_BUILD)
+    !if $(TOOL_CHAIN_TAG) in "GCC GCC5 GCCNOLTO"
+      !error EmulatorPkg not supported for Windows/GCC builds
+    !endif
+    !if $(TOOL_CHAIN_TAG) in "CLANGDWARF"
+      !error EmulatorPkg not supported for Windows/CLANGDWARF builds
+    !endif
+  !else
+    !if $(TOOL_CHAIN_TAG) in "VS2019 VS2022"
+      !error EmulatorPkg not supported for Linux/VS20xx builds
+    !endif
+    !if $(TOOL_CHAIN_TAG) in "CLANGPDB"
+      !error EmulatorPkg not supported for Linux/CLANGPDB builds
+    !endif
+  !endif
+!endif
+
 [BuildOptions]
   #
   # Disable deprecated APIs.
   #
   *_*_*_CC_FLAGS = -D DISABLE_NEW_DEPRECATED_INTERFACES
 
+  #
+  # Windows/VS20xx using Visual Studio includes and libraries
+  #
   MSFT:DEBUG_*_*_CC_FLAGS = /Od /Oy-
   MSFT:NOOPT_*_*_CC_FLAGS = /Od /Oy-
-  GCC:DEBUG_CLANGPDB_*_CC_FLAGS =-O0 -Wno-unused-command-line-argument -Wno-incompatible-pointer-types -Wno-enum-conversion -Wno-incompatible-pointer-types -Wno-sometimes-uninitialized -Wno-constant-conversion -Wno-main-return-type
 
   MSFT:*_*_*_DLINK_FLAGS     = /ALIGN:4096 /FILEALIGN:4096
-  MSFT:DEBUG_*_*_DLINK_FLAGS = /BASE:0x10000
-  MSFT:NOOPT_*_*_DLINK_FLAGS = /BASE:0x10000
+  MSFT:*_*_IA32_DLINK_FLAGS  = /BASE:0x010000000
+  MSFT:*_*_X64_DLINK_FLAGS   = /BASE:0x180000000
 
-!if $(WIN_HOST_BUILD) == TRUE
   #
-  # CLANGPDB tool chain depends on WIN_HOST_BUILD flag to generate the windows application.
+  # Windows/CLANGPDB using Visual Studio includes and libraries
   #
-  CLANGPDB: *_*_*_DLINK_FLAGS = /ALIGN:4096 /FILEALIGN:4096
-  CLANGPDB:DEBUG_*_*_DLINK_FLAGS = /BASE:0x10000
-  CLANGPDB:NOOPT_*_*_DLINK_FLAGS = /BASE:0x10000
+  CLANGPDB:RELEASE_*_*_CC_FLAGS = -g0
+  CLANGPDB:DEBUG_*_*_CC_FLAGS   = -O0 -fno-omit-frame-pointer -g3 -gcodeview -fno-lto
+  CLANGPDB:NOOPT_*_*_CC_FLAGS   = -O0 -fno-omit-frame-pointer -g3 -gcodeview -fno-lto
+
+  CLANGPDB:*_*_*_DLINK_FLAGS     = /ALIGN:4096 /FILEALIGN:4096
+  CLANGPDB:DEBUG_*_*_DLINK_FLAGS = /DEBUG
+  CLANGPDB:NOOPT_*_*_DLINK_FLAGS = /DEBUG
+  CLANGPDB:*_*_IA32_DLINK_FLAGS  = /BASE:0x010000000
+  CLANGPDB:*_*_X64_DLINK_FLAGS   = /BASE:0x180000000
+
+!if $(WIN_MINGW32_BUILD)
+  #
+  # Windows/Mingw CLANGDWARF using Mingw CLANG includes and libraries
+  #
+  GCC:*_CLANGDWARF_IA32_PP_FLAGS    = -target i686-w64-mingw32
+  GCC:*_CLANGDWARF_X64_PP_FLAGS     = -target x86_64-w64-mingw32
+
+  GCC:*_CLANGDWARF_X64_CC_FLAGS     = -target x86_64-w64-mingw32 -mno-stack-arg-probe
+  GCC:*_CLANGDWARF_IA32_CC_FLAGS    = -target i686-w64-mingw32 -mno-stack-arg-probe
+  GCC:RELEASE_CLANGDWARF_*_CC_FLAGS = -g0
+  GCC:DEBUG_CLANGDWARF_*_CC_FLAGS   = -O0 -fno-omit-frame-pointer -fexceptions -g3 -gcodeview -fdebug-macro -fno-lto
+  GCC:NOOPT_CLANGDWARF_*_CC_FLAGS   = -O0 -fno-omit-frame-pointer -fexceptions -g3 -gcodeview -fdebug-macro -fno-lto
+
+  GCC:*_CLANGDWARF_X64_NASM_FLAGS  = -f win64
+  GCC:*_CLANGDWARF_IA32_NASM_FLAGS = -f win32
+
+  #
+  # Change Windows/Mingw CLANGDWARF to use llvm-rc instead of objcopy to
+  # produce HII resources as a PE/COFF library
+  #
+  GCC:*_CLANGDWARF_*_GENFWHII_FLAGS == --hiipackage
+  GCC:*_CLANGDWARF_*_RC_PATH         = llvm-rc
+  GCC:*_CLANGDWARF_*_RC_FLAGS       ==
+
+  #
+  # Must override DLINK to use options compatible with Mingw CLANG that is
+  # subset of GCC options for Windows application targets
+  #
+  GCC:*_CLANGDWARF_*_DLINK_FLAGS     == -nostdlib -shared -Wl,--section-alignment=0x1000 -Wl,--file-alignment=0x1000
+  GCC:*_CLANGDWARF_IA32_DLINK_FLAGS  = -target i686-w64-mingw32 -Wl,--entry,__ModuleEntryPoint
+  GCC:*_CLANGDWARF_X64_DLINK_FLAGS   = -target x86_64-w64-mingw32 -Wl,--entry,_ModuleEntryPoint
+  GCC:DEBUG_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(DEBUG_DIR)/$(BASE_NAME).pdb
+  GCC:NOOPT_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(DEBUG_DIR)/$(BASE_NAME).pdb
+  GCC:*_CLANGDWARF_X64_DLINK2_FLAGS  ==
+  GCC:*_CLANGDWARF_IA32_DLINK2_FLAGS ==
 !endif
+
+  GCC:RELEASE_*_*_CC_FLAGS = -g0
+  GCC:DEBUG_*_*_CC_FLAGS   = -g3 -O0 -fno-lto
+  GCC:NOOPT_*_*_CC_FLAGS   = -g3 -fno-lto
+
+  #
+  # GCC IA32 CLANGDWARF does not work with -flto.
+  # Disable LTO for this specific tool chain configuration
+  #
+  GCC:RELEASE_CLANGDWARF_IA32_CC_FLAGS = -fno-lto
+
+[Defines]
+  #
+  # Defines for settings that are common between MSFT and CLANGPDB tool chain
+  # families that must use Visual Studio specific defines and libraries when
+  # building modules of type HOST_APPLICATION
+  #
+!if $(ARCH) in "X64"
+  DEFINE VS_ARCH_DIR = x64
+!endif
+!if $(ARCH) in "IA32"
+  DEFINE VS_ARCH_DIR = x86
+!endif
+  DEFINE VISUAL_STUDIO_DEFINES   = -D UNICODE -D _CRT_SECURE_NO_WARNINGS -D _CRT_SECURE_NO_DEPRECATE
+  DEFINE VISUAL_STUDIO_LIB_PATHS = /LIBPATH:"%VCToolsInstallDir%lib\$(VS_ARCH_DIR)" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\$(VS_ARCH_DIR)" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%um\$(VS_ARCH_DIR)"
+  DEFINE VISUAL_STUDIO_LIBS      = Kernel32.lib MSVCRTD.lib vcruntimed.lib ucrtd.lib Gdi32.lib User32.lib Winmm.lib Advapi32.lib
+
+[BuildOptions.common.EDKII.HOST_APPLICATION]
+  MSFT:*_*_*_CC_FLAGS        = $(VISUAL_STUDIO_DEFINES)
+  #
+  # Must ovveride DLINK_FLAGS to remove /DLL when linking .exe
+  #
+  MSFT:*_*_*_DLINK_FLAGS    == /out:"$(BIN_DIR)\$(BASE_NAME).exe" /NOLOGO /SUBSYSTEM:CONSOLE /IGNORE:4086 /MAP /OPT:REF /LTCG
+  MSFT:*_*_*_DLINK_FLAGS     = $(VISUAL_STUDIO_LIB_PATHS) $(VISUAL_STUDIO_LIBS)
+  MSFT:DEBUG_*_*_DLINK_FLAGS = /DEBUG /pdb:"$(BIN_DIR)\$(BASE_NAME).pdb"
+  MSFT:NOOPT_*_*_DLINK_FLAGS = /DEBUG /pdb:"$(BIN_DIR)\$(BASE_NAME).pdb"
+
+  CLANGPDB:*_*_*_CC_FLAGS        = $(VISUAL_STUDIO_DEFINES)
+  #
+  # Must ovveride DLINK_FLAGS to remove /DLL when linking .exe
+  #
+  CLANGPDB:*_*_*_DLINK_FLAGS    == /OUT:"$(BIN_DIR)\$(BASE_NAME).exe" /NOLOGO /SUBSYSTEM:CONSOLE /IGNORE:4086 /OPT:REF /LLDMAP
+  CLANGPDB:*_*_*_DLINK_FLAGS     = $(VISUAL_STUDIO_LIB_PATHS) $(VISUAL_STUDIO_LIBS)
+  CLANGPDB:DEBUG_*_*_DLINK_FLAGS = /DEBUG /pdb:"$(BIN_DIR)\$(BASE_NAME).pdb"
+  CLANGPDB:NOOPT_*_*_DLINK_FLAGS = /DEBUG /pdb:"$(BIN_DIR)\$(BASE_NAME).pdb"
+
+  #
+  # GCC RELEASE X64 Host application does not work with -flto.
+  # Disable LTO for this specific tool chain configuration
+  #
+  GCC:RELEASE_*_X64_CC_FLAGS = -fno-lto
+  #
+  # Must override DLINK flags to remove -nostdlib because Host application must
+  # link against standard libraries
+  #
+  GCC:*_*_*_DLINK_FLAGS      == -o $(BIN_DIR)/Host -z noexecstack
+  GCC:RELEASE_*_*_DLINK_FLAGS = -flto
+  GCC:*_*_IA32_DLINK_FLAGS    = -m32
+  GCC:*_*_X64_DLINK_FLAGS     = -m64
+
+  GCC:*_*_*_DLINK2_FLAGS == -lpthread -ldl -lXext -lX11
+
+!if $(WIN_MINGW32_BUILD)
+  #
+  # Windows Mingw CLANGDWARF
+  #
+  GCC:*_CLANGDWARF_*_CC_FLAGS       = -D UNICODE -D _CRT_SECURE_NO_DEPRECATE -Wno-incompatible-pointer-types
+  GCC:RELEASE_CLANGDWARF_*_CC_FLAGS = -g0
+  GCC:DEBUG_CLANGDWARF_*_CC_FLAGS   = -O0 -fno-omit-frame-pointer -fexceptions -g3 -gcodeview -fdebug-macro -fno-lto
+  GCC:NOOPT_CLANGDWARF_*_CC_FLAGS   = -O0 -fno-omit-frame-pointer -fexceptions -g3 -gcodeview -fdebug-macro -fno-lto
+
+  GCC:*_CLANGDWARF_*_DLINK_FLAGS    == -o $(BIN_DIR)/$(BASE_NAME).exe -Wl,--entry,main -lwinmm -lgdi32
+  GCC:*_CLANGDWARF_IA32_DLINK_FLAGS  = -target i686-w64-mingw32
+  GCC:*_CLANGDWARF_X64_DLINK_FLAGS   = -target x86_64-w64-mingw32
+  GCC:DEBUG_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(BIN_DIR)/$(BASE_NAME).pdb
+  GCC:NOOPT_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(BIN_DIR)/$(BASE_NAME).pdb
+  GCC:*_CLANGDWARF_IA32_DLINK2_FLAGS ==
+  GCC:*_CLANGDWARF_X64_DLINK2_FLAGS  ==
+!endif
+
+  #
+  # Need to do XCODE link via gcc and not ld as the pathing to libraries changes
+  # from OS version to OS version
+  #
+  XCODE:*_*_IA32_DLINK_PATH == gcc
+  XCODE:*_*_IA32_CC_FLAGS = -I$(WORKSPACE)/EmulatorPkg/Unix/Host/X11IncludeHack
+  XCODE:*_*_IA32_DLINK_FLAGS == -arch i386 -o $(BIN_DIR)/Host -L/usr/X11R6/lib -lXext -lX11 -framework Carbon
+  XCODE:*_*_IA32_ASM_FLAGS == -arch i386 -g
+
+  XCODE:*_*_X64_DLINK_PATH == gcc
+  XCODE:*_*_X64_DLINK_FLAGS == -o $(BIN_DIR)/Host -L/usr/X11R6/lib -lXext -lX11 -framework Carbon -Wl,-no_pie
+  XCODE:*_*_X64_ASM_FLAGS == -g
+  XCODE:*_*_X64_CC_FLAGS = -O0 -target x86_64-apple-darwin -I$(WORKSPACE)/EmulatorPkg/Unix/Host/X11IncludeHack "-DEFIAPI=__attribute__((ms_abi))"
+
