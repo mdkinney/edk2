@@ -608,5 +608,7 @@ EMU_THUNK_PROTOCOL  gEmuThunkProtocol = {
   GetNextThunkProtocol
 };
 
-#pragma warning(default : 4996)
-#pragma warning(default : 4232)
+#if !defined (__clang__)
+  #pragma warning(default : 4996)
+  #pragma warning(default : 4232)
+#endif

@@ -9,6 +9,16 @@
 !include UnitTestFrameworkPkg/UnitTestFrameworkPkgCommon.dsc.inc
 
 [Defines]
+  HOST_BASED_UNIT_TESTING_ENABLED = TRUE
+
+  #
+  # Host based unit test builds only support NOOPT build target
+  #
+  BUILD_TARGETS = NOOPT
+
+  #
+  # Always enable code coverage and address sanitizers
+  #
   UNIT_TESTING_CODE_COVERAGE_ENABLE     = TRUE
   UNIT_TESTING_ADDRESS_SANITIZER_ENABLE = TRUE
 
@@ -28,13 +38,85 @@
   UefiBootServicesTableLib|UnitTestFrameworkPkg/Library/UnitTestUefiBootServicesTableLib/UnitTestUefiBootServicesTableLib.inf
   PeiServicesTablePointerLib|UnitTestFrameworkPkg/Library/UnitTestPeiServicesTablePointerLib/UnitTestPeiServicesTablePointerLib.inf
   NULL|UnitTestFrameworkPkg/Library/UnitTestDebugAssertLib/UnitTestDebugAssertLibHost.inf
-  NULL|MdePkg/Library/StackCheckLibNull/StackCheckLibNullHostApplication.inf
+  StackCheckLib|MdePkg/Library/StackCheckLibNull/StackCheckLibNullHostApplication.inf
+
+#
+# Fail with error message if the OS/Compiler combination is not supported
+#
+# Operating System and Compiler Compatibility Matrix for Host-based unit tests
+# NOTE: Only NOOPT build target is supported for unit test builds
+#
+# +---------------+--------+----------+------------+-----+----+--------+
+# | OS/Compiler   | VS2019 | CLANGPDB | CLANGDWARF |   GCC    | XCODE5 |
+# |               | VS2022 |          |            |   GCC5   |        |
+# |               |        |          |            | GCCNOLTO |        |
+# +---------------+--------+----------+------------+----------+--------+
+# | Windows/VS    |IA32/X64| IA32/X64 |            |          |        |
+# | Windows/Mingw |        |          |  X64/IA32* |          |        |
+# | Linux         |        |          |  IA32/X64  | IA32/X64 |        |
+# | macOS         |        |          |     Y      |    Y     |   Y    |
+# +---------------+--------+----------+------------+----------+--------+
+#   * IA32 Mingw builds are only supported with alternate Mingw installation
+#     that does not support CLANGPDB firmware builds.
+#
+!if $(WIN_MINGW32_BUILD)
+  !if $(TOOL_CHAIN_TAG) in "VS2019 VS2022"
+    !error Host-based Unit Tests not supported for Mingw/VS20xx builds
+  !endif
+  !if $(TOOL_CHAIN_TAG) in "CLANGPDB"
+    !error Host-based Unit Tests not supported for Mingw/CLANGPDB builds
+  !endif
+  !if $(TOOL_CHAIN_TAG) in "GCC GCC5 GCCNOLTO"
+    !error Host-based Unit Tests not supported for Mingw/GCC builds
+  !endif
+!else
+  !if $(WIN_HOST_BUILD)
+    !if $(TOOL_CHAIN_TAG) in "GCC GCC5 GCCNOLTO"
+      !error Host-based Unit Tests not supported for Windows/GCC builds
+    !endif
+    !if $(TOOL_CHAIN_TAG) in "CLANGDWARF"
+      !error Host-based Unit Tests not supported for Windows/CLANGDWARF builds
+    !endif
+  !else
+    !if $(TOOL_CHAIN_TAG) in "VS2019 VS2022"
+      !error Host-based Unit Tests not supported for Linux/VS20xx builds
+    !endif
+    !if $(TOOL_CHAIN_TAG) in "CLANGPDB"
+      !error Host-based Unit Tests not supported for Linux/CLANGPDB builds
+    !endif
+  !endif
+!endif
 
 [BuildOptions]
+!if $(WIN_MINGW32_BUILD)
+  GCC:*_CLANGDWARF_IA32_PP_FLAGS = -target i686-w64-mingw32
+  GCC:*_CLANGDWARF_X64_PP_FLAGS  = -target x86_64-w64-mingw32
+
+  GCC:*_CLANGDWARF_X64_CC_FLAGS  = -target x86_64-w64-mingw32
+  GCC:*_CLANGDWARF_IA32_CC_FLAGS = -target i686-w64-mingw32
+  GCC:*_CLANGDWARF_*_CC_FLAGS    = -O0 -fno-omit-frame-pointer -fexceptions -g3 -gcodeview -fdebug-macro -fno-lto
+
+  GCC:*_CLANGDWARF_X64_NASM_FLAGS  = -f win64
+  GCC:*_CLANGDWARF_IA32_NASM_FLAGS = -f win32
+!endif
+
   MSFT:*_*_*_CC_FLAGS     = /MTd /EHs
-  GCC:*_*_*_CC_FLAGS      = -fno-pie
+  GCC:*_*_*_CC_FLAGS      = -fpie
   CLANGPDB:*_*_*_CC_FLAGS = -fno-pie
   GCC:*_*_*_ASLCC_FLAGS   = -fpie
+
+  #
+  # Disable stack protector for unit tests because ASAN provides better coverage
+  #
+  GCC:*_*_*_CC_FLAGS             = -fno-stack-protector
+  CLANGPDB:*_*_*_CC_FLAGS        = -fno-stack-protector
+
+  #
+  # Force long double to be 64-bits for CLANGDWARF IA32 builds to address
+  # alignment errors from c++ math libraries
+  #
+  GCC:*_CLANGDWARF_IA32_CC_FLAGS = -mlong-double-64
+
 !if $(UNIT_TESTING_ADDRESS_SANITIZER_ENABLE)
   #
   # Enable Address Sanitizer for VS2019, VS2022, and GCC
@@ -44,12 +126,14 @@
   GCC:*_*_*_CC_FLAGS       = -fsanitize=address
   CLANGPDB:*_*_*_CC_FLAGS  = -fsanitize=address
 !endif
+
 !ifdef $(UNIT_TESTING_DEBUG)
   MSFT:*_*_*_CC_FLAGS     = -D UNIT_TESTING_DEBUG=1
   GCC:*_*_*_CC_FLAGS      = -D UNIT_TESTING_DEBUG=1
   CLANGPDB:*_*_*_CC_FLAGS = -D UNIT_TESTING_DEBUG=1
   XCODE:*_*_*_CC_FLAGS    = -D UNIT_TESTING_DEBUG=1
 !endif
+
   GCC:*_*_*_CC_FLAGS      = -fexceptions
   CLANGPDB:*_*_*_CC_FLAGS = -fexceptions
 
@@ -83,30 +167,67 @@
   #
   CLANGPDB:*_*_*_CXX_FLAGS = -Wno-microsoft-cast -Wno-write-strings
 
+[Defines]
+  #
+  # Defines for settings that are common between MSFT and CLANGPDB tool chain
+  # families that must use Visual Studio specific defines and libraries when
+  # building modules of type HOST_APPLICATION
+  #
+  DEFINE VISUAL_STUDIO_DEFINES        = -D UNICODE -D _CRT_SECURE_NO_WARNINGS -D _CRT_SECURE_NO_DEPRECATE
+  DEFINE VISUAL_STUDIO_IA32_LIB_PATHS = /LIBPATH:"%VCToolsInstallDir%lib\x86" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x86" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%um\x86"
+  DEFINE VISUAL_STUDIO_X64_LIB_PATHS  = /LIBPATH:"%VCToolsInstallDir%lib\X64" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\X64" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%um\X64"
+
 [BuildOptions.common.EDKII.HOST_APPLICATION]
   #
   # Set MSFT HOST_APPLICATION options
   #
-  MSFT:*_*_*_DLINK_FLAGS            == /nologo /SUBSYSTEM:CONSOLE /DEBUG /out:"$(BIN_DIR)\$(MODULE_NAME_GUID).exe" /pdb:"$(BIN_DIR)\$(MODULE_NAME_GUID).pdb" /WHOLEARCHIVE /STACK:0x00800000,0x00800000
+  MSFT:*_*_*_CC_FLAGS     = $(VISUAL_STUDIO_DEFINES)
+  #
+  # Must override DLINK_FLAGS to remove /DLL when linking .exe
+  #
+  MSFT:*_*_*_DLINK_FLAGS   == /out:"$(BIN_DIR)\$(MODULE_NAME_GUID).exe" /NOLOGO /SUBSYSTEM:CONSOLE /WHOLEARCHIVE /STACK:0x00800000,0x00800000 /SAFESEH:NO
+  MSFT:*_*_IA32_DLINK_FLAGS = $(VISUAL_STUDIO_IA32_LIB_PATHS)
+  MSFT:*_*_X64_DLINK_FLAGS  = $(VISUAL_STUDIO_X64_LIB_PATHS)
+  MSFT:*_*_*_DLINK_FLAGS    = /DEBUG /pdb:"$(BIN_DIR)\$(MODULE_NAME_GUID).pdb"
 
-  MSFT:*_VS2015_IA32_DLINK_FLAGS    = /LIBPATH:"%VS2015_PREFIX%Lib" /LIBPATH:"%VS2015_PREFIX%VC\Lib" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x86" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%\um\x86"
-  MSFT:*_VS2015x86_IA32_DLINK_FLAGS = /LIBPATH:"%VS2015_PREFIX%Lib" /LIBPATH:"%VS2015_PREFIX%VC\Lib" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x86" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%\um\x86"
-  MSFT:*_VS2017_IA32_DLINK_FLAGS    = /LIBPATH:"%VCToolsInstallDir%lib\x86" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x86" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%\um\x86"
-  MSFT:*_VS2019_IA32_DLINK_FLAGS    = /LIBPATH:"%VCToolsInstallDir%lib\x86" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x86" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%\um\x86"
-  MSFT:*_VS2022_IA32_DLINK_FLAGS    = /LIBPATH:"%VCToolsInstallDir%lib\x86" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x86" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%\um\x86"
-
-  MSFT:*_VS2015_X64_DLINK_FLAGS     = /LIBPATH:"%VS2015_PREFIX%VC\Lib\AMD64" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x64" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%\um\x64"
-  MSFT:*_VS2015x86_X64_DLINK_FLAGS  = /LIBPATH:"%VS2015_PREFIX%VC\Lib\AMD64" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x64" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%\um\x64"
-  MSFT:*_VS2017_X64_DLINK_FLAGS     = /LIBPATH:"%VCToolsInstallDir%lib\x64" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x64" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%\um\x64"
-  MSFT:*_VS2019_X64_DLINK_FLAGS     = /LIBPATH:"%VCToolsInstallDir%lib\x64" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x64" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%\um\x64"
-  MSFT:*_VS2022_X64_DLINK_FLAGS     = /LIBPATH:"%VCToolsInstallDir%lib\x64" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x64" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%\um\x64"
+  #
+  # Set CLANGPDB HOST_APPLICATION options
+  #
+  CLANGPDB:*_*_*_CC_FLAGS     = $(VISUAL_STUDIO_DEFINES)
+  #
+  # Must override DLINK_FLAGS to remove /DLL when linking .exe
+  #
+  CLANGPDB:*_*_*_DLINK_FLAGS   == /out:"$(BIN_DIR)\$(MODULE_NAME_GUID).exe" /NOLOGO /SUBSYSTEM:CONSOLE /WHOLEARCHIVE /STACK:0x00800000,0x00800000 /IGNORE:4099 /SAFESEH:NO
+  CLANGPDB:*_*_IA32_DLINK_FLAGS = $(VISUAL_STUDIO_IA32_LIB_PATHS)
+  CLANGPDB:*_*_X64_DLINK_FLAGS  = $(VISUAL_STUDIO_X64_LIB_PATHS)
+  CLANGPDB:*_*_*_DLINK_FLAGS    = /DEBUG /pdb:"$(BIN_DIR)\$(MODULE_NAME_GUID).pdb"
+!if $(UNIT_TESTING_ADDRESS_SANITIZER_ENABLE)
+  #
+  # Remove default library clang_rt.profile.lib that is not includes with Visual Studio
+  #
+  CLANGPDB:*_*_IA32_DLINK_FLAGS = /NODEFAULTLIB:clang_rt.profile.lib
+  #
+  # Add Address Sanitizer runtime libraries for IA32/X64 architectures
+  #
+  CLANGPDB:*_*_IA32_DLINK_FLAGS = clang_rt.profile-i386.lib clang_rt.asan_dynamic-i386.lib clang_rt.asan_dynamic_runtime_thunk-i386.lib
+  CLANGPDB:*_*_X64_DLINK_FLAGS  = clang_rt.profile-x86_64.lib clang_rt.asan_dynamic-x86_64.lib clang_rt.asan_dynamic_runtime_thunk-x86_64.lib
+!endif
 
   #
   # Set GCC HOST_APPLICATION options
   #
-  GCC:*_*_*_CC_FLAGS        =  -Wno-write-strings
-  GCC:*_*_IA32_DLINK_FLAGS  == -o $(BIN_DIR)/$(MODULE_NAME_GUID) -z noexecstack -m32 -no-pie
-  GCC:*_*_X64_DLINK_FLAGS   == -o $(BIN_DIR)/$(MODULE_NAME_GUID) -z noexecstack -m64 -no-pie
+  GCC:*_*_*_CC_FLAGS           =  -Wno-write-strings -fpie
+  GCC:*_*_IA32_DLINK_FLAGS     == -o $(BIN_DIR)/$(MODULE_NAME_GUID) -m32
+  GCC:*_*_X64_DLINK_FLAGS      == -o $(BIN_DIR)/$(MODULE_NAME_GUID) -m64
+  GCC:*_GCC_*_DLINK_FLAGS      =  -z noexecstack
+  GCC:*_GCC5_*_DLINK_FLAGS     =  -z noexecstack
+  GCC:*_GCCNOLTO_*_DLINK_FLAGS =  -z noexecstack
+!if $(WIN_MINGW32_BUILD)
+  GCC:*_CLANGDWARF_*_DLINK_FLAGS = -Wl,--pdb,$(BIN_DIR)\$(MODULE_NAME_GUID).pdb -g3
+!else
+  GCC:*_CLANGDWARF_*_DLINK_FLAGS = -z noexecstack
+!endif
+
 !if $(UNIT_TESTING_ADDRESS_SANITIZER_ENABLE)
   #
   # Enable Address Sanitizer linker options
@@ -123,20 +244,11 @@
   GCC:*_CLANGDWARF_*_DLINK_FLAGS = -fprofile-instr-generate -fcoverage-mapping
 !endif
   #
-  # Surround our static libraries with whole-archive, so constructor-based test registration works properly.
-  # Note that we need to --no-whole-archive before linking system libraries.
+  # Surround static libraries with whole-archive, so constructor-based test registration works properly.
+  # Change to --no-whole-archive before linking system libraries.
   #
   GCC:*_*_*_DLINK_FLAGS    = -Wl,--whole-archive
   GCC:*_*_*_DLINK2_FLAGS   == -Wl,--no-whole-archive -lpthread -lstdc++ -lm
-
-  #
-  # Set CLANGPDB HOST_APPLICATION options
-  #
-  CLANGPDB:*_*_*_DLINK_FLAGS   == /nologo /SUBSYSTEM:CONSOLE /DEBUG /out:"$(BIN_DIR)\$(MODULE_NAME_GUID).exe" /pdb:"$(BIN_DIR)\$(MODULE_NAME_GUID).pdb" /WHOLEARCHIVE /STACK:0x00800000,0x00800000
-  CLANGPDB:*_*_X64_DLINK_FLAGS  = /LIBPATH:"%VCToolsInstallDir%lib\x64" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x64" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%\um\x64"
-!if $(UNIT_TESTING_ADDRESS_SANITIZER_ENABLE)
-  CLANGPDB:*_*_X64_DLINK_FLAGS  = clang_rt.profile-x86_64.lib clang_rt.asan_dynamic-x86_64.lib clang_rt.asan_dynamic_runtime_thunk-x86_64.lib
-!endif
 
   #
   # Need to do this link via gcc and not ld as the pathing to libraries changes from OS version to OS version

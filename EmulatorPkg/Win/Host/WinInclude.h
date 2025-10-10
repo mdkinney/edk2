@@ -14,10 +14,12 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 // compile at /W4 (highest warning level) with /WX (warnings cause build
 // errors).
 //
-#pragma warning(disable : 4115)
-#pragma warning(disable : 4201)
-#pragma warning(disable : 4028)
-#pragma warning(disable : 4133)
+#if !defined (__clang__)
+  #pragma warning(disable : 4115)
+  #pragma warning(disable : 4201)
+  #pragma warning(disable : 4028)
+  #pragma warning(disable : 4133)
+#endif
 
 #define GUID              _WINNT_DUP_GUID_____
 #define _LIST_ENTRY       _WINNT_DUP_LIST_ENTRY_FORWARD
@@ -65,7 +67,11 @@ typedef UINT32 size_t;
 //
 // Set the warnings back on as the EFI code must be /W4.
 //
-#pragma warning(default : 4115)
-#pragma warning(default : 4201)
+#if !defined (__clang__)
+  #pragma warning(default : 4115)
+  #pragma warning(default : 4201)
+#endif
+
+#undef IMAGE_FILE_MACHINE_ARM64
 
 #endif
