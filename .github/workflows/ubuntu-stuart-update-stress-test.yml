@@ -1,0 +1,81 @@
+## @file
+# A workflow using Ubuntu to stress stuart_update
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Ubuntu Stress Test for stuart_update
+
+on:
+  workflow_dispatch:
+    inputs:
+      linux-runs-on:
+        description: The runner label for Linux jobs.
+        required: true
+        type: string
+        default: 'ubuntu-24.04'
+      linux-container-image:
+        description: The container image for Linux jobs.
+        required: true
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      edk2-tools-build-params:
+        description: The EDK2 Tools build parameters.
+        required: true
+        type: string
+        default: '-t CLANGPDB'
+      stuart-update-iterations:
+        description: Number of stuart_update iterations to run in stress test.
+        required: false
+        type: string
+        default: '100'
+
+jobs:
+  build_linux_packages:
+    name: Run stuart_update Stress Test on Linux ${{ matrix.item }}
+    runs-on: ${{ inputs.linux-runs-on }}
+    container:
+      image: ${{ inputs.linux-container-image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        item  : [0,1,2,3,4,5,6,7,8,9]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Setup Linux CLANG Job ${{ matrix.item }}
+        uses: ./.github/actions/setup-job
+        with:
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: Run stuart_update Stress Test in a loop
+        shell: bash
+        run: |
+          for i in $(seq 1 ${{ inputs.stuart-update-iterations }}); do
+            echo "Iteration $i of stuart_update"
+            if ! stuart_update -c ${{ inputs.stuart-ci-settings-file }}; then
+              echo "stuart_update failed on iteration $i"
+              exit 1
+            fi
+          done
+
+

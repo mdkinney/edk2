@@ -1,0 +1,195 @@
+## @file
+# A workflow using Ubuntu GCC tools to run Basic Acceptance Tests (BAT)
+# on packages and platforms and uploads artifacts.
+#
+# Firmware Build Support:             GCC          - IA32/X64/AARCH64/RISCV64
+# Firmware Build Support:             GCCNOLTO     - IA32/X64/AARCH64
+# Host-Based Unit Test Build Support: GCC/GCCNOLTO - IA32/X64
+# EmulatorPkg Build Support:          GCC/GCCNOLTO - IA32/X64
+#
+# NOTE: GCCNOLTO has many open issues
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Ubuntu GCC Basic Acceptance Test
+
+on:
+  workflow_call:
+    inputs:
+      linux-runs-on:
+        description: The runner label for Linux jobs.
+        required: true
+        type: string
+        default: 'ubuntu-24.04'
+      linux-container-image:
+        description: The container image for Linux jobs.
+        required: true
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      edk2-tools-build-params:
+        description: The EDK2 Tools build parameters.
+        required: true
+        type: string
+        default: '-t GCC'
+      firmware-test-arch-list:
+        description: List of firmware test architectures to build.
+        required: false
+        type: string
+        default: '["IA32", "X64", "AARCH64", "RISCV64"]'
+      tool-chain-tag-list:
+        description: List of tool chain tags to test.
+        required: true
+        type: string
+        default: '["GCC"]'
+
+  workflow_dispatch:
+    inputs:
+      linux-runs-on:
+        description: The runner label for Linux jobs.
+        required: true
+        type: string
+        default: 'ubuntu-24.04'
+      linux-container-image:
+        description: The container image for Linux jobs.
+        required: true
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      edk2-tools-build-params:
+        description: The EDK2 Tools build parameters.
+        required: true
+        type: string
+        default: '-t GCC'
+      firmware-test-arch-list:
+        description: List of firmware test architectures to build.
+        required: false
+        type: string
+        default: '["IA32", "X64", "AARCH64", "RISCV64"]'
+      tool-chain-tag-list:
+        description: List of tool chain tags to test.
+        required: true
+        type: string
+        default: '["GCC"]'
+
+jobs:
+  build_linux_gcc_packages_basic_acceptance_test:
+    name: Build Linux ${{ matrix.tool_chain_tag }} Packages Basic Acceptance Test
+    runs-on: ${{ inputs.linux-runs-on }}
+    container:
+      image: ${{ inputs.linux-container-image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        tool_chain_tag: ${{ fromJSON(inputs.tool-chain-tag-list) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Setup Linux GCC Job
+        uses: ./.github/actions/setup-job
+        with:
+          linux-host-compiler: 'gcc'
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: Build HelloWorld ${{ matrix.tool_chain_tag }}
+        run: |
+          . ./edksetup.sh
+          # Convert JSON array to build command architecture list (e.g. -a IA32 -a X64)
+          ARCH_LIST=$(echo '${{ inputs.firmware-test-arch-list }}' | sed 's/\[//g; s/\]//g; s/"//g; s/,/ -a /g; s/^/-a /')
+          build $ARCH_LIST -t ${{ matrix.tool_chain_tag }} -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldGccBuild.log >NUL
+      - name: Build UnitTestFrameworkPkg X64 Unit Tests ${{ matrix.tool_chain_tag }}
+        run: |
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" -a X64 -t NOOPT TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p UnitTestFrameworkPkg
+      - name: Build UnitTestFrameworkPkg IA32 Unit Tests ${{ matrix.tool_chain_tag }}
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t ${{ matrix.tool_chain_tag }} -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
+      - name: Upload Linux ${{ matrix.tool_chain_tag }} Packages Basic Acceptance Test Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: Upload Linux ${{ matrix.tool_chain_tag }} Packages Basic Acceptance Test Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_linux_gcc_platforms_basic_acceptance_test:
+    name: Build Linux ${{ matrix.tool_chain_tag }} Platforms Basic Acceptance Test
+    runs-on: ${{ inputs.linux-runs-on }}
+    container:
+      image: ${{ inputs.linux-container-image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        tool_chain_tag: ${{ fromJSON(inputs.tool-chain-tag-list) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Setup Linux GCC Job
+        uses: ./.github/actions/setup-job
+        with:
+          linux-host-compiler: 'gcc'
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: Build EmulatorPkg X64 Unix Host Module ${{ matrix.tool_chain_tag }}
+        run: |
+          . ./edksetup.sh
+          build -a X64  -t ${{ matrix.tool_chain_tag }}      -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64DebugGccBuild.log >NUL
+      - name: Build EmulatorPkg IA32 Unix Host Module ${{ matrix.tool_chain_tag }}
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t ${{ matrix.tool_chain_tag }}      -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32DebugGccBuild.log >NUL
+      - name: Build OVMF IA32/X64 Platform ${{ matrix.tool_chain_tag }}
+        if: false
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -a X64 -t ${{ matrix.tool_chain_tag }}      -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64GccBuild.log >NUL
+      - name: Upload Linux ${{ matrix.tool_chain_tag }} Platforms Basic Acceptance Test Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: Upload Linux ${{ matrix.tool_chain_tag }} Platforms Basic Acceptance Test Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()

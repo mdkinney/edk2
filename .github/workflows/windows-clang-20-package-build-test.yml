@@ -1,0 +1,217 @@
+## @file
+# A workflow using Windows to run package builds and uploads artifacts.
+#
+# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+# Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
+# EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Windows CLANG 20.1.8 Build Packages Test
+
+on:
+  workflow_call:
+    inputs:
+      windows-runs-on:
+        description: The runner label for Windows jobs.
+        required: true
+        type: string
+        default: 'windows-2025'
+      windows-clang-installer:
+        description: Windows CLANG installer (e.g., edk2-clang, llvm, vs-clangpdb, or none)
+        required: true
+        type: string
+        default: 'none'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      edk2-tools-build-params:
+        description: The EDK2 Tools build parameters.
+        required: true
+        type: string
+        default: '-t CLANGPDB'
+      build-type-list:
+        description: List of build types to test.
+        required: true
+        type: string
+        default: '["DEBUG", "RELEASE"]'
+      build-arch-list:
+        description: List of build architectures to test.
+        required: true
+        type: string
+        default: '["IA32", "X64"]'
+      tool-chain-tag-list:
+        description: List of tool chain tags to test.
+        required: true
+        type: string
+        default: '["CLANGPDB", "CLANGDWARF"]'
+      package-lists:
+        description: List of package lists to test.
+        required: true
+        type: string
+        default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+      stuart-ci-build-params:
+        description: Additional Stuart CI build parameters.
+        required: false
+        type: string
+        # NO-TARGET:  ''
+        # Packages:   '--disable-all CompilerPlugin=run'
+        # Unit Tests: '--disable-all DISABLE_DEBUG_MACRO_CHECK HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run'
+        # Unit Tests no code coverage: '--disable-all DISABLE_DEBUG_MACRO_CHECK HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run CODE_COVERAGE=FALSE'
+        default: ''
+
+jobs:
+  filter_packages:
+    runs-on: ubuntu-latest
+    outputs:
+      filtered-matrix: ${{ steps.filter-matrix.outputs.filtered-matrix }}
+    steps:
+      - id: filter-matrix
+        env:
+          BUILD_TYPE_LIST: ${{ inputs.build-type-list }}
+          BUILD_ARCH_LIST: ${{ inputs.build-arch-list }}
+          TOOL_CHAIN_TAG_LIST: ${{ inputs.tool-chain-tag-list }}
+          PACKAGE_LISTS: ${{ inputs.package-lists }}
+        shell: python
+        run: |
+          import json
+          import os
+
+          FILTER_LIST = [
+            {
+            'build_type':    'NOOPT',
+            'build_arch':    'IA32',
+            'build_package': 'RedfishPkg'
+            },
+            {
+            'tool_chain_tag': 'GCCNOLTO',
+            'build_arch':     'RISCV64'
+            }
+          ]
+
+          def apply_filters_to_combination(combinations, filter_list):
+            for filter_item in filter_list:
+              combinations = filtered_combination(combinations, filter_item)
+            return combinations
+
+          def filtered_combination(combinations, filter_item):
+            filtered_combinations = []
+            for combo in combinations:
+              match = True
+              for key, value in filter_item.items():
+                if value not in combo.get(key).split(','):
+                  match = False
+                  break
+              if not match:
+                print('[no filter] combo:', combo)
+                filtered_combinations.append(combo)
+                continue
+              new_combo = combo.copy()
+              for key, value in filter_item.items():
+                combo_value_without_filter = ','.join([
+                  v for v in new_combo.get(key).split(',') if v != value
+                ])
+                combo_value_with_filter = ','.join([
+                  v for v in new_combo.get(key).split(',') if v == value
+                ])
+                if combo_value_without_filter:
+                  temp = new_combo.copy()
+                  temp[key] = combo_value_without_filter
+                  print('[add split] new_combo:', key, value, temp)
+                  filtered_combinations.append(temp)
+                if combo_value_with_filter:
+                  new_combo[key] = combo_value_with_filter
+                  print('[add keep] new_combo:', key, value, new_combo)
+            return filtered_combinations
+
+          print ('Inputs values...')
+          print ('  build-type-list:', os.environ['BUILD_TYPE_LIST'])
+          print ('  build-arch-list:', os.environ['BUILD_ARCH_LIST'])
+          print ('  tool-chain-tag-list:', os.environ['TOOL_CHAIN_TAG_LIST'])
+          print ('  package-lists:', os.environ['PACKAGE_LISTS'])
+
+          build_type_list = json.loads(os.environ['BUILD_TYPE_LIST'])
+          print ('Initial build_type_list:', build_type_list)
+          build_arch_list = json.loads(os.environ['BUILD_ARCH_LIST'])
+          print ('Initial build_arch_list:', build_arch_list)
+          tool_chain_tag_list = json.loads(os.environ['TOOL_CHAIN_TAG_LIST'])
+          print ('Initial tool_chain_tag_list:', tool_chain_tag_list)
+          package_lists = json.loads(os.environ['PACKAGE_LISTS'])
+          print ('Initial package_lists:', package_lists)
+
+          # Generate all combinations
+          combinations = []
+          for build_type in build_type_list:
+            for build_arch in build_arch_list:
+              for tool_chain_tag in tool_chain_tag_list:
+                for build_package in package_lists:
+                  combinations.append({
+                    'build_type': build_type,
+                    'build_arch': build_arch,
+                    'tool_chain_tag': tool_chain_tag,
+                    'build_package': build_package
+                  })
+
+          print(f'Total combinations before filtering: {len(combinations)}')
+          for i, combo in enumerate(combinations):
+            print(f'  {i+1}: {combo}')
+
+          filtered_combinations = apply_filters_to_combination(combinations, FILTER_LIST)
+          print(f'Total combinations after applying filters: {len(filtered_combinations)}')
+          for i, combo in enumerate(filtered_combinations):
+            print(f'  {i+1}: {combo}')
+
+          print(f'filtered-matrix={json.dumps(filtered_combinations)}')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+            f.write(f'filtered-matrix={json.dumps(filtered_combinations)}\n')
+
+  build_windows_packages:
+    name: Build Windows Packages ${{inputs.windows-clang-installer}}-${{ matrix.config.build_arch }}-${{ matrix.config.build_type }}-${{ matrix.config.tool_chain_tag }}-${{ strategy.job-index }}
+    needs: filter_packages
+    if: ${{ needs.filter_packages.outputs.filtered-matrix != '[]' }}
+    runs-on: ${{ inputs.windows-runs-on }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config: ${{ fromJSON(needs.filter_packages.outputs.filtered-matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows CLANG Job
+        uses: ./.github/actions/setup-job
+        with:
+          windows-clang-installer: ${{ inputs.windows-clang-installer }}
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: Build Packages ${{ matrix.config.build_package }}
+        shell: cmd
+        run: |
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" -a ${{ matrix.config.build_arch }} -t ${{ matrix.config.build_type }} TOOL_CHAIN_TAG=${{ matrix.config.tool_chain_tag }} -p ${{ matrix.config.build_package }} ${{ inputs.stuart-ci-build-params }}
+      - name: Upload Windows Packages Logs ${{inputs.windows-clang-installer}}-${{ matrix.config.build_arch }}-${{ matrix.config.build_type }}-${{ matrix.config.tool_chain_tag }}-${{ strategy.job-index }}
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Packages Logs ${{inputs.windows-clang-installer}}-${{ matrix.config.build_arch }}-${{ matrix.config.build_type }}-${{ matrix.config.tool_chain_tag }}-${{ strategy.job-index }}
+          if-no-files-found: ignore
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+
