@@ -1,0 +1,44 @@
+## @file
+# A workflow using a staged build with Ubuntu compilers and Windows compilers
+# to perform a sequence of quality checks, basic acceptance tests, package
+# tests, platform tests, and uploads artifacts.
+#
+# This top level file configures the conditions this workflow run and
+# configures parameters to pass to the staged-build.yml workflow that implements
+# the staged build process.
+#
+# Copyright (C) 2026 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Run Staged Build
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - sandbox/master
+      - clang_ci_v5*
+  push:
+    branches:
+      - sandbox/master
+
+jobs:
+  staged_build:
+    name: Staged Build
+    uses: ./.github/workflows/staged-build.yml
+    with:
+      linux-runs-on: 'ubuntu-24.04'
+      linux-container-image: 'ghcr.io/tianocore/containers/ubuntu-24-build:latest'
+      windows-runs-on: 'windows-2025'
+      python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
+      enable-code-quality-checks: true
+      enable-basic-acceptance-tests: true
+      enable-linux-clang-tests: true
+      enable-linux-gcc-tests: true
+      enable-linux-gccnolto-tests: false
+      enable-windows-visual-studio-tests: false
+      enable-windows-clang-tests: true
+      skip-filter-list: '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
+      continue-on-error-filter-list: '[{"tool_chain_tag": "GCCNOLTO"}]'

@@ -1,0 +1,77 @@
+## @file
+# Composite action that Installs Python in a virtual environment, installs
+# pip requirements, and adds Python virtual environment to PATH.
+# Caches the virtual environment to avoid re-installing on subsequent runs.
+#
+# Copyright (C) 2026 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+name: Install Python in venv and install pip-requirements.txt
+description: Use cache restore/save with Python venv installer and pip-requirements add it to PATH'
+inputs:
+  python-version:
+    description: Python version to install (e.g., 3.12)
+    required: true
+  pip-requirements:
+    description: Path to pip requirements file
+    required: true
+    default: 'pip-requirements.txt'
+  cache-name-suffix:
+    description: Suffix for cache name to allow multiple caches
+    required: false
+    default: ''
+runs:
+  using: 'composite'
+  steps:
+    - name: Restore cached venv
+      id: cache-venv
+      uses: actions/cache/restore@v5
+      with:
+        path: .venv
+        key: ${{ runner.os }}-Python-${{ inputs.python-version }}-venv-${{ hashFiles(inputs.pip-requirements) }}${{ inputs.cache-name-suffix }}
+    - name: Set up Python ${{ inputs.python-version }}
+      if: ${{ steps.cache-venv.outputs.cache-hit != 'true' }}
+      uses: actions/setup-python@v6
+      with:
+        python-version: ${{ inputs.python-version }}
+    - name: Linux Create venv if cache missed
+      if: ${{ steps.cache-venv.outputs.cache-hit != 'true' && runner.os == 'Linux' }}
+      shell: bash
+      run: |
+        python -m venv --copies .venv
+        source .venv/bin/activate
+        python -m pip install --no-cache-dir --upgrade pip
+        pip install --no-cache-dir -r ${{ inputs.pip-requirements }}
+    - name: Windows Create and install venv if cache missed
+      if: ${{ steps.cache-venv.outputs.cache-hit != 'true' && runner.os == 'Windows' }}
+      shell: cmd
+      run: |
+        python -m venv --copies .venv
+        PATH=%CD%\.venv\Scripts;%PATH%
+        python -m pip install --no-cache-dir --upgrade pip
+        pip install --no-cache-dir -r ${{ inputs.pip-requirements }}
+    - name: Save venv cache
+      uses: actions/cache/save@v5
+      if: ${{ steps.cache-venv.outputs.cache-hit != 'true' }}
+      with:
+        path: .venv
+        key: ${{ steps.cache-venv.outputs.cache-primary-key }}
+    - name: Windows Add venv to PATH
+      if: ${{ runner.os == 'Windows' }}
+      shell: cmd
+      run: |
+        echo VIRTUAL_ENV=%CD%\.venv>> %GITHUB_ENV%
+        echo %CD%\.venv\Scripts>> %GITHUB_PATH%
+    - name: Linux Add venv to PATH
+      if: ${{ runner.os == 'Linux' }}
+      shell: bash
+      run: |
+        echo "VIRTUAL_ENV=$PWD/.venv" >> $GITHUB_ENV
+        echo "$PWD/.venv/bin" >> $GITHUB_PATH
+    - name: List venv pip inventory
+      shell: bash
+      run: |
+        python --version
+        pip --version
+        pip list --verbose --no-cache-dir

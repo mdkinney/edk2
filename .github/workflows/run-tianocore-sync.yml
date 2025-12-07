@@ -1,0 +1,38 @@
+## @file
+# A workflow using to sync sandbox/master with tianocore edk2/master
+#
+# Copyright (C) 2026 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Run Sync with TianoCore
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */2 * * *'
+
+jobs:
+  sync:
+    name: Sync with TianoCore
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sandbox/master branch
+        uses: actions/checkout@v4
+        with:
+          ref: sandbox/master
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Add tianocore remote
+        run: git remote add tianocore https://github.com/tianocore/edk2.git
+      - name: Fetch tianocore changes
+        run: git fetch tianocore master
+      - name: Sync with tianocore master
+        run: |
+          git checkout sandbox/master
+          git rebase tianocore/master
+      - name: Push changes
+        run: git push origin sandbox/master --force

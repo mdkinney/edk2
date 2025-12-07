@@ -1,0 +1,55 @@
+## @file
+# Composite action that sets up a Windows MINGW edk2-clang environment for
+# CI jobs that builds packages and uploads artifacts. Caching is used to avoid
+# re-installing LLVMon subsequent runs.
+#
+# * Installs TianoCore MINGW edk2-clang support, adds edk2-clang to PATH, and
+#   sets CLANG_BIN, BASETOOLS_MINGW_PATH, CC, and CXX environment variables.
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+name: Windows Setup MINGW edk2-clang Job
+description: Windows setup MINGW edk2-clang environment for CI jobs
+inputs:
+  edk2-clang-version:
+    description: The edk2-clang version to install (e.g., 20.1.8)
+    required: true
+  edk2-clang-version-patch-level:
+    description: The edk2-clang version patch level to install (e.g., 0)
+    required: true
+  edk2-clang-install_path:
+    description: The path where edk2-clang is installed (e.g., C:\edk2-clang)
+    required: false
+    default: 'C:\edk2-clang'
+runs:
+  using: 'composite'
+  steps:
+    - name: Restore TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }} from cache
+      id: cache-edk2-clang
+      uses: actions/cache/restore@v5
+      with:
+        path: ${{ inputs.edk2-clang-install_path }}
+        key: ${{ runner.os }}-edk2-clang-${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}
+    - name: Install TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}
+      if: ${{ steps.cache-edk2-clang.outputs.cache-hit != 'true' }}
+      shell: cmd
+      run: |
+        curl -L -o EdkClangSetup-${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v${{ inputs.edk2-clang-version }}/EdkClangSetup-${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}.exe
+        EdkClangSetup-${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}.exe /silent
+    - name: Save TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }} to cache
+      if: ${{ steps.cache-edk2-clang.outputs.cache-hit != 'true' }}
+      uses: actions/cache/save@v5
+      with:
+        path: ${{ inputs.edk2-clang-install_path }}
+        key: ${{ steps.cache-edk2-clang.outputs.cache-primary-key }}
+    - name: Add TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }} to PATH
+      shell: cmd
+      run: |
+        PATH=${{ inputs.edk2-clang-install_path }}\bin;%PATH%
+        echo PATH=%PATH%>> %GITHUB_ENV%
+        echo CLANG_BIN=${{ inputs.edk2-clang-install_path }}\bin\>> %GITHUB_ENV%
+        echo BASETOOLS_MINGW_PATH=${{ inputs.edk2-clang-install_path }}>> %GITHUB_ENV%
+        echo CC=clang>> %GITHUB_ENV%
+        echo CXX=clang++>> %GITHUB_ENV%
