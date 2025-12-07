@@ -1,0 +1,138 @@
+## @file
+# A workflow using Windows tools to build EmulatorPkg and uploads artifacts.
+#
+# TARGET     Feature Enable/Disable
+# ========== ==========================
+# DEBUG      NETWORK_ENABLE=FALSE
+# RELEASE    NETWORK_ENABLE=TRUE
+# NOOPT      SECURE_BOOT_ENABLE=TRUE
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Windows EmulatorPkg Test
+
+on:
+  workflow_call:
+    inputs:
+      windows-runs-on:
+        description: The runner label for Windows jobs.
+        required: true
+        type: string
+        default: 'windows-2025'
+      windows-installer:
+        description: Windows compiler installer (e.g., edk2-clang, llvm, vs-clangpdb, or vs)
+        required: true
+        type: string
+        default: 'vss'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: false
+        type: string
+        default: 'EmulatorPkg/PlatformCI/PlatformBuild.py'
+      edk2-tools-build-params:
+        description: The EDK2 Tools build parameters.
+        required: true
+        type: string
+        default: '-t CLANGPDB'
+      edk-setup-params:
+        description: The EDK2 setup parameters.
+        required: false
+        type: string
+        default: 'Mingw-w64'
+      build-arch-list:
+        description: List of build architectures to test.
+        required: true
+        type: string
+        default: '["IA32", "X64"]'
+      tool-chain-tag-list:
+        description: List of tool chain tags to test.
+        required: true
+        type: string
+        default: '["CLANGPDB", "CLANGDWARF"]'
+      emulatorpkg-target-list:
+        description: List of EmulatorPkg targets to build.
+        required: false
+        type: string
+        default: '["DEBUG", "RELEASE", "NOOPT"]'
+
+jobs:
+  build_windows_emulatorpkg_test:
+    name: Build Windows ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} EmulatorPkg Test
+    runs-on: ${{ inputs.windows-runs-on }}
+    defaults:
+          run:
+            shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        build_arch: ${{ fromJSON(inputs.build-arch-list) }}
+        tool_chain_tag: ${{ fromJSON(inputs.tool-chain-tag-list) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Job
+        uses: ./.github/actions/setup-job
+        with:
+          windows-installer: ${{ inputs.windows-installer }}
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: Stuart Build EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} DEBUG
+        if: contains(inputs.emulatorpkg-target-list, 'DEBUG')
+        run: |
+          stuart_build -c ${{ inputs.stuart-ci-settings-file }} \
+              DISABLE_DEBUG_MACRO_CHECK                         \
+              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }}       \
+              TARGET=DEBUG                                      \
+              -a ${{ matrix.build_arch }}                       \
+              BLD_*_NETWORK_ENABLE=FALSE                        \
+              BLD_*_NO_PLATFORM_BOOT_DELAYS                     \
+              MAKE_STARTUP_NSH=TRUE --FLASHROM
+          mv Build/BUILDLOG_EmulatorPkg_With_Run.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_DEBUG.txt
+      - name: Stuart Build EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} RELEASE
+        if: contains(inputs.emulatorpkg-target-list, 'RELEASE')
+        run: |
+          stuart_build -c ${{ inputs.stuart-ci-settings-file }} \
+              DISABLE_DEBUG_MACRO_CHECK                         \
+              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }}       \
+              TARGET=RELEASE                                    \
+              -a ${{ matrix.build_arch }}                       \
+              BLD_*_NETWORK_ENABLE=TRUE                         \
+              BLD_*_NO_PLATFORM_BOOT_DELAYS                     \
+              MAKE_STARTUP_NSH=TRUE --FLASHROM
+          mv Build/BUILDLOG_EmulatorPkg_With_Run.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_RELEASE.txt
+      - name: Stuart Build EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} NOOPT
+        if: contains(inputs.emulatorpkg-target-list, 'NOOPT')
+        run: |
+          stuart_build -c ${{ inputs.stuart-ci-settings-file }} \
+              DISABLE_DEBUG_MACRO_CHECK                         \
+              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }}       \
+              TARGET=NOOPT                                      \
+              -a ${{ matrix.build_arch }}                       \
+              BLD_*_SECURE_BOOT_ENABLE=TRUE                     \
+              BLD_*_NO_PLATFORM_BOOT_DELAYS                     \
+              MAKE_STARTUP_NSH=TRUE --FLASHROM
+          mv Build/BUILDLOG_EmulatorPkg_With_Run.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_NOOPT.txt
+      - name: Upload Windows EmulatorPkg ${{ inputs.windows-installer }} ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows EmulatorPkg ${{ inputs.windows-installer }} ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+

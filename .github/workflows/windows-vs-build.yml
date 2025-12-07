@@ -1,0 +1,153 @@
+## @file
+# A workflow using Windows Visual Studio tools that builds packages and uploads
+# artifacts.
+#
+# Firmware Build Support:             VS20xx - IA32/X64
+# Host-Based Unit Test Build Support: VS20xx - IA32/X64
+# EmulatorPkg Build Support:          VS20xx - IA32/X64
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Windows Visual Studio VS20xx Build
+
+on:
+  workflow_call:
+    inputs:
+      windows-runs-on:
+        description: The runner label for Windows jobs.
+        required: true
+        type: string
+        default: 'windows-2025'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      package-lists:
+        description: List of package lists to test (e.g. ["MdePkg,FatPkg","UefiCpuPkg"]).
+        required: true
+        type: string
+        default: '["FatPkg"]'
+      skip-filter-list:
+        description: List of filter criteria to skip.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
+        default: ''
+      continue-on-error-filter-list:
+        description: List of filter criteria to continue on error.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO"}]'
+        default: ''
+      tool-chain-tag-list:
+        description: List of tool chain tags to test.
+        required: true
+        type: string
+        default: '["VS2022"]'
+
+  workflow_dispatch:
+    inputs:
+      windows-runs-on:
+        description: The runner label for Windows jobs.
+        required: true
+        type: string
+        default: 'windows-2025'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      package-lists:
+        description: List of package lists to test (e.g. ["MdePkg,FatPkg","UefiCpuPkg"]).
+        required: true
+        type: string
+        default: '["FatPkg"]'
+      skip-filter-list:
+        description: List of filter criteria to skip.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
+        default: ''
+      continue-on-error-filter-list:
+        description: List of filter criteria to continue on error.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO"}]'
+        default: ''
+      tool-chain-tag-list:
+        description: List of tool chain tags to test.
+        required: true
+        type: string
+        default: '["VS2022"]'
+
+jobs:
+  build_windows_visual_studio_packages:
+    uses: ./.github/workflows/windows-package-build.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      windows-installer: 'vs'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t VS2022'
+      build-type-list: '["DEBUG,RELEASE,NOOPT"]'
+      build-arch-list: '["IA32","X64"]'
+      tool-chain-tag-list: ${{ inputs.tool-chain-tag-list }}
+      package-lists: ${{ inputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
+      stuart-ci-build-params: '--disable-all CompilerPlugin=run'
+
+  build_windows_visual_studio_noopt_unit_tests:
+    # Do not run for PR.  Covered by Ubuntu clang workflow.
+    if: ${{ github.event_name != 'pull_request' }}
+    uses: ./.github/workflows/windows-package-build.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      windows-installer: 'vs'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t VS2022'
+      build-type-list: '["NOOPT"]'
+      build-arch-list: '["IA32", "X64"]'
+      tool-chain-tag-list: ${{ inputs.tool-chain-tag-list }}
+      package-lists: ${{ inputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
+      stuart-ci-build-params: '--disable-all DISABLE_DEBUG_MACRO_CHECK HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run CODE_COVERAGE=FALSE'
+
+  build_windows_visual_studio_emulatorpkg:
+    if: ${{ contains(inputs.package-lists, 'EmulatorPkg') }}
+    uses: ./.github/workflows/windows-emulator-build.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      windows-installer: 'vs'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      edk2-tools-build-params: '-t VS2022'
+      edk-setup-params: ''
+      build-arch-list: '["IA32","X64"]'
+      tool-chain-tag-list: ${{ inputs.tool-chain-tag-list }}
