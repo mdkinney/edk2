@@ -297,6 +297,7 @@ FixupCmObjectSelfToken (
     return EFI_UNSUPPORTED;
   }
 
+  TokenFixerFunc = NULL;
   if (GET_CM_NAMESPACE_ID (CmObjDesc->ObjectId) == EObjNameSpaceArm) {
     ArmNamespaceObjId = GET_CM_OBJECT_ID (CmObjDesc->ObjectId);
     if (ArmNamespaceObjId >= EArmObjMax) {
