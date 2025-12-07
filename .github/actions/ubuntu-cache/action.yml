@@ -1,0 +1,53 @@
+name: 'Ubuntu Cache and Stuart Init'
+description: 'Ubuntu save/restore cache and setup Stuart environment'
+runs:
+  using: "composite"
+  steps:
+    - uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: mono-complete build-essential llvm-20 clang-20 lld-20 uuid-dev lcov python3.12 gcc-multilib g++-multilib libx11-dev libx11-6 libxext6 libxext-dev
+        version: 1.0
+    - name: Install i386 libs
+      shell: bash
+      run: |
+        sudo dpkg --add-architecture i386
+        sudo apt-get update
+        sudo apt-get install -y libc6-i386 libc6-dev-i386 libxext6:i386 libxext-dev:i386
+    - name: Install mono certs
+      shell: bash
+      run: sudo cert-sync --user /etc/ssl/certs/ca-certificates.crt
+    - name: Cache submodules
+      id: cache-submodules
+      uses: actions/cache@v4
+      with:
+        path: |
+          .git/modules
+        key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
+    - name: Restore cached venv
+      uses: actions/cache/restore@v4
+      id: cache-venv
+      with:
+        path: .venv
+        key: ${{ runner.os }}-venv-${{ hashFiles('pip-requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-venv-
+    - name: Create and install venv if cache missed
+      shell: bash
+      if: steps.cache-venv.outputs.cache-hit != 'true'
+      run: |
+        python -m venv .venv
+        source .venv/bin/activate
+        python -m pip install --upgrade pip
+        pip install -r pip-requirements.txt
+    - name: Save venv cache
+      uses: actions/cache/save@v4
+      if: steps.cache-venv.outputs.cache-hit != 'true'
+      with:
+        path: .venv
+        key: ${{ steps.cache-venv.outputs.cache-primary-key }}
+    - name: Add /usr/bin to PATH
+      shell: bash
+      run: echo "PATH=/usr/lib/llvm-20/bin:$PATH" >> $GITHUB_ENV
+    - name: Set PATH to use venv
+      shell: bash
+      run: echo "PATH=$PWD/.venv/bin:$PATH" >> $GITHUB_ENV

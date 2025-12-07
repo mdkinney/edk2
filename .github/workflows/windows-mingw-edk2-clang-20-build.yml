@@ -1,0 +1,194 @@
+## @file
+# A workflow using Windows MINGW edk2-clang tools that builds packages and
+# uploads artifacts.
+#
+# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+# Host-Based Unit Test Build Support: CLANGDWARF          - X64
+# EmulatorPkg Build Support:          CLANGDWARF          - X64
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Windows Mingw edk2-clang 20.1.8 Build
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - sandbox/master
+
+jobs:
+  build_windows_mingw_edk2_clang_precheck:
+    name: Build Windows Mingw edk2-clang Precheck
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Mingw edk2-clang Job
+        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
+        with:
+          edk2-clang-version: '20.1.8'
+          edk2-clang-version-patch-level: '0'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t CLANGPDB'
+      - name: Build HelloWorld CLANGPDB
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
+      - name: Build HelloWorld CLANGDWARF
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          build -a IA32 -a X64 -t CLANGDWARF -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangDwarfBuild.log >NUL
+      - name: 'Build UnitTestFrameworkPkg X64 Unit Tests'
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
+      - name: Build EmulatorPkg X64 Host Module
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          call build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64DebugBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64ReleaseBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64NooptBuild.log >NUL
+      - name: 'Build OVMF Platform CLANGPDB'
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64BuildClangPdb.log >NUL
+      - name: Build OVMF Platform CLANGDWARF
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          build -a IA32 -a X64 -t CLANGDWARF -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64BuildClangDwarf.log >NUL
+      - name: Upload Windows Mingw edk2-clang Precheck Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Mingw edk2-clang Precheck Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_mingw_edk2_clang_packages:
+    name: Build Windows Mingw edk2-clang Packages (${{ join(matrix.*, ' - ') }})
+    needs: build_windows_mingw_edk2_clang_precheck
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - DEBUG
+          - RELEASE
+        build_arch:
+          - IA32
+          - X64
+        tool_chain_tag:
+          - CLANGPDB
+          - CLANGDWARF
+        build_package:
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Mingw edk2-clang Job
+        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
+        with:
+          edk2-clang-version: '20.1.8'
+          edk2-clang-version-patch-level: '0'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
+      - name: Build Windows Mingw edk2-clang Packages ${{ matrix.tool_chain_tag }}
+        shell: cmd
+        run:
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
+      - name: Upload Windows Mingw edk2-clang Packages Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Mingw edk2-clang Packages Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_mingw_edk2_clang_noopt_unit_tests:
+    name: Build Windows Mingw edk2-clang Unit Tests (${{ join(matrix.*, ' - ') }})
+    needs: build_windows_mingw_edk2_clang_precheck
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - NOOPT
+        build_arch:
+          - X64
+        tool_chain_tag:
+          - CLANGDWARF
+        build_package:
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Mingw edk2-clang Job
+        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
+        with:
+          edk2-clang-version: '20.1.8'
+          edk2-clang-version-patch-level: '0'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
+      - name: Build Windows Mingw edk2-clang Unit Tests ${{ matrix.tool_chain_tag }}
+        shell: cmd
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
+      - name: Upload Windows Mingw edk2-clang Unit Test Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Mingw edk2-clang Unit Test Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_mingw_edk2_clang_emulatorpkg:
+    name: Build Windows Mingw edk2-clang EmulatorPkg
+    needs: build_windows_mingw_edk2_clang_precheck
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Mingw edk2-clang Job
+        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
+        with:
+          edk2-clang-version: '20.1.8'
+          edk2-clang-version-patch-level: '0'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t CLANGDWARF'
+      - name: Build Windows Mingw edk2-clang EmulatorPkg
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          call build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorX64NooptBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorX64DebugBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorX64ReleaseBuild.log >NUL
+      - name: Upload Windows Mingw edk2-clang EmulatorPkg Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Mingw edk2-clang EmulatorPkg Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
