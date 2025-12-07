@@ -1,0 +1,133 @@
+## @file
+# A workflow using Windows Visual Studio VS20xx tools to run Basic Acceptance
+# Tests (BAT) on packages and platforms and uploads artifacts.
+#
+# Firmware Build Support:             VS20xx - IA32/X64
+# Host-Based Unit Test Build Support: VS20xx - IA32/X64
+# EmulatorPkg Build Support:          VS20xx - IA32/X64
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Windows Visual Studio VS20xx Basic Acceptance Test
+
+on:
+  workflow_call:
+    inputs:
+      windows-runs-on:
+        description: The runner label for Windows jobs.
+        required: true
+        type: string
+        default: 'windows-2025'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      edk2-tools-build-params:
+        description: The EDK2 Tools build parameters.
+        required: true
+        type: string
+        default: '-t VS2022'
+      tool-chain-tag-list:
+        description: List of tool chain tags to test.
+        required: true
+        type: string
+        default: '["VS2022"]'
+
+jobs:
+  build_windows_visual_studio_packages_basic_acceptance_test:
+    name: Build Windows Visual Studio ${{ matrix.tool_chain_tag }} Packages Basic Acceptance Test
+    runs-on: ${{ inputs.windows-runs-on }}
+    strategy:
+      fail-fast: false
+      matrix:
+        tool_chain_tag: ${{ fromJSON(inputs.tool-chain-tag-list) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Visual Studio ${{ matrix.tool_chain_tag }} Job
+        uses: ./.github/actions/setup-job
+        with:
+          windows-clang-installer: 'none'
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: Build HelloWorld ${{ matrix.tool_chain_tag }}
+        shell: cmd
+        run: |
+          call edksetup.bat ${{ matrix.tool_chain_tag }}
+          call build -a IA32 -a X64 -t ${{ matrix.tool_chain_tag }} -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorld${{ matrix.tool_chain_tag }}Build.log >NUL
+      - name: Build UnitTestFrameworkPkg X64 Unit Tests
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p UnitTestFrameworkPkg CODE_COVERAGE=FALSE
+      - name: Build UnitTestFrameworkPkg IA32 Unit Tests
+        shell: cmd
+        run: |
+          call edksetup.bat ${{ matrix.tool_chain_tag }}
+          call build -a IA32 -t ${{ matrix.tool_chain_tag }} -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
+      - name: Upload Windows Visual Studio ${{ matrix.tool_chain_tag }} Packages Basic Acceptance Test Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Visual Studio ${{ matrix.tool_chain_tag }} Packages Basic Acceptance Test Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_visual_studio_platforms_basic_acceptance_test:
+    name: Build Windows Visual Studio ${{ matrix.tool_chain_tag }} Platforms Basic Acceptance Test
+    runs-on: ${{ inputs.windows-runs-on }}
+    strategy:
+      fail-fast: false
+      matrix:
+        tool_chain_tag: ${{ fromJSON(inputs.tool-chain-tag-list) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Visual Studio ${{ matrix.tool_chain_tag }} Job
+        uses: ./.github/actions/setup-job
+        with:
+          windows-clang-installer: 'none'
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: Build EmulatorPkg X64 Host Module
+        shell: cmd
+        run: |
+          call edksetup.bat ${{ matrix.tool_chain_tag }}
+          call build -a X64 -t ${{ matrix.tool_chain_tag }} -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64DebugBuild.log >NUL
+      - name: Build EmulatorPkg IA32 Host Module
+        shell: cmd
+        run: |
+          call edksetup.bat ${{ matrix.tool_chain_tag }}
+          call build -a IA32 -t ${{ matrix.tool_chain_tag }} -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32DebugBuild.log >NUL
+      - name: Build OVMF Platform
+        shell: cmd
+        run: |
+          call edksetup.bat ${{ matrix.tool_chain_tag }}
+          call build -a IA32 -a X64 -t ${{ matrix.tool_chain_tag }} -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
+      - name: Upload Windows Visual Studio ${{ matrix.tool_chain_tag }} Platforms Basic Acceptance Test Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Visual Studio ${{ matrix.tool_chain_tag }} Platforms Basic Acceptance Test Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()

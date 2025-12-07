@@ -1,0 +1,117 @@
+## @file
+# A workflow using Windows MINGW edk2-clang tools that builds packages and
+# uploads artifacts.
+#
+# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+# Host-Based Unit Test Build Support: CLANGDWARF          - X64
+# EmulatorPkg Build Support:          CLANGDWARF          - X64
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Windows Mingw edk2-clang 20.1.8 Build
+
+on:
+  workflow_call:
+    inputs:
+      windows-runs-on:
+        description: The runner label for Windows jobs.
+        required: true
+        type: string
+        default: 'windows-2025'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      package-lists:
+        description: List of package lists to test.
+        required: true
+        type: string
+        default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+
+  workflow_dispatch:
+    inputs:
+      windows-runs-on:
+        description: The runner label for Windows jobs.
+        required: true
+        type: string
+        default: 'windows-2025'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      package-lists:
+        description: List of package lists to test.
+        required: true
+        type: string
+        default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+
+jobs:
+  build_windows_mingw_edk2_clang_packages:
+    uses: ./.github/workflows/windows-clang-20-package-build-test.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      windows-clang-installer: 'edk2-clang'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-a X64 -t CLANGPDB'
+      build-type-list: '["DEBUG,RELEASE,NOOPT"]'
+      build-arch-list: '["IA32", "X64"]'
+      tool-chain-tag-list: '["CLANGPDB", "CLANGDWARF"]'
+      package-lists: ${{ inputs.package-lists }}
+      stuart-ci-build-params: '--disable-all CompilerPlugin=run'
+
+  build_windows_mingw_edk2_clang_noopt_unit_tests:
+    # Do not run for PR.  Covered by Ubuntu clang workflow.
+    if: ${{ github.event_name != 'pull_request' }}
+    uses: ./.github/workflows/windows-clang-20-package-build-test.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      windows-clang-installer: 'edk2-clang'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-a X64 -t CLANGDWARF'
+      build-type-list: '["NOOPT"]'
+      build-arch-list: '["X64"]'
+      tool-chain-tag-list: '["CLANGDWARF"]'
+      package-lists: ${{ inputs.package-lists }}
+      stuart-ci-build-params: '--disable-all DISABLE_DEBUG_MACRO_CHECK HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run'
+
+  build_windows_mingw_edk2_clang_emulatorpkg:
+    # Do not run for PR.  Covered by mingw-llvm workflow.
+    if: ${{ github.event_name != 'pull_request' && contains(inputs.package-lists, 'EmulatorPkg') }}
+    uses: ./.github/workflows/windows-clang-20-emulator-build-test.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      windows-clang-installer: 'edk2-clang'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-a X64 -t CLANGDWARF'
+      edk-setup-params: 'Mingw-w64'
+      build-arch-list: '["X64"]'
+      tool-chain-tag-list: '["CLANGDWARF"]'
