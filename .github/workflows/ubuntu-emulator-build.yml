@@ -1,0 +1,143 @@
+## @file
+# A workflow using Ubuntu tools to build EmulatorPkg and uploads artifacts.
+#
+# TARGET     Feature Enable/Disable
+# ========== ==========================
+# DEBUG      NETWORK_ENABLE=FALSE
+# RELEASE    NETWORK_ENABLE=TRUE
+# NOOPT      SECURE_BOOT_ENABLE=TRUE
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Ubuntu EmulatorPkg Test
+
+on:
+  workflow_call:
+    inputs:
+      linux-runs-on:
+        description: The runner label for Linux jobs.
+        required: true
+        type: string
+        default: 'ubuntu-24.04'
+      linux-container-image:
+        description: The container image for Linux jobs.
+        required: true
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      linux-host-compiler:
+        description: Linux Host Compiler (e.g., clang, gcc)
+        required: false
+        type: string
+        default: 'clang'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: false
+        type: string
+        default: 'EmulatorPkg/PlatformCI/PlatformBuild.py'
+      edk2-tools-build-params:
+        description: The EDK2 Tools build parameters.
+        required: true
+        type: string
+        default: '-t CLANGDWARF'
+      edk-setup-params:
+        description: The EDK2 setup parameters.
+        required: false
+        type: string
+        default: ''
+      build-arch-list:
+        description: List of build architectures to test.
+        required: true
+        type: string
+        default: '["IA32", "X64"]'
+      tool-chain-tag-list:
+        description: List of tool chain tags to test.
+        required: true
+        type: string
+        default: '["CLANGDWARF"]'
+      emulatorpkg-target-list:
+        description: List of EmulatorPkg targets to build.
+        required: false
+        type: string
+        default: '["DEBUG", "RELEASE", "NOOPT"]'
+
+jobs:
+  build_linux_emulatorpkg_test:
+    name: Build Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} EmulatorPkg Test
+    runs-on: ${{ inputs.linux-runs-on }}
+    defaults:
+          run:
+            shell: bash
+    container:
+      image: ${{ inputs.linux-container-image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        build_arch: ${{ fromJSON(inputs.build-arch-list) }}
+        tool_chain_tag: ${{ fromJSON(inputs.tool-chain-tag-list) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Setup Linux Job
+        uses: ./.github/actions/setup-job
+        with:
+          linux-host-compiler: ${{ inputs.linux-host-compiler }}
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: Stuart Build EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} DEBUG
+        if: contains(inputs.emulatorpkg-target-list, 'DEBUG')
+        run: |
+          stuart_build -c ${{ inputs.stuart-ci-settings-file }} \
+              DISABLE_DEBUG_MACRO_CHECK                         \
+              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }}       \
+              TARGET=DEBUG                                      \
+              -a ${{ matrix.build_arch }}                       \
+              BLD_*_NETWORK_ENABLE=FALSE                        \
+              MAKE_STARTUP_NSH=TRUE --FLASHROM
+          mv Build/BUILDLOG_EmulatorPkg_With_Run.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_DEBUG.txt
+      - name: Stuart Build EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} RELEASE
+        if: contains(inputs.emulatorpkg-target-list, 'RELEASE')
+        run: |
+          stuart_build -c ${{ inputs.stuart-ci-settings-file }} \
+              DISABLE_DEBUG_MACRO_CHECK                         \
+              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }}       \
+              TARGET=RELEASE                                    \
+              -a ${{ matrix.build_arch }}                       \
+              BLD_*_NETWORK_ENABLE=TRUE                         \
+              MAKE_STARTUP_NSH=TRUE --FLASHROM
+          mv Build/BUILDLOG_EmulatorPkg_With_Run.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_RELEASE.txt
+      - name: Stuart Build EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} NOOPT
+        if: contains(inputs.emulatorpkg-target-list, 'NOOPT')
+        run: |
+          stuart_build -c ${{ inputs.stuart-ci-settings-file }} \
+              DISABLE_DEBUG_MACRO_CHECK                         \
+              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }}       \
+              TARGET=NOOPT                                      \
+              -a ${{ matrix.build_arch }}                       \
+              BLD_*_SECURE_BOOT_ENABLE=TRUE                     \
+              MAKE_STARTUP_NSH=TRUE --FLASHROM
+          mv Build/BUILDLOG_EmulatorPkg_With_Run.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_NOOPT.txt
+      - name: Upload Linux EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Linux EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+

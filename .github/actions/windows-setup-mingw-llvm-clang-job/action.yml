@@ -1,0 +1,53 @@
+## @file
+# Composite action that sets up a Windows LLVM MINGW CLANG environment for
+# CI jobs that builds packages and uploads artifacts. Caching is used to avoid
+# re-installing LLVM on subsequent runs.
+#
+# * Installs MINGW LLVM with CLANG support, adds LLVM to PATH, and sets
+#   CLANG_BIN environment variable.
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+name: Windows Setup LLVM MINGW CLANG Job
+description: Windows setup LLVM MINGW with CLANG support for CI jobs
+inputs:
+  llvm_version:
+    description: The LLVM version to install (e.g., 20250709)
+    required: true
+  llvm_install_path:
+    description: The path where LLVM is installed (e.g., C:\llvm-mingw-20250709-ucrt-x86_64)
+    required: false
+    default: 'C:\llvm-mingw-20250709-ucrt-x86_64'
+runs:
+  using: 'composite'
+  steps:
+    - name: Restore LLVM MINGW ${{ inputs.llvm_version }} from cache
+      id: cache-llvm-mingw
+      uses: actions/cache/restore@v5
+      with:
+        path: ${{ inputs.llvm_install_path }}
+        key: ${{ runner.os }}-llvm-mingw-${{ inputs.llvm_version }}-ucrt-x86_64
+    - name: Install LLVM MINGW ${{ inputs.llvm_version }}
+      if: ${{ steps.cache-llvm-mingw.outputs.cache-hit != 'true' }}
+      shell: cmd
+      run: |
+        curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/${{ inputs.llvm_version }}/llvm-mingw-${{ inputs.llvm_version }}-ucrt-x86_64.zip"
+        powershell -command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath 'C:\' -Force"
+    - name: Save LLVM MINGW ${{ inputs.llvm_version }} to cache
+      if: ${{ steps.cache-llvm-mingw.outputs.cache-hit != 'true' }}
+      uses: actions/cache/save@v5
+      with:
+        path: ${{ inputs.llvm_install_path }}
+        key: ${{ steps.cache-llvm-mingw.outputs.cache-primary-key }}
+    - name: Add LLVM MINGW ${{ inputs.llvm_version }} to PATH
+      shell: cmd
+      run: |
+        PATH=${{ inputs.llvm_install_path }}\bin;%PATH%
+        PATH=%PATH%;${{ inputs.llvm_install_path }}\i686-w64-mingw32\bin
+        echo PATH=%PATH%>> %GITHUB_ENV%
+        echo CLANG_BIN=${{ inputs.llvm_install_path }}\bin\>> %GITHUB_ENV%
+        echo BASETOOLS_MINGW_PATH=${{ inputs.llvm_install_path }}>> %GITHUB_ENV%
+        echo CC=clang>> %GITHUB_ENV%
+        echo CXX=clang++>> %GITHUB_ENV%

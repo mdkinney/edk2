@@ -1,0 +1,46 @@
+## @file
+# Composite action that sets up a Windows environment for CI jobs that required
+# QEMU to perform boot tests. Caching is used to avoid re-installing QEMU on
+# subsequent runs.
+#
+# * Installs QEMU adds QEMU to PATH environment variable.
+#
+# Copyright (C) 2026 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+name: Windows Setup QEMU Job
+description: Windows setup QEMU for CI jobs
+inputs:
+  windows-qemu-installer-version:
+    description: Windows QEMU installer (e.g., 2023.7.25)
+    required: true
+  windows-qemu-install_path:
+    description: The path where QEMU is installed (e.g., C:\Program Files\qemu)
+    required: false
+    default: 'C:\Program Files\qemu'
+runs:
+  using: 'composite'
+  steps:
+    - name: Restore QEMU ${{ inputs.windows-qemu-installer-version }} from cache
+      id: cache-qemu
+      uses: actions/cache/restore@v5
+      with:
+        path: ${{ inputs.windows-qemu-install_path }}
+        key: ${{ runner.os }}-QEMU-${{ inputs.windows-qemu-installer-version }}
+    - name: Install QEMU ${{ inputs.windows-qemu-installer-version }}
+      if: ${{ steps.cache-qemu.outputs.cache-hit != 'true' }}
+      shell: cmd
+      run: |
+        choco install qemu --version=${{ inputs.windows-qemu-installer-version }}
+    - name: Save QEMU ${{ inputs.windows-qemu-installer-version }} to cache
+      if: ${{ steps.cache-qemu.outputs.cache-hit != 'true' }}
+      uses: actions/cache/save@v5
+      with:
+        path: ${{ inputs.windows-qemu-install_path }}
+        key: ${{ steps.cache-qemu.outputs.cache-primary-key }}
+    - name: Add QEMU ${{ inputs.windows-qemu-installer-version }} to PATH
+      shell: cmd
+      run: |
+        PATH=%PATH%;${{ inputs.windows-qemu-install_path }}
+        echo PATH=%PATH%>> %GITHUB_ENV%
