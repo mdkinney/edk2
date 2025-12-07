@@ -1,0 +1,613 @@
+## @file
+# A workflow using a staged build with Ubuntu tools and Windows tools to perform
+# a sequence of quality checks, basic acceptance tests, package tests, platform
+# tests, and uploads artifacts.
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Staged Build
+
+on:
+  workflow_call:
+    inputs:
+      linux-runs-on:
+        description: The runner label for Linux jobs.
+        required: false
+        type: string
+        default: 'ubuntu-24.04'
+      linux-container-image:
+        description: The container image for Linux jobs.
+        required: false
+        type: string
+        default: 'ghcr.io/tianocore/containers/ubuntu-24-build:latest'
+      linux-container-image-qemu:
+        description: The container image for Linux jobs with QEMU.
+        required: false
+        type: string
+        default: 'ghcr.io/tianocore/containers/ubuntu-24-test:latest'
+      windows-runs-on:
+        description: The runner label for Windows jobs.
+        required: false
+        type: string
+        default: 'windows-2025'
+      windows-qemu-installer-version:
+        description: Windows QEMU installer (e.g., 2023.7.25)
+        required: true
+        type: string
+        default: '2023.7.25'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      enable-code-quality-tests:
+        description: Enable Code Quality Tests
+        required: false
+        type: boolean
+        default: true
+      enable-basic-acceptance-tests:
+        description: Enable Basic Acceptance Tests (BAT)
+        required: false
+        type: boolean
+        default: true
+      enable-linux-clang-tests:
+        description: Enable Linux CLANG builds and tests
+        required: false
+        type: boolean
+        default: true
+      enable-linux-gcc-tests:
+        description: Enable Linux GCC builds and tests
+        required: false
+        type: boolean
+        default: true
+      enable-linux-gccnolto-tests:
+        description: Enable Linux GCCNOLTO builds and tests
+        required: false
+        type: boolean
+        default: false
+      enable-windows-visual-studio-tests:
+        description: Enable Windows Visual Studio builds and tests
+        required: false
+        type: boolean
+        default: true
+      enable-windows-clang-tests:
+        description: Enable Windows CLANG builds and tests
+        required: false
+        type: boolean
+        default: true
+      default-package-lists:
+        description: Default package lists to use if not set in Stage 0.
+        required: false
+        type: string
+        default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+      skip-filter-list:
+        description: List of filter criteria to skip.
+        required: false
+        type: string
+        default: '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
+      continue-on-error-filter-list:
+        description: List of filter criteria to continue on error.
+        required: false
+        type: string
+        default: '[{"tool_chain_tag": "GCCNOLTO"}]'
+
+  workflow_dispatch:
+    inputs:
+      linux-runs-on:
+        description: The runner label for Linux jobs.
+        required: false
+        type: string
+        default: 'ubuntu-24.04'
+      linux-container-image:
+        description: The container image for Linux jobs.
+        required: false
+        type: string
+        default: 'ghcr.io/tianocore/containers/ubuntu-24-build:latest'
+      linux-container-image-qemu:
+        description: The container image for Linux jobs with QEMU.
+        required: false
+        type: string
+        default: 'ghcr.io/tianocore/containers/ubuntu-24-test:latest'
+      windows-runs-on:
+        description: The runner label for Windows jobs.
+        required: false
+        type: string
+        default: 'windows-2025'
+      windows-qemu-installer-version:
+        description: Windows QEMU installer (e.g., 2023.7.25)
+        required: true
+        type: string
+        default: '2023.7.25'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      enable-code-quality-tests:
+        description: Enable Code Quality Tests
+        required: false
+        type: boolean
+        default: true
+      enable-basic-acceptance-tests:
+        description: Enable Basic Acceptance Tests (BAT)
+        required: false
+        type: boolean
+        default: true
+      enable-linux-clang-tests:
+        description: Enable Linux CLANG builds and tests
+        required: false
+        type: boolean
+        default: true
+      enable-linux-gcc-tests:
+        description: Enable Linux GCC builds and tests
+        required: false
+        type: boolean
+        default: true
+      enable-linux-gccnolto-tests:
+        description: Enable Linux GCCNOLTO builds and tests
+        required: false
+        type: boolean
+        default: false
+      enable-windows-visual-studio-tests:
+        description: Enable Windows Visual Studio builds and tests
+        required: false
+        type: boolean
+        default: true
+      enable-windows-clang-tests:
+        description: Enable Windows CLANG builds and tests
+        required: false
+        type: boolean
+        default: true
+      default-package-lists:
+        description: Default package lists to use if not set in Stage 0.
+        required: false
+        type: string
+        default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+      skip-filter-list:
+        description: List of filter criteria to skip.
+        required: false
+        type: string
+        default: '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
+      continue-on-error-filter-list:
+        description: List of filter criteria to continue on error.
+        required: false
+        type: string
+        default: '[{"tool_chain_tag": "GCCNOLTO"}]'
+
+jobs:
+  #
+  # Stage 0: Set Package Lists and run PatchCheck
+  #
+  set_package_lists:
+    name: Set Package Lists
+    uses: ./.github/workflows/ubuntu-set-package-lists-and-patch-check.yml
+    with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      default-package-lists: ${{ inputs.default-package-lists }}
+      run-patch-check: ${{ inputs.enable-code-quality-tests }}
+
+  #
+  # Stage 0 Success
+  #
+  stage0:
+    name: Stage 0 Success
+    runs-on: ubuntu-slim
+    needs:
+      - set_package_lists
+    if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
+    outputs:
+      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+    steps:
+      - name: Stage 0 Success
+        run: echo "Stage 0 jobs completed successfully"
+
+  #
+  # Stage 1: Run no-target tests and basic acceptance tests
+  #
+  build_linux_clang_no_target_test:
+    name: Code Quality Tests
+    needs: stage0
+    if: ${{ always() && inputs.enable-code-quality-tests }}
+    uses: ./.github/workflows/ubuntu-package-build-test.yml
+    with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
+      linux-host-compiler: 'clang'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t CLANGPDB'
+      build-type-list: '["NO-TARGET"]'
+      #
+      # build-arch-list is ignored for NO-TARGET but set to arbitrary value to
+      # satisfy workflow call input requirements.
+      #
+      build-arch-list: '["X64"]'
+      tool-chain-tag-list: '["CLANGPDB"]'
+      package-lists: ${{ needs.stage0.outputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
+  build_linux_clangdwarf_basic_acceptance_test:
+    name: Basic Acceptance Tests - Linux CLANGDWARF
+    # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64/AARCH64/RISCV64
+    # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
+    # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
+    needs: stage0
+    if: ${{ always() && inputs.enable-basic-acceptance-tests && inputs.enable-linux-clang-tests }}
+    uses: ./.github/workflows/ubuntu-basic-acceptance-test.yml
+    with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
+      linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
+      linux-host-compiler: 'gcc'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t CLANGPDB'
+      firmware-test-arch-parameter: 'IA32,X64,AARCH64,RISCV64'
+      firmware-tool-chain-tag: 'CLANGDWARF'
+      unit-test-arch-list: '["IA32","X64"]'
+      unit-test-tool-chain-tag: 'CLANGDWARF'
+      emulatorpkg-target-list: '["DEBUG", "RELEASE", "NOOPT"]'
+  build_linux_clangpdb_basic_acceptance_test:
+    name: Basic Acceptance Tests - Linux CLANGPDB
+    # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64/AARCH64/RISCV64
+    # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
+    # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
+    needs: stage0
+    if: ${{ always() && inputs.enable-basic-acceptance-tests && inputs.enable-linux-clang-tests }}
+    uses: ./.github/workflows/ubuntu-basic-acceptance-test.yml
+    with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
+      linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
+      linux-host-compiler: 'gcc'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t CLANGPDB'
+      firmware-test-arch-parameter: 'IA32,X64'
+      firmware-tool-chain-tag: 'CLANGPDB'
+      unit-test-arch-list: ''
+      unit-test-tool-chain-tag: ''
+      emulatorpkg-target-list: ''
+  build_windows_mingw_edk2_clangdwarf_basic_acceptance_test:
+    name: Basic Acceptance Tests - Windows MinGW EDK2 CLANGDWARF
+    # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGDWARF          - X64
+    # EmulatorPkg Build Support:          CLANGDWARF          - X64
+    needs: stage0
+    if: ${{ always() && inputs.enable-basic-acceptance-tests && inputs.enable-windows-clang-tests }}
+    uses: ./.github/workflows/windows-basic-acceptance-test.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      windows-installer: 'edk2-clang'
+      windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-a X64 -t CLANGPDB'
+      firmware-test-arch-parameter: 'IA32,X64'
+      firmware-tool-chain-tag: 'CLANGDWARF'
+      unit-test-arch-list: '["X64"]'
+      unit-test-tool-chain-tag: 'CLANGDWARF'
+  build_windows_mingw_edk2_clangpdb_basic_acceptance_test:
+    name: Basic Acceptance Tests - Windows MinGW EDK2 CLANGDWARF
+    # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGDWARF          - IA32
+    # EmulatorPkg Build Support:          CLANGDWARF          - IA32
+    needs: stage0
+    if: ${{ always() && inputs.enable-basic-acceptance-tests && inputs.enable-windows-clang-tests }}
+    uses: ./.github/workflows/windows-basic-acceptance-test.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      windows-installer: 'edk2-clang'
+      windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-a X64 -t CLANGPDB'
+      firmware-test-arch-parameter: 'IA32,X64'
+      firmware-tool-chain-tag: 'CLANGPDB'
+      unit-test-arch-list: ''
+      unit-test-tool-chain-tag: ''
+      emulatorpkg-target-list: ''
+  build_windows_mingw_llvm_20_clang_basic_acceptance_test:
+    name: Basic Acceptance Tests - Windows MinGW LLVM 20 CLANG
+    # Firmware Build Support:             CLANGDWARF - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
+    # EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
+    needs: stage0
+    if: ${{ always() && inputs.enable-basic-acceptance-tests && inputs.enable-windows-clang-tests }}
+    uses: ./.github/workflows/windows-basic-acceptance-test.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      windows-installer: 'llvm'
+      windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-a X64 -t CLANGDWARF'
+      firmware-test-arch-parameter: 'IA32,X64'
+      firmware-tool-chain-tag: 'CLANGDWARF'
+      unit-test-arch-list: '["IA32","X64"]'
+      unit-test-tool-chain-tag: 'CLANGDWARF'
+  build_windows_vs_llvm_20_clang_basic_acceptance_test:
+    name: Basic Acceptance Tests - Windows VS LLVM 20 CLANG
+    # Firmware Build Support:             CLANGPDB - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
+    # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
+    needs: stage0
+    if: ${{ always() && inputs.enable-basic-acceptance-tests && inputs.enable-windows-clang-tests }}
+    uses: ./.github/workflows/windows-basic-acceptance-test.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      windows-installer: 'vs-clangpdb'
+      windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t VS2022'
+      firmware-test-arch-parameter: 'IA32,X64'
+      firmware-tool-chain-tag: 'CLANGPDB'
+      unit-test-arch-list: '["IA32","X64"]'
+      unit-test-tool-chain-tag: 'CLANGPDB'
+  build_linux_gcc_basic_acceptance_test:
+    name: Basic Acceptance Tests - Linux GCC
+    # Firmware Build Support:             GCC          - IA32/X64/AARCH64/RISCV64
+    # Firmware Build Support:             GCCNOLTO     - IA32/X64/AARCH64
+    # Host-Based Unit Test Build Support: GCC/GCCNOLTO - IA32/X64
+    # EmulatorPkg Build Support:          GCC/GCCNOLTO - IA32/X64
+    needs: stage0
+    if: ${{ always() && inputs.enable-basic-acceptance-tests && inputs.enable-linux-gcc-tests }}
+    uses: ./.github/workflows/ubuntu-basic-acceptance-test.yml
+    with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
+      linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
+      linux-host-compiler: 'gcc'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t GCC'
+      firmware-test-arch-parameter: 'IA32,X64,AARCH64,RISCV64'
+      firmware-tool-chain-tag: 'GCC'
+      unit-test-arch-list: '["IA32","X64"]'
+      unit-test-tool-chain-tag: 'GCC'
+      emulatorpkg-target-list: '["DEBUG", "RELEASE", "NOOPT"]'
+  build_linux_gccnolto_basic_acceptance_test:
+    name: Basic Acceptance Tests - Linux GCCNOLTO
+    # Firmware Build Support:             GCC          - IA32/X64/AARCH64/RISCV64
+    # Firmware Build Support:             GCCNOLTO     - IA32/X64/AARCH64
+    # Host-Based Unit Test Build Support: GCC/GCCNOLTO - IA32/X64
+    # EmulatorPkg Build Support:          GCC/GCCNOLTO - IA32/X64
+    needs: stage0
+    if: ${{ always() && inputs.enable-basic-acceptance-tests && inputs.enable-linux-gccnolto-tests }}
+    uses: ./.github/workflows/ubuntu-basic-acceptance-test.yml
+    with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
+      linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
+      linux-host-compiler: 'gcc'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t GCC'
+      firmware-test-arch-parameter: 'IA32,X64,AARCH64'
+      firmware-tool-chain-tag: 'GCCNOLTO'
+      unit-test-arch-list: '["IA32","X64"]'
+      unit-test-tool-chain-tag: 'GCCNOLTO'
+      emulatorpkg-target-list: '["DEBUG", "RELEASE", "NOOPT"]'
+  build_windows_vs_basic_acceptance_test:
+    name: Basic Acceptance Tests - Windows Visual Studio
+    # Firmware Build Support:             VS20xx - IA32/X64
+    # Host-Based Unit Test Build Support: VS20xx - IA32/X64
+    # EmulatorPkg Build Support:          VS20xx - IA32/X64
+    needs: stage0
+    if: ${{ always() && inputs.enable-basic-acceptance-tests && inputs.enable-windows-visual-studio-tests }}
+    uses: ./.github/workflows/windows-basic-acceptance-test.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      windows-installer: 'vs'
+      windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t VS2022'
+      firmware-test-arch-parameter: 'IA32,X64'
+      firmware-tool-chain-tag: 'VS2022'
+      unit-test-arch-list: '["IA32","X64"]'
+      unit-test-tool-chain-tag: 'VS2022'
+
+  #
+  # Stage 1 Success
+  #
+  stage1:
+    name: Stage 1 Success
+    runs-on: ubuntu-slim
+    needs:
+      - stage0
+      - build_linux_clang_no_target_test
+      - build_linux_clangpdb_basic_acceptance_test
+      - build_linux_clangdwarf_basic_acceptance_test
+      - build_linux_gcc_basic_acceptance_test
+      - build_linux_gccnolto_basic_acceptance_test
+      - build_windows_mingw_edk2_clangdwarf_basic_acceptance_test
+      - build_windows_mingw_edk2_clangpdb_basic_acceptance_test
+      - build_windows_mingw_llvm_20_clang_basic_acceptance_test
+      - build_windows_vs_llvm_20_clang_basic_acceptance_test
+      - build_windows_vs_basic_acceptance_test
+    if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
+    outputs:
+      package-lists: ${{ needs.stage0.outputs.package-lists }}
+    steps:
+      - name: Stage 1 Success
+        run: echo "Stage 1 jobs completed successfully"
+
+  #
+  # Stage 2: Run full tests for packages and platforms
+  #
+  ubuntu_clang_build:
+    # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64/AARCH64/RISCV64
+    # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
+    # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
+    needs: stage1
+    if: ${{ always() && inputs.enable-linux-clang-tests }}
+    uses: ./.github/workflows/ubuntu-clang-build.yml
+    with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
+      linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      package-lists: ${{ needs.stage1.outputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
+  windows_mingw_edk2_clang_20_build:
+    # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGDWARF          - X64
+    # EmulatorPkg Build Support:          CLANGDWARF          - X64
+    needs: stage1
+    if: ${{ always() && inputs.enable-windows-clang-tests }}
+    uses: ./.github/workflows/windows-mingw-edk2-clang-20-build.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      package-lists: ${{ needs.stage1.outputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
+  windows_mingw_llvm_20_clang_build:
+    # Firmware Build Support:             CLANGDWARF - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
+    # EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
+    needs: stage1
+    if: ${{ always() && inputs.enable-windows-clang-tests }}
+    uses: ./.github/workflows/windows-mingw-llvm-20-clang-build.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      package-lists: ${{ needs.stage1.outputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
+  windows_vs_llvm_20_clang_build:
+    # Firmware Build Support:             CLANGPDB - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
+    # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
+    needs: stage1
+    if: ${{ always() && inputs.enable-windows-clang-tests }}
+    uses: ./.github/workflows/windows-vs-llvm-20-clang-build.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      package-lists: ${{ needs.stage1.outputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
+  ubuntu_gcc_build:
+    # Firmware Build Support:             GCC          - IA32/X64/AARCH64/RISCV64
+    # Firmware Build Support:             GCCNOLTO     - IA32/X64/AARCH64
+    # Host-Based Unit Test Build Support: GCC/GCCNOLTO - IA32/X64
+    # EmulatorPkg Build Support:          GCC/GCCNOLTO - IA32/X64
+    needs: stage1
+    if: ${{ always() && inputs.enable-linux-gcc-tests }}
+    uses: ./.github/workflows/ubuntu-gcc-build.yml
+    with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
+      linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      package-lists: ${{ needs.stage1.outputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
+      tool-chain-tag-list: '["GCC"]'
+  ubuntu_gccnolto_build:
+    # Firmware Build Support:             GCC          - IA32/X64/AARCH64/RISCV64
+    # Firmware Build Support:             GCCNOLTO     - IA32/X64/AARCH64
+    # Host-Based Unit Test Build Support: GCC/GCCNOLTO - IA32/X64
+    # EmulatorPkg Build Support:          GCC/GCCNOLTO - IA32/X64
+    needs: stage1
+    if: ${{ always() && inputs.enable-linux-gccnolto-tests }}
+    uses: ./.github/workflows/ubuntu-gcc-build.yml
+    with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
+      linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      package-lists: ${{ needs.stage1.outputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
+      tool-chain-tag-list: '["GCCNOLTO"]'
+  windows_vs_build:
+    # Firmware Build Support:             VS20xx - IA32/X64
+    # Host-Based Unit Test Build Support: VS20xx - IA32/X64
+    # EmulatorPkg Build Support:          VS20xx - IA32/X64
+    needs: stage1
+    if: ${{ always() && inputs.enable-windows-visual-studio-tests }}
+    uses: ./.github/workflows/windows-vs-build.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      package-lists: ${{ needs.stage1.outputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
+      tool-chain-tag-list: '["VS2022"]'
+
+  #
+  # Stage 2 Success
+  #
+  stage2:
+    name: Stage 2 Success
+    runs-on: ubuntu-slim
+    needs:
+      - stage1
+      - ubuntu_clang_build
+      - windows_mingw_llvm_20_clang_build
+      - windows_mingw_edk2_clang_20_build
+      - windows_vs_llvm_20_clang_build
+      - ubuntu_gcc_build
+      - ubuntu_gccnolto_build
+      - windows_vs_build
+    if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
+    outputs:
+      package-lists: ${{ needs.stage1.outputs.package-lists }}
+    steps:
+      - name: Stage 2 Success
+        run: echo "Stage 2 jobs completed successfully"
+      - uses: Kesin11/actions-timeline@v2
+

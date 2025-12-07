@@ -1,0 +1,100 @@
+## @file
+# Composite action that sets up a Windows or Linux environment for CI jobs that
+# builds packages and uploads artifacts. Caching is used to avoid re-installing
+# compilers, Python, Python modules, and git submodules on subsequent runs.
+#
+# * Optionally installs clang compiler, adds clang compiler to PATH, and sets
+#   CLANG_BIN, BASETOOLS_MINGW_PATH, CC, and CXX environment variables.
+# * Installs Python in a virtual environment, installs edk2 pip requirements,
+#   and adds Python virtual environment to PATH.
+# * Installs git submodules using stuart_setup.
+# * Sets up Stuart Tools, builds edk2 BaseTools, and sets NASM_PREFIX and
+#   IASL_PREFIX environment variables.
+#
+# Copyright (C) 2026 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+name: Setup Job
+description: Setup Environment for CI jobs
+inputs:
+  linux-host-compiler:
+    description: Linux Host Compiler (e.g., clang, gcc)
+    required: false
+    type: string
+    default: 'clang'
+  windows-installer:
+    description: Windows compiler installer (e.g., edk2-clang, llvm, vs-clangpdb, or vs)
+    required: false
+    type: string
+    default: 'vs'
+  windows-qemu-installer-version:
+    description: Windows QEMU installer (e.g., 2023.7.25)
+    required: false
+    type: string
+    default: ''
+  python-version:
+    description: Python version to install (e.g., 3.12)
+    required: true
+  pip-requirements:
+    description: Path to pip requirements file
+    required: true
+    default: 'pip-requirements.txt'
+  stuart-ci-settings-file:
+    description: Path to the stuart CI settings file (e.g. .pytool/CISettings.py)
+    required: true
+  edk2-tools-build-params:
+    description: Command line parameters for Edk2ToolsBuild.py (e.g. -a X64 -t CLANGPDB)
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Linux Set CC and CXX to CLANG
+      if: ${{ inputs.linux-host-compiler == 'clang' && runner.os == 'Linux' }}
+      shell: bash
+      run: |
+        echo CC=clang>> $GITHUB_ENV
+        echo CXX=clang++>> $GITHUB_ENV
+    - name: Windows Setup Visual Studio Job
+      if: ${{ inputs.windows-installer == 'vs' && runner.os == 'Windows' }}
+      shell: cmd
+      run: |
+        echo "Visual Studio selected, no additional setup required."
+    - name: Windows Setup Visual Studio CLANGPDB Job
+      if: ${{ inputs.windows-installer == 'vs-clangpdb' && runner.os == 'Windows' }}
+      uses: ./.github/actions/windows-setup-vs-clangpdb-job
+      with:
+        llvm_version: '20.1.8'
+        llvm_install_path: 'C:\Program Files\LLVM'
+    - name: Windows Setup Mingw edk2-clang Job
+      if: ${{ inputs.windows-installer == 'edk2-clang' && runner.os == 'Windows' }}
+      uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
+      with:
+        edk2-clang-version: '20.1.8'
+        edk2-clang-version-patch-level: '0'
+        edk2-clang-install_path: 'C:\edk2-clang'
+    - name: Windows Setup LLVM MINGW CLANG Job
+      if: ${{ inputs.windows-installer == 'llvm' && runner.os == 'Windows' }}
+      uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
+      with:
+        llvm_version: '20250709'
+        llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
+    - name: Install QEMU on Windows
+      if: ${{ inputs.windows-qemu-installer-version != '' && runner.os == 'Windows' }}
+      uses: ./.github/actions/windows-setup-qemu-job
+      with:
+        windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
+    - name: Install Python in venv
+      uses: ./.github/actions/install-python-venv
+      with:
+        python-version: ${{ inputs.python-version }}
+        pip-requirements: ${{ inputs.pip-requirements }}
+    - name: Install Git Submodules from stuart_setup
+      uses: ./.github/actions/install-git-submodules
+      with:
+        stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+    - name: Set up Stuart Tools
+      uses: ./.github/actions/install-stuart-tools
+      with:
+        stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+        edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
