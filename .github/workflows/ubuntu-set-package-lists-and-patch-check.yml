@@ -1,0 +1,124 @@
+## @file
+# A workflow using Ubuntu to determine lists of packages to test based on files
+# modified in a pull-request and optionally perform patch checks on the
+# commits in a pull-request
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Ubuntu Set Package Lists and Patch Check
+
+on:
+  workflow_call:
+    inputs:
+      linux-runs-on:
+        description: The runner label for Linux jobs.
+        required: true
+        type: string
+        default: 'ubuntu-24.04'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      default-package-lists:
+        description: Default list of package lists to test.
+        required: false
+        type: string
+        default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg","IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+      run-patch-check:
+        description: Whether to run PatchCheck on the PR.
+        required: false
+        type: boolean
+        default: false
+    outputs:
+      package-lists:
+        description: List of package lists to test.
+        value: ${{ jobs.set_package_lists.outputs.package-lists }}
+
+jobs:
+  set_package_lists:
+    name: Set Package Lists
+    runs-on: ${{ inputs.linux-runs-on }}
+    outputs:
+      package-lists: ${{ steps.set-package-lists.outputs.package-lists }}
+    steps:
+      - name: Checkout Reference
+        if: github.event_name != 'pull_request'
+        #
+        # If not PR, then use default checkout settings with fetch-depth of 1
+        #
+        uses: actions/checkout@v6
+      - name: Get Number of Commits in PR
+        if: github.event_name == 'pull_request'
+        #
+        # If PR, then set PR_COMMIT_COUNT to the number of commits in PR + 1
+        # for use in subsequent checkout step
+        #
+        run: |
+          echo "PR_COMMIT_COUNT=$((${{ github.event.pull_request.commits }} + 1))" >> $GITHUB_ENV
+      - name: Checkout Pull Request
+        if: github.event_name == 'pull_request'
+        #
+        # Checkout PR with fetch-depth of number of commits in PR + 1 using
+        # a reference that is the base of the PR using sha to avoid pulling
+        # merge commit. This allows PatchCheck to evaluate all commits in the
+        # PR, and for stuart_pr_eval to evaluate the files modified over the
+        # entire PR.
+        #
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: ${{ env.PR_COMMIT_COUNT }}
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Install Python in venv
+        #
+        # Setup Python virtual environment and use GitHub Action Cache to
+        # cache pip packages to speed up installs. Use a suffix for th cache
+        # name because ubuntu-latest is not the same as an Ubuntu docker image
+        # and the cache can not be shared between the two.
+        #
+        uses: ./.github/actions/install-python-venv
+        with:
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          cache-name-suffix: '-set-package-lists'
+      - name: Compute Package Lists
+        id: set-package-lists
+        #
+        # If PR, then use stuart_pr_eval to compute package lists based on
+        # the commits in the PR and format as JSON array.
+        #
+        # If not a PR, then use the default package lists input that is already
+        # formatted as a JSON array.
+        #
+        # Use jq to ensure the output is a compact single line JSON string for
+        # setting the output variable.
+        #
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            PR_EVAL_LIST=$(stuart_pr_eval -c ${{ inputs.stuart-ci-settings-file }} --pr-target HEAD~${{ github.event.pull_request.commits }} --output-csv-format-string {pkgcsv})
+            PR_EVAL_LIST=[\"$PR_EVAL_LIST\"]
+          else
+            PR_EVAL_LIST='${{ inputs.default-package-lists }}'
+          fi
+          echo $PR_EVAL_LIST
+          echo "package-lists=$PR_EVAL_LIST" >> $GITHUB_OUTPUT
+      - name: PatchCheck PR
+        if: github.event_name == 'pull_request' && inputs.run-patch-check
+        #
+        # If PR, Run PatchCheck on all commits in the PR
+        #
+        run: |
+          python BaseTools/Scripts/PatchCheck.py HEAD~${{ github.event.pull_request.commits }}..HEAD

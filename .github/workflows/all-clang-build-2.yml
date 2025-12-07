@@ -1,0 +1,33 @@
+## @file
+# A workflow using a staged build with Ubuntu CLANG tools and Windows CLANG
+# tools to perform a sequence of quality checks, basic acceptance tests,
+# package tests, platform tests, and uploads artifacts.
+#
+# This top level file configures the conditions this workflow runs and
+# configures parameters to pass to the staged-build.yml workflow that implements
+# the staged build process.
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: All CLANG 20.1.8 Build 2
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - sandbox/master
+      - clang_ci_v5*
+
+jobs:
+  staged_build_clang_20:
+    name: Staged Build CLANG 20.1.8
+    uses: ./.github/workflows/staged-build.yml
+    with:
+      linux-runs-on: 'ubuntu-24.04'
+      linux-container-image: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      windows-runs-on: 'windows-2025'
+      python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
+
