@@ -1,0 +1,305 @@
+## @file
+# A workflow using Windows to run Basic Acceptance Tests (BAT) on packages and
+# platforms and uploads artifacts.
+#
+# MINGW edk2-clang Build Support
+# ===============================================================================
+# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+# Host-Based Unit Test Build Support: CLANGDWARF          - X64
+# EmulatorPkg Build Support:          CLANGDWARF          - X64
+#
+# MINGW llvm Build Support
+# ===============================================================================
+# Firmware Build Support:             CLANGDWARF - IA32/X64
+# Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
+# EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
+#
+# VS20xx CLANG Build Support
+# ===============================================================================
+# Firmware Build Support:             CLANGPDB - IA32/X64
+# Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
+# EmulatorPkg Build Support:          CLANGPDB - IA32/X64
+#
+# VS20xx Build Support
+# ===============================================================================
+# Firmware Build Support:             VS20xx - IA32/X64
+# Host-Based Unit Test Build Support: VS20xx - IA32/X64
+# EmulatorPkg Build Support:          VS20xx - IA32/X64
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Windows Basic Acceptance Test
+
+on:
+  workflow_call:
+    inputs:
+      windows-runs-on:
+        description: The runner label for Windows jobs.
+        required: true
+        type: string
+        default: 'windows-2025'
+      windows-installer:
+        description: Windows compiler installer (e.g., edk2-clang, llvm, vs-clangpdb, or vs)
+        required: true
+        type: string
+        default: 'vs'
+      windows-qemu-installer-version:
+        description: Windows QEMU installer (e.g., 2023.7.25)
+        required: true
+        type: string
+        default: '2023.7.25'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      edk2-tools-build-params:
+        description: The EDK2 Tools build parameters.
+        required: true
+        type: string
+        default: '-t GCC'
+      firmware-test-arch-parameter:
+        description: List of firmware test architectures to build.
+        required: false
+        type: string
+        default: 'IA32,X64,AARCH64,RISCV64'
+      firmware-tool-chain-tag:
+        description: Firmware test tool chain tags to build.
+        required: true
+        type: string
+        default: 'GCC'
+      unit-test-arch-list:
+        description: List of unit test architectures to build.
+        required: false
+        type: string
+        default: '["IA32","X64"]'
+      unit-test-tool-chain-tag:
+        description: Unit test tool chain tag to build.
+        required: true
+        type: string
+        default: 'GCC'
+      emulatorpkg-target-list:
+        description: List of EmulatorPkg targets to build.
+        required: false
+        type: string
+        default: '["DEBUG", "RELEASE", "NOOPT"]'
+
+  workflow_dispatch:
+    inputs:
+      windows-runs-on:
+        description: The runner label for Windows jobs.
+        required: true
+        type: string
+        default: 'windows-2025'
+      windows-installer:
+        description: Windows compiler installer (e.g., edk2-clang, llvm, vs-clangpdb, or vs)
+        required: true
+        type: string
+        default: 'vs'
+      windows-qemu-installer-version:
+        description: Windows QEMU installer (e.g., 2023.7.25)
+        required: true
+        type: string
+        default: '2023.7.25'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      edk2-tools-build-params:
+        description: The EDK2 Tools build parameters.
+        required: true
+        type: string
+        default: '-t GCC'
+      firmware-test-arch-parameter:
+        description: Firmware test architectures to build.
+        required: false
+        type: string
+        default: 'IA32,X64,AARCH64,RISCV64'
+      firmware-tool-chain-tag:
+        description: Firmware test tool chain tags to build.
+        required: true
+        type: string
+        default: 'GCC'
+      unit-test-arch-list:
+        description: List of unit test architectures to build.
+        required: false
+        type: string
+        default: '["IA32","X64"]'
+      unit-test-tool-chain-tag:
+        description: Unit test tool chain tag to build.
+        required: true
+        type: string
+        default: 'GCC'
+      emulatorpkg-target-list:
+        description: List of EmulatorPkg targets to build.
+        required: false
+        type: string
+        default: '["DEBUG", "RELEASE", "NOOPT"]'
+
+jobs:
+  build_windows_firmware_basic_acceptance_test:
+    name: Build Windows ${{inputs.windows-installer}}-${{ inputs.firmware-tool-chain-tag }} Firmware Basic Acceptance Test
+    runs-on: ${{ inputs.windows-runs-on }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows ${{ inputs.firmware-tool-chain-tag }} Job
+        uses: ./.github/actions/setup-job
+        with:
+          windows-installer: ${{ inputs.windows-installer }}
+          windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: UEFI Application with NASM BAT ${{ inputs.firmware-tool-chain-tag }}
+        run: |
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" \
+              --disable-all CompilerPlugin=run                       \
+              TOOL_CHAIN_TAG=${{ inputs.firmware-tool-chain-tag }}   \
+              -t DEBUG,RELEASE,NOOPT                                 \
+              -a ${{ inputs.firmware-test-arch-parameter }}          \
+              -p MdeModulePkg                                        \
+              BUILDMODULE=MdeModulePkg/Application/HelloWorld/HelloWorld.inf
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_HelloWorld_${{ inputs.firmware-tool-chain-tag }}.txt
+      - name: DXE Driver with ASL BAT ${{ inputs.firmware-tool-chain-tag }}
+        run: |
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" \
+              --disable-all CompilerPlugin=run                       \
+              TOOL_CHAIN_TAG=${{ inputs.firmware-tool-chain-tag }}   \
+              -t DEBUG,RELEASE,NOOPT                                 \
+              -a ${{ inputs.firmware-test-arch-parameter }}          \
+              -p PrmPkg                                              \
+              BUILDMODULE=PrmPkg/PrmSsdtInstallDxe/PrmSsdtInstallDxe.inf
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_PrmSsdtInstallDxe_${{ inputs.firmware-tool-chain-tag }}.txt
+      - name: DXE Library with VFR BAT ${{ inputs.firmware-tool-chain-tag }}
+        run: |
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" \
+              --disable-all CompilerPlugin=run                       \
+              TOOL_CHAIN_TAG=${{ inputs.firmware-tool-chain-tag }}   \
+              -t DEBUG,RELEASE,NOOPT                                 \
+              -a ${{ inputs.firmware-test-arch-parameter }}          \
+              -p MdeModulePkg                                        \
+              BUILDMODULE=MdeModulePkg/Library/PlatformVarCleanupLib/PlatformVarCleanupLib.inf
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_PlatformVarCleanupLib_${{ inputs.firmware-tool-chain-tag }}.txt
+      - name: Stuart Update OvmfPkg
+        run: |
+          stuart_update -c OvmfPkg/PlatformCI/PlatformBuild.py
+          mv Build/UPDATE_LOG.txt Build/UPDATE_LOG_OvmfPkg_${{ inputs.firmware-tool-chain-tag }}.txt
+      - name: Stuart Build and Boot OVMF IA32/X64 Platform ${{ inputs.firmware-tool-chain-tag }}
+        run: |
+          stuart_build -c OvmfPkg/PlatformCI/PlatformBuild.py         \
+              -a IA32,X64 TOOL_CHAIN_TAG=${{ inputs.firmware-tool-chain-tag }} \
+              BLD_*_NETWORK_ENABLE=FALSE                              \
+              --FLASHROM MAKE_STARTUP_NSH=TRUE QEMU_HEADLESS=TRUE
+      - name: Upload Windows ${{inputs.windows-installer}} ${{ inputs.firmware-tool-chain-tag }} Firmware Basic Acceptance Test Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: Upload Windows ${{inputs.windows-installer}} ${{ inputs.firmware-tool-chain-tag }} Firmware Basic Acceptance Test Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_unit_test_emulatorpkg_basic_acceptance_test:
+    name: Build Windows ${{inputs.windows-installer}}-${{ inputs.unit-test-tool-chain-tag }}-${{matrix.build_arch}} Unit Test EmulatorPkg Basic Acceptance Test
+    if: ${{ inputs.unit-test-arch-list != '' }}
+    runs-on: ${{ inputs.windows-runs-on }}
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        build_arch: ${{ fromJSON(inputs.unit-test-arch-list) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} Job
+        uses: ./.github/actions/setup-job
+        with:
+          windows-installer: ${{ inputs.windows-installer }}
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: Stuart Build UnitTestFrameworkPkg Sample GoogleTest ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }}
+        run: |
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"       \
+              DISABLE_DEBUG_MACRO_CHECK                                    \
+              --disable-all                                                \
+              HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run   \
+              TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}        \
+              -t NOOPT -a ${{ matrix.build_arch }} -p UnitTestFrameworkPkg \
+              BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_UnitTestFrameworkPkg_${{ inputs.unit-test-tool-chain-tag }}_${{ matrix.build_arch }}.txt
+      - name: Stuart Update EmulatorPkg
+        run: |
+          stuart_update -c EmulatorPkg/PlatformCI/PlatformBuild.py
+          mv Build/UPDATE_LOG.txt Build/UPDATE_LOG_EmulatorPkg_${{ inputs.unit-test-tool-chain-tag }}.txt
+      - name: Stuart Build EmulatorPkg Windows Host Module ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} DEBUG
+        if: contains(inputs.emulatorpkg-target-list, 'DEBUG')
+        run: |
+          stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py    \
+              DISABLE_DEBUG_MACRO_CHECK                              \
+              TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}  \
+              TARGET=DEBUG                                           \
+              -a ${{ matrix.build_arch }}                            \
+              BUILDMODULE=EmulatorPkg/Win/Host/WinHost.inf
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ inputs.unit-test-tool-chain-tag }}_${{ matrix.build_arch }}_DEBUG.txt
+      - name: Stuart Build EmulatorPkg Windows Host Module ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} RELEASE
+        if: contains(inputs.emulatorpkg-target-list, 'RELEASE')
+        run: |
+          stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py    \
+              DISABLE_DEBUG_MACRO_CHECK                              \
+              TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}  \
+              TARGET=RELEASE                                         \
+              -a ${{ matrix.build_arch }}                            \
+              BUILDMODULE=EmulatorPkg/Win/Host/WinHost.inf
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ inputs.unit-test-tool-chain-tag }}_${{ matrix.build_arch }}_RELEASE.txt
+      - name: Stuart Build EmulatorPkg Windows Host Module ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} NOOPT
+        if: contains(inputs.emulatorpkg-target-list, 'NOOPT')
+        run: |
+          stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py    \
+              DISABLE_DEBUG_MACRO_CHECK                              \
+              TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}  \
+              TARGET=NOOPT                                           \
+              -a ${{ matrix.build_arch }}                            \
+              BUILDMODULE=EmulatorPkg/Win/Host/WinHost.inf
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ inputs.unit-test-tool-chain-tag }}_${{ matrix.build_arch }}_NOOPT.txt
+      - name: Upload Windows ${{inputs.windows-installer}} ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} Unit Test EmulatorPkg Basic Acceptance Test Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: Upload Windows ${{inputs.windows-installer}} ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} Unit Test EmulatorPkg Basic Acceptance Test Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+

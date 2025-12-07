@@ -1,0 +1,141 @@
+## @file
+# A workflow using Windows to run package builds and uploads artifacts.
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Windows Build Packages Test
+
+on:
+  workflow_call:
+    inputs:
+      windows-runs-on:
+        description: The runner label for Windows jobs.
+        required: true
+        type: string
+        default: 'windows-2025'
+      windows-installer:
+        description: Windows compiler installer (e.g., edk2-clang, llvm, vs-clangpdb, or vs)
+        required: true
+        type: string
+        default: 'vs'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      edk2-tools-build-params:
+        description: The EDK2 Tools build parameters.
+        required: true
+        type: string
+        default: '-t CLANGPDB'
+      build-type-list:
+        description: List of build types to test.
+        required: true
+        type: string
+        default: '["DEBUG", "RELEASE"]'
+      build-arch-list:
+        description: List of build architectures to test.
+        required: true
+        type: string
+        default: '["IA32", "X64"]'
+      tool-chain-tag-list:
+        description: List of tool chain tags to test.
+        required: true
+        type: string
+        default: '["CLANGPDB", "CLANGDWARF"]'
+      package-lists:
+        description: List of package lists to test.
+        required: true
+        type: string
+        default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+      skip-filter-list:
+        description: List of filter criteria to skip.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
+        default: ''
+      continue-on-error-filter-list:
+        description: List of filter criteria to continue on error.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO"}]'
+        default: ''
+      stuart-ci-build-params:
+        description: Additional Stuart CI build parameters.
+        required: false
+        type: string
+        # NO-TARGET:  ''
+        # Packages:   '--disable-all CompilerPlugin=run'
+        # Unit Tests: '--disable-all DISABLE_DEBUG_MACRO_CHECK HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run'
+        # Unit Tests no code coverage: '--disable-all DISABLE_DEBUG_MACRO_CHECK HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run CODE_COVERAGE=FALSE'
+        default: ''
+
+jobs:
+  filter_packages:
+    runs-on: ubuntu-latest
+    outputs:
+      filtered-matrix: ${{ steps.filter-matrix.outputs.filtered-matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - id: filter-matrix
+        env:
+          BUILD_TYPE_LIST: ${{ inputs.build-type-list }}
+          BUILD_ARCH_LIST: ${{ inputs.build-arch-list }}
+          TOOL_CHAIN_TAG_LIST: ${{ inputs.tool-chain-tag-list }}
+          PACKAGE_LISTS: ${{ inputs.package-lists }}
+          SKIP_FILTER_LIST: ${{ inputs.skip-filter-list }}
+          CONTINUE_ON_ERROR_FILTER_LIST: ${{ inputs.continue-on-error-filter-list }}
+        run: python ./.github/scripts/filter_matrix.py
+
+  build_windows_packages:
+    name: Build Windows Packages ${{inputs.windows-installer}}-${{ matrix.config.build_arch }}-${{ matrix.config.build_type }}-${{ matrix.config.tool_chain_tag }}-${{ strategy.job-index }}
+    needs: filter_packages
+    if: ${{ needs.filter_packages.outputs.filtered-matrix != '[]' }}
+    runs-on: ${{ inputs.windows-runs-on }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config: ${{ fromJSON(needs.filter_packages.outputs.filtered-matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Job
+        uses: ./.github/actions/setup-job
+        with:
+          windows-installer: ${{ inputs.windows-installer }}
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: Build Packages ${{ matrix.config.build_package }}
+        continue-on-error: ${{ matrix.config.continue_on_error == 'true' }}
+        shell: cmd
+        run: |
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" -a ${{ matrix.config.build_arch }} -t ${{ matrix.config.build_type }} TOOL_CHAIN_TAG=${{ matrix.config.tool_chain_tag }} -p ${{ matrix.config.build_package }} ${{ inputs.stuart-ci-build-params }}
+      - name: Upload Windows Packages Logs ${{inputs.windows-installer}}-${{ matrix.config.build_arch }}-${{ matrix.config.build_type }}-${{ matrix.config.tool_chain_tag }}-${{ strategy.job-index }}
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Packages Logs ${{inputs.windows-installer}}-${{ matrix.config.build_arch }}-${{ matrix.config.build_type }}-${{ matrix.config.tool_chain_tag }}-${{ strategy.job-index }}
+          if-no-files-found: ignore
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+
