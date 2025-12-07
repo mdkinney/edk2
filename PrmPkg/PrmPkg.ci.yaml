@@ -103,7 +103,13 @@
           "prmopreg",
           "prmpecofflib",
           "prmpkg",
-          "prmssdtinstall"
+          "prmssdtinstall",
+          "prmconfig",
+          "prmcontextbufferlib",
+          "prminfo",
+          "prmloader",
+          "prmmodulediscoverylib",
+          "prmexportdescriptor"
         ],
         "IgnoreStandardPaths": [],   # Standard Plugin defined paths that
                                      # should be ignore
