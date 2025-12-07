@@ -1,0 +1,150 @@
+## @file
+# A workflow using Ubuntu CLANG tools that builds packages and uploads artifacts.
+#
+# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64/AARCH64/RISCV64
+# Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
+# EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Ubuntu CLANG 20.1.8 Build
+
+on:
+  workflow_call:
+    inputs:
+      linux-runs-on:
+        description: The runner label for Linux jobs.
+        required: true
+        type: string
+        default: 'ubuntu-24.04'
+      linux-container-image:
+        description: The container image for Linux jobs.
+        required: true
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      package-lists:
+        description: List of package lists to test.
+        required: true
+        type: string
+        default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+      emulatorpkg-build-options:
+        description: Additional build options for EmulatorPkg.
+        required: false
+        type: string
+        default: ''
+
+  workflow_dispatch:
+    inputs:
+      linux-runs-on:
+        description: The runner label for Linux jobs.
+        required: true
+        type: string
+        default: 'ubuntu-24.04'
+      linux-container-image:
+        description: The container image for Linux jobs.
+        required: true
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      package-lists:
+        description: List of package lists to test.
+        required: true
+        type: string
+        default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+      emulatorpkg-build-options:
+        description: Additional build options for EmulatorPkg.
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  build_linux_clang_packages_ia32_x64:
+    uses: ./.github/workflows/ubuntu-package-build-test.yml
+    with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
+      linux-host-compiler: 'clang'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t CLANGPDB'
+      build_type_list: '["DEBUG", "RELEASE"]'
+      build_arch_list: '["IA32", "X64"]'
+      tool_chain_tag_list: '["CLANGPDB", "CLANGDWARF"]'
+      package-lists: ${{ inputs.package-lists }}
+
+  build_linux_clangdwarf_aarch64_riscv64_packages:
+    uses: ./.github/workflows/ubuntu-package-build-test.yml
+    with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
+      linux-host-compiler: 'clang'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t CLANGDWARF'
+      build_type_list: '["DEBUG", "RELEASE"]'
+      build_arch_list: '["AARCH64", "RISCV64"]'
+      tool_chain_tag_list: '["CLANGDWARF"]'
+      package-lists: ${{ inputs.package-lists }}
+
+  build_linux_clangdwarf_noopt_unit_tests:
+    uses: ./.github/workflows/ubuntu-package-build-test.yml
+    with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
+      linux-host-compiler: 'clang'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t CLANGDWARF'
+      build_type_list: '["NOOPT"]'
+      build_arch_list: '["X64"]'
+      tool_chain_tag_list: '["CLANGDWARF"]'
+      package-lists: ${{ inputs.package-lists }}
+
+  build_linux_clangdwarf_emulatorpkg:
+    if: ${{ contains(inputs.package-lists, 'EmulatorPkg') }}
+    uses: ./.github/workflows/ubuntu-emulator-build.yml
+    with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
+      linux-host-compiler: 'clang'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t CLANGDWARF'
+      edk-setup-params: ''
+      build_arch_list: '["IA32", "X64"]'
+      tool_chain_tag_list: '["CLANGDWARF"]'
+      emulatorpkg-build-options: ${{ inputs.emulatorpkg-build-options }}

@@ -1,0 +1,86 @@
+## @file
+# A workflow using Windows Visual Studio CLANGPDB tools that builds packages and
+# uploads artifacts.
+#
+# Firmware Build Support:             CLANGPDB - IA32/X64
+# Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
+# EmulatorPkg Build Support:          CLANGPDB - IA32/X64
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Windows Visual Studio CLANGPDB LLVM 20.1.8 Build
+
+on:
+  workflow_call:
+    inputs:
+      windows-runs-on:
+        description: The runner label for Windows jobs.
+        required: true
+        type: string
+        default: 'windows-2025'
+      python-version:
+        description: The version of Python to use.
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: Path to pip requirements file
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: The path to the Stuart CI settings file.
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      package-lists:
+        description: List of package lists to test (e.g. ["MdePkg,FatPkg","UefiCpuPkg"]).
+        required: true
+        type: string
+        default: '["FatPkg"]'
+
+jobs:
+  build_windows_visual_studio_clangpdb_packages:
+    uses: ./.github/workflows/windows-clang-20-package-build-test.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      windows-clang-installer: 'vs-clangpdb'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t VS2022'
+      build_type_list: '["DEBUG","RELEASE"]'
+      build_arch_list: '["IA32","X64"]'
+      tool_chain_tag_list: '["CLANGPDB"]'
+      package-lists: ${{ inputs.package-lists }}
+
+  build_windows_visual_studio_clangpdb_noopt_unit_tests:
+    # Do not run for PR.  Covered by Ubuntu clang workflow.
+    if: ${{ github.event_name != 'pull_request' }}
+    uses: ./.github/workflows/windows-clang-20-package-build-test.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      windows-clang-installer: 'vs-clangpdb'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t VS2022'
+      build_type_list: '["NOOPT"]'
+      build_arch_list: '["X64"]'
+      tool_chain_tag_list: '["CLANGPDB"]'
+      package-lists: ${{ inputs.package-lists }}
+
+  build_windows_visual_studio_clangpdb_emulatorpkg:
+    if: ${{ contains(inputs.package-lists, 'EmulatorPkg') }}
+    uses: ./.github/workflows/windows-clang-20-emulator-build-test.yml
+    with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
+      windows-clang-installer: 'vs-clangpdb'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t VS2022'
+      edk-setup-params: ''
+      build_arch_list: '["IA32","X64"]'
+      tool_chain_tag_list: '["CLANGPDB"]'
