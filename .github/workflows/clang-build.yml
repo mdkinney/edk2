@@ -66,8 +66,14 @@ jobs:
     name: Build Linux CLANGPDB OVMF PreCheck
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
+      image: ghcr.io/tianocore/containers/fedora-43-test:b562821
+#      image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
     steps:
+      - name: Versions
+        run: |
+          clang --version
+          lld --version
+          llvm-ar --version
       - name: Checkout
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
