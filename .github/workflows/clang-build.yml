@@ -101,7 +101,7 @@ jobs:
     name: Build Windows (${{ join(matrix.*, ' - ') }})
     runs-on: windows-latest
     env:
-      CLANG_HOST_BIN: n
+      CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
     strategy:
       fail-fast: false
       matrix:
@@ -230,7 +230,7 @@ jobs:
     name: Build Windows (${{ join(matrix.*, ' - ') }})
     runs-on: windows-latest
     env:
-      CLANG_HOST_BIN: n
+      CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
     strategy:
       fail-fast: false
       matrix:
