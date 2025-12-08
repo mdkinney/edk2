@@ -69,11 +69,6 @@ jobs:
       image: ghcr.io/tianocore/containers/fedora-43-test:b562821
 #      image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
     steps:
-      - name: Versions
-        run: |
-          clang --version
-          lld --version
-          llvm-ar --version
       - name: Checkout
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
