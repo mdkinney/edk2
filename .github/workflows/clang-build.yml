@@ -200,7 +200,7 @@ jobs:
 #      image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
     steps:
       - name: Install ASAN libs
-        run: sudo dnf install libasan
+        run: sudo dnf install libasan compiler-rt
       - name: Checkout
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
