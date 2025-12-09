@@ -13,7 +13,7 @@ on:
       - sandbox/master
 
 env:
-  LINUX_CONTAINER_IMAGE: ghcr.io/mdkinney/containers/fedora-43-build:2f8da75
+  LINUX_CONTAINER_IMAGE: "ghcr.io/mdkinney/containers/fedora-43-build:2f8da75"
   CLANG_VERSION: "20.1.8"
 
 jobs:
