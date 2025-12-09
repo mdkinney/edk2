@@ -14,13 +14,14 @@ on:
 
 env:
   LINUX_CONTAINER_IMAGE: ghcr.io/mdkinney/containers/fedora-43-build:2f8da75
+  CLANG_VERSION: "20.1.8"
 
 jobs:
   build_linux_clang_precheck:
     name: Build Linux CLANGPDB NO-TARGET PreCheck
     runs-on: ubuntu-latest
     container:
-      image: ${{env.LINUX_CONTAINER_IMAGE}}
+      image: ${{ env.LINUX_CONTAINER_IMAGE }}
     strategy:
       fail-fast: false
       matrix:
@@ -61,15 +62,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: "Upload Linux NO-TARGET Logs (${{ join(matrix.*, ' - ') }})"
-          path: |
-            Build/*.txt
+          path: Build/*.txt
         if: always()
 
   build_linux_clang_ovmf_precheck:
     name: Build Linux CLANG PreCheck
     runs-on: ubuntu-latest
     container:
-      image: ${{env.LINUX_CONTAINER_IMAGE}}
+      image: ${{ env.LINUX_CONTAINER_IMAGE }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -100,8 +100,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: "Upload Linux OVMF Precheck Logs"
-          path: |
-            Build/*.txt
+          path: Build/*.txt
         if: always()
 
   build_windows_clang:
@@ -127,11 +126,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Install CLANG 20.8.1
+      - name: Install CLANG ${{ env.CLANG_VERSION }}
         shell: cmd
         run: |
-          choco install -y llvm --version=20.8.1
-          refreshenv
+          choco install -y llvm --version=${{ env.CLANG_VERSION }}
       - name: Set up Python 3.13
         uses: actions/setup-python@v5
         with:
@@ -152,8 +150,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: "Upload Windows Logs (${{ join(matrix.*, ' - ') }})"
-          path: |
-            Build/*.txt
+          path: Build/*.txt
         if: always()
 
   build_linux_clang:
@@ -161,7 +158,7 @@ jobs:
     name: Build Linux (${{ join(matrix.*, ' - ') }})
     runs-on: ubuntu-latest
     container:
-      image: ${{env.LINUX_CONTAINER_IMAGE}}
+      image: ${{ env.LINUX_CONTAINER_IMAGE }}
     strategy:
       fail-fast: false
       matrix:
@@ -185,7 +182,7 @@ jobs:
       - name: 'Clone Submodules'
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGDPDB
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Build BaseTools'
         run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
       - name: 'Build Packages CLANGPDB'
@@ -194,8 +191,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: "Upload Linux Logs (${{ matrix.build_arch}} - ${{ matrix.build_type }})"
-          path: |
-            Build/*.txt
+          path: Build/*.txt
         if: always()
 
   build_linux_noopt_unit_tests:
@@ -203,7 +199,7 @@ jobs:
     name: Build Linux CLANGDWARF NOOPT unit tests
     runs-on: ubuntu-latest
     container:
-      image: ${{env.LINUX_CONTAINER_IMAGE}}
+      image: ${{ env.LINUX_CONTAINER_IMAGE }}
     steps:
       - name: Install ASAN libs
         run: sudo dnf install compiler-rt -y
@@ -227,8 +223,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: "Upload Linux CLANGDWARF NOOPT Unit Test Logs"
-          path: |
-            Build/*.txt
+          path: Build/*.txt
         if: always()
 
   build_windows_noopt_unit_tests:
@@ -248,11 +243,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Install CLANG 20.1.8
+      - name: Install CLANG ${{ env.CLANG_VERSION }}
         shell: cmd
         run: |
-          choco install -y llvm --version=20.1.8
-          refreshenv
+          choco install -y llvm --version=${{ env.CLANG_VERSION }}
       - name: Install OpenCppCoverage
         shell: cmd
         run: |
