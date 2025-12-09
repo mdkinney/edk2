@@ -12,14 +12,15 @@ on:
     branches:
       - sandbox/master
 
+env:
+  LINUX_CONTAINER_IMAGE: ghcr.io/mdkinney/containers/fedora-43-build:2f8da75
+
 jobs:
   build_linux_clang_precheck:
     name: Build Linux CLANGPDB NO-TARGET PreCheck
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/mdkinney/containers/fedora-43-build:205f087
-#      image: ghcr.io/tianocore/containers/fedora-43-test:b562821
-#      image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
+      image: ${{env.LINUX_CONTAINER_IMAGE}}
     strategy:
       fail-fast: false
       matrix:
@@ -28,8 +29,8 @@ jobs:
         build_arch:
           - X64
         build_package:
-          - CryptoPkg,ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,FatPkg,FmpDevicePkg,NetworkPkg,RedfishPkg,PcAtChipsetPkg,MdeModulePkg,MdePkg
-          - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,SecurityPkg,ShellPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg,OvmfPkg,ArmVirtPkg
+          - ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,FatPkg,FmpDevicePkg,NetworkPkg,RedfishPkg,PcAtChipsetPkg,MdeModulePkg,MdePkg,CryptoPkg
+          - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,SecurityPkg,ShellPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
     steps:
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -51,7 +52,7 @@ jobs:
       - name: 'Clone Submodules'
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGDPDB
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Build BaseTools'
         run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
       - name: 'Build Packages CLANGPDB NO-TARGET'
@@ -65,12 +66,10 @@ jobs:
         if: always()
 
   build_linux_clang_ovmf_precheck:
-    name: Build Linux CLANGPDB OVMF PreCheck
+    name: Build Linux CLANG PreCheck
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/mdkinney/containers/fedora-43-build:205f087
-#      image: ghcr.io/tianocore/containers/fedora-43-test:b562821
-#      image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
+      image: ${{env.LINUX_CONTAINER_IMAGE}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -86,6 +85,13 @@ jobs:
         run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGDPDB
       - name: 'Build BaseTools'
         run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
+      - name: 'Build UnitTestFrameworkPkg Unit Tests'
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
+      - name: 'Build EmulatorPkg Platform'
+        run: |
+          . ./edksetup.sh
+          build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc
       - name: 'Build OVMF Platform'
         run: |
           . ./edksetup.sh
@@ -155,9 +161,7 @@ jobs:
     name: Build Linux (${{ join(matrix.*, ' - ') }})
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/mdkinney/containers/fedora-43-build:205f087
-#      image: ghcr.io/tianocore/containers/fedora-43-test:b562821
-#      image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
+      image: ${{env.LINUX_CONTAINER_IMAGE}}
     strategy:
       fail-fast: false
       matrix:
@@ -199,9 +203,7 @@ jobs:
     name: Build Linux CLANGDWARF NOOPT unit tests
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/mdkinney/containers/fedora-43-build:205f087
-#      image: ghcr.io/tianocore/containers/fedora-43-test:b562821
-#      image: ghcr.io/tianocore/containers/ubuntu-24-dev:latest
+      image: ${{env.LINUX_CONTAINER_IMAGE}}
     steps:
       - name: Install ASAN libs
         run: sudo dnf install compiler-rt -y
