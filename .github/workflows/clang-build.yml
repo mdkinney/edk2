@@ -96,15 +96,15 @@ jobs:
       - name: 'Build EmulatorPkg X64 Platform'
         run: |
           . ./edksetup.sh
-          build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -j Build/EmulatorX64Build.log -q
+          build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -j Build/EmulatorX64Build.log >NUL
       - name: 'Build EmulatorPkg IA32 Platform'
         run: |
           . ./edksetup.sh
-          build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -j Build/EmulatorIA32Build.log -q
+          build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -j Build/EmulatorIA32Build.log >NUL
       - name: 'Build OVMF Platform'
         run: |
           . ./edksetup.sh
-          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log -q
+          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
       - name: Upload Logs
         uses: actions/upload-artifact@v4
         with:
@@ -172,7 +172,7 @@ jobs:
         run: |
           PATH=%CLANG_BIN%;%PATH%
           set
-          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
       - name: Upload CLANGPDB-VS Logs
         uses: actions/upload-artifact@v4
         with:
@@ -188,7 +188,7 @@ jobs:
         run: |
           PATH=%CLANG_BIN%;%PATH%
           set
-          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
       - name: Upload CLANGPDB-Mingw Logs
         uses: actions/upload-artifact@v4
         with:
@@ -204,7 +204,7 @@ jobs:
         run: |
           PATH=%CLANG_BIN%;%PATH%
           set
-          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGDWARF -p "${{ matrix.build_package }}"
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGDWARF -p "${{ matrix.build_package }}" -v
       - name: Upload CLANGDWARF-Mingw Logs
         uses: actions/upload-artifact@v4
         with:
