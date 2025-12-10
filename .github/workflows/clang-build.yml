@@ -76,7 +76,7 @@ jobs:
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Install 32-bit glibc and libstdc++
-        run: sudo dnf install glibc.i686 libstdc++.i686 -y
+        run: sudo dnf install glibc.i686 glibc-devel.i686 libstdc++.i686 -y
       - name: Install 32-bit libs and 32-bit x11 dependencies
         run: sudo dnf install libX11.i686 libXext.i686  -y
       - name: 'Install/Upgrade pip modules'
