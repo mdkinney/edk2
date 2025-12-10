@@ -53,6 +53,9 @@ jobs:
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Build BaseTools'
+        env:
+          CC: clang
+          CXX: clang++
         run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
       - name: 'Build Packages CLANGPDB NO-TARGET'
         run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
@@ -81,14 +84,21 @@ jobs:
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Build BaseTools'
+        env:
+          CC: clang
+          CXX: clang++
         run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
       - name: 'Build UnitTestFrameworkPkg Unit Tests'
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
-      - name: 'Build EmulatorPkg Platform'
+      - name: 'Build EmulatorPkg X64 Platform'
         run: |
           . ./edksetup.sh
           build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc
+      - name: 'Build EmulatorPkg IA32 Platform'
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc
       - name: 'Build OVMF Platform'
         run: |
           . ./edksetup.sh
@@ -180,6 +190,9 @@ jobs:
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Build BaseTools'
+        env:
+          CC: clang
+          CXX: clang++
         run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
       - name: 'Build Packages CLANGPDB'
         run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
@@ -211,6 +224,9 @@ jobs:
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGDWARF
       - name: 'Build BaseTools'
+        env:
+          CC: clang
+          CXX: clang++
         run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
       - name: 'Build Packages CLANGDWARF NOOPT'
         run: stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF
