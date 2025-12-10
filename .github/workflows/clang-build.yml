@@ -19,7 +19,7 @@ jobs:
   build_linux_clang_precheck:
     name: Build Linux CLANGPDB NO-TARGET PreCheck
     runs-on: ubuntu-latest
-    container: ghcr.io/mdkinney/containers/fedora-43-build:2f8da75
+    container: ghcr.io/mdkinney/containers/fedora-43-build:542e8d5
     strategy:
       fail-fast: false
       matrix:
@@ -69,16 +69,12 @@ jobs:
   build_linux_clang_ovmf_precheck:
     name: Build Linux CLANG PreCheck
     runs-on: ubuntu-latest
-    container: ghcr.io/mdkinney/containers/fedora-43-build:2f8da75
+    container: ghcr.io/mdkinney/containers/fedora-43-build:542e8d5
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Install 32-bit glibc and libstdc++
-        run: sudo dnf install glibc.i686 glibc-devel.i686 libstdc++.i686 -y
-      - name: Install 32-bit libs and 32-bit x11 dependencies
-        run: sudo dnf install libX11.i686 libX11-devel.i686 libXext.i686 libXext-devel.i686 -y
       - name: 'Install/Upgrade pip modules'
         run: |
           pip install --upgrade pip
@@ -141,6 +137,11 @@ jobs:
         shell: cmd
         run: |
           choco install -y llvm --version=${{ env.CLANG_VERSION }}
+      - name: Install TianoCore Mingw CLANG 20.1.8
+        shell: cmd
+        run: |
+          curl -L -o EdkClangSetup.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v20.1.8/EdkClangSetup-20.1.8.0.exe
+          EdkClangSetup.exe /S
       - name: Set up Python 3.13
         uses: actions/setup-python@v5
         with:
@@ -168,7 +169,7 @@ jobs:
     needs: [build_linux_clang_precheck, build_linux_clang_ovmf_precheck]
     name: Build Linux (${{ join(matrix.*, ' - ') }})
     runs-on: ubuntu-latest
-    container: ghcr.io/mdkinney/containers/fedora-43-build:2f8da75
+    container: ghcr.io/mdkinney/containers/fedora-43-build:542e8d5
     strategy:
       fail-fast: false
       matrix:
@@ -211,7 +212,7 @@ jobs:
     needs: [build_linux_clang_precheck, build_linux_clang_ovmf_precheck]
     name: Build Linux CLANGDWARF NOOPT unit tests
     runs-on: ubuntu-latest
-    container: ghcr.io/mdkinney/containers/fedora-43-build:2f8da75
+    container: ghcr.io/mdkinney/containers/fedora-43-build:542e8d5
     steps:
       - name: Install ASAN libs
         run: sudo dnf install compiler-rt -y
