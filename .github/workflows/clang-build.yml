@@ -145,7 +145,7 @@ jobs:
         shell: cmd
         run: |
           curl -L -o EdkClangSetup-20.1.8.0.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v20.1.8/EdkClangSetup-20.1.8.0.exe
-          EdkClangSetup-20.1.8.0.exe /s /q
+          EdkClangSetup-20.1.8.0.exe /silent
           dir "C:\edk2-clang\bin"
       - name: Set up Python 3.13
         uses: actions/setup-python@v5
