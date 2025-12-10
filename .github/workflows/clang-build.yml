@@ -164,9 +164,10 @@ jobs:
       - name: 'Build Packages CLANGPDB-VS'
         shell: cmd
         env:
-          PATH: "C:\\Program Files\\LLVM\\bin;${{ env.PATH }}"
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
-        run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
+        run: |
+          PATH=%CLANG_BIN%;%PATH%
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
       - name: Upload CLANGPDB-VS Logs
         uses: actions/upload-artifact@v4
         with:
@@ -179,9 +180,10 @@ jobs:
       - name: 'Build Packages CLANGPDB-Mingw'
         shell: cmd
         env:
-          PATH: "C:\\edk2-clang\\bin;${{ env.PATH }}"
           CLANG_BIN: "C:\\edk2-clang\\bin\\"
-        run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
+        run: |
+          PATH=%CLANG_BIN%;%PATH%
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
       - name: Upload CLANGPDB-Mingw Logs
         uses: actions/upload-artifact@v4
         with:
@@ -194,9 +196,10 @@ jobs:
       - name: 'Build Packages CLANGDWARF-Mingw'
         shell: cmd
         env:
-          PATH: "C:\\llvm-mingw-20251104-ucrt-x86_64\\bin;${{ env.PATH }}"
           CLANG_BIN: "C:\\llvm-mingw-20251104-ucrt-x86_64\\bin\\"
-        run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGDWARF -p "${{ matrix.build_package }}"
+        run: |
+          PATH=%CLANG_BIN%;%PATH%
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGDWARF -p "${{ matrix.build_package }}"
       - name: Upload CLANGDWARF-Mingw Logs
         uses: actions/upload-artifact@v4
         with:
