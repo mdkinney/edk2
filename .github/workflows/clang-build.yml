@@ -138,15 +138,15 @@ jobs:
       - name: Install LLVM-MinGW
         shell: cmd
         run: |
-          curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/20250709/llvm-mingw-20250709-ucrt-x86_64.zip"
+          curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/20251104/llvm-mingw-20251104-ucrt-x86_64.zip"
           powershell -command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath 'C:\' -Force"
-          dir C:\llvm-mingw-20251104-ucrt-i686\bin
+          dir "C:\llvm-mingw-20251104-ucrt-x86_64\bin"
       - name: Install TianoCore Mingw CLANG 20.1.8
         shell: cmd
         run: |
           curl -L -o EdkClangSetup-20.1.8.0.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v20.1.8/EdkClangSetup-20.1.8.0.exe
           EdkClangSetup-20.1.8.0.exe /s /q
-          dir C:\edk2-clang\bin
+          dir "C:\edk2-clang\bin"
       - name: Set up Python 3.13
         uses: actions/setup-python@v5
         with:
@@ -161,11 +161,11 @@ jobs:
         run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
-
       - name: 'Build Packages CLANGPDB-VS'
+        shell: cmd
         env:
+          PATH: "C:\\Program Files\\LLVM\\bin;${{ env.PATH }}"
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
-          PATH: "C:\\Program Files\\LLVM\\bin\\;${{ env.PATH }}"
         run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
       - name: Upload CLANGPDB-VS Logs
         uses: actions/upload-artifact@v4
@@ -175,13 +175,12 @@ jobs:
         if: always()
       - name: 'Remove Build Directory CLANGPDB-VS'
         shell: cmd
-        run: |
-          rmdir /s /q Build
-
+        run: rmdir /s /q Build
       - name: 'Build Packages CLANGPDB-Mingw'
+        shell: cmd
         env:
+          PATH: "C:\\edk2-clang\\bin;${{ env.PATH }}"
           CLANG_BIN: "C:\\edk2-clang\\bin\\"
-          PATH: "C:\\edk2-clang\\bin\\";${{ env.PATH }}"
         run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
       - name: Upload CLANGPDB-Mingw Logs
         uses: actions/upload-artifact@v4
@@ -191,14 +190,13 @@ jobs:
         if: always()
       - name: 'Remove Build Directory CLANGPDB-Mingw'
         shell: cmd
-        run: |
-          rmdir /s /q Build
-
+        run: rmdir /s /q Build
       - name: 'Build Packages CLANGDWARF-Mingw'
+        shell: cmd
         env:
-          CLANG_BIN: "c:\\edk2-clang-x86\\llvm-mingw-20251104-ucrt-i686\\bin\\"
-          PATH: "c:\\edk2-clang-x86\\llvm-mingw-20251104-ucrt-i686\\bin\\";${{ env.PATH }}"
-        run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
+          PATH: "C:\\llvm-mingw-20251104-ucrt-x86_64\\bin;${{ env.PATH }}"
+          CLANG_BIN: "C:\\llvm-mingw-20251104-ucrt-x86_64\\bin\\"
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGDWARF -p "${{ matrix.build_package }}"
       - name: Upload CLANGDWARF-Mingw Logs
         uses: actions/upload-artifact@v4
         with:
@@ -207,8 +205,7 @@ jobs:
         if: always()
       - name: 'Remove Build Directory CLANGDWARF-Mingw'
         shell: cmd
-        run: |
-          rmdir /s /q Build
+        run: rmdir /s /q Build
 
   build_linux_clang:
     needs: [build_linux_clang_precheck, build_linux_clang_ovmf_precheck]
