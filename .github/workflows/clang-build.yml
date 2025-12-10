@@ -19,7 +19,7 @@ jobs:
   build_linux_clang_precheck:
     name: Build Linux CLANGPDB NO-TARGET PreCheck
     runs-on: ubuntu-latest
-    container: ghcr.io/mdkinney/containers/fedora-43-build:542e8d5
+    container: ghcr.io/mdkinney/containers/fedora-43-build:latest
     strategy:
       fail-fast: false
       matrix:
@@ -69,7 +69,7 @@ jobs:
   build_linux_clang_ovmf_precheck:
     name: Build Linux CLANG PreCheck
     runs-on: ubuntu-latest
-    container: ghcr.io/mdkinney/containers/fedora-43-build:542e8d5
+    container: ghcr.io/mdkinney/containers/fedora-43-build:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -169,7 +169,7 @@ jobs:
     needs: [build_linux_clang_precheck, build_linux_clang_ovmf_precheck]
     name: Build Linux (${{ join(matrix.*, ' - ') }})
     runs-on: ubuntu-latest
-    container: ghcr.io/mdkinney/containers/fedora-43-build:542e8d5
+    container: ghcr.io/mdkinney/containers/fedora-43-build:latest
     strategy:
       fail-fast: false
       matrix:
@@ -212,7 +212,7 @@ jobs:
     needs: [build_linux_clang_precheck, build_linux_clang_ovmf_precheck]
     name: Build Linux CLANGDWARF NOOPT unit tests
     runs-on: ubuntu-latest
-    container: ghcr.io/mdkinney/containers/fedora-43-build:542e8d5
+    container: ghcr.io/mdkinney/containers/fedora-43-build:latest
     steps:
       - name: Install ASAN libs
         run: sudo dnf install compiler-rt -y
