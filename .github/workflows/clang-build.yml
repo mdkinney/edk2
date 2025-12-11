@@ -157,8 +157,6 @@ jobs:
         shell: cmd
         run: |
           curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/20251104/llvm-mingw-20251104-ucrt-x86_64.zip"
-          #powershell -command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath 'C:\' -Force"
-          #dir "C:\llvm-mingw-20251104-ucrt-x86_64\bin"
       - name: Cache TianoCore Mingw CLANG
         id: cache-edk2-clang
         uses: actions/cache@v4
@@ -202,7 +200,6 @@ jobs:
         run: |
           PATH=%CLANG_BIN%;%PATH%
           set
-          #stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
       - name: Upload CLANGPDB-Mingw Logs
         uses: actions/upload-artifact@v4
         with:
