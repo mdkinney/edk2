@@ -165,22 +165,6 @@ jobs:
         run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
-      - name: 'Build Packages CLANGPDB-VS'
-        shell: cmd
-        env:
-          CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
-        run: |
-          PATH=%CLANG_BIN%;%PATH%
-          set
-          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
-      - name: Upload CLANGPDB-VS Logs
-        uses: actions/upload-artifact@v4
-        with:
-          name: "Upload Windows CLANGPDB-VS Logs (${{ join(matrix.*, ' - ') }})"
-          path: |
-            Build/*.txt
-            Build/*.log
-        if: always()
       - name: 'Build Packages CLANGPDB-Mingw'
         shell: cmd
         env:
@@ -197,6 +181,9 @@ jobs:
             Build/*.txt
             Build/*.log
         if: always()
+      - name: Remove Build Directory CLANGPDB-Mingw
+        shell: cmd
+        run: rmdir /s /q Build
       - name: 'Build Packages CLANGDWARF-Mingw'
         shell: cmd
         env:
@@ -209,6 +196,25 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: "Upload Windows CLANGDWARF-Mingw Logs (${{ join(matrix.*, ' - ') }})"
+          path: |
+            Build/*.txt
+            Build/*.log
+        if: always()
+      - name: Remove Build Directory CLANGDWARF-Mingw
+        shell: cmd
+        run: rmdir /s /q Build
+      - name: 'Build Packages CLANGPDB-VS'
+        shell: cmd
+        env:
+          CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
+        run: |
+          PATH=%CLANG_BIN%;%PATH%
+          set
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
+      - name: Upload CLANGPDB-VS Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Windows CLANGPDB-VS Logs (${{ join(matrix.*, ' - ') }})"
           path: |
             Build/*.txt
             Build/*.log
