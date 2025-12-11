@@ -177,6 +177,7 @@ jobs:
         with:
           python-version: '3.13'
           cache: 'pip'
+          cache-dependency-path: 'pip-requirements.txt'
       - name: Cache pip modules
         uses: actions/cache@v4
         with:
