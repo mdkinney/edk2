@@ -157,6 +157,8 @@ jobs:
         shell: cmd
         run: |
           curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/20251104/llvm-mingw-20251104-ucrt-x86_64.zip"
+          powershell -command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath 'C:\' -Force"
+          dir "C:\llvm-mingw-20251104-ucrt-x86_64\bin"
       - name: Cache TianoCore Mingw CLANG
         id: cache-edk2-clang
         uses: actions/cache@v4
@@ -168,8 +170,6 @@ jobs:
         shell: cmd
         run: |
           curl -L -o EdkClangSetup-20.1.8.0.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v20.1.8/EdkClangSetup-20.1.8.0.exe
-          EdkClangSetup-20.1.8.0.exe /silent
-          dir "C:\edk2-clang\bin"
       - name: Set up Python 3.13
         uses: actions/setup-python@v5
         with:
