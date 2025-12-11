@@ -135,17 +135,38 @@ jobs:
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Cache CLANG ${{ env.CLANG_VERSION }}
+        id: cache-clang
+        uses: actions/cache@v4
+        with:
+          path: C:\Program Files\LLVM
+          key: choco-clang-${{ env.CLANG_VERSION }}-${{ runner.os }}
       - name: Install CLANG ${{ env.CLANG_VERSION }}
+        if: steps.cache-clang.outputs.cache-hit != 'true'
         shell: cmd
         run: |
           choco install -y llvm --version=${{ env.CLANG_VERSION }}
+      - name: Cache LLVM-MinGW
+        id: cache-llvm-mingw
+        uses: actions/cache@v4
+        with:
+          path: C:\llvm-mingw-20251104-ucrt-x86_64
+          key: llvm-mingw-20251104-ucrt-x86_64-${{ runner.os }}
       - name: Install LLVM-MinGW
+        if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
         shell: cmd
         run: |
           curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/20251104/llvm-mingw-20251104-ucrt-x86_64.zip"
           powershell -command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath 'C:\' -Force"
           dir "C:\llvm-mingw-20251104-ucrt-x86_64\bin"
+      - name: Cache TianoCore Mingw CLANG
+        id: cache-edk2-clang
+        uses: actions/cache@v4
+        with:
+          path: C:\edk2-clang
+          key: edk2-clang-${{ env.CLANG_VERSION }}-${{ runner.os }}
       - name: Install TianoCore Mingw CLANG 20.1.8
+        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
         shell: cmd
         run: |
           curl -L -o EdkClangSetup-20.1.8.0.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v20.1.8/EdkClangSetup-20.1.8.0.exe
@@ -155,6 +176,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+          cache: 'pip'
+      - name: Cache pip modules
+        uses: actions/cache@v4
+        with:
+          path: ~\AppData\Local\pip\Cache
+          key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: 'Install/Upgrade pip modules'
         run: |
           pip install --upgrade pip
