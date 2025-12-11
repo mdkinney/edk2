@@ -114,7 +114,8 @@ jobs:
   build_windows_2025_server_core_clang:
     name: Build Windows 2025 Server Core Clang
     runs-on: windows-latest
-    container: ghcr.io/mdkinney/containers/windows-2022-build:latest
+    container:
+      image: ghcr.io/mdkinney/containers/windows-2022-build:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
