@@ -28,16 +28,17 @@ jobs:
           - ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,FatPkg,FmpDevicePkg,NetworkPkg,RedfishPkg,PcAtChipsetPkg,MdeModulePkg,MdePkg,CryptoPkg
           - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,SecurityPkg,ShellPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
     steps:
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Install cspell
-        run: npm install -g cspell
       - name: Checkout
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Cache pip modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
+          restore-keys: |
+        ${{ runner.os }}-pip-
       - name: 'Install/Upgrade pip modules'
         run: |
           pip install --upgrade pip
@@ -74,6 +75,13 @@ jobs:
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Cache pip modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: 'Install/Upgrade pip modules'
         run: |
           pip install --upgrade pip
@@ -106,47 +114,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: "Upload Linux OVMF Precheck Logs"
-          path: |
-            Build/*.txt
-            Build/*.log
-        if: always()
-
-  build_windows_2025_server_core_clang:
-    name: Build Windows 2025 Server Core Clang
-    runs-on: windows-latest
-    container:
-      image: ghcr.io/mdkinney/containers/windows-2022-build:latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Set up Python 3.13
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-      - name: 'Install/Upgrade pip modules'
-        run: |
-          pip install --upgrade pip
-          pip install --upgrade -r pip-requirements.txt
-      - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
-      - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
-      - name: 'Build BaseTools'
-        run: python BaseTools/Edk2ToolsBuild.py -t VS2022
-      - name: 'Build Packages CLANGPDB'
-        shell: cmd
-        env:
-          CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
-        run: |
-          PATH=%CLANG_BIN%;%PATH%
-          set
-          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGPDB -p FatPkg
-      - name: Upload Logs
-        uses: actions/upload-artifact@v4
-        with:
-          name: "Upload Windows CLANGPDB Unit Test Logs"
           path: |
             Build/*.txt
             Build/*.log
@@ -189,15 +156,15 @@ jobs:
         id: cache-llvm-mingw
         uses: actions/cache@v4
         with:
-          path: C:\llvm-mingw-20251104-ucrt-x86_64
-          key: llvm-mingw-20251104-ucrt-x86_64-${{ runner.os }}
+          path: C:\llvm-mingw-20250709-ucrt-x86_64
+          key: llvm-mingw-20250709-ucrt-x86_64-${{ runner.os }}
       - name: Install LLVM-MinGW
         if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
         shell: cmd
         run: |
-          curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/20251104/llvm-mingw-20251104-ucrt-x86_64.zip"
+          curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/20250709/llvm-mingw-20250709-ucrt-x86_64.zip"
           powershell -command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath 'C:\' -Force"
-          dir "C:\llvm-mingw-20251104-ucrt-x86_64\bin"
+          dir "C:\llvm-mingw-20250709-ucrt-x86_64\bin"
       - name: Cache TianoCore Mingw CLANG
         id: cache-edk2-clang
         uses: actions/cache@v4
@@ -240,6 +207,7 @@ jobs:
         run: |
           PATH=%CLANG_BIN%;%PATH%
           set
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
       - name: Upload CLANGPDB-Mingw Logs
         uses: actions/upload-artifact@v4
         with:
@@ -254,7 +222,7 @@ jobs:
       - name: 'Build Packages CLANGDWARF-Mingw'
         shell: cmd
         env:
-          CLANG_BIN: "C:\\llvm-mingw-20251104-ucrt-x86_64\\bin\\"
+          CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
         run: |
           PATH=%CLANG_BIN%;%PATH%
           set
@@ -308,6 +276,13 @@ jobs:
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Cache pip modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
+          restore-keys: |
+        ${{ runner.os }}-pip-
       - name: 'Install/Upgrade pip modules'
         run: |
           pip install --upgrade pip
@@ -344,6 +319,13 @@ jobs:
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Cache pip modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
+          restore-keys: |
+        ${{ runner.os }}-pip-
       - name: 'Install/Upgrade pip modules'
         run: |
           pip install --upgrade pip
@@ -403,6 +385,15 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+          cache: 'pip'
+          cache-dependency-path: 'pip-requirements.txt'
+      - name: Cache pip modules
+        uses: actions/cache@v4
+        with:
+          path: ~\AppData\Local\pip\Cache
+          key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
+          restore-keys: |
+        ${{ runner.os }}-pip-
       - name: 'Install/Upgrade pip modules'
         run: |
           pip install --upgrade pip
