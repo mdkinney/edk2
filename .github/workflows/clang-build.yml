@@ -217,6 +217,7 @@ jobs:
           PATH=%CLANG_BIN%;%PATH%
           edksetup.bat Mingw-w64
           build -a ${{ matrix.build_arch }} -b ${{ matrix.build_type }} -t CLANGPDB -p "${{ matrix.build_package }}"
+        if: always()
       - name: Upload CLANGPDB-Mingw Logs
         uses: actions/upload-artifact@v4
         with:
