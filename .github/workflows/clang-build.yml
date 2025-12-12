@@ -206,6 +206,8 @@ jobs:
           CLANG_BIN: "C:\\edk2-clang\\bin\\"
           BASETOOLS_MINGW_PATH: "C:\\edk2-clang"
           BASETOOLS_MINGW_BUILD: "TRUE"
+          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
+          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           PATH=%CLANG_BIN%;%PATH%
           edksetup.bat Mingw-w64
