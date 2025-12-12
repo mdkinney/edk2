@@ -38,7 +38,7 @@ jobs:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
           restore-keys: |
-        ${{ runner.os }}-pip-
+            ${{ runner.os }}-pip-
       - name: 'Install/Upgrade pip modules'
         run: |
           pip install --upgrade pip
@@ -282,7 +282,7 @@ jobs:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
           restore-keys: |
-        ${{ runner.os }}-pip-
+            ${{ runner.os }}-pip-
       - name: 'Install/Upgrade pip modules'
         run: |
           pip install --upgrade pip
@@ -325,7 +325,7 @@ jobs:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
           restore-keys: |
-        ${{ runner.os }}-pip-
+            ${{ runner.os }}-pip-
       - name: 'Install/Upgrade pip modules'
         run: |
           pip install --upgrade pip
@@ -393,7 +393,7 @@ jobs:
           path: ~\AppData\Local\pip\Cache
           key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
           restore-keys: |
-        ${{ runner.os }}-pip-
+            ${{ runner.os }}-pip-
       - name: 'Install/Upgrade pip modules'
         run: |
           pip install --upgrade pip
