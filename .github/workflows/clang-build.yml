@@ -200,7 +200,7 @@ jobs:
         run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
-      - name: 'Build Packages CLANGPDB-Mingw'
+      - name: 'Stuart Packages CLANGPDB-Mingw'
         shell: cmd
         env:
           CLANG_BIN: "C:\\edk2-clang\\bin\\"
@@ -208,6 +208,15 @@ jobs:
           PATH=%CLANG_BIN%;%PATH%
           set
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
+      - name: 'Build Packages CLANGPDB-Mingw'
+        shell: cmd
+        env:
+          CLANG_BIN: "C:\\edk2-clang\\bin\\"
+          BASETOOLS_MINGW_PATH: "C:\\edk2-clang\\bin\\"
+        run: |
+          PATH=%CLANG_BIN%;%PATH%
+          edksetup.bat Mingw-w64
+          build -a ${{ matrix.build_arch }} -b ${{ matrix.build_type }} -t CLANGPDB -p "${{ matrix.build_package }}"
       - name: Upload CLANGPDB-Mingw Logs
         uses: actions/upload-artifact@v4
         with:
@@ -219,6 +228,7 @@ jobs:
       - name: Remove Build Directory CLANGPDB-Mingw
         shell: cmd
         run: rmdir /s /q Build
+        if: always()
       - name: 'Build Packages CLANGDWARF-Mingw'
         shell: cmd
         env:
@@ -227,6 +237,7 @@ jobs:
           PATH=%CLANG_BIN%;%PATH%
           set
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGDWARF -p "${{ matrix.build_package }}" -v
+        if: always()
       - name: Upload CLANGDWARF-Mingw Logs
         uses: actions/upload-artifact@v4
         with:
@@ -238,6 +249,7 @@ jobs:
       - name: Remove Build Directory CLANGDWARF-Mingw
         shell: cmd
         run: rmdir /s /q Build
+        if: always()
       - name: 'Build Packages CLANGPDB-VS'
         shell: cmd
         env:
@@ -246,6 +258,7 @@ jobs:
           PATH=%CLANG_BIN%;%PATH%
           set
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
+        if: always()
       - name: Upload CLANGPDB-VS Logs
         uses: actions/upload-artifact@v4
         with:
