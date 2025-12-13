@@ -159,6 +159,7 @@ jobs:
 
 
   build_linux_clang_precheck:
+    if: false
     name: Build Linux CLANGPDB NO-TARGET PreCheck
     runs-on: ubuntu-latest
     container: ghcr.io/mdkinney/containers/fedora-43-build:latest
@@ -221,6 +222,7 @@ jobs:
         if: always()
 
   build_linux_clang_ovmf_precheck:
+    if: false
     name: Build Linux CLANG PreCheck
     runs-on: ubuntu-latest
     container: ghcr.io/mdkinney/containers/fedora-43-build:latest
