@@ -69,7 +69,7 @@ jobs:
       - name: Upload Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Linux NO-TARGET Logs (${{ split(matrix.build_package, ',')[0] }})"
+          name: "Upload Linux NO-TARGET Logs (${{ strategy.job-index }})"
           path: |
             Build/*.txt
             Build/*.log
