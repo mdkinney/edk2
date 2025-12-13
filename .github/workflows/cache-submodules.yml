@@ -113,9 +113,13 @@ jobs:
           CC: clang
           CXX: clang++
         run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
-      - name: 'Build UnitTestFrameworkPkg Unit Tests'
+      - name: 'Build UnitTestFrameworkPkg X64 Unit Tests'
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
+      - name: 'Build UnitTestFrameworkPkg IA32 Unit Tests'
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t CLANGDWARF -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
       - name: 'Build EmulatorPkg X64 Host Module'
         run: |
           . ./edksetup.sh
