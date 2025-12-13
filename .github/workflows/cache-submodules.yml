@@ -1,0 +1,139 @@
+# @file
+# A workflow that builds packages using clang and upload it's artifacts.
+#
+# Copyright (c) Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: CLANG Build
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - sandbox/master
+
+jobs:
+  build_linux_clang_precheck:
+    name: Build Linux CLANGPDB NO-TARGET PreCheck
+    runs-on: ubuntu-latest
+    container: ghcr.io/mdkinney/containers/fedora-43-build:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - NO-TARGET
+        build_arch:
+          - X64
+        build_package:
+          - ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,FatPkg,FmpDevicePkg,NetworkPkg,RedfishPkg,PcAtChipsetPkg,MdeModulePkg,MdePkg,CryptoPkg
+          - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,SecurityPkg,ShellPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Cache submodules
+        id: cache-submodules
+        uses: actions/cache@v4
+        with:
+          path: |
+            .git/modules
+          key: ${{ runner.os }}-${{ hashFiles('.gitmodules') }}
+      - name: PatchCheck PR
+        if: github.event_name == 'pull_request'
+        run: python BaseTools/Scripts/PatchCheck.py ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
+      - name: Cache pip modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: 'Install/Upgrade pip modules'
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade -r pip-requirements.txt
+      - name: 'Clone Submodules'
+        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Download External Dependencies'
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Build BaseTools'
+        env:
+          CC: clang
+          CXX: clang++
+        run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
+      - name: 'Build Packages CLANGPDB NO-TARGET'
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
+      - name: Upload Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Linux NO-TARGET Logs (${{ join(matrix.*, ' - ') }})"
+          path: |
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_linux_clang_ovmf_precheck:
+    name: Build Linux CLANG PreCheck
+    runs-on: ubuntu-latest
+    container: ghcr.io/mdkinney/containers/fedora-43-build:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Cache submodules
+        id: cache-submodules
+        uses: actions/cache@v4
+        with:
+          path: |
+            .git/modules
+          key: ${{ runner.os }}-${{ hashFiles('.gitmodules') }}
+      - name: Cache pip modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: 'Install/Upgrade pip modules'
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade -r pip-requirements.txt
+      - name: 'Clone Submodules'
+        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Download External Dependencies'
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Build BaseTools'
+        env:
+          CC: clang
+          CXX: clang++
+        run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
+      - name: 'Build UnitTestFrameworkPkg Unit Tests'
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
+      - name: 'Build EmulatorPkg X64 Platform'
+        run: |
+          . ./edksetup.sh
+          build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -j Build/EmulatorX64Build.log >NUL
+      - name: 'Build EmulatorPkg IA32 Platform'
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -j Build/EmulatorIA32Build.log >NUL
+      - name: 'Build OVMF Platform'
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
+      - name: Upload Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Linux OVMF Precheck Logs"
+          path: |
+            Build/*.txt
+            Build/*.log
+        if: always()
+
