@@ -33,7 +33,7 @@ jobs:
           submodules: false
       - uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: mono-utils llvm-20 clang-20
+          packages: mono-complete llvm-20 clang-20
           version: 1.0
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
@@ -85,7 +85,7 @@ jobs:
           submodules: false
       - uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: mono-utils llvm-20 clang-20
+          packages: mono-complete llvm-20 clang-20
           version: 1.0
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
