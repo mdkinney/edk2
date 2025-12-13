@@ -54,10 +54,15 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
+      - name: Set up Python 3.14
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+          cache: 'pip'
       - name: 'Install/Upgrade pip modules'
         run: |
-          pip install --upgrade pip
-          pip install --upgrade -r pip-requirements.txt
+          python -m pip install --upgrade pip
+          pip install -r pip-requirements.txt
       - name: 'Clone Submodules'
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Download External Dependencies'
@@ -103,10 +108,15 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
+      - name: Set up Python 3.14
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+          cache: 'pip'
       - name: 'Install/Upgrade pip modules'
         run: |
-          pip install --upgrade pip
-          pip install --upgrade -r pip-requirements.txt
+          python -m pip install --upgrade pip
+          pip install -r pip-requirements.txt
       - name: 'Clone Submodules'
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Download External Dependencies'
