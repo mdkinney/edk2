@@ -119,11 +119,11 @@ jobs:
       - name: 'Build EmulatorPkg X64 Host Module'
         run: |
           . ./edksetup.sh
-          build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unit/Host/Host.inf -j Build/EmulatorX64Build.log >NUL
+          build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64Build.log >NUL
       - name: 'Build EmulatorPkg IA32 Host Module'
         run: |
           . ./edksetup.sh
-          build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unit/Host/Host.inf -j Build/EmulatorIA32Build.log >NUL
+          build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32Build.log >NUL
       - name: 'Build OVMF Platform'
         run: |
           . ./edksetup.sh
