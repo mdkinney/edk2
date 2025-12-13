@@ -80,6 +80,8 @@ jobs:
     runs-on: ubuntu-latest
     container: ghcr.io/mdkinney/containers/fedora-43-build:latest
     steps:
+      - name: Install extra deps
+        run: sudo dnf install compiler-rt-devel.i686
       - name: Checkout
         uses: actions/checkout@v4
         with:
