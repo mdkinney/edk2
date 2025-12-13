@@ -59,6 +59,7 @@ jobs:
         with:
           python-version: '3.14'
           cache: 'pip'
+          cache-dependency-path: 'pip-requirements.txt'
       - name: 'Install/Upgrade pip modules'
         run: |
           python -m pip install --upgrade pip
@@ -113,6 +114,7 @@ jobs:
         with:
           python-version: '3.14'
           cache: 'pip'
+          cache-dependency-path: 'pip-requirements.txt'
       - name: 'Install/Upgrade pip modules'
         run: |
           python -m pip install --upgrade pip
