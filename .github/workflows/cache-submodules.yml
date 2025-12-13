@@ -92,7 +92,7 @@ jobs:
 #          python -m pip install --upgrade pip
 #          pip install -r pip-requirements.txt
       - name: Update certs for nuget
-        run: cert-sync /etc/ssl/certs/ca-certificates.crt
+        run: sudo cert-sync /etc/ssl/certs/ca-certificates.crt
       - name: 'Clone Submodules'
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Download External Dependencies'
@@ -149,7 +149,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r pip-requirements.txt
       - name: Update certs for nuget
-        run: cert-sync /etc/ssl/certs/ca-certificates.crt
+        run: sudo cert-sync /etc/ssl/certs/ca-certificates.crt
       - name: 'Clone Submodules'
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Download External Dependencies'
