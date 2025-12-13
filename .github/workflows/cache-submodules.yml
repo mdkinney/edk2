@@ -13,6 +13,127 @@ on:
       - sandbox/master
 
 jobs:
+  build_linux_clang_precheck_no_docker:
+    name: Build Linux GCC NO-TARGET PreCheck
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - NO-TARGET
+        build_arch:
+          - X64
+        build_package:
+          - ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg
+          - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Cache submodules
+        id: cache-submodules
+        uses: actions/cache@v4
+        with:
+          path: |
+            .git/modules
+          key: ${{ runner.os }}-${{ hashFiles('.gitmodules') }}
+      - name: PatchCheck PR
+        if: github.event_name == 'pull_request'
+        run: python BaseTools/Scripts/PatchCheck.py ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
+      - name: Cache pip modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: 'Install/Upgrade pip modules'
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade -r pip-requirements.txt
+      - name: 'Clone Submodules'
+        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Download External Dependencies'
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Build BaseTools'
+        run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
+      - name: 'Build Packages CLANGPDB GCC NO-TARGET'
+        run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=GCC -p "${{ matrix.build_package }}"
+      - name: Upload Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Linux GCC NO-TARGET Logs (${{ strategy.job-index }})"
+          path: |
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_linux_clang_ovmf_precheck_no_docker:
+    name: Build Linux GCC PreCheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Cache submodules
+        id: cache-submodules
+        uses: actions/cache@v4
+        with:
+          path: |
+            .git/modules
+          key: ${{ runner.os }}-${{ hashFiles('.gitmodules') }}
+      - name: Cache pip modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: 'Install/Upgrade pip modules'
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade -r pip-requirements.txt
+      - name: 'Clone Submodules'
+        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Download External Dependencies'
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Build BaseTools'
+        run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
+      - name: 'Build UnitTestFrameworkPkg X64 Unit Tests'
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=GCC -p UnitTestFrameworkPkg
+      - name: 'Build UnitTestFrameworkPkg IA32 Unit Tests'
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t GCC -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
+      - name: 'Build EmulatorPkg X64 Host Module'
+        run: |
+          . ./edksetup.sh
+          build -a X64 -t GCC -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64Build.log >NUL
+      - name: 'Build EmulatorPkg IA32 Host Module'
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t GCC -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32Build.log >NUL
+      - name: 'Build OVMF Platform'
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -a X64 -t GCC -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
+      - name: Upload Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Linux GCC OVMF Precheck Logs"
+          path: |
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+
   build_linux_clang_precheck:
     name: Build Linux CLANGPDB NO-TARGET PreCheck
     runs-on: ubuntu-latest
