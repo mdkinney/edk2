@@ -25,8 +25,8 @@ jobs:
         build_arch:
           - X64
         build_package:
-          - ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,FatPkg,RedfishPkg,PcAtChipsetPkg,MdeModulePkg,MdePkg,CryptoPkg
-          - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
+          - ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg
+          - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -116,14 +116,14 @@ jobs:
       - name: 'Build UnitTestFrameworkPkg Unit Tests'
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
-      - name: 'Build EmulatorPkg X64 Platform'
+      - name: 'Build EmulatorPkg X64 Host Module'
         run: |
           . ./edksetup.sh
-          build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -j Build/EmulatorX64Build.log >NUL
-      - name: 'Build EmulatorPkg IA32 Platform'
+          build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unit/Host/Host.inf -j Build/EmulatorX64Build.log >NUL
+      - name: 'Build EmulatorPkg IA32 Host Module'
         run: |
           . ./edksetup.sh
-          build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -j Build/EmulatorIA32Build.log >NUL
+          build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unit/Host/Host.inf -j Build/EmulatorIA32Build.log >NUL
       - name: 'Build OVMF Platform'
         run: |
           . ./edksetup.sh
