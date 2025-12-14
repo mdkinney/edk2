@@ -5,8 +5,11 @@ runs:
   steps:
     - uses: awalsh128/cache-apt-pkgs-action@latest
       with:
-        packages: mono-complete build-essential llvm-20 clang-20 uuid-dev lcov python3.12 libx11-dev libxext-dev
+        packages: mono-complete build-essential llvm-20 clang-20 lld-20 uuid-dev lcov python3.12 libx11-dev libxext-dev
         version: 1.0
+    - name: Clean mono certs cache
+      shell: bash
+      run: sudo rm -f /etc/ssl/certs/ca-certificates.crt
     - name: Restore mono certs
       uses: actions/cache/restore@v4
       id: cache-mono-certs
