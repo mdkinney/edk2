@@ -12,10 +12,9 @@ runs:
       with:
         packages: mono-complete build-essential llvm-20 clang-20 lld-20 uuid-dev lcov python3.12 gcc-multilib g++-multilib libx11-dev libx11-6 libxext6 libxext-dev
         version: 1.0
-    - uses: awalsh128/cache-apt-pkgs-action@latest
-      with:
-        packages: libc6-i386 libc6-dev-i386 libxext6:i386 libxext-dev:i386
-        version: 1.0
+    - name: Install i386 libs
+      shell: bash
+      run: sudo apt-get install -y libc6-i386 libc6-dev-i386 libxext6:i386 libxext-dev:i386
     - name: Install mono certs
       shell: bash
       run: sudo cert-sync --user /etc/ssl/certs/ca-certificates.crt
