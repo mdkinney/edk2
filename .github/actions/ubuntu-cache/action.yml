@@ -39,9 +39,6 @@ runs:
       with:
         path: .venv
         key: ${{ steps.cache-venv.outputs.cache-primary-key }}
-    - name: Find llvm-ar
-      shell: bash
-      run: find /. -name "llvm-ar"
     - name: Add /usr/bin to PATH
       shell: bash
       run: echo "PATH=/usr/lib/llvm-20/bin:$PATH" >> $GITHUB_ENV
