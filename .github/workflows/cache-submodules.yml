@@ -31,6 +31,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: false
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Run ubuntu-cache composite action
         uses: ./.github/actions/ubuntu-cache
       - name: PatchCheck PR

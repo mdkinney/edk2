@@ -3,17 +3,12 @@ description: 'Ubuntu save/restore cache and setup Stuart environment'
 runs:
   using: "composite"
   steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        submodules: false
-    - name: Ensure safe directory for Git
-      run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
     - uses: awalsh128/cache-apt-pkgs-action@latest
       with:
         packages: mono-complete build-essential llvm-20 clang-20 uuid-dev lcov python3.12
         version: 1.0
     - name: Install mono certs
+      shell: bash
       run: sudo apt install ca-certificates-mono
     - name: Cache submodules
       id: cache-submodules
@@ -31,6 +26,7 @@ runs:
         restore-keys: |
           ${{ runner.os }}-venv-
     - name: Create and install venv if cache missed
+      shell: bash
       if: steps.cache-venv.outputs.cache-hit != 'true'
       run: |
         python -m venv .venv
@@ -44,4 +40,5 @@ runs:
         path: .venv
         key: ${{ steps.cache-venv.outputs.cache-primary-key }}
     - name: Set PATH to use venv
+      shell: bash
       run: echo "PATH=$PWD/.venv/bin:$PATH" >> $GITHUB_ENV
