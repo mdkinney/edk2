@@ -32,7 +32,7 @@ jobs:
         with:
           submodules: false
       - name: Run ubuntu-cache composite action
-        uses: ./.github/workflows/ubuntu-cache.yml
+        uses: ./.github/actions/ubuntu-cache
       - name: PatchCheck PR
         if: github.event_name == 'pull_request'
         run: python BaseTools/Scripts/PatchCheck.py ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
