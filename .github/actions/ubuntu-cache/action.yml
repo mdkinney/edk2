@@ -41,7 +41,7 @@ runs:
         key: ${{ steps.cache-venv.outputs.cache-primary-key }}
     - name: Add /usr/bin to PATH
       shell: bash
-      run: echo "PATH=/usr/bin:$PATH" >> $GITHUB_ENV
+      run: echo "PATH=/bin:$PATH" >> $GITHUB_ENV
     - name: Set PATH to use venv
       shell: bash
       run: echo "PATH=$PWD/.venv/bin:$PATH" >> $GITHUB_ENV
