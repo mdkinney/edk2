@@ -57,7 +57,7 @@ jobs:
         if: always()
 
   build_linux_clang_ovmf_precheck:
-    name: Build Linux CLANGPDB/CLANGDWARF PreCheck
+    name: Build Linux CLANGPDB CLANGDWARF PreCheck
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -103,7 +103,7 @@ jobs:
       - name: Upload Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Linux CLANGPDB/CLANGDWARF Precheck Logs"
+          name: "Upload Linux CLANGPDB CLANGDWARF Precheck Logs"
           path: |
             Build/*.txt
             Build/*.log
