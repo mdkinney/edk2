@@ -5,29 +5,11 @@ runs:
   steps:
     - uses: awalsh128/cache-apt-pkgs-action@latest
       with:
-        packages: mono-complete build-essential llvm-20 clang-20 lld-20 uuid-dev lcov python3.12 libx11-dev libxext-dev
+        packages: mono-complete build-essential llvm-20 clang-20 lld-20 uuid-dev lcov python3.12 libx11-dev libxext-dev ca-certificates-mono
         version: 1.0
-    - name: Clean mono certs cache
-      shell: bash
-      run: sudo rm -f /etc/ssl/certs/ca-certificates.crt
-    - name: Restore mono certs
-      uses: actions/cache/restore@v4
-      id: cache-mono-certs
-      with:
-        path: /etc/ssl/certs/ca-certificates.crt
-        key: ${{ runner.os }}-mono-certs
-        restore-keys: |
-          ${{ runner.os }}-mono-certs
     - name: Install mono certs
-      if: steps.cache-mono-certs.outputs.cache-hit != 'true'
       shell: bash
       run: sudo apt install ca-certificates-mono
-    - name: Save mono certs cache
-      uses: actions/cache/save@v4
-      if: steps.cache-mono-certs.outputs.cache-hit != 'true'
-      with:
-        path: /etc/ssl/certs/ca-certificates.crt
-        key: ${{ steps.cache-mono-certs.outputs.cache-primary-key }}
     - name: Cache submodules
       id: cache-submodules
       uses: actions/cache@v4
