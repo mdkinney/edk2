@@ -35,6 +35,7 @@ jobs:
         with:
           packages: mono-complete build-essential llvm-20 clang-20 uuid-dev lcov python3.12
           version: 1.0
+          execute_install_scripts: true
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Cache submodules
@@ -91,9 +92,7 @@ jobs:
       - name: 'Clone Submodules'
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Download External Dependencies'
-        run: |
-          sudo cert-sync /etc/ssl/certs/ca-certificates.crt
-          stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Build BaseTools'
         run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
       - name: 'Build Packages CLANGPDB GCC NO-TARGET'
