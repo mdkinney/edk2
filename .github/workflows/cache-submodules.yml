@@ -79,6 +79,9 @@ jobs:
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
       - name: 'Build UnitTestFrameworkPkg IA32 Unit Tests'
+        env:
+          NASM_PREFIX: "${{ github.workspace }}/BaseTools/Bin/mu_nasm_extdep/Linux-x86-64/"
+          IASL_PREFIX: "${{ github.workspace }}/BaseTools/Bin/edk2-acpica-iasl_extdep/Linux-x86/"
         run: |
           . ./edksetup.sh
           build -a IA32 -t CLANGDWARF -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
@@ -90,6 +93,9 @@ jobs:
           . ./edksetup.sh
           build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64Build.log >NUL
       - name: 'Build EmulatorPkg IA32 Host Module'
+        env:
+          NASM_PREFIX: "${{ github.workspace }}/BaseTools/Bin/mu_nasm_extdep/Linux-x86-64/"
+          IASL_PREFIX: "${{ github.workspace }}/BaseTools/Bin/edk2-acpica-iasl_extdep/Linux-x86/"
         run: |
           . ./edksetup.sh
           build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32Build.log >NUL
