@@ -78,10 +78,10 @@ jobs:
       - name: 'Build UnitTestFrameworkPkg X64 Unit Tests'
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
-#      - name: 'Build UnitTestFrameworkPkg IA32 Unit Tests'
-#        run: |
-#          . ./edksetup.sh
-#          build -a IA32 -t CLANGDWARF -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
+      - name: 'Build UnitTestFrameworkPkg IA32 Unit Tests'
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t CLANGDWARF -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
       - name: 'Build EmulatorPkg X64 Host Module'
         env:
           NASM_PREFIX: "${{ github.workspace }}/BaseTools/Bin/mu_nasm_extdep/Linux-x86-64/"
@@ -89,10 +89,10 @@ jobs:
         run: |
           . ./edksetup.sh
           build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64Build.log >NUL
-#      - name: 'Build EmulatorPkg IA32 Host Module'
-#        run: |
-#          . ./edksetup.sh
-#          build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32Build.log >NUL
+      - name: 'Build EmulatorPkg IA32 Host Module'
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32Build.log >NUL
       - name: 'Build OVMF Platform'
         env:
           NASM_PREFIX: "${{ github.workspace }}/BaseTools/Bin/mu_nasm_extdep/Linux-x86-64/"
