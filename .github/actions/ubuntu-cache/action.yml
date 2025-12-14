@@ -41,6 +41,4 @@ runs:
         key: ${{ steps.cache-venv.outputs.cache-primary-key }}
     - name: Set PATH to use venv and clang-20
       shell: bash
-      run: |
-        echo "PATH=$PWD/.venv/bin:$PATH" >> $GITHUB_ENV
-        echo "PATH=/usr/lib64/llvm20/bin:$PATH" >> $GITHUB_ENV
+      run: echo "PATH=/usr/lib64/llvm20/bin:$PWD/.venv/bin:$PATH" >> $GITHUB_ENV
