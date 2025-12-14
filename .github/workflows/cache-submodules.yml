@@ -33,7 +33,7 @@ jobs:
           submodules: false
       - uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: mono-complete build-essential llvm-20 clang-20 uuid-dev lcov
+          packages: mono-complete build-essential llvm-20 clang-20 uuid-dev lcov python3.12
           version: 1.0
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
@@ -47,10 +47,6 @@ jobs:
       - name: PatchCheck PR
         if: github.event_name == 'pull_request'
         run: python BaseTools/Scripts/PatchCheck.py ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
-      - name: Set up Python 3.13
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
       - name: Restore cached venv
         uses: actions/cache/restore@v4
         id: cache-venv
@@ -62,6 +58,7 @@ jobs:
       - name: Create and install venv if cache missed
         if: steps.cache-venv.outputs.cache-hit != 'true'
         run: |
+          python --version
           python -m venv .venv
           source .venv/bin/activate
           python -m pip install --upgrade pip
