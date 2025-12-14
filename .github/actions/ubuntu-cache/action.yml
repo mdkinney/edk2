@@ -5,7 +5,7 @@ runs:
   steps:
     - uses: awalsh128/cache-apt-pkgs-action@latest
       with:
-        packages: mono-complete build-essential llvm-20 clang-20 lld-20 uuid-dev lcov python3.12 gcc-multilib libc6-i386 libc6-dev-i386 libx11-dev libxext-dev libx11-6 libxext6
+        packages: mono-complete build-essential llvm-20 clang-20 lld-20 uuid-dev lcov python3.12 gcc-multilib g++-multilib libc6-i386 libc6-dev-i386 libx11-dev libxext-dev libx11-6 libxext6
         version: 1.0
     - name: Install mono certs
       shell: bash
