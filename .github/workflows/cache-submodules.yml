@@ -75,6 +75,14 @@ jobs:
           CC: clang
           CXX: clang++
         run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
+      - name: 'Build HelloWorld CLANGPDB CLANGDWARF'
+        env:
+          NASM_PREFIX: "${{ github.workspace }}/BaseTools/Bin/mu_nasm_extdep/Linux-x86-64/"
+          IASL_PREFIX: "${{ github.workspace }}/BaseTools/Bin/edk2-acpica-iasl_extdep/Linux-x86/"
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
+          build -a IA32 -a X64 -a AARCH64 -a RISCV64 -t CLANGDWARF -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangDwarfBuild.log >NUL
       - name: 'Build UnitTestFrameworkPkg X64 Unit Tests'
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
