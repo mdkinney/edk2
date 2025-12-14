@@ -5,15 +5,16 @@ runs:
   steps:
     - uses: awalsh128/cache-apt-pkgs-action@latest
       with:
-        packages: mono-complete build-essential llvm-20 clang-20 uuid-dev lcov python3.12 libx11-dev
+        packages: mono-complete build-essential llvm-20 clang-20 uuid-dev lcov python3.12 libx11-dev libxext-dev
         version: 1.0
-    - name: Cache mono certs
+    - name: Restore mono certs
+      uses: actions/cache/restore@v4
       id: cache-mono-certs
-      uses: actions/cache@v4
       with:
-        path: |
-          /etc/ssl/certs/ca-certificates.crt
+        path: /etc/ssl/certs/ca-certificates.crt
         key: ${{ runner.os }}-mono-certs
+        restore-keys: |
+          ${{ runner.os }}-mono-certs
     - name: Install mono certs
       if: steps.cache-mono-certs.outputs.cache-hit != 'true'
       shell: bash
