@@ -15,6 +15,9 @@ runs:
     - name: Install mono certs
       shell: bash
       run: sudo cert-sync --user /etc/ssl/certs/ca-certificates.crt
+    - name: Install i386 libs
+      shell: bash
+      run: sudo apt-get install -y libc6-i386 libc6-dev-i386 libxext6:i386 libxext-dev:i386
     - name: Cache submodules
       id: cache-submodules
       uses: actions/cache@v4
