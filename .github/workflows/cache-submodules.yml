@@ -29,8 +29,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: false
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Run ubuntu-cache composite action
@@ -61,38 +59,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: false
-      - uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: mono-complete build-essential llvm-20 clang-20 uuid-dev lcov
-          version: 1.0
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Cache submodules
-        id: cache-submodules
-        uses: actions/cache@v4
-        with:
-          path: |
-            .git/modules
-          key: ${{ runner.os }}-${{ hashFiles('.gitmodules') }}
-      - name: Cache pip modules
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('pip-requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-      - name: Set up Python 3.13
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-          cache: 'pip'
-          cache-dependency-path: 'pip-requirements.txt'
-      - name: 'Install/Upgrade pip modules'
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r pip-requirements.txt
+      - name: Run ubuntu-cache composite action
+        uses: ./.github/actions/ubuntu-cache
       - name: 'Clone Submodules'
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Download External Dependencies'
@@ -126,7 +96,6 @@ jobs:
             Build/*.txt
             Build/*.log
         if: always()
-
 
   build_linux_clang_precheck:
     if: false
