@@ -21,10 +21,13 @@ jobs:
       matrix:
         build_type:
           - DEBUG
+          - RELEASE
         build_arch:
+          - IA32
           - X64
         build_package:
-          - FatPkg
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -109,7 +112,7 @@ jobs:
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
         run: |
           PATH=C:\Program Files\LLVM\bin;%PATH%
-          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
       - name: Upload CLANGPDB-VS Logs
         uses: actions/upload-artifact@v4
         with:
