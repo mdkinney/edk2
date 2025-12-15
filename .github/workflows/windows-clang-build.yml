@@ -156,7 +156,7 @@ jobs:
           PATH=%CLANG_BIN%;%PATH%
           set
           call edksetup.bat ForceRebuild Mingw-w64
-          build -a IA32 -b DEBUG -t CLANGPDB -p FatPkg/PatPkg.dsc
+          build -a X64 -b DEBUG -t CLANGPDB -p FatPkg/PatPkg.dsc -j Build\FatPkgClangPdbMingwBuild.log -v >NUL
         if: always()
       - name: 'Stuart Packages CLANGPDB-Mingw'
         shell: cmd
