@@ -128,11 +128,13 @@ jobs:
       - name: Activate venv
         shell: cmd
         run: |
-          echo "PATH=%CD%\.venv\Scripts;%PATH%" >> %GITHUB_ENV%
+          echo "%CD%\.venv\Scripts;%PATH%" >> %GITHUB_PATH%
       - name: Test venv
         shell: cmd
         run: |
           set
+          where python
+          where pip
           python --version
           pip --version
           pip list
