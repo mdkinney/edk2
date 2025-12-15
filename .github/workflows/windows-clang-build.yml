@@ -65,8 +65,8 @@ jobs:
         run: |
           PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
           set
-          echo PATH=%PATH% >> %GITHUB_PATH%
-          type %GITHUB_PATH%
+          echo PATH=%PATH% >> %GITHUB_ENV%
+          type %GITHUB_ENV%
       - name: Test venv
         shell: cmd
         run: |
