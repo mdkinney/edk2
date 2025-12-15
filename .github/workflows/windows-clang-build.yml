@@ -124,15 +124,22 @@ jobs:
         with:
           path: C:\edk2-clang
           key: ${{ steps.cache-edk2-clang.outputs.cache-primary-key }}
-      - name: Cache submodules
+      - name: Restore submodules
         id: cache-submodules
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
-          path: |
-            .git/modules
+          path: .git/modules
           key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
+          restore-keys: |
+            ${{ runner.os }}-submodules-
       - name: 'Clone Submodules'
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: Save submodules
+        if: steps.cache-submodules.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .git/modules
+          key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Build BaseTools'
