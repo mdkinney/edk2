@@ -131,7 +131,7 @@ jobs:
       - name: Activate venv
         shell: cmd
         run: |
-          echo "%CD%\.venv\Scripts;%PATH%" >> %GITHUB_PATH%
+          echo "PATH=%CD%\\venv\\Scripts;%PATH%" >> $GITHUB_ENV
       - name: Test venv
         shell: cmd
         run: |
