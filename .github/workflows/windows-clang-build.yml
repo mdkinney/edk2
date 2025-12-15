@@ -49,9 +49,6 @@ jobs:
         run: |
           python -m venv .venv
           PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          where python
-          where pip
-          dir .venv\Scripts
           python -m pip install --upgrade pip
           pip install -r pip-requirements.txt
       - name: Save venv cache
@@ -64,18 +61,7 @@ jobs:
         shell: cmd
         run: |
           PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          set
           echo PATH=%PATH% >> %GITHUB_ENV%
-          type %GITHUB_ENV%
-      - name: Test venv
-        shell: cmd
-        run: |
-          set
-          where python
-          where pip
-          dir .venv\Scripts
-          python --version
-          pip --version
           pip list
       - name: Restore CLANG 20.1.8
         id: cache-clang
@@ -162,7 +148,7 @@ jobs:
         run: |
           PATH=%CLANG_BIN%;%PATH%
           set
-          edksetup.bat ForceRebuild Mingw-w64
+          call edksetup.bat ForceRebuild Mingw-w64
           build -a IA32 -b DEBUG -t CLANGPDB -p FatPkg/PatPkg.dsc
         if: always()
       - name: 'Stuart Packages CLANGPDB-Mingw'
@@ -170,7 +156,7 @@ jobs:
         env:
           CLANG_BIN: "C:\\edk2-clang\\bin\\"
         run: |
-          PATH=%CLANG_BIN%;%PATH%
+          PATH=C:\edk2-clang\bin;%PATH%
           set
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
         if: always()
@@ -190,7 +176,7 @@ jobs:
         env:
           CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
         run: |
-          PATH=%CLANG_BIN%;%PATH%
+          PATH=C:\llvm-mingw-20250709-ucrt-x86_64\bin;%PATH%
           set
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGDWARF -p "${{ matrix.build_package }}" -v
         if: always()
@@ -210,7 +196,7 @@ jobs:
         env:
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
         run: |
-          PATH=%CLANG_BIN%;%PATH%
+          PATH=C:\Program Files\LLVM\bin;%PATH%
           set
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
         if: always()
