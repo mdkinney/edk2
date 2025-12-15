@@ -15,7 +15,7 @@ on:
 jobs:
   build_windows_clang:
     name: Build Windows (${{ join(matrix.*, ' - ') }})
-    runs-on: windows-latest
+    runs-on: windows-2022
     strategy:
       fail-fast: false
       matrix:
