@@ -1,0 +1,135 @@
+# @file
+# A workflow that builds packages using clang and upload it's artifacts.
+#
+# Copyright (c) Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Windows CLANG Build
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - sandbox/master
+
+jobs:
+  build_windows_clang:
+    name: Build Windows (${{ join(matrix.*, ' - ') }})
+    runs-on: windows-2022
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - DEBUG
+        build_arch:
+          - X64
+        build_package:
+          - FatPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Restore cached venv
+        uses: actions/cache/restore@v4
+        id: cache-venv
+        with:
+          path: .venv
+          key: ${{ runner.os }}-venv-${{ hashFiles('pip-requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-venv-
+      - name: Set up Python 3.12
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Create and install venv if cache missed
+        shell: cmd
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+        run: |
+          python -m venv .venv
+          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
+          python -m pip install --upgrade pip
+          pip install -r pip-requirements.txt
+      - name: Save venv cache
+        uses: actions/cache/save@v4
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+        with:
+          path: .venv
+          key: ${{ steps.cache-venv.outputs.cache-primary-key }}
+      - name: Activate venv
+        shell: cmd
+        run: |
+          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
+          echo PATH=%PATH% >> %GITHUB_ENV%
+          pip list
+      - name: Restore LLVM-MinGW
+        id: cache-llvm-mingw
+        uses: actions/cache/restore@v4
+        with:
+          path: C:\llvm-mingw-20250709-ucrt-x86_64
+          key: ${{ runner.os }}-llvm-mingw-20250709-ucrt-x86_64
+          restore-keys: |
+            ${{ runner.os }}-llvm-mingw-20250709-ucrt-x86_64
+      - name: Install LLVM-MinGW
+        if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
+        shell: cmd
+        run: |
+          curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/20250709/llvm-mingw-20250709-ucrt-x86_64.zip"
+          powershell -command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath 'C:\' -Force"
+          dir "C:\llvm-mingw-20250709-ucrt-x86_64\bin"
+      - name: Save LLVM-MinGW
+        if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: C:\llvm-mingw-20250709-ucrt-x86_64
+          key: ${{ steps.cache-llvm-mingw.outputs.cache-primary-key }}
+      - name: Restore submodules
+        id: cache-submodules
+        uses: actions/cache/restore@v4
+        with:
+          path: .git/modules
+          key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
+          restore-keys: |
+            ${{ runner.os }}-submodules-
+      - name: 'Clone Submodules'
+        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: Save submodules
+        if: steps.cache-submodules.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .git/modules
+          key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
+      - name: 'Download External Dependencies'
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Build BaseTools'
+        run: python BaseTools/Edk2ToolsBuild.py -t VS2022
+      - name: 'Build Packages CLANGDWARF-Mingw'
+        shell: cmd
+        env:
+          CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
+        run: |
+          PATH=C:\llvm-mingw-20250709-ucrt-x86_64\bin;%PATH%
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGDWARF -p "${{ matrix.build_package }}" -v
+      - name: Upload CLANGDWARF-Mingw Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Windows CLANGDWARF-Mingw Logs (${{ join(matrix.*, ' - ') }})"
+          path: |
+            Build/**/*
+        if: always()
+      - name: 'Build Packages CLANGPDB-Mingw'
+        shell: cmd
+        env:
+          CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
+        run: |
+          PATH=C:\llvm-mingw-20250709-ucrt-x86_64\bin;%PATH%
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
+        if: always()
+      - name: Upload CLANGPDB-Mingw Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Windows CLANGPDB-Mingw Logs (${{ join(matrix.*, ' - ') }})"
+          path: |
+            Build/**/*
+        if: always()
