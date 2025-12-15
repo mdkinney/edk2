@@ -116,7 +116,7 @@ jobs:
         if: steps.cache-venv.outputs.cache-hit != 'true'
         run: |
           python -m venv .venv
-          .venv\Scripts\activate
+          PATH=%CD%\.venv\Scripts;%PATH%
           where python
           where pip
           dir .venv\Scripts
