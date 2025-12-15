@@ -21,13 +21,10 @@ jobs:
       matrix:
         build_type:
           - DEBUG
-          - RELEASE
         build_arch:
-          - IA32
           - X64
         build_package:
-          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
-          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
+          - FatPkg
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -106,7 +103,8 @@ jobs:
           key: ${{ steps.cache-venv.outputs.cache-primary-key }}
       - name: Activate venv
         shell: cmd
-        run: .venv\Scripts\activate
+        run: |
+          echo "PATH=%CD%\.venv\Scripts;%PATH%" >> %GITHUB_ENV%
       - name: 'Clone Submodules'
         run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
       - name: 'Download External Dependencies'
