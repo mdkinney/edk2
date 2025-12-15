@@ -4,7 +4,7 @@
 # Copyright (c) Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
-name: Windows CLANG Build
+name: Windows Mingw LLVM 20.1.8 CLANG Build
 
 on:
   workflow_dispatch:
