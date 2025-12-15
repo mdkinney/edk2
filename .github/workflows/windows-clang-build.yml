@@ -48,7 +48,7 @@ jobs:
         if: steps.cache-venv.outputs.cache-hit != 'true'
         run: |
           python -m venv .venv
-          PATH=%CD%\.venv\Scripts;%PATH%
+          .venv\Scripts\activate.bat
           where python
           where pip
           dir .venv\Scripts
@@ -63,7 +63,8 @@ jobs:
       - name: Activate venv
         shell: cmd
         run: |
-          echo "PATH=%CD%\.venv\Scripts;%PATH%" >> $GITHUB_ENV
+          .venv\Scripts\activate.bat
+          echo "PATH=%PATH%" >> $GITHUB_ENV
       - name: Test venv
         shell: cmd
         run: |
