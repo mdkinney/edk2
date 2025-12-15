@@ -1,0 +1,185 @@
+# @file
+# A workflow that builds packages using clang and upload it's artifacts.
+#
+# Copyright (c) Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Windows CLANG Build
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - sandbox/master
+
+jobs:
+  build_windows_clang:
+    name: Build Windows (${{ join(matrix.*, ' - ') }})
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - DEBUG
+          - RELEASE
+        build_arch:
+          - IA32
+          - X64
+        build_package:
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Cache CLANG 20.1.8
+        id: cache-clang
+        uses: actions/cache@v4
+        with:
+          path: C:\Program Files\LLVM
+          key: LLVM-20.1.8-win64.exe-${{ runner.os }}
+      - name: Install CLANG 20.1.8
+        if: steps.cache-clang.outputs.cache-hit != 'true'
+        shell: cmd
+        run: |
+          curl -SL --output llvm_install.exe https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/LLVM-20.1.8-win64.exe
+          llvm_install.exe /S
+      - name: Cache LLVM-MinGW
+        id: cache-llvm-mingw
+        uses: actions/cache@v4
+        with:
+          path: C:\llvm-mingw-20250709-ucrt-x86_64
+          key: llvm-mingw-20250709-ucrt-x86_64-${{ runner.os }}
+      - name: Install LLVM-MinGW
+        if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
+        shell: cmd
+        run: |
+          curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/20250709/llvm-mingw-20250709-ucrt-x86_64.zip"
+          powershell -command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath 'C:\' -Force"
+          dir "C:\llvm-mingw-20250709-ucrt-x86_64\bin"
+      - name: Cache TianoCore Mingw CLANG
+        id: cache-edk2-clang
+        uses: actions/cache@v4
+        with:
+          path: C:\edk2-clang
+          key: edk2-clang-20.1.8-${{ runner.os }}
+      - name: Install TianoCore Mingw CLANG 20.1.8
+        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
+        shell: cmd
+        run: |
+          curl -L -o EdkClangSetup-20.1.8.0.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v20.1.8/EdkClangSetup-20.1.8.0.exe
+          EdkClangSetup-20.1.8.0.exe /silent
+      - name: Cache submodules
+        id: cache-submodules
+        uses: actions/cache@v4
+        with:
+          path: |
+            .git/modules
+          key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
+      - name: Restore cached venv
+        uses: actions/cache/restore@v4
+        id: cache-venv
+        with:
+          path: .venv
+          key: ${{ runner.os }}-venv-${{ hashFiles('pip-requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-venv-
+      - name: Set up Python 3.12
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Create and install venv if cache missed
+        shell: cmd
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+        run: |
+          python -m venv .venv
+          .venv\Scripts\activate
+          python -m pip install --upgrade pip
+          pip install -r pip-requirements.txt
+      - name: Save venv cache
+        uses: actions/cache/save@v4
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+        with:
+          path: .venv
+          key: ${{ steps.cache-venv.outputs.cache-primary-key }}
+      - name: Activate venv
+        shell: cmd
+        run: .venv\Scripts\activate
+      - name: 'Clone Submodules'
+        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Download External Dependencies'
+        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+      - name: 'Build BaseTools'
+        run: python BaseTools/Edk2ToolsBuild.py -t VS2022
+      - name: 'Build Packages CLANGPDB-Mingw'
+        shell: cmd
+        env:
+          CLANG_BIN: "C:\\edk2-clang\\bin\\"
+          BASETOOLS_MINGW_PATH: "C:\\edk2-clang"
+          BASETOOLS_MINGW_BUILD: "TRUE"
+          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
+          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
+        run: |
+          PATH=%CLANG_BIN%;%PATH%
+          set
+          edksetup.bat ForceRebuild Mingw-w64
+          build -a IA32 -b DEBUG -t CLANGPDB -p FatPkg/PatPkg.dsc
+        if: always()
+      - name: 'Stuart Packages CLANGPDB-Mingw'
+        shell: cmd
+        env:
+          CLANG_BIN: "C:\\edk2-clang\\bin\\"
+        run: |
+          PATH=%CLANG_BIN%;%PATH%
+          set
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
+        if: always()
+      - name: Upload CLANGPDB-Mingw Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Windows CLANGPDB-Mingw Logs (${{ join(matrix.*, ' - ') }})"
+          path: |
+            Build/**/*
+        if: always()
+      - name: Remove Build Directory CLANGPDB-Mingw
+        shell: cmd
+        run: rmdir /s /q Build
+        if: always()
+      - name: 'Build Packages CLANGDWARF-Mingw'
+        shell: cmd
+        env:
+          CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
+        run: |
+          PATH=%CLANG_BIN%;%PATH%
+          set
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGDWARF -p "${{ matrix.build_package }}" -v
+        if: always()
+      - name: Upload CLANGDWARF-Mingw Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Windows CLANGDWARF-Mingw Logs (${{ join(matrix.*, ' - ') }})"
+          path: |
+            Build/**/*
+        if: always()
+      - name: Remove Build Directory CLANGDWARF-Mingw
+        shell: cmd
+        run: rmdir /s /q Build
+        if: always()
+      - name: 'Build Packages CLANGPDB-VS'
+        shell: cmd
+        env:
+          CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
+        run: |
+          PATH=%CLANG_BIN%;%PATH%
+          set
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
+        if: always()
+      - name: Upload CLANGPDB-VS Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Windows CLANGPDB-VS Logs (${{ join(matrix.*, ' - ') }})"
+          path: |
+            Build/**/*
+        if: always()
