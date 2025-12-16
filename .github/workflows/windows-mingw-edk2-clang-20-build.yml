@@ -123,7 +123,7 @@ jobs:
           set
           where mingw32-make
           call build -a X64 -t CLANGPDB -b DEBUG -p FatPkg\FatPkg.dsc GenMake
-          mingw32-make -f Build\Fat\DEBUG_CLANGPDB\X64\FatPkg\EnhancedFatDxe\Fat\GNUmakefile
+          mingw32-make -f Build\Fat\DEBUG_CLANGPDB\X64\FatPkg\EnhancedFatDxe\Fat\GNUmakefile -d
           call build -a X64 -t CLANGPDB -b DEBUG -p FatPkg\FatPkg.dsc -j Build\BuildFatPkg.log -v
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
