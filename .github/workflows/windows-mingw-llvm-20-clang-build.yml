@@ -113,6 +113,7 @@ jobs:
           set CLANG_BIN=C:\llvm-mingw-20250709-ucrt-x86_64\bin\
           set BASETOOLS_MINGW_PATH=C:\llvm-mingw-20250709-ucrt-x86_64
           set HOST_ARCH=X64
+          set MSYS_NO_PATHCONV=1
           call edksetup.bat Mingw-w64 ForceRebuild
           build -a X64 -t CLANGDWARF -b DEBUG -p FatPkg\FatPkg.dsc -j Build\BuildFatPkg.log -v
       - name: 'Build BaseTools'
