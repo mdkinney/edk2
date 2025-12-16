@@ -1787,7 +1787,6 @@ class DscBuildData(PlatformBuildClassObject):
 
     @staticmethod
     def ExecuteCommand (Command):
-        print (f"ExecuteCommand: {Command}")
         try:
             Process = subprocess.Popen(Command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         except:

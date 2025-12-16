@@ -179,6 +179,7 @@ class BuildFile(object):
         MakePath = AutoGenObject.BuildOption.get('MAKE', {}).get('PATH')
         if not MakePath:
             MakePath = AutoGenObject.ToolDefinition.get('MAKE', {}).get('PATH')
+        print(f"MakePath: {MakePath}")
         if "nmake" in MakePath:
             self._FileType = NMAKE_FILETYPE
         else:
@@ -188,6 +189,7 @@ class BuildFile(object):
             self._Platform = WIN32_PLATFORM
         else:
             self._Platform = POSIX_PLATFORM
+        print (f"BuildFile Platform: {self._Platform}, FileType: {self._FileType}")
 
     ## Create build file.
     #
