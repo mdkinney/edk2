@@ -65,13 +65,7 @@ jobs:
           pip list
           where make
           where mingw32-make
-          rename c:\mingw64\bin\make.exe donotuse-make.exe
-          rename c:\mingw64\bin\mingw32-make.exe donotuse-mingw32-make.exe
-          where make
-          where mingw32-make
           dir c:\mingw64\bin
-          fsutil fsinfo volumeinfo c:
-          fsutil fsinfo volumeinfo d:
       - name: Restore TianoCore Mingw CLANG
         id: cache-edk2-clang
         uses: actions/cache/restore@v4
@@ -92,6 +86,13 @@ jobs:
         with:
           path: C:\edk2-clang
           key: ${{ steps.cache-edk2-clang.outputs.cache-primary-key }}
+      - name: Add TianoCore Mingw CLANG to PATH
+        shell: cmd
+        run: |
+          PATH=C:\edk2-clang\bin;%PATH%
+          echo PATH=%PATH% >> %GITHUB_ENV%
+          where make
+          where mingw32-make
       - name: Restore submodules
         id: cache-submodules
         uses: actions/cache/restore@v4
@@ -122,10 +123,6 @@ jobs:
           set BASETOOLS_MINGW_PATH=C:\edk2-clang
           set HOST_ARCH=X64
           call edksetup.bat Mingw-w64 ForceRebuild
-          set
-          where mingw32-make
-          call build -a X64 -t CLANGPDB -b DEBUG -p FatPkg\FatPkg.dsc GenMake
-          mingw32-make -f Build\Fat\DEBUG_CLANGPDB\X64\FatPkg\EnhancedFatDxe\Fat\GNUmakefile -d
           call build -a X64 -t CLANGPDB -b DEBUG -p FatPkg\FatPkg.dsc -j Build\BuildFatPkg.log -v
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
