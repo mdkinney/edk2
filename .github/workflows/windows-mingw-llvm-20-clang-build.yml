@@ -63,6 +63,8 @@ jobs:
           PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
           echo PATH=%PATH% >> %GITHUB_ENV%
           pip list
+          where make
+          where nmake
       - name: Restore LLVM-MinGW
         id: cache-llvm-mingw
         uses: actions/cache/restore@v4
@@ -115,21 +117,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: "Upload Windows CLANGDWARF-Mingw Logs (${{ join(matrix.*, ' - ') }})"
-          path: |
-            Build/**/*
-        if: always()
-      - name: 'Build Packages CLANGPDB-Mingw'
-        shell: cmd
-        env:
-          CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
-        run: |
-          PATH=C:\llvm-mingw-20250709-ucrt-x86_64\bin;%PATH%
-          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
-        if: always()
-      - name: Upload CLANGPDB-Mingw Logs
-        uses: actions/upload-artifact@v4
-        with:
-          name: "Upload Windows CLANGPDB-Mingw Logs (${{ join(matrix.*, ' - ') }})"
           path: |
             Build/**/*
         if: always()
