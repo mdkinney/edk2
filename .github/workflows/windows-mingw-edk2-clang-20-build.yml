@@ -30,6 +30,31 @@ jobs:
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Restore TianoCore Mingw CLANG 20.1.8
+        id: cache-edk2-clang
+        uses: actions/cache/restore@v4
+        with:
+          path: C:\edk2-clang
+          key: ${{ runner.os }}-edk2-clang-20.1.8
+          restore-keys: |
+            ${{ runner.os }}-edk2-clang-20.1.8
+      - name: Install TianoCore Mingw CLANG 20.1.8
+        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
+        shell: cmd
+        run: |
+          curl -L -o EdkClangSetup-20.1.8.0.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v20.1.8/EdkClangSetup-20.1.8.0.exe
+          EdkClangSetup-20.1.8.0.exe /silent
+      - name: Save TianoCore Mingw CLANG 20.1.8
+        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: C:\edk2-clang
+          key: ${{ steps.cache-edk2-clang.outputs.cache-primary-key }}
+      - name: Add TianoCore Mingw CLANG to PATH
+        shell: cmd
+        run: |
+          PATH=C:\edk2-clang\bin;%PATH%
+          echo PATH=%PATH% >> %GITHUB_ENV%
       - name: Restore cached venv
         uses: actions/cache/restore@v4
         id: cache-venv
@@ -63,34 +88,6 @@ jobs:
           PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
           echo PATH=%PATH% >> %GITHUB_ENV%
           pip list
-          where make
-          where mingw32-make
-          dir c:\mingw64\bin
-      - name: Restore TianoCore Mingw CLANG
-        id: cache-edk2-clang
-        uses: actions/cache/restore@v4
-        with:
-          path: C:\edk2-clang
-          key: ${{ runner.os }}-edk2-clang-20.1.8
-          restore-keys: |
-            ${{ runner.os }}-edk2-clang-20.1.8
-      - name: Install TianoCore Mingw CLANG 20.1.8
-        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
-        shell: cmd
-        run: |
-          curl -L -o EdkClangSetup-20.1.8.0.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v20.1.8/EdkClangSetup-20.1.8.0.exe
-          EdkClangSetup-20.1.8.0.exe /silent
-      - name: Save TianoCore Mingw CLANG
-        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: C:\edk2-clang
-          key: ${{ steps.cache-edk2-clang.outputs.cache-primary-key }}
-      - name: Add TianoCore Mingw CLANG to PATH
-        shell: cmd
-        run: |
-          PATH=C:\edk2-clang\bin;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
       - name: Restore submodules
         id: cache-submodules
         uses: actions/cache/restore@v4
