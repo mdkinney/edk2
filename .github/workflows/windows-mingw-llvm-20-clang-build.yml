@@ -64,7 +64,9 @@ jobs:
           echo PATH=%PATH% >> %GITHUB_ENV%
           pip list
           where make
-          where nmake
+          rename c:\mingw64\bin\make.exe donotuse-make.exe
+          where make
+          dir c:\mingw64\bin
       - name: Restore LLVM-MinGW
         id: cache-llvm-mingw
         uses: actions/cache/restore@v4
