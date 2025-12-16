@@ -107,7 +107,10 @@ jobs:
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py"
       - name: 'Build BaseTools'
-        run: mingw32-make -C BaseTools
+        env:
+          CC: "clang"
+          CXX: "clang++"
+        run: python BaseTools\Edk2ToolsBuild.py
       - name: 'Build Packages CLANGPDB-Mingw'
         shell: cmd
         env:
