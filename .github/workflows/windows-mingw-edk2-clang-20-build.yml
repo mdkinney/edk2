@@ -91,8 +91,6 @@ jobs:
         run: |
           PATH=C:\edk2-clang\bin;%PATH%
           echo PATH=%PATH% >> %GITHUB_ENV%
-          where make
-          where mingw32-make
       - name: Restore submodules
         id: cache-submodules
         uses: actions/cache/restore@v4
@@ -111,19 +109,6 @@ jobs:
           key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py"
-      - name: Build Edk2 BaseTools
-        shell: cmd
-        env:
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
-        run: |
-          dir C:\edk2-clang\bin
-          PATH=C:\edk2-clang\bin;%PATH%
-          set CLANG_BIN=C:\edk2-clang\bin\
-          set BASETOOLS_MINGW_PATH=C:\edk2-clang
-          set HOST_ARCH=X64
-          call edksetup.bat Mingw-w64 ForceRebuild
-          call build -a X64 -t CLANGPDB -b DEBUG -p FatPkg\FatPkg.dsc -j Build\BuildFatPkg.log -v
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
       - name: 'Build Packages CLANGPDB-Mingw'
@@ -131,8 +116,18 @@ jobs:
         env:
           CLANG_BIN: "C:\\edk2-clang\\bin\\"
         run: |
-          PATH=C:\edk2-clang\bin;%PATH%
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
+      - name: Build Edk2 BaseTools
+        shell: cmd
+        env:
+          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
+          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
+        run: |
+          set CLANG_BIN=C:\edk2-clang\bin\
+          set BASETOOLS_MINGW_PATH=C:\edk2-clang
+          set HOST_ARCH=X64
+          call edksetup.bat Mingw-w64 ForceRebuild
+          call build -a X64 -t CLANGPDB -b DEBUG -p FatPkg\FatPkg.dsc -j Build\BuildFatPkg.log -v
       - name: Upload CLANGPDB-Mingw Logs
         uses: actions/upload-artifact@v4
         with:

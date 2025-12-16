@@ -86,6 +86,11 @@ jobs:
         with:
           path: C:\Program Files\LLVM
           key: ${{ steps.cache-clang.outputs.cache-primary-key }}
+      - name: Add CLANG 20.1.8 to PATH
+        shell: cmd
+        run: |
+          PATH=C:\Program Files\LLVM\bin;%PATH%
+          echo PATH=%PATH% >> %GITHUB_ENV%
       - name: Restore submodules
         id: cache-submodules
         uses: actions/cache/restore@v4
@@ -95,7 +100,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-submodules-
       - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+        run: stuart_setup -c ".pytool/CISettings.py"
       - name: Save submodules
         if: steps.cache-submodules.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
@@ -103,7 +108,7 @@ jobs:
           path: .git/modules
           key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
       - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+        run: stuart_update -c ".pytool/CISettings.py"
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
       - name: 'Build Packages CLANGPDB-VS'
@@ -111,7 +116,6 @@ jobs:
         env:
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
         run: |
-          PATH=C:\Program Files\LLVM\bin;%PATH%
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
       - name: Upload CLANGPDB-VS Logs
         uses: actions/upload-artifact@v4
