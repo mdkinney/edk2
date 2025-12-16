@@ -112,6 +112,7 @@ jobs:
       - name: Build Edk2 BaseTools
         shell: cmd
         run: |
+          dir C:\llvm-mingw-20250709-ucrt-x86_64\bin
           PATH=C:\llvm-mingw-20250709-ucrt-x86_64\bin;%PATH%
           set CLANG_BIN=C:\llvm-mingw-20250709-ucrt-x86_64\bin\
           set BASETOOLS_MINGW_PATH=C:\llvm-mingw-20250709-ucrt-x86_64
