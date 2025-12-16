@@ -70,6 +70,8 @@ jobs:
           where make
           where mingw32-make
           dir c:\mingw64\bin
+          fsutil fsinfo volumeinfo c:
+          fsutil fsinfo volumeinfo d:
       - name: Restore TianoCore Mingw CLANG
         id: cache-edk2-clang
         uses: actions/cache/restore@v4
