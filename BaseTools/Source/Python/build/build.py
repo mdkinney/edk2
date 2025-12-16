@@ -218,6 +218,7 @@ class MakeSubProc(Popen):
 # @param  WorkingDir            The directory in which the program will be running
 #
 def LaunchCommand(Command, WorkingDir,ModuleAuto = None):
+    print(f"Launching command: {Command} in directory: {WorkingDir}")
     BeginTime = time.time()
     # if working directory doesn't exist, Popen() will raise an exception
     if not os.path.isdir(WorkingDir):

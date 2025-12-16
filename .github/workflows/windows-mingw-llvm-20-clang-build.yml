@@ -120,7 +120,7 @@ jobs:
           set MSYS_NO_PATHCONV=1
           call edksetup.bat Mingw-w64 ForceRebuild
           set
-          call build -a X64 -t CLANGDWARF -b DEBUG -p FatPkg\FatPkg.dsc -j Build\BuildFatPkg.log -v
+          cmd /c build -a X64 -t CLANGDWARF -b DEBUG -p FatPkg\FatPkg.dsc -j Build\BuildFatPkg.log -v
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
       - name: 'Build Packages CLANGDWARF-Mingw'
