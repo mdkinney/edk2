@@ -66,6 +66,7 @@ jobs:
           where make
           where mingw32-make
           rename c:\mingw64\bin\make.exe donotuse-make.exe
+          rename c:\mingw64\bin\mingw32-make.exe donotuse-mingw32-make.exe
           where make
           where mingw32-make
           dir c:\mingw64\bin
