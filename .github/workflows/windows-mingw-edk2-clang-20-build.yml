@@ -122,9 +122,9 @@ jobs:
           call edksetup.bat Mingw-w64 ForceRebuild
           set
           where mingw32-make
-          build -a X64 -t CLANGPDB -b DEBUG -p FatPkg\FatPkg.dsc GenMake
+          call build -a X64 -t CLANGPDB -b DEBUG -p FatPkg\FatPkg.dsc GenMake
           mingw32-make -f Build\Fat\DEBUG_CLANGPDB\X64\FatPkg\EnhancedFatDxe\Fat\GNUmakefile
-          cmd /c build -a X64 -t CLANGPDB -b DEBUG -p FatPkg\FatPkg.dsc -j Build\BuildFatPkg.log -v
+          call build -a X64 -t CLANGPDB -b DEBUG -p FatPkg\FatPkg.dsc -j Build\BuildFatPkg.log -v
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
       - name: 'Build Packages CLANGPDB-Mingw'
