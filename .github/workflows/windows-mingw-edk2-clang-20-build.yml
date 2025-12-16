@@ -112,13 +112,15 @@ jobs:
         run: stuart_update -c ".pytool/CISettings.py"
       - name: Build Edk2 BaseTools
         shell: cmd
+        env:
+          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
+          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           dir C:\edk2-clang\bin
           PATH=C:\edk2-clang\bin;%PATH%
           set CLANG_BIN=C:\edk2-clang\bin\
           set BASETOOLS_MINGW_PATH=C:\edk2-clang
           set HOST_ARCH=X64
-          set MSYS_NO_PATHCONV=1
           call edksetup.bat Mingw-w64 ForceRebuild
           set
           where mingw32-make
