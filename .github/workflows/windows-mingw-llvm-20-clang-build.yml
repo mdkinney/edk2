@@ -97,7 +97,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-submodules-
       - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+        run: stuart_setup -c ".pytool/CISettings.py"
       - name: Save submodules
         if: steps.cache-submodules.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
@@ -105,7 +105,15 @@ jobs:
           path: .git/modules
           key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
       - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+        run: stuart_update -c ".pytool/CISettings.py"
+      - name: Build Edk2
+        run: |
+          PATH=C:\llvm-mingw-20250709-ucrt-x86_64\bin;%PATH%
+          set CLANG_BIN=C:\llvm-mingw-20250709-ucrt-x86_64\bin\
+          set BASETOOLS_MINGW_PATH=C:\llvm-mingw-20250709-ucrt-x86_64\bin\
+          set HOST_ARCH=X64
+          edksetup.bat Mingw-w64 ForceRebuild
+          build -a X64 -t CLANGDWARF -b DEBUG -p FatPkg\FatPkg.dsc -j Build\BuildFatPkg.log -v
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
       - name: 'Build Packages CLANGDWARF-Mingw'
