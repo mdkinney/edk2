@@ -107,6 +107,7 @@ jobs:
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py"
       - name: Build Edk2
+        shell: cmd
         run: |
           PATH=C:\llvm-mingw-20250709-ucrt-x86_64\bin;%PATH%
           set CLANG_BIN=C:\llvm-mingw-20250709-ucrt-x86_64\bin\
