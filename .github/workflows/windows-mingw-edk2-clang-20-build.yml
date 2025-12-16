@@ -110,7 +110,7 @@ jobs:
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py"
       - name: 'Build BaseTools'
-        run: python BaseTools/Edk2ToolsBuild.py -t VS2022
+        run: mingw32-make -C BaseTools
       - name: 'Build Packages CLANGPDB-Mingw'
         shell: cmd
         env:
@@ -125,8 +125,7 @@ jobs:
         run: |
           set CLANG_BIN=C:\edk2-clang\bin\
           set BASETOOLS_MINGW_PATH=C:\edk2-clang
-          set HOST_ARCH=X64
-          call edksetup.bat Mingw-w64 ForceRebuild
+          call edksetup.bat Mingw-w64
           call build -a X64 -t CLANGPDB -b DEBUG -p FatPkg\FatPkg.dsc -j Build\BuildFatPkg.log -v
       - name: Upload CLANGPDB-Mingw Logs
         uses: actions/upload-artifact@v4
