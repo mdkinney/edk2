@@ -106,14 +106,14 @@ jobs:
           key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py"
-      - name: Build Edk2
+      - name: Build Edk2 BaseTools
         shell: cmd
         run: |
           PATH=C:\llvm-mingw-20250709-ucrt-x86_64\bin;%PATH%
           set CLANG_BIN=C:\llvm-mingw-20250709-ucrt-x86_64\bin\
           set BASETOOLS_MINGW_PATH=C:\llvm-mingw-20250709-ucrt-x86_64
           set HOST_ARCH=X64
-          edksetup.bat Mingw-w64 ForceRebuild
+          call edksetup.bat Mingw-w64 ForceRebuild
           build -a X64 -t CLANGDWARF -b DEBUG -p FatPkg\FatPkg.dsc -j Build\BuildFatPkg.log -v
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
