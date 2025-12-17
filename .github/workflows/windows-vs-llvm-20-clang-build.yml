@@ -106,7 +106,7 @@ jobs:
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
-          edksetup.bat VS2022
+          call edksetup.bat VS2022
           build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
       - name: 'Build UnitTestFrameworkPkg X64 Unit Tests'
         run: |
@@ -118,7 +118,7 @@ jobs:
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
-          edksetup.bat VS2022
+          call edksetup.bat VS2022
           build -a IA32 -t CLANGPDB -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
       - name: 'Build EmulatorPkg X64 Host Module'
         shell: cmd
@@ -127,7 +127,7 @@ jobs:
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
-          edksetup.bat VS2022
+          call edksetup.bat VS2022
           build -a X64 -t CLANGPDB -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64Build.log >NUL
       - name: 'Build EmulatorPkg IA32 Host Module'
         shell: cmd
@@ -136,7 +136,7 @@ jobs:
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
-          edksetup.bat VS2022
+          call edksetup.bat VS2022
           build -a IA32 -t CLANGPDB -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32Build.log >NUL
       - name: 'Build OVMF Platform'
         shell: cmd
@@ -145,7 +145,7 @@ jobs:
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
-          edksetup.bat VS2022
+          call edksetup.bat VS2022
           build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
       - name: Upload Windows VS Clang Precheck Logs
         uses: actions/upload-artifact@v4
