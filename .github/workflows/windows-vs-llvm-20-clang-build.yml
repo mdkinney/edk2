@@ -122,6 +122,8 @@ jobs:
         with:
           name: "Upload Windows CLANGPDB-VS Logs (${{ join(matrix.*, ' - ') }})"
           path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
             Build/*.txt
             Build/*.log
         if: always()
@@ -229,6 +231,8 @@ jobs:
         with:
           name: "Upload Windows CLANGPDB-VS Unit Test Logs (${{ join(matrix.*, ' - ') }})"
           path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
             Build/*.txt
             Build/*.log
         if: always()

@@ -130,6 +130,8 @@ jobs:
         with:
           name: "Upload Windows Mingw edk2-clang Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})"
           path: |
+            BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
+            Build/*.txt
             Build/*.log
         if: always()
