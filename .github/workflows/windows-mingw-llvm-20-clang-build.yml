@@ -112,7 +112,7 @@ jobs:
         env:
           CC: "clang"
           CXX: "clang++"
-        run: python BaseTools/Edk2ToolsBuild.py -t ${{ matrix.tool_chain_tag }}
+        run: python BaseTools/Edk2ToolsBuild.py -a X64 -t ${{ matrix.tool_chain_tag }}
       - name: 'Build Packages ${{ matrix.tool_chain_tag }}-Mingw'
         shell: cmd
         env:
