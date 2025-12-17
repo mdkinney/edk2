@@ -21,12 +21,15 @@ jobs:
       matrix:
         build_type:
           - DEBUG
+          - RELEASE
         build_arch:
+          - IA32
           - X64
         tool_chain_tag:
           - CLANGDWARF
         build_package:
-          - FatPkg
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
       - name: Checkout
         uses: actions/checkout@v4
