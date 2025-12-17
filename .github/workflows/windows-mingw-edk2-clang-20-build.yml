@@ -21,10 +21,13 @@ jobs:
       matrix:
         build_type:
           - DEBUG
+          - RELEASE
         build_arch:
+          - IA32
           - X64
         build_package:
-          - FatPkg
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -115,18 +118,10 @@ jobs:
         shell: cmd
         env:
           CLANG_BIN: "C:\\edk2-clang\\bin\\"
-        run: |
-          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}" -v
-      - name: Build Edk2 BaseTools
-        shell: cmd
-        env:
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
-          set CLANG_BIN=C:\edk2-clang\bin\
-          set BASETOOLS_MINGW_PATH=C:\edk2-clang
-          call edksetup.bat Mingw-w64
-          call build -a X64 -t CLANGPDB -b DEBUG -p FatPkg\FatPkg.dsc -j Build\BuildFatPkg.log -v
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
       - name: Upload CLANGPDB-Mingw Logs
         uses: actions/upload-artifact@v4
         with:
