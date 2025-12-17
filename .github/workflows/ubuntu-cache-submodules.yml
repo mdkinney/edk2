@@ -13,6 +13,63 @@ on:
       - sandbox/master
 
 jobs:
+  build_linux_pr_precheck:
+    name: Linux PR Precheck
+    runs-on: ubuntu-latest
+    env:
+      build_package: "ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Restore cached venv
+        uses: actions/cache/restore@v4
+        id: cache-venv
+        with:
+          path: .venv
+          key: ${{ runner.os }}-venv-${{ hashFiles('pip-requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-venv-
+      - name: Create and install venv if cache missed
+        shell: bash
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install --upgrade pip
+          pip install -r pip-requirements.txt
+      - name: Save venv cache
+        uses: actions/cache/save@v4
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+        with:
+          path: .venv
+          key: ${{ steps.cache-venv.outputs.cache-primary-key }}
+      - name: Set PATH to use venv
+        shell: bash
+        run: echo "PATH=$PWD/.venv/bin:$PATH" >> $GITHUB_ENV
+      - name: PatchCheck PR
+        if: github.event_name == 'pull_request'
+        run: python BaseTools/Scripts/PatchCheck.py ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
+      - name: 'Download External Dependencies'
+        run: stuart_update -c ".pytool/CISettings.py"
+      - name: 'Generate List of Packages to Evaluate'
+        if: github.event_name == 'pull_request'
+        run: echo "pkgs_to_build=$(stuart_pr_eval -c .pytool/CISettings.py -p ${{ env.build_package }} --pr-target ${{ github.event.pull_request.head.sha }} --output-csv-format-string {pkgcsv})" >> $GITHUB_ENV
+      - name: 'Evaluate Packages'
+        if: github.event_name == 'pull_request'
+        run: stuart_ci_build -c ".pytool/CISettings.py" -t NO-TARGET -p ${pkgs_to_build}
+      - name: Upload Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} Logs (${{ strategy.job-index }})"
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
   build_linux_clang_no_target_precheck:
     name: Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} PreCheck
     runs-on: ubuntu-latest
