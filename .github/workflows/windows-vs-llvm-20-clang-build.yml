@@ -130,7 +130,7 @@ jobs:
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           call edksetup.bat VS2022
-          build -a X64 -t CLANGPDB -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Windows/Host/Host.inf -j Build/EmulatorX64Build.log >NUL
+          build -a X64 -t CLANGPDB -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64Build.log >NUL
       - name: 'Build EmulatorPkg IA32 Host Module'
         shell: cmd
         env:
@@ -139,7 +139,7 @@ jobs:
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           call edksetup.bat VS2022
-          build -a IA32 -t CLANGPDB -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Windows/Host/Host.inf -j Build/EmulatorIA32Build.log >NUL
+          build -a IA32 -t CLANGPDB -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32Build.log >NUL
       - name: 'Build OVMF Platform'
         shell: cmd
         env:
