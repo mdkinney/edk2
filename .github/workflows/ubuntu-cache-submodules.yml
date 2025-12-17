@@ -19,7 +19,7 @@ jobs:
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
     steps:
-      - name: Checkout PR depth $(( ${{ github.event.pull_request.commits }} + 1 ))
+      - name: Checkout PR depth ${{ github.event.pull_request.commits }}
         if: github.event_name == 'pull_request'
         uses: actions/checkout@v4
         with:
@@ -71,7 +71,7 @@ jobs:
       - name: Upload Linux PR Precheck Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Linux PR Precheck Logs
+          name: "Upload Linux PR Precheck Logs"
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
