@@ -100,6 +100,7 @@ jobs:
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
       - name: 'Build HelloWorld CLANGPDB'
+        shell: cmd
         env:
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
@@ -111,6 +112,7 @@ jobs:
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGPDB -p UnitTestFrameworkPkg
       - name: 'Build UnitTestFrameworkPkg IA32 Unit Tests'
+        shell: cmd
         env:
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
@@ -119,6 +121,7 @@ jobs:
           edksetup.bat VS2022
           build -a IA32 -t CLANGPDB -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
       - name: 'Build EmulatorPkg X64 Host Module'
+        shell: cmd
         env:
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
@@ -127,6 +130,7 @@ jobs:
           edksetup.bat VS2022
           build -a X64 -t CLANGPDB -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64Build.log >NUL
       - name: 'Build EmulatorPkg IA32 Host Module'
+        shell: cmd
         env:
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
@@ -135,6 +139,7 @@ jobs:
           edksetup.bat VS2022
           build -a IA32 -t CLANGPDB -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32Build.log >NUL
       - name: 'Build OVMF Platform'
+        shell: cmd
         env:
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
