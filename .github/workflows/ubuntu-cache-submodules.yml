@@ -16,6 +16,8 @@ jobs:
   build_linux_pr_precheck:
     name: Linux PR Precheck
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
     env:
       build_package: "ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"
     steps:
