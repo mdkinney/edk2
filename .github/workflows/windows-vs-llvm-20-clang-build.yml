@@ -178,7 +178,6 @@ jobs:
         run: |
           PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
           echo PATH=%PATH% >> %GITHUB_ENV%
-          pip list
       - name: Restore CLANG 20.1.8
         id: cache-clang
         uses: actions/cache/restore@v4

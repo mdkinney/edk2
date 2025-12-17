@@ -23,6 +23,8 @@ jobs:
           - DEBUG
         build_arch:
           - X64
+        tool_chain_tag:
+          - CLANGDWARF
         build_package:
           - FatPkg
     steps:
@@ -88,7 +90,6 @@ jobs:
         run: |
           PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
           echo PATH=%PATH% >> %GITHUB_ENV%
-          pip list
       - name: Restore submodules
         id: cache-submodules
         uses: actions/cache/restore@v4
@@ -107,31 +108,26 @@ jobs:
           key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py"
-      - name: Build Edk2 BaseTools
-        shell: cmd
-        env:
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
-        run: |
-          set CLANG_BIN=C:\llvm-mingw-20250709-ucrt-x86_64\bin\
-          set BASETOOLS_MINGW_PATH=C:\llvm-mingw-20250709-ucrt-x86_64
-          set HOST_ARCH=X64
-          set MSYS_NO_PATHCONV=1
-          call edksetup.bat Mingw-w64 ForceRebuild
-          call build -a X64 -t CLANGDWARF -b DEBUG -p FatPkg\FatPkg.dsc -j Build\BuildFatPkg.log -v
       - name: 'Build BaseTools'
-        run: python BaseTools/Edk2ToolsBuild.py -t VS2022
-      - name: 'Build Packages CLANGDWARF-Mingw'
+        env:
+          CC: "clang"
+          CXX: "clang++"
+        run: python BaseTools/Edk2ToolsBuild.py -t ${{ matrix.tool_chain_tag }}
+      - name: 'Build Packages ${{ matrix.tool_chain_tag }}-Mingw'
         shell: cmd
         env:
           CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
+          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
+          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
-          PATH=C:\llvm-mingw-20250709-ucrt-x86_64\bin;%PATH%
-          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGDWARF -p "${{ matrix.build_package }}" -v
-      - name: Upload CLANGDWARF-Mingw Logs
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
+      - name: Upload Windows Mingw Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Windows CLANGDWARF-Mingw Logs (${{ join(matrix.*, ' - ') }})"
+          name: "Upload Windows Mingw Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})"
           path: |
-            Build/**/*
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
         if: always()
