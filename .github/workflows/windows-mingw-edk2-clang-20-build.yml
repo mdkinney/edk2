@@ -15,7 +15,7 @@ on:
 jobs:
   build_windows_clang:
     name: Build Windows (${{ join(matrix.*, ' - ') }})
-    runs-on: windows-2022
+    runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
@@ -25,9 +25,9 @@ jobs:
         build_arch:
           - IA32
           - X64
-        build_package:
-          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
-          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
+        tool_chain_tag:
+          - CLANGPDB
+          - CLANGDWARF
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -113,19 +113,20 @@ jobs:
         env:
           CC: "clang"
           CXX: "clang++"
-        run: python BaseTools\Edk2ToolsBuild.py
-      - name: 'Build Packages CLANGPDB-Mingw'
+        run: python BaseTools\Edk2ToolsBuild.py -t ${{ matrix.tool_chain_tag }}
+      - name: 'Build Packages ${{ matrix.tool_chain_tag }}-Mingw'
         shell: cmd
         env:
           CLANG_BIN: "C:\\edk2-clang\\bin\\"
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
-          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
-      - name: Upload CLANGPDB-Mingw Logs
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }}
+      - name: Upload ${{ matrix.tool_chain_tag }}-Mingw Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Windows CLANGPDB-Mingw Logs (${{ join(matrix.*, ' - ') }})"
+          name: "Upload Windows Mingw edk2-clang Logs (${{ join(matrix.*, ' - ') }})"
           path: |
-            Build/**/*
+            Build/**/BUILDLOG*.txt
+            Build/*.log
         if: always()
