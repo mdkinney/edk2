@@ -9,6 +9,8 @@
 !include UnitTestFrameworkPkg/UnitTestFrameworkPkgCommon.dsc.inc
 
 [Defines]
+  HOST_BASED_UNIT_TESTING_ENABLED = TRUE
+
   #
   # Host based unit test builds only support NOOPT build target
   #
