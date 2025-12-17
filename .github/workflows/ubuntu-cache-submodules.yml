@@ -18,11 +18,18 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
-    env:
-      build_package: "ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"
     steps:
-      - name: Checkout
+      - name: Checkout PR depth $(( ${{ github.event.pull_request.commits }} + 1 ))
+        if: github.event_name == 'pull_request'
         uses: actions/checkout@v4
+        with:
+          fetch-depth: $(( ${{ github.event.pull_request.commits }} + 1 ))
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Checkout HEAD depth 1
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Restore cached venv
@@ -57,14 +64,14 @@ jobs:
         run: stuart_update -c ".pytool/CISettings.py"
       - name: 'Generate List of Packages to Evaluate'
         if: github.event_name == 'pull_request'
-        run: echo "pkgs_to_build=$(stuart_pr_eval -c .pytool/CISettings.py -p ${{ env.build_package }} --pr-target ${{ github.event.pull_request.head.sha }} --output-csv-format-string {pkgcsv})" >> $GITHUB_ENV
+        run: echo "pkgs_to_build=$(stuart_pr_eval -c .pytool/CISettings.py --pr-target ${{ github.event.pull_request.head.sha }} --output-csv-format-string {pkgcsv})" >> $GITHUB_ENV
       - name: 'Evaluate Packages'
         if: github.event_name == 'pull_request'
         run: stuart_ci_build -c ".pytool/CISettings.py" -t NO-TARGET -p ${pkgs_to_build}
-      - name: Upload Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} Logs
+      - name: Upload Linux PR Precheck Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} Logs (${{ strategy.job-index }})"
+          name: "Upload Linux PR Precheck Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
