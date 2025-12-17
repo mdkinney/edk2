@@ -100,7 +100,7 @@ class BuildFile(object):
 
     ## Fixed header string for makefile
     _GMAKE_MAKEFILE_HEADER = '''
-ifeq (Windows, $(findstring Windows,$(MAKE_HOST)))
+ifeq (Windows, $(findstring Windows,$(OS)))
   SHELL := cmd.exe
 endif
     '''
