@@ -223,6 +223,14 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdPeiCoreImageLoaderSearchTeSectionFirst|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdDxeIplBuildPageTables|FALSE
   gEmulatorPkgTokenSpaceGuid.PcdEmulatorLazyLoadSymbols|FALSE
+!if $(WIN_MINGW32_BUILD)
+  #
+  # When WIN_MINGW32_BUILD is set, -target is set to build Windows application.
+  # Set PcdOpensslLibAssemblySourceStyleNasm to TRUE to use Openssl NASM
+  # source files that assume a Windows calling convention.
+  #
+  gEfiCryptoPkgTokenSpaceGuid.PcdOpensslLibAssemblySourceStyleNasm|TRUE
+!endif
 
 [PcdsFixedAtBuild]
   gEfiMdeModulePkgTokenSpaceGuid.PcdImageProtectionPolicy|0x00000000
