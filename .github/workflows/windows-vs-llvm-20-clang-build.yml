@@ -15,7 +15,7 @@ on:
 jobs:
   build_windows_clang:
     name: Build Windows (${{ join(matrix.*, ' - ') }})
-    runs-on: windows-2022
+    runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
@@ -25,6 +25,8 @@ jobs:
         build_arch:
           - IA32
           - X64
+        tool_chain_tag:
+          - CLANGPDB
         build_package:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
@@ -111,16 +113,16 @@ jobs:
         run: stuart_update -c ".pytool/CISettings.py"
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
-      - name: 'Build Packages CLANGPDB-VS'
+      - name: 'Build Packages ${{ matrix.tool_chain_tag }}-VS'
         shell: cmd
         env:
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
         run: |
-          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
-      - name: Upload CLANGPDB-VS Logs
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
+      - name: Upload Windows VS Clang Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Windows CLANGPDB-VS Logs (${{ join(matrix.*, ' - ') }})"
+          name: "Upload Windows VS Clang Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})"
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
@@ -129,8 +131,8 @@ jobs:
         if: always()
 
   build_windows_clang_noopt_unit_tests:
-    name: Build Windows (${{ join(matrix.*, ' - ') }})
-    runs-on: windows-2022
+    name: Build Windows Unit Test (${{ join(matrix.*, ' - ') }})
+    runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
@@ -138,6 +140,8 @@ jobs:
           - NOOPT
         build_arch:
           - X64
+        tool_chain_tag:
+          - CLANGPDB
         build_package:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
@@ -207,7 +211,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-submodules-
       - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+        run: stuart_setup -c ".pytool/CISettings.py"
       - name: Save submodules
         if: steps.cache-submodules.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
@@ -215,20 +219,20 @@ jobs:
           path: .git/modules
           key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
       - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+        run: stuart_update -c ".pytool/CISettings.py"
       - name: 'Build BaseTools'
         run: python BaseTools/Edk2ToolsBuild.py -t VS2022
-      - name: 'Build Packages CLANGPDB-VS'
+      - name: 'Build Packages ${{ matrix.tool_chain_tag }}-VS'
         shell: cmd
         env:
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
         run: |
           PATH=C:\Program Files\LLVM\bin;%PATH%
-          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
-      - name: Upload CLANGPDB-VS Unit Test Logs
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
+      - name: Upload Windows VS Clang Unit Test Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Windows CLANGPDB-VS Unit Test Logs (${{ join(matrix.*, ' - ') }})"
+          name: "Upload Windows VS Clang Unit Test Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})"
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
