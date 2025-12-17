@@ -14,7 +14,7 @@ on:
 
 jobs:
   build_linux_clang_no_target_precheck:
-    name: Build Linux CLANGPDB NO-TARGET PreCheck
+    name: Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} PreCheck
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
@@ -23,8 +23,8 @@ jobs:
       matrix:
         build_type:
           - NO-TARGET
-        build_arch:
-          - X64
+        tool_chain_tag:
+          - CLANGPDB
         build_package:
           - ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg
           - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
@@ -39,27 +39,29 @@ jobs:
         if: github.event_name == 'pull_request'
         run: python BaseTools/Scripts/PatchCheck.py ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
       - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+        run: stuart_setup -c ".pytool/CISettings.py"
       - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py" TOOL_CHAIN_TAG=CLANGPDB
+        run: stuart_update -c ".pytool/CISettings.py"
       - name: 'Build BaseTools'
         env:
           CC: clang
           CXX: clang++
-        run: python3 BaseTools/Edk2ToolsBuild.py -t GCC
-      - name: 'Build Packages CLANGPDB NO-TARGET'
-        run: stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=CLANGPDB -p "${{ matrix.build_package }}"
-      - name: Upload Logs
+        run: python3 BaseTools/Edk2ToolsBuild.py -t ${{ matrix.tool_chain_tag }}
+      - name: 'Build Packages ${{ matrix.build_type }}'
+        run: stuart_ci_build -c ".pytool/CISettings.py" -t ${{ matrix.build_type }} -p "${{ matrix.build_package }}"
+      - name: Upload Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Linux CLANGPDB NO-TARGET Logs (${{ strategy.job-index }})"
+          name: "Upload Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} Logs (${{ strategy.job-index }})"
           path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
             Build/*.txt
             Build/*.log
         if: always()
 
   build_linux_clang_ovmf_precheck:
-    name: Build Linux CLANGPDB CLANGDWARF PreCheck
+    name: Linux CLANGPDB CLANGDWARF PreCheck
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
@@ -123,6 +125,8 @@ jobs:
         with:
           name: "Upload Linux CLANGPDB CLANGDWARF Precheck Logs"
           path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
             Build/*.txt
             Build/*.log
         if: always()
