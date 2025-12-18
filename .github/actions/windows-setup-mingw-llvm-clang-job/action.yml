@@ -62,7 +62,7 @@ runs:
         PATH=${{ inputs.llvm_install_path }}\bin;%PATH%
         echo PATH=%PATH% >> %GITHUB_ENV%
         echo CLANG_BIN=${{ inputs.llvm_install_path }}\bin\>> %GITHUB_ENV%
-        echo BASETOOLS_MINGW_PATH=${{ inputs.edk2-clang-install_path }}>> %GITHUB_ENV%
+        echo BASETOOLS_MINGW_PATH=${{ inputs.llvm_install_path }}>> %GITHUB_ENV%
         echo CC=clang>> %GITHUB_ENV%
         echo CXX=clang++>> %GITHUB_ENV%
     - name: Install Python in venv
