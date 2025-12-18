@@ -41,27 +41,25 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Restore TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }}
+    - name: Restore TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }} from cache
       id: cache-edk2-clang
       uses: actions/cache/restore@v5
       with:
         path: ${{ inputs.edk2-clang-install_path }}
-        key: ${{ runner.os }}-edk2-clang-${{ inputs.edk2-clang-version }}
-        restore-keys: |
-          ${{ runner.os }}-edk2-clang-${{ inputs.edk2-clang-version }}
-    - name: Install TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }}
+        key: ${{ runner.os }}-edk2-clang-${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}
+    - name: Install TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}
       if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
       shell: cmd
       run: |
         curl -L -o EdkClangSetup-${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v${{ inputs.edk2-clang-version }}/EdkClangSetup-${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}.exe
         EdkClangSetup-${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}.exe /silent
-    - name: Save TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }} to cache
+    - name: Save TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }} to cache
       if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
       uses: actions/cache/save@v5
       with:
         path: ${{ inputs.edk2-clang-install_path }}
         key: ${{ steps.cache-edk2-clang.outputs.cache-primary-key }}
-    - name: Add TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }} to PATH
+    - name: Add TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }} to PATH
       shell: cmd
       run: |
         PATH=${{ inputs.edk2-clang-install_path }}\bin;%PATH%
