@@ -102,25 +102,25 @@ jobs:
           CC: "clang"
           CXX: "clang++"
         run: python BaseTools/Edk2ToolsBuild.py -a X64 -t CLANGDWARF
+      - name: 'Build UnitTestFrameworkPkg X64 Unit Tests'
+        env:
+          CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
       - name: 'Build HelloWorld CLANGDWARF'
         shell: cmd
         env:
-          CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin"
+          CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
           BASETOOLS_MINGW_PATH: "C:\\llvm-mingw-20250709-ucrt-x86_64"
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           call edksetup.bat Mingw-w64
           build -a IA32 -a X64 -t CLANGDWARF -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangDwarfBuild.log >NUL
-      - name: 'Build UnitTestFrameworkPkg X64 Unit Tests'
-        env:
-          CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin"
-        run: |
-          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
       - name: 'Build UnitTestFrameworkPkg IA32 Unit Tests'
         shell: cmd
         env:
-          CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin"
+          CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
           BASETOOLS_MINGW_PATH: "C:\\llvm-mingw-20250709-ucrt-x86_64"
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
