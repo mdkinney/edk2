@@ -20,14 +20,15 @@ on:
 jobs:
   build_windows_mingw_edk2_clang_precheck:
     name: Build Windows CLANGPDB CLANGDWARF Precheck
-    runs-on: windows-2022
+    runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
-          edk2-clang-version: '20.1.8.0'
+          edk2-clang-version: '20.1.8'
+          edk2-clang-version-patch-level: '0'
           python-version: '3.12'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t CLANGPDB'
@@ -97,7 +98,8 @@ jobs:
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
-          edk2-clang-version: '20.1.8.0'
+          edk2-clang-version: '20.1.8'
+          edk2-clang-version-patch-level: '0'
           python-version: '3.12'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
@@ -138,7 +140,8 @@ jobs:
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
-          edk2-clang-version: '20.1.8.0'
+          edk2-clang-version: '20.1.8'
+          edk2-clang-version-patch-level: '0'
           python-version: '3.12'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
@@ -167,7 +170,8 @@ jobs:
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
-          edk2-clang-version: '20.1.8.0'
+          edk2-clang-version: '20.1.8'
+          edk2-clang-version-patch-level: '0'
           python-version: '3.12'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t CLANGDWARF'
