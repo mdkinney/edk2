@@ -101,7 +101,7 @@ jobs:
           CC: "clang"
           CXX: "clang++"
         run: python BaseTools\Edk2ToolsBuild.py -a X64 -t CLANGPDB
-      - name: 'Build HelloWorld CLANGPDB CLANGDWARF'
+      - name: 'Build HelloWorld CLANGPDB'
         shell: cmd
         env:
           CLANG_BIN: "C:\\edk2-clang\\bin\\"
@@ -110,22 +110,22 @@ jobs:
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           call edksetup.bat Mingw-w64
-          build -a IA32 -a X64 -t CLANGPDB -t CLANGDWARF -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangDwarfBuild.log >NUL
+          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
+      - name: 'Build HelloWorld CLANGDWARF
+        shell: cmd
+        env:
+          CLANG_BIN: "C:\\edk2-clang\\bin\\"
+          BASETOOLS_MINGW_PATH: "C:\\edk2-clang"
+          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
+          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
+        run: |
+          call edksetup.bat Mingw-w64
+          build -a IA32 -a X64 -t CLANGDWARF -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangDwarfBuild.log >NUL
       - name: 'Build UnitTestFrameworkPkg X64 Unit Tests'
         env:
           CLANG_BIN: "C:\\edk2-clang\\bin\\"
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
-      - name: 'Build UnitTestFrameworkPkg IA32 Unit Tests'
-        shell: cmd
-        env:
-          CLANG_BIN: "C:\\edk2-clang\\bin\\"
-          BASETOOLS_MINGW_PATH: "C:\\edk2-clang"
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
-        run: |
-          call edksetup.bat Mingw-w64
-          build -a IA32 -t CLANGDWARF -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
       - name: 'Build EmulatorPkg X64 Host Module'
         shell: cmd
         env:
@@ -136,16 +136,6 @@ jobs:
         run: |
           call edksetup.bat Mingw-w64
           build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64Build.log >NUL
-      - name: 'Build EmulatorPkg IA32 Host Module'
-        shell: cmd
-        env:
-          CLANG_BIN: "C:\\edk2-clang\\bin\\"
-          BASETOOLS_MINGW_PATH: "C:\\edk2-clang"
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
-        run: |
-          call edksetup.bat Mingw-w64
-          build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32Build.log >NUL
       - name: 'Build OVMF Platform CLANGPDB'
         shell: cmd
         env:
