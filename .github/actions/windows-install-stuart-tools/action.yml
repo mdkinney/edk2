@@ -11,6 +11,8 @@ runs:
   using: 'composite'
   steps:
     - name: 'Download External Dependencies'
+      shell: cmd
       run: stuart_update -c ${{ inputs.stuart-ci-settings-file }}
     - name: 'Build BaseTools'
+      shell: cmd
       run: python BaseTools/Edk2ToolsBuild.py ${{ inputs.edk2-tools-build-params }}
