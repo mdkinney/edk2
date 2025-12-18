@@ -416,7 +416,7 @@ jobs:
 
   build_windows_clang_emulatorpkg:
     name: Build Windows CLANGDWARF EmulatorPkg
-    needs: build_windows_clang_ovmf_precheck
+    #needs: build_windows_clang_ovmf_precheck
     runs-on: windows-latest
     steps:
       - name: Checkout
