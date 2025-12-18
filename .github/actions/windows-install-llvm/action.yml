@@ -4,6 +4,10 @@ inputs:
   llvm_version:
     description: 'The LLVM version to install (e.g., 20.1.8)'
     required: true
+  llvm_install_path:
+    description: 'The path where LLVM is installed (e.g., C:\Program Files\LLVM)'
+    required: false
+    default: 'C:\Program Files\LLVM'
 runs:
   using: 'composite'
   steps:
@@ -11,7 +15,7 @@ runs:
       id: cache-clang
       uses: actions/cache/restore@v5
       with:
-        path: C:\Program Files\LLVM
+        path: ${{ inputs.llvm_install_path }}
         key: ${{ runner.os }}-LLVM-${{ inputs.llvm_version }}-win64.exe
     - name: Install CLANG ${{ inputs.llvm_version }}
       if: steps.cache-clang.outputs.cache-hit != 'true'
@@ -23,11 +27,11 @@ runs:
       if: steps.cache-clang.outputs.cache-hit != 'true'
       uses: actions/cache/save@v5
       with:
-        path: C:\Program Files\LLVM
+        path: ${{ inputs.llvm_install_path }}
         key: ${{ steps.cache-clang.outputs.cache-primary-key }}
     - name: Add CLANG ${{ inputs.llvm_version }} to PATH
       shell: cmd
       run: |
-        PATH=C:\Program Files\LLVM\bin;%PATH%
-        echo PATH=%PATH% >> %GITHUB_ENV%
-        echo CLANG_BIN=C:\Program Files\LLVM\bin\ >> %GITHUB_ENV%
+        PATH=${{ inputs.llvm_install_path }}\bin;%PATH%
+        echo PATH=%PATH%>> %GITHUB_ENV%
+        echo CLANG_BIN=${{ inputs.llvm_install_path }}\bin\>> %GITHUB_ENV%

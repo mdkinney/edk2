@@ -24,7 +24,7 @@ runs:
       run: |
         python -m venv .venv
         PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-        echo PATH=%PATH% >> %GITHUB_ENV%
+        echo PATH=%PATH%>> %GITHUB_ENV%
         python -m pip install --upgrade pip
         pip install -r pip-requirements.txt
     - name: Save venv cache
@@ -38,4 +38,4 @@ runs:
       if: steps.cache-venv.outputs.cache-hit == 'true'
       run: |
         PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-        echo PATH=%PATH% >> %GITHUB_ENV%
+        echo PATH=%PATH%>> %GITHUB_ENV%
