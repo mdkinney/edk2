@@ -4,7 +4,7 @@
 #
 # Firmware Build Support:             CLANGPDB - IA32/X64
 # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
-# EmulatorPkg Build Support:   CLANGPDB - IA32/X64
+# EmulatorPkg Build Support:          CLANGPDB - IA32/X64
 #
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent

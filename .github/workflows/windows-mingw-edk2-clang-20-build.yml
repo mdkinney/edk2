@@ -1,5 +1,10 @@
-# @file
-# A workflow that builds packages using clang and upload it's artifacts.
+## @file
+# A workflow using Windows MINGW edk2-clang tools that builds packages and
+# uploads artifacts.
+#
+# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+# Host-Based Unit Test Build Support: CLANGDWARF - X64
+# EmulatorPkg Build Support:          CLANGDWARF - X64
 #
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
@@ -19,120 +24,28 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Restore TianoCore Mingw CLANG 20.1.8
-        id: cache-edk2-clang
-        uses: actions/cache/restore@v4
+      - name: Setup Windows Mingw edk2-clang Job
+        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
-          path: C:\edk2-clang
-          key: ${{ runner.os }}-edk2-clang-20.1.8
-          restore-keys: |
-            ${{ runner.os }}-edk2-clang-20.1.8
-      - name: Install TianoCore Mingw CLANG 20.1.8
-        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
-        shell: cmd
-        run: |
-          curl -L -o EdkClangSetup-20.1.8.0.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v20.1.8/EdkClangSetup-20.1.8.0.exe
-          EdkClangSetup-20.1.8.0.exe /silent
-      - name: Save TianoCore Mingw CLANG 20.1.8
-        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: C:\edk2-clang
-          key: ${{ steps.cache-edk2-clang.outputs.cache-primary-key }}
-      - name: Add TianoCore Mingw CLANG to PATH
-        shell: cmd
-        run: |
-          PATH=C:\edk2-clang\bin;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
-      - name: Restore cached venv
-        uses: actions/cache/restore@v4
-        id: cache-venv
-        with:
-          path: .venv
-          key: ${{ runner.os }}-venv-${{ hashFiles('pip-requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-venv-
-      - name: Set up Python 3.12
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        uses: actions/setup-python@v5
-        with:
+          edk2-clang-version: '20.1.8'
           python-version: '3.12'
-      - name: Create and install venv if cache missed
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t CLANGPDB'
+      - name: Build HelloWorld CLANGPDB
         shell: cmd
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        run: |
-          python -m venv .venv
-          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          python -m pip install --upgrade pip
-          pip install -r pip-requirements.txt
-      - name: Save venv cache
-        uses: actions/cache/save@v4
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        with:
-          path: .venv
-          key: ${{ steps.cache-venv.outputs.cache-primary-key }}
-      - name: Activate venv
-        shell: cmd
-        run: |
-          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
-      - name: Restore submodules
-        id: cache-submodules
-        uses: actions/cache/restore@v4
-        with:
-          path: .git/modules
-          key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
-          restore-keys: |
-            ${{ runner.os }}-submodules-
-      - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py"
-      - name: Save submodules
-        if: steps.cache-submodules.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: .git/modules
-          key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
-      - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py"
-      - name: 'Build BaseTools'
-        env:
-          CC: "clang"
-          CXX: "clang++"
-        run: python BaseTools\Edk2ToolsBuild.py -a X64 -t CLANGPDB
-      - name: 'Build HelloWorld CLANGPDB'
-        shell: cmd
-        env:
-          CLANG_BIN: "C:\\edk2-clang\\bin\\"
-          BASETOOLS_MINGW_PATH: "C:\\edk2-clang"
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           call edksetup.bat Mingw-w64
-          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
-      - name: 'Build HelloWorld CLANGDWARF'
+          call build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
+      - name: Build HelloWorld CLANGDWARF
         shell: cmd
-        env:
-          CLANG_BIN: "C:\\edk2-clang\\bin\\"
-          BASETOOLS_MINGW_PATH: "C:\\edk2-clang"
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           call edksetup.bat Mingw-w64
-          build -a IA32 -a X64 -t CLANGDWARF -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangDwarfBuild.log >NUL
+          call build -a IA32 -a X64 -t CLANGDWARF -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangDwarfBuild.log >NUL
       - name: 'Build UnitTestFrameworkPkg X64 Unit Tests'
-        env:
-          CLANG_BIN: "C:\\edk2-clang\\bin\\"
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
-      - name: 'Build EmulatorPkg X64 Host Module'
+      - name: Build EmulatorPkg X64 Host Module
         shell: cmd
-        env:
-          CLANG_BIN: "C:\\edk2-clang\\bin\\"
-          BASETOOLS_MINGW_PATH: "C:\\edk2-clang"
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           call edksetup.bat Mingw-w64
           call build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64DebugBuild.log >NUL
@@ -140,28 +53,18 @@ jobs:
           call build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64NooptBuild.log >NUL
       - name: 'Build OVMF Platform CLANGPDB'
         shell: cmd
-        env:
-          CLANG_BIN: "C:\\edk2-clang\\bin\\"
-          BASETOOLS_MINGW_PATH: "C:\\edk2-clang"
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           call edksetup.bat Mingw-w64
-          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64BuildClangPdb.log >NUL
-      - name: 'Build OVMF Platform CLANGDWARF'
+          call build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64BuildClangPdb.log >NUL
+      - name: Build OVMF Platform CLANGDWARF
         shell: cmd
-        env:
-          CLANG_BIN: "C:\\edk2-clang\\bin\\"
-          BASETOOLS_MINGW_PATH: "C:\\edk2-clang"
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           call edksetup.bat Mingw-w64
-          build -a IA32 -a X64 -t CLANGDWARF -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64BuildClangDwarf.log >NUL
+          call build -a IA32 -a X64 -t CLANGDWARF -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64BuildClangDwarf.log >NUL
       - name: Upload Windows Mingw edk2-clang Precheck Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Windows Mingw edk2-clang Precheck Logs"
+          name: Upload Windows Mingw edk2-clang Precheck Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt

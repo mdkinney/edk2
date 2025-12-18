@@ -1,0 +1,82 @@
+## @file
+# Composite action that sets up a Windows MINGW edk2-clang environment for
+# CI jobs that builds packages and uploads artifacts. Caching is used to avoid
+# re-installing LLVM, Python, Python modules, and git submodules on subsequent
+# runs.
+#
+# * Installs TianoCore MINGW edk2-clang support, adds edk2-clang to PATH, and
+#   sets CLANG_BIN, CC, and CXX environment variables.
+# * Installs Python in a virtual environment, installs edk2 pip requirements,
+#   and adds Python virtual environment to PATH.
+# * Installs git submodules using stuart_setup.
+# * Sets up Stuart Tools, builds edk2 BaseTools, and sets NASM_PREFIX and
+#   IASL_PREFIX environment variables.
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+name: 'Windows Setup MINGW edk2-clang Job'
+description: 'Windows setup MINGW edk2-clang environment for CI jobs'
+inputs:
+  edk2-clang-version:
+    description: 'The edk2-clang version to install (e.g., 20.1.8)'
+    required: true
+  edk2-clang-install_path:
+    description: 'The path where edk2-clang is installed (e.g., C:\edk2-clang)'
+    required: false
+    default: 'C:\edk2-clang'
+  python-version:
+    description: 'Python version to install (e.g., 3.12)'
+    required: true
+  stuart-ci-settings-file:
+    description: 'Path to the stuart CI settings file (e.g. .pytool/CISettings.py)'
+    required: true
+  edk2-tools-build-params:
+    description: 'Command line parameters for Edk2ToolsBuild.py (e.g. -a X64 -t CLANGPDB)'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Restore TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }}
+      id: cache-edk2-clang
+      uses: actions/cache/restore@v5
+      with:
+        path: ${{ inputs.edk2-clang-install_path }}
+        key: ${{ runner.os }}-edk2-clang-${{ inputs.edk2-clang-version }}
+        restore-keys: |
+          ${{ runner.os }}-edk2-clang-${{ inputs.edk2-clang-version }}
+    - name: Install TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }}
+      if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
+      shell: cmd
+      run: |
+        curl -L -o EdkClangSetup-${{ inputs.edk2-clang-version }}.0.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v${{ inputs.edk2-clang-version }}/EdkClangSetup-${{ inputs.edk2-clang-version }}.0.exe
+        EdkClangSetup-${{ inputs.edk2-clang-version }}.0.exe /silent
+    - name: Save TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }} to cache
+      if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v5
+      with:
+        path: ${{ inputs.edk2-clang-install_path }}
+        key: ${{ steps.cache-edk2-clang.outputs.cache-primary-key }}
+    - name: Add TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }} to PATH
+      shell: cmd
+      run: |
+        PATH=${{ inputs.edk2-clang-install_path }}\bin;%PATH%
+        echo PATH=%PATH%>> %GITHUB_ENV%
+        echo CLANG_BIN=${{ inputs.edk2-clang-install_path }}\bin\>> %GITHUB_ENV%
+        echo BASETOOLS_MINGW_PATH=${{ inputs.edk2-clang-install_path }}>> %GITHUB_ENV%
+        echo CC=clang>> %GITHUB_ENV%
+        echo CXX=clang++>> %GITHUB_ENV%
+    - name: Install Python in venv
+      uses: ./.github/actions/windows-install-python-venv
+      with:
+        python-version: ${{ inputs.python-version }}
+    - name: Install Git Submodules from stuart_setup
+      uses: ./.github/actions/windows-install-git-submodules
+      with:
+        stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+    - name: Set up Stuart Tools
+      uses: ./.github/actions/windows-install-stuart-tools
+      with:
+        stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+        edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}

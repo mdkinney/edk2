@@ -1,6 +1,6 @@
 ## @file
 # Composite action that sets up a Windows Visual Studio CLANGPDB environment for
-# CI jobs that builds packages and uploads artifacts. Caching is usedto avoid
+# CI jobs that builds packages and uploads artifacts. Caching is used to avoid
 # re-installing LLVM, Python, Python modules, and git submodules on subsequent
 # runs.
 #
