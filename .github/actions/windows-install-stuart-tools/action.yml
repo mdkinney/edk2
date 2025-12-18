@@ -1,0 +1,16 @@
+name: 'Windows Install Stuart Tools from stuart_update and build BaseTools'
+description: 'Windows use stuart_update to download external dependencies and build BaseTools'
+inputs:
+  stuart-ci-settings-file:
+    description: 'Path to the stuart CI settings file (e.g. .pytool/CISettings.py)'
+    required: true
+  edk2-tools-build-params:
+    description: 'Command line parameters for Edk2ToolsBuild.py (e.g. -t VS2022)'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Download External Dependencies'
+      run: stuart_update -c ${{ inputs.stuart-ci-settings-file }}
+    - name: 'Build BaseTools'
+      run: python BaseTools/Edk2ToolsBuild.py ${{ inputs.edk2-tools-build-params }}

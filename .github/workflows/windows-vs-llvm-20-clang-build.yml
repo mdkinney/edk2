@@ -36,10 +36,11 @@ jobs:
         uses: ./.github/actions/windows-install-git-submodules
         with:
           stuart-ci-settings-file: '.pytool/CISettings.py'
-      - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py"
-      - name: 'Build BaseTools'
-        run: python BaseTools/Edk2ToolsBuild.py -t VS2022
+      - name: 'Set up Stuart Tools'
+        uses: ./.github/actions/windows-install-stuart-tools
+        with:
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-t VS2022'
       - name: 'Build HelloWorld CLANGPDB'
         shell: cmd
         run: |
@@ -118,10 +119,11 @@ jobs:
         uses: ./.github/actions/windows-install-git-submodules
         with:
           stuart-ci-settings-file: '.pytool/CISettings.py'
-      - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py"
-      - name: 'Build BaseTools'
-        run: python BaseTools/Edk2ToolsBuild.py -t VS2022
+      - name: 'Set up Stuart Tools'
+        uses: ./.github/actions/windows-install-stuart-tools
+        with:
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-t VS2022'
       - name: 'Build Packages ${{ matrix.tool_chain_tag }}-VS'
         shell: cmd
         run: |
@@ -168,10 +170,11 @@ jobs:
         uses: ./.github/actions/windows-install-git-submodules
         with:
           stuart-ci-settings-file: '.pytool/CISettings.py'
-      - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py"
-      - name: 'Build BaseTools'
-        run: python BaseTools/Edk2ToolsBuild.py -t VS2022
+      - name: 'Set up Stuart Tools'
+        uses: ./.github/actions/windows-install-stuart-tools
+        with:
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-t VS2022'
       - name: 'Build Packages ${{ matrix.tool_chain_tag }}-VS'
         shell: cmd
         run: |
@@ -206,10 +209,11 @@ jobs:
         uses: ./.github/actions/windows-install-git-submodules
         with:
           stuart-ci-settings-file: '.pytool/CISettings.py'
-      - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py"
-      - name: 'Build BaseTools'
-        run: python BaseTools/Edk2ToolsBuild.py -t VS2022
+      - name: 'Set up Stuart Tools'
+        uses: ./.github/actions/windows-install-stuart-tools
+        with:
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-t VS2022'
       - name: 'Build EmulatorPkg X64 Host Module'
         shell: cmd
         run: |

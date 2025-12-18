@@ -4,7 +4,6 @@ inputs:
   llvm_version:
     description: 'The LLVM version to install (e.g., 20.1.8)'
     required: true
-    default: '20.1.8'
 runs:
   using: 'composite'
   steps:

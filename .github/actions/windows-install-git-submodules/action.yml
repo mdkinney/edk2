@@ -2,9 +2,8 @@ name: 'Windows Install Git Submodules from stuart_setup '
 description: 'Windows use cache restore/save for git submodules installed by stuart_setup'
 inputs:
   stuart-ci-settings-file:
-    description: 'Path to the stuart CI settings file'
+    description: 'Path to the stuart CI settings file (e.g. .pytool/CISettings.py)'
     required: true
-    default: '.pytool/CISettings.py'
 runs:
   using: 'composite'
   steps:
