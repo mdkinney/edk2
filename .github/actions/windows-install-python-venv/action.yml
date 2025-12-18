@@ -1,3 +1,12 @@
+## @file
+# Composite action that Installs Python in a virtual environment, installs
+# edk2 pip requirements, and adds Python virtual environment to PATH.
+# Caches the virtual environment to avoid re-installing on subsequent runs.
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
 name: 'Windows Install Python in venv and install pip-requirements.txt'
 description: 'Windows use cache restore/save with Python venv installer and pip-requirements add it to PATH'
 inputs:

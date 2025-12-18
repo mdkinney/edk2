@@ -1,7 +1,7 @@
 # @file
 # A workflow that builds packages using clang and upload it's artifacts.
 #
-# Copyright (c) Intel Corporation.
+# Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
 name: Windows Mingw edk2-clang 20.1.8 Build

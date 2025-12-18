@@ -1,3 +1,21 @@
+## @file
+# Composite action that sets up a Windows Visual Studio CLANGPDB environment for
+# CI jobs that builds packages and uploads artifacts. Caching is usedto avoid
+# re-installing LLVM, Python, Python modules, and git submodules on subsequent
+# runs.
+#
+# * Installs LLVM with CLANGPDB support, adds LLVM to PATH, and sets CLANG_BIN
+#   environment variable.
+# * Installs Python in a virtual environment, installs edk2 pip requirements,
+#   and adds Python virtual environment to PATH.
+# * Installs git submodules using stuart_setup.
+# * Sets up Stuart Tools, builds edk2 BaseTools, and sets NASM_PREFIX and
+#   IASL_PREFIX environment variables.
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
 name: 'Windows Setup Visual Studio CLANGPDB Job'
 description: 'Windows setup Visual Studio with CLANGPDB support for CI jobs'
 inputs:

@@ -1,3 +1,11 @@
+## @file
+# Composite action Installs Git submodules using stuart_setup with caching to
+# avoid re-cloning on subsequent runs.
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
 name: 'Windows Install Git Submodules from stuart_setup '
 description: 'Windows use cache restore/save for git submodules installed by stuart_setup'
 inputs:

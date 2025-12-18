@@ -1,3 +1,11 @@
+## @file
+# Composite action that sets sets up Stuart Tools, builds edk2 BaseTools, and
+# sets NASM_PREFIX and IASL_PREFIX environment variables.
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
 name: 'Windows Install Stuart Tools from stuart_update and build BaseTools'
 description: 'Windows use stuart_update to download external dependencies and build BaseTools'
 inputs:
