@@ -18,7 +18,7 @@ on:
       - sandbox/master
 
 jobs:
-  build_windows_clang_ovmf_precheck:
+  build_windows_mingw_edk2_clang_precheck:
     name: Build Windows CLANGPDB CLANGDWARF Precheck
     runs-on: windows-latest
     steps:
@@ -27,7 +27,7 @@ jobs:
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
-          edk2-clang-version: '20.1.8'
+          edk2-clang-version: '20.1.8.0'
           python-version: '3.12'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t CLANGPDB'
@@ -72,9 +72,9 @@ jobs:
             Build/*.log
         if: always()
 
-  build_windows_clang:
+  build_windows_mingw_edk2_clang_packages:
     name: Build Windows (${{ join(matrix.*, ' - ') }})
-    needs: build_windows_clang_ovmf_precheck
+    needs: build_windows_mingw_edk2_clang_precheck
     runs-on: windows-latest
     strategy:
       fail-fast: false
@@ -94,100 +94,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Restore TianoCore Mingw CLANG 20.1.8
-        id: cache-edk2-clang
-        uses: actions/cache/restore@v4
+      - name: Setup Windows Mingw edk2-clang Job
+        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
-          path: C:\edk2-clang
-          key: ${{ runner.os }}-edk2-clang-20.1.8
-          restore-keys: |
-            ${{ runner.os }}-edk2-clang-20.1.8
-      - name: Install TianoCore Mingw CLANG 20.1.8
-        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
-        shell: cmd
-        run: |
-          curl -L -o EdkClangSetup-20.1.8.0.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v20.1.8/EdkClangSetup-20.1.8.0.exe
-          EdkClangSetup-20.1.8.0.exe /silent
-      - name: Save TianoCore Mingw CLANG 20.1.8
-        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: C:\edk2-clang
-          key: ${{ steps.cache-edk2-clang.outputs.cache-primary-key }}
-      - name: Add TianoCore Mingw CLANG to PATH
-        shell: cmd
-        run: |
-          PATH=C:\edk2-clang\bin;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
-      - name: Restore cached venv
-        uses: actions/cache/restore@v4
-        id: cache-venv
-        with:
-          path: .venv
-          key: ${{ runner.os }}-venv-${{ hashFiles('pip-requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-venv-
-      - name: Set up Python 3.12
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        uses: actions/setup-python@v5
-        with:
+          edk2-clang-version: '20.1.8.0'
           python-version: '3.12'
-      - name: Create and install venv if cache missed
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
+      - name: Build Packages ${{ matrix.tool_chain_tag }}-Mingw
         shell: cmd
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        run: |
-          python -m venv .venv
-          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          python -m pip install --upgrade pip
-          pip install -r pip-requirements.txt
-      - name: Save venv cache
-        uses: actions/cache/save@v4
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        with:
-          path: .venv
-          key: ${{ steps.cache-venv.outputs.cache-primary-key }}
-      - name: Activate venv
-        shell: cmd
-        run: |
-          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
-      - name: Restore submodules
-        id: cache-submodules
-        uses: actions/cache/restore@v4
-        with:
-          path: .git/modules
-          key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
-          restore-keys: |
-            ${{ runner.os }}-submodules-
-      - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py"
-      - name: Save submodules
-        if: steps.cache-submodules.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: .git/modules
-          key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
-      - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py"
-      - name: 'Build BaseTools'
-        env:
-          CC: "clang"
-          CXX: "clang++"
-        run: python BaseTools\Edk2ToolsBuild.py -a X64 -t ${{ matrix.tool_chain_tag }}
-      - name: 'Build Packages ${{ matrix.tool_chain_tag }}-Mingw'
-        shell: cmd
-        env:
-          CLANG_BIN: "C:\\edk2-clang\\bin\\"
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
-        run: |
+        run:
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
       - name: Upload Windows Mingw edk2-clang Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Windows Mingw edk2-clang Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})"
+          name: Upload Windows Mingw edk2-clang Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
@@ -195,9 +116,9 @@ jobs:
             Build/*.log
         if: always()
 
-  build_windows_clang_noopt_unit_tests:
+  build_windows_mingw_edk2_clang_noopt_unit_tests:
     name: Build Windows Unit Test (${{ join(matrix.*, ' - ') }})
-    needs: build_windows_clang_ovmf_precheck
+    needs: build_windows_mingw_edk2_clang_precheck
     runs-on: windows-latest
     strategy:
       fail-fast: false
@@ -214,94 +135,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Restore TianoCore Mingw CLANG 20.1.8
-        id: cache-edk2-clang
-        uses: actions/cache/restore@v4
+      - name: Setup Windows Mingw edk2-clang Job
+        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
-          path: C:\edk2-clang
-          key: ${{ runner.os }}-edk2-clang-20.1.8
-          restore-keys: |
-            ${{ runner.os }}-edk2-clang-20.1.8
-      - name: Install TianoCore Mingw CLANG 20.1.8
-        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
-        shell: cmd
-        run: |
-          curl -L -o EdkClangSetup-20.1.8.0.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v20.1.8/EdkClangSetup-20.1.8.0.exe
-          EdkClangSetup-20.1.8.0.exe /silent
-      - name: Save TianoCore Mingw CLANG 20.1.8
-        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: C:\edk2-clang
-          key: ${{ steps.cache-edk2-clang.outputs.cache-primary-key }}
-      - name: Add TianoCore Mingw CLANG to PATH
-        shell: cmd
-        run: |
-          PATH=C:\edk2-clang\bin;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
-      - name: Restore cached venv
-        uses: actions/cache/restore@v4
-        id: cache-venv
-        with:
-          path: .venv
-          key: ${{ runner.os }}-venv-${{ hashFiles('pip-requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-venv-
-      - name: Set up Python 3.12
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        uses: actions/setup-python@v5
-        with:
+          edk2-clang-version: '20.1.8.0'
           python-version: '3.12'
-      - name: Create and install venv if cache missed
-        shell: cmd
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        run: |
-          python -m venv .venv
-          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          python -m pip install --upgrade pip
-          pip install -r pip-requirements.txt
-      - name: Save venv cache
-        uses: actions/cache/save@v4
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        with:
-          path: .venv
-          key: ${{ steps.cache-venv.outputs.cache-primary-key }}
-      - name: Activate venv
-        shell: cmd
-        run: |
-          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
-      - name: Restore submodules
-        id: cache-submodules
-        uses: actions/cache/restore@v4
-        with:
-          path: .git/modules
-          key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
-          restore-keys: |
-            ${{ runner.os }}-submodules-
-      - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py"
-      - name: Save submodules
-        if: steps.cache-submodules.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: .git/modules
-          key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
-      - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py"
-      - name: 'Build BaseTools'
-        env:
-          CC: "clang"
-          CXX: "clang++"
-        run: python BaseTools\Edk2ToolsBuild.py -a X64 -t ${{ matrix.tool_chain_tag }}
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
       - name: 'Build Packages ${{ matrix.tool_chain_tag }}-Mingw'
         shell: cmd
-        env:
-          CLANG_BIN: "C:\\edk2-clang\\bin\\"
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
       - name: Upload Windows Mingw edk2-clang Unit Test Logs
@@ -315,102 +157,22 @@ jobs:
             Build/*.log
         if: always()
 
-  build_windows_clang_emulatorpkg:
+  build_windows_mingw_edk2_clang_emulatorpkg:
     name: Build Windows CLANGDWARF EmulatorPkg
-    needs: build_windows_clang_ovmf_precheck
+    needs: build_windows_mingw_edk2_clang_precheck
     runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Restore TianoCore Mingw CLANG 20.1.8
-        id: cache-edk2-clang
-        uses: actions/cache/restore@v4
+      - name: Setup Windows Mingw edk2-clang Job
+        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
-          path: C:\edk2-clang
-          key: ${{ runner.os }}-edk2-clang-20.1.8
-          restore-keys: |
-            ${{ runner.os }}-edk2-clang-20.1.8
-      - name: Install TianoCore Mingw CLANG 20.1.8
-        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
-        shell: cmd
-        run: |
-          curl -L -o EdkClangSetup-20.1.8.0.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v20.1.8/EdkClangSetup-20.1.8.0.exe
-          EdkClangSetup-20.1.8.0.exe /silent
-      - name: Save TianoCore Mingw CLANG 20.1.8
-        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: C:\edk2-clang
-          key: ${{ steps.cache-edk2-clang.outputs.cache-primary-key }}
-      - name: Add TianoCore Mingw CLANG to PATH
-        shell: cmd
-        run: |
-          PATH=C:\edk2-clang\bin;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
-      - name: Restore cached venv
-        uses: actions/cache/restore@v4
-        id: cache-venv
-        with:
-          path: .venv
-          key: ${{ runner.os }}-venv-${{ hashFiles('pip-requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-venv-
-      - name: Set up Python 3.12
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        uses: actions/setup-python@v5
-        with:
+          edk2-clang-version: '20.1.8.0'
           python-version: '3.12'
-      - name: Create and install venv if cache missed
-        shell: cmd
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        run: |
-          python -m venv .venv
-          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          python -m pip install --upgrade pip
-          pip install -r pip-requirements.txt
-      - name: Save venv cache
-        uses: actions/cache/save@v4
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        with:
-          path: .venv
-          key: ${{ steps.cache-venv.outputs.cache-primary-key }}
-      - name: Activate venv
-        shell: cmd
-        run: |
-          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
-      - name: Restore submodules
-        id: cache-submodules
-        uses: actions/cache/restore@v4
-        with:
-          path: .git/modules
-          key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
-          restore-keys: |
-            ${{ runner.os }}-submodules-
-      - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py"
-      - name: Save submodules
-        if: steps.cache-submodules.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: .git/modules
-          key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
-      - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py"
-      - name: 'Build BaseTools'
-        env:
-          CC: "clang"
-          CXX: "clang++"
-        run: python BaseTools\Edk2ToolsBuild.py -a X64 -t CLANGDWARF
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t CLANGDWARF'
       - name: 'Build EmulatorPkg X64 Host Module'
         shell: cmd
-        env:
-          CLANG_BIN: "C:\\edk2-clang\\bin\\"
-          BASETOOLS_MINGW_PATH: "C:\\edk2-clang"
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           call edksetup.bat Mingw-w64
           call build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE -D REDFISH_ENABLE -j Build/EmulatorX64NooptBuild.log >NUL
@@ -419,7 +181,7 @@ jobs:
       - name: Upload Windows Mingw edk2-clang EmulatorPkg Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Windows Mingw edk2-clang EmulatorPkg Logs"
+          name: Upload Windows Mingw edk2-clang EmulatorPkg Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
