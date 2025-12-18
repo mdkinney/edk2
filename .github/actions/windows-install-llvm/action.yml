@@ -30,3 +30,4 @@ runs:
       run: |
         PATH=C:\Program Files\LLVM\bin;%PATH%
         echo PATH=%PATH% >> %GITHUB_ENV%
+        echo CLANG_BIN=C:\Program Files\LLVM\bin\ >> %GITHUB_ENV%

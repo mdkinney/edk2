@@ -17,13 +17,13 @@ on:
     branches:
       - sandbox/master
 
-env:
-  CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
-  NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-  IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
+#env:
+#  CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
+#  NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
+#  IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
 
 jobs:
-  build_windows_clang_ovmf_precheck:
+  build_windows_visual_studio_clangpdb_precheck:
     name: Build Windows Visual Studio CLANGPDB Precheck
     runs-on: windows-latest
     steps:
@@ -81,9 +81,9 @@ jobs:
             Build/*.log
         if: always()
 
-  build_windows_clang:
-    name: Build Windows VS CLANGPDB Packages (${{ join(matrix.*, ' - ') }})
-    needs: build_windows_clang_ovmf_precheck
+  build_windows_visual_studio_clangpdb_packages:
+    name: Build Windows Visual Studio CLANGPDB Packages (${{ join(matrix.*, ' - ') }})
+    needs: build_windows_visual_studio_clangpdb_precheck
     runs-on: windows-latest
     strategy:
       fail-fast: false
@@ -124,9 +124,9 @@ jobs:
             Build/*.log
         if: always()
 
-  build_windows_clang_noopt_unit_tests:
-    name: Build Windows VS CLANGPDB Unit Test (${{ join(matrix.*, ' - ') }})
-    needs: build_windows_clang_ovmf_precheck
+  build_windows_visual_studio_clangpdb_noopt_unit_tests:
+    name: Build Windows Visual Studio CLANGPDB Unit Test (${{ join(matrix.*, ' - ') }})
+    needs: build_windows_visual_studio_clangpdb_precheck
     runs-on: windows-latest
     strategy:
       fail-fast: false
@@ -165,9 +165,9 @@ jobs:
             Build/*.log
         if: always()
 
-  build_windows_clang_emulatorpkg:
-    name: Build Windows VS CLANGPDB EmulatorPkg
-    needs: build_windows_clang_ovmf_precheck
+  build_windows_visual_studio_clangpdb_emulatorpkg:
+    name: Build Windows Visual Studio CLANGPDB EmulatorPkg
+    needs: build_windows_visual_studio_clangpdb_precheck
     runs-on: windows-latest
     steps:
       - name: Checkout

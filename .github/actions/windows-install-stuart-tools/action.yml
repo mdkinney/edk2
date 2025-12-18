@@ -16,3 +16,8 @@ runs:
     - name: 'Build BaseTools'
       shell: cmd
       run: python BaseTools/Edk2ToolsBuild.py ${{ inputs.edk2-tools-build-params }}
+    - name: Set NASM_PREFIX and IASL_PREFIX environment variables
+      shell: cmd
+      run: |
+        echo NASM_PREFIX=%GITHUB_WORKSPACE%\BaseTools\Bin\mu_nasm_extdep\Windows-x86-64\ >> %GITHUB_ENV%
+        echo IASL_PREFIX=%GITHUB_WORKSPACE%\BaseTools\Bin\edk2-acpica-iasl_extdep\Windows-x86\ >> %GITHUB_ENV%
