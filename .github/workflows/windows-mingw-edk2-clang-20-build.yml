@@ -171,7 +171,6 @@ jobs:
 
   build_windows_clang:
     name: Build Windows (${{ join(matrix.*, ' - ') }})
-    if: false # Temporarily disable to save CI resources
     needs: build_windows_clang_ovmf_precheck
     runs-on: windows-latest
     strategy:
@@ -295,7 +294,6 @@ jobs:
 
   build_windows_clang_noopt_unit_tests:
     name: Build Windows Unit Test (${{ join(matrix.*, ' - ') }})
-    if: false # Temporarily disable to save CI resources
     needs: build_windows_clang_ovmf_precheck
     runs-on: windows-latest
     strategy:
@@ -416,7 +414,7 @@ jobs:
 
   build_windows_clang_emulatorpkg:
     name: Build Windows CLANGDWARF EmulatorPkg
-    #needs: build_windows_clang_ovmf_precheck
+    needs: build_windows_clang_ovmf_precheck
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -512,24 +510,9 @@ jobs:
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           call edksetup.bat Mingw-w64
-          call build -a X64 -t CLANGDWARF -b NOOPT -p EmulatorPkg/EmulatorPkg.dsc --pcd gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut=0 --pcd gEfiShellPkgTokenSpaceGuid.PcdShellDefaultDelay=0 -j Build/EmulatorX64NooptBuild.log >NUL
-          cd Build\EmulatorX64Mingw\NOOPT_CLANGDWARF\X64
-          echo "dh -d -v" > startup.nsh
-          echo "reset -s" >> startup.nsh
-          call WinHost.exe > ${{ github.workspace }}\Build\EmulatorX64NooptBoot.log 2>&1
-          cd ${{ github.workspace }}
-          call build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc --pcd gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut=0 --pcd gEfiShellPkgTokenSpaceGuid.PcdShellDefaultDelay=0 -j Build/EmulatorX64DebugBuild.log >NUL
-          cd Build\EmulatorX64Mingw\DEBUG_CLANGDWARF\X64
-          echo "dh -d -v" > startup.nsh
-          echo "reset -s" >> startup.nsh
-          call WinHost.exe > ${{ github.workspace }}\Build\EmulatorX64DebugBoot.log 2>&1
-          cd ${{ github.workspace }}
-          call build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc --pcd gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut=0 --pcd gEfiShellPkgTokenSpaceGuid.PcdShellDefaultDelay=0 -j Build/EmulatorX64ReleaseBuild.log >NUL
-          cd Build\EmulatorX64Mingw\RELEASE_CLANGDWARF\X64
-          echo "dh -d -v" > startup.nsh
-          echo "reset -s" >> startup.nsh
-          call WinHost.exe > ${{ github.workspace }}\Build\EmulatorX64ReleaseBoot.log 2>&1
-          cd ${{ github.workspace }}
+          call build -a X64 -t CLANGDWARF -b NOOPT -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE -D REDFISH_ENABLE -j Build/EmulatorX64NooptBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorX64DebugBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc -j Build/EmulatorX64ReleaseBuild.log >NUL
       - name: Upload Windows Mingw edk2-clang EmulatorPkg Logs
         uses: actions/upload-artifact@v4
         with:
