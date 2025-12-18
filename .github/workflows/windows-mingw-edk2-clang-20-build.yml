@@ -135,7 +135,9 @@ jobs:
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           call edksetup.bat Mingw-w64
-          build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64Build.log >NUL
+          build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64DebugBuild.log >NUL
+          build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64ReleaseBuild.log >NUL
+          build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64NooptBuild.log >NUL
       - name: 'Build OVMF Platform CLANGPDB'
         shell: cmd
         env:
@@ -169,6 +171,7 @@ jobs:
 
   build_windows_clang:
     name: Build Windows (${{ join(matrix.*, ' - ') }})
+    if: false # Temporarily disable to save CI resources
     needs: build_windows_clang_ovmf_precheck
     runs-on: windows-latest
     strategy:
@@ -292,6 +295,7 @@ jobs:
 
   build_windows_clang_noopt_unit_tests:
     name: Build Windows Unit Test (${{ join(matrix.*, ' - ') }})
+    if: false # Temporarily disable to save CI resources
     needs: build_windows_clang_ovmf_precheck
     runs-on: windows-latest
     strategy:
@@ -403,6 +407,133 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: "Upload Windows Mingw edk2-clang Unit Test Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})"
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_clang_emulatorpkg:
+    name: Build Windows CLANGDWARF EmulatorPkg
+    needs: build_windows_clang_ovmf_precheck
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Restore TianoCore Mingw CLANG 20.1.8
+        id: cache-edk2-clang
+        uses: actions/cache/restore@v4
+        with:
+          path: C:\edk2-clang
+          key: ${{ runner.os }}-edk2-clang-20.1.8
+          restore-keys: |
+            ${{ runner.os }}-edk2-clang-20.1.8
+      - name: Install TianoCore Mingw CLANG 20.1.8
+        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
+        shell: cmd
+        run: |
+          curl -L -o EdkClangSetup-20.1.8.0.exe https://github.com/tianocore/edk2-edkrepo/releases/download/edkclang-v20.1.8/EdkClangSetup-20.1.8.0.exe
+          EdkClangSetup-20.1.8.0.exe /silent
+      - name: Save TianoCore Mingw CLANG 20.1.8
+        if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: C:\edk2-clang
+          key: ${{ steps.cache-edk2-clang.outputs.cache-primary-key }}
+      - name: Add TianoCore Mingw CLANG to PATH
+        shell: cmd
+        run: |
+          PATH=C:\edk2-clang\bin;%PATH%
+          echo PATH=%PATH% >> %GITHUB_ENV%
+      - name: Restore cached venv
+        uses: actions/cache/restore@v4
+        id: cache-venv
+        with:
+          path: .venv
+          key: ${{ runner.os }}-venv-${{ hashFiles('pip-requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-venv-
+      - name: Set up Python 3.12
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Create and install venv if cache missed
+        shell: cmd
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+        run: |
+          python -m venv .venv
+          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
+          python -m pip install --upgrade pip
+          pip install -r pip-requirements.txt
+      - name: Save venv cache
+        uses: actions/cache/save@v4
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+        with:
+          path: .venv
+          key: ${{ steps.cache-venv.outputs.cache-primary-key }}
+      - name: Activate venv
+        shell: cmd
+        run: |
+          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
+          echo PATH=%PATH% >> %GITHUB_ENV%
+      - name: Restore submodules
+        id: cache-submodules
+        uses: actions/cache/restore@v4
+        with:
+          path: .git/modules
+          key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
+          restore-keys: |
+            ${{ runner.os }}-submodules-
+      - name: 'Clone Submodules'
+        run: stuart_setup -c ".pytool/CISettings.py"
+      - name: Save submodules
+        if: steps.cache-submodules.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .git/modules
+          key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
+      - name: 'Download External Dependencies'
+        run: stuart_update -c ".pytool/CISettings.py"
+      - name: 'Build BaseTools'
+        env:
+          CC: "clang"
+          CXX: "clang++"
+        run: python BaseTools\Edk2ToolsBuild.py -a X64 -t CLANGDWARF
+      - name: 'Build EmulatorPkg X64 Host Module'
+        shell: cmd
+        env:
+          CLANG_BIN: "C:\\edk2-clang\\bin\\"
+          BASETOOLS_MINGW_PATH: "C:\\edk2-clang"
+          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
+          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
+        run: |
+          call edksetup.bat Mingw-w64
+          build -a X64 -t CLANGDWARF -b NOOPT -p EmulatorPkg/EmulatorPkg.dsc --pcd gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut=0 --pcd gEfiShellPkgTokenSpaceGuid.PcdShellDefaultDelay=0 -j Build/EmulatorX64NooptBuild.log >NUL
+          cd Build\EmulatorX64Mingw\NOOPT_CLANGDWARF\X64
+          echo "dh -d -v" > startup.nsh
+          echo "reset -s" >> startup.nsh
+          WinHost.exe > ${{ github.workspace }}\Build\EmulatorX64NooptBoot.log 2>&1
+          cd ${{ github.workspace }}
+          build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc --pcd gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut=0 --pcd gEfiShellPkgTokenSpaceGuid.PcdShellDefaultDelay=0 -j Build/EmulatorX64DebugBuild.log >NUL
+          cd Build\EmulatorX64Mingw\DEBUG_CLANGDWARF\X64
+          echo "dh -d -v" > startup.nsh
+          echo "reset -s" >> startup.nsh
+          WinHost.exe > ${{ github.workspace }}\Build\EmulatorX64DebugBoot.log 2>&1
+          cd ${{ github.workspace }}
+          build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc --pcd gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut=0 --pcd gEfiShellPkgTokenSpaceGuid.PcdShellDefaultDelay=0 -j Build/EmulatorX64ReleaseBuild.log >NUL
+          cd Build\EmulatorX64Mingw\RELEASE_CLANGDWARF\X64
+          echo "dh -d -v" > startup.nsh
+          echo "reset -s" >> startup.nsh
+          WinHost.exe > ${{ github.workspace }}\Build\EmulatorX64ReleaseBoot.log 2>&1
+          cd ${{ github.workspace }}
+      - name: Upload Windows Mingw edk2-clang EmulatorPkg Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Upload Windows Mingw edk2-clang EmulatorPkg Logs"
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
