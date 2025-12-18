@@ -1,0 +1,80 @@
+## @file
+# Composite action that sets up a Windows LLVM MINGW CLANG environment for
+# CI jobs that builds packages and uploads artifacts. Caching is used to avoid
+# re-installing LLVM, Python, Python modules, and git submodules on subsequent
+# runs.
+#
+# * Installs MINGW LLVM with CLANG support, adds LLVM to PATH, and sets
+#   CLANG_BIN environment variable.
+# * Installs Python in a virtual environment, installs edk2 pip requirements,
+#   and adds Python virtual environment to PATH.
+# * Installs git submodules using stuart_setup.
+# * Sets up Stuart Tools, builds edk2 BaseTools, and sets NASM_PREFIX and
+#   IASL_PREFIX environment variables.
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+name: 'Windows Setup LLVM MINGW CLANG Job'
+description: 'Windows setup LLVM MINGW with CLANG support for CI jobs'
+inputs:
+  llvm_version:
+    description: 'The LLVM version to install (e.g., 20250709)'
+    required: true
+  llvm_install_path:
+    description: 'The path where LLVM is installed (e.g., C:\llvm-mingw-20250709-ucrt-x86_64)'
+    required: false
+    default: 'C:\llvm-mingw-20250709-ucrt-x86_64'
+  python-version:
+    description: 'Python version to install (e.g., 3.12)'
+    required: true
+  stuart-ci-settings-file:
+    description: 'Path to the stuart CI settings file (e.g. .pytool/CISettings.py)'
+    required: true
+  edk2-tools-build-params:
+    description: 'Command line parameters for Edk2ToolsBuild.py (e.g. -t VS2022)'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Restore LLVM MINGW ${{ inputs.llvm_version }} from cache
+      id: cache-llvm-mingw
+      uses: actions/cache/restore@v5
+      with:
+        path: ${{ inputs.llvm_install_path }}
+        key: ${{ runner.os }}-llvm-mingw-${{ inputs.llvm_version }}-ucrt-x86_64
+    - name: Install LLVM MINGW ${{ inputs.llvm_version }}
+      if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
+      shell: cmd
+      run: |
+        curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/${{ inputs.llvm_version }}/llvm-mingw-${{ inputs.llvm_version }}-ucrt-x86_64.zip"
+        powershell -command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath 'C:\' -Force"
+    - name: Save LLVM MINGW ${{ inputs.llvm_version }} to cache
+      if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v5
+      with:
+        path: ${{ inputs.llvm_install_path }}
+        key: ${{ steps.cache-llvm-mingw.outputs.cache-primary-key }}
+    - name: Add LLVM MINGW ${{ inputs.llvm_version }} to PATH
+      shell: cmd
+      run: |
+        PATH=${{ inputs.llvm_install_path }}\bin;%PATH%
+        echo PATH=%PATH% >> %GITHUB_ENV%
+        echo CLANG_BIN=${{ inputs.llvm_install_path }}\bin\>> %GITHUB_ENV%
+        echo BASETOOLS_MINGW_PATH=${{ inputs.edk2-clang-install_path }}>> %GITHUB_ENV%
+        echo CC=clang>> %GITHUB_ENV%
+        echo CXX=clang++>> %GITHUB_ENV%
+    - name: Install Python in venv
+      uses: ./.github/actions/windows-install-python-venv
+      with:
+        python-version: ${{ inputs.python-version }}
+    - name: Install Git Submodules from stuart_setup
+      uses: ./.github/actions/windows-install-git-submodules
+      with:
+        stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+    - name: Set up Stuart Tools
+      uses: ./.github/actions/windows-install-stuart-tools
+      with:
+        stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+        edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
