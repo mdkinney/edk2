@@ -1,5 +1,5 @@
-name: 'Windows Install LLVM'
-description: 'Windows use cache restore/save with LLVM installer'
+name: 'Windows Install LLVM and add to PATH'
+description: 'Windows use cache restore/save with LLVM installer to install LLVM and add it to PATH'
 inputs:
   llvm_version:
     description: 'The LLVM version to install (e.g., 20.1.8)'
