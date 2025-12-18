@@ -25,35 +25,6 @@ jobs:
         uses: ./.github/actions/windows-install-llvm
         with:
           llvm_version: '20.1.8'
-      - name: Restore CLANG 20.1.8
-        if: false # Handled by action
-        id: cache-clang
-        uses: actions/cache/restore@v4
-        with:
-          path: C:\Program Files\LLVM
-          key: ${{ runner.os }}-LLVM-20.1.8-win64.exe
-          restore-keys: |
-            ${{ runner.os }}-LLVM-20.1.8-win64.exe
-      - name: Install CLANG 20.1.8
-        if: false # Handled by action
-        #if: steps.cache-clang.outputs.cache-hit != 'true'
-        shell: cmd
-        run: |
-          curl -SL --output llvm_install.exe https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/LLVM-20.1.8-win64.exe
-          llvm_install.exe /S
-      - name: Save CLANG 20.1.8
-        if: false # Handled by action
-        #if: steps.cache-clang.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: C:\Program Files\LLVM
-          key: ${{ steps.cache-clang.outputs.cache-primary-key }}
-      - name: Add CLANG 20.1.8 to PATH
-        if: false # Handled by action
-        shell: cmd
-        run: |
-          PATH=C:\Program Files\LLVM\bin;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
       - name: Restore cached venv
         uses: actions/cache/restore@v4
         id: cache-venv
@@ -195,31 +166,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Restore CLANG 20.1.8
-        id: cache-clang
-        uses: actions/cache/restore@v4
+      - name: Install LLVM 20.1.8
+        uses: ./.github/actions/windows-install-llvm
         with:
-          path: C:\Program Files\LLVM
-          key: ${{ runner.os }}-LLVM-20.1.8-win64.exe
-          restore-keys: |
-            ${{ runner.os }}-LLVM-20.1.8-win64.exe
-      - name: Install CLANG 20.1.8
-        if: steps.cache-clang.outputs.cache-hit != 'true'
-        shell: cmd
-        run: |
-          curl -SL --output llvm_install.exe https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/LLVM-20.1.8-win64.exe
-          llvm_install.exe /S
-      - name: Save CLANG 20.1.8
-        if: steps.cache-clang.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: C:\Program Files\LLVM
-          key: ${{ steps.cache-clang.outputs.cache-primary-key }}
-      - name: Add CLANG 20.1.8 to PATH
-        shell: cmd
-        run: |
-          PATH=C:\Program Files\LLVM\bin;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
+          llvm_version: '20.1.8'
       - name: Restore cached venv
         uses: actions/cache/restore@v4
         id: cache-venv
@@ -277,6 +227,8 @@ jobs:
         shell: cmd
         env:
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
+          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
+          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
       - name: Upload Windows VS Clang Logs
@@ -343,26 +295,10 @@ jobs:
         run: |
           PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
           echo PATH=%PATH% >> %GITHUB_ENV%
-      - name: Restore CLANG 20.1.8
-        id: cache-clang
-        uses: actions/cache/restore@v4
+      - name: Install LLVM 20.1.8
+        uses: ./.github/actions/windows-install-llvm
         with:
-          path: C:\Program Files\LLVM
-          key: ${{ runner.os }}-LLVM-20.1.8-win64.exe
-          restore-keys: |
-            ${{ runner.os }}-LLVM-20.1.8-win64.exe
-      - name: Install CLANG 20.1.8
-        if: steps.cache-clang.outputs.cache-hit != 'true'
-        shell: cmd
-        run: |
-          curl -SL --output llvm_install.exe https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/LLVM-20.1.8-win64.exe
-          llvm_install.exe /S
-      - name: Save CLANG 20.1.8
-        if: steps.cache-clang.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: C:\Program Files\LLVM
-          key: ${{ steps.cache-clang.outputs.cache-primary-key }}
+          llvm_version: '20.1.8'
       - name: Restore submodules
         id: cache-submodules
         uses: actions/cache/restore@v4
@@ -387,8 +323,9 @@ jobs:
         shell: cmd
         env:
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
+          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
+          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
-          PATH=C:\Program Files\LLVM\bin;%PATH%
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
       - name: Upload Windows VS Clang Unit Test Logs
         uses: actions/upload-artifact@v4
@@ -410,31 +347,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Restore CLANG 20.1.8
-        id: cache-clang
-        uses: actions/cache/restore@v4
+      - name: Install LLVM 20.1.8
+        uses: ./.github/actions/windows-install-llvm
         with:
-          path: C:\Program Files\LLVM
-          key: ${{ runner.os }}-LLVM-20.1.8-win64.exe
-          restore-keys: |
-            ${{ runner.os }}-LLVM-20.1.8-win64.exe
-      - name: Install CLANG 20.1.8
-        if: steps.cache-clang.outputs.cache-hit != 'true'
-        shell: cmd
-        run: |
-          curl -SL --output llvm_install.exe https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/LLVM-20.1.8-win64.exe
-          llvm_install.exe /S
-      - name: Save CLANG 20.1.8
-        if: steps.cache-clang.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: C:\Program Files\LLVM
-          key: ${{ steps.cache-clang.outputs.cache-primary-key }}
-      - name: Add CLANG 20.1.8 to PATH
-        shell: cmd
-        run: |
-          PATH=C:\Program Files\LLVM\bin;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
+          llvm_version: '20.1.8'
       - name: Restore cached venv
         uses: actions/cache/restore@v4
         id: cache-venv
