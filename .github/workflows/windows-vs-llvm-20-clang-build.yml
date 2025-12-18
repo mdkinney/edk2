@@ -17,11 +17,6 @@ on:
     branches:
       - sandbox/master
 
-#env:
-#  CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
-#  NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-#  IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
-
 jobs:
   build_windows_visual_studio_clangpdb_precheck:
     name: Build Windows Visual Studio CLANGPDB Precheck
@@ -36,44 +31,44 @@ jobs:
           python-version: '3.12'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
-      - name: 'Build HelloWorld CLANGPDB'
+      - name: Build HelloWorld CLANGPDB
         shell: cmd
         run: |
           call edksetup.bat VS2022
           call build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
-      - name: 'Build UnitTestFrameworkPkg X64 Unit Tests'
+      - name: Build UnitTestFrameworkPkg X64 Unit Tests
         env:
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGPDB -p UnitTestFrameworkPkg
-      - name: 'Build UnitTestFrameworkPkg IA32 Unit Tests'
+      - name: Build UnitTestFrameworkPkg IA32 Unit Tests
         shell: cmd
         run: |
           call edksetup.bat VS2022
           call build -a IA32 -t CLANGPDB -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
-      - name: 'Build EmulatorPkg X64 Host Module'
+      - name: Build EmulatorPkg X64 Host Module
         shell: cmd
         run: |
           call edksetup.bat VS2022
           call build -a X64 -t CLANGPDB -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64DebugBuild.log >NUL
           call build -a X64 -t CLANGPDB -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64ReleaseBuild.log >NUL
           call build -a X64 -t CLANGPDB -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64NooptBuild.log >NUL
-      - name: 'Build EmulatorPkg IA32 Host Module'
+      - name: Build EmulatorPkg IA32 Host Module
         shell: cmd
         run: |
           call edksetup.bat VS2022
           call build -a IA32 -t CLANGPDB -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32DebugBuild.log >NUL
           call build -a IA32 -t CLANGPDB -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32ReleaseBuild.log >NUL
           call build -a IA32 -t CLANGPDB -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32NooptBuild.log >NUL
-      - name: 'Build OVMF Platform'
+      - name: Build OVMF Platform
         shell: cmd
         run: |
           call edksetup.bat VS2022
           call build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
-      - name: Upload Windows VS CLANGPDB Precheck Logs
+      - name: Upload Windows Visual Studio CLANGPDB Precheck Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Windows VS CLANGPDB Precheck Logs"
+          name: "Upload Windows Visual Studio CLANGPDB Precheck Logs"
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
@@ -109,14 +104,14 @@ jobs:
           python-version: '3.12'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
-      - name: 'Build Packages ${{ matrix.tool_chain_tag }}-VS'
+      - name: Build Packages ${{ matrix.tool_chain_tag }}-VS
         shell: cmd
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
-      - name: Upload Windows VS CLANGPDB Logs
+      - name: Upload Windows Visual Studio CLANGPDB Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Windows VS CLANGPDB Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})"
+          name: Upload Windows Visual Studio CLANGPDB Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
@@ -150,14 +145,14 @@ jobs:
           python-version: '3.12'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
-      - name: 'Build Packages ${{ matrix.tool_chain_tag }}-VS'
+      - name: Build Packages ${{ matrix.tool_chain_tag }}-VS
         shell: cmd
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
-      - name: Upload Windows VS CLANGPDB Unit Test Logs
+      - name: Upload Windows Visual Studio CLANGPDB Unit Test Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Windows VS CLANGPDB Unit Test Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})"
+          name: Upload Windows Visual Studio CLANGPDB Unit Test Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
@@ -179,7 +174,7 @@ jobs:
           python-version: '3.12'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
-      - name: 'Build EmulatorPkg X64 Host Module'
+      - name: Build EmulatorPkg X64 Host Module
         shell: cmd
         run: |
           call edksetup.bat VS2022
@@ -193,10 +188,10 @@ jobs:
           call build -a IA32 -t CLANGPDB -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE -D REDFISH_ENABLE -j Build/EmulatorIA32NooptBuild.log >NUL
           call build -a IA32 -t CLANGPDB -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE                 -j Build/EmulatorIA32DebugBuild.log >NUL
           call build -a IA32 -t CLANGPDB -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                                         -j Build/EmulatorIA32ReleaseBuild.log >NUL
-      - name: Upload Windows VS CLANGPDB EmulatorPkg Logs
+      - name: Upload Windows Visual Studio CLANGPDB EmulatorPkg Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Windows VS CLANGPDB EmulatorPkg Logs"
+          name: Upload Windows Visual Studio CLANGPDB EmulatorPkg Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
