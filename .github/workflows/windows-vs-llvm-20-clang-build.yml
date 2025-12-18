@@ -36,14 +36,14 @@ jobs:
             ${{ runner.os }}-LLVM-20.1.8-win64.exe
       - name: Install CLANG 20.1.8
         if: false # Handled by action
-        if: steps.cache-clang.outputs.cache-hit != 'true'
+        #if: steps.cache-clang.outputs.cache-hit != 'true'
         shell: cmd
         run: |
           curl -SL --output llvm_install.exe https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/LLVM-20.1.8-win64.exe
           llvm_install.exe /S
       - name: Save CLANG 20.1.8
         if: false # Handled by action
-        if: steps.cache-clang.outputs.cache-hit != 'true'
+        #if: steps.cache-clang.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
           path: C:\Program Files\LLVM
