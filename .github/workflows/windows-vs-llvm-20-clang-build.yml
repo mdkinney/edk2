@@ -1,10 +1,15 @@
 # @file
-# A workflow that builds packages using clang and upload it's artifacts.
+# A workflow using Windows Visual Studio CLANGPDB tools that builds packages and
+# uploads artifacts.
+#
+# Firmware Build Support: CLANGPDB - IA32/X64
+# Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
+# EmulatorPkg Build Support: CLANGPDB - IA32/X64
 #
 # Copyright (c) Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
-name: Windows VS LLVM 20.1.8 CLANG Build
+name: Windows Visual Studio CLANGPDB LLVM 20.1.8 Build
 
 on:
   workflow_dispatch:
@@ -35,7 +40,7 @@ jobs:
         shell: cmd
         run: |
           call edksetup.bat VS2022
-          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
+          call build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
       - name: 'Build UnitTestFrameworkPkg X64 Unit Tests'
         env:
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
@@ -45,7 +50,7 @@ jobs:
         shell: cmd
         run: |
           call edksetup.bat VS2022
-          build -a IA32 -t CLANGPDB -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
+          call build -a IA32 -t CLANGPDB -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
       - name: 'Build EmulatorPkg X64 Host Module'
         shell: cmd
         run: |
@@ -64,7 +69,7 @@ jobs:
         shell: cmd
         run: |
           call edksetup.bat VS2022
-          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
+          call build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
       - name: Upload Windows VS CLANGPDB Precheck Logs
         uses: actions/upload-artifact@v4
         with:
@@ -97,21 +102,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Install LLVM 20.1.8
-        uses: ./.github/actions/windows-install-llvm
+      - name: Setup Windows Visual Studio CLANGPDB Job
+        uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
           llvm_version: '20.1.8'
-      - name: Install Python in venv
-        uses: ./.github/actions/windows-install-python-venv
-        with:
           python-version: '3.12'
-      - name: Install Git Submodules from stuart_setup
-        uses: ./.github/actions/windows-install-git-submodules
-        with:
-          stuart-ci-settings-file: '.pytool/CISettings.py'
-      - name: 'Set up Stuart Tools'
-        uses: ./.github/actions/windows-install-stuart-tools
-        with:
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: 'Build Packages ${{ matrix.tool_chain_tag }}-VS'
@@ -148,21 +143,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Install LLVM 20.1.8
-        uses: ./.github/actions/windows-install-llvm
+      - name: Setup Windows Visual Studio CLANGPDB Job
+        uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
           llvm_version: '20.1.8'
-      - name: Install Python in venv
-        uses: ./.github/actions/windows-install-python-venv
-        with:
           python-version: '3.12'
-      - name: Install Git Submodules from stuart_setup
-        uses: ./.github/actions/windows-install-git-submodules
-        with:
-          stuart-ci-settings-file: '.pytool/CISettings.py'
-      - name: 'Set up Stuart Tools'
-        uses: ./.github/actions/windows-install-stuart-tools
-        with:
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: 'Build Packages ${{ matrix.tool_chain_tag }}-VS'
@@ -187,21 +172,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Install LLVM 20.1.8
-        uses: ./.github/actions/windows-install-llvm
+      - name: Setup Windows Visual Studio CLANGPDB Job
+        uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
           llvm_version: '20.1.8'
-      - name: Install Python in venv
-        uses: ./.github/actions/windows-install-python-venv
-        with:
           python-version: '3.12'
-      - name: Install Git Submodules from stuart_setup
-        uses: ./.github/actions/windows-install-git-submodules
-        with:
-          stuart-ci-settings-file: '.pytool/CISettings.py'
-      - name: 'Set up Stuart Tools'
-        uses: ./.github/actions/windows-install-stuart-tools
-        with:
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: 'Build EmulatorPkg X64 Host Module'
