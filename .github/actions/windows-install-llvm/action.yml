@@ -1,12 +1,12 @@
 name: 'Windows Install LLVM'
 description: 'Windows use cache restore/save with LLVM installer'
+inputs:
+  llvm_version:
+    description: 'The LLVM version to install (e.g., 20.1.8)'
+    required: true
+    default: '20.1.8'
 runs:
-  using: "composite"
-  inputs:
-    llvm_version:
-      description: 'The LLVM version to install (e.g., 20.1.8)'
-      required: true
-      default: '20.1.8'
+  using: 'composite'
   steps:
     - name: Restore CLANG ${{ inputs.llvm_version }} from cache
       id: cache-clang
