@@ -22,6 +22,8 @@ jobs:
     name: Build Windows Visual Studio CLANGPDB Precheck
     runs-on: windows-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:

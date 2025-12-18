@@ -16,8 +16,6 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Checkout
-      uses: actions/checkout@v6
     - name: Install LLVM ${{ inputs.llvm_version }}
       uses: ./.github/actions/windows-install-llvm
       with:
