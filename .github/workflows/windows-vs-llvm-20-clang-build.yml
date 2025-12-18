@@ -14,7 +14,7 @@ on:
 
 jobs:
   build_windows_clang_ovmf_precheck:
-    name: Build Windows CLANGPDB Precheck
+    name: Build Windows VS CLANGPDB Precheck
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -115,7 +115,7 @@ jobs:
         if: always()
 
   build_windows_clang:
-    name: Build Windows (${{ join(matrix.*, ' - ') }})
+    name: Build Windows VS CLANGPDB Packages (${{ join(matrix.*, ' - ') }})
     needs: build_windows_clang_ovmf_precheck
     runs-on: windows-latest
     strategy:
@@ -185,7 +185,7 @@ jobs:
         if: always()
 
   build_windows_clang_noopt_unit_tests:
-    name: Build Windows Unit Test (${{ join(matrix.*, ' - ') }})
+    name: Build Windows VS CLANGPDB Unit Test (${{ join(matrix.*, ' - ') }})
     needs: build_windows_clang_ovmf_precheck
     runs-on: windows-latest
     strategy:
@@ -253,7 +253,7 @@ jobs:
         if: always()
 
   build_windows_clang_emulatorpkg:
-    name: Build Windows CLANGPDB Precheck
+    name: Build Windows VS CLANGPDB EmulatorPkg
     needs: build_windows_clang_ovmf_precheck
     runs-on: windows-latest
     steps:
