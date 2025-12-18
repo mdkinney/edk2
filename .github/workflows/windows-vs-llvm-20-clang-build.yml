@@ -18,9 +18,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        uses: actions/checkout@v6
       - name: Install LLVM 20.1.8
         uses: ./.github/actions/windows-install-llvm
         with:
@@ -29,22 +27,10 @@ jobs:
         uses: ./.github/actions/windows-install-python-venv
         with:
           python-version: '3.12'
-      - name: Restore submodules
-        id: cache-submodules
-        uses: actions/cache/restore@v4
+      - name: Install Git Submodules from stuart_setup
+        uses: ./.github/actions/windows-install-git-submodules
         with:
-          path: .git/modules
-          key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
-          restore-keys: |
-            ${{ runner.os }}-submodules-
-      - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py"
-      - name: Save submodules
-        if: steps.cache-submodules.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: .git/modules
-          key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
+          stuart-ci-settings-file: '.pytool/CISettings.py'
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py"
       - name: 'Build BaseTools'
@@ -134,9 +120,7 @@ jobs:
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        uses: actions/checkout@v6
       - name: Install LLVM 20.1.8
         uses: ./.github/actions/windows-install-llvm
         with:
@@ -145,22 +129,10 @@ jobs:
         uses: ./.github/actions/windows-install-python-venv
         with:
           python-version: '3.12'
-      - name: Restore submodules
-        id: cache-submodules
-        uses: actions/cache/restore@v4
+      - name: Install Git Submodules from stuart_setup
+        uses: ./.github/actions/windows-install-git-submodules
         with:
-          path: .git/modules
-          key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
-          restore-keys: |
-            ${{ runner.os }}-submodules-
-      - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py"
-      - name: Save submodules
-        if: steps.cache-submodules.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: .git/modules
-          key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
+          stuart-ci-settings-file: '.pytool/CISettings.py'
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py"
       - name: 'Build BaseTools'
@@ -202,9 +174,7 @@ jobs:
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        uses: actions/checkout@v6
       - name: Install LLVM 20.1.8
         uses: ./.github/actions/windows-install-llvm
         with:
@@ -213,22 +183,10 @@ jobs:
         uses: ./.github/actions/windows-install-python-venv
         with:
           python-version: '3.12'
-      - name: Restore submodules
-        id: cache-submodules
-        uses: actions/cache/restore@v4
+      - name: Install Git Submodules from stuart_setup
+        uses: ./.github/actions/windows-install-git-submodules
         with:
-          path: .git/modules
-          key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
-          restore-keys: |
-            ${{ runner.os }}-submodules-
-      - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py"
-      - name: Save submodules
-        if: steps.cache-submodules.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: .git/modules
-          key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
+          stuart-ci-settings-file: '.pytool/CISettings.py'
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py"
       - name: 'Build BaseTools'
@@ -258,9 +216,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        uses: actions/checkout@v6
       - name: Install LLVM 20.1.8
         uses: ./.github/actions/windows-install-llvm
         with:
@@ -269,22 +225,10 @@ jobs:
         uses: ./.github/actions/windows-install-python-venv
         with:
           python-version: '3.12'
-      - name: Restore submodules
-        id: cache-submodules
-        uses: actions/cache/restore@v4
+      - name: Install Git Submodules from stuart_setup
+        uses: ./.github/actions/windows-install-git-submodules
         with:
-          path: .git/modules
-          key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
-          restore-keys: |
-            ${{ runner.os }}-submodules-
-      - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py"
-      - name: Save submodules
-        if: steps.cache-submodules.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: .git/modules
-          key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
+          stuart-ci-settings-file: '.pytool/CISettings.py'
       - name: 'Download External Dependencies'
         run: stuart_update -c ".pytool/CISettings.py"
       - name: 'Build BaseTools'

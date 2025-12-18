@@ -1,0 +1,23 @@
+name: 'Windows Install Git Submodules from stuart_setup '
+description: 'Windows use cache restore/save for git submodules installed by stuart_setup'
+stuart-ci-settings-file:
+  description: 'Path to the stuart CI settings file'
+  required: true
+  default: '.pytool/CISettings.py'
+runs:
+  using: 'composite'
+  steps:
+    - name: Restore submodules
+      id: cache-submodules
+      uses: actions/cache/restore@v5
+      with:
+        path: .git/modules
+        key: ${{ runner.os }}-stuart-setup-submodules-${{ hashFiles('.gitmodules', ${{ inputs.stuart-ci-settings-file }}) }}
+    - name: 'Clone Submodules'
+      run: stuart_setup -c ${{ inputs.stuart-ci-settings-file }}
+    - name: Save submodules
+      if: steps.cache-submodules.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v5
+      with:
+        path: .git/modules
+        key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
