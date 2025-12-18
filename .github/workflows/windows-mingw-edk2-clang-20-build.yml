@@ -111,7 +111,7 @@ jobs:
         run: |
           call edksetup.bat Mingw-w64
           build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
-      - name: 'Build HelloWorld CLANGDWARF
+      - name: 'Build HelloWorld CLANGDWARF'
         shell: cmd
         env:
           CLANG_BIN: "C:\\edk2-clang\\bin\\"
