@@ -106,6 +106,7 @@ jobs:
         shell: cmd
         env:
           CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin"
+          BASETOOLS_MINGW_PATH: "C:\\llvm-mingw-20250709-ucrt-x86_64"
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
@@ -120,6 +121,7 @@ jobs:
         shell: cmd
         env:
           CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin"
+          BASETOOLS_MINGW_PATH: "C:\\llvm-mingw-20250709-ucrt-x86_64"
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
@@ -129,6 +131,7 @@ jobs:
         shell: cmd
         env:
           CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
+          BASETOOLS_MINGW_PATH: "C:\\llvm-mingw-20250709-ucrt-x86_64"
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
@@ -138,6 +141,7 @@ jobs:
         shell: cmd
         env:
           CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
+          BASETOOLS_MINGW_PATH: "C:\\llvm-mingw-20250709-ucrt-x86_64"
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
@@ -147,6 +151,7 @@ jobs:
         shell: cmd
         env:
           CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
+          BASETOOLS_MINGW_PATH: "C:\\llvm-mingw-20250709-ucrt-x86_64"
           NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
           IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
