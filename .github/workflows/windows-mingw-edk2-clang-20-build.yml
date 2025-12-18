@@ -516,19 +516,19 @@ jobs:
           cd Build\EmulatorX64Mingw\NOOPT_CLANGDWARF\X64
           echo "dh -d -v" > startup.nsh
           echo "reset -s" >> startup.nsh
-          WinHost.exe > ${{ github.workspace }}\Build\EmulatorX64NooptBoot.log 2>&1
+          call WinHost.exe > ${{ github.workspace }}\Build\EmulatorX64NooptBoot.log 2>&1
           cd ${{ github.workspace }}
           call build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc --pcd gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut=0 --pcd gEfiShellPkgTokenSpaceGuid.PcdShellDefaultDelay=0 -j Build/EmulatorX64DebugBuild.log >NUL
           cd Build\EmulatorX64Mingw\DEBUG_CLANGDWARF\X64
           echo "dh -d -v" > startup.nsh
           echo "reset -s" >> startup.nsh
-          WinHost.exe > ${{ github.workspace }}\Build\EmulatorX64DebugBoot.log 2>&1
+          call WinHost.exe > ${{ github.workspace }}\Build\EmulatorX64DebugBoot.log 2>&1
           cd ${{ github.workspace }}
           call build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc --pcd gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut=0 --pcd gEfiShellPkgTokenSpaceGuid.PcdShellDefaultDelay=0 -j Build/EmulatorX64ReleaseBuild.log >NUL
           cd Build\EmulatorX64Mingw\RELEASE_CLANGDWARF\X64
           echo "dh -d -v" > startup.nsh
           echo "reset -s" >> startup.nsh
-          WinHost.exe > ${{ github.workspace }}\Build\EmulatorX64ReleaseBoot.log 2>&1
+          call WinHost.exe > ${{ github.workspace }}\Build\EmulatorX64ReleaseBoot.log 2>&1
           cd ${{ github.workspace }}
       - name: Upload Windows Mingw edk2-clang EmulatorPkg Logs
         uses: actions/upload-artifact@v4
