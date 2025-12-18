@@ -19,26 +19,14 @@ env:
 
 jobs:
   build_windows_clang_ovmf_precheck:
-    name: Build Windows VS CLANGPDB Precheck
+    name: Build Windows Visual Studio CLANGPDB Precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Install LLVM 20.1.8
-        uses: ./.github/actions/windows-install-llvm
+      - name: Setup Windows Visual Studio CLANGPDB Job
+        uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
           llvm_version: '20.1.8'
-      - name: Install Python in venv
-        uses: ./.github/actions/windows-install-python-venv
-        with:
           python-version: '3.12'
-      - name: Install Git Submodules from stuart_setup
-        uses: ./.github/actions/windows-install-git-submodules
-        with:
-          stuart-ci-settings-file: '.pytool/CISettings.py'
-      - name: 'Set up Stuart Tools'
-        uses: ./.github/actions/windows-install-stuart-tools
-        with:
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: 'Build HelloWorld CLANGPDB'
