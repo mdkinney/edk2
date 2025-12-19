@@ -199,7 +199,7 @@ jobs:
             Build/*.log
         if: always()
 
-  build_linux_visual_studio_clangdwarf_noopt_unit_tests:
+  build_linux_clangdwarf_noopt_unit_tests:
     name: Build Linux CLANGDWARF Unit Tests (${{ join(matrix.*, ' - ') }})
     needs: [build_linux_clang_precheck, build_linux_clang_no_target_precheck]
     runs-on: ubuntu-latest
@@ -260,14 +260,12 @@ jobs:
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t CLANGDWARF'
       - name: Build Linux CLANGDWARF EmulatorPkg X64
-        shell: cmd
         run: |
           . ./edksetup.sh
           build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE -D REDFISH_ENABLE -j Build/EmulatorX64NooptBuild.log >NUL
           build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE                 -j Build/EmulatorX64DebugBuild.log >NUL
           build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                                         -j Build/EmulatorX64ReleaseBuild.log >NUL
       - name: Build Linux CLANGDWARF EmulatorPkg IA32
-        shell: cmd
         run: |
           . ./edksetup.sh
           build -a IA32 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE -D REDFISH_ENABLE -j Build/EmulatorIA32NooptBuild.log >NUL
