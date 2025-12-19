@@ -262,15 +262,15 @@ jobs:
       - name: Build Linux CLANGDWARF EmulatorPkg X64
         run: |
           . ./edksetup.sh
-          build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE -D REDFISH_ENABLE -j Build/EmulatorX64NooptBuild.log >NUL
-          build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE                 -j Build/EmulatorX64DebugBuild.log >NUL
-          build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                                         -j Build/EmulatorX64ReleaseBuild.log >NUL
+          build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorX64NooptBuild.log >NUL
+          build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorX64DebugBuild.log >NUL
+          build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorX64ReleaseBuild.log >NUL
       - name: Build Linux CLANGDWARF EmulatorPkg IA32
         run: |
           . ./edksetup.sh
-          build -a IA32 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE -D REDFISH_ENABLE -j Build/EmulatorIA32NooptBuild.log >NUL
-          build -a IA32 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE                 -j Build/EmulatorIA32DebugBuild.log >NUL
-          build -a IA32 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                                         -j Build/EmulatorIA32ReleaseBuild.log >NUL
+          build -a IA32 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorIA32NooptBuild.log >NUL
+          build -a IA32 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorIA32DebugBuild.log >NUL
+          build -a IA32 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorIA32ReleaseBuild.log >NUL
       - name: Upload Linux CLANGDWARF EmulatorPkg Logs
         uses: actions/upload-artifact@v6
         with:

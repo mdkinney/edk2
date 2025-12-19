@@ -181,16 +181,16 @@ jobs:
         shell: cmd
         run: |
           call edksetup.bat Mingw-w64
-          call build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE -D REDFISH_ENABLE -j Build/EmulatorX64NooptBuild.log >NUL
-          call build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE                 -j Build/EmulatorX64DebugBuild.log >NUL
-          call build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                                         -j Build/EmulatorX64ReleaseBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorX64NooptBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorX64DebugBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorX64ReleaseBuild.log >NUL
       - name: Build Windows LLVM MINGW CLANG EmulatorPkg IA32
         shell: cmd
         run: |
           call edksetup.bat Mingw-w64
-          call build -a IA32 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE -D REDFISH_ENABLE -j Build/EmulatorIA32NooptBuild.log >NUL
-          call build -a IA32 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE                 -j Build/EmulatorIA32DebugBuild.log >NUL
-          call build -a IA32 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                                         -j Build/EmulatorIA32ReleaseBuild.log >NUL
+          call build -a IA32 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorIA32NooptBuild.log >NUL
+          call build -a IA32 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorIA32DebugBuild.log >NUL
+          call build -a IA32 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorIA32ReleaseBuild.log >NUL
       - name: Upload Windows LLVM MINGW CLANG EmulatorPkg Logs
         uses: actions/upload-artifact@v6
         with:

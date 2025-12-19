@@ -104,7 +104,7 @@ jobs:
           python-version: '3.12'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
-      - name: Build Windows Visual Studio CLANGPDB Packages ${{ matrix.tool_chain_tag }}
+      - name: Build Packages ${{ matrix.tool_chain_tag }}-VS
         shell: cmd
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
@@ -178,16 +178,16 @@ jobs:
         shell: cmd
         run: |
           call edksetup.bat VS2022
-          call build -a X64 -t CLANGPDB -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE -D REDFISH_ENABLE -j Build/EmulatorX64NooptBuild.log >NUL
-          call build -a X64 -t CLANGPDB -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE                 -j Build/EmulatorX64DebugBuild.log >NUL
-          call build -a X64 -t CLANGPDB -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                                         -j Build/EmulatorX64ReleaseBuild.log >NUL
+          call build -a X64 -t CLANGPDB -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorX64NooptBuild.log >NUL
+          call build -a X64 -t CLANGPDB -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorX64DebugBuild.log >NUL
+          call build -a X64 -t CLANGPDB -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorX64ReleaseBuild.log >NUL
       - name: Build Windows Visual Studio CLANGPDB EmulatorPkg IA32
         shell: cmd
         run: |
           call edksetup.bat VS2022
-          call build -a IA32 -t CLANGPDB -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE -D REDFISH_ENABLE -j Build/EmulatorIA32NooptBuild.log >NUL
-          call build -a IA32 -t CLANGPDB -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE                 -j Build/EmulatorIA32DebugBuild.log >NUL
-          call build -a IA32 -t CLANGPDB -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                                         -j Build/EmulatorIA32ReleaseBuild.log >NUL
+          call build -a IA32 -t CLANGPDB -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorIA32NooptBuild.log >NUL
+          call build -a IA32 -t CLANGPDB -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorIA32DebugBuild.log >NUL
+          call build -a IA32 -t CLANGPDB -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorIA32ReleaseBuild.log >NUL
       - name: Upload Windows Visual Studio CLANGPDB EmulatorPkg Logs
         uses: actions/upload-artifact@v6
         with:
