@@ -294,7 +294,6 @@ jobs:
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
 
-jobs:
   build_windows_visual_studio_clangpdb_precheck:
     name: Build Windows Visual Studio CLANGPDB Precheck
     runs-on: windows-latest
@@ -488,7 +487,6 @@ jobs:
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
 
-jobs:
   build_windows_mingw_edk2_clang_precheck:
     name: Build Windows Mingw edk2-clang Precheck
     runs-on: windows-latest
@@ -676,7 +674,6 @@ jobs:
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
 
-jobs:
   build_windows_llvm_mingw_clang_precheck:
     name: Build Windows LLVM MINGW CLANG Precheck
     runs-on: windows-latest
