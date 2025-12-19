@@ -19,8 +19,8 @@ on:
       - sandbox/master
 
 jobs:
-  build_windows_clang_ovmf_precheck:
-    name: Build Windows CLANGDWARF Precheck
+  build_windows_llvm_mingw_clang_precheck:
+    name: Build Windows LLVM MINGW CLANG Precheck
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -76,9 +76,9 @@ jobs:
             Build/*.log
         if: always()
 
-  build_windows_clang:
-    name: Build Windows (${{ join(matrix.*, ' - ') }})
-    needs: build_windows_clang_ovmf_precheck
+  build_windows_llvm_mingw_clang_packages:
+    name: Build Windows LLVM MINGW CLANG Packages (${{ join(matrix.*, ' - ') }})
+    needs: build_windows_llvm_mingw_clang_precheck
     runs-on: windows-latest
     strategy:
       fail-fast: false
@@ -97,101 +97,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Restore LLVM-MinGW
-        id: cache-llvm-mingw
-        uses: actions/cache/restore@v4
+      - name: Setup Windows LLVM MINGW CLANG Job
+        uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
-          path: C:\llvm-mingw-20250709-ucrt-x86_64
-          key: ${{ runner.os }}-llvm-mingw-20250709-ucrt-x86_64
-          restore-keys: |
-            ${{ runner.os }}-llvm-mingw-20250709-ucrt-x86_64
-      - name: Install LLVM-MinGW
-        if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
-        shell: cmd
-        run: |
-          curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/20250709/llvm-mingw-20250709-ucrt-x86_64.zip"
-          powershell -command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath 'C:\' -Force"
-          dir "C:\llvm-mingw-20250709-ucrt-x86_64\bin"
-      - name: Save LLVM-MinGW
-        if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: C:\llvm-mingw-20250709-ucrt-x86_64
-          key: ${{ steps.cache-llvm-mingw.outputs.cache-primary-key }}
-      - name: Add CLANG 20.1.8 to PATH
-        shell: cmd
-        run: |
-          PATH=C:\llvm-mingw-20250709-ucrt-x86_64\bin;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
-      - name: Restore cached venv
-        uses: actions/cache/restore@v4
-        id: cache-venv
-        with:
-          path: .venv
-          key: ${{ runner.os }}-venv-${{ hashFiles('pip-requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-venv-
-      - name: Set up Python 3.12
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        uses: actions/setup-python@v5
-        with:
+          llvm_version: '20250709'
+          llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
           python-version: '3.12'
-      - name: Create and install venv if cache missed
-        shell: cmd
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        run: |
-          python -m venv .venv
-          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          python -m pip install --upgrade pip
-          pip install -r pip-requirements.txt
-      - name: Save venv cache
-        uses: actions/cache/save@v4
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        with:
-          path: .venv
-          key: ${{ steps.cache-venv.outputs.cache-primary-key }}
-      - name: Activate venv
-        shell: cmd
-        run: |
-          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
-      - name: Restore submodules
-        id: cache-submodules
-        uses: actions/cache/restore@v4
-        with:
-          path: .git/modules
-          key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
-          restore-keys: |
-            ${{ runner.os }}-submodules-
-      - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py"
-      - name: Save submodules
-        if: steps.cache-submodules.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: .git/modules
-          key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
-      - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py"
-      - name: 'Build BaseTools'
-        env:
-          CC: "clang"
-          CXX: "clang++"
-        run: python BaseTools/Edk2ToolsBuild.py -a X64 -t ${{ matrix.tool_chain_tag }}
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
       - name: 'Build Packages ${{ matrix.tool_chain_tag }}-Mingw'
         shell: cmd
-        env:
-          CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
       - name: Upload Windows Mingw Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Windows Mingw Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})"
+          name: Upload Windows Mingw Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
@@ -199,9 +120,9 @@ jobs:
             Build/*.log
         if: always()
 
-  build_windows_clang_noopt_unit_tests:
-    name: Build Windows Unit Test (${{ join(matrix.*, ' - ') }})
-    needs: build_windows_clang_ovmf_precheck
+  build_windows_llvm_mingw_clang_noopt_unit_tests:
+    name: Build Windows LLVM MINGW CLANG Unit Tests (${{ join(matrix.*, ' - ') }})
+    needs: build_windows_llvm_mingw_clang_precheck
     runs-on: windows-latest
     strategy:
       fail-fast: false
@@ -218,95 +139,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Restore LLVM-MinGW
-        id: cache-llvm-mingw
-        uses: actions/cache/restore@v4
+      - name: Setup Windows LLVM MINGW CLANG Job
+        uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
-          path: C:\llvm-mingw-20250709-ucrt-x86_64
-          key: ${{ runner.os }}-llvm-mingw-20250709-ucrt-x86_64
-          restore-keys: |
-            ${{ runner.os }}-llvm-mingw-20250709-ucrt-x86_64
-      - name: Install LLVM-MinGW
-        if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
-        shell: cmd
-        run: |
-          curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/20250709/llvm-mingw-20250709-ucrt-x86_64.zip"
-          powershell -command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath 'C:\' -Force"
-          dir "C:\llvm-mingw-20250709-ucrt-x86_64\bin"
-      - name: Save LLVM-MinGW
-        if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: C:\llvm-mingw-20250709-ucrt-x86_64
-          key: ${{ steps.cache-llvm-mingw.outputs.cache-primary-key }}
-      - name: Add CLANG 20.1.8 to PATH
-        shell: cmd
-        run: |
-          PATH=C:\llvm-mingw-20250709-ucrt-x86_64\bin;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
-      - name: Restore cached venv
-        uses: actions/cache/restore@v4
-        id: cache-venv
-        with:
-          path: .venv
-          key: ${{ runner.os }}-venv-${{ hashFiles('pip-requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-venv-
-      - name: Set up Python 3.12
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        uses: actions/setup-python@v5
-        with:
+          llvm_version: '20250709'
+          llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
           python-version: '3.12'
-      - name: Create and install venv if cache missed
-        shell: cmd
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        run: |
-          python -m venv .venv
-          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          python -m pip install --upgrade pip
-          pip install -r pip-requirements.txt
-      - name: Save venv cache
-        uses: actions/cache/save@v4
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        with:
-          path: .venv
-          key: ${{ steps.cache-venv.outputs.cache-primary-key }}
-      - name: Activate venv
-        shell: cmd
-        run: |
-          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
-      - name: Restore submodules
-        id: cache-submodules
-        uses: actions/cache/restore@v4
-        with:
-          path: .git/modules
-          key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
-          restore-keys: |
-            ${{ runner.os }}-submodules-
-      - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py"
-      - name: Save submodules
-        if: steps.cache-submodules.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: .git/modules
-          key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
-      - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py"
-      - name: 'Build BaseTools'
-        env:
-          CC: "clang"
-          CXX: "clang++"
-        run: python BaseTools/Edk2ToolsBuild.py -a X64 -t ${{ matrix.tool_chain_tag }}
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
       - name: 'Build Packages ${{ matrix.tool_chain_tag }}-Mingw'
         shell: cmd
-        env:
-          CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
       - name: Upload Windows Mingw Unit Test Logs
@@ -320,124 +162,39 @@ jobs:
             Build/*.log
         if: always()
 
-  build_windows_clang_emulatorpkg:
-    name: Build Windows CLANGDWARF Precheck
-    needs: build_windows_clang_ovmf_precheck
+  build_windows_llvm_mingw_clang_emulatorpkg:
+    name: Build Windows LLVM MINGW CLANG EmulatorPkg
+    needs: build_windows_llvm_mingw_clang_precheck
     runs-on: windows-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Restore LLVM-MinGW
-        id: cache-llvm-mingw
-        uses: actions/cache/restore@v4
+      - name: Setup Windows LLVM MINGW CLANG Job
+        uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
-          path: C:\llvm-mingw-20250709-ucrt-x86_64
-          key: ${{ runner.os }}-llvm-mingw-20250709-ucrt-x86_64
-          restore-keys: |
-            ${{ runner.os }}-llvm-mingw-20250709-ucrt-x86_64
-      - name: Install LLVM-MinGW
-        if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
-        shell: cmd
-        run: |
-          curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/20250709/llvm-mingw-20250709-ucrt-x86_64.zip"
-          powershell -command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath 'C:\' -Force"
-          dir "C:\llvm-mingw-20250709-ucrt-x86_64\bin"
-      - name: Save LLVM-MinGW
-        if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: C:\llvm-mingw-20250709-ucrt-x86_64
-          key: ${{ steps.cache-llvm-mingw.outputs.cache-primary-key }}
-      - name: Add CLANG 20.1.8 to PATH
-        shell: cmd
-        run: |
-          PATH=C:\llvm-mingw-20250709-ucrt-x86_64\bin;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
-      - name: Restore cached venv
-        uses: actions/cache/restore@v4
-        id: cache-venv
-        with:
-          path: .venv
-          key: ${{ runner.os }}-venv-${{ hashFiles('pip-requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-venv-
-      - name: Set up Python 3.12
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        uses: actions/setup-python@v5
-        with:
+          llvm_version: '20250709'
+          llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
           python-version: '3.12'
-      - name: Create and install venv if cache missed
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t CLANGDWARF'
+      - name: Build EmulatorPkg X64 Host Module
         shell: cmd
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        run: |
-          python -m venv .venv
-          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          python -m pip install --upgrade pip
-          pip install -r pip-requirements.txt
-      - name: Save venv cache
-        uses: actions/cache/save@v4
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-        with:
-          path: .venv
-          key: ${{ steps.cache-venv.outputs.cache-primary-key }}
-      - name: Activate venv
-        shell: cmd
-        run: |
-          PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-          echo PATH=%PATH% >> %GITHUB_ENV%
-      - name: Restore submodules
-        id: cache-submodules
-        uses: actions/cache/restore@v4
-        with:
-          path: .git/modules
-          key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
-          restore-keys: |
-            ${{ runner.os }}-submodules-
-      - name: 'Clone Submodules'
-        run: stuart_setup -c ".pytool/CISettings.py"
-      - name: Save submodules
-        if: steps.cache-submodules.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: .git/modules
-          key: ${{ steps.cache-submodules.outputs.cache-primary-key }}
-      - name: 'Download External Dependencies'
-        run: stuart_update -c ".pytool/CISettings.py"
-      - name: 'Build BaseTools'
-        env:
-          CC: "clang"
-          CXX: "clang++"
-        run: python BaseTools/Edk2ToolsBuild.py -a X64 -t CLANGDWARF
-      - name: 'Build EmulatorPkg X64 Host Module'
-        shell: cmd
-        env:
-          CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
-          BASETOOLS_MINGW_PATH: "C:\\llvm-mingw-20250709-ucrt-x86_64"
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           call edksetup.bat Mingw-w64
           call build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE -D REDFISH_ENABLE -j Build/EmulatorX64NooptBuild.log >NUL
           call build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE                 -j Build/EmulatorX64DebugBuild.log >NUL
           call build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                                         -j Build/EmulatorX64ReleaseBuild.log >NUL
-      - name: 'Build EmulatorPkg IA32 Host Module'
+      - name: Build EmulatorPkg IA32 Host Module
         shell: cmd
-        env:
-          CLANG_BIN: "C:\\llvm-mingw-20250709-ucrt-x86_64\\bin\\"
-          BASETOOLS_MINGW_PATH: "C:\\llvm-mingw-20250709-ucrt-x86_64"
-          NASM_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\mu_nasm_extdep\\Windows-x86-64\\"
-          IASL_PREFIX: "${{ github.workspace }}\\BaseTools\\Bin\\edk2-acpica-iasl_extdep\\Windows-x86\\"
         run: |
           call edksetup.bat Mingw-w64
           call build -a IA32 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE -D REDFISH_ENABLE -j Build/EmulatorIA32NooptBuild.log >NUL
           call build -a IA32 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE                 -j Build/EmulatorIA32DebugBuild.log >NUL
           call build -a IA32 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                                         -j Build/EmulatorIA32ReleaseBuild.log >NUL
-      - name: Upload Windows Mingw EmulatorPkg Logs
+      - name: Upload Windows LLVM MINGW CLANG EmulatorPkg Logs
         uses: actions/upload-artifact@v4
         with:
-          name: "Upload Windows Mingw EmulatorPkg Logs"
+          name: Upload Windows LLVM MINGW CLANG EmulatorPkg Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt

@@ -120,7 +120,7 @@ jobs:
         if: always()
 
   build_windows_visual_studio_clangpdb_noopt_unit_tests:
-    name: Build Windows Visual Studio CLANGPDB Unit Test (${{ join(matrix.*, ' - ') }})
+    name: Build Windows Visual Studio CLANGPDB Unit Tests (${{ join(matrix.*, ' - ') }})
     needs: build_windows_visual_studio_clangpdb_precheck
     runs-on: windows-latest
     strategy:
