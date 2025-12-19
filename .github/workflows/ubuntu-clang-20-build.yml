@@ -106,7 +106,7 @@ jobs:
 
   build_linux_clang_packages:
     name: Build Linux Packages (${{ join(matrix.*, ' - ') }})
-    needs: build_linux_clang_precheck and build_linux_clang_no_target_precheck
+    needs: [build_linux_clang_precheck, build_linux_clang_no_target_precheck]
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
@@ -193,7 +193,7 @@ jobs:
 
   build_linux_visual_studio_clangdwarf_noopt_unit_tests:
     name: Build Linux CLANGDWARF Unit Tests (${{ join(matrix.*, ' - ') }})
-    needs: build_linux_clang_precheck and build_linux_clang_no_target_precheck
+    needs: [build_linux_clang_precheck, build_linux_clang_no_target_precheck]
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
@@ -234,7 +234,7 @@ jobs:
 
   build_linux_clangdwarf_emulatorpkg:
     name: Build Linux CLANGDWARF EmulatorPkg
-    needs: build_linux_clang_precheck and build_linux_clang_no_target_precheck
+    needs: [build_linux_clang_precheck, build_linux_clang_no_target_precheck]
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
