@@ -35,7 +35,7 @@ jobs:
         shell: cmd
         run: |
           call edksetup.bat VS2022
-          call build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
+          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
       - name: Build UnitTestFrameworkPkg X64 Unit Tests
         env:
           CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
@@ -45,7 +45,7 @@ jobs:
         shell: cmd
         run: |
           call edksetup.bat VS2022
-          call build -a IA32 -t CLANGPDB -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
+          build -a IA32 -t CLANGPDB -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
       - name: Build EmulatorPkg X64 Host Module
         shell: cmd
         run: |
@@ -64,7 +64,7 @@ jobs:
         shell: cmd
         run: |
           call edksetup.bat VS2022
-          call build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
+          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
       - name: Upload Windows Visual Studio CLANGPDB Precheck Logs
         uses: actions/upload-artifact@v6
         with:
