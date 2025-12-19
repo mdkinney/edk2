@@ -1,0 +1,861 @@
+## @file
+# A workflow using Ubuntu CLANG tools that builds packages and uploads artifacts.
+#
+# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+# Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
+# EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: All CLANG 20.1.8 Build
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - sandbox/master
+
+jobs:
+  build_linux_clang_precheck:
+    name: Build Linux CLANGPDB CLANGDWARF PreCheck
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Setup Linux CLANG Job
+        uses: ./.github/actions/linux-setup-clang-job
+        with:
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-t CLANGPDB'
+      - name: Build HelloWorld CLANGPDB CLANGDWARF
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -a X64                       -t CLANGPDB   -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
+          build -a IA32 -a X64 -a AARCH64 -a RISCV64 -t CLANGDWARF -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangDwarfBuild.log >NUL
+      - name: Build UnitTestFrameworkPkg X64 Unit Tests
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
+      - name: Build UnitTestFrameworkPkg IA32 Unit Tests
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t CLANGDWARF -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
+      - name: Build EmulatorPkg X64 Unix Host Module
+        run: |
+          . ./edksetup.sh
+          build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64Build.log >NUL
+      - name: Build EmulatorPkg IA32 Unix Host Module
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32Build.log >NUL
+      - name: Build OVMF Platform
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
+      - name: Upload Linux CLANGPDB CLANGDWARF Precheck Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: Upload Linux CLANGPDB CLANGDWARF Precheck Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_linux_clang_no_target_precheck:
+    name: Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} PreCheck
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - NO-TARGET
+        tool_chain_tag:
+          - CLANGPDB
+        build_package:
+          - ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg
+          - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Setup Linux CLANG Job
+        uses: ./.github/actions/linux-setup-clang-job
+        with:
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
+      - name: Build Packages ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }}
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -t ${{ matrix.build_type }} -p "${{ matrix.build_package }}"
+      - name: Upload Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} PreCheck Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: Upload Linux Logs (${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_linux_clang_packages:
+    name: Build Linux Packages (${{ join(matrix.*, ' - ') }})
+    needs: [build_linux_clang_precheck, build_linux_clang_no_target_precheck]
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - DEBUG
+          - RELEASE
+        build_arch:
+          - IA32
+          - X64
+        tool_chain_tag:
+          - CLANGPDB
+          - CLANGDWARF
+        build_package:
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Setup Linux CLANG Job
+        uses: ./.github/actions/linux-setup-clang-job
+        with:
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
+      - name: Build Packages ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
+      - name: Upload Linux Packages Logs ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Linux Packages Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_linux_clangdwarf_aarch64_riscv64_packages:
+    name: Build Linux Packages (${{ join(matrix.*, ' - ') }})
+    needs: build_linux_clang_packages
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - DEBUG
+          - RELEASE
+        build_arch:
+          - AARCH64
+          - RISCV64
+        tool_chain_tag:
+          - CLANGDWARF
+        build_package:
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Setup Linux CLANG Job
+        uses: ./.github/actions/linux-setup-clang-job
+        with:
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
+      - name: Build Packages ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
+      - name: Upload Linux Packages Logs ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Linux Packages Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_linux_clangdwarf_noopt_unit_tests:
+    name: Build Linux CLANGDWARF Unit Tests (${{ join(matrix.*, ' - ') }})
+    needs: [build_linux_clang_precheck, build_linux_clang_no_target_precheck]
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - NOOPT
+        build_arch:
+          - X64
+        tool_chain_tag:
+          - CLANGDWARF
+        build_package:
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Setup Linux CLANG Job
+        uses: ./.github/actions/linux-setup-clang-job
+        with:
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
+      - name: Build Linux CLANGDWARF Unit Tests ${{ matrix.tool_chain_tag }}
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
+      - name: Upload Linux CLANGDWARF Unit Test Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Linux CLANGDWARF Unit Test Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_linux_clangdwarf_emulatorpkg:
+    name: Build Linux CLANGDWARF EmulatorPkg
+    needs: [build_linux_clang_precheck, build_linux_clang_no_target_precheck]
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Setup Linux CLANG Job
+        uses: ./.github/actions/linux-setup-clang-job
+        with:
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-t CLANGDWARF'
+      - name: Build Linux CLANGDWARF EmulatorPkg X64
+        run: |
+          . ./edksetup.sh
+          build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorX64NooptBuild.log >NUL
+          build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorX64DebugBuild.log >NUL
+          build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorX64ReleaseBuild.log >NUL
+      - name: Build Linux CLANGDWARF EmulatorPkg IA32
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorIA32NooptBuild.log >NUL
+          build -a IA32 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorIA32DebugBuild.log >NUL
+          build -a IA32 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorIA32ReleaseBuild.log >NUL
+      - name: Upload Linux CLANGDWARF EmulatorPkg Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Linux CLANGDWARF EmulatorPkg Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+## @file
+# A workflow using Windows Visual Studio CLANGPDB tools that builds packages and
+# uploads artifacts.
+#
+# Firmware Build Support:             CLANGPDB - IA32/X64
+# Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
+# EmulatorPkg Build Support:          CLANGPDB - IA32/X64
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+jobs:
+  build_windows_visual_studio_clangpdb_precheck:
+    name: Build Windows Visual Studio CLANGPDB Precheck
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Visual Studio CLANGPDB Job
+        uses: ./.github/actions/windows-setup-vs-clangpdb-job
+        with:
+          llvm_version: '20.1.8'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-t VS2022'
+      - name: Build HelloWorld CLANGPDB
+        shell: cmd
+        run: |
+          call edksetup.bat VS2022
+          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
+      - name: Build UnitTestFrameworkPkg X64 Unit Tests
+        env:
+          CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGPDB -p UnitTestFrameworkPkg
+      - name: Build UnitTestFrameworkPkg IA32 Unit Tests
+        shell: cmd
+        run: |
+          call edksetup.bat VS2022
+          build -a IA32 -t CLANGPDB -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
+      - name: Build EmulatorPkg X64 Host Module
+        shell: cmd
+        run: |
+          call edksetup.bat VS2022
+          call build -a X64 -t CLANGPDB -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64DebugBuild.log >NUL
+          call build -a X64 -t CLANGPDB -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64ReleaseBuild.log >NUL
+          call build -a X64 -t CLANGPDB -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64NooptBuild.log >NUL
+      - name: Build EmulatorPkg IA32 Host Module
+        shell: cmd
+        run: |
+          call edksetup.bat VS2022
+          call build -a IA32 -t CLANGPDB -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32DebugBuild.log >NUL
+          call build -a IA32 -t CLANGPDB -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32ReleaseBuild.log >NUL
+          call build -a IA32 -t CLANGPDB -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32NooptBuild.log >NUL
+      - name: Build OVMF Platform
+        shell: cmd
+        run: |
+          call edksetup.bat VS2022
+          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
+      - name: Upload Windows Visual Studio CLANGPDB Precheck Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: "Upload Windows Visual Studio CLANGPDB Precheck Logs"
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_visual_studio_clangpdb_packages:
+    name: Build Windows Visual Studio CLANGPDB Packages (${{ join(matrix.*, ' - ') }})
+    needs: build_windows_visual_studio_clangpdb_precheck
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - DEBUG
+          - RELEASE
+        build_arch:
+          - IA32
+          - X64
+        tool_chain_tag:
+          - CLANGPDB
+        build_package:
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Visual Studio CLANGPDB Job
+        uses: ./.github/actions/windows-setup-vs-clangpdb-job
+        with:
+          llvm_version: '20.1.8'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-t VS2022'
+      - name: Build Packages ${{ matrix.tool_chain_tag }}-VS
+        shell: cmd
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
+      - name: Upload Windows Visual Studio CLANGPDB Packages Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Visual Studio CLANGPDB Packages Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_visual_studio_clangpdb_noopt_unit_tests:
+    name: Build Windows Visual Studio CLANGPDB Unit Tests (${{ join(matrix.*, ' - ') }})
+    needs: build_windows_visual_studio_clangpdb_precheck
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - NOOPT
+        build_arch:
+          - X64
+        tool_chain_tag:
+          - CLANGPDB
+        build_package:
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Visual Studio CLANGPDB Job
+        uses: ./.github/actions/windows-setup-vs-clangpdb-job
+        with:
+          llvm_version: '20.1.8'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-t VS2022'
+      - name: Build Windows Visual Studio CLANGPDB Unit Tests ${{ matrix.tool_chain_tag }}-VS
+        shell: cmd
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
+      - name: Upload Windows Visual Studio CLANGPDB Unit Test Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Visual Studio CLANGPDB Unit Test Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_visual_studio_clangpdb_emulatorpkg:
+    name: Build Windows Visual Studio CLANGPDB EmulatorPkg
+    needs: build_windows_visual_studio_clangpdb_precheck
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Visual Studio CLANGPDB Job
+        uses: ./.github/actions/windows-setup-vs-clangpdb-job
+        with:
+          llvm_version: '20.1.8'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-t VS2022'
+      - name: Build Windows Visual Studio CLANGPDB EmulatorPkg X64
+        shell: cmd
+        run: |
+          call edksetup.bat VS2022
+          call build -a X64 -t CLANGPDB -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorX64NooptBuild.log >NUL
+          call build -a X64 -t CLANGPDB -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorX64DebugBuild.log >NUL
+          call build -a X64 -t CLANGPDB -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorX64ReleaseBuild.log >NUL
+      - name: Build Windows Visual Studio CLANGPDB EmulatorPkg IA32
+        shell: cmd
+        run: |
+          call edksetup.bat VS2022
+          call build -a IA32 -t CLANGPDB -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorIA32NooptBuild.log >NUL
+          call build -a IA32 -t CLANGPDB -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorIA32DebugBuild.log >NUL
+          call build -a IA32 -t CLANGPDB -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorIA32ReleaseBuild.log >NUL
+      - name: Upload Windows Visual Studio CLANGPDB EmulatorPkg Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Visual Studio CLANGPDB EmulatorPkg Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+## @file
+# A workflow using Windows MINGW edk2-clang tools that builds packages and
+# uploads artifacts.
+#
+# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+# Host-Based Unit Test Build Support: CLANGDWARF          - X64
+# EmulatorPkg Build Support:          CLANGDWARF          - X64
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+jobs:
+  build_windows_mingw_edk2_clang_precheck:
+    name: Build Windows Mingw edk2-clang Precheck
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Mingw edk2-clang Job
+        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
+        with:
+          edk2-clang-version: '20.1.8'
+          edk2-clang-version-patch-level: '0'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t CLANGPDB'
+      - name: Build HelloWorld CLANGPDB
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
+      - name: Build HelloWorld CLANGDWARF
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          build -a IA32 -a X64 -t CLANGDWARF -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangDwarfBuild.log >NUL
+      - name: 'Build UnitTestFrameworkPkg X64 Unit Tests'
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
+      - name: Build EmulatorPkg X64 Host Module
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          call build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64DebugBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64ReleaseBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64NooptBuild.log >NUL
+      - name: 'Build OVMF Platform CLANGPDB'
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64BuildClangPdb.log >NUL
+      - name: Build OVMF Platform CLANGDWARF
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          build -a IA32 -a X64 -t CLANGDWARF -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64BuildClangDwarf.log >NUL
+      - name: Upload Windows Mingw edk2-clang Precheck Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Mingw edk2-clang Precheck Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_mingw_edk2_clang_packages:
+    name: Build Windows Mingw edk2-clang Packages (${{ join(matrix.*, ' - ') }})
+    needs: build_windows_mingw_edk2_clang_precheck
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - DEBUG
+          - RELEASE
+        build_arch:
+          - IA32
+          - X64
+        tool_chain_tag:
+          - CLANGPDB
+          - CLANGDWARF
+        build_package:
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Mingw edk2-clang Job
+        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
+        with:
+          edk2-clang-version: '20.1.8'
+          edk2-clang-version-patch-level: '0'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
+      - name: Build Windows Mingw edk2-clang Packages ${{ matrix.tool_chain_tag }}
+        shell: cmd
+        run:
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
+      - name: Upload Windows Mingw edk2-clang Packages Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Mingw edk2-clang Packages Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_mingw_edk2_clang_noopt_unit_tests:
+    name: Build Windows Mingw edk2-clang Unit Tests (${{ join(matrix.*, ' - ') }})
+    needs: build_windows_mingw_edk2_clang_precheck
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - NOOPT
+        build_arch:
+          - X64
+        tool_chain_tag:
+          - CLANGDWARF
+        build_package:
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Mingw edk2-clang Job
+        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
+        with:
+          edk2-clang-version: '20.1.8'
+          edk2-clang-version-patch-level: '0'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
+      - name: Build Windows Mingw edk2-clang Unit Tests ${{ matrix.tool_chain_tag }}
+        shell: cmd
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
+      - name: Upload Windows Mingw edk2-clang Unit Test Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Mingw edk2-clang Unit Test Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_mingw_edk2_clang_emulatorpkg:
+    name: Build Windows Mingw edk2-clang EmulatorPkg
+    needs: build_windows_mingw_edk2_clang_precheck
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Mingw edk2-clang Job
+        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
+        with:
+          edk2-clang-version: '20.1.8'
+          edk2-clang-version-patch-level: '0'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t CLANGDWARF'
+      - name: Build Windows Mingw edk2-clang EmulatorPkg
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          call build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorX64NooptBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorX64DebugBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorX64ReleaseBuild.log >NUL
+      - name: Upload Windows Mingw edk2-clang EmulatorPkg Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Mingw edk2-clang EmulatorPkg Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+## @file
+# A workflow using Windows LLVM MINGW CLANG tools that builds packages and
+# uploads artifacts.
+#
+# Firmware Build Support:             CLANGDWARF - IA32/X64
+# Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
+# EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+jobs:
+  build_windows_llvm_mingw_clang_precheck:
+    name: Build Windows LLVM MINGW CLANG Precheck
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows LLVM MINGW CLANG Job
+        uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
+        with:
+          llvm_version: '20250709'
+          llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t CLANGDWARF'
+      - name: Build HelloWorld CLANGDWARF
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          build -a IA32 -a X64 -t CLANGDWARF -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangDwarfBuild.log >NUL
+      - name: Build UnitTestFrameworkPkg X64 Unit Tests
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
+      - name: Build UnitTestFrameworkPkg IA32 Unit Tests
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          build -a IA32 -t CLANGDWARF -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
+      - name: Build EmulatorPkg X64 Host Module
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          call build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64DebugBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64ReleaseBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64NooptBuild.log >NUL
+      - name: Build EmulatorPkg IA32 Host Module
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          call build -a IA32 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32DebugBuild.log >NUL
+          call build -a IA32 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32ReleaseBuild.log >NUL
+          call build -a IA32 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32NooptBuild.log >NUL
+      - name: Build OVMF Platform
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          build -a IA32 -a X64 -t CLANGDWARF -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
+      - name: Upload Windows LLVM MINGW CLANG Precheck Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows LLVM MINGW CLANG Precheck Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_llvm_mingw_clang_packages:
+    name: Build Windows LLVM MINGW CLANG Packages (${{ join(matrix.*, ' - ') }})
+    needs: build_windows_llvm_mingw_clang_precheck
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - DEBUG
+          - RELEASE
+        build_arch:
+          - IA32
+          - X64
+        tool_chain_tag:
+          - CLANGDWARF
+        build_package:
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows LLVM MINGW CLANG Job
+        uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
+        with:
+          llvm_version: '20250709'
+          llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
+      - name: Build Windows LLVM MINGW CLANG Packages ${{ matrix.tool_chain_tag }}
+        shell: cmd
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
+      - name: Upload Windows LLVM MINGW CLANG Packages Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows LLVM MINGW CLANG Packages Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_llvm_mingw_clang_noopt_unit_tests:
+    name: Build Windows LLVM MINGW CLANG Unit Tests (${{ join(matrix.*, ' - ') }})
+    needs: build_windows_llvm_mingw_clang_precheck
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type:
+          - NOOPT
+        build_arch:
+          - X64
+        tool_chain_tag:
+          - CLANGDWARF
+        build_package:
+          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
+          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows LLVM MINGW CLANG Job
+        uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
+        with:
+          llvm_version: '20250709'
+          llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
+      - name: Build Windows LLVM MINGW CLANG Unit Tests ${{ matrix.tool_chain_tag }}
+        shell: cmd
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
+      - name: Upload Windows LLVM MINGW CLANG Unit Test Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows LLVM MINGW CLANG Unit Test Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_llvm_mingw_clang_emulatorpkg:
+    name: Build Windows LLVM MINGW CLANG EmulatorPkg
+    needs: build_windows_llvm_mingw_clang_precheck
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows LLVM MINGW CLANG Job
+        uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
+        with:
+          llvm_version: '20250709'
+          llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
+          python-version: '3.12'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t CLANGDWARF'
+      - name: Build Windows LLVM MINGW CLANG EmulatorPkg X64
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          call build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorX64NooptBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorX64DebugBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorX64ReleaseBuild.log >NUL
+      - name: Build Windows LLVM MINGW CLANG EmulatorPkg IA32
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          call build -a IA32 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorIA32NooptBuild.log >NUL
+          call build -a IA32 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorIA32DebugBuild.log >NUL
+          call build -a IA32 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorIA32ReleaseBuild.log >NUL
+      - name: Upload Windows LLVM MINGW CLANG EmulatorPkg Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows LLVM MINGW CLANG EmulatorPkg Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
