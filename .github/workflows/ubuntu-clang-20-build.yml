@@ -24,7 +24,7 @@ jobs:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
@@ -246,7 +246,7 @@ jobs:
         with:
           python-version: '3.12'
           stuart-ci-settings-file: '.pytool/CISettings.py'
-          edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
+          edk2-tools-build-params: '-t CLANGDWARF'
       - name: Build Linux CLANGDWARF EmulatorPkg X64
         shell: cmd
         run: |
