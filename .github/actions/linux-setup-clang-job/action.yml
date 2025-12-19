@@ -1,0 +1,49 @@
+## @file
+# Composite action that sets up a Linux CLANG environment for
+# CI jobs that builds packages and uploads artifacts. Caching is used to avoid
+# re-installing LLVM, Python, Python modules, and git submodules on subsequent
+# runs.
+#
+# * Installs Python in a virtual environment, installs edk2 pip requirements,
+#   and adds Python virtual environment to PATH.
+# * Installs git submodules using stuart_setup.
+# * Sets up Stuart Tools, builds edk2 BaseTools, and sets NASM_PREFIX and
+#   IASL_PREFIX environment variables.
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+name: 'Linux Setup CLANG Job'
+description: 'Linux setup CLANG environment for CI jobs'
+inputs:
+  python-version:
+    description: 'Python version to install (e.g., 3.12)'
+    required: true
+  stuart-ci-settings-file:
+    description: 'Path to the stuart CI settings file (e.g. .pytool/CISettings.py)'
+    required: true
+  edk2-tools-build-params:
+    description: 'Command line parameters for Edk2ToolsBuild.py (e.g. -t GCC)'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Set CC and CXX for CLANG
+      shell: bash
+      run: |
+        echo CC=clang>> $GITHUB_ENV
+        echo CXX=clang++>> $GITHUB_ENV
+    - name: Install Python in venv
+      uses: ./.github/actions/linux-install-python-venv
+      with:
+        python-version: ${{ inputs.python-version }}
+    - name: Install Git Submodules from stuart_setup
+      uses: ./.github/actions/linux-install-git-submodules
+      with:
+        stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+    - name: Set up Stuart Tools
+      uses: ./.github/actions/linux-install-stuart-tools
+      with:
+        stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+        edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
