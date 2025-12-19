@@ -66,7 +66,7 @@ jobs:
           call edksetup.bat VS2022
           call build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
       - name: Upload Windows Visual Studio CLANGPDB Precheck Logs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: "Upload Windows Visual Studio CLANGPDB Precheck Logs"
           path: |
@@ -104,14 +104,14 @@ jobs:
           python-version: '3.12'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
-      - name: Build Packages ${{ matrix.tool_chain_tag }}-VS
+      - name: Build Windows Visual Studio CLANGPDB Packages ${{ matrix.tool_chain_tag }}
         shell: cmd
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
-      - name: Upload Windows Visual Studio CLANGPDB Logs
-        uses: actions/upload-artifact@v4
+      - name: Upload Windows Visual Studio CLANGPDB Packages Logs
+        uses: actions/upload-artifact@v6
         with:
-          name: Upload Windows Visual Studio CLANGPDB Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
+          name: Upload Windows Visual Studio CLANGPDB Packages Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
@@ -145,12 +145,12 @@ jobs:
           python-version: '3.12'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
-      - name: Build Packages ${{ matrix.tool_chain_tag }}-VS
+      - name: Build Windows Visual Studio CLANGPDB Unit Tests ${{ matrix.tool_chain_tag }}-VS
         shell: cmd
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
       - name: Upload Windows Visual Studio CLANGPDB Unit Test Logs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: Upload Windows Visual Studio CLANGPDB Unit Test Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
           path: |
@@ -174,14 +174,14 @@ jobs:
           python-version: '3.12'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
-      - name: Build EmulatorPkg X64 Host Module
+      - name: Build Windows Visual Studio CLANGPDB EmulatorPkg X64
         shell: cmd
         run: |
           call edksetup.bat VS2022
           call build -a X64 -t CLANGPDB -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE -D REDFISH_ENABLE -j Build/EmulatorX64NooptBuild.log >NUL
           call build -a X64 -t CLANGPDB -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE                 -j Build/EmulatorX64DebugBuild.log >NUL
           call build -a X64 -t CLANGPDB -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                                         -j Build/EmulatorX64ReleaseBuild.log >NUL
-      - name: 'Build EmulatorPkg IA32 Host Module'
+      - name: Build Windows Visual Studio CLANGPDB EmulatorPkg IA32
         shell: cmd
         run: |
           call edksetup.bat VS2022
@@ -189,7 +189,7 @@ jobs:
           call build -a IA32 -t CLANGPDB -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE                 -j Build/EmulatorIA32DebugBuild.log >NUL
           call build -a IA32 -t CLANGPDB -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                                         -j Build/EmulatorIA32ReleaseBuild.log >NUL
       - name: Upload Windows Visual Studio CLANGPDB EmulatorPkg Logs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: Upload Windows Visual Studio CLANGPDB EmulatorPkg Logs
           path: |
