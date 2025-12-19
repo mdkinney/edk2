@@ -27,7 +27,7 @@ class WinRcPath(IUefiBuildPlugin):
                     self._set_path(rc_path)
                     return 0
 
-        return 0
+#        return 0
 
         # If it does not exist, try to find it with FindToolInWinSdk
         path = locate_tools.FindToolInWinSdk("rc.exe")
