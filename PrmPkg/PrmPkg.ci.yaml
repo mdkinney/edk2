@@ -100,16 +100,16 @@
           "keepoptionalheader",
           "odule",                  # note: appears in buffer ascii dump in documentation
           "oemid",
-          "prmopreg",
-          "prmpecofflib",
-          "prmpkg",
-          "prmssdtinstall",
           "prmconfig",
           "prmcontextbufferlib",
+          "prmexportdescriptor",
           "prminfo",
           "prmloader",
           "prmmodulediscoverylib",
-          "prmexportdescriptor"
+          "prmopreg",
+          "prmpecofflib",
+          "prmpkg",
+          "prmssdtinstall"
         ],
         "IgnoreStandardPaths": [],   # Standard Plugin defined paths that
                                      # should be ignore
