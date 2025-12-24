@@ -634,6 +634,9 @@
   GCC:*_CLANGDWARF_X64_DLINK_FLAGS   = -target x86_64-w64-mingw32 -Wl,--entry,_ModuleEntryPoint
   GCC:DEBUG_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(DEBUG_DIR)/$(BASE_NAME).pdb
   GCC:NOOPT_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(DEBUG_DIR)/$(BASE_NAME).pdb
+  #
+  # Set DLINK2_FLAGS to empyty string to disable use of linker script
+  #
   GCC:*_CLANGDWARF_X64_DLINK2_FLAGS  ==
   GCC:*_CLANGDWARF_IA32_DLINK2_FLAGS ==
 !endif
@@ -713,6 +716,9 @@
   GCC:*_CLANGDWARF_X64_DLINK_FLAGS   = -target x86_64-w64-mingw32
   GCC:DEBUG_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(BIN_DIR)/$(BASE_NAME).pdb
   GCC:NOOPT_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(BIN_DIR)/$(BASE_NAME).pdb
+  #
+  # Set DLINK2_FLAGS to empyty string to disable use of linker script
+  #
   GCC:*_CLANGDWARF_IA32_DLINK2_FLAGS ==
   GCC:*_CLANGDWARF_X64_DLINK2_FLAGS  ==
 !endif
