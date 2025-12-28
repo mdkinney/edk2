@@ -176,10 +176,6 @@
 !else
   GCC:*_*_*_CC_FLAGS          = --coverage
 !endif
-#  GCC:*_*_*_CC_FLAGS          = --coverage
-#  GCC:*_GCC5_*_CC_FLAGS       = --coverage
-#  GCC:*_GCCNOLTO_*_CC_FLAGS   = --coverage
-#  GCC:*_CLANGDWARF_*_CC_FLAGS = -fprofile-instr-generate -fcoverage-mapping
   CLANGPDB:*_*_*_CC_FLAGS     = -fprofile-instr-generate -fcoverage-mapping
 !endif
 
@@ -254,13 +250,9 @@
   GCC:*_*_*_CC_FLAGS           =  -Wno-write-strings -fpie
   GCC:*_*_IA32_DLINK_FLAGS     == -o $(BIN_DIR)/$(MODULE_NAME_GUID) -m32
   GCC:*_*_X64_DLINK_FLAGS      == -o $(BIN_DIR)/$(MODULE_NAME_GUID) -m64
-#  GCC:*_GCC_*_DLINK_FLAGS      =  -z noexecstack
-#  GCC:*_GCC5_*_DLINK_FLAGS     =  -z noexecstack
-#  GCC:*_GCCNOLTO_*_DLINK_FLAGS =  -z noexecstack
 !if $(WIN_MINGW32_BUILD)
   GCC:*_CLANGDWARF_*_DLINK_FLAGS = -Wl,--pdb,$(BIN_DIR)\$(MODULE_NAME_GUID).pdb -g3
 !else
-#  GCC:*_CLANGDWARF_*_DLINK_FLAGS = -z noexecstack
   GCC:*_*_*_DLINK_FLAGS = -z noexecstack
 !endif
 
@@ -279,10 +271,6 @@
 !else
   GCC:*_*_*_DLINK_FLAGS          = --coverage
 !endif
-#  GCC:*_GCC_*_DLINK_FLAGS        = --coverage
-#  GCC:*_GCC5_*_DLINK_FLAGS       = --coverage
-#  GCC:*_GCCNOLTO_*_DLINK_FLAGS   = --coverage
-#  GCC:*_CLANGDWARF_*_DLINK_FLAGS = -fprofile-instr-generate -fcoverage-mapping
 !endif
   #
   # Surround static libraries with whole-archive, so constructor-based test registration works properly.
