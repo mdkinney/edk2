@@ -399,7 +399,7 @@ class WindowsVsToolChain(IUefiBuildPlugin):
             if clang_bin is not None:
                 self.Logger.debug("CLANG_BIN is already set.")
             else:
-                # Assume default installation c:\edk2-clang\bin\
+                # Assume default installation "c:\edk2-clang\bin\"
                 clang_bin = "c:\\edk2-clang\\bin\\"
 
             # now confirm it exists
