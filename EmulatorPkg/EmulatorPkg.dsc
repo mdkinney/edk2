@@ -533,16 +533,48 @@
 #
 # Operating System and Compiler Compatibility Matrix for EmulatorPkg
 #
-# +---------------+--------+----------+------------+-----+----+--------+
-# | OS/Compiler   | VS2019 | CLANGPDB | CLANGDWARF |   GCC    | XCODE5 |
-# |               | VS2022 |          |            |   GCC5   |        |
-# |               |        |          |            | GCCNOLTO |        |
-# +---------------+--------+----------+------------+----------+--------+
-# | Windows/VS    |   Y    |    Y     |            |          |        |
-# | Windows/Mingw |        |          |     Y      |          |        |
-# | Linux         |        |          |     Y      |    Y     |        |
-# | macOS         |        |          |     Y      |    Y     |   Y    |
-# +---------------+--------+----------+------------+----------+--------+
+# +--------------------+--------+----------+------------+-----+----+--------+
+# | OS/Compiler        | VS2019 | CLANGPDB | CLANGDWARF |   GCC    | XCODE5 |
+# |                    | VS2022 |          |            |   GCC5   |        |
+# |                    |        |          |            | GCCNOLTO |        |
+# +--------------------+--------+----------+------------+----------+--------+
+# | Windows/VS         |IA32/X64|          |            |          |        |
+# | Windows/LLVM/VS    |        | IA32/X64 |            |          |        |
+# | Windows/LLVM/MSYS2 |        |          |    X64     |          |        |
+# | Windows/LLVM/MINGW |        |          |  IA32/X64  |          |        |
+# | Linux/LLVM         |        |          |  IA32/X64  |          |        |
+# | Linux/GCC          |        |          |            | IA32/X64 |        |
+# | macOS/XCODE5       |        |          |            |          |IA32/X64|
+# +--------------------+--------+----------+------------+----------+--------+
+#
+# * Windows/VS: Windows environment with Visual Studio installed
+# * Windows/LLVM/VS: Windows environment with Visual Studio and LLVM 20.1.8 or
+#   higher installed. The default version of LLVM installed with Visual Studio
+#   is not supported.
+#   * https://github.com/llvm/llvm-project/releases
+#   * EmulatorPkg builds depend on Visual Studio includes/libraries
+# * Windows/LLVM/MSYS2: Windows environment with MSYS2 based LLVM 20.1.8 or
+#   higher installed.
+#   * https://github.com/tianocore/edk2-edkrepo/releases?q=clang
+#   * EmulatorPkg builds do not use any Visual Studio includes/libraries
+#   * MSYS2 based LLVM 20.1.8 does not provide IA32 includes/libraries
+# * Windows/LLVM/MINGW: Windows environment with LLVM MINGW 20.1.8 or higher
+#   installed with UCRT includes/libraries.
+#   * https://github.com/mstorsjo/llvm-mingw/releases
+#   * EmulatorPkg builds do not use any Visual Studio includes/libraries
+#   * UCRT release provide IA32 and X64 includes/libraries
+# * Linux/LLVM or Linux/GCC: Linux environment with GCC 13 or higher and
+#   LLVM 20.1.8 or higher installed. Not all Linux distributions provide IA32
+#   includes/libraries for Host-based unit tests.
+#   * EmulatorPkg builds use GCC and LLVM includes/libraries
+#   * Ubuntu 24.04 apt modules for IA32 and X64 includes/libraries:
+#       build-essential uuid-dev lcov
+#       g++-13 gcc-13
+#       g++-13-x86-64-linux-gnux32 gcc-13-x86-64-linux-gnux32
+#       llvm-20 clang-20 lld-20 libclang-rt-20-dev
+#       gcc-multilib g++-multilib libx11-dev libx11-6 libxext6 libxext-dev
+#       libc6-i386 libc6-dev-i386 libxext6:i386 libxext-dev:i386 linux-libc-dev:i386
+# macOS/XCODE: macOS environment with XCODE5 installed.
 #
 !if $(WIN_MINGW32_BUILD)
   !if $(TOOL_CHAIN_TAG) in "VS2019 VS2022"
