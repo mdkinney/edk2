@@ -214,6 +214,9 @@ jobs:
           - X64
         tool_chain_tag:
           - CLANGDWARF
+          - GCC           # Temp coverage
+          - GCC5          # Temp coverage
+          - GCCNOLTO      # Temp coverage
         build_package:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
@@ -282,6 +285,15 @@ jobs:
             Build/*.log
         if: always()
 
+  build_linux_clang_done:
+    name: Build Linux CLANG Done
+    needs: [build_linux_clang_packages, build_linux_clangdwarf_aarch64_riscv64_packages, build_linux_clangdwarf_noopt_unit_tests, build_linux_clangdwarf_emulatorpkg]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Completion Message
+        run: echo "All CLANG Build Workflow Completed Successfully"
+
+
 ## @file
 # A workflow using Windows Visual Studio CLANGPDB tools that builds packages and
 # uploads artifacts.
@@ -296,6 +308,7 @@ jobs:
 
   build_windows_visual_studio_clangpdb_precheck:
     name: Build Windows Visual Studio CLANGPDB Precheck
+    needs: build_linux_clang_done
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -475,6 +488,14 @@ jobs:
             Build/*.log
         if: always()
 
+  build_windows_visual_studio_clangpdb_done:
+    name: Build Windows Visual Studio CLANGPDB Done
+    needs: [build_windows_visual_studio_clangpdb_packages, build_windows_visual_studio_clangpdb_noopt_unit_tests, build_windows_visual_studio_clangpdb_emulatorpkg]
+    runs-on: windows-latest
+    steps:
+      - name: Echo Completion Message
+        run: echo "All Windows Visual Studio CLANGPDB Build Workflow Completed Successfully"
+
 ## @file
 # A workflow using Windows MINGW edk2-clang tools that builds packages and
 # uploads artifacts.
@@ -489,6 +510,7 @@ jobs:
 
   build_windows_mingw_edk2_clang_precheck:
     name: Build Windows Mingw edk2-clang Precheck
+    needs: build_windows_visual_studio_clangpdb_done
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -662,6 +684,14 @@ jobs:
             Build/*.log
         if: always()
 
+  build_windows_mingw_edk2_clang_done:
+    name: Build Windows Mingw edk2-clang Done
+    needs: [build_windows_mingw_edk2_clang_packages, build_windows_mingw_edk2_clang_noopt_unit_tests, build_windows_mingw_edk2_clang_emulatorpkg]
+    runs-on: windows-latest
+    steps:
+      - name: Echo Completion Message
+        run: echo "All Windows Mingw edk2-clang Build Workflow Completed Successfully"
+
 ## @file
 # A workflow using Windows LLVM MINGW CLANG tools that builds packages and
 # uploads artifacts.
@@ -676,6 +706,7 @@ jobs:
 
   build_windows_llvm_mingw_clang_precheck:
     name: Build Windows LLVM MINGW CLANG Precheck
+    needs: build_windows_mingw_edk2_clang_done
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -856,3 +887,11 @@ jobs:
             Build/*.txt
             Build/*.log
         if: always()
+
+  build_windows_llvm_mingw_clang_done:
+    name: Build Windows LLVM Mingw edk2-clang Done
+    needs: [build_windows_llvm_mingw_clang_packages, build_windows_llvm_mingw_clang_noopt_unit_tests, build_windows_llvm_mingw_clang_emulatorpkg]
+    runs-on: windows-latest
+    steps:
+      - name: Echo Completion Message
+        run: echo "All Windows LLVM Mingw edk2-clang Build Workflow Completed Successfully"
