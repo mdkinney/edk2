@@ -1,0 +1,87 @@
+## @file
+# A workflow using Ubuntu CLANG tools to run Basic Acceptance Tests (BAT)
+# on packages and uploads artifacts.
+#
+# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+# Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
+# EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Ubuntu CLANG 20.1.8 Basic Acceptance Test
+
+on:
+  workflow_call:
+  inputs:
+    python-version:
+      description: 'The version of Python to use.'
+      required: true
+      type: string
+      default: '3.12'
+    stuart-ci-settings-file:
+      description: 'The path to the Stuart CI settings file.'
+      required: true
+      type: string
+      default: '.pytool/CISettings.py'
+    edk2-tools-build-params:
+      description: 'The EDK2 Tools build parameters.'
+      required: true
+      type: string
+      default: '-t CLANGPDB'
+
+jobs:
+  build_linux_clang_basic_acceptance_test:
+    name: Build Linux CLANGPDB CLANGDWARF Basic Acceptance Test
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Setup Linux CLANG Job
+        uses: ./.github/actions/linux-setup-clang-job
+        with:
+          python-version: ${{ inputs.python-version }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: Build HelloWorld CLANGPDB
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -a X64                       -t CLANGPDB   -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
+      - name: Build HelloWorld CLANGDWARF
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -a X64 -a AARCH64 -a RISCV64 -t CLANGDWARF -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangDwarfBuild.log >NUL
+      - name: Build UnitTestFrameworkPkg X64 Unit Tests
+        run: |
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
+      - name: Build UnitTestFrameworkPkg IA32 Unit Tests
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t CLANGDWARF -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
+      - name: Build EmulatorPkg X64 Unix Host Module
+        run: |
+          . ./edksetup.sh
+          build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64Build.log >NUL
+      - name: Build EmulatorPkg IA32 Unix Host Module
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32Build.log >NUL
+      - name: Build OVMF IA32/X64 Platform
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
+      - name: Upload Linux CLANGPDB CLANGDWARF Basic Acceptance Test Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: Upload Linux CLANGPDB CLANGDWARF Basic Acceptance Test Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+

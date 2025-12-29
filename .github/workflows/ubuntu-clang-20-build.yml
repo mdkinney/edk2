@@ -17,100 +17,26 @@ on:
       - sandbox/master
 
 jobs:
-  build_linux_clang_precheck:
-    name: Build Linux CLANGPDB CLANGDWARF PreCheck
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Setup Linux CLANG Job
-        uses: ./.github/actions/linux-setup-clang-job
-        with:
-          python-version: '3.12'
-          stuart-ci-settings-file: '.pytool/CISettings.py'
-          edk2-tools-build-params: '-t CLANGPDB'
-      - name: Build HelloWorld CLANGPDB CLANGDWARF
-        run: |
-          . ./edksetup.sh
-          build -a IA32 -a X64                       -t CLANGPDB   -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
-          build -a IA32 -a X64 -a AARCH64 -a RISCV64 -t CLANGDWARF -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangDwarfBuild.log >NUL
-      - name: Build UnitTestFrameworkPkg X64 Unit Tests
-        run: |
-          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
-      - name: Build UnitTestFrameworkPkg IA32 Unit Tests
-        run: |
-          . ./edksetup.sh
-          build -a IA32 -t CLANGDWARF -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
-      - name: Build EmulatorPkg X64 Unix Host Module
-        run: |
-          . ./edksetup.sh
-          build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64Build.log >NUL
-      - name: Build EmulatorPkg IA32 Unix Host Module
-        run: |
-          . ./edksetup.sh
-          build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32Build.log >NUL
-      - name: Build OVMF Platform
-        run: |
-          . ./edksetup.sh
-          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
-      - name: Upload Linux CLANGPDB CLANGDWARF Precheck Logs
-        uses: actions/upload-artifact@v4
-        with:
-          name: Upload Linux CLANGPDB CLANGDWARF Precheck Logs
-          path: |
-            BaseTools/BaseToolsBuild/*.txt
-            Build/**/BUILDLOG*.txt
-            Build/*.txt
-            Build/*.log
-        if: always()
+  build_linux_clang_basic_acceptance_test:
+    uses: ./.github/workflows/ubuntu-clang-20-basic-acceptance-test.yml
+    with:
+      python-version: '3.12'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
+      edk2-tools-build-params: '-t CLANGPDB'
 
-  build_linux_clang_no_target_precheck:
-    name: Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} PreCheck
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
-    strategy:
-      fail-fast: false
-      matrix:
-        build_type:
-          - NO-TARGET
-        tool_chain_tag:
-          - CLANGPDB
-        build_package:
-          - ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg
-          - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Setup Linux CLANG Job
-        uses: ./.github/actions/linux-setup-clang-job
-        with:
-          python-version: '3.12'
-          stuart-ci-settings-file: '.pytool/CISettings.py'
-          edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
-      - name: Build Packages ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }}
-        run: |
-          stuart_ci_build -c ".pytool/CISettings.py" -t ${{ matrix.build_type }} -p "${{ matrix.build_package }}"
-      - name: Upload Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} PreCheck Logs
-        uses: actions/upload-artifact@v4
-        with:
-          name: Upload Linux Logs (${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
-          path: |
-            BaseTools/BaseToolsBuild/*.txt
-            Build/**/BUILDLOG*.txt
-            Build/*.txt
-            Build/*.log
-        if: always()
+  build_linux_clang_no_target_test:
+    uses: ./.github/workflows/ubuntu-clang-20-no-target-test.yml
+    with:
+      python-version: '3.12'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
+      edk2-tools-build-params: '-t CLANGPDB'
+      package-lists: |
+        ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg
+        IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
 
   build_linux_clang_packages:
     name: Build Linux Packages (${{ join(matrix.*, ' - ') }})
-    needs: [build_linux_clang_precheck, build_linux_clang_no_target_precheck]
+    needs: [build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
@@ -201,7 +127,7 @@ jobs:
 
   build_linux_clangdwarf_noopt_unit_tests:
     name: Build Linux CLANGDWARF Unit Tests (${{ join(matrix.*, ' - ') }})
-    needs: [build_linux_clang_precheck, build_linux_clang_no_target_precheck]
+    needs: [build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
@@ -247,7 +173,7 @@ jobs:
 
   build_linux_clangdwarf_emulatorpkg:
     name: Build Linux CLANGDWARF EmulatorPkg
-    needs: [build_linux_clang_precheck, build_linux_clang_no_target_precheck]
+    needs: [build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
