@@ -32,142 +32,41 @@ jobs:
       edk2-tools-build-params: '-t CLANGPDB'
       package-lists: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
 
-  build_linux_clang_packages:
-    name: Build Linux Packages (${{ join(matrix.*, ' - ') }})
+  build_linux_clang_packages_ia32_x64:
     needs: [build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
-    strategy:
-      fail-fast: false
-      matrix:
-        build_type:
-          - DEBUG
-          - RELEASE
-        build_arch:
-          - IA32
-          - X64
-        tool_chain_tag:
-          - CLANGPDB
-          - CLANGDWARF
-        build_package:
-          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
-          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Setup Linux CLANG Job
-        uses: ./.github/actions/linux-setup-clang-job
-        with:
-          python-version: '3.12'
-          stuart-ci-settings-file: '.pytool/CISettings.py'
-          edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
-      - name: Build Packages ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
-        run: |
-          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
-      - name: Upload Linux Packages Logs ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
-        uses: actions/upload-artifact@v6
-        with:
-          name: Upload Linux Packages Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
-          path: |
-            BaseTools/BaseToolsBuild/*.txt
-            Build/**/BUILDLOG*.txt
-            Build/*.txt
-            Build/*.log
-        if: always()
+    uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
+    with:
+      python-version: '3.12'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
+      edk2-tools-build-params: '-t CLANGPDB'
+      build_type_list: '["DEBUG", "RELEASE"]'
+      build_arch_list: '["IA32", "X64"]'
+      tool_chain_tag_list: '["CLANGPDB", "CLANGDWARF"]'
+      package-lists: '["ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg", "CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg"]'
 
   build_linux_clangdwarf_aarch64_riscv64_packages:
-    name: Build Linux Packages (${{ join(matrix.*, ' - ') }})
-    needs: build_linux_clang_packages
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
-    strategy:
-      fail-fast: false
-      matrix:
-        build_type:
-          - DEBUG
-          - RELEASE
-        build_arch:
-          - AARCH64
-          - RISCV64
-        tool_chain_tag:
-          - CLANGDWARF
-        build_package:
-          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
-          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Setup Linux CLANG Job
-        uses: ./.github/actions/linux-setup-clang-job
-        with:
-          python-version: '3.12'
-          stuart-ci-settings-file: '.pytool/CISettings.py'
-          edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
-      - name: Build Packages ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
-        run: |
-          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
-      - name: Upload Linux Packages Logs ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
-        uses: actions/upload-artifact@v6
-        with:
-          name: Upload Linux Packages Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
-          path: |
-            BaseTools/BaseToolsBuild/*.txt
-            Build/**/BUILDLOG*.txt
-            Build/*.txt
-            Build/*.log
-        if: always()
+    needs: build_linux_clang_packages_ia32_x64
+    uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
+    with:
+      python-version: '3.12'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
+      edk2-tools-build-params: '-t CLANGDWARF'
+      build_type_list: '["DEBUG", "RELEASE"]'
+      build_arch_list: '["AARCH64", "RISCV64"]'
+      tool_chain_tag_list: '["CLANGDWARF"]'
+      package-lists: '["ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg", "CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg"]'
 
   build_linux_clangdwarf_noopt_unit_tests:
-    name: Build Linux CLANGDWARF Unit Tests (${{ join(matrix.*, ' - ') }})
     needs: [build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
-    strategy:
-      fail-fast: false
-      matrix:
-        build_type:
-          - NOOPT
-        build_arch:
-          - X64
-        tool_chain_tag:
-          - CLANGDWARF
-          - GCC          # Temp coverage
-          - GCC5         # Temp coverage
-          - GCCNOLTO     # Temp coverage
-        build_package:
-          - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
-          - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Setup Linux CLANG Job
-        uses: ./.github/actions/linux-setup-clang-job
-        with:
-          python-version: '3.12'
-          stuart-ci-settings-file: '.pytool/CISettings.py'
-          edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
-      - name: Build Linux CLANGDWARF Unit Tests ${{ matrix.tool_chain_tag }}
-        run: |
-          stuart_ci_build -c ".pytool/CISettings.py" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
-      - name: Upload Linux CLANGDWARF Unit Test Logs
-        uses: actions/upload-artifact@v6
-        with:
-          name: Upload Linux CLANGDWARF Unit Test Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
-          path: |
-            BaseTools/BaseToolsBuild/*.txt
-            Build/**/BUILDLOG*.txt
-            Build/*.txt
-            Build/*.log
-        if: always()
+    uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
+    with:
+      python-version: '3.12'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
+      edk2-tools-build-params: '-t CLANGDWARF'
+      build_type_list: '["NOOPT"]'
+      build_arch_list: '["X64"]'
+      tool_chain_tag_list: '["CLANGDWARF", "GCC", "GCC5", "GCCNOLTO"]'
+      package-lists: '["ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg", "CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg"]'
 
   build_linux_clangdwarf_emulatorpkg:
     name: Build Linux CLANGDWARF EmulatorPkg
@@ -186,18 +85,30 @@ jobs:
           python-version: '3.12'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t CLANGDWARF'
-      - name: Build Linux CLANGDWARF EmulatorPkg X64
+      - name: Build Linux CLANGDWARF EmulatorPkg X64 DEBUG
+        run: |
+          . ./edksetup.sh
+          build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorX64DebugBuild.log >NUL
+      - name: Build Linux CLANGDWARF EmulatorPkg X64 RELEASE
+        run: |
+          . ./edksetup.sh
+          build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorX64ReleaseBuild.log >NUL
+      - name: Build Linux CLANGDWARF EmulatorPkg X64 NOOPT
         run: |
           . ./edksetup.sh
           build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorX64NooptBuild.log >NUL
-          build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorX64DebugBuild.log >NUL
-          build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorX64ReleaseBuild.log >NUL
-      - name: Build Linux CLANGDWARF EmulatorPkg IA32
+      - name: Build Linux CLANGDWARF EmulatorPkg IA32 DEBUG
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorIA32DebugBuild.log >NUL
+      - name: Build Linux CLANGDWARF EmulatorPkg IA32 RELEASE
+        run: |
+          . ./edksetup.sh
+          build -a IA32 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorIA32ReleaseBuild.log >NUL
+      - name: Build Linux CLANGDWARF EmulatorPkg IA32 NOOPT
         run: |
           . ./edksetup.sh
           build -a IA32 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorIA32NooptBuild.log >NUL
-          build -a IA32 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorIA32DebugBuild.log >NUL
-          build -a IA32 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorIA32ReleaseBuild.log >NUL
       - name: Upload Linux CLANGDWARF EmulatorPkg Logs
         uses: actions/upload-artifact@v6
         with:

@@ -1,6 +1,5 @@
 ## @file
-# A workflow using Ubuntu CLANG tools to run all NO-TARGET quality checks
-# on packages and uploads artifacts.
+# A workflow using Ubuntu to run package builds and uploads artifacts.
 #
 # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
 # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
@@ -9,7 +8,7 @@
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
-name: Ubuntu CLANG 20.1.8 NO-TARGET Quality Checks
+name: Ubuntu CLANG 20.1.8 Build Packages Test
 
 on:
   workflow_call:
@@ -29,6 +28,21 @@ on:
         required: true
         type: string
         default: '-t CLANGPDB'
+      build_type_list:
+        description: 'List of build types to test.'
+        required: true
+        type: string
+        default: '["DEBUG", "RELEASE"]'
+      build_arch_list:
+        description: 'List of build architectures to test.'
+        required: true
+        type: string
+        default: '["IA32", "X64"]'
+      tool_chain_tag_list:
+        description: 'List of tool chain tags to test.'
+        required: true
+        type: string
+        default: '["CLANGPDB", "CLANGDWARF"]'
       package-lists:
         description: 'List of package lists to test.'
         required: true
@@ -36,19 +50,18 @@ on:
         default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
 
 jobs:
-  build_linux_clang_no_target_test:
-    name: Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} Test
+  build_linux_packages:
+    name: Build Linux Packages (${{ join(matrix.*, ' - ') }})
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
     strategy:
       fail-fast: false
       matrix:
-        build_type:
-          - NO-TARGET
-        tool_chain_tag:
-          - CLANGPDB
-        build_package: ${{ fromJSON(inputs.package-lists)}}
+        build_type: ${{ fromJSON(inputs.build_type_list) }}
+        build_arch: ${{ fromJSON(inputs.build_arch_list) }}
+        tool_chain_tag: ${{ fromJSON(inputs.tool_chain_tag_list) }}
+        build_package: ${{ fromJSON(inputs.package-lists) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -59,17 +72,19 @@ jobs:
         with:
           python-version: '${{ inputs.python-version }}'
           stuart-ci-settings-file: '${{ inputs.stuart-ci-settings-file }}'
-          edk2-tools-build-params: '${{ inputs.edk2-tools-build-params }}'
-      - name: Build Packages ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }}
+          edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
+      - name: Build Packages ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
         run: |
-          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" -t ${{ matrix.build_type }} -p "${{ matrix.build_package }}"
-      - name: Upload Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} Logs
-        uses: actions/upload-artifact@v4
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
+      - name: Upload Linux Packages Logs ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
+        uses: actions/upload-artifact@v6
         with:
-          name: Upload Linux Logs (${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
+          name: Upload Linux Packages Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
             Build/*.txt
             Build/*.log
         if: always()
+
+
