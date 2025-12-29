@@ -13,22 +13,22 @@ name: Ubuntu CLANG 20.1.8 Basic Acceptance Test
 
 on:
   workflow_call:
-  inputs:
-    python-version:
-      description: 'The version of Python to use.'
-      required: true
-      type: string
-      default: '3.12'
-    stuart-ci-settings-file:
-      description: 'The path to the Stuart CI settings file.'
-      required: true
-      type: string
-      default: '.pytool/CISettings.py'
-    edk2-tools-build-params:
-      description: 'The EDK2 Tools build parameters.'
-      required: true
-      type: string
-      default: '-t CLANGPDB'
+    inputs:
+      python-version:
+        description: 'The version of Python to use.'
+        required: true
+        type: string
+        default: '3.12'
+      stuart-ci-settings-file:
+        description: 'The path to the Stuart CI settings file.'
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      edk2-tools-build-params:
+        description: 'The EDK2 Tools build parameters.'
+        required: true
+        type: string
+        default: '-t CLANGPDB'
 
 jobs:
   build_linux_clang_basic_acceptance_test:

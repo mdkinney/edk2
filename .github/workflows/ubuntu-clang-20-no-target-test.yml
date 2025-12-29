@@ -13,29 +13,29 @@ name: Ubuntu CLANG 20.1.8 NO-TARGET Quality Checks
 
 on:
   workflow_call:
-  inputs:
-    python-version:
-      description: 'The version of Python to use.'
-      required: true
-      type: string
-      default: '3.12'
-    stuart-ci-settings-file:
-      description: 'The path to the Stuart CI settings file.'
-      required: true
-      type: string
-      default: '.pytool/CISettings.py'
-    edk2-tools-build-params:
-      description: 'The EDK2 Tools build parameters.'
-      required: true
-      type: string
-      default: '-t CLANGPDB'
-    package-lists:
-      description: 'List of package lists to test.'
-      required: true
-      type: string
-      default: |
-        ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg
-        IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
+    inputs:
+      python-version:
+        description: 'The version of Python to use.'
+        required: true
+        type: string
+        default: '3.12'
+      stuart-ci-settings-file:
+        description: 'The path to the Stuart CI settings file.'
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      edk2-tools-build-params:
+        description: 'The EDK2 Tools build parameters.'
+        required: true
+        type: string
+        default: '-t CLANGPDB'
+      package-lists:
+        description: 'List of package lists to test.'
+        required: true
+        type: string
+        default: |
+          ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg
+          IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
 
 jobs:
   build_linux_clang_no_target_test:
