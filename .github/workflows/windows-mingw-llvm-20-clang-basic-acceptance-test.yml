@@ -1,0 +1,121 @@
+## @file
+# A workflow using Windows LLVM MINGW CLANG tools to run Basic Acceptance Tests
+# (BAT) on packages and platforms and uploads artifacts.
+#
+# Firmware Build Support:             CLANGDWARF - IA32/X64
+# Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
+# EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+name: Windows LLVM MINGW CLANG 20.1.8 Basic Acceptance Test
+
+on:
+  workflow_call:
+    inputs:
+      windows-runs-on:
+        description: 'The runner label for Windows jobs.'
+        required: true
+        type: string
+        default: 'windows-2025'
+      python-version:
+        description: 'The version of Python to use.'
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: 'Path to pip requirements file'
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: 'The path to the Stuart CI settings file.'
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      edk2-tools-build-params:
+        description: 'The EDK2 Tools build parameters.'
+        required: true
+        type: string
+        default: '-a X64 -t CLANGDWARF'
+
+jobs:
+  build_windows_llvm_mingw_clang_packages_basic_acceptance_test:
+    name: Build Windows LLVM MINGW CLANG Packages Basic Acceptance Test
+    runs-on: ${{ inputs.windows-runs-on }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows LLVM MINGW CLANG Job
+        uses: ./.github/actions/windows-setup-clang-job
+        with:
+          windows-clang-installer: 'llvm'
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: Build HelloWorld CLANGDWARF
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          call build -a IA32 -a X64 -t CLANGDWARF -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangDwarfBuild.log >NUL
+      - name: Build UnitTestFrameworkPkg X64 Unit Tests
+        run: |
+          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
+      - name: Build UnitTestFrameworkPkg IA32 Unit Tests
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          call build -a IA32 -t CLANGDWARF -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
+      - name: Upload Windows LLVM MINGW CLANG Packages Basic Acceptance Test Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows LLVM MINGW CLANG Packages Basic Acceptance Test Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_llvm_mingw_clang_platforms_basic_acceptance_test:
+    name: Build Windows LLVM MINGW CLANG Platforms Basic Acceptance Test
+    runs-on: ${{ inputs.windows-runs-on }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows LLVM MINGW CLANG Job
+        uses: ./.github/actions/windows-setup-clang-job
+        with:
+          windows-clang-installer: 'llvm'
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: Build EmulatorPkg X64 Host Module
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          call build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64DebugBuild.log >NUL
+      - name: Build EmulatorPkg IA32 Host Module
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          call build -a IA32 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32DebugBuild.log >NUL
+      - name: Build OVMF Platform
+        shell: cmd
+        run: |
+          call edksetup.bat Mingw-w64
+          call build -a IA32 -a X64 -t CLANGDWARF -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
+      - name: Upload Windows LLVM MINGW CLANG Platforms Basic Acceptance Test Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows LLVM MINGW CLANG Platforms Basic Acceptance Test Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()

@@ -1,6 +1,6 @@
 ## @file
 # Composite action that Installs Python in a virtual environment, installs
-# edk2 pip requirements, and adds Python virtual environment to PATH.
+# pip requirements, and adds Python virtual environment to PATH.
 # Caches the virtual environment to avoid re-installing on subsequent runs.
 #
 # Copyright (C) 2025 Intel Corporation.
@@ -13,37 +13,50 @@ inputs:
   python-version:
     description: 'Python version to install (e.g., 3.12)'
     required: true
+  pip-requirements:
+    description: 'Path to pip requirements file'
+    required: true
+    default: 'pip-requirements.txt'
+  cache-name-suffix:
+    description: 'Optional suffix for cache name to allow multiple caches'
+    required: false
+    default: ''
 runs:
   using: 'composite'
   steps:
     - name: Restore cached venv
-      uses: actions/cache/restore@v5
       id: cache-venv
+      uses: actions/cache/restore@v5
       with:
         path: .venv
-        key: ${{ runner.os }}-Python-${{ inputs.python-version }}-venv-${{ hashFiles('pip-requirements.txt') }}
+        key: ${{ runner.os }}-Python-${{ inputs.python-version }}-venv-${{ hashFiles(inputs.pip-requirements) }}${{ inputs.cache-name-suffix }}
     - name: Set up Python ${{ inputs.python-version }}
       if: steps.cache-venv.outputs.cache-hit != 'true'
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: ${{ inputs.python-version }}
-    - name: Create and install venv if cache missed
+    - name: Create venv if cache missed
       shell: bash
       if: steps.cache-venv.outputs.cache-hit != 'true'
       run: |
-        python -m venv .venv
+        python -m venv --copies .venv
         source .venv/bin/activate
-        echo "PATH=$GITHUB_WORKSPACE/.venv/bin:$PATH">> $GITHUB_ENV
-        python -m pip install --upgrade pip
-        pip install -r pip-requirements.txt
-    - name: Save venv cache
+        python -m pip install --no-cache-dir --upgrade pip
+        pip install --no-cache-dir -r ${{ inputs.pip-requirements }}
+    - name: Save venv cache if cache missed
       uses: actions/cache/save@v5
       if: steps.cache-venv.outputs.cache-hit != 'true'
       with:
         path: .venv
         key: ${{ steps.cache-venv.outputs.cache-primary-key }}
-    - name: Activate venv
+    - name: Add venv to PATH
       shell: bash
-      if: steps.cache-venv.outputs.cache-hit == 'true'
       run: |
-        echo "PATH=$GITHUB_WORKSPACE/.venv/bin:$PATH">> $GITHUB_ENV
+        echo "VIRTUAL_ENV=$PWD/.venv" >> $GITHUB_ENV
+        echo "$PWD/.venv/bin" >> $GITHUB_PATH
+    - name: List venv pip inventory
+      shell: bash
+      run: |
+        python --version
+        pip --version
+        pip list --no-cache-dir --verbose

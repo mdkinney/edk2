@@ -1,0 +1,107 @@
+## @file
+# A workflow using Ubuntu CLANG tools to build EmulatorPkg and uploads artifacts.
+#
+# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+# Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
+# EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Ubuntu CLANG 20.1.8 EmulatorPkg Test
+
+on:
+  workflow_call:
+    inputs:
+      linux-runs-on:
+        description: 'The runner label for Linux jobs.'
+        required: true
+        type: string
+        default: 'ubuntu-latest'
+      linux-container-image:
+        description: 'The container image for Linux jobs.'
+        required: true
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      python-version:
+        description: 'The version of Python to use.'
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: 'Path to pip requirements file'
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: 'The path to the Stuart CI settings file.'
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      edk2-tools-build-params:
+        description: 'The EDK2 Tools build parameters.'
+        required: true
+        type: string
+        default: '-t CLANGDWARF'
+      edk-setup-params:
+        description: 'The EDK2 setup parameters.'
+        required: false
+        type: string
+        default: ''
+      build_arch_list:
+        description: 'List of build architectures to test.'
+        required: true
+        type: string
+        default: '["IA32", "X64"]'
+      tool_chain_tag_list:
+        description: 'List of tool chain tags to test.'
+        required: true
+        type: string
+        default: '["CLANGDWARF"]'
+
+jobs:
+  build_linux_clang_emulatorpkg_test:
+    name: Build Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} EmulatorPkg Test
+    runs-on: ${{ inputs.linux-runs-on }}
+    container:
+      image: ${{ inputs.linux-container-image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        build_arch: ${{ fromJSON(inputs.build_arch_list) }}
+        tool_chain_tag: ${{ fromJSON(inputs.tool_chain_tag_list) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Setup Linux CLANG Job
+        uses: ./.github/actions/linux-setup-clang-job
+        with:
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: Build Linux EmulatorPkg DEBUG ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }}
+        run: |
+          . ./edksetup.sh ${{ inputs.edk-setup-params }}
+          build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/Emulator${{ matrix.build_arch }}DebugBuild.log >NUL
+      - name: Build Linux EmulatorPkg RELEASE ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }}
+        run: |
+          . ./edksetup.sh ${{ inputs.edk-setup-params }}
+          build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/Emulator${{ matrix.build_arch }}ReleaseBuild.log >NUL
+      - name: Build Linux EmulatorPkg NOOPT ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }}
+        run: |
+          . ./edksetup.sh ${{ inputs.edk-setup-params }}
+          build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/Emulator${{ matrix.build_arch }}NooptBuild.log >NUL
+      - name: Upload Linux EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Linux EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+

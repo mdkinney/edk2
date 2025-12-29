@@ -24,8 +24,8 @@ runs:
           .git/modules
         key: ${{ runner.os }}-submodules-${{ hashFiles('.gitmodules') }}
     - name: Restore cached venv
-      uses: actions/cache/restore@v4
       id: cache-venv
+      uses: actions/cache/restore@v4
       with:
         path: .venv
         key: ${{ runner.os }}-venv-${{ hashFiles('pip-requirements.txt') }}

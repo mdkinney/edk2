@@ -20,6 +20,10 @@ inputs:
   python-version:
     description: 'Python version to install (e.g., 3.12)'
     required: true
+  pip-requirements:
+    description: 'Path to pip requirements file'
+    required: true
+    default: 'pip-requirements.txt'
   stuart-ci-settings-file:
     description: 'Path to the stuart CI settings file (e.g. .pytool/CISettings.py)'
     required: true
@@ -38,6 +42,7 @@ runs:
       uses: ./.github/actions/linux-install-python-venv
       with:
         python-version: ${{ inputs.python-version }}
+        pip-requirements: ${{ inputs.pip-requirements }}
     - name: Install Git Submodules from stuart_setup
       uses: ./.github/actions/linux-install-git-submodules
       with:

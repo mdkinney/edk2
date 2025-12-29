@@ -31,6 +31,7 @@ jobs:
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t CLANGPDB'
       - name: Build HelloWorld CLANGPDB CLANGDWARF
@@ -92,6 +93,7 @@ jobs:
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
       - name: Build Packages ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }}
@@ -138,6 +140,7 @@ jobs:
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
       - name: Build Packages ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
@@ -183,6 +186,7 @@ jobs:
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
       - name: Build Packages ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
@@ -229,6 +233,7 @@ jobs:
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
       - name: Build Linux CLANGDWARF Unit Tests ${{ matrix.tool_chain_tag }}
@@ -260,6 +265,7 @@ jobs:
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t CLANGDWARF'
       - name: Build Linux CLANGDWARF EmulatorPkg X64
@@ -318,6 +324,7 @@ jobs:
         with:
           llvm_version: '20.1.8'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: Build HelloWorld CLANGPDB
@@ -391,6 +398,7 @@ jobs:
         with:
           llvm_version: '20.1.8'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: Build Packages ${{ matrix.tool_chain_tag }}-VS
@@ -432,6 +440,7 @@ jobs:
         with:
           llvm_version: '20.1.8'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: Build Windows Visual Studio CLANGPDB Unit Tests ${{ matrix.tool_chain_tag }}-VS
@@ -461,6 +470,7 @@ jobs:
         with:
           llvm_version: '20.1.8'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: Build Windows Visual Studio CLANGPDB EmulatorPkg X64
@@ -521,6 +531,7 @@ jobs:
           edk2-clang-version: '20.1.8'
           edk2-clang-version-patch-level: '0'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t CLANGPDB'
       - name: Build HelloWorld CLANGPDB
@@ -592,6 +603,7 @@ jobs:
           edk2-clang-version: '20.1.8'
           edk2-clang-version-patch-level: '0'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
       - name: Build Windows Mingw edk2-clang Packages ${{ matrix.tool_chain_tag }}
@@ -634,6 +646,7 @@ jobs:
           edk2-clang-version: '20.1.8'
           edk2-clang-version-patch-level: '0'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
       - name: Build Windows Mingw edk2-clang Unit Tests ${{ matrix.tool_chain_tag }}
@@ -664,6 +677,7 @@ jobs:
           edk2-clang-version: '20.1.8'
           edk2-clang-version-patch-level: '0'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t CLANGDWARF'
       - name: Build Windows Mingw edk2-clang EmulatorPkg
@@ -717,6 +731,7 @@ jobs:
           llvm_version: '20250709'
           llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t CLANGDWARF'
       - name: Build HelloWorld CLANGDWARF
@@ -789,6 +804,7 @@ jobs:
           llvm_version: '20250709'
           llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
       - name: Build Windows LLVM MINGW CLANG Packages ${{ matrix.tool_chain_tag }}
@@ -831,6 +847,7 @@ jobs:
           llvm_version: '20250709'
           llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
       - name: Build Windows LLVM MINGW CLANG Unit Tests ${{ matrix.tool_chain_tag }}
@@ -861,6 +878,7 @@ jobs:
           llvm_version: '20250709'
           llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t CLANGDWARF'
       - name: Build Windows LLVM MINGW CLANG EmulatorPkg X64

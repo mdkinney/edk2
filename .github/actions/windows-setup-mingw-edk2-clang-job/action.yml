@@ -1,16 +1,10 @@
 ## @file
 # Composite action that sets up a Windows MINGW edk2-clang environment for
 # CI jobs that builds packages and uploads artifacts. Caching is used to avoid
-# re-installing LLVM, Python, Python modules, and git submodules on subsequent
-# runs.
+# re-installing LLVMon subsequent runs.
 #
 # * Installs TianoCore MINGW edk2-clang support, adds edk2-clang to PATH, and
 #   sets CLANG_BIN, BASETOOLS_MINGW_PATH, CC, and CXX environment variables.
-# * Installs Python in a virtual environment, installs edk2 pip requirements,
-#   and adds Python virtual environment to PATH.
-# * Installs git submodules using stuart_setup.
-# * Sets up Stuart Tools, builds edk2 BaseTools, and sets NASM_PREFIX and
-#   IASL_PREFIX environment variables.
 #
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
@@ -29,15 +23,6 @@ inputs:
     description: 'The path where edk2-clang is installed (e.g., C:\edk2-clang)'
     required: false
     default: 'C:\edk2-clang'
-  python-version:
-    description: 'Python version to install (e.g., 3.12)'
-    required: true
-  stuart-ci-settings-file:
-    description: 'Path to the stuart CI settings file (e.g. .pytool/CISettings.py)'
-    required: true
-  edk2-tools-build-params:
-    description: 'Command line parameters for Edk2ToolsBuild.py (e.g. -a X64 -t CLANGPDB)'
-    required: true
 runs:
   using: 'composite'
   steps:
@@ -68,16 +53,3 @@ runs:
         echo BASETOOLS_MINGW_PATH=${{ inputs.edk2-clang-install_path }}>> %GITHUB_ENV%
         echo CC=clang>> %GITHUB_ENV%
         echo CXX=clang++>> %GITHUB_ENV%
-    - name: Install Python in venv
-      uses: ./.github/actions/windows-install-python-venv
-      with:
-        python-version: ${{ inputs.python-version }}
-    - name: Install Git Submodules from stuart_setup
-      uses: ./.github/actions/windows-install-git-submodules
-      with:
-        stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
-    - name: Set up Stuart Tools
-      uses: ./.github/actions/windows-install-stuart-tools
-      with:
-        stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
-        edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
