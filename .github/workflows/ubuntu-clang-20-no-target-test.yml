@@ -33,9 +33,9 @@ on:
         description: 'List of package lists to test.'
         required: true
         type: string
-        default: |
-          ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg
-          IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
+        default:
+          - ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg
+          - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
 
 jobs:
   build_linux_clang_no_target_test:
@@ -50,7 +50,7 @@ jobs:
           - NO-TARGET
         tool_chain_tag:
           - CLANGPDB
-        build_package: ${{ fromJson(inputs.package-lists) }}
+        build_package: ${{ inputs.package-lists}}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
