@@ -17,6 +17,9 @@ on:
       - sandbox/master
 
 env:
+  #
+  # Package array that has similar execution times across 2 jobs.
+  #
   PACKAGE_LISTS: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "DynamicTablesPkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
 
 jobs:
@@ -46,7 +49,7 @@ jobs:
       python-version: '3.12'
       stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGPDB'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: ${{ toJSON(env.PACKAGE_LISTS) }}
 
   build_linux_clang_packages_ia32_x64:
     needs: [set_package_lists, build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
