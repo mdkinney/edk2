@@ -29,7 +29,8 @@ jobs:
       - name: Set Package Lists
         id: set-package-lists
         run: |
-          echo "package-lists=${{ env.PACKAGE_LISTS }}" >> $GITHUB_OUTPUT
+          LOCAL_PACKAGE_LISTS='["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "DynamicTablesPkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+          echo "package-lists=$LOCAL_PACKAGE_LISTS" >> $GITHUB_OUTPUT
 
   build_linux_clang_basic_acceptance_test:
     needs: set_package_lists
