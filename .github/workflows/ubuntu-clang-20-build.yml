@@ -29,9 +29,7 @@ jobs:
       - name: Set Package Lists
         id: set-package-lists
         run: |
-          LOCAL_PACKAGE_LISTS=${{ toJSON(env.PACKAGE_LISTS) }}
-          echo "package-lists=$LOCAL_PACKAGE_LISTS"
-          echo "package-lists=$LOCAL_PACKAGE_LISTS" >> $GITHUB_OUTPUT
+          echo "package-lists=${{ toJSON(env.PACKAGE_LISTS) }}" >> $GITHUB_OUTPUT
 
   build_linux_clang_basic_acceptance_test:
     needs: set_package_lists
