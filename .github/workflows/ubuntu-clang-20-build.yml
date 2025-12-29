@@ -32,6 +32,7 @@ jobs:
           echo "package-lists=${{ env.PACKAGE_LISTS }}" >> $GITHUB_OUTPUT
 
   build_linux_clang_basic_acceptance_test:
+    needs: set_package_lists
     uses: ./.github/workflows/ubuntu-clang-20-basic-acceptance-test.yml
     with:
       python-version: '3.12'
@@ -39,6 +40,7 @@ jobs:
       edk2-tools-build-params: '-t CLANGPDB'
 
   build_linux_clang_no_target_test:
+    needs: set_package_lists
     uses: ./.github/workflows/ubuntu-clang-20-no-target-test.yml
     with:
       python-version: '3.12'
