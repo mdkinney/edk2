@@ -29,9 +29,7 @@ jobs:
       - name: Set Package Lists
         id: set-package-lists
         run: |
-          LOCAL_PACKAGE_LISTS1='["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "DynamicTablesPkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
-          LOCAL_PACKAGE_LISTS=${{ fromJSON(env.PACKAGE_LISTS) }}
-          echo "package-lists=$LOCAL_PACKAGE_LISTS1"
+          LOCAL_PACKAGE_LISTS=${{ toJSON(env.PACKAGE_LISTS) }}
           echo "package-lists=$LOCAL_PACKAGE_LISTS"
           echo "package-lists=$LOCAL_PACKAGE_LISTS" >> $GITHUB_OUTPUT
 
