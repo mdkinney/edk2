@@ -29,10 +29,30 @@ jobs:
     outputs:
       package-lists: ${{ steps.set-package-lists.outputs.package-lists }}
     steps:
-      - name: Set Package Lists
+      - name: Use Default Package Lists
+        if: github.event_name != 'pull_request'
+        run: |
+          echo "LOCAL_PACKAGE_LISTS=${{ toJSON(env.PACKAGE_LISTS) }}" >> $GITHUB_ENV
+      - name: Checkout
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        if: github.event_name == 'pull_request'
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Install Python in venv
+        if: github.event_name == 'pull_request'
+        uses: ./.github/actions/linux-install-python-venv
+        with:
+          python-version: '3.12'
+      - name: Run stuart_pr_eval
+        if: github.event_name == 'pull_request'
+        run: |
+          LOCAL_PACKAGE_LISTS=["$(stuart_pr_eval -c .pytool/CISettings.py --pr-target ${{ github.event.pull_request.head.sha }} --output-csv-format-string {pkgcsv})"]
+          echo "LOCAL_PACKAGE_LISTS=${{ toJSON(LOCAL_PACKAGE_LISTS) }}" >> $GITHUB_ENV
+      - name: Set Default Package Lists
         id: set-package-lists
         run: |
-          echo "package-lists=${{ toJSON(env.PACKAGE_LISTS) }}" >> $GITHUB_OUTPUT
+          echo "package-lists=$LOCAL_PACKAGE_LISTS" >> $GITHUB_OUTPUT
 
   build_linux_clang_basic_acceptance_test:
     needs: set_package_lists
@@ -49,7 +69,7 @@ jobs:
       python-version: '3.12'
       stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGPDB'
-      package-lists: ${{ toJSON(env.PACKAGE_LISTS) }}
+      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
 
   build_linux_clang_packages_ia32_x64:
     needs: [set_package_lists, build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
