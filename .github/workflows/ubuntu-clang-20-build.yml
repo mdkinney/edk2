@@ -16,6 +16,9 @@ on:
     branches:
       - sandbox/master
 
+env:
+  PACKAGE_LISTS: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "DynamicTablesPkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+
 jobs:
   build_linux_clang_basic_acceptance_test:
     uses: ./.github/workflows/ubuntu-clang-20-basic-acceptance-test.yml
@@ -30,7 +33,7 @@ jobs:
       python-version: '3.12'
       stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGPDB'
-      package-lists: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+      package-lists: ${{ env.PACKAGE_LISTS }}
 
   build_linux_clang_packages_ia32_x64:
     needs: [build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
@@ -42,10 +45,10 @@ jobs:
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["IA32", "X64"]'
       tool_chain_tag_list: '["CLANGPDB", "CLANGDWARF"]'
-      package-lists: '["ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg", "CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg"]'
+      package-lists: ${{ env.PACKAGE_LISTS }}
 
   build_linux_clangdwarf_aarch64_riscv64_packages:
-    needs: build_linux_clang_packages_ia32_x64
+    needs: [build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
       python-version: '3.12'
@@ -54,7 +57,7 @@ jobs:
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["AARCH64", "RISCV64"]'
       tool_chain_tag_list: '["CLANGDWARF"]'
-      package-lists: '["ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg", "CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg"]'
+      package-lists: ${{ env.PACKAGE_LISTS }}
 
   build_linux_clangdwarf_noopt_unit_tests:
     needs: [build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
@@ -66,7 +69,7 @@ jobs:
       build_type_list: '["NOOPT"]'
       build_arch_list: '["X64"]'
       tool_chain_tag_list: '["CLANGDWARF", "GCC", "GCC5", "GCCNOLTO"]'
-      package-lists: '["ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg", "CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg"]'
+      package-lists: ${{ env.PACKAGE_LISTS }}
 
   build_linux_clangdwarf_emulatorpkg:
     name: Build Linux CLANGDWARF EmulatorPkg
