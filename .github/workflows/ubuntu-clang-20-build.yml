@@ -20,7 +20,7 @@ env:
   PACKAGE_LISTS: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "DynamicTablesPkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
 
 jobs:
-  set_package_lists_from_env:
+  set_package_lists:
     name: Set Package Lists
     runs-on: ubuntu-latest
     outputs:
@@ -68,7 +68,7 @@ jobs:
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["AARCH64", "RISCV64"]'
       tool_chain_tag_list: '["CLANGDWARF"]'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: ${{ needs.set_package_lists_from_env.outputs.package-lists }}
 
   build_linux_clangdwarf_noopt_unit_tests:
     needs: [build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
