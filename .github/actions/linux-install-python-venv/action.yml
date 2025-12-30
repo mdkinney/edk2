@@ -40,7 +40,8 @@ runs:
         python -m pip install --no-cache-dir --upgrade pip
         pip install --no-cache-dir -r ${{ inputs.pip-requirements }}
         ls -al venv/bin/
-        echo "PATH=$PWD/venv/bin:$PATH" >> $GITHUB_ENV
+        echo "VIRTUAL_ENV=$PWD/venv" >> $GITHUB_ENV
+        echo "$PWD/venv/bin" >> $GITHUB_PATH
     - name: Install pip requirements if cache missed
       shell: bash
       if: steps.cache-venv.outputs.cache-hit != 'true'
@@ -61,10 +62,12 @@ runs:
       if: steps.cache-venv.outputs.cache-hit == 'true'
       shell: bash
       run: |
-        echo "PATH=$PWD/venv/bin:$PATH" >> $GITHUB_ENV
+        echo "VIRTUAL_ENV=$PWD/venv" >> $GITHUB_ENV
+        echo "$PWD/venv/bin" >> $GITHUB_PATH
     - name: List venv pip inventory
       shell: bash
       run: |
+        export
         ls -al venv/bin/
         which python
         which pip
