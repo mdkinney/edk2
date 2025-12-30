@@ -57,6 +57,10 @@ jobs:
         uses: ./.github/actions/linux-install-python-venv
         with:
           python-version: '3.12'
+      - name: PatchCheck PR
+        if: github.event_name == 'pull_request'
+        run: |
+          python BaseTools/Scripts/PatchCheck.py HEAD~${{ github.event.pull_request.commits }}..HEAD
       - name: Run stuart_pr_eval to generate Package List
         if: github.event_name == 'pull_request'
         run: |
