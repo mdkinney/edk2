@@ -39,20 +39,28 @@ runs:
         source .venv/bin/activate
         python -m pip install --upgrade pip
         pip install -r ${{ inputs.pip-requirements }}
-        echo "PATH=$GITHUB_WORKSPACE/.venv/bin:$PATH">> $GITHUB_ENV
+        ls -al .venv/bin/
+        which python
+        which pip
+        python --version
+        pip --version
+        pip list --verbose
     - name: Save venv cache if cache missed
       uses: actions/cache/save@v5
       if: steps.cache-venv.outputs.cache-hit != 'true'
       with:
         path: .venv
         key: ${{ steps.cache-venv.outputs.cache-primary-key }}
-    - name: Activate venv if cache hit
+    - name: Add venv to PATH
       shell: bash
-      if: steps.cache-venv.outputs.cache-hit == 'true'
       run: |
         echo "PATH=$GITHUB_WORKSPACE/.venv/bin:$PATH">> $GITHUB_ENV
     - name: List venv pip inventory
       shell: bash
       run: |
-        pip list --verbose
         ls -al .venv/bin/
+        which python
+        which pip
+        python --version
+        pip --version
+        pip list --verbose
