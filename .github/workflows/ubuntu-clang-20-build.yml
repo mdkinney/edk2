@@ -33,7 +33,7 @@ jobs:
       - name: Use Default Package Lists
         if: github.event_name != 'pull_request'
         run: |
-          echo "LOCAL_PACKAGE_LISTS=${{ env.PACKAGE_LISTS }}" >> $GITHUB_ENV
+          echo "LOCAL_PACKAGE_LISTS=${{ toJSON(env.PACKAGE_LISTS) }}" >> $GITHUB_ENV
       - name: Checkout
         if: github.event_name == 'pull_request'
         #
@@ -51,18 +51,20 @@ jobs:
         uses: ./.github/actions/linux-install-python-venv
         with:
           python-version: '3.12'
-      - name: Use stuart_pr_eval Package List
+      - name: Run stuart_pr_eval to generate Package List
         if: github.event_name == 'pull_request'
         run: |
           PR_EVAL_LIST=$(stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~1 --output-csv-format-string {pkgcsv})
           PR_EVAL_LIST=[\"$PR_EVAL_LIST\"]
-          echo "PR_EVAL_LIST=$PR_EVAL_LIST"
-          #echo "LOCAL_PACKAGE_LISTS=[\"$PR_EVAL_LIST\"]" >> $GITHUB_ENV
-          echo "LOCAL_PACKAGE_LISTS=$PR_EVAL_LIST" >> $GITHUB_ENV
+          echo "PR_EVAL_LIST=$PR_EVAL_LIST" >> $GITHUB_ENV
+      - name: Use stuart_pr_eval Package List
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "LOCAL_PACKAGE_LISTS=${{ toJSON(env.PR_EVAL_LIST) }}" >> $GITHUB_ENV
       - name: Set Package Lists
         id: set-package-lists
         run: |
-          echo "package-lists=${{ toJSON(env.LOCAL_PACKAGE_LISTS) }}" >> $GITHUB_OUTPUT
+          echo "package-lists=$LOCAL_PACKAGE_LISTS" >> $GITHUB_OUTPUT
 
   build_linux_clang_basic_acceptance_test:
     needs: set_package_lists
