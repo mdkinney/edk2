@@ -37,13 +37,9 @@ runs:
       run: |
         python -m venv .venv
         source .venv/bin/activate
-        echo "PATH=$GITHUB_WORKSPACE/.venv/bin:$PATH">> $GITHUB_ENV
-    - name: Install pip requirements if cache missed
-      shell: bash
-      if: steps.cache-venv.outputs.cache-hit != 'true'
-      run: |
         python -m pip install --upgrade pip
         pip install -r ${{ inputs.pip-requirements }}
+        echo "PATH=$GITHUB_WORKSPACE/.venv/bin:$PATH">> $GITHUB_ENV
     - name: Save venv cache if cache missed
       uses: actions/cache/save@v5
       if: steps.cache-venv.outputs.cache-hit != 'true'
