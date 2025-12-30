@@ -36,6 +36,9 @@ runs:
       if: steps.cache-venv.outputs.cache-hit != 'true'
       run: |
         python -m venv --copies .venv
+        source .venv/bin/activate
+        python -m pip install --no-cache-dir --upgrade pip
+        pip install --no-cache-dir -r ${{ inputs.pip-requirements }}
         ls -al .venv/bin/
         echo "PATH=$PWD/.venv/bin:$PATH" >> $GITHUB_ENV
     - name: Install pip requirements if cache missed
@@ -45,10 +48,8 @@ runs:
         ls -al .venv/bin/
         which python
         python --version
-        python -m pip install --no-cache-dir --upgrade pip
         which pip
         pip --version
-        pip install --no-cache-dir -r ${{ inputs.pip-requirements }}
         pip list --verbose
     - name: Save venv cache if cache missed
       uses: actions/cache/save@v5
