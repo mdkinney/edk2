@@ -1,6 +1,6 @@
 ## @file
 # Composite action that Installs Python in a virtual environment, installs
-# edk2 pip requirements, and adds Python virtual environment to PATH.
+# pip requirements, and adds Python virtual environment to PATH.
 # Caches the virtual environment to avoid re-installing on subsequent runs.
 #
 # Copyright (C) 2025 Intel Corporation.
@@ -13,6 +13,10 @@ inputs:
   python-version:
     description: 'Python version to install (e.g., 3.12)'
     required: true
+  pip-requirements:
+    description: 'Path to pip requirements file'
+    required: false
+    default: 'pip-requirements.txt'
 runs:
   using: 'composite'
   steps:
@@ -21,7 +25,7 @@ runs:
       id: cache-venv
       with:
         path: .venv
-        key: ${{ runner.os }}-Python-${{ inputs.python-version }}-venv-${{ hashFiles('pip-requirements.txt') }}
+        key: ${{ runner.os }}-Python-${{ inputs.python-version }}-venv-${{ hashFiles(inputs.pip-requirements) }}
     - name: Set up Python ${{ inputs.python-version }}
       if: steps.cache-venv.outputs.cache-hit != 'true'
       uses: actions/setup-python@v5
@@ -35,7 +39,8 @@ runs:
         PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
         echo PATH=%PATH%>> %GITHUB_ENV%
         python -m pip install --upgrade pip
-        pip install -r pip-requirements.txt
+        pip install -r ${{ inputs.pip-requirements }}
+        pip list --verbose
     - name: Save venv cache
       uses: actions/cache/save@v5
       if: steps.cache-venv.outputs.cache-hit != 'true'
@@ -48,3 +53,4 @@ runs:
       run: |
         PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
         echo PATH=%PATH%>> %GITHUB_ENV%
+        pip list --verbose
