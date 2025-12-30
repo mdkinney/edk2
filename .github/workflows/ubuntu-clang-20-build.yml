@@ -37,7 +37,7 @@ jobs:
       - name: Compute Number of Commits in PR
         if: github.event_name == 'pull_request'
         run: |
-           echo "NUM_PR_COMMITS=$((${{ github.event.pull_request.commits + 1 }}))" >> $GITHUB_ENV
+           echo "NUM_PR_COMMITS=$((${{ github.event.pull_request.commits}} + 1 ))" >> $GITHUB_ENV
       - name: Checkout
         if: github.event_name == 'pull_request'
         uses: actions/checkout@v6
