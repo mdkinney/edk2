@@ -61,8 +61,8 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           git log --oneline -n 10
-          stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~${{ env.PR_COMMIT_COUNT }} --output-csv-format-string {pkgcsv} -v
-          PR_EVAL_LIST=$(stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~${{ env.PR_COMMIT_COUNT }} --output-csv-format-string {pkgcsv})
+          stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~${{ github.event.pull_request.commits }} --output-csv-format-string {pkgcsv} -v
+          PR_EVAL_LIST=$(stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~${{ github.event.pull_request.commits }} --output-csv-format-string {pkgcsv})
           PR_EVAL_LIST=[\"$PR_EVAL_LIST\"]
           echo "PR_EVAL_LIST=$PR_EVAL_LIST" >> $GITHUB_ENV
       - name: Use stuart_pr_eval Package List
