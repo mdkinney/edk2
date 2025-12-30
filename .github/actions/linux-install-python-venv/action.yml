@@ -37,9 +37,6 @@ runs:
       run: |
         python -m venv --copies .venv
         ls -al .venv/bin/
-        source .venv/bin/activate
-        python -m pip install  --no-cache-dir --upgrade pip
-        ls -al .venv/bin/
         echo "PATH=$PWD/.venv/bin:$PATH" >> $GITHUB_ENV
     - name: Install pip requirements if cache missed
       shell: bash
@@ -47,8 +44,9 @@ runs:
       run: |
         ls -al .venv/bin/
         which python
-        which pip
         python --version
+        python -m pip install --no-cache-dir --upgrade pip
+        which pip
         pip --version
         pip install --no-cache-dir -r ${{ inputs.pip-requirements }}
         pip list --verbose
