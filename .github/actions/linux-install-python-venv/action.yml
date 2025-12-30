@@ -41,14 +41,14 @@ runs:
       shell: bash
       if: steps.cache-venv.outputs.cache-hit != 'true'
       run: |
-        python -m pip install --upgrade pip
-        pip install -r ${{ inputs.pip-requirements }}
+        .venv/bin/python -m pip install --upgrade pip
+        .venv/bin/pip install -r ${{ inputs.pip-requirements }}
         ls -al .venv/bin/
         which python
         which pip
-        python --version
-        pip --version
-        pip list --verbose
+        .venv/bin/python --version
+        .venv/bin/pip --version
+        .venv/bin/pip list --verbose
     - name: Save venv cache if cache missed
       uses: actions/cache/save@v5
       if: steps.cache-venv.outputs.cache-hit != 'true'
