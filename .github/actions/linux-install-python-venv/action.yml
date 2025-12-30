@@ -39,19 +39,6 @@ runs:
         source venv/bin/activate
         python -m pip install --no-cache-dir --upgrade pip
         pip install --no-cache-dir -r ${{ inputs.pip-requirements }}
-        ls -al venv/bin/
-        echo "VIRTUAL_ENV=$PWD/venv" >> $GITHUB_ENV
-        echo "$PWD/venv/bin" >> $GITHUB_PATH
-    - name: Install pip requirements if cache missed
-      shell: bash
-      if: steps.cache-venv.outputs.cache-hit != 'true'
-      run: |
-        ls -al venv/bin/
-        which python
-        python --version
-        which pip
-        pip --version
-        pip list --verbose
     - name: Save venv cache if cache missed
       uses: actions/cache/save@v5
       if: steps.cache-venv.outputs.cache-hit != 'true'
@@ -59,7 +46,6 @@ runs:
         path: venv
         key: ${{ steps.cache-venv.outputs.cache-primary-key }}
     - name: Add venv to PATH
-      if: steps.cache-venv.outputs.cache-hit == 'true'
       shell: bash
       run: |
         echo "VIRTUAL_ENV=$PWD/venv" >> $GITHUB_ENV
