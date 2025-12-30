@@ -30,15 +30,16 @@ jobs:
     outputs:
       package-lists: ${{ steps.set-package-lists.outputs.package-lists }}
     steps:
-      - name: Show runner env
-        run: |
-          echo "runner.os=${{ runner.os }}"
-          echo "runner.name=${{ runner.name }}"
-          echo "runner.environment=${{ runner.environment }}"
       - name: Use Default Package Lists
         if: github.event_name != 'pull_request'
         run: |
           echo "LOCAL_PACKAGE_LISTS=${{ toJSON(env.PACKAGE_LISTS) }}" >> $GITHUB_ENV
+      - name: Checkout
+        if: github.event_name != 'pull_request'
+        #
+        # If not PR, then use default checkout settings with fetch-depth of 1
+        #
+        uses: actions/checkout@v6
       - name: Get Number of Commit in PR
         if: github.event_name == 'pull_request'
         run: |
@@ -55,10 +56,8 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: ${{ env.PR_COMMIT_COUNT }}
       - name: Ensure safe directory for Git
-        if: github.event_name == 'pull_request'
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Install Python in venv
-        if: github.event_name == 'pull_request'
         uses: ./.github/actions/linux-install-python-venv
         with:
           python-version: '3.12'
