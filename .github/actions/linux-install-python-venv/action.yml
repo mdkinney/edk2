@@ -58,6 +58,7 @@ runs:
     - name: List venv pip inventory
       shell: bash
       run: |
+        source .venv/bin/activate
         ls -al .venv/bin/
         which python
         which pip
