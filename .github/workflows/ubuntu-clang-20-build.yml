@@ -42,6 +42,7 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: actions/checkout@v6
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: ${{ env.NUM_PR_COMMITS }}
       - name: Ensure safe directory for Git
         if: github.event_name == 'pull_request'
