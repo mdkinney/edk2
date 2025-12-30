@@ -30,6 +30,11 @@ jobs:
     outputs:
       package-lists: ${{ steps.set-package-lists.outputs.package-lists }}
     steps:
+      - name: Show runner env
+        run: |
+          echo "runner.os=${{ runner.os }}"
+          echo "runner.name=${{ runner.name }}"
+          echo "runner.environment=${{ runner.environment }}"
       - name: Use Default Package Lists
         if: github.event_name != 'pull_request'
         run: |
