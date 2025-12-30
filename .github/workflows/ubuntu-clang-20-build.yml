@@ -15,6 +15,7 @@ on:
   pull_request:
     branches:
       - sandbox/master
+      - clang_ci_v5b
 
 env:
   #
