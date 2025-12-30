@@ -33,8 +33,8 @@ jobs:
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Restore cached venv
-        uses: actions/cache/restore@v4
         id: cache-venv
+        uses: actions/cache/restore@v4
         with:
           path: .venv
           key: ${{ runner.os }}-venv-${{ hashFiles('pip-requirements.txt') }}

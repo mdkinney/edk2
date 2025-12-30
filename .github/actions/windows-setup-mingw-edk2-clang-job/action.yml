@@ -47,6 +47,8 @@ runs:
       with:
         path: ${{ inputs.edk2-clang-install_path }}
         key: ${{ runner.os }}-edk2-clang-${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}
+        restore-keys: |
+          ${{ runner.os }}-edk2-clang-${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}
     - name: Install TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}
       if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
       shell: cmd

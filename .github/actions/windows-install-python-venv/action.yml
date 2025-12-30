@@ -21,11 +21,13 @@ runs:
   using: 'composite'
   steps:
     - name: Restore cached venv
-      uses: actions/cache/restore@v5
       id: cache-venv
+      uses: actions/cache/restore@v5
       with:
         path: .venv
         key: ${{ runner.os }}-Python-${{ inputs.python-version }}-venv-${{ hashFiles(inputs.pip-requirements) }}
+        restore-keys: |
+          ${{ runner.os }}-Python-${{ inputs.python-version }}-venv-${{ hashFiles(inputs.pip-requirements) }}
     - name: Set up Python ${{ inputs.python-version }}
       if: steps.cache-venv.outputs.cache-hit != 'true'
       uses: actions/setup-python@v6

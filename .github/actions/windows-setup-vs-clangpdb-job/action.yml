@@ -44,6 +44,8 @@ runs:
       with:
         path: ${{ inputs.llvm_install_path }}
         key: ${{ runner.os }}-LLVM-${{ inputs.llvm_version }}-win64.exe
+        restore-keys: |
+          ${{ runner.os }}-LLVM-${{ inputs.llvm_version }}-win64.exe
     - name: Install CLANG ${{ inputs.llvm_version }}
       if: steps.cache-clang.outputs.cache-hit != 'true'
       shell: cmd
