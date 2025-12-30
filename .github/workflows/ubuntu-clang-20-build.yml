@@ -48,7 +48,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           PR_EVAL_LIST="$(stuart_pr_eval -c .pytool/CISettings.py --pr-target ${{ github.event.pull_request.head.sha }} --output-csv-format-string {pkgcsv})"
-          echo "LOCAL_PACKAGE_LISTS=${{ toJSON(PR_EVAL_LIST) }}" >> $GITHUB_ENV
+          echo "LOCAL_PACKAGE_LISTS=${{ toJSON($PR_EVAL_LIST) }}" >> $GITHUB_ENV
       - name: Set Default Package Lists
         id: set-package-lists
         run: |
