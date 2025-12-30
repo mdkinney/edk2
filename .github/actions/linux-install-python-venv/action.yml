@@ -24,7 +24,7 @@ runs:
       uses: actions/cache/restore@v5
       id: cache-venv
       with:
-        path: .venv
+        path: venv
         key: ${{ runner.os }}-Python-${{ inputs.python-version }}-venv-${{ hashFiles(inputs.pip-requirements) }}
     - name: Set up Python ${{ inputs.python-version }}
       if: steps.cache-venv.outputs.cache-hit != 'true'
@@ -35,17 +35,17 @@ runs:
       shell: bash
       if: steps.cache-venv.outputs.cache-hit != 'true'
       run: |
-        python -m venv --copies .venv
-        source .venv/bin/activate
+        python -m venv --copies venv
+        source venv/bin/activate
         python -m pip install --no-cache-dir --upgrade pip
         pip install --no-cache-dir -r ${{ inputs.pip-requirements }}
-        ls -al .venv/bin/
-        echo "PATH=$PWD/.venv/bin:$PATH" >> $GITHUB_ENV
+        ls -al venv/bin/
+        echo "PATH=$PWD/venv/bin:$PATH" >> $GITHUB_ENV
     - name: Install pip requirements if cache missed
       shell: bash
       if: steps.cache-venv.outputs.cache-hit != 'true'
       run: |
-        ls -al .venv/bin/
+        ls -al venv/bin/
         which python
         python --version
         which pip
@@ -55,17 +55,17 @@ runs:
       uses: actions/cache/save@v5
       if: steps.cache-venv.outputs.cache-hit != 'true'
       with:
-        path: .venv
+        path: venv
         key: ${{ steps.cache-venv.outputs.cache-primary-key }}
     - name: Add venv to PATH
       if: steps.cache-venv.outputs.cache-hit == 'true'
       shell: bash
       run: |
-        echo "PATH=$PWD/.venv/bin:$PATH" >> $GITHUB_ENV
+        echo "PATH=$PWD/venv/bin:$PATH" >> $GITHUB_ENV
     - name: List venv pip inventory
       shell: bash
       run: |
-        ls -al .venv/bin/
+        ls -al venv/bin/
         which python
         which pip
         python --version
