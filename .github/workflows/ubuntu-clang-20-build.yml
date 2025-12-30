@@ -34,17 +34,15 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           echo "LOCAL_PACKAGE_LISTS=${{ toJSON(env.PACKAGE_LISTS) }}" >> $GITHUB_ENV
-#      - name: Compute Number of Commits in PR
-#        if: github.event_name == 'pull_request'
-#        run: |
-#           echo "NUM_PR_COMMITS=$((${{ github.event.pull_request.commits}} + 1 ))" >> $GITHUB_ENV
       - name: Checkout
         if: github.event_name == 'pull_request'
+        #
+        # Checkout PR that defaults to pulling the merge commit.continue-on-error:
+        # Use depth 2 to allow stuart_pr_eval with a target of HEAD~1
+        #
         uses: actions/checkout@v6
         with:
           fetch-depth: 2
-#          ref: ${{ github.event.pull_request.head.sha }}
-#          fetch-depth: ${{ env.NUM_PR_COMMITS }}
       - name: Ensure safe directory for Git
         if: github.event_name == 'pull_request'
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
@@ -56,9 +54,7 @@ jobs:
       - name: Use stuart_pr_eval Package List
         if: github.event_name == 'pull_request'
         run: |
-          git log --oneline -n 10
-          stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~1 --output-csv-format-string [{pkgcsv}] -v
-          PR_EVAL_LIST=$(stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~1 --output-csv-format-string [{pkgcsv}])
+          PR_EVAL_LIST=$(stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~1 --output-csv-format-string ["{pkgcsv}"])
           echo "PR_EVAL_LIST=$PR_EVAL_LIST"
           echo "LOCAL_PACKAGE_LISTS=\"$PR_EVAL_LIST\"" >> $GITHUB_ENV
       - name: Set Package Lists
