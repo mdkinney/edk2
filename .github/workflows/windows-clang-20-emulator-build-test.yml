@@ -75,14 +75,17 @@ jobs:
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
       - name: Build Windows EmulatorPkg DEBUG ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }}
+        shell: cmd
         run: |
           call edksetup.bat ${{ inputs.edk-setup-params }}
           call build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/Emulator${{ matrix.build_arch }}DebugBuild.log >NUL
       - name: Build Windows EmulatorPkg RELEASE ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }}
+        shell: cmd
         run: |
           call edksetup.bat ${{ inputs.edk-setup-params }}
           call build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/Emulator${{ matrix.build_arch }}ReleaseBuild.log >NUL
       - name: Build Windows EmulatorPkg NOOPT ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }}
+        shell: cmd
         run: |
           call edksetup.bat ${{ inputs.edk-setup-params }}
           call build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/Emulator${{ matrix.build_arch }}NooptBuild.log >NUL
