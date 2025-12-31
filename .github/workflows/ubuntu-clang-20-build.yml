@@ -151,6 +151,7 @@ jobs:
       pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGDWARF'
+      edk-setup-params: ''
       build_arch_list: '["IA32", "X64"]'
       tool_chain_tag_list: '["CLANGDWARF"]'
 

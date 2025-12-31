@@ -67,7 +67,6 @@ jobs:
         if: always()
 
   build_windows_mingw_edk2_clang_packages:
-    name: Build Windows Mingw edk2-clang Packages (${{ join(matrix.*, ' - ') }})
     needs: build_windows_mingw_edk2_clang_precheck
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
@@ -83,7 +82,6 @@ jobs:
       package-lists: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
 
   build_windows_mingw_edk2_clang_noopt_unit_tests:
-    name: Build Windows Mingw edk2-clang Unit Tests (${{ join(matrix.*, ' - ') }})
     needs: build_windows_mingw_edk2_clang_precheck
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
@@ -101,32 +99,13 @@ jobs:
   build_windows_mingw_edk2_clang_emulatorpkg:
     name: Build Windows Mingw edk2-clang EmulatorPkg
     needs: build_windows_mingw_edk2_clang_precheck
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Setup Windows Mingw edk2-clang Job
-        uses: ./.github/actions/windows-setup-clang-job
-        with:
-          windows-clang-installer: 'edk2-clang'
-          python-version: '3.12'
-          pip-requirements: 'pip-requirements.txt'
-          stuart-ci-settings-file: '.pytool/CISettings.py'
-          edk2-tools-build-params: '-a X64 -t CLANGDWARF'
-      - name: Build Windows Mingw edk2-clang EmulatorPkg
-        shell: cmd
-        run: |
-          call edksetup.bat Mingw-w64
-          call build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/EmulatorX64NooptBuild.log >NUL
-          call build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/EmulatorX64DebugBuild.log >NUL
-          call build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/EmulatorX64ReleaseBuild.log >NUL
-      - name: Upload Windows Mingw edk2-clang EmulatorPkg Logs
-        uses: actions/upload-artifact@v6
-        with:
-          name: Upload Windows Mingw edk2-clang EmulatorPkg Logs
-          path: |
-            BaseTools/BaseToolsBuild/*.txt
-            Build/**/BUILDLOG*.txt
-            Build/*.txt
-            Build/*.log
-        if: always()
+    uses: ./.github/workflows/windows-clang-20-emulatorpkg-build.yml
+    with:
+      windows-clang-installer: 'edk2-clang'
+      python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
+      edk2-tools-build-params: '-a X64 -t CLANGDWARF'
+      edk-setup-params: 'Mingw-w64'
+      build_arch_list: '["X64"]'
+      tool_chain_tag_list: '["CLANGDWARF"]'
