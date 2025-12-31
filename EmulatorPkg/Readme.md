@@ -1,5 +1,6 @@
 ## Overview
 
+
 EmulatorPkg provides an environment where a UEFI environment can be
 emulated under an environment where a full UEFI compatible
 environment is not possible.  (For example, running under an OS
