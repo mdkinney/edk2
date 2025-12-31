@@ -18,14 +18,9 @@ on:
       - sandbox/master
       - clang_ci_v5b
 
-env:
-  #
-  # Package array that has similar execution times across 2 jobs.
-  #
-  PACKAGE_LISTS: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "DynamicTablesPkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
-
 jobs:
   set_package_lists:
+    name: Set Package Lists
     uses: ./.github/workflows/ubuntu-set-package-lists-and-patch-check.yml
 
   build_windows_mingw_edk2_clang_packages_basic_acceptance_test:
@@ -138,8 +133,10 @@ jobs:
   build_windows_mingw_edk2_clang_emulatorpkg:
     name: Build Windows Mingw edk2-clang EmulatorPkg
     needs:
+      - set_package_lists
       - build_windows_mingw_edk2_clang_packages_basic_acceptance_test
       - build_windows_mingw_edk2_clang_platforms_basic_acceptance_test
+    if: contains(needs.set_package_lists.outputs.package-lists, 'EmulatorPkg')
     uses: ./.github/workflows/windows-clang-20-emulator-build-test.yml
     with:
       windows-clang-installer: 'edk2-clang'

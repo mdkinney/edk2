@@ -19,6 +19,7 @@ on:
 
 jobs:
   set_package_lists:
+    name: Set Package Lists
     uses: ./.github/workflows/ubuntu-set-package-lists-and-patch-check.yml
     with:
       run-patch-check: true
