@@ -21,8 +21,6 @@ runs:
       with:
         path: .git/modules
         key: ${{ runner.os }}-stuart-setup-submodules-${{ hashFiles('.gitmodules', inputs.stuart-ci-settings-file) }}
-        restore-keys: |
-          ${{ runner.os }}-stuart-setup-submodules-${{ hashFiles('.gitmodules', inputs.stuart-ci-settings-file) }}
     - name: 'Clone Submodules'
       shell: cmd
       run: stuart_setup -c ${{ inputs.stuart-ci-settings-file }}

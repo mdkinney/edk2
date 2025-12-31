@@ -29,6 +29,10 @@ inputs:
   python-version:
     description: 'Python version to install (e.g., 3.12)'
     required: true
+  pip-requirements:
+    description: 'Path to pip requirements file'
+    required: true
+    default: 'pip-requirements.txt'
   stuart-ci-settings-file:
     description: 'Path to the stuart CI settings file (e.g. .pytool/CISettings.py)'
     required: true
@@ -44,8 +48,6 @@ runs:
       with:
         path: ${{ inputs.llvm_install_path }}
         key: ${{ runner.os }}-llvm-mingw-${{ inputs.llvm_version }}-ucrt-x86_64
-        restore-keys: |
-          ${{ runner.os }}-llvm-mingw-${{ inputs.llvm_version }}-ucrt-x86_64
     - name: Install LLVM MINGW ${{ inputs.llvm_version }}
       if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
       shell: cmd
@@ -71,6 +73,7 @@ runs:
       uses: ./.github/actions/windows-install-python-venv
       with:
         python-version: ${{ inputs.python-version }}
+        pip-requirements: ${{ inputs.pip-requirements }}
     - name: Install Git Submodules from stuart_setup
       uses: ./.github/actions/windows-install-git-submodules
       with:

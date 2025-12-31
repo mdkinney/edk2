@@ -22,14 +22,15 @@ jobs:
     name: Build Windows Mingw edk2-clang Precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
           edk2-clang-version: '20.1.8'
           edk2-clang-version-patch-level: '0'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t CLANGPDB'
       - name: Build HelloWorld CLANGPDB
@@ -93,14 +94,15 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
           edk2-clang-version: '20.1.8'
           edk2-clang-version-patch-level: '0'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
       - name: Build Windows Mingw edk2-clang Packages ${{ matrix.tool_chain_tag }}
@@ -135,14 +137,15 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
           edk2-clang-version: '20.1.8'
           edk2-clang-version-patch-level: '0'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
       - name: Build Windows Mingw edk2-clang Unit Tests ${{ matrix.tool_chain_tag }}
@@ -165,14 +168,15 @@ jobs:
     needs: build_windows_mingw_edk2_clang_precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
           edk2-clang-version: '20.1.8'
           edk2-clang-version-patch-level: '0'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t CLANGDWARF'
       - name: Build Windows Mingw edk2-clang EmulatorPkg

@@ -19,6 +19,11 @@ on:
         required: true
         type: string
         default: '3.12'
+      pip-requirements:
+        description: 'Path to pip requirements file'
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
       stuart-ci-settings-file:
         description: 'The path to the Stuart CI settings file.'
         required: true
@@ -32,19 +37,18 @@ on:
 
 jobs:
   build_linux_clang_packages_basic_acceptance_test:
-    name: Build Linux CLANGPDB CLANGDWARF Basic Acceptance Test
+    name: Build Linux CLANGPDB CLANGDWARF Packages Basic Acceptance Test
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
       - name: Build HelloWorld CLANGPDB
@@ -62,10 +66,10 @@ jobs:
         run: |
           . ./edksetup.sh
           build -a IA32 -t CLANGDWARF -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
-      - name: Upload Linux CLANGPDB CLANGDWARF Package Basic Acceptance Test Logs
+      - name: Upload Linux CLANGPDB CLANGDWARF Packages Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
-          name: Upload Linux CLANGPDB CLANGDWARF Package Basic Acceptance Test Logs
+          name: Upload Linux CLANGPDB CLANGDWARF Packages Basic Acceptance Test Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
@@ -74,19 +78,18 @@ jobs:
         if: always()
 
   build_linux_clang_platforms_basic_acceptance_test:
-    name: Build Linux CLANGPDB CLANGDWARF Platform Basic Acceptance Test
+    name: Build Linux CLANGPDB CLANGDWARF Platforms Basic Acceptance Test
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
       - name: Build EmulatorPkg X64 Unix Host Module
@@ -101,10 +104,10 @@ jobs:
         run: |
           . ./edksetup.sh
           build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
-      - name: Upload Linux CLANGPDB CLANGDWARF Platform Basic Acceptance Test Logs
+      - name: Upload Linux CLANGPDB CLANGDWARF Platforms Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
-          name: Upload Linux CLANGPDB CLANGDWARF Platform Basic Acceptance Test Logs
+          name: Upload Linux CLANGPDB CLANGDWARF Platforms Basic Acceptance Test Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt

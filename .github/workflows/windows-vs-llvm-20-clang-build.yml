@@ -22,13 +22,14 @@ jobs:
     name: Build Windows Visual Studio CLANGPDB Precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
           llvm_version: '20.1.8'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: Build HelloWorld CLANGPDB
@@ -95,13 +96,14 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
           llvm_version: '20.1.8'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: Build Packages ${{ matrix.tool_chain_tag }}-VS
@@ -136,13 +138,14 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
           llvm_version: '20.1.8'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: Build Windows Visual Studio CLANGPDB Unit Tests ${{ matrix.tool_chain_tag }}-VS
@@ -165,13 +168,14 @@ jobs:
     needs: build_windows_visual_studio_clangpdb_precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
           llvm_version: '20.1.8'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: Build Windows Visual Studio CLANGPDB EmulatorPkg X64

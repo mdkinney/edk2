@@ -34,33 +34,14 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           echo "LOCAL_PACKAGE_LISTS=${{ toJSON(env.PACKAGE_LISTS) }}" >> $GITHUB_ENV
-      - name: Checkout
-        if: github.event_name != 'pull_request'
-        #
-        # If not PR, then use default checkout settings with fetch-depth of 1
-        #
-        uses: actions/checkout@v6
-      - name: Get Number of Commit in PR
-        if: github.event_name == 'pull_request'
-        run: |
-          echo "PR_COMMIT_COUNT=$((${{ github.event.pull_request.commits }} + 1))" >> $GITHUB_ENV
-      - name: Checkout
-        if: github.event_name == 'pull_request'
-        #
-        # Checkout PR with fetch-depth of number of commits in PR + 1
-        # This allows patch check to evaluate all commits in the PR, and for
-        # stuart_pr_eval to evaluate the files modified over the entire PR.
-        #
-        uses: actions/checkout@v6
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: ${{ env.PR_COMMIT_COUNT }}
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Install Python in venv
         uses: ./.github/actions/linux-install-python-venv
         with:
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
+          cache-name-suffix: '-set-package-lists'
       - name: PatchCheck PR
         if: github.event_name == 'pull_request'
         run: |
@@ -87,6 +68,7 @@ jobs:
     uses: ./.github/workflows/ubuntu-clang-20-basic-acceptance-test.yml
     with:
       python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGPDB'
 
@@ -95,6 +77,7 @@ jobs:
     uses: ./.github/workflows/ubuntu-clang-20-no-target-test.yml
     with:
       python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGPDB'
       package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
@@ -104,6 +87,7 @@ jobs:
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
       python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGPDB'
       build_type_list: '["DEBUG", "RELEASE"]'
@@ -116,6 +100,7 @@ jobs:
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
       python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGDWARF'
       build_type_list: '["DEBUG", "RELEASE"]'
@@ -128,6 +113,7 @@ jobs:
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
       python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGDWARF'
       build_type_list: '["NOOPT"]'
@@ -142,14 +128,13 @@ jobs:
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t CLANGDWARF'
       - name: Build Linux CLANGDWARF EmulatorPkg X64 DEBUG

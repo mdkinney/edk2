@@ -15,8 +15,12 @@ inputs:
     required: true
   pip-requirements:
     description: 'Path to pip requirements file'
-    required: false
+    required: true
     default: 'pip-requirements.txt'
+  cache-name-suffix:
+    description: 'Suffix for cache name to allow multiple caches
+    required: false
+    default: ''
 runs:
   using: 'composite'
   steps:
@@ -25,9 +29,7 @@ runs:
       uses: actions/cache/restore@v5
       with:
         path: .venv
-        key: ${{ runner.os }}-Python-${{ inputs.python-version }}-venv-${{ hashFiles(inputs.pip-requirements) }}
-        restore-keys: |
-          ${{ runner.os }}-Python-${{ inputs.python-version }}-venv-${{ hashFiles(inputs.pip-requirements) }}
+        key: ${{ runner.os }}-Python-${{ inputs.python-version }}-venv-${{ hashFiles(inputs.pip-requirements) }}${{ inputs.cache-name-suffix }}
     - name: Set up Python ${{ inputs.python-version }}
       if: steps.cache-venv.outputs.cache-hit != 'true'
       uses: actions/setup-python@v6

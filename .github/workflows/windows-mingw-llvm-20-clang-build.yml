@@ -23,14 +23,15 @@ jobs:
     name: Build Windows LLVM MINGW CLANG Precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
           llvm_version: '20250709'
           llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t CLANGDWARF'
       - name: Build HelloWorld CLANGDWARF
@@ -95,14 +96,15 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
           llvm_version: '20250709'
           llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
       - name: Build Windows LLVM MINGW CLANG Packages ${{ matrix.tool_chain_tag }}
@@ -137,14 +139,15 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
           llvm_version: '20250709'
           llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
       - name: Build Windows LLVM MINGW CLANG Unit Tests ${{ matrix.tool_chain_tag }}
@@ -167,14 +170,15 @@ jobs:
     needs: build_windows_llvm_mingw_clang_precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
           llvm_version: '20250709'
           llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t CLANGDWARF'
       - name: Build Windows LLVM MINGW CLANG EmulatorPkg X64

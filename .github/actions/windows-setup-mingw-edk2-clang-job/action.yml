@@ -32,6 +32,10 @@ inputs:
   python-version:
     description: 'Python version to install (e.g., 3.12)'
     required: true
+  pip-requirements:
+    description: 'Path to pip requirements file'
+    required: true
+    default: 'pip-requirements.txt'
   stuart-ci-settings-file:
     description: 'Path to the stuart CI settings file (e.g. .pytool/CISettings.py)'
     required: true
@@ -47,8 +51,6 @@ runs:
       with:
         path: ${{ inputs.edk2-clang-install_path }}
         key: ${{ runner.os }}-edk2-clang-${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}
-        restore-keys: |
-          ${{ runner.os }}-edk2-clang-${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}
     - name: Install TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }}.${{ inputs.edk2-clang-version-patch-level }}
       if: steps.cache-edk2-clang.outputs.cache-hit != 'true'
       shell: cmd
@@ -74,6 +76,7 @@ runs:
       uses: ./.github/actions/windows-install-python-venv
       with:
         python-version: ${{ inputs.python-version }}
+        pip-requirements: ${{ inputs.pip-requirements }}
     - name: Install Git Submodules from stuart_setup
       uses: ./.github/actions/windows-install-git-submodules
       with:

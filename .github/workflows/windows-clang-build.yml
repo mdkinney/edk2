@@ -26,10 +26,8 @@ jobs:
         build_package:
           - FatPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Restore cached venv
         uses: actions/cache/restore@v4
         id: cache-venv

@@ -23,14 +23,13 @@ jobs:
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t CLANGPDB'
       - name: Build HelloWorld CLANGPDB CLANGDWARF
@@ -84,14 +83,13 @@ jobs:
           - ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg
           - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
       - name: Build Packages ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }}
@@ -130,14 +128,13 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
       - name: Build Packages ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
@@ -175,14 +172,13 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
       - name: Build Packages ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
@@ -221,14 +217,13 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t ${{ matrix.tool_chain_tag }}'
       - name: Build Linux CLANGDWARF Unit Tests ${{ matrix.tool_chain_tag }}
@@ -252,14 +247,13 @@ jobs:
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t CLANGDWARF'
       - name: Build Linux CLANGDWARF EmulatorPkg X64
@@ -311,13 +305,14 @@ jobs:
     needs: build_linux_clang_done
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
           llvm_version: '20.1.8'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: Build HelloWorld CLANGPDB
@@ -384,13 +379,14 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
           llvm_version: '20.1.8'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: Build Packages ${{ matrix.tool_chain_tag }}-VS
@@ -426,12 +422,13 @@ jobs:
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
           llvm_version: '20.1.8'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: Build Windows Visual Studio CLANGPDB Unit Tests ${{ matrix.tool_chain_tag }}-VS
@@ -454,13 +451,14 @@ jobs:
     needs: build_windows_visual_studio_clangpdb_precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
           llvm_version: '20.1.8'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-t VS2022'
       - name: Build Windows Visual Studio CLANGPDB EmulatorPkg X64
@@ -513,14 +511,15 @@ jobs:
     needs: build_windows_visual_studio_clangpdb_done
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
           edk2-clang-version: '20.1.8'
           edk2-clang-version-patch-level: '0'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t CLANGPDB'
       - name: Build HelloWorld CLANGPDB
@@ -584,14 +583,15 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
           edk2-clang-version: '20.1.8'
           edk2-clang-version-patch-level: '0'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
       - name: Build Windows Mingw edk2-clang Packages ${{ matrix.tool_chain_tag }}
@@ -626,14 +626,15 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
           edk2-clang-version: '20.1.8'
           edk2-clang-version-patch-level: '0'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
       - name: Build Windows Mingw edk2-clang Unit Tests ${{ matrix.tool_chain_tag }}
@@ -656,14 +657,15 @@ jobs:
     needs: build_windows_mingw_edk2_clang_precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
           edk2-clang-version: '20.1.8'
           edk2-clang-version-patch-level: '0'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t CLANGDWARF'
       - name: Build Windows Mingw edk2-clang EmulatorPkg
@@ -709,14 +711,15 @@ jobs:
     needs: build_windows_mingw_edk2_clang_done
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
           llvm_version: '20250709'
           llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t CLANGDWARF'
       - name: Build HelloWorld CLANGDWARF
@@ -781,14 +784,15 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
           llvm_version: '20250709'
           llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
       - name: Build Windows LLVM MINGW CLANG Packages ${{ matrix.tool_chain_tag }}
@@ -823,14 +827,15 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
           llvm_version: '20250709'
           llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t ${{ matrix.tool_chain_tag }}'
       - name: Build Windows LLVM MINGW CLANG Unit Tests ${{ matrix.tool_chain_tag }}
@@ -853,14 +858,15 @@ jobs:
     needs: build_windows_llvm_mingw_clang_precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout Reference or Pull Request
+        uses: ./.github/actions/checkout-reference-or-pull-request
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
           llvm_version: '20250709'
           llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
           python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
           edk2-tools-build-params: '-a X64 -t CLANGDWARF'
       - name: Build Windows LLVM MINGW CLANG EmulatorPkg X64
