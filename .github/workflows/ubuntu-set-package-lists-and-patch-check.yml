@@ -30,6 +30,8 @@ jobs:
   set_package_lists:
     name: Set Package Lists
     runs-on: ubuntu-latest
+    outputs:
+      package-lists: ${{ steps.set-package-lists.outputs.package-lists }}
     steps:
       - name: Use Default Package Lists
         if: github.event_name != 'pull_request'
