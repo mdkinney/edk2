@@ -18,7 +18,7 @@ inputs:
     required: true
     default: 'pip-requirements.txt'
   cache-name-suffix:
-    description: 'Suffix for cache name to allow multiple caches
+    description: 'Suffix for cache name to allow multiple caches'
     required: false
     default: ''
 runs:
@@ -39,22 +39,24 @@ runs:
       shell: cmd
       if: steps.cache-venv.outputs.cache-hit != 'true'
       run: |
-        python -m venv .venv
-        PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-        echo PATH=%PATH%>> %GITHUB_ENV%
-        python -m pip install --upgrade pip
-        pip install -r ${{ inputs.pip-requirements }}
-        pip list --verbose
+        python -m venv --copies .venv
+        .venv\Scripts\activate
+        python -m pip install --no-cache-dir --upgrade pip
+        pip install --no-cache-dir -r ${{ inputs.pip-requirements }}
     - name: Save venv cache
       uses: actions/cache/save@v5
       if: steps.cache-venv.outputs.cache-hit != 'true'
       with:
         path: .venv
         key: ${{ steps.cache-venv.outputs.cache-primary-key }}
-    - name: Activate venv
+    - name: Add venv to PATH
       shell: cmd
-      if: steps.cache-venv.outputs.cache-hit == 'true'
       run: |
         PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
         echo PATH=%PATH%>> %GITHUB_ENV%
-        pip list --verbose
+    - name: List venv pip inventory
+      shell: cmd
+      run: |
+        python --version
+        pip --version
+        pip list --no-cache-dir --verbose
