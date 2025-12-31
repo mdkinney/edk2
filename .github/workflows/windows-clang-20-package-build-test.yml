@@ -61,7 +61,7 @@ on:
 
 jobs:
   build_windows_packages:
-    name: Build Windows Packages (${{ join(matrix.*, ' - ') }})
+    name: Build Windows Packages ${{inputs.windows-clang-installer}}-${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }}
     runs-on: windows-latest
     strategy:
       fail-fast: false
@@ -81,13 +81,13 @@ jobs:
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
-      - name: Build Packages ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
+      - name: Build Packages ${{ matrix.build_package }}
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" -a ${{ matrix.build_arch }} -t ${{ matrix.build_type }} TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p "${{ matrix.build_package }}"
-      - name: Upload Windows Packages Logs ${{ matrix.tool_chain_tag }} ${{ matrix.build_type }} ${{ matrix.build_arch }}
+      - name: Upload Windows Packages Logs ${{inputs.windows-clang-installer}}-${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }}
         uses: actions/upload-artifact@v6
         with:
-          name: Upload Windows Packages Logs (${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }})
+          name: Upload Windows Packages Logs ${{inputs.windows-clang-installer}}-${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }}
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
