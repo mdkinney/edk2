@@ -24,7 +24,7 @@ on:
     outputs:
       package-lists:
         description: 'List of package lists to test.'
-        value: ${{ steps.set-package-lists.outputs.package-lists }}
+        value: ${{ jobs.set_package_lists.outputs.package-lists }}
 
 jobs:
   set_package_lists:
