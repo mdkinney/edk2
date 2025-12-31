@@ -152,6 +152,7 @@ jobs:
       stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGDWARF'
       build_type_list: '["DEBUG", "RELEASE", "NOOPT"]'
+      build_options_list: '["-D NETWORK_ENABLE=FALSE","","-D SECURE_BOOT_ENABLE"]'
       build_arch_list: '["IA32", "X64"]'
       tool_chain_tag_list: '["CLANGDWARF"]'
 
