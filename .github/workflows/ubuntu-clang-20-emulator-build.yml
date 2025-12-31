@@ -71,9 +71,9 @@ jobs:
         run: |
           set -e  # Exit immediately if any command fails
           . ./edksetup.sh
-          build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/Emulator${{ matrix.build_arch }}DebugBuild.log >dev/null
-          build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/Emulator${{ matrix.build_arch }}ReleaseBuild.log >dev/null
-          build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/Emulator${{ matrix.build_arch }}NooptBuild.log >dev/null
+          build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/Emulator${{ matrix.build_arch }}DebugBuild.log >NUL
+          build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/Emulator${{ matrix.build_arch }}ReleaseBuild.log >NUL
+          build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/Emulator${{ matrix.build_arch }}NooptBuild.log >NUL
       - name: Upload Linux EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
         uses: actions/upload-artifact@v6
         with:
