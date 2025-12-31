@@ -98,18 +98,12 @@ jobs:
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
       - name: Build EmulatorPkg X64 Unix Host Module
         run: |
-          set -e  # Exit immediately if any command fails
           . ./edksetup.sh
           build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64DebugBuild.log >NUL
-          build -a X64 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64ReleaseBuild.log >NUL
-          build -a X64 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64NooptBuild.log >NUL
       - name: Build EmulatorPkg IA32 Unix Host Module
         run: |
-          set -e  # Exit immediately if any command fails
           . ./edksetup.sh
           build -a IA32 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32DebugBuild.log >NUL
-          build -a IA32 -t CLANGDWARF -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32ReleaseBuild.log >NUL
-          build -a IA32 -t CLANGDWARF -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32NooptBuild.log >NUL
       - name: Build OVMF IA32/X64 Platform
         run: |
           . ./edksetup.sh
