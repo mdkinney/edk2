@@ -39,10 +39,13 @@ runs:
       shell: cmd
       if: steps.cache-venv.outputs.cache-hit != 'true'
       run: |
-        python -m venv --copies .venv
-        PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-        python -m pip install --no-cache-dir --upgrade pip
-        pip install --no-cache-dir -r ${{ inputs.pip-requirements }}
+        python -m venv .venv
+        PATH=%CD%\.venv\Scripts;%PATH%
+        python -m pip install --upgrade pip
+        pip install -r ${{ inputs.pip-requirements }}
+        python --version
+        pip --version
+        pip list --verbose
     - name: Save venv cache
       uses: actions/cache/save@v5
       if: steps.cache-venv.outputs.cache-hit != 'true'
@@ -52,11 +55,10 @@ runs:
     - name: Add venv to PATH
       shell: cmd
       run: |
-        PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
-        echo PATH=%PATH%>> %GITHUB_ENV%
+        echo %CD%\.venv\Scripts>> %GITHUB_PATH%
     - name: List venv pip inventory
       shell: cmd
       run: |
         python --version
         pip --version
-        pip list --no-cache-dir --verbose
+        pip list --verbose
