@@ -16,6 +16,7 @@ on:
   pull_request:
     branches:
       - sandbox/master
+      - clang_ci_v5b
 
 jobs:
   build_windows_visual_studio_clangpdb_precheck:
