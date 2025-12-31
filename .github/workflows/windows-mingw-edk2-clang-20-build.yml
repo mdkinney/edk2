@@ -25,10 +25,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows Mingw edk2-clang Job
-        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
+        uses: ./.github/actions/windows-setup-clang-job
         with:
-          edk2-clang-version: '20.1.8'
-          edk2-clang-version-patch-level: '0'
+          windows-clang-installer: 'edk2-clang'
           python-version: '3.12'
           pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
@@ -97,10 +96,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows Mingw edk2-clang Job
-        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
+        uses: ./.github/actions/windows-setup-clang-job
         with:
-          edk2-clang-version: '20.1.8'
-          edk2-clang-version-patch-level: '0'
+          windows-clang-installer: 'edk2-clang'
           python-version: '3.12'
           pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
@@ -140,10 +138,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows Mingw edk2-clang Job
-        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
+        uses: ./.github/actions/windows-setup-clang-job
         with:
-          edk2-clang-version: '20.1.8'
-          edk2-clang-version-patch-level: '0'
+          windows-clang-installer: 'edk2-clang'
           python-version: '3.12'
           pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
@@ -171,10 +168,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows Mingw edk2-clang Job
-        uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
+        uses: ./.github/actions/windows-setup-clang-job
         with:
-          edk2-clang-version: '20.1.8'
-          edk2-clang-version-patch-level: '0'
+          windows-clang-installer: 'edk2-clang'
           python-version: '3.12'
           pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'

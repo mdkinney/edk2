@@ -1,16 +1,10 @@
 ## @file
 # Composite action that sets up a Windows LLVM MINGW CLANG environment for
 # CI jobs that builds packages and uploads artifacts. Caching is used to avoid
-# re-installing LLVM, Python, Python modules, and git submodules on subsequent
-# runs.
+# re-installing LLVM on subsequent runs.
 #
 # * Installs MINGW LLVM with CLANG support, adds LLVM to PATH, and sets
 #   CLANG_BIN environment variable.
-# * Installs Python in a virtual environment, installs edk2 pip requirements,
-#   and adds Python virtual environment to PATH.
-# * Installs git submodules using stuart_setup.
-# * Sets up Stuart Tools, builds edk2 BaseTools, and sets NASM_PREFIX and
-#   IASL_PREFIX environment variables.
 #
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
@@ -26,19 +20,6 @@ inputs:
     description: 'The path where LLVM is installed (e.g., C:\llvm-mingw-20250709-ucrt-x86_64)'
     required: false
     default: 'C:\llvm-mingw-20250709-ucrt-x86_64'
-  python-version:
-    description: 'Python version to install (e.g., 3.12)'
-    required: true
-  pip-requirements:
-    description: 'Path to pip requirements file'
-    required: true
-    default: 'pip-requirements.txt'
-  stuart-ci-settings-file:
-    description: 'Path to the stuart CI settings file (e.g. .pytool/CISettings.py)'
-    required: true
-  edk2-tools-build-params:
-    description: 'Command line parameters for Edk2ToolsBuild.py (e.g. -t VS2022)'
-    required: true
 runs:
   using: 'composite'
   steps:
@@ -69,17 +50,3 @@ runs:
         echo BASETOOLS_MINGW_PATH=${{ inputs.llvm_install_path }}>> %GITHUB_ENV%
         echo CC=clang>> %GITHUB_ENV%
         echo CXX=clang++>> %GITHUB_ENV%
-    - name: Install Python in venv
-      uses: ./.github/actions/windows-install-python-venv
-      with:
-        python-version: ${{ inputs.python-version }}
-        pip-requirements: ${{ inputs.pip-requirements }}
-    - name: Install Git Submodules from stuart_setup
-      uses: ./.github/actions/windows-install-git-submodules
-      with:
-        stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
-    - name: Set up Stuart Tools
-      uses: ./.github/actions/windows-install-stuart-tools
-      with:
-        stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
-        edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}

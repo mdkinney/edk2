@@ -25,9 +25,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows Visual Studio CLANGPDB Job
-        uses: ./.github/actions/windows-setup-vs-clangpdb-job
+        uses: ./.github/actions/windows-setup-clang-job
         with:
-          llvm_version: '20.1.8'
+          windows-clang-installer: 'vs-clangpdb'
           python-version: '3.12'
           pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
@@ -99,9 +99,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows Visual Studio CLANGPDB Job
-        uses: ./.github/actions/windows-setup-vs-clangpdb-job
+        uses: ./.github/actions/windows-setup-clang-job
         with:
-          llvm_version: '20.1.8'
+          windows-clang-installer: 'vs-clangpdb'
           python-version: '3.12'
           pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
@@ -141,9 +141,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows Visual Studio CLANGPDB Job
-        uses: ./.github/actions/windows-setup-vs-clangpdb-job
+        uses: ./.github/actions/windows-setup-clang-job
         with:
-          llvm_version: '20.1.8'
+          windows-clang-installer: 'vs-clangpdb'
           python-version: '3.12'
           pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
@@ -171,9 +171,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows Visual Studio CLANGPDB Job
-        uses: ./.github/actions/windows-setup-vs-clangpdb-job
+        uses: ./.github/actions/windows-setup-clang-job
         with:
-          llvm_version: '20.1.8'
+          windows-clang-installer: 'vs-clangpdb'
           python-version: '3.12'
           pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'

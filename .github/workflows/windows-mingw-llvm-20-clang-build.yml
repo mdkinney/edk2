@@ -26,10 +26,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows LLVM MINGW CLANG Job
-        uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
+        uses: ./.github/actions/windows-setup-clang-job
         with:
-          llvm_version: '20250709'
-          llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
+          windows-clang-installer: 'llvm'
           python-version: '3.12'
           pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
@@ -99,10 +98,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows LLVM MINGW CLANG Job
-        uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
+        uses: ./.github/actions/windows-setup-clang-job
         with:
-          llvm_version: '20250709'
-          llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
+          windows-clang-installer: 'llvm'
           python-version: '3.12'
           pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
@@ -142,10 +140,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows LLVM MINGW CLANG Job
-        uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
+        uses: ./.github/actions/windows-setup-clang-job
         with:
-          llvm_version: '20250709'
-          llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
+          windows-clang-installer: 'llvm'
           python-version: '3.12'
           pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
@@ -173,10 +170,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows LLVM MINGW CLANG Job
-        uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
+        uses: ./.github/actions/windows-setup-clang-job
         with:
-          llvm_version: '20250709'
-          llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
+          windows-clang-installer: 'llvm'
           python-version: '3.12'
           pip-requirements: 'pip-requirements.txt'
           stuart-ci-settings-file: '.pytool/CISettings.py'
