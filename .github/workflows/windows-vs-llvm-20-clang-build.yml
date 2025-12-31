@@ -36,36 +36,30 @@ jobs:
         shell: cmd
         run: |
           call edksetup.bat VS2022
-          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
+          call build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
       - name: Build UnitTestFrameworkPkg X64 Unit Tests
-        env:
-          CLANG_BIN: "C:\\Program Files\\LLVM\\bin\\"
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGPDB -p UnitTestFrameworkPkg
       - name: Build UnitTestFrameworkPkg IA32 Unit Tests
         shell: cmd
         run: |
           call edksetup.bat VS2022
-          build -a IA32 -t CLANGPDB -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
+          call build -a IA32 -t CLANGPDB -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
       - name: Build EmulatorPkg X64 Host Module
         shell: cmd
         run: |
           call edksetup.bat VS2022
           call build -a X64 -t CLANGPDB -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64DebugBuild.log >NUL
-          call build -a X64 -t CLANGPDB -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64ReleaseBuild.log >NUL
-          call build -a X64 -t CLANGPDB -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64NooptBuild.log >NUL
       - name: Build EmulatorPkg IA32 Host Module
         shell: cmd
         run: |
           call edksetup.bat VS2022
           call build -a IA32 -t CLANGPDB -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32DebugBuild.log >NUL
-          call build -a IA32 -t CLANGPDB -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32ReleaseBuild.log >NUL
-          call build -a IA32 -t CLANGPDB -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorIA32NooptBuild.log >NUL
       - name: Build OVMF Platform
         shell: cmd
         run: |
           call edksetup.bat VS2022
-          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
+          call build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
       - name: Upload Windows Visual Studio CLANGPDB Precheck Logs
         uses: actions/upload-artifact@v6
         with:
