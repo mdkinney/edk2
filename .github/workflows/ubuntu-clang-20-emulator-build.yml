@@ -33,16 +33,6 @@ on:
         required: true
         type: string
         default: '-t CLANGDWARF'
-      build_type_list:
-        description: 'List of build types to test.'
-        required: true
-        type: string
-        default: '["DEBUG", "RELEASE", "NOOPT"]'
-      build_options_list:
-        description: 'List of build options to test.'
-        required: true
-        type: string
-        default: '["-D NETWORK_ENABLE=FALSE","","-D SECURE_BOOT_ENABLE"]'
       build_arch_list:
         description: 'List of build architectures to test.'
         required: true
@@ -81,11 +71,9 @@ jobs:
         run: |
           set -e  # Exit immediately if any command fails
           . ./edksetup.sh
-          build_types=(${{ join(fromJSON(inputs.build_type_list),' ') }})
-          for ((i=0; i<${#build_types[@]}; i++)); do
-            echo "build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b ${{ inputs.build_type_list[$i] }} ${{ inputs.build_options_list[$i] }} -p EmulatorPkg/EmulatorPkg.dsc -j Build/Emulator${{ matrix.build_arch }}${{ inputs.build_type_list[$i] }}Build.log > /dev/null"
-            build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b ${{ inputs.build_type_list[$i] }} ${{ inputs.build_options_list[$i] }} -p EmulatorPkg/EmulatorPkg.dsc -j Build/Emulator${{ matrix.build_arch }}${{ inputs.build_type_list[$i] }}Build.log > /dev/null
-          done
+          build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/Emulator${{ matrix.build_arch }}DebugBuild.log >dev/null
+          build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         -j Build/Emulator${{ matrix.build_arch }}ReleaseBuild.log >dev/null
+          build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/Emulator${{ matrix.build_arch }}NooptBuild.log >dev/null
       - name: Upload Linux EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} ${{ join(fromJSON(inputs.build_type_list),' ') }} Logs
         uses: actions/upload-artifact@v6
         with:
