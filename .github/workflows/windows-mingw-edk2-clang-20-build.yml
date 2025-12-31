@@ -18,9 +18,76 @@ on:
       - sandbox/master
       - clang_ci_v5b
 
+env:
+  #
+  # Package array that has similar execution times across 2 jobs.
+  #
+  PACKAGE_LISTS: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "DynamicTablesPkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+
 jobs:
-  build_windows_mingw_edk2_clang_precheck:
-    name: Build Windows Mingw edk2-clang Precheck
+  set_package_lists:
+    name: Set Package Lists
+    runs-on: ubuntu-latest
+    outputs:
+      package-lists: ${{ steps.set-package-lists.outputs.package-lists }}
+    steps:
+      - name: Use Default Package Lists
+        if: github.event_name != 'pull_request'
+        run: |
+          echo "LOCAL_PACKAGE_LISTS=${{ toJSON(env.PACKAGE_LISTS) }}" >> $GITHUB_ENV
+      - name: Checkout Reference
+        if: github.event_name != 'pull_request'
+        #
+        # If not PR, then use default checkout settings with fetch-depth of 1
+        #
+        uses: actions/checkout@v6
+      - name: Get Number of Commit in PR
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "PR_COMMIT_COUNT=$((${{ github.event.pull_request.commits }} + 1))" >> $GITHUB_ENV
+      - name: Checkout Pull Request
+        if: github.event_name == 'pull_request'
+        #
+        # Checkout PR with fetch-depth of number of commits in PR + 1
+        # This allows patch check to evaluate all commits in the PR, and for
+        # stuart_pr_eval to evaluate the files modified over the entire PR.
+        #
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: ${{ env.PR_COMMIT_COUNT }}
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Install Python in venv
+        uses: ./.github/actions/linux-install-python-venv
+        with:
+          python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
+          cache-name-suffix: '-set-package-lists'
+      - name: Run stuart_pr_eval to generate Package List
+        if: github.event_name == 'pull_request'
+        run: |
+          git log --oneline -n 10
+          stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~${{ github.event.pull_request.commits }} --output-csv-format-string {pkgcsv} -v
+          PR_EVAL_LIST=$(stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~${{ github.event.pull_request.commits }} --output-csv-format-string {pkgcsv})
+          PR_EVAL_LIST=[\"$PR_EVAL_LIST\"]
+          echo "PR_EVAL_LIST=$PR_EVAL_LIST" >> $GITHUB_ENV
+      - name: Use stuart_pr_eval Package List
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "LOCAL_PACKAGE_LISTS=${{ toJSON(env.PR_EVAL_LIST) }}" >> $GITHUB_ENV
+      - name: Set Package Lists
+        id: set-package-lists
+        run: |
+          echo "package-lists=$LOCAL_PACKAGE_LISTS" >> $GITHUB_OUTPUT
+      - name: PatchCheck PR
+        if: github.event_name == 'pull_request'
+        run: |
+          python BaseTools/Scripts/PatchCheck.py HEAD~${{ github.event.pull_request.commits }}..HEAD
+
+  build_windows_mingw_edk2_clang_packages_basic_acceptance_test:
+    needs: set_package_lists
+    name: Build Windows Mingw edk2-clang Packages Basic Acceptance Test
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -46,6 +113,32 @@ jobs:
       - name: Build UnitTestFrameworkPkg X64 Unit Tests
         run: |
           stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
+      - name: Upload Windows Mingw edk2-clang Packages Basic Acceptance Test Logs
+        uses: actions/upload-artifact@v6
+        with:
+          name: Upload Windows Mingw edk2-clang Packages Basic Acceptance Test Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILDLOG*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_windows_mingw_edk2_clang_platforms_basic_acceptance_test:
+    needs: set_package_lists
+    name: Build Windows Mingw edk2-clang Platforms Basic Acceptance Test
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Windows Mingw edk2-clang Job
+        uses: ./.github/actions/windows-setup-clang-job
+        with:
+          windows-clang-installer: 'edk2-clang'
+          python-version: '3.12'
+          pip-requirements: 'pip-requirements.txt'
+          stuart-ci-settings-file: '.pytool/CISettings.py'
+          edk2-tools-build-params: '-a X64 -t CLANGPDB'
       - name: Build EmulatorPkg X64 Host Module
         shell: cmd
         run: |
@@ -56,10 +149,10 @@ jobs:
         run: |
           call edksetup.bat Mingw-w64
           call build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64BuildClangPdb.log >NUL
-      - name: Upload Windows Mingw edk2-clang Precheck Logs
+      - name: Upload Windows Mingw edk2-clang Platforms Basic Acceptance Test Logs
         uses: actions/upload-artifact@v6
         with:
-          name: Upload Windows Mingw edk2-clang Precheck Logs
+          name: Upload Windows Mingw edk2-clang Platforms Basic Acceptance Test Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
@@ -68,7 +161,9 @@ jobs:
         if: always()
 
   build_windows_mingw_edk2_clang_packages:
-    needs: build_windows_mingw_edk2_clang_precheck
+    needs:
+      - build_windows_mingw_edk2_clang_packages_basic_acceptance_test
+      - build_windows_mingw_edk2_clang_platforms_basic_acceptance_test
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
       windows-clang-installer: 'edk2-clang'
@@ -83,7 +178,9 @@ jobs:
       package-lists: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
 
   build_windows_mingw_edk2_clang_noopt_unit_tests:
-    needs: build_windows_mingw_edk2_clang_precheck
+    needs:
+      - build_windows_mingw_edk2_clang_packages_basic_acceptance_test
+      - build_windows_mingw_edk2_clang_platforms_basic_acceptance_test
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
       windows-clang-installer: 'edk2-clang'
@@ -99,7 +196,9 @@ jobs:
 
   build_windows_mingw_edk2_clang_emulatorpkg:
     name: Build Windows Mingw edk2-clang EmulatorPkg
-    needs: build_windows_mingw_edk2_clang_precheck
+    needs:
+      - build_windows_mingw_edk2_clang_packages_basic_acceptance_test
+      - build_windows_mingw_edk2_clang_platforms_basic_acceptance_test
     uses: ./.github/workflows/windows-clang-20-emulator-build-test.yml
     with:
       windows-clang-installer: 'edk2-clang'
