@@ -40,7 +40,7 @@ runs:
       if: steps.cache-venv.outputs.cache-hit != 'true'
       run: |
         python -m venv --copies .venv
-        .venv\Scripts\activate
+        PATH=%GITHUB_WORKSPACE%\.venv\Scripts;%PATH%
         python -m pip install --no-cache-dir --upgrade pip
         pip install --no-cache-dir -r ${{ inputs.pip-requirements }}
     - name: Save venv cache
