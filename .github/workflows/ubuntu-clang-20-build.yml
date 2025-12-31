@@ -34,7 +34,7 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           echo "LOCAL_PACKAGE_LISTS=${{ toJSON(env.PACKAGE_LISTS) }}" >> $GITHUB_ENV
-      - name: Checkout
+      - name: Checkout Reference
         if: github.event_name != 'pull_request'
         #
         # If not PR, then use default checkout settings with fetch-depth of 1
@@ -44,7 +44,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           echo "PR_COMMIT_COUNT=$((${{ github.event.pull_request.commits }} + 1))" >> $GITHUB_ENV
-      - name: Checkout
+      - name: Checkout Pull Request
         if: github.event_name == 'pull_request'
         #
         # Checkout PR with fetch-depth of number of commits in PR + 1
