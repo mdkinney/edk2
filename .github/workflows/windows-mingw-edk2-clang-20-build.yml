@@ -100,7 +100,7 @@ jobs:
   build_windows_mingw_edk2_clang_emulatorpkg:
     name: Build Windows Mingw edk2-clang EmulatorPkg
     needs: build_windows_mingw_edk2_clang_precheck
-    uses: ./.github/workflows/windows-clang-20-emulatorpkg-build.yml
+    uses: ./.github/workflows/windows-clang-20-emulator-build-test.yml
     with:
       windows-clang-installer: 'edk2-clang'
       python-version: '3.12'
