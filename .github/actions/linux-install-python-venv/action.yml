@@ -18,9 +18,8 @@ inputs:
     required: true
     default: 'pip-requirements.txt'
   cache-name-suffix:
-    description: 'Suffix for cache name to allow multiple caches
+    description: 'Optional suffix for cache name to allow multiple caches
     required: false
-    default: ''
 runs:
   using: 'composite'
   steps:
