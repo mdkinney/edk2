@@ -51,7 +51,7 @@ on:
 
 jobs:
   build_linux_clang_emulatorpkg_test:
-    name: Build Linux CLANGDWARF EmulatorPkg Test
+    name: Build Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} ${{ inputs.build_type_list }} EmulatorPkg Test
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
@@ -72,17 +72,18 @@ jobs:
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
-      - name: Build Linux ${{ matrix.tool_chain_tag }} EmulatorPkg ${{ matrix.build_arch }} Multiple Targets
+      - name: Build Linux EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} ${{inputs.build_type_list}}
         run: |
           set -e  # Exit immediately if any command fails
           . ./edksetup.sh
-          for build_type in ${{ fromJSON(inputs.build_type_list) }}; do
+          echo "list = ${{ join(fromJSON(inputs.build_type_list),' ') }}"
+          for build_type in ${{ join(fromJSON(inputs.build_type_list),' ') }}; do
           build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b $build_type -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE -j Build/Emulator${{ matrix.build_arch }}${build_type}Build.log > /dev/null
           done
-      - name: Upload Linux ${{ matrix.tool_chain_tag }} EmulatorPkg Logs
+      - name: Upload Linux EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} ${{inputs.build_type_list}} Logs
         uses: actions/upload-artifact@v6
         with:
-          name: Upload Linux ${{ matrix.tool_chain_tag }} EmulatorPkg Logs
+          name: Upload Linux EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} ${{inputs.build_type_list}} Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
