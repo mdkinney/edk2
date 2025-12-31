@@ -14,10 +14,10 @@ on:
   workflow_call:
     inputs:
       windows-clang-installer:
-        description: 'Windows CLANG installer (e.g., edk2-clang, llvm, or vs-clangpdb)'
+        description: 'Windows CLANG installer (e.g., edk2-clang, llvm, vs-clangpdb, or none)'
         required: true
         type: string
-        default: 'edk2-clang'
+        default: 'none'
       python-version:
         description: 'The version of Python to use.'
         required: true
