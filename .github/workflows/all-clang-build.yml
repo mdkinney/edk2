@@ -23,8 +23,10 @@ jobs:
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
@@ -83,8 +85,10 @@ jobs:
           - ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg
           - IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
@@ -128,8 +132,10 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
@@ -172,8 +178,10 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
@@ -217,8 +225,10 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
@@ -247,8 +257,10 @@ jobs:
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
@@ -305,8 +317,8 @@ jobs:
     needs: build_linux_clang_done
     runs-on: windows-latest
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
@@ -379,8 +391,8 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
@@ -422,7 +434,7 @@ jobs:
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
       - name: Checkout
-        uses: ./.github/actions/checkout-reference-or-pull-request
+        uses: actions/checkout@v6
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
@@ -451,8 +463,8 @@ jobs:
     needs: build_windows_visual_studio_clangpdb_precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
@@ -511,8 +523,8 @@ jobs:
     needs: build_windows_visual_studio_clangpdb_done
     runs-on: windows-latest
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
@@ -583,8 +595,8 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
@@ -626,8 +638,8 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
@@ -657,8 +669,8 @@ jobs:
     needs: build_windows_mingw_edk2_clang_precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
         with:
@@ -711,8 +723,8 @@ jobs:
     needs: build_windows_mingw_edk2_clang_done
     runs-on: windows-latest
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
@@ -784,8 +796,8 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
@@ -827,8 +839,8 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
@@ -858,8 +870,8 @@ jobs:
     needs: build_windows_llvm_mingw_clang_precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:

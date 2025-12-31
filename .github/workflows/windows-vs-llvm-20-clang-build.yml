@@ -22,8 +22,8 @@ jobs:
     name: Build Windows Visual Studio CLANGPDB Precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
@@ -96,8 +96,8 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
@@ -138,8 +138,8 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:
@@ -168,8 +168,8 @@ jobs:
     needs: build_windows_visual_studio_clangpdb_precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows Visual Studio CLANGPDB Job
         uses: ./.github/actions/windows-setup-vs-clangpdb-job
         with:

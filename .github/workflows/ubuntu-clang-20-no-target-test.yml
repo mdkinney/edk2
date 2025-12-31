@@ -55,8 +55,10 @@ jobs:
           - CLANGPDB
         build_package: ${{ fromJSON(inputs.package-lists)}}
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:

@@ -23,8 +23,8 @@ jobs:
     name: Build Windows LLVM MINGW CLANG Precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
@@ -96,8 +96,8 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
@@ -139,8 +139,8 @@ jobs:
           - CryptoPkg,FatPkg,FmpDevicePkg,PcAtChipsetPkg,PrmPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,SignedCapsulePkg
           - ArmPkg,ArmPlatformPkg,DynamicTablesPkg,EmbeddedPkg,NetworkPkg,RedfishPkg,MdeModulePkg,MdePkg,IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,SecurityPkg,ShellPkg
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:
@@ -170,8 +170,8 @@ jobs:
     needs: build_windows_llvm_mingw_clang_precheck
     runs-on: windows-latest
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
         with:

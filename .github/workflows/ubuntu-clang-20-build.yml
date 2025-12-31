@@ -34,8 +34,29 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           echo "LOCAL_PACKAGE_LISTS=${{ toJSON(env.PACKAGE_LISTS) }}" >> $GITHUB_ENV
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        if: github.event_name != 'pull_request'
+        #
+        # If not PR, then use default checkout settings with fetch-depth of 1
+        #
+        uses: actions/checkout@v6
+      - name: Get Number of Commit in PR
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "PR_COMMIT_COUNT=$((${{ github.event.pull_request.commits }} + 1))" >> $GITHUB_ENV
+      - name: Checkout
+        if: github.event_name == 'pull_request'
+        #
+        # Checkout PR with fetch-depth of number of commits in PR + 1
+        # This allows patch check to evaluate all commits in the PR, and for
+        # stuart_pr_eval to evaluate the files modified over the entire PR.
+        #
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: ${{ env.PR_COMMIT_COUNT }}
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Install Python in venv
         uses: ./.github/actions/linux-install-python-venv
         with:
@@ -129,8 +150,10 @@ jobs:
     container:
       image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
     steps:
-      - name: Checkout Reference or Pull Request
-        uses: ./.github/actions/checkout-reference-or-pull-request
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/linux-setup-clang-job
         with:
