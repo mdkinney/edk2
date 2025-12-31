@@ -143,7 +143,20 @@ jobs:
       package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
 
   build_linux_clangdwarf_emulatorpkg:
+    needs: [set_package_lists, build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
     if: contains(needs.set_package_lists.outputs.package-lists, 'EmulatorPkg')
+    uses: ./.github/workflows/ubuntu-clang-20-emulator-build.yml
+    with:
+      python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
+      edk2-tools-build-params: '-t CLANGDWARF'
+      build_type_list: '["DEBUG", "RELEASE", "NOOPT"]'
+      build_arch_list: '["IA32", "X64"]'
+      tool_chain_tag_list: '["CLANGDWARF"]'
+
+  build_linux_clangdwarf_emulatorpkg_old:
+    if: false
     name: Build Linux CLANGDWARF EmulatorPkg
     needs: [set_package_lists, build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
     runs-on: ubuntu-latest
