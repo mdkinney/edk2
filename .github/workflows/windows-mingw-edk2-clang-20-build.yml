@@ -47,9 +47,7 @@ jobs:
         tool_chain_tag:
           - 'CLANGPDB'
           - 'CLANGDWARF'
-        build_package:
-          - 'Arm'
-          - 'Foo'
+        build_package: ${{ needs.set_package_lists.outputs.package-lists }}
     steps:
       - name: Show Matrix values
         run: |
