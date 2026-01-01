@@ -28,11 +28,6 @@ jobs:
     name: Build Windows Mingw edk2-clang Packages Basic Acceptance Test
     runs-on: windows-latest
     steps:
-      - name: Display Package Lists
-        run: |
-          echo "Package Lists: ${{ needs.set_package_lists.outputs.package-lists }}"
-          echo "${{ toJson(needs.set_package_lists.outputs.package-lists) }}"
-          echo "${{ toJson(fromJson(needs.set_package_lists.outputs.package-lists)) }}"
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows Mingw edk2-clang Job
