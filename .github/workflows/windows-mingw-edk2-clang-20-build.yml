@@ -30,9 +30,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: '["DEBUG", "RELEASE"]'
-        build_arch: '["IA32", "X64"]'
-        tool_chain_tag: '["CLANGPDB", "CLANGDWARF"]'
+        build_type:
+          - 'DEBUG'
+          - 'RELEASE'
+        build_arch:
+          - 'IA32'
+          - 'X64'
+        tool_chain_tag:
+          - 'CLANGPDB'
+          - 'CLANGDWARF'
         build_package: ${{ toJSON(fromJSON(needs.set_package_lists.outputs.package-lists)) }}
     steps:
       - name: Show Matrix values
