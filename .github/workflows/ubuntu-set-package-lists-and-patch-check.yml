@@ -33,10 +33,6 @@ jobs:
     outputs:
       package-lists: ${{ steps.set-package-lists.outputs.package-lists }}
     steps:
-      - name: Use Default Package Lists
-        if: github.event_name != 'pull_request'
-        run: |
-          echo "LOCAL_PACKAGE_LISTS=${{ toJSON(inputs.default-package-lists) }}" >> $GITHUB_ENV
       - name: Checkout Reference
         if: github.event_name != 'pull_request'
         #
@@ -67,21 +63,15 @@ jobs:
           pip-requirements: 'pip-requirements.txt'
           cache-name-suffix: '-set-package-lists'
       - name: Run stuart_pr_eval to generate Package List
-        if: github.event_name == 'pull_request'
-        run: |
-          git log --oneline -n 10
-          stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~${{ github.event.pull_request.commits }} --output-csv-format-string {pkgcsv} -v
-          PR_EVAL_LIST=$(stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~${{ github.event.pull_request.commits }} --output-csv-format-string {pkgcsv})
-          PR_EVAL_LIST=[\"$PR_EVAL_LIST\"]
-          echo "PR_EVAL_LIST=$PR_EVAL_LIST" >> $GITHUB_ENV
-      - name: Use stuart_pr_eval Package List
-        if: github.event_name == 'pull_request'
-        run: |
-          echo "LOCAL_PACKAGE_LISTS=${{ toJSON(env.PR_EVAL_LIST) }}" >> $GITHUB_ENV
-      - name: Set Package Lists
         id: set-package-lists
         run: |
-          echo "package-lists=$LOCAL_PACKAGE_LISTS" >> $GITHUB_OUTPUT
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            PR_EVAL_LIST=$(stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~${{ github.event.pull_request.commits }} --output-csv-format-string {pkgcsv})
+            PR_EVAL_LIST=[\"$PR_EVAL_LIST\"]
+            echo "package-lists=${{ toJSON($PR_EVAL_LIST) }}" >> $GITHUB_OUTPUT
+          else
+            echo "package-lists=${{ toJSON(inputs.default-package-lists) }}" >> $GITHUB_OUTPUT
+          fi
       - name: PatchCheck PR
         if: github.event_name == 'pull_request' && inputs.run-patch-check
         run: |
