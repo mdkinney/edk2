@@ -24,6 +24,14 @@ jobs:
     with:
       run-patch-check: true
 
+  show_package_lists_value:
+    needs: set_package_lists
+    name: Show Package Lists Value
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show Package Lists Value
+        run: echo "${{ needs.set_package_lists.outputs.package-lists }}"
+
   build_linux_clang_basic_acceptance_test:
     needs: set_package_lists
     uses: ./.github/workflows/ubuntu-clang-20-basic-acceptance-test.yml

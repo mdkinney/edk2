@@ -23,6 +23,14 @@ jobs:
     name: Set Package Lists
     uses: ./.github/workflows/ubuntu-set-package-lists-and-patch-check.yml
 
+  show_package_lists_value:
+    needs: set_package_lists
+    name: Show Package Lists Value
+    runs-on: windows-latest
+    steps:
+      - name: Show Package Lists Value
+        run: echo "${{ needs.set_package_lists.outputs.package-lists }}"
+
   show_package_lists:
     needs: set_package_lists
     name: Show Package Lists
