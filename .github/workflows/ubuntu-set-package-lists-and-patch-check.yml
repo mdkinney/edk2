@@ -63,7 +63,6 @@ jobs:
           pip-requirements: 'pip-requirements.txt'
           cache-name-suffix: '-set-package-lists'
       - name: Run stuart_pr_eval to generate Package List
-        if: github.event_name == 'pull_request'
         run: |
           if [ "${{ github.event_name }}" == "pull_request" ]; then
             PR_EVAL_LIST=$(stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~${{ github.event.pull_request.commits }} --output-csv-format-string {pkgcsv})
