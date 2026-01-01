@@ -15,7 +15,7 @@ on:
         description: 'Default list of package lists to test.'
         required: false
         type: string
-        default: "['ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg', 'IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg']"
+        default: "['ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg','IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg']"
       run-patch-check:
         description: 'Whether to run PatchCheck on the PR.'
         required: false
@@ -68,7 +68,7 @@ jobs:
             PR_EVAL_LIST=$(stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~${{ github.event.pull_request.commits }} --output-csv-format-string {pkgcsv})
             PR_EVAL_LIST="['$PR_EVAL_LIST']"
           else
-            PR_EVAL_LIST='${{ inputs.default-package-lists }}'
+            PR_EVAL_LIST="${{ inputs.default-package-lists }}"
           fi
           echo "PR_EVAL_LIST=$PR_EVAL_LIST"
           echo "PR_EVAL_LIST=$PR_EVAL_LIST" > $GITHUB_ENV
