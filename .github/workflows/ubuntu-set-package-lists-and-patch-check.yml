@@ -75,7 +75,7 @@ jobs:
       - name: Set Package List Output
         id: set-package-lists
         run: |
-          echo "package-lists=${{ toJSON(env.PR_EVAL_LIST) }}">> "$GITHUB_OUTPUT"
+          echo "package-lists=${{ env.PR_EVAL_LIST }}" >> "$GITHUB_OUTPUT"
       - name: PatchCheck PR
         if: github.event_name == 'pull_request' && inputs.run-patch-check
         run: |
