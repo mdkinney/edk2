@@ -30,7 +30,8 @@ jobs:
     steps:
       - name: Display Package Lists
         run: |
-          echo "Package Lists: ${{ toJson(needs.set_package_lists.outputs.package-lists) }}"
+          echo "Package Lists: ${{ needs.set_package_lists.outputs.package-lists }}"
+          echo ${{ fromJson(needs.set_package_lists.outputs.package-lists) }}
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows Mingw edk2-clang Job
@@ -115,7 +116,7 @@ jobs:
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["IA32", "X64"]'
       tool_chain_tag_list: '["CLANGPDB", "CLANGDWARF"]'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: ${{ fromJson(needs.set_package_lists.outputs.package-lists) }}
 
   build_windows_mingw_edk2_clang_noopt_unit_tests:
     needs:
@@ -131,7 +132,7 @@ jobs:
       build_type_list: '["NOOPT"]'
       build_arch_list: '["X64"]'
       tool_chain_tag_list: '["CLANGDWARF"]'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: ${{ fromJson(needs.set_package_lists.outputs.package-lists) }}
 
   build_windows_mingw_edk2_clang_emulatorpkg:
     name: Build Windows Mingw edk2-clang EmulatorPkg
