@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: Display Package Lists
         run: |
-          echo "Package Lists: ${{ needs.set_package_lists.outputs.package-lists }}"
+          echo "Package Lists: ${{ toJson(needs.set_package_lists.outputs.package-lists) }}"
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows Mingw edk2-clang Job
