@@ -39,7 +39,7 @@ jobs:
         # If not PR, then use default checkout settings with fetch-depth of 1
         #
         uses: actions/checkout@v6
-      - name: Get Number of Commit in PR
+      - name: Get Number of Commits in PR
         if: github.event_name == 'pull_request'
         run: |
           echo "PR_COMMIT_COUNT=$((${{ github.event.pull_request.commits }} + 1))" >> $GITHUB_ENV
@@ -62,14 +62,14 @@ jobs:
           python-version: '3.12'
           pip-requirements: 'pip-requirements.txt'
           cache-name-suffix: '-set-package-lists'
-      - name: Run stuart_pr_eval to generate Package List
+      - name: Compute Package Lists
         run: |
           if [ "${{ github.event_name }}" == "pull_request" ]; then
             PR_EVAL_LIST=$(stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~${{ github.event.pull_request.commits }} --output-csv-format-string {pkgcsv})
             PR_EVAL_LIST=[\"$PR_EVAL_LIST\"]
-            echo "PR_EVAL_LIST: $PR_EVAL_LIST" > $GITHUB_ENV
+            echo "PR_EVAL_LIST=$PR_EVAL_LIST" > $GITHUB_ENV
           else
-            echo "PR_EVAL_LIST: ${{ inputs.default-package-lists }}" > $GITHUB_ENV
+            echo "PR_EVAL_LIST=${{ inputs.default-package-lists }}" > $GITHUB_ENV
           fi
       - name: Set Package List Output
         id: set-package-lists
