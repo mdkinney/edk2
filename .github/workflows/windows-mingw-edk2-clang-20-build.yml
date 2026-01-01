@@ -23,6 +23,25 @@ jobs:
     name: Set Package Lists
     uses: ./.github/workflows/ubuntu-set-package-lists-and-patch-check.yml
 
+  show_package_lists:
+    needs: set_package_lists
+    name: Show Package Lists
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: '["DEBUG", "RELEASE"]'
+        build_arch: '["IA32", "X64"]'
+        tool_chain_tag: '["CLANGPDB", "CLANGDWARF"]'
+        build_package: ${{ toJSON(fromJSON(needs.set_package_lists.outputs.package-lists)) }}
+    steps:
+      - name: Show Matrix values
+        run: |
+          echo "Build Package: ${{ matrix.build_package }}"
+          echo "Build Arch:   ${{ matrix.build_arch }}"
+          echo "Build Type:   ${{ matrix.build_type }}"
+          echo "Tool Chain:   ${{ matrix.tool_chain_tag }}"
+
   build_windows_mingw_edk2_clang_packages_basic_acceptance_test:
     needs: set_package_lists
     name: Build Windows Mingw edk2-clang Packages Basic Acceptance Test

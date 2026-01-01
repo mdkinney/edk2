@@ -60,15 +60,7 @@ on:
         default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
 
 jobs:
-  show_package_lists:
-    name: Show Package Lists
-    runs-on: windows-latest
-    steps:
-      - name: Show Package Lists
-        run: |
-          echo "Package Lists: ${{ inputs.package-lists }}"
   build_windows_packages:
-    needs: show_package_lists
     name: Build Windows Packages ${{inputs.windows-clang-installer}}-${{ matrix.build_arch }}-${{ matrix.build_type }}-${{ matrix.tool_chain_tag }}-${{ strategy.job-index }}
     runs-on: windows-latest
     strategy:
