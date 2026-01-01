@@ -47,7 +47,7 @@ jobs:
         tool_chain_tag:
           - 'CLANGPDB'
           - 'CLANGDWARF'
-        build_package: ${{ toJson(fromJson(needs.set_package_lists.outputs.package-lists)) }}
+        build_package: ${{ needs.set_package_lists.outputs.package-lists }}
     steps:
       - name: Show Matrix values
         run: |
@@ -145,7 +145,7 @@ jobs:
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["IA32", "X64"]'
       tool_chain_tag_list: '["CLANGPDB", "CLANGDWARF"]'
-      package-lists: ${{ toJSON(fromJSON(needs.set_package_lists.outputs.package-lists)) }}
+      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
 
   build_windows_mingw_edk2_clang_noopt_unit_tests:
     needs:
@@ -161,7 +161,7 @@ jobs:
       build_type_list: '["NOOPT"]'
       build_arch_list: '["X64"]'
       tool_chain_tag_list: '["CLANGDWARF"]'
-      package-lists: ${{ toJSON(fromJSON(needs.set_package_lists.outputs.package-lists)) }}
+      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
 
   build_windows_mingw_edk2_clang_emulatorpkg:
     name: Build Windows Mingw edk2-clang EmulatorPkg
