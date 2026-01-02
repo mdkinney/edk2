@@ -134,7 +134,6 @@ jobs:
 
   build_windows_mingw_edk2_clang_emulatorpkg:
     if: contains(needs.set_package_lists.outputs.package-lists, 'EmulatorPkg')
-    name: Build Windows Mingw edk2-clang EmulatorPkg
     needs:
       - set_package_lists
       - build_windows_mingw_edk2_clang_packages_basic_acceptance_test
