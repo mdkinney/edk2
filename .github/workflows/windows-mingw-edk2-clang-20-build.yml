@@ -59,9 +59,9 @@ jobs:
       - name: Show Matrix values
         run: |
           echo "Build Package: ${{ matrix.build_package }}"
-          echo "Build Arch:   ${{ matrix.build_arch }}"
-          echo "Build Type:   ${{ matrix.build_type }}"
-          echo "Tool Chain:   ${{ matrix.tool_chain_tag }}"
+          echo "Build Arch:    ${{ matrix.build_arch }}"
+          echo "Build Type:    ${{ matrix.build_type }}"
+          echo "Tool Chain:    ${{ matrix.tool_chain_tag }}"
 
   build_windows_mingw_edk2_clang_packages_basic_acceptance_test:
     needs: set_package_lists
@@ -152,7 +152,7 @@ jobs:
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["IA32", "X64"]'
       tool_chain_tag_list: '["CLANGPDB", "CLANGDWARF"]'
-      package-lists: '${{ needs.set_package_lists.outputs.package-lists }}'
+      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
 
   build_windows_mingw_edk2_clang_noopt_unit_tests:
     needs:
@@ -168,7 +168,7 @@ jobs:
       build_type_list: '["NOOPT"]'
       build_arch_list: '["X64"]'
       tool_chain_tag_list: '["CLANGDWARF"]'
-      package-lists: '${{ needs.set_package_lists.outputs.package-lists }}'
+      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
 
   build_windows_mingw_edk2_clang_emulatorpkg:
     name: Build Windows Mingw edk2-clang EmulatorPkg
