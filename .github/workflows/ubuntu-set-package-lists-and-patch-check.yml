@@ -66,9 +66,9 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" == "pull_request" ]; then
             PR_EVAL_LIST=$(stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~${{ github.event.pull_request.commits }} --output-csv-format-string {pkgcsv})
-            PR_EVAL_LIST=["$PR_EVAL_LIST"]
+            PR_EVAL_LIST='["$PR_EVAL_LIST"]'
           else
-            PR_EVAL_LIST=${{ inputs.default-package-lists }}
+            PR_EVAL_LIST='${{ inputs.default-package-lists }}'
           fi
           echo "PR_EVAL_LIST=$PR_EVAL_LIST"
           echo $PR_EVAL_LIST
