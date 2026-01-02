@@ -38,9 +38,19 @@ jobs:
         if: contains(needs.set_package_lists.outputs.package-lists, 'FooPkg')
         run: echo "FooPkg is in the package list"
 
-  show_package_lists:
+  show_package_lists_workflow_call:
     needs: set_package_lists
-    name: Show Package Lists
+    name: Show Package Lists Workflow Call
+    uses: ./.github/workflows/windows-clang-20-show-package-lists.yml
+    with:
+      build_type_list: '["DEBUG", "RELEASE"]'
+      build_arch_list: '["IA32", "X64"]'
+      tool_chain_tag_list: '["CLANGPDB", "CLANGDWARF"]'
+      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+
+  show_package_lists_inline:
+    needs: set_package_lists
+    name: Show Package Lists Inline
     runs-on: windows-latest
     strategy:
       fail-fast: false
