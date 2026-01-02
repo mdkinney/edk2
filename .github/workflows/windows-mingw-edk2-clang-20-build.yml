@@ -81,7 +81,7 @@ jobs:
         shell: cmd
         run: |
           call edksetup.bat Mingw-w64
-          call build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64DebugBuild.log >NUL
+          call build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64DebugBuild.log >NUL
       - name: Build OVMF Platform CLANGPDB
         shell: cmd
         run: |
