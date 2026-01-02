@@ -151,8 +151,8 @@ jobs:
   build_windows_mingw_edk2_clang_packages:
     needs:
       - set_package_lists
-#      - build_windows_mingw_edk2_clang_packages_basic_acceptance_test
-#      - build_windows_mingw_edk2_clang_platforms_basic_acceptance_test
+      - build_windows_mingw_edk2_clang_packages_basic_acceptance_test
+      - build_windows_mingw_edk2_clang_platforms_basic_acceptance_test
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
       windows-clang-installer: 'edk2-clang'
@@ -168,8 +168,8 @@ jobs:
   build_windows_mingw_edk2_clang_noopt_unit_tests:
     needs:
       - set_package_lists
-#      - build_windows_mingw_edk2_clang_packages_basic_acceptance_test
-#      - build_windows_mingw_edk2_clang_platforms_basic_acceptance_test
+      - build_windows_mingw_edk2_clang_packages_basic_acceptance_test
+      - build_windows_mingw_edk2_clang_platforms_basic_acceptance_test
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
       windows-clang-installer: 'edk2-clang'
