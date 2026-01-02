@@ -38,6 +38,9 @@ jobs:
       - name: Show Package Lists Value from JSON2
         run: |
           echo 'fromJSON(${{ needs.set_package_lists.outputs.package-lists }})'
+      - name: Show Package Lists Value from/to JSON
+        run: |
+          echo '${{ toJSON(fromJSON(needs.set_package_lists.outputs.package-lists)) }}'
       - name: Contains EmulatorPkg
         if: contains(needs.set_package_lists.outputs.package-lists, 'EmulatorPkg')
         run: echo "EmulatorPkg is in the package list"
