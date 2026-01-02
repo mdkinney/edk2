@@ -94,7 +94,8 @@ jobs:
             PR_EVAL_LIST='${{ inputs.default-package-lists }}'
           fi
           echo $PR_EVAL_LIST
-          echo "package-lists=$(echo $PR_EVAL_LIST | jq -c .)" >> $GITHUB_OUTPUT
+          #echo "package-lists=$(echo $PR_EVAL_LIST | jq -c .)" >> $GITHUB_OUTPUT
+          echo "package-lists=$PR_EVAL_LIST" >> $GITHUB_OUTPUT
       - name: PatchCheck PR
         if: github.event_name == 'pull_request' && inputs.run-patch-check
         #
