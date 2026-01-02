@@ -30,7 +30,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Show Package Lists Value
-        run: echo "${{ needs.set_package_lists.outputs.package-lists }}"
+        run: |
+          echo '${{ needs.set_package_lists.outputs.package-lists }}'
+          echo '${{ needs.set_package_lists.outputs.package-lists[0] }}'
+    steps:
+      if: contains(needs.set_package_lists.outputs.package-lists, 'EmulatorPkg')
+      name: Contains EmulatorPkg
+      run: echo "EmulatorPkg is in the package list"
+    steps:
+      if: contains(needs.set_package_lists.outputs.package-lists, 'FooPkg')
+      name: Contains FooPkg
+      run: echo "FooPkg is in the package list"
 
   build_linux_clang_basic_acceptance_test:
     needs: set_package_lists
@@ -49,7 +59,7 @@ jobs:
       pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGPDB'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: '${{ needs.set_package_lists.outputs.package-lists }}'
 
   build_linux_clang_packages_ia32_x64:
     needs: [set_package_lists, build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
@@ -62,7 +72,7 @@ jobs:
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["IA32", "X64"]'
       tool_chain_tag_list: '["CLANGPDB", "CLANGDWARF"]'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: '${{ needs.set_package_lists.outputs.package-lists }}'
 
   build_linux_clangdwarf_aarch64_riscv64_packages:
     needs: [set_package_lists, build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
@@ -75,7 +85,7 @@ jobs:
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["AARCH64", "RISCV64"]'
       tool_chain_tag_list: '["CLANGDWARF"]'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: '${{ needs.set_package_lists.outputs.package-lists }}'
 
   build_linux_clangdwarf_noopt_unit_tests:
     needs: [set_package_lists, build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
@@ -88,7 +98,7 @@ jobs:
       build_type_list: '["NOOPT"]'
       build_arch_list: '["X64"]'
       tool_chain_tag_list: '["CLANGDWARF"]'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: '${{ needs.set_package_lists.outputs.package-lists }}'
 
   build_linux_clangdwarf_emulatorpkg:
     needs: [set_package_lists, build_linux_clang_basic_acceptance_test, build_linux_clang_no_target_test]
@@ -116,4 +126,4 @@ jobs:
       build_type_list: '["NOOPT"]'
       build_arch_list: '["X64"]'
       tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: '${{ needs.set_package_lists.outputs.package-lists }}'
