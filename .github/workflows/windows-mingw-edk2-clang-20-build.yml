@@ -23,56 +23,6 @@ jobs:
     name: Set Package Lists
     uses: ./.github/workflows/ubuntu-set-package-lists-and-patch-check.yml
 
-  show_package_lists_value:
-    needs: set_package_lists
-    name: Show Package Lists Value
-    runs-on: windows-latest
-    steps:
-      - name: Show Package Lists Value
-        run: |
-          echo '${{ needs.set_package_lists.outputs.package-lists }}'
-      - name: Contains EmulatorPkg
-        if: contains(needs.set_package_lists.outputs.package-lists, 'EmulatorPkg')
-        run: echo "EmulatorPkg is in the package list"
-      - name: Contains FooPkg
-        if: contains(needs.set_package_lists.outputs.package-lists, 'FooPkg')
-        run: echo "FooPkg is in the package list"
-
-  show_package_lists_workflow_call:
-    needs: set_package_lists
-    name: Show Package Lists Workflow Call
-    uses: ./.github/workflows/windows-clang-20-show-package-lists.yml
-    with:
-      build_type_list: '["DEBUG", "RELEASE"]'
-      build_arch_list: '["IA32", "X64"]'
-      tool_chain_tag_list: '["CLANGPDB", "CLANGDWARF"]'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
-
-  show_package_lists_inline:
-    needs: set_package_lists
-    name: Show Package Lists Inline
-    runs-on: windows-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        build_type:
-          - 'DEBUG'
-          - 'RELEASE'
-        build_arch:
-          - 'IA32'
-          - 'X64'
-        tool_chain_tag:
-          - 'CLANGPDB'
-          - 'CLANGDWARF'
-        build_package: ${{ fromJSON(needs.set_package_lists.outputs.package-lists) }}
-    steps:
-      - name: Show Matrix values
-        run: |
-          echo "Build Package: ${{ matrix.build_package }}"
-          echo "Build Arch:    ${{ matrix.build_arch }}"
-          echo "Build Type:    ${{ matrix.build_type }}"
-          echo "Tool Chain:    ${{ matrix.tool_chain_tag }}"
-
   build_windows_mingw_edk2_clang_packages_basic_acceptance_test:
     needs: set_package_lists
     name: Build Windows Mingw edk2-clang Packages Basic Acceptance Test
@@ -183,12 +133,12 @@ jobs:
       package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
 
   build_windows_mingw_edk2_clang_emulatorpkg:
+    if: contains(needs.set_package_lists.outputs.package-lists, 'EmulatorPkg')
     name: Build Windows Mingw edk2-clang EmulatorPkg
     needs:
       - set_package_lists
       - build_windows_mingw_edk2_clang_packages_basic_acceptance_test
       - build_windows_mingw_edk2_clang_platforms_basic_acceptance_test
-    if: contains(needs.set_package_lists.outputs.package-lists, 'EmulatorPkg')
     uses: ./.github/workflows/windows-clang-20-emulator-build-test.yml
     with:
       windows-clang-installer: 'edk2-clang'
