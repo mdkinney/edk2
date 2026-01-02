@@ -70,6 +70,8 @@ jobs:
           else
             PR_EVAL_LIST=${{ inputs.default-package-lists }}
           fi
+          echo "PR_EVAL_LIST=$PR_EVAL_LIST"
+          echo $PR_EVAL_LIST
           PR_EVAL_LIST=$(echo $PR_EVAL_LIST | jq -c .)
           echo "PR_EVAL_LIST=$PR_EVAL_LIST"
           echo "PR_EVAL_LIST=$PR_EVAL_LIST" > $GITHUB_ENV
