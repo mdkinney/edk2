@@ -45,8 +45,8 @@ jobs:
 
   build_linux_clang_packages_ia32_x64:
     needs:
-      - set_package_lists,
-      - build_linux_clang_basic_acceptance_test,
+      - set_package_lists
+      - build_linux_clang_basic_acceptance_test
       - build_linux_clang_no_target_test
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
