@@ -33,14 +33,12 @@ jobs:
         run: |
           echo '${{ needs.set_package_lists.outputs.package-lists }}'
           echo '${{ needs.set_package_lists.outputs.package-lists[0] }}'
-    steps:
-      if: contains(needs.set_package_lists.outputs.package-lists, 'EmulatorPkg')
-      name: Contains EmulatorPkg
-      run: echo "EmulatorPkg is in the package list"
-    steps:
-      if: contains(needs.set_package_lists.outputs.package-lists, 'FooPkg')
-      name: Contains FooPkg
-      run: echo "FooPkg is in the package list"
+      - name: Contains EmulatorPkg
+        if: contains(needs.set_package_lists.outputs.package-lists, 'EmulatorPkg')
+        run: echo "EmulatorPkg is in the package list"
+      - name: Contains FooPkg
+        if: contains(needs.set_package_lists.outputs.package-lists, 'FooPkg')
+        run: echo "FooPkg is in the package list"
 
   build_linux_clang_basic_acceptance_test:
     needs: set_package_lists
