@@ -4,7 +4,7 @@
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
-name: All CLANG 20.1.8 Build
+name: All CLANG 20.1.8 Build 2
 
 on:
   workflow_dispatch:
