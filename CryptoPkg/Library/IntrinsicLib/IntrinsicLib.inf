@@ -50,6 +50,9 @@
   Ia32/MathModU64x64.c      | GCC
 
   Ia32/MathUlldiv.nasm      | CLANGPDB
+  Ia32/MathUllrem.nasm      | CLANGPDB
+  Ia32/MathLldiv.nasm       | CLANGPDB
+
 [Sources.X64]
   CopyMem.c
   Math.c                    | GCC
