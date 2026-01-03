@@ -64,8 +64,11 @@ jobs:
     name: Stage 1 Success
     runs-on: ubuntu-latest
     needs:
+      - stage0
       - build_linux_clang_basic_acceptance_test
       - build_linux_clang_no_target_test
+    outputs:
+      package-lists: ${{ needs.stage0.outputs.package-lists }}
     steps:
       - name: Stage 1 Success
         run: echo "Stage 1 jobs completed successfully"
@@ -80,7 +83,7 @@ jobs:
     needs: stage1
     uses: ./.github/workflows/ubuntu-clang-20-build.yml
     with:
-      package-lists: ${{ needs.stage0.outputs.package-lists }}
+      package-lists: ${{ needs.stage1.outputs.package-lists }}
   windows_mingw_llvm_20_clang_build:
     # Firmware Build Support:             CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
@@ -88,7 +91,7 @@ jobs:
     needs: stage1
     uses: ./.github/workflows/windows-mingw-llvm-20-clang-build.yml
     with:
-      package-lists: ${{ needs.stage0.outputs.package-lists }}
+      package-lists: ${{ needs.stage1.outputs.package-lists }}
   windows_mingw_edk2_clang_20_build:
     # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF          - X64
@@ -96,7 +99,7 @@ jobs:
     needs: stage1
     uses: ./.github/workflows/windows-mingw-edk2-clang-20-build.yml
     with:
-      package-lists: ${{ needs.stage0.outputs.package-lists }}
+      package-lists: ${{ needs.stage1.outputs.package-lists }}
   windows_vs_llvm_20_clang_build:
     # Firmware Build Support:             CLANGPDB - IA32/X64
     # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
@@ -104,15 +107,18 @@ jobs:
     needs: stage1
     uses: ./.github/workflows/windows-vs-llvm-20-clang-build.yml
     with:
-      package-lists: ${{ needs.stage0.outputs.package-lists }}
+      package-lists: ${{ needs.stage1.outputs.package-lists }}
   stage2:
     name: Stage 2 Success
     runs-on: ubuntu-latest
     needs:
+      - stage1
       - ubuntu_clang_20_build
       - windows_mingw_llvm_20_clang_build
       - windows_mingw_edk2_clang_20_build
       - windows_vs_llvm_20_clang_build
+    outputs:
+      package-lists: ${{ needs.stage1.outputs.package-lists }}
     steps:
       - name: Stage 2 Success
         run: echo "Stage 2 jobs completed successfully"
