@@ -22,12 +22,13 @@ jobs:
     uses: ./.github/workflows/ubuntu-set-package-lists-and-patch-check.yml
     with:
       run-patch-check: true
-
-  stage0_success:
+  stage0:
     name: Stage 0 Success
     runs-on: ubuntu-latest
     needs:
       - set_package_lists
+    outputs:
+      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
     steps:
       - name: Stage 0 Success
         run: echo "Stage 0 jobs completed successfully"
@@ -36,16 +37,15 @@ jobs:
   # Stage 1: Run basic acceptance tests and no-target tests
   #
   build_linux_clang_basic_acceptance_test:
-    needs: stage0_success
+    needs: stage0
     uses: ./.github/workflows/ubuntu-clang-20-basic-acceptance-test.yml
     with:
       python-version: '3.12'
       pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGPDB'
-
   build_linux_clang_no_target_test:
-    needs: stage0_success
+    needs: stage0
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
       python-version: '3.12'
@@ -59,9 +59,8 @@ jobs:
       #
       build_arch_list: '["X64"]'
       tool_chain_tag_list: '["CLANGPDB"]'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
-
-  stage1_success:
+      package-lists: ${{ needs.stage0.outputs.package-lists }}
+  stage1:
     name: Stage 1 Success
     runs-on: ubuntu-latest
     needs:
@@ -78,36 +77,35 @@ jobs:
     # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
     # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
-    needs: stage1_success
+    needs: stage1
     uses: ./.github/workflows/ubuntu-clang-20-build.yml
     with:
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: ${{ needs.stage0.outputs.package-lists }}
   windows_mingw_llvm_20_clang_build:
     # Firmware Build Support:             CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
     # EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
-    needs: stage1_success
+    needs: stage1
     uses: ./.github/workflows/windows-mingw-llvm-20-clang-build.yml
     with:
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: ${{ needs.stage0.outputs.package-lists }}
   windows_mingw_edk2_clang_20_build:
     # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF          - X64
     # EmulatorPkg Build Support:          CLANGDWARF          - X64
-    needs: stage1_success
+    needs: stage1
     uses: ./.github/workflows/windows-mingw-edk2-clang-20-build.yml
     with:
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: ${{ needs.stage0.outputs.package-lists }}
   windows_vs_llvm_20_clang_build:
     # Firmware Build Support:             CLANGPDB - IA32/X64
     # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
     # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
-    needs: stage1_success
+    needs: stage1
     uses: ./.github/workflows/windows-vs-llvm-20-clang-build.yml
     with:
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
-
-  stage2_success:
+      package-lists: ${{ needs.stage0.outputs.package-lists }}
+  stage2:
     name: Stage 2 Success
     runs-on: ubuntu-latest
     needs:
