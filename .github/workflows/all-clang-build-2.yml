@@ -34,6 +34,7 @@ jobs:
     # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
     # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
+    needs: set_package_lists
     uses: ./.github/workflows/ubuntu-clang-20-build.yml
     with:
       package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
@@ -41,6 +42,7 @@ jobs:
     # Firmware Build Support:             CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
     # EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
+    needs: set_package_lists
     uses: ./.github/workflows/windows-mingw-llvm-20-clang-build.yml
     with:
       package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
@@ -48,6 +50,7 @@ jobs:
     # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF          - X64
     # EmulatorPkg Build Support:          CLANGDWARF          - X64
+    needs: set_package_lists
     uses: ./.github/workflows/windows-mingw-edk2-clang-20-build.yml
     with:
       package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
@@ -55,6 +58,7 @@ jobs:
     # Firmware Build Support:             CLANGPDB - IA32/X64
     # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
     # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
+    needs: set_package_lists
     uses: ./.github/workflows/windows-vs-llvm-20-clang-build.yml
     with:
       package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
