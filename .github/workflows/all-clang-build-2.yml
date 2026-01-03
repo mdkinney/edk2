@@ -33,4 +33,4 @@ jobs:
     # Firmware Build Support:             CLANGPDB - IA32/X64
     # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
     # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
-    uses: ./.github/workflows/windows-clang-20-emulator-build-test.yml
+    uses: ./.github/workflows/windows-vs-llvm-20-clang-build.yml
