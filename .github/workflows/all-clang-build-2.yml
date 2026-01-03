@@ -60,9 +60,9 @@ jobs:
     needs: stage0
     uses: ./.github/workflows/ubuntu-clang-20-basic-acceptance-test.yml
     with:
-        python-version: '3.12'
-        pip-requirements: 'pip-requirements.txt'
-        stuart-ci-settings-file: '.pytool/CISettings.py'
+      python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGPDB'
   build_windows_vs_llvm_20_clang_basic_acceptance_test:
     needs: stage0
