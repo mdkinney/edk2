@@ -89,10 +89,10 @@ jobs:
         run: |
           call edksetup.bat ${{ inputs.edk-setup-params }}
           call build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   -j Build/Emulator${{ matrix.build_arch }}NooptBuild.log >NUL
-      - name: Upload Windows EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
+      - name: Upload Windows EmulatorPkg ${{ inputs.windows-clang-installer }} ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
         uses: actions/upload-artifact@v6
         with:
-          name: Upload Windows EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
+          name: Upload Windows EmulatorPkg ${{ inputs.windows-clang-installer }} ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
