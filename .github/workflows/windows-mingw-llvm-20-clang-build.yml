@@ -14,15 +14,15 @@ name: Windows LLVM MINGW CLANG 20.1.8 Build
 
 on:
   workflow_call:
-  workflow_dispatch:
+    inputs:
+      package-lists:
+        description: 'List of package lists to test.'
+        required: true
+        type: string
+        default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
 
 jobs:
-  set_package_lists:
-    name: Set Package Lists
-    uses: ./.github/workflows/ubuntu-set-package-lists-and-patch-check.yml
-
   build_windows_llvm_mingw_clang_packages_basic_acceptance_test:
-    needs: set_package_lists
     name: Build Windows LLVM MINGW CLANG Packages Basic Acceptance Test
     runs-on: windows-latest
     steps:
@@ -61,7 +61,6 @@ jobs:
         if: always()
 
   build_windows_llvm_mingw_clang_platforms_basic_acceptance_test:
-    needs: set_package_lists
     name: Build Windows LLVM MINGW CLANG Platforms Basic Acceptance Test
     runs-on: windows-latest
     steps:
@@ -103,7 +102,6 @@ jobs:
 
   build_windows_llvm_mingw_clang_packages:
     needs:
-      - set_package_lists
       - build_windows_llvm_mingw_clang_packages_basic_acceptance_test
       - build_windows_llvm_mingw_clang_platforms_basic_acceptance_test
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
@@ -116,11 +114,10 @@ jobs:
       build_type_list: '["DEBUG","RELEASE"]'
       build_arch_list: '["IA32","X64"]'
       tool_chain_tag_list: '["CLANGDWARF"]'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: ${{ inputs.package-lists }}
 
   build_windows_llvm_mingw_clang_noopt_unit_tests:
     needs:
-      - set_package_lists
       - build_windows_llvm_mingw_clang_packages_basic_acceptance_test
       - build_windows_llvm_mingw_clang_platforms_basic_acceptance_test
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
@@ -133,12 +130,11 @@ jobs:
       build_type_list: '["NOOPT"]'
       build_arch_list: '["X64"]'
       tool_chain_tag_list: '["CLANGDWARF"]'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: ${{ inputs.package-lists }}
 
   build_windows_llvm_mingw_clang_emulatorpkg:
-    if: contains(needs.set_package_lists.outputs.package-lists, 'EmulatorPkg')
+    if: contains(inputs.package-lists, 'EmulatorPkg')
     needs:
-      - set_package_lists
       - build_windows_llvm_mingw_clang_packages_basic_acceptance_test
       - build_windows_llvm_mingw_clang_platforms_basic_acceptance_test
     uses: ./.github/workflows/windows-clang-20-emulator-build-test.yml

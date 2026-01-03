@@ -14,23 +14,47 @@ on:
       - clang_ci_v5b
 
 jobs:
+  #
+  # Stage 0: Set Package Lists and run patch check
+  #
+  set_package_lists:
+    name: Set Package Lists
+    uses: ./.github/workflows/ubuntu-set-package-lists-and-patch-check.yml
+    with:
+      run-patch-check: true
+
+  #
+  # Stage 1: Run basic acceptance tests and no-target tests
+  #
+
+  #
+  # Stage 2: Run full tests for packages and platforms
+  #
   ubuntu_clang_20_build:
     # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
     # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
     uses: ./.github/workflows/ubuntu-clang-20-build.yml
+    with:
+      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
   windows_mingw_llvm_20_clang_build:
     # Firmware Build Support:             CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
     # EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
     uses: ./.github/workflows/windows-mingw-llvm-20-clang-build.yml
+    with:
+      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
   windows_mingw_edk2_clang_20_build:
     # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF          - X64
     # EmulatorPkg Build Support:          CLANGDWARF          - X64
     uses: ./.github/workflows/windows-mingw-edk2-clang-20-build.yml
+    with:
+      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
   windows_vs_llvm_20_clang_build:
     # Firmware Build Support:             CLANGPDB - IA32/X64
     # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
     # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
     uses: ./.github/workflows/windows-vs-llvm-20-clang-build.yml
+    with:
+      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}

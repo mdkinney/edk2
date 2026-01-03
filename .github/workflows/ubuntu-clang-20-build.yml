@@ -12,17 +12,15 @@ name: Ubuntu CLANG 20.1.8 Build
 
 on:
   workflow_call:
-  workflow_dispatch:
+    inputs:
+      package-lists:
+        description: 'List of package lists to test.'
+        required: true
+        type: string
+        default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
 
 jobs:
-  set_package_lists:
-    name: Set Package Lists
-    uses: ./.github/workflows/ubuntu-set-package-lists-and-patch-check.yml
-    with:
-      run-patch-check: true
-
   build_linux_clang_basic_acceptance_test:
-    needs: set_package_lists
     uses: ./.github/workflows/ubuntu-clang-20-basic-acceptance-test.yml
     with:
       python-version: '3.12'
@@ -31,18 +29,16 @@ jobs:
       edk2-tools-build-params: '-t CLANGPDB'
 
   build_linux_clang_no_target_test:
-    needs: set_package_lists
     uses: ./.github/workflows/ubuntu-clang-20-no-target-test.yml
     with:
       python-version: '3.12'
       pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGPDB'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: ${{ inputs.package-lists }}
 
   build_linux_clang_packages_ia32_x64:
     needs:
-      - set_package_lists
       - build_linux_clang_basic_acceptance_test
       - build_linux_clang_no_target_test
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
@@ -54,11 +50,10 @@ jobs:
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["IA32", "X64"]'
       tool_chain_tag_list: '["CLANGPDB", "CLANGDWARF"]'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: ${{ inputs.package-lists }}
 
   build_linux_clangdwarf_aarch64_riscv64_packages:
     needs:
-      - set_package_lists
       - build_linux_clang_basic_acceptance_test
       - build_linux_clang_no_target_test
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
@@ -70,11 +65,10 @@ jobs:
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["AARCH64", "RISCV64"]'
       tool_chain_tag_list: '["CLANGDWARF"]'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: ${{ inputs.package-lists }}
 
   build_linux_clangdwarf_noopt_unit_tests:
     needs:
-      - set_package_lists
       - build_linux_clang_basic_acceptance_test
       - build_linux_clang_no_target_test
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
@@ -86,12 +80,11 @@ jobs:
       build_type_list: '["NOOPT"]'
       build_arch_list: '["X64"]'
       tool_chain_tag_list: '["CLANGDWARF"]'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: ${{ inputs.package-lists }}
 
   build_linux_clangdwarf_emulatorpkg:
-    if: contains(needs.set_package_lists.outputs.package-lists, 'EmulatorPkg')
+    if: contains(inputs.package-lists, 'EmulatorPkg')
     needs:
-      - set_package_lists
       - build_linux_clang_basic_acceptance_test
       - build_linux_clang_no_target_test
     uses: ./.github/workflows/ubuntu-clang-20-emulator-build.yml
@@ -108,7 +101,6 @@ jobs:
   # TODO: Move to separate workflow after validation
   build_linux_gcc_noopt_unit_tests:
     needs:
-      - set_package_lists
       - build_linux_clang_basic_acceptance_test
       - build_linux_clang_no_target_test
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
@@ -120,4 +112,4 @@ jobs:
       build_type_list: '["NOOPT"]'
       build_arch_list: '["X64"]'
       tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      package-lists: ${{ inputs.package-lists }}
