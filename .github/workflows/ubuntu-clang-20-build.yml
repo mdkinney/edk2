@@ -29,15 +29,6 @@ jobs:
       edk2-tools-build-params: '-t CLANGPDB'
 
   build_linux_clang_no_target_test:
-    uses: ./.github/workflows/ubuntu-clang-20-no-target-test.yml
-    with:
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
-      edk2-tools-build-params: '-t CLANGPDB'
-      package-lists: ${{ inputs.package-lists }}
-
-  build_linux_clang_no_target_test_2:
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
       python-version: '3.12'
