@@ -1,0 +1,36 @@
+## @file
+# A workflow using Ubuntu CLANG tools that builds packages and uploads artifacts.
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: All CLANG 20.1.8 Build
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - sandbox/master
+      - clang_ci_v5b
+
+jobs:
+  ubuntu_clang_20_build:
+    # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
+    # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
+    uses: ./.github/workflows/ubuntu-clang-20-build.yml
+  windows_mingw_llvm_20_clang_build:
+    # Firmware Build Support:             CLANGDWARF - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
+    # EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
+    uses: ./.github/workflows/windows-mingw-llvm-20-clang-build.yml
+  windows_mingw_edk2_clang_20_build:
+    # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGDWARF          - X64
+    # EmulatorPkg Build Support:          CLANGDWARF          - X64
+    uses: ./.github/workflows/windows-mingw-edk2-clang-20-build.yml
+  windows_vs_llvm_20_clang_build:
+    # Firmware Build Support:             CLANGPDB - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
+    # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
+    uses: ./.github/workflows/windows-clang-20-emulator-build-test.yml

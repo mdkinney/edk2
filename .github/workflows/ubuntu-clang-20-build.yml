@@ -11,11 +11,8 @@
 name: Ubuntu CLANG 20.1.8 Build
 
 on:
+  workflow_call:
   workflow_dispatch:
-  pull_request:
-    branches:
-      - sandbox/master
-      - clang_ci_v5b
 
 jobs:
   set_package_lists:
