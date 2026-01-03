@@ -57,6 +57,9 @@ jobs:
       tool_chain_tag_list: '["CLANGPDB"]'
       package-lists: ${{ needs.stage0.outputs.package-lists }}
   build_linux_clang_basic_acceptance_test:
+    # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
+    # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
     needs: stage0
     uses: ./.github/workflows/ubuntu-clang-20-basic-acceptance-test.yml
     with:
@@ -64,7 +67,21 @@ jobs:
       pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGPDB'
+  build_windows_mingw_llvm_20_clang_basic_acceptance_test:
+    # Firmware Build Support:             CLANGDWARF - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
+    # EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
+    needs: stage0
+    uses: ./.github/workflows/windows-mingw-llvm-20-clang-basic-acceptance-test.yml
+    with:
+      python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
+      edk2-tools-build-params: '-a X64 -t CLANGDWARF'
   build_windows_vs_llvm_20_clang_basic_acceptance_test:
+    # Firmware Build Support:             CLANGPDB - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
+    # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
     needs: stage0
     uses: ./.github/workflows/windows-vs-llvm-20-clang-basic-acceptance-test.yml
     with:
@@ -83,6 +100,7 @@ jobs:
       - stage0
       - build_linux_clang_no_target_test
       - build_linux_clang_basic_acceptance_test
+      - build_windows_mingw_llvm_20_clang_basic_acceptance_test
       - build_windows_vs_llvm_20_clang_basic_acceptance_test
     outputs:
       package-lists: ${{ needs.stage0.outputs.package-lists }}
@@ -101,20 +119,20 @@ jobs:
     uses: ./.github/workflows/ubuntu-clang-20-build.yml
     with:
       package-lists: ${{ needs.stage1.outputs.package-lists }}
-  windows_mingw_llvm_20_clang_build:
-    # Firmware Build Support:             CLANGDWARF - IA32/X64
-    # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
-    # EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
-    needs: stage1
-    uses: ./.github/workflows/windows-mingw-llvm-20-clang-build.yml
-    with:
-      package-lists: ${{ needs.stage1.outputs.package-lists }}
   windows_mingw_edk2_clang_20_build:
     # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF          - X64
     # EmulatorPkg Build Support:          CLANGDWARF          - X64
     needs: stage1
     uses: ./.github/workflows/windows-mingw-edk2-clang-20-build.yml
+    with:
+      package-lists: ${{ needs.stage1.outputs.package-lists }}
+  windows_mingw_llvm_20_clang_build:
+    # Firmware Build Support:             CLANGDWARF - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
+    # EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
+    needs: stage1
+    uses: ./.github/workflows/windows-mingw-llvm-20-clang-build.yml
     with:
       package-lists: ${{ needs.stage1.outputs.package-lists }}
   windows_vs_llvm_20_clang_build:
