@@ -37,6 +37,22 @@ jobs:
       edk2-tools-build-params: '-t CLANGPDB'
       package-lists: ${{ inputs.package-lists }}
 
+  build_linux_clang_no_target_test_2:
+    uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
+    with:
+      python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
+      edk2-tools-build-params: '-t CLANGPDB'
+      build_type_list: '["NO-TARGET"]'
+      #
+      # build_arch_list is ignored for NO-TARGET but set to arbitrary value to
+      # satisfy workflow call input requirements.
+      #
+      build_arch_list: '["X64"]'
+      tool_chain_tag_list: '["CLANGPDB"]'
+      package-lists: ${{ inputs.package-lists }}
+
   build_linux_clang_packages_ia32_x64:
     needs:
       - build_linux_clang_basic_acceptance_test
