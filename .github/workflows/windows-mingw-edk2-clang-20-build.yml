@@ -21,106 +21,27 @@ on:
         default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
 
 jobs:
-  build_windows_mingw_edk2_clang_packages_basic_acceptance_test:
-    name: Build Windows Mingw edk2-clang Packages Basic Acceptance Test
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Setup Windows Mingw edk2-clang Job
-        uses: ./.github/actions/windows-setup-clang-job
-        with:
-          windows-clang-installer: 'edk2-clang'
-          python-version: '3.12'
-          pip-requirements: 'pip-requirements.txt'
-          stuart-ci-settings-file: '.pytool/CISettings.py'
-          edk2-tools-build-params: '-a X64 -t CLANGPDB'
-      - name: Build HelloWorld CLANGPDB
-        shell: cmd
-        run: |
-          call edksetup.bat Mingw-w64
-          call build -a IA32 -a X64 -t CLANGPDB -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
-      - name: Build HelloWorld CLANGDWARF
-        shell: cmd
-        run: |
-          call edksetup.bat Mingw-w64
-          call build -a IA32 -a X64 -t CLANGDWARF -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangDwarfBuild.log >NUL
-      - name: Build UnitTestFrameworkPkg X64 Unit Tests
-        run: |
-          stuart_ci_build -c ".pytool/CISettings.py" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
-      - name: Upload Windows Mingw edk2-clang Packages Basic Acceptance Test Logs
-        uses: actions/upload-artifact@v6
-        with:
-          name: Upload Windows Mingw edk2-clang Packages Basic Acceptance Test Logs
-          path: |
-            BaseTools/BaseToolsBuild/*.txt
-            Build/**/BUILDLOG*.txt
-            Build/*.txt
-            Build/*.log
-        if: always()
-
-  build_windows_mingw_edk2_clang_platforms_basic_acceptance_test:
-    name: Build Windows Mingw edk2-clang Platforms Basic Acceptance Test
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Setup Windows Mingw edk2-clang Job
-        uses: ./.github/actions/windows-setup-clang-job
-        with:
-          windows-clang-installer: 'edk2-clang'
-          python-version: '3.12'
-          pip-requirements: 'pip-requirements.txt'
-          stuart-ci-settings-file: '.pytool/CISettings.py'
-          edk2-tools-build-params: '-a X64 -t CLANGPDB'
-      - name: Build EmulatorPkg X64 Host Module
-        shell: cmd
-        run: |
-          call edksetup.bat Mingw-w64
-          call build -a X64 -t CLANGDWARF -b DEBUG -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Win/Host/WinHost.inf -j Build/EmulatorX64DebugBuild.log >NUL
-      - name: Build OVMF Platform CLANGPDB
-        shell: cmd
-        run: |
-          call edksetup.bat Mingw-w64
-          call build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64BuildClangPdb.log >NUL
-      - name: Upload Windows Mingw edk2-clang Platforms Basic Acceptance Test Logs
-        uses: actions/upload-artifact@v6
-        with:
-          name: Upload Windows Mingw edk2-clang Platforms Basic Acceptance Test Logs
-          path: |
-            BaseTools/BaseToolsBuild/*.txt
-            Build/**/BUILDLOG*.txt
-            Build/*.txt
-            Build/*.log
-        if: always()
-
   build_windows_mingw_edk2_clang_packages:
-    needs:
-      - build_windows_mingw_edk2_clang_packages_basic_acceptance_test
-      - build_windows_mingw_edk2_clang_platforms_basic_acceptance_test
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
       windows-clang-installer: 'edk2-clang'
       python-version: '3.12'
       pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
-      edk2-tools-build-params: '-t CLANGPDB'
+      edk2-tools-build-params: '-a X64 -t CLANGPDB'
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["IA32", "X64"]'
       tool_chain_tag_list: '["CLANGPDB", "CLANGDWARF"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_windows_mingw_edk2_clang_noopt_unit_tests:
-    needs:
-      - build_windows_mingw_edk2_clang_packages_basic_acceptance_test
-      - build_windows_mingw_edk2_clang_platforms_basic_acceptance_test
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
       windows-clang-installer: 'edk2-clang'
       python-version: '3.12'
       pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
-      edk2-tools-build-params: '-t CLANGPDB'
+      edk2-tools-build-params: '-a X64 -t CLANGDWARF'
       build_type_list: '["NOOPT"]'
       build_arch_list: '["X64"]'
       tool_chain_tag_list: '["CLANGDWARF"]'
@@ -128,9 +49,6 @@ jobs:
 
   build_windows_mingw_edk2_clang_emulatorpkg:
     if: contains(inputs.package-lists, 'EmulatorPkg')
-    needs:
-      - build_windows_mingw_edk2_clang_packages_basic_acceptance_test
-      - build_windows_mingw_edk2_clang_platforms_basic_acceptance_test
     uses: ./.github/workflows/windows-clang-20-emulator-build-test.yml
     with:
       windows-clang-installer: 'edk2-clang'

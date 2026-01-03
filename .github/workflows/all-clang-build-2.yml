@@ -67,6 +67,17 @@ jobs:
       pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
       edk2-tools-build-params: '-t CLANGPDB'
+  build_windows_mingw_edk2_clang_basic_acceptance_test:
+    # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+    # Host-Based Unit Test Build Support: CLANGDWARF          - IA32
+    # EmulatorPkg Build Support:          CLANGDWARF          - IA32
+    needs: stage0
+    uses: ./.github/workflows/windows-mingw-edk2-clang-20-basic-acceptance-test.yml
+    with:
+      python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
+      edk2-tools-build-params: '-a X64 -t CLANGPDB'
   build_windows_mingw_llvm_20_clang_basic_acceptance_test:
     # Firmware Build Support:             CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
@@ -100,6 +111,7 @@ jobs:
       - stage0
       - build_linux_clang_no_target_test
       - build_linux_clang_basic_acceptance_test
+      - build_windows_mingw_edk2_clang_basic_acceptance_test
       - build_windows_mingw_llvm_20_clang_basic_acceptance_test
       - build_windows_vs_llvm_20_clang_basic_acceptance_test
     outputs:
