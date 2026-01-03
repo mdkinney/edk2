@@ -2,7 +2,7 @@
 # A workflow using Ubuntu CLANG tools to run Basic Acceptance Tests (BAT)
 # on packages and platforms and uploads artifacts.
 #
-# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64/AARCH64/RISCV64
 # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
 # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
 #
