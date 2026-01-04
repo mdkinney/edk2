@@ -15,30 +15,20 @@ on:
   workflow_call:
     inputs:
       windows-runs-on:
-        description: 'The runner label for Windows jobs.'
+        description: 'The runner label for Windows jobs (e.g. windows-2025).'
         required: true
-        type: string
-        default: 'windows-latest'
       python-version:
-        description: 'The version of Python to use.'
+        description: 'The version of Python to use (e.g. 3.12).'
         required: true
-        type: string
-        default: '3.12'
       pip-requirements:
-        description: 'Path to pip requirements file'
+        description: 'Path to pip requirements file (e.g. pip-requirements.txt)'
         required: true
-        type: string
-        default: 'pip-requirements.txt'
       stuart-ci-settings-file:
-        description: 'The path to the Stuart CI settings file.'
+        description: 'The path to the Stuart CI settings file (e.g. .pytool/CISettings.py).'
         required: true
-        type: string
-        default: '.pytool/CISettings.py'
       package-lists:
-        description: 'List of package lists to test.'
+        description: 'List of package lists to test (e.g. ["MdePkg,FatPkg","UefiCpuPkg"]).'
         required: true
-        type: string
-        default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
 
 jobs:
   build_windows_visual_studio_clangpdb_packages:

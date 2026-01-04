@@ -15,10 +15,8 @@ on:
   workflow_call:
     inputs:
       windows-runs-on:
-        description: 'The runner label for Windows jobs.'
+        description: 'The runner label for Windows jobs (e.g. windows-2025).'
         required: true
-        type: string
-        default: 'windows-latest'
       python-version:
         description: 'The version of Python to use.'
         required: true
