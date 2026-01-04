@@ -21,6 +21,9 @@ jobs:
     name: Set Package Lists
     uses: ./.github/workflows/ubuntu-set-package-lists-and-patch-check.yml
     with:
+      python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
       run-patch-check: true
 
   #
@@ -130,6 +133,9 @@ jobs:
     needs: stage1
     uses: ./.github/workflows/ubuntu-clang-20-build.yml
     with:
+      python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
       package-lists: ${{ needs.stage1.outputs.package-lists }}
   windows_mingw_edk2_clang_20_build:
     # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
@@ -138,6 +144,9 @@ jobs:
     needs: stage1
     uses: ./.github/workflows/windows-mingw-edk2-clang-20-build.yml
     with:
+      python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
       package-lists: ${{ needs.stage1.outputs.package-lists }}
   windows_mingw_llvm_20_clang_build:
     # Firmware Build Support:             CLANGDWARF - IA32/X64
@@ -146,6 +155,9 @@ jobs:
     needs: stage1
     uses: ./.github/workflows/windows-mingw-llvm-20-clang-build.yml
     with:
+      python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
       package-lists: ${{ needs.stage1.outputs.package-lists }}
   windows_vs_llvm_20_clang_build:
     # Firmware Build Support:             CLANGPDB - IA32/X64
@@ -154,6 +166,9 @@ jobs:
     needs: stage1
     uses: ./.github/workflows/windows-vs-llvm-20-clang-build.yml
     with:
+      python-version: '3.12'
+      pip-requirements: 'pip-requirements.txt'
+      stuart-ci-settings-file: '.pytool/CISettings.py'
       package-lists: ${{ needs.stage1.outputs.package-lists }}
 
   #

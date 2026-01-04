@@ -11,6 +11,21 @@ name: Ubuntu Set Package Lists and Patch Check
 on:
   workflow_call:
     inputs:
+      python-version:
+        description: 'The version of Python to use.'
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: 'Path to pip requirements file'
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: 'The path to the Stuart CI settings file.'
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
       default-package-lists:
         description: 'Default list of package lists to test.'
         required: false
@@ -71,8 +86,8 @@ jobs:
         #
         uses: ./.github/actions/linux-install-python-venv
         with:
-          python-version: '3.12'
-          pip-requirements: 'pip-requirements.txt'
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
           cache-name-suffix: '-set-package-lists'
       - name: Compute Package Lists
         id: set-package-lists
@@ -88,7 +103,7 @@ jobs:
         #
         run: |
           if [ "${{ github.event_name }}" == "pull_request" ]; then
-            PR_EVAL_LIST=$(stuart_pr_eval -c .pytool/CISettings.py --pr-target HEAD~${{ github.event.pull_request.commits }} --output-csv-format-string {pkgcsv})
+            PR_EVAL_LIST=$(stuart_pr_eval -c ${{ inputs.stuart-ci-settings-file }} --pr-target HEAD~${{ github.event.pull_request.commits }} --output-csv-format-string {pkgcsv})
             PR_EVAL_LIST=[\"$PR_EVAL_LIST\"]
           else
             PR_EVAL_LIST='${{ inputs.default-package-lists }}'

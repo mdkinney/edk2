@@ -13,6 +13,21 @@ name: Ubuntu CLANG 20.1.8 Build
 on:
   workflow_call:
     inputs:
+      python-version:
+        description: 'The version of Python to use.'
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: 'Path to pip requirements file'
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: 'The path to the Stuart CI settings file.'
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
       package-lists:
         description: 'List of package lists to test.'
         required: true
@@ -23,9 +38,9 @@ jobs:
   build_linux_clang_packages_ia32_x64:
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGPDB'
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["IA32", "X64"]'
@@ -35,9 +50,9 @@ jobs:
   build_linux_clangdwarf_aarch64_riscv64_packages:
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGDWARF'
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["AARCH64", "RISCV64"]'
@@ -47,9 +62,9 @@ jobs:
   build_linux_clangdwarf_noopt_unit_tests:
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGDWARF'
       build_type_list: '["NOOPT"]'
       build_arch_list: '["X64"]'
@@ -60,9 +75,9 @@ jobs:
     if: contains(inputs.package-lists, 'EmulatorPkg')
     uses: ./.github/workflows/ubuntu-clang-20-emulator-build.yml
     with:
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGDWARF'
       edk-setup-params: ''
       build_arch_list: '["IA32", "X64"]'
@@ -75,9 +90,9 @@ jobs:
     if: github.event_name != 'pull_request'
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
       build_type_list: '["NOOPT"]'
       build_arch_list: '["X64"]'

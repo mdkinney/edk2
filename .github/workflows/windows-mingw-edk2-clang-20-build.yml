@@ -14,6 +14,21 @@ name: Windows Mingw edk2-clang 20.1.8 Build
 on:
   workflow_call:
     inputs:
+      python-version:
+        description: 'The version of Python to use.'
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: 'Path to pip requirements file'
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: 'The path to the Stuart CI settings file.'
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
       package-lists:
         description: 'List of package lists to test.'
         required: true
@@ -25,9 +40,9 @@ jobs:
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
       windows-clang-installer: 'edk2-clang'
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-a X64 -t CLANGPDB'
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["IA32", "X64"]'
@@ -40,9 +55,9 @@ jobs:
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
       windows-clang-installer: 'edk2-clang'
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-a X64 -t CLANGDWARF'
       build_type_list: '["NOOPT"]'
       build_arch_list: '["X64"]'
@@ -55,9 +70,9 @@ jobs:
     uses: ./.github/workflows/windows-clang-20-emulator-build-test.yml
     with:
       windows-clang-installer: 'edk2-clang'
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-a X64 -t CLANGDWARF'
       edk-setup-params: 'Mingw-w64'
       build_arch_list: '["X64"]'
