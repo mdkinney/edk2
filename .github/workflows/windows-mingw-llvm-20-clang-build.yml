@@ -36,6 +36,8 @@ jobs:
       package-lists: ${{ inputs.package-lists }}
 
   build_windows_llvm_mingw_clang_noopt_unit_tests:
+    # Do not run for PR.  Covered by Ubuntu clang workflow.
+    if: github.event_name != 'pull_request'
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
       windows-clang-installer: 'llvm'

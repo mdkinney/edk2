@@ -1,7 +1,7 @@
 ## @file
 # A workflow using Ubuntu CLANG tools that builds packages and uploads artifacts.
 #
-# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
+# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64/AARCH64/RISCV64
 # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
 # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
 #
@@ -71,6 +71,8 @@ jobs:
   # Temp check for GCC and GCCNOLTO tool chains to build X64 NOOPT unit tests
   # TODO: Move to separate workflow after validation
   build_linux_gcc_noopt_unit_tests:
+    # Do not run for PR.  Covered by Ubuntu clang workflow.
+    if: github.event_name != 'pull_request'
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
       python-version: '3.12'
