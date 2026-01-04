@@ -1,0 +1,67 @@
+## @file
+# A workflow using Ubuntu to stress stuart_update
+#
+# Copyright (C) 2025 Intel Corporation.
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+name: Ubuntu Stress Test for stuart_update
+
+on:
+  workflow_dispatch:
+    inputs:
+      linux-runs-on:
+        description: 'The runner label for Linux jobs.'
+        required: true
+        type: string
+        default: 'ubuntu-latest'
+      linux-container-image:
+        description: 'The container image for Linux jobs.'
+        required: true
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      python-version:
+        description: 'The version of Python to use.'
+        required: true
+        type: string
+        default: '3.12'
+      pip-requirements:
+        description: 'Path to pip requirements file'
+        required: true
+        type: string
+        default: 'pip-requirements.txt'
+      stuart-ci-settings-file:
+        description: 'The path to the Stuart CI settings file.'
+        required: true
+        type: string
+        default: '.pytool/CISettings.py'
+      edk2-tools-build-params:
+        description: 'The EDK2 Tools build parameters.'
+        required: true
+        type: string
+        default: '-t CLANGPDB'
+
+jobs:
+  build_linux_packages:
+    name: Build Linux Packages (${{ join(matrix.*, ' - ') }})
+    runs-on: ${{ inputs.linux-runs-on }}
+    container:
+      image: ${{ inputs.linux-container-image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        item1: [0,1,2,3,4,5,6,7,8,9]
+        item2: [0,1,2,3,4,5,6,7,8,9]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Setup Linux CLANG Job ${{ matrix.item1 }}${{ matrix.item2 }}
+        uses: ./.github/actions/linux-setup-clang-job
+        with:
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+
+
