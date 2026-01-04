@@ -22,9 +22,10 @@ on:
         type: string
         default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
       windows-runs-on:
-        description: 'The runner label for Windows jobs (e.g. windows-2025).'
+        description: 'The runner label for Windows jobs.'
         required: false
         type: string
+        default: 'windows-2025'
       python-version:
         description: 'The version of Python to use.'
         required: true

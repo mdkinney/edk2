@@ -15,25 +15,30 @@ on:
   workflow_call:
     inputs:
       windows-runs-on:
-        description: 'The runner label for Windows jobs (e.g. windows-2025).'
+        description: 'The runner label for Windows jobs.'
         required: true
         type: string
+        default: 'windows-2025'
       python-version:
-        description: 'The version of Python to use (e.g. 3.12).'
+        description: 'The version of Python to use.'
         required: true
         type: string
+        default: '3.12'
       pip-requirements:
-        description: 'Path to pip requirements file (e.g. pip-requirements.txt)'
+        description: 'Path to pip requirements file'
         required: true
         type: string
+        default: 'pip-requirements.txt'
       stuart-ci-settings-file:
-        description: 'The path to the Stuart CI settings file (e.g. .pytool/CISettings.py).'
+        description: 'The path to the Stuart CI settings file.'
         required: true
         type: string
+        default: '.pytool/CISettings.py'
       package-lists:
         description: 'List of package lists to test (e.g. ["MdePkg,FatPkg","UefiCpuPkg"]).'
         required: true
         type: string
+        default: '["FatPkg"]'
 
 jobs:
   build_windows_visual_studio_clangpdb_packages:

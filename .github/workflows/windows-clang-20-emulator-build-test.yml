@@ -14,9 +14,10 @@ on:
   workflow_call:
     inputs:
       windows-runs-on:
-        description: 'The runner label for Windows jobs (e.g. windows-2025).'
+        description: 'The runner label for Windows jobs.'
         required: true
         type: string
+        default: 'windows-2025'
       windows-clang-installer:
         description: 'Windows CLANG installer (e.g., edk2-clang, llvm, vs-clangpdb, or none)'
         required: true
