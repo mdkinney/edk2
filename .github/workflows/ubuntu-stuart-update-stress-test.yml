@@ -71,8 +71,11 @@ jobs:
         shell: bash
         run: |
           for i in $(seq 1 ${{ inputs.stuart-update-iterations }}); do
-          echo "Iteration $i of stuart_update"
-          stuart_update -c ${{ inputs.stuart-ci-settings-file }}
+            echo "Iteration $i of stuart_update"
+            if ! stuart_update -c ${{ inputs.stuart-ci-settings-file }}; then
+              echo "stuart_update failed on iteration $i"
+              exit 1
+            fi
           done
 
 

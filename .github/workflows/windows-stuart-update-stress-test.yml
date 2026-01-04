@@ -65,6 +65,10 @@ jobs:
         shell: pwsh
         run: |
           for ($i = 1; $i -le ${{ inputs.stuart-update-iterations }}; $i++) {
-          Write-Output "Iteration $i of stuart_update"
-          stuart_update -c ${{ inputs.stuart-ci-settings-file }}
+            Write-Output "Iteration $i of stuart_update"
+            stuart_update -c ${{ inputs.stuart-ci-settings-file }}
+            if ($LASTEXITCODE -ne 0) {
+              Write-Error "stuart_update failed on iteration $i with exit code $LASTEXITCODE"
+              exit $LASTEXITCODE
+            }
           }
