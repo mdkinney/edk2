@@ -39,29 +39,40 @@ on:
         required: true
         type: string
         default: '-t CLANGPDB'
+      stuart-update-iterations:
+        description: 'Number of stuart_update iterations to run in stress test.'
+        required: false
+        type: string
+        default: '100'
 
 jobs:
   build_linux_packages:
-    name: Build Linux Packages (${{ join(matrix.*, ' - ') }})
+    name: Run stuart_update Stress Test on Linux ${{ matrix.item }}
     runs-on: ${{ inputs.linux-runs-on }}
     container:
       image: ${{ inputs.linux-container-image }}
     strategy:
       fail-fast: false
       matrix:
-        item1: [0,1,2,3,4,5,6,7,8,9]
-        item2: [0,1,2,3,4,5,6,7,8,9]
+        item  : [0,1,2,3,4,5,6,7,8,9]
     steps:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Setup Linux CLANG Job ${{ matrix.item1 }}${{ matrix.item2 }}
+      - name: Setup Linux CLANG Job ${{ matrix.item }}
         uses: ./.github/actions/linux-setup-clang-job
         with:
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: 'Run stuart_update Stress Test in a loop'
+        shell: bash
+        run: |
+          for i in $(seq 1 ${{ inputs.stuart-update-iterations }}); do
+          echo "Iteration $i of stuart_update"
+          stuart_update -c ${{ inputs.stuart-ci-settings-file }}
+          done
 
 
