@@ -14,6 +14,16 @@ name: Ubuntu CLANG 20.1.8 Basic Acceptance Test
 on:
   workflow_call:
     inputs:
+      linux-runs-on:
+        description: 'The runner label for Linux jobs.'
+        required: true
+        type: string
+        default: 'ubuntu-latest'
+      linux-container-image:
+        description: 'The container image for Linux jobs.'
+        required: true
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
       python-version:
         description: 'The version of Python to use.'
         required: true
@@ -38,9 +48,9 @@ on:
 jobs:
   build_linux_clang_packages_basic_acceptance_test:
     name: Build Linux CLANGPDB CLANGDWARF Packages Basic Acceptance Test
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.linux-runs-on }}
     container:
-      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
+      image: ${{ inputs.linux-container-image }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -81,9 +91,9 @@ jobs:
 
   build_linux_clang_platforms_basic_acceptance_test:
     name: Build Linux CLANGPDB CLANGDWARF Platforms Basic Acceptance Test
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.linux-runs-on }}
     container:
-      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
+      image: ${{ inputs.linux-container-image }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6

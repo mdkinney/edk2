@@ -14,6 +14,11 @@ name: Windows Mingw edk2-clang 20.1.8 Basic Acceptance Test
 on:
   workflow_call:
     inputs:
+      windows-runs-on:
+        description: 'The runner label for Windows jobs.'
+        required: true
+        type: string
+        default: 'windows-latest'
       python-version:
         description: 'The version of Python to use.'
         required: true
@@ -38,7 +43,7 @@ on:
 jobs:
   build_windows_mingw_edk2_clang_packages_basic_acceptance_test:
     name: Build Windows Mingw edk2-clang Packages Basic Acceptance Test
-    runs-on: windows-latest
+    runs-on: ${{ inputs.windows-runs-on }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -76,7 +81,7 @@ jobs:
 
   build_windows_mingw_edk2_clang_platforms_basic_acceptance_test:
     name: Build Windows Mingw edk2-clang Platforms Basic Acceptance Test
-    runs-on: windows-latest
+    runs-on: ${{ inputs.windows-runs-on }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6

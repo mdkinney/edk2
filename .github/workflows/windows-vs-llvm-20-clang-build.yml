@@ -14,6 +14,11 @@ name: Windows Visual Studio CLANGPDB LLVM 20.1.8 Build
 on:
   workflow_call:
     inputs:
+      windows-runs-on:
+        description: 'The runner label for Windows jobs.'
+        required: true
+        type: string
+        default: 'windows-latest'
       python-version:
         description: 'The version of Python to use.'
         required: true
@@ -39,6 +44,7 @@ jobs:
   build_windows_visual_studio_clangpdb_packages:
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-clang-installer: 'vs-clangpdb'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
@@ -54,6 +60,7 @@ jobs:
     if: github.event_name != 'pull_request'
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-clang-installer: 'vs-clangpdb'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
@@ -68,6 +75,7 @@ jobs:
     if: contains(inputs.package-lists, 'EmulatorPkg')
     uses: ./.github/workflows/windows-clang-20-emulator-build-test.yml
     with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-clang-installer: 'vs-clangpdb'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}

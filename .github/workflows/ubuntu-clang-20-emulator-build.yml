@@ -13,6 +13,16 @@ name: Ubuntu CLANG 20.1.8 EmulatorPkg Test
 on:
   workflow_call:
     inputs:
+      linux-runs-on:
+        description: 'The runner label for Linux jobs.'
+        required: true
+        type: string
+        default: 'ubuntu-latest'
+      linux-container-image:
+        description: 'The container image for Linux jobs.'
+        required: true
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
       python-version:
         description: 'The version of Python to use.'
         required: true
@@ -52,9 +62,9 @@ on:
 jobs:
   build_linux_clang_emulatorpkg_test:
     name: Build Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} EmulatorPkg Test
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.linux-runs-on }}
     container:
-      image: ghcr.io/mdkinney/containers/ubuntu-24-build:latest
+      image: ${{ inputs.linux-container-image }}
     strategy:
       fail-fast: false
       matrix:

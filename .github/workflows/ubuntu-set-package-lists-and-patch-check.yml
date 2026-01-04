@@ -11,6 +11,11 @@ name: Ubuntu Set Package Lists and Patch Check
 on:
   workflow_call:
     inputs:
+      linux-runs-on:
+        description: 'The runner label for Linux jobs.'
+        required: true
+        type: string
+        default: 'ubuntu-latest'
       python-version:
         description: 'The version of Python to use.'
         required: true
@@ -44,7 +49,7 @@ on:
 jobs:
   set_package_lists:
     name: Set Package Lists
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.linux-runs-on }}
     outputs:
       package-lists: ${{ steps.set-package-lists.outputs.package-lists }}
     steps:

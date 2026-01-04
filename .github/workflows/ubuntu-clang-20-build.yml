@@ -13,6 +13,16 @@ name: Ubuntu CLANG 20.1.8 Build
 on:
   workflow_call:
     inputs:
+      linux-runs-on:
+        description: 'The runner label for Linux jobs.'
+        required: true
+        type: string
+        default: 'ubuntu-latest'
+      linux-container-image:
+        description: 'The container image for Linux jobs.'
+        required: true
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
       python-version:
         description: 'The version of Python to use.'
         required: true
@@ -38,6 +48,8 @@ jobs:
   build_linux_clang_packages_ia32_x64:
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -50,6 +62,8 @@ jobs:
   build_linux_clangdwarf_aarch64_riscv64_packages:
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -62,6 +76,8 @@ jobs:
   build_linux_clangdwarf_noopt_unit_tests:
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -75,6 +91,8 @@ jobs:
     if: contains(inputs.package-lists, 'EmulatorPkg')
     uses: ./.github/workflows/ubuntu-clang-20-emulator-build.yml
     with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -90,6 +108,8 @@ jobs:
     if: github.event_name != 'pull_request'
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}

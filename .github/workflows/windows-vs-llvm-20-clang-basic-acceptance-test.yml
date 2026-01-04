@@ -14,6 +14,11 @@ name: Windows Visual Studio CLANGPDB LLVM 20.1.8 Basic Acceptance Test
 on:
   workflow_call:
     inputs:
+      windows-runs-on:
+        description: 'The runner label for Windows jobs.'
+        required: true
+        type: string
+        default: 'windows-latest'
       python-version:
         description: 'The version of Python to use.'
         required: true
@@ -38,7 +43,7 @@ on:
 jobs:
   build_windows_visual_studio_clangpdb_packages_basic_acceptance_test:
     name: Build Windows Visual Studio CLANGPDB Packages Basic Acceptance Test
-    runs-on: windows-latest
+    runs-on: ${{ inputs.windows-runs-on }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -76,7 +81,7 @@ jobs:
 
   build_windows_visual_studio_clangpdb_platforms_basic_acceptance_test:
     name: Build Windows Visual Studio CLANGPDB Platforms Basic Acceptance Test
-    runs-on: windows-latest
+    runs-on: ${{ inputs.windows-runs-on }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6

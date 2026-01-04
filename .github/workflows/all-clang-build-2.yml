@@ -24,6 +24,9 @@ jobs:
     name: Staged Build CLANG 20.1.8
     uses: ./.github/workflows/staged-build.yml
     with:
+      linux-runs-on: 'ubuntu-latest'
+      linux-container-image: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      windows-runs-on: 'windows-latest'
       python-version: '3.12'
       pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'

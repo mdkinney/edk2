@@ -11,6 +11,21 @@ name: Staged Build CLANG 20.1.8
 on:
   workflow_call:
     inputs:
+      linux-runs-on:
+        description: 'The runner label for Linux jobs.'
+        required: false
+        type: string
+        default: 'ubuntu-latest'
+      linux-container-image:
+        description: 'The container image for Linux jobs.'
+        required: false
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      windows-runs-on:
+        description: 'The runner label for Windows jobs.'
+        required: false
+        type: string
+        default: 'windows-latest'
       python-version:
         description: 'The version of Python to use.'
         required: true
@@ -29,12 +44,13 @@ on:
 
 jobs:
   #
-  # Stage 0: Set Package Lists and run patch check
+  # Stage 0: Set Package Lists and run PatchCheck
   #
   set_package_lists:
     name: Set Package Lists
     uses: ./.github/workflows/ubuntu-set-package-lists-and-patch-check.yml
     with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -45,7 +61,7 @@ jobs:
   #
   stage0:
     name: Stage 0 Success
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.linux-runs-on }}
     needs:
       - set_package_lists
     outputs:
@@ -61,6 +77,8 @@ jobs:
     needs: stage0
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -80,6 +98,8 @@ jobs:
     needs: stage0
     uses: ./.github/workflows/ubuntu-clang-20-basic-acceptance-test.yml
     with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -91,6 +111,7 @@ jobs:
     needs: stage0
     uses: ./.github/workflows/windows-mingw-edk2-clang-20-basic-acceptance-test.yml
     with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -102,6 +123,7 @@ jobs:
     needs: stage0
     uses: ./.github/workflows/windows-mingw-llvm-20-clang-basic-acceptance-test.yml
     with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -113,6 +135,7 @@ jobs:
     needs: stage0
     uses: ./.github/workflows/windows-vs-llvm-20-clang-basic-acceptance-test.yml
     with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -123,7 +146,7 @@ jobs:
   #
   stage1:
     name: Stage 1 Success
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.linux-runs-on }}
     needs:
       - stage0
       - build_linux_clang_no_target_test
@@ -147,6 +170,8 @@ jobs:
     needs: stage1
     uses: ./.github/workflows/ubuntu-clang-20-build.yml
     with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -158,6 +183,7 @@ jobs:
     needs: stage1
     uses: ./.github/workflows/windows-mingw-edk2-clang-20-build.yml
     with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -169,6 +195,7 @@ jobs:
     needs: stage1
     uses: ./.github/workflows/windows-mingw-llvm-20-clang-build.yml
     with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -180,6 +207,7 @@ jobs:
     needs: stage1
     uses: ./.github/workflows/windows-vs-llvm-20-clang-build.yml
     with:
+      windows-runs-on: ${{ inputs.windows-runs-on }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -190,7 +218,7 @@ jobs:
   #
   stage2:
     name: Stage 2 Success
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.linux-runs-on }}
     needs:
       - stage1
       - ubuntu_clang_20_build
