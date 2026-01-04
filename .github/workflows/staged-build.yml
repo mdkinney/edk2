@@ -24,6 +24,7 @@ on:
       windows-runs-on:
         description: 'The runner label for Windows jobs (e.g. windows-2025).'
         required: false
+        type: string
       python-version:
         description: 'The version of Python to use.'
         required: true

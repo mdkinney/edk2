@@ -17,18 +17,23 @@ on:
       windows-runs-on:
         description: 'The runner label for Windows jobs (e.g. windows-2025).'
         required: true
+        type: string
       python-version:
         description: 'The version of Python to use (e.g. 3.12).'
         required: true
+        type: string
       pip-requirements:
         description: 'Path to pip requirements file (e.g. pip-requirements.txt)'
         required: true
+        type: string
       stuart-ci-settings-file:
         description: 'The path to the Stuart CI settings file (e.g. .pytool/CISettings.py).'
         required: true
+        type: string
       package-lists:
         description: 'List of package lists to test (e.g. ["MdePkg,FatPkg","UefiCpuPkg"]).'
         required: true
+        type: string
 
 jobs:
   build_windows_visual_studio_clangpdb_packages:
