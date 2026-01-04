@@ -1,5 +1,11 @@
 ## @file
-# A workflow using Ubuntu CLANG tools that builds packages and uploads artifacts.
+# A workflow using a staged build with Ubuntu CLANG tools and Windows CLANG
+# tools to perform a sequence of quality checks, basic acceptance tests,
+# package tests, platform tests, and uploads artifacts.
+#
+# This top level file configures the conditions this workflow runs and
+# configures parameters to pass to the staged-build.yml workflow that implements
+# the staged build process.
 #
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
@@ -11,181 +17,14 @@ on:
   pull_request:
     branches:
       - sandbox/master
-      - clang_ci_v5b
+      - clang_ci_v5*
 
 jobs:
-  #
-  # Stage 0: Set Package Lists and run patch check
-  #
-  set_package_lists:
-    name: Set Package Lists
-    uses: ./.github/workflows/ubuntu-set-package-lists-and-patch-check.yml
+  staged_build_clang_20:
+    name: Staged Build CLANG 20.1.8
+    uses: ./.github/workflows/staged-build.yml
     with:
       python-version: '3.12'
       pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
-      run-patch-check: true
-
-  #
-  # Stage 0 Success
-  #
-  stage0:
-    name: Stage 0 Success
-    runs-on: ubuntu-latest
-    needs:
-      - set_package_lists
-    outputs:
-      package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
-    steps:
-      - name: Stage 0 Success
-        run: echo "Stage 0 jobs completed successfully"
-
-  #
-  # Stage 1: Run basic acceptance tests and no-target tests
-  #
-  build_linux_clang_no_target_test:
-    needs: stage0
-    uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
-    with:
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
-      edk2-tools-build-params: '-t CLANGPDB'
-      build_type_list: '["NO-TARGET"]'
-      #
-      # build_arch_list is ignored for NO-TARGET but set to arbitrary value to
-      # satisfy workflow call input requirements.
-      #
-      build_arch_list: '["X64"]'
-      tool_chain_tag_list: '["CLANGPDB"]'
-      package-lists: ${{ needs.stage0.outputs.package-lists }}
-  build_linux_clang_basic_acceptance_test:
-    # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64/AARCH64/RISCV64
-    # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
-    # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
-    needs: stage0
-    uses: ./.github/workflows/ubuntu-clang-20-basic-acceptance-test.yml
-    with:
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
-      edk2-tools-build-params: '-t CLANGPDB'
-  build_windows_mingw_edk2_clang_basic_acceptance_test:
-    # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
-    # Host-Based Unit Test Build Support: CLANGDWARF          - IA32
-    # EmulatorPkg Build Support:          CLANGDWARF          - IA32
-    needs: stage0
-    uses: ./.github/workflows/windows-mingw-edk2-clang-20-basic-acceptance-test.yml
-    with:
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
-      edk2-tools-build-params: '-a X64 -t CLANGPDB'
-  build_windows_mingw_llvm_20_clang_basic_acceptance_test:
-    # Firmware Build Support:             CLANGDWARF - IA32/X64
-    # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
-    # EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
-    needs: stage0
-    uses: ./.github/workflows/windows-mingw-llvm-20-clang-basic-acceptance-test.yml
-    with:
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
-      edk2-tools-build-params: '-a X64 -t CLANGDWARF'
-  build_windows_vs_llvm_20_clang_basic_acceptance_test:
-    # Firmware Build Support:             CLANGPDB - IA32/X64
-    # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
-    # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
-    needs: stage0
-    uses: ./.github/workflows/windows-vs-llvm-20-clang-basic-acceptance-test.yml
-    with:
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
-      edk2-tools-build-params: '-t VS2022'
-
-  #
-  # Stage 1 Success
-  #
-  stage1:
-    name: Stage 1 Success
-    runs-on: ubuntu-latest
-    needs:
-      - stage0
-      - build_linux_clang_no_target_test
-      - build_linux_clang_basic_acceptance_test
-      - build_windows_mingw_edk2_clang_basic_acceptance_test
-      - build_windows_mingw_llvm_20_clang_basic_acceptance_test
-      - build_windows_vs_llvm_20_clang_basic_acceptance_test
-    outputs:
-      package-lists: ${{ needs.stage0.outputs.package-lists }}
-    steps:
-      - name: Stage 1 Success
-        run: echo "Stage 1 jobs completed successfully"
-
-  #
-  # Stage 2: Run full tests for packages and platforms
-  #
-  ubuntu_clang_20_build:
-    # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64/AARCH64/RISCV64
-    # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
-    # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
-    needs: stage1
-    uses: ./.github/workflows/ubuntu-clang-20-build.yml
-    with:
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
-      package-lists: ${{ needs.stage1.outputs.package-lists }}
-  windows_mingw_edk2_clang_20_build:
-    # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
-    # Host-Based Unit Test Build Support: CLANGDWARF          - X64
-    # EmulatorPkg Build Support:          CLANGDWARF          - X64
-    needs: stage1
-    uses: ./.github/workflows/windows-mingw-edk2-clang-20-build.yml
-    with:
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
-      package-lists: ${{ needs.stage1.outputs.package-lists }}
-  windows_mingw_llvm_20_clang_build:
-    # Firmware Build Support:             CLANGDWARF - IA32/X64
-    # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
-    # EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
-    needs: stage1
-    uses: ./.github/workflows/windows-mingw-llvm-20-clang-build.yml
-    with:
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
-      package-lists: ${{ needs.stage1.outputs.package-lists }}
-  windows_vs_llvm_20_clang_build:
-    # Firmware Build Support:             CLANGPDB - IA32/X64
-    # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
-    # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
-    needs: stage1
-    uses: ./.github/workflows/windows-vs-llvm-20-clang-build.yml
-    with:
-      python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
-      package-lists: ${{ needs.stage1.outputs.package-lists }}
-
-  #
-  # Stage 2 Success
-  #
-  stage2:
-    name: Stage 2 Success
-    runs-on: ubuntu-latest
-    needs:
-      - stage1
-      - ubuntu_clang_20_build
-      - windows_mingw_llvm_20_clang_build
-      - windows_mingw_edk2_clang_20_build
-      - windows_vs_llvm_20_clang_build
-    outputs:
-      package-lists: ${{ needs.stage1.outputs.package-lists }}
-    steps:
-      - name: Stage 2 Success
-        run: echo "Stage 2 jobs completed successfully"
 
