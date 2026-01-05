@@ -89,7 +89,7 @@ jobs:
         # name because ubuntu-latest is not the same as an Ubuntu docker image
         # and the cache can not be shared between the two.
         #
-        uses: ./.github/actions/linux-install-python-venv
+        uses: ./.github/actions/install-python-venv
         with:
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}

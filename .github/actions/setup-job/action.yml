@@ -71,13 +71,13 @@ runs:
         llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
     - name: Install Python in venv
       if: runner.os == 'Linux'
-      uses: ./.github/actions/linux-install-python-venv
+      uses: ./.github/actions/install-python-venv
       with:
         python-version: ${{ inputs.python-version }}
         pip-requirements: ${{ inputs.pip-requirements }}
     - name: Install Python in venv
       if: runner.os == 'Windows'
-      uses: ./.github/actions/windows-install-python-venv
+      uses: ./.github/actions/install-python-venv
       with:
         python-version: ${{ inputs.python-version }}
         pip-requirements: ${{ inputs.pip-requirements }}
