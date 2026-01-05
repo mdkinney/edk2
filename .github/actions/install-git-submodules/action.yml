@@ -6,11 +6,11 @@
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
 
-name: 'Install Git Submodules from stuart_setup '
-description: 'Use cache restore/save for git submodules installed by stuart_setup'
+name: Install Git Submodules from stuart_setup
+description: Use cache restore/save for git submodules installed by stuart_setup
 inputs:
   stuart-ci-settings-file:
-    description: 'Path to the stuart CI settings file (e.g. .pytool/CISettings.py)'
+    description: Path to the stuart CI settings file (e.g. .pytool/CISettings.py)
     required: true
 runs:
   using: 'composite'
@@ -21,13 +21,8 @@ runs:
       with:
         path: .git/modules
         key: ${{ runner.os }}-stuart-setup-submodules-${{ hashFiles('.gitmodules', inputs.stuart-ci-settings-file) }}
-    - name: 'Clone Submodules Linux'
-      if : runner.os == 'Linux'
+    - name: Clone Submodules
       shell: bash
-      run: stuart_setup -c ${{ inputs.stuart-ci-settings-file }}
-    - name: 'Clone Submodules Windows'
-      if : runner.os == 'Windows'
-      shell: cmd
       run: stuart_setup -c ${{ inputs.stuart-ci-settings-file }}
     - name: Save submodules
       if: steps.cache-submodules.outputs.cache-hit != 'true'
