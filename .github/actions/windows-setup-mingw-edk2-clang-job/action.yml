@@ -10,17 +10,17 @@
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
 
-name: 'Windows Setup MINGW edk2-clang Job'
-description: 'Windows setup MINGW edk2-clang environment for CI jobs'
+name: Windows Setup MINGW edk2-clang Job
+description: Windows setup MINGW edk2-clang environment for CI jobs
 inputs:
   edk2-clang-version:
-    description: 'The edk2-clang version to install (e.g., 20.1.8)'
+    description: The edk2-clang version to install (e.g., 20.1.8)
     required: true
   edk2-clang-version-patch-level:
-    description: 'The edk2-clang version patch level to install (e.g., 0)'
+    description: The edk2-clang version patch level to install (e.g., 0)
     required: true
   edk2-clang-install_path:
-    description: 'The path where edk2-clang is installed (e.g., C:\edk2-clang)'
+    description: The path where edk2-clang is installed (e.g., C:\edk2-clang)
     required: false
     default: 'C:\edk2-clang'
 runs:

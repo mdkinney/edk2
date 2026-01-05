@@ -14,32 +14,32 @@ on:
   workflow_call:
     inputs:
       linux-runs-on:
-        description: 'The runner label for Linux jobs.'
+        description: The runner label for Linux jobs.
         required: true
         type: string
         default: 'ubuntu-latest'
       linux-container-image:
-        description: 'The container image for Linux jobs.'
+        description: The container image for Linux jobs.
         required: true
         type: string
         default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
       python-version:
-        description: 'The version of Python to use.'
+        description: The version of Python to use.
         required: true
         type: string
         default: '3.12'
       pip-requirements:
-        description: 'Path to pip requirements file'
+        description: Path to pip requirements file
         required: true
         type: string
         default: 'pip-requirements.txt'
       stuart-ci-settings-file:
-        description: 'The path to the Stuart CI settings file.'
+        description: The path to the Stuart CI settings file.
         required: true
         type: string
         default: '.pytool/CISettings.py'
       package-lists:
-        description: 'List of package lists to test.'
+        description: List of package lists to test.
         required: true
         type: string
         default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'

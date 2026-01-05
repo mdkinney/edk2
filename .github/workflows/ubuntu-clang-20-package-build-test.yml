@@ -14,12 +14,12 @@ on:
   workflow_call:
     inputs:
       linux-runs-on:
-        description: 'The runner label for Linux jobs.'
+        description: The runner label for Linux jobs.
         required: true
         type: string
         default: 'ubuntu-latest'
       linux-container-image:
-        description: 'The container image for Linux jobs.'
+        description: The container image for Linux jobs.
         required: true
         type: string
         default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
@@ -29,42 +29,42 @@ on:
         type: string
         default: 'clang'
       python-version:
-        description: 'The version of Python to use.'
+        description: The version of Python to use.
         required: true
         type: string
         default: '3.12'
       pip-requirements:
-        description: 'Path to pip requirements file'
+        description: Path to pip requirements file
         required: true
         type: string
         default: 'pip-requirements.txt'
       stuart-ci-settings-file:
-        description: 'The path to the Stuart CI settings file.'
+        description: The path to the Stuart CI settings file.
         required: true
         type: string
         default: '.pytool/CISettings.py'
       edk2-tools-build-params:
-        description: 'The EDK2 Tools build parameters.'
+        description: The EDK2 Tools build parameters.
         required: true
         type: string
         default: '-t CLANGPDB'
       build_type_list:
-        description: 'List of build types to test.'
+        description: List of build types to test.
         required: true
         type: string
         default: '["DEBUG", "RELEASE"]'
       build_arch_list:
-        description: 'List of build architectures to test.'
+        description: List of build architectures to test.
         required: true
         type: string
         default: '["IA32", "X64"]'
       tool_chain_tag_list:
-        description: 'List of tool chain tags to test.'
+        description: List of tool chain tags to test.
         required: true
         type: string
         default: '["CLANGPDB", "CLANGDWARF"]'
       package-lists:
-        description: 'List of package lists to test.'
+        description: List of package lists to test.
         required: true
         type: string
         default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'

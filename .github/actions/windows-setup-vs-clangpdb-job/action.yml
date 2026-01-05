@@ -10,14 +10,14 @@
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
 
-name: 'Windows Setup Visual Studio CLANGPDB Job'
-description: 'Windows setup Visual Studio with CLANGPDB support for CI jobs'
+name: Windows Setup Visual Studio CLANGPDB Job
+description: Windows setup Visual Studio with CLANGPDB support for CI jobs
 inputs:
   llvm_version:
-    description: 'The LLVM version to install (e.g., 20.1.8)'
+    description: The LLVM version to install (e.g., 20.1.8)
     required: true
   llvm_install_path:
-    description: 'The path where LLVM is installed (e.g., C:\Program Files\LLVM)'
+    description: The path where LLVM is installed (e.g., C:\Program Files\LLVM)
     required: false
     default: 'C:\Program Files\LLVM'
 runs:

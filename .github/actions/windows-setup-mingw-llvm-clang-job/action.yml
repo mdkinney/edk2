@@ -10,14 +10,14 @@
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
 
-name: 'Windows Setup LLVM MINGW CLANG Job'
-description: 'Windows setup LLVM MINGW with CLANG support for CI jobs'
+name: Windows Setup LLVM MINGW CLANG Job
+description: Windows setup LLVM MINGW with CLANG support for CI jobs
 inputs:
   llvm_version:
-    description: 'The LLVM version to install (e.g., 20250709)'
+    description: The LLVM version to install (e.g., 20250709)
     required: true
   llvm_install_path:
-    description: 'The path where LLVM is installed (e.g., C:\llvm-mingw-20250709-ucrt-x86_64)'
+    description: The path where LLVM is installed (e.g., C:\llvm-mingw-20250709-ucrt-x86_64)
     required: false
     default: 'C:\llvm-mingw-20250709-ucrt-x86_64'
 runs:

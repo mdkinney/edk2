@@ -15,27 +15,27 @@ on:
   workflow_call:
     inputs:
       windows-runs-on:
-        description: 'The runner label for Windows jobs.'
+        description: The runner label for Windows jobs.
         required: true
         type: string
         default: 'windows-2025'
       python-version:
-        description: 'The version of Python to use.'
+        description: The version of Python to use.
         required: true
         type: string
         default: '3.12'
       pip-requirements:
-        description: 'Path to pip requirements file'
+        description: Path to pip requirements file
         required: true
         type: string
         default: 'pip-requirements.txt'
       stuart-ci-settings-file:
-        description: 'The path to the Stuart CI settings file.'
+        description: The path to the Stuart CI settings file.
         required: true
         type: string
         default: '.pytool/CISettings.py'
       edk2-tools-build-params:
-        description: 'The EDK2 Tools build parameters.'
+        description: The EDK2 Tools build parameters.
         required: true
         type: string
         default: '-t VS2022'
@@ -71,7 +71,7 @@ jobs:
       - name: Upload Windows Visual Studio CLANGPDB Packages Basic Acceptance Test Logs
         uses: actions/upload-artifact@v6
         with:
-          name: "Upload Windows Visual Studio CLANGPDB Packages Basic Acceptance Test Logs"
+          name: Upload Windows Visual Studio CLANGPDB Packages Basic Acceptance Test Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt
@@ -111,7 +111,7 @@ jobs:
       - name: Upload Windows Visual Studio CLANGPDB Platforms Basic Acceptance Test Logs
         uses: actions/upload-artifact@v6
         with:
-          name: "Upload Windows Visual Studio CLANGPDB Platforms Basic Acceptance Test Logs"
+          name: Upload Windows Visual Studio CLANGPDB Platforms Basic Acceptance Test Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/**/BUILDLOG*.txt

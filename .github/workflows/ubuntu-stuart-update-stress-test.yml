@@ -10,37 +10,37 @@ on:
   workflow_dispatch:
     inputs:
       linux-runs-on:
-        description: 'The runner label for Linux jobs.'
+        description: The runner label for Linux jobs.
         required: true
         type: string
         default: 'ubuntu-latest'
       linux-container-image:
-        description: 'The container image for Linux jobs.'
+        description: The container image for Linux jobs.
         required: true
         type: string
         default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
       python-version:
-        description: 'The version of Python to use.'
+        description: The version of Python to use.
         required: true
         type: string
         default: '3.12'
       pip-requirements:
-        description: 'Path to pip requirements file'
+        description: Path to pip requirements file
         required: true
         type: string
         default: 'pip-requirements.txt'
       stuart-ci-settings-file:
-        description: 'The path to the Stuart CI settings file.'
+        description: The path to the Stuart CI settings file.
         required: true
         type: string
         default: '.pytool/CISettings.py'
       edk2-tools-build-params:
-        description: 'The EDK2 Tools build parameters.'
+        description: The EDK2 Tools build parameters.
         required: true
         type: string
         default: '-t CLANGPDB'
       stuart-update-iterations:
-        description: 'Number of stuart_update iterations to run in stress test.'
+        description: Number of stuart_update iterations to run in stress test.
         required: false
         type: string
         default: '100'
@@ -67,7 +67,7 @@ jobs:
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
-      - name: 'Run stuart_update Stress Test in a loop'
+      - name: Run stuart_update Stress Test in a loop
         shell: bash
         run: |
           for i in $(seq 1 ${{ inputs.stuart-update-iterations }}); do
