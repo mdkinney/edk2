@@ -48,7 +48,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows Visual Studio CLANGPDB Job
-        uses: ./.github/actions/windows-setup-clang-job
+        uses: ./.github/actions/setup-job
         with:
           windows-clang-installer: 'vs-clangpdb'
           python-version: ${{ inputs.python-version }}
@@ -86,7 +86,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows Visual Studio CLANGPDB Job
-        uses: ./.github/actions/windows-setup-clang-job
+        uses: ./.github/actions/setup-job
         with:
           windows-clang-installer: 'vs-clangpdb'
           python-version: ${{ inputs.python-version }}

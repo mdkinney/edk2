@@ -49,7 +49,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows LLVM MINGW CLANG Job
-        uses: ./.github/actions/windows-setup-clang-job
+        uses: ./.github/actions/setup-job
         with:
           windows-clang-installer: 'llvm'
           python-version: ${{ inputs.python-version }}
@@ -87,7 +87,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows LLVM MINGW CLANG Job
-        uses: ./.github/actions/windows-setup-clang-job
+        uses: ./.github/actions/setup-job
         with:
           windows-clang-installer: 'llvm'
           python-version: ${{ inputs.python-version }}

@@ -76,7 +76,7 @@ jobs:
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Setup Linux CLANG Job
-        uses: ./.github/actions/linux-setup-clang-job
+        uses: ./.github/actions/setup-job
         with:
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}

@@ -72,7 +72,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Windows CLANG Job
-        uses: ./.github/actions/windows-setup-clang-job
+        uses: ./.github/actions/setup-job
         with:
           windows-clang-installer: ${{ inputs.windows-clang-installer }}
           python-version: ${{ inputs.python-version }}
