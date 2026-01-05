@@ -19,10 +19,10 @@ runs:
   using: 'composite'
   steps:
     - name: 'Download External Dependencies'
-      shell: cmd
+      shell: bash
       run: stuart_update -c ${{ inputs.stuart-ci-settings-file }}
     - name: 'Build BaseTools'
-      shell: cmd
+      shell: bash
       run: python BaseTools/Edk2ToolsBuild.py ${{ inputs.edk2-tools-build-params }}
     - name: Set NASM_PREFIX and IASL_PREFIX environment variables
       shell: cmd
