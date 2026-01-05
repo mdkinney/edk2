@@ -30,13 +30,13 @@ runs:
         path: ${{ inputs.llvm_install_path }}
         key: ${{ runner.os }}-llvm-mingw-${{ inputs.llvm_version }}-ucrt-x86_64
     - name: Install LLVM MINGW ${{ inputs.llvm_version }}
-      if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
+      if: ${{ steps.cache-llvm-mingw.outputs.cache-hit != 'true' }}
       shell: cmd
       run: |
         curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/${{ inputs.llvm_version }}/llvm-mingw-${{ inputs.llvm_version }}-ucrt-x86_64.zip"
         powershell -command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath 'C:\' -Force"
     - name: Save LLVM MINGW ${{ inputs.llvm_version }} to cache
-      if: steps.cache-llvm-mingw.outputs.cache-hit != 'true'
+      if: ${{ steps.cache-llvm-mingw.outputs.cache-hit != 'true' }}
       uses: actions/cache/save@v5
       with:
         path: ${{ inputs.llvm_install_path }}

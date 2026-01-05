@@ -31,12 +31,12 @@ runs:
         path: .venv
         key: ${{ runner.os }}-Python-${{ inputs.python-version }}-venv-${{ hashFiles(inputs.pip-requirements) }}${{ inputs.cache-name-suffix }}
     - name: Set up Python ${{ inputs.python-version }}
-      if: steps.cache-venv.outputs.cache-hit != 'true'
+      if: ${{ steps.cache-venv.outputs.cache-hit != 'true' }}
       uses: actions/setup-python@v6
       with:
         python-version: ${{ inputs.python-version }}
     - name: Linux Create venv if cache missed
-      if: steps.cache-venv.outputs.cache-hit != 'true' && runner.os == 'Linux'
+      if: ${{ steps.cache-venv.outputs.cache-hit != 'true' && runner.os == 'Linux' }}
       shell: bash
       run: |
         python -m venv --copies .venv
@@ -44,7 +44,7 @@ runs:
         python -m pip install --no-cache-dir --upgrade pip
         pip install --no-cache-dir -r ${{ inputs.pip-requirements }}
     - name: Windows Create and install venv if cache missed
-      if: steps.cache-venv.outputs.cache-hit != 'true' && runner.os == 'Windows'
+      if: ${{ steps.cache-venv.outputs.cache-hit != 'true' && runner.os == 'Windows' }}
       shell: cmd
       run: |
         python -m venv --copies .venv
@@ -53,18 +53,18 @@ runs:
         pip install --no-cache-dir -r ${{ inputs.pip-requirements }}
     - name: Save venv cache
       uses: actions/cache/save@v5
-      if: steps.cache-venv.outputs.cache-hit != 'true'
+      if: ${{ steps.cache-venv.outputs.cache-hit != 'true' }}
       with:
         path: .venv
         key: ${{ steps.cache-venv.outputs.cache-primary-key }}
     - name: Windows Add venv to PATH
-      if: runner.os == 'Windows'
+      if: ${{ runner.os == 'Windows' }}
       shell: cmd
       run: |
         echo VIRTUAL_ENV=%CD%\.venv>> %GITHUB_ENV%
         echo %CD%\.venv\Scripts>> %GITHUB_PATH%
     - name: Linux Add venv to PATH
-      if: runner.os == 'Linux'
+      if: ${{ runner.os == 'Linux' }}
       shell: bash
       run: |
         echo "VIRTUAL_ENV=$PWD/.venv" >> $GITHUB_ENV

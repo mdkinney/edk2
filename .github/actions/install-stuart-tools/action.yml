@@ -25,13 +25,13 @@ runs:
       shell: bash
       run: python BaseTools/Edk2ToolsBuild.py ${{ inputs.edk2-tools-build-params }}
     - name: ${{runner.os}} Set NASM_PREFIX and IASL_PREFIX Environment Variables
-      if: runner.os == 'Linux'
+      if: ${{ runner.os == 'Linux' }}
       shell: bash
       run: |
         echo NASM_PREFIX=$GITHUB_WORKSPACE/BaseTools/Bin/mu_nasm_extdep/Linux-x86-64/>> $GITHUB_ENV
         echo IASL_PREFIX=$GITHUB_WORKSPACE/BaseTools/Bin/edk2-acpica-iasl_extdep/Linux-x86/>> $GITHUB_ENV
     - name: ${{runner.os}} Set NASM_PREFIX and IASL_PREFIX Environment Variables
-      if: runner.os == 'Windows'
+      if: ${{ runner.os == 'Windows' }}
       shell: cmd
       run: |
         echo NASM_PREFIX=%GITHUB_WORKSPACE%\BaseTools\Bin\mu_nasm_extdep\Windows-x86-64\>> %GITHUB_ENV%

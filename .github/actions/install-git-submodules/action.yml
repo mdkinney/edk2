@@ -25,7 +25,7 @@ runs:
       shell: bash
       run: stuart_setup -c ${{ inputs.stuart-ci-settings-file }}
     - name: Save submodules
-      if: steps.cache-submodules.outputs.cache-hit != 'true'
+      if: ${{ steps.cache-submodules.outputs.cache-hit != 'true' }}
       uses: actions/cache/save@v5
       with:
         path: .git/modules

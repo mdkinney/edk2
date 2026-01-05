@@ -30,13 +30,13 @@ runs:
         path: ${{ inputs.llvm_install_path }}
         key: ${{ runner.os }}-LLVM-${{ inputs.llvm_version }}-win64.exe
     - name: Install CLANG ${{ inputs.llvm_version }}
-      if: steps.cache-clang.outputs.cache-hit != 'true'
+      if: ${{ steps.cache-clang.outputs.cache-hit != 'true' }}
       shell: cmd
       run: |
         curl -SL --output llvm_install.exe https://github.com/llvm/llvm-project/releases/download/llvmorg-${{ inputs.llvm_version }}/LLVM-${{ inputs.llvm_version }}-win64.exe
         llvm_install.exe /S
     - name: Save CLANG ${{ inputs.llvm_version }} to cache
-      if: steps.cache-clang.outputs.cache-hit != 'true'
+      if: ${{ steps.cache-clang.outputs.cache-hit != 'true' }}
       uses: actions/cache/save@v5
       with:
         path: ${{ inputs.llvm_install_path }}

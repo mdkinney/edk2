@@ -91,7 +91,7 @@ jobs:
       package-lists: ${{ inputs.package-lists }}
 
   build_linux_clangdwarf_emulatorpkg:
-    if: contains(inputs.package-lists, 'EmulatorPkg')
+    if: ${{ contains(inputs.package-lists, 'EmulatorPkg') }}
     uses: ./.github/workflows/ubuntu-clang-20-emulator-build.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
@@ -109,7 +109,7 @@ jobs:
   # TODO: Move to separate workflow after validation
   build_linux_gcc_noopt_unit_tests:
     # Do not run for PR.  Covered by Ubuntu clang workflow.
-    if: github.event_name != 'pull_request'
+    if: ${{ github.event_name != 'pull_request' }}
     uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}

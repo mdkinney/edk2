@@ -85,7 +85,7 @@ jobs:
 
   build_windows_mingw_edk2_clang_noopt_unit_tests:
     # Do not run for PR.  Covered by Ubuntu clang workflow.
-    if: github.event_name != 'pull_request'
+    if: ${{ github.event_name != 'pull_request' }}
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
@@ -101,7 +101,7 @@ jobs:
 
   build_windows_mingw_edk2_clang_emulatorpkg:
     # Do not run for PR.  Covered by mingw-llvm workflow.
-    if: github.event_name != 'pull_request' && contains(inputs.package-lists, 'EmulatorPkg')
+    if: ${{ github.event_name != 'pull_request' && contains(inputs.package-lists, 'EmulatorPkg') }}
     uses: ./.github/workflows/windows-clang-20-emulator-build-test.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
