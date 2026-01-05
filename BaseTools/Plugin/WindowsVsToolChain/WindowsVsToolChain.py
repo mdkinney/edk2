@@ -261,14 +261,11 @@ class WindowsVsToolChain(IUefiBuildPlugin):
             # Look for $(CLANG_BIN)/mingw32-make.exe to determine if we are in a
             # mingw32 environment
             #
-            is_mingw32_env = False
             clang_bin = shell_environment.GetEnvironment().get_shell_var("CLANG_BIN")
-            if clang_bin is not None:
-                if os.path.exists(os.path.join(clang_bin, "mingw32-make.exe")):
-                    self.Logger.debug("CLANG_BIN is set to a mingw32 toolchain.")
-                    is_mingw32_env = True
-
+            is_mingw32_env = (clang_bin and os.path.exists(os.path.join(clang_bin, "mingw32-make.exe")))
             if is_mingw32_env:
+                self.Logger.debug("CLANG_BIN is set to a mingw32 toolchain.")
+
                 #
                 # CLANGPDB requires lld-link.exe to generate PE/COFF images. If
                 # the mingw32 environment installed does not have lld-link.exe
@@ -281,25 +278,19 @@ class WindowsVsToolChain(IUefiBuildPlugin):
                 #
                 # Set environment variables for mingw32 CLANGPDB environment
                 #
-                basetools_mingw_build = shell_environment.GetEnvironment().get_shell_var("BASETOOLS_MINGW_BUILD")
-                clang_host_bin = shell_environment.GetEnvironment().get_shell_var("CLANG_HOST_BIN")
-
-                if basetools_mingw_build is not None:
-                    self.Logger.debug("BASETOOLS_MINGW_BUILD is already set.")
-                else:
-                    basetools_mingw_build = 'TRUE'
+                basetools_mingw_build = shell_environment.GetEnvironment().get_shell_var("BASETOOLS_MINGW_BUILD") or 'TRUE'
                 if basetools_mingw_build.upper() != 'TRUE':
                     self.Logger.error("BASETOOLS_MINGW_BUILD must be set to TRUE for CLANGPDB toolchain.")
                     return -1
+                shell_environment.GetEnvironment().set_shell_var("BASETOOLS_MINGW_BUILD", basetools_mingw_build)
 
-                if clang_host_bin is not None:
+                clang_host_bin = shell_environment.GetEnvironment().get_shell_var("CLANG_HOST_BIN")
+                if clang_host_bin:
                     self.Logger.debug("CLANG_HOST_BIN is already set.")
                 else:
                     # The environment is mingw32 make add "mingw32-" to the end of the path.
                     # The rest of the command is derived from definitions in tools.def.
                     clang_host_bin = 'mingw32-'
-
-                shell_environment.GetEnvironment().set_shell_var("BASETOOLS_MINGW_BUILD", basetools_mingw_build)
                 shell_environment.GetEnvironment().set_shell_var("CLANG_HOST_BIN", clang_host_bin)
 
             else:
@@ -312,7 +303,7 @@ class WindowsVsToolChain(IUefiBuildPlugin):
                 # arm64 == 64bit Arm
                 #
                 HostType = shell_environment.GetEnvironment().get_shell_var("CLANG_VS_HOST")
-                if HostType is not None:
+                if HostType:
                     HostType = HostType.lower()
                     self.Logger.info(
                         f"CLANG_VS_HOST defined by environment.  Value is {HostType}")
@@ -325,7 +316,8 @@ class WindowsVsToolChain(IUefiBuildPlugin):
                             HostType = "x64"
                     else:
                         # anything other than x86 or x64 is not supported
-                        raise NotImplementedError()
+                        self.Logger.error(f"CLANGPDB not supported for detected host [{HostType.arch}-{HostType.bit}]")
+                        return -1
 
                 # CLANG_VS_HOST options are not exactly the same as QueryVcVariables. This translates.
                 VC_HOST_ARCH_TRANSLATOR = {
@@ -377,26 +369,23 @@ class WindowsVsToolChain(IUefiBuildPlugin):
             # set the path to the mingw32 make utility
             ##
 
-            basetools_mingw_build = shell_environment.GetEnvironment().get_shell_var("BASETOOLS_MINGW_BUILD")
-            clang_host_bin = shell_environment.GetEnvironment().get_shell_var("CLANG_HOST_BIN")
-            clang_bin = shell_environment.GetEnvironment().get_shell_var("CLANG_BIN")
-
-            if basetools_mingw_build is not None:
-                self.Logger.debug("BASETOOLS_MINGW_BUILD is already set.")
-            else:
-                basetools_mingw_build = 'TRUE'
+            basetools_mingw_build = shell_environment.GetEnvironment().get_shell_var("BASETOOLS_MINGW_BUILD") or 'TRUE'
             if basetools_mingw_build.upper() != 'TRUE':
                 self.Logger.error("BASETOOLS_MINGW_BUILD must be set to TRUE for CLANGDWARF toolchain.")
                 return -1
+            shell_environment.GetEnvironment().set_shell_var("BASETOOLS_MINGW_BUILD", basetools_mingw_build)
 
-            if clang_host_bin is not None:
+            clang_host_bin = shell_environment.GetEnvironment().get_shell_var("CLANG_HOST_BIN")
+            if clang_host_bin:
                 self.Logger.debug("CLANG_HOST_BIN is already set.")
             else:
                 # The environment is mingw32 make add "mingw32-" to the end of the path.
                 # The rest of the command is derived from definitions in tools.def.
                 clang_host_bin = 'mingw32-'
+            shell_environment.GetEnvironment().set_shell_var("CLANG_HOST_BIN", clang_host_bin)
 
-            if clang_bin is not None:
+            clang_bin = shell_environment.GetEnvironment().get_shell_var("CLANG_BIN")
+            if clang_bin:
                 self.Logger.debug("CLANG_BIN is already set.")
             else:
                 # Assume default installation "c:\edk2-clang\bin\"
@@ -407,8 +396,6 @@ class WindowsVsToolChain(IUefiBuildPlugin):
                 self.Logger.error(f"mingw32 toolchain not found in CLANG_BIN path {clang_bin}")
                 return -2
 
-            shell_environment.GetEnvironment().set_shell_var("BASETOOLS_MINGW_BUILD", basetools_mingw_build)
-            shell_environment.GetEnvironment().set_shell_var("CLANG_HOST_BIN", clang_host_bin)
             shell_environment.GetEnvironment().set_shell_var("CLANG_BIN", clang_bin)
 
         return 0
