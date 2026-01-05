@@ -48,7 +48,7 @@ runs:
       with:
         stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
     - name: Set up Stuart Tools
-      uses: ./.github/actions/linux-install-stuart-tools
+      uses: ./.github/actions/install-stuart-tools
       with:
         stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
         edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
