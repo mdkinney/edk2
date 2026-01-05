@@ -18,6 +18,11 @@
 name: Setup Job
 description: Setup Environment for CI jobs
 inputs:
+  linux-host-compiler:
+    description: Linux Host Compiler (e.g., clang, gcc)
+    required: false
+    type: string
+    default: 'clang'
   windows-clang-installer:
     description: Windows CLANG installer (e.g., edk2-clang, llvm, vs-clangpdb, or none)
     required: false
@@ -39,27 +44,27 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Set CC and CXX for CLANG
-      if: runner.os == 'Linux'
+    - name: Linux Set CC and CXX to CLANG
+      if: ${{ inputs.linux-host-compiler == 'clang' && runner.os == 'Linux' }}
       shell: bash
       run: |
         echo CC=clang>> $GITHUB_ENV
         echo CXX=clang++>> $GITHUB_ENV
-    - name: Setup Windows Visual Studio CLANGPDB Job
-      if: ${{ inputs.windows-clang-installer == 'vs-clangpdb' }}
+    - name: Windows Setup Visual Studio CLANGPDB Job
+      if: ${{ inputs.windows-clang-installer == 'vs-clangpdb' && runner.os == 'Windows' }}
       uses: ./.github/actions/windows-setup-vs-clangpdb-job
       with:
         llvm_version: '20.1.8'
         llvm_install_path: 'C:\Program Files\LLVM'
-    - name: Setup Windows Mingw edk2-clang Job
-      if: ${{ inputs.windows-clang-installer == 'edk2-clang' }}
+    - name: Windows Setup Mingw edk2-clang Job
+      if: ${{ inputs.windows-clang-installer == 'edk2-clang' && runner.os == 'Windows' }}
       uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
       with:
         edk2-clang-version: '20.1.8'
         edk2-clang-version-patch-level: '0'
         edk2-clang-install_path: 'C:\edk2-clang'
-    - name: Setup Windows LLVM MINGW CLANG Job
-      if: ${{ inputs.windows-clang-installer == 'llvm' }}
+    - name: Windows Setup LLVM MINGW CLANG Job
+      if: ${{ inputs.windows-clang-installer == 'llvm' && runner.os == 'Windows' }}
       uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
       with:
         llvm_version: '20250709'
