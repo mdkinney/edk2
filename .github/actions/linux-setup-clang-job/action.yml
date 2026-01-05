@@ -44,7 +44,7 @@ runs:
         python-version: ${{ inputs.python-version }}
         pip-requirements: ${{ inputs.pip-requirements }}
     - name: Install Git Submodules from stuart_setup
-      uses: ./.github/actions/linux-install-git-submodules
+      uses: ./.github/actions/install-git-submodules
       with:
         stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
     - name: Set up Stuart Tools
