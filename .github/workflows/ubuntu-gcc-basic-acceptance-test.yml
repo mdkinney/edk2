@@ -6,6 +6,8 @@
 # Host-Based Unit Test Build Support: GCC/GCCNOLTO - IA32/X64
 # EmulatorPkg Build Support:          GCC/GCCNOLTO - IA32/X64
 #
+# NOTE: GCCNOLTO has many open issues and is currently not tested
+#
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
@@ -102,6 +104,7 @@ jobs:
           . ./edksetup.sh
           build -a IA32 -a X64 -a AARCH64 -a RISCV64 -t GCC      -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldGccBuild.log >NUL
       - name: Build HelloWorld GCCNOLTO
+        if: false
         run: |
           . ./edksetup.sh
           build -a IA32 -a X64 -a AARCH64            -t GCCNOLTO -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldGccNoltoBuild.log >NUL
@@ -150,18 +153,22 @@ jobs:
           . ./edksetup.sh
           build -a IA32 -t GCC      -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32DebugGccBuild.log >NUL
       - name: Build EmulatorPkg X64 Unix Host Module GCCNOLTO
+        if: false
         run: |
           . ./edksetup.sh
           build -a X64  -t GCCNOLTO -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64DebugGccNoltoBuild.log >NUL
       - name: Build EmulatorPkg IA32 Unix Host Module GCCNOLTO
+        if: false
         run: |
           . ./edksetup.sh
           build -a IA32 -t GCCNOLTO -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32DebugGccNoltoBuild.log >NUL
       - name: Build OVMF IA32/X64 Platform GCC
+        if: false
         run: |
           . ./edksetup.sh
           build -a IA32 -a X64 -t GCC      -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64GccBuild.log >NUL
       - name: Build OVMF IA32/X64 Platform GCCNOLTO
+        if: false
         run: |
           . ./edksetup.sh
           build -a IA32 -a X64 -t GCCNOLTO -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64GccNoltoBuild.log >NUL

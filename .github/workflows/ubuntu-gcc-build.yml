@@ -5,6 +5,8 @@
 # Host-Based Unit Test Build Support: GCC/GCCNOLTO - IA32/X64
 # EmulatorPkg Build Support:          GCC/GCCNOLTO - IA32/X64
 #
+# NOTE: GCCNOLTO has many open issues and is currently not tested
+#
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
@@ -90,7 +92,8 @@ jobs:
       edk2-tools-build-params: '-t GCC'
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["IA32", "X64"]'
-      tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
+      #tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
+      tool_chain_tag_list: '["GCC"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_linux_gcc_aarch64_packages:
@@ -105,7 +108,8 @@ jobs:
       edk2-tools-build-params: '-t GCC'
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["AARCH64"]'
-      tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
+      #tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
+      tool_chain_tag_list: '["GCC"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_linux_gcc_riscv64_packages:
@@ -135,7 +139,8 @@ jobs:
       edk2-tools-build-params: '-t GCC'
       build_type_list: '["NOOPT"]'
       build_arch_list: '["IA32", "X64"]'
-      tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
+      #tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
+      tool_chain_tag_list: '["GCC"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_linux_gcc_emulatorpkg:
@@ -151,4 +156,5 @@ jobs:
       edk2-tools-build-params: '-t GCC'
       edk-setup-params: ''
       build_arch_list: '["IA32", "X64"]'
-      tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
+      #tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
+      tool_chain_tag_list: '["GCC"]'
