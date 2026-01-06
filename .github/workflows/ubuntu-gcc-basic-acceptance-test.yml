@@ -43,7 +43,7 @@ on:
         description: The EDK2 Tools build parameters.
         required: true
         type: string
-        default: '-t CLANGPDB'
+        default: '-t GCC'
 
   workflow_dispatch:
     inputs:
@@ -76,7 +76,7 @@ on:
         description: The EDK2 Tools build parameters.
         required: true
         type: string
-        default: '-t CLANGPDB'
+        default: '-t GCC'
 
 jobs:
   build_linux_gcc_packages_basic_acceptance_test:
