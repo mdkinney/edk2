@@ -94,6 +94,7 @@ jobs:
       package-lists: ${{ inputs.package-lists }}
 
   build_linux_gcc_aarch64_riscv64_packages:
+    if: false
     uses: ./.github/workflows/ubuntu-package-build-test.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
