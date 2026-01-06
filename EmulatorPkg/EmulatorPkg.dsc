@@ -663,8 +663,8 @@
   GCC:*_CLANGDWARF_*_DLINK_FLAGS     == -nostdlib -shared -Wl,--section-alignment=0x1000 -Wl,--file-alignment=0x1000
   GCC:*_CLANGDWARF_IA32_DLINK_FLAGS  = -target i686-w64-mingw32 -Wl,--entry,__ModuleEntryPoint
   GCC:*_CLANGDWARF_X64_DLINK_FLAGS   = -target x86_64-w64-mingw32 -Wl,--entry,_ModuleEntryPoint
-  GCC:DEBUG_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(DEBUG_DIR)/$(BASE_NAME).pdb
-  GCC:NOOPT_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(DEBUG_DIR)/$(BASE_NAME).pdb
+  GCC:DEBUG_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(DEBUG_DIR)/$(BASE_NAME).pdb -Wno-unused-command-line-argument
+  GCC:NOOPT_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(DEBUG_DIR)/$(BASE_NAME).pdb -Wno-unused-command-line-argument
   #
   # Set DLINK2_FLAGS to empyty string to disable use of linker script
   #
@@ -745,8 +745,8 @@
   GCC:*_CLANGDWARF_*_DLINK_FLAGS    == -o $(BIN_DIR)/$(BASE_NAME).exe -Wl,--entry,main -lwinmm -lgdi32
   GCC:*_CLANGDWARF_IA32_DLINK_FLAGS  = -target i686-w64-mingw32
   GCC:*_CLANGDWARF_X64_DLINK_FLAGS   = -target x86_64-w64-mingw32
-  GCC:DEBUG_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(BIN_DIR)/$(BASE_NAME).pdb
-  GCC:NOOPT_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(BIN_DIR)/$(BASE_NAME).pdb
+  GCC:DEBUG_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(BIN_DIR)/$(BASE_NAME).pdb -Wno-unused-command-line-argument
+  GCC:NOOPT_CLANGDWARF_*_DLINK_FLAGS = -g -Wl,--pdb,$(BIN_DIR)/$(BASE_NAME).pdb -Wno-unused-command-line-argument
   #
   # Set DLINK2_FLAGS to empyty string to disable use of linker script
   #
