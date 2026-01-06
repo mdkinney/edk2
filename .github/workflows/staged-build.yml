@@ -12,32 +12,32 @@ on:
   workflow_call:
     inputs:
       linux-runs-on:
-        description: 'The runner label for Linux jobs.'
+        description: The runner label for Linux jobs.
         required: false
         type: string
         default: 'ubuntu-latest'
       linux-container-image:
-        description: 'The container image for Linux jobs.'
+        description: The container image for Linux jobs.
         required: false
         type: string
         default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
       windows-runs-on:
-        description: 'The runner label for Windows jobs.'
+        description: The runner label for Windows jobs.
         required: false
         type: string
         default: 'windows-2025'
       python-version:
-        description: 'The version of Python to use.'
+        description: The version of Python to use.
         required: true
         type: string
         default: '3.12'
       pip-requirements:
-        description: 'Path to pip requirements file'
+        description: Path to pip requirements file
         required: true
         type: string
         default: 'pip-requirements.txt'
       stuart-ci-settings-file:
-        description: 'The path to the Stuart CI settings file.'
+        description: The path to the Stuart CI settings file.
         required: true
         type: string
         default: '.pytool/CISettings.py'
@@ -75,7 +75,7 @@ jobs:
   #
   build_linux_clang_no_target_test:
     needs: stage0
-    uses: ./.github/workflows/ubuntu-clang-20-package-build-test.yml
+    uses: ./.github/workflows/ubuntu-package-build-test.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}

@@ -1,14 +1,14 @@
 ## @file
-# A workflow using Ubuntu CLANG tools that builds packages and uploads artifacts.
+# A workflow using Ubuntu GCC tools that builds packages and uploads artifacts.
 #
-# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64/AARCH64/RISCV64
-# Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
-# EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
+# Firmware Build Support:             GCC/GCCNOLTO - IA32/X64/AARCH64/RISCV64
+# Host-Based Unit Test Build Support: GCC/GCCNOLTO - IA32/X64
+# EmulatorPkg Build Support:          GCC/GCCNOLTO - IA32/X64
 #
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
-name: Ubuntu CLANG 20.1.8 Build
+name: Ubuntu GCC Build
 
 on:
   workflow_call:
@@ -78,62 +78,62 @@ on:
         default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
 
 jobs:
-  build_linux_clang_packages_ia32_x64:
+  build_linux_gcc_packages_ia32_x64:
     uses: ./.github/workflows/ubuntu-package-build-test.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
-      linux-host-compiler: 'clang'
+      linux-host-compiler: 'gcc'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
-      edk2-tools-build-params: '-t CLANGPDB'
+      edk2-tools-build-params: '-t GCC'
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["IA32", "X64"]'
-      tool_chain_tag_list: '["CLANGPDB", "CLANGDWARF"]'
+      tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
       package-lists: ${{ inputs.package-lists }}
 
-  build_linux_clangdwarf_aarch64_riscv64_packages:
+  build_linux_gcc_aarch64_riscv64_packages:
     uses: ./.github/workflows/ubuntu-package-build-test.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
-      linux-host-compiler: 'clang'
+      linux-host-compiler: 'gcc'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
-      edk2-tools-build-params: '-t CLANGDWARF'
+      edk2-tools-build-params: '-t GCC'
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["AARCH64", "RISCV64"]'
-      tool_chain_tag_list: '["CLANGDWARF"]'
+      tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
       package-lists: ${{ inputs.package-lists }}
 
-  build_linux_clangdwarf_noopt_unit_tests:
+  build_linux_gcc_noopt_unit_tests:
     uses: ./.github/workflows/ubuntu-package-build-test.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
-      linux-host-compiler: 'clang'
+      linux-host-compiler: 'gcc'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
-      edk2-tools-build-params: '-t CLANGDWARF'
+      edk2-tools-build-params: '-t GCC'
       build_type_list: '["NOOPT"]'
       build_arch_list: '["X64"]'
-      tool_chain_tag_list: '["CLANGDWARF"]'
+      tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
       package-lists: ${{ inputs.package-lists }}
 
-  build_linux_clangdwarf_emulatorpkg:
+  build_linux_gcc_emulatorpkg:
     if: ${{ contains(inputs.package-lists, 'EmulatorPkg') }}
     uses: ./.github/workflows/ubuntu-emulator-build.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
-      linux-host-compiler: 'clang'
+      linux-host-compiler: 'gcc'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
-      edk2-tools-build-params: '-t CLANGDWARF'
+      edk2-tools-build-params: '-t GCC'
       edk-setup-params: ''
       build_arch_list: '["IA32", "X64"]'
-      tool_chain_tag_list: '["CLANGDWARF"]'
+      tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
