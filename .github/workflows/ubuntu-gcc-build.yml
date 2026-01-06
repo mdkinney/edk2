@@ -93,7 +93,7 @@ jobs:
       tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
       package-lists: ${{ inputs.package-lists }}
 
-  build_linux_gcc_aarch64_riscv64_packages:
+  build_linux_gcc_aarch64_packages:
     uses: ./.github/workflows/ubuntu-package-build-test.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
@@ -104,8 +104,23 @@ jobs:
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
       build_type_list: '["DEBUG", "RELEASE"]'
-      build_arch_list: '["AARCH64", "RISCV64"]'
+      build_arch_list: '["AARCH64"]'
       tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
+      package-lists: ${{ inputs.package-lists }}
+
+  build_linux_gcc_riscv64_packages:
+    uses: ./.github/workflows/ubuntu-package-build-test.yml
+    with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
+      linux-host-compiler: 'gcc'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t GCC'
+      build_type_list: '["DEBUG", "RELEASE"]'
+      build_arch_list: '["RISCV64"]'
+      tool_chain_tag_list: '["GCC"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_linux_gcc_noopt_unit_tests:
