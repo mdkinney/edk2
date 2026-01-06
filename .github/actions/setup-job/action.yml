@@ -50,6 +50,12 @@ runs:
       run: |
         echo CC=clang>> $GITHUB_ENV
         echo CXX=clang++>> $GITHUB_ENV
+    - name: Linux Set AARCH64_PREFIX and RISCV64_PREFIX
+      if: ${{ runner.os == 'Linux' }}
+      shell: bash
+      run: |
+        echo GCC_AARCH64_PREFIX=/usr/bin/aarch64-linux-gnu- >> $GITHUB_ENV
+        echo GCC_RISCV64_PREFIX=/usr/bin/riscv64-linux-gnu- >> $GITHUB_ENV
     - name: Windows Setup Visual Studio CLANGPDB Job
       if: ${{ inputs.windows-clang-installer == 'vs-clangpdb' && runner.os == 'Windows' }}
       uses: ./.github/actions/windows-setup-vs-clangpdb-job
