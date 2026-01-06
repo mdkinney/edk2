@@ -45,6 +45,11 @@ on:
         required: true
         type: string
         default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+      emulatorpkg-build-options:
+        description: Additional build options for EmulatorPkg.
+        required: false
+        type: string
+        default: ''
 
   workflow_dispatch:
     inputs:
@@ -78,6 +83,11 @@ on:
         required: true
         type: string
         default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+      emulatorpkg-build-options:
+        description: Additional build options for EmulatorPkg.
+        required: false
+        type: string
+        default: ''
 
 jobs:
   build_linux_gcc_packages_ia32_x64:
@@ -92,7 +102,6 @@ jobs:
       edk2-tools-build-params: '-t GCC'
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["IA32", "X64"]'
-      #tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
       tool_chain_tag_list: '["GCC"]'
       package-lists: ${{ inputs.package-lists }}
 
@@ -108,7 +117,6 @@ jobs:
       edk2-tools-build-params: '-t GCC'
       build_type_list: '["DEBUG", "RELEASE"]'
       build_arch_list: '["AARCH64"]'
-      #tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
       tool_chain_tag_list: '["GCC"]'
       package-lists: ${{ inputs.package-lists }}
 
@@ -139,7 +147,6 @@ jobs:
       edk2-tools-build-params: '-t GCC'
       build_type_list: '["NOOPT"]'
       build_arch_list: '["IA32", "X64"]'
-      #tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
       tool_chain_tag_list: '["GCC"]'
       package-lists: ${{ inputs.package-lists }}
 
@@ -156,5 +163,5 @@ jobs:
       edk2-tools-build-params: '-t GCC'
       edk-setup-params: ''
       build_arch_list: '["IA32", "X64"]'
-      #tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
       tool_chain_tag_list: '["GCC"]'
+      emulatorpkg-build-options: ${{ inputs.emulatorpkg-build-options }}
