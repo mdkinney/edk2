@@ -15,7 +15,7 @@ on:
         description: The runner label for Linux jobs.
         required: false
         type: string
-        default: 'ubuntu-latest'
+        default: 'ubuntu-24.04'
       linux-container-image:
         description: The container image for Linux jobs.
         required: false
