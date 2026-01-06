@@ -134,7 +134,7 @@ jobs:
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
       build_type_list: '["NOOPT"]'
-      build_arch_list: '["X64"]'
+      build_arch_list: '["IA32", "X64"]'
       tool_chain_tag_list: '["GCC", "GCCNOLTO"]'
       package-lists: ${{ inputs.package-lists }}
 
