@@ -623,12 +623,12 @@
   # Windows/CLANGPDB using Visual Studio includes and libraries
   #
   CLANGPDB:RELEASE_*_*_CC_FLAGS = -g0
-  CLANGPDB:DEBUG_*_*_CC_FLAGS   = -O0 -fno-omit-frame-pointer -g3 -gcodeview -fno-lto
-  CLANGPDB:NOOPT_*_*_CC_FLAGS   = -O0 -fno-omit-frame-pointer -g3 -gcodeview -fno-lto
+  CLANGPDB:DEBUG_*_*_CC_FLAGS   = -g3 -fno-lto -O0
+  CLANGPDB:NOOPT_*_*_CC_FLAGS   = -g3 -fno-lto
 
   CLANGPDB:*_*_*_DLINK_FLAGS     = /ALIGN:4096 /FILEALIGN:4096
-  CLANGPDB:DEBUG_*_*_DLINK_FLAGS = /DEBUG
-  CLANGPDB:NOOPT_*_*_DLINK_FLAGS = /DEBUG
+#  CLANGPDB:DEBUG_*_*_DLINK_FLAGS = /DEBUG
+#  CLANGPDB:NOOPT_*_*_DLINK_FLAGS = /DEBUG
   CLANGPDB:*_*_IA32_DLINK_FLAGS  = /BASE:0x010000000
   CLANGPDB:*_*_X64_DLINK_FLAGS   = /BASE:0x180000000
 
@@ -642,8 +642,8 @@
   GCC:*_CLANGDWARF_X64_CC_FLAGS     = -target x86_64-w64-mingw32 -mno-stack-arg-probe
   GCC:*_CLANGDWARF_IA32_CC_FLAGS    = -target i686-w64-mingw32 -mno-stack-arg-probe
   GCC:RELEASE_CLANGDWARF_*_CC_FLAGS = -g0
-  GCC:DEBUG_CLANGDWARF_*_CC_FLAGS   = -O0 -fno-omit-frame-pointer -fexceptions -g3 -gcodeview -fdebug-macro -fno-lto
-  GCC:NOOPT_CLANGDWARF_*_CC_FLAGS   = -O0 -fno-omit-frame-pointer -fexceptions -g3 -gcodeview -fdebug-macro -fno-lto
+  GCC:DEBUG_CLANGDWARF_*_CC_FLAGS   = -g3 -gcodeview -fdebug-macro -fno-omit-frame-pointer -fexceptions -fno-lto -O0
+  GCC:NOOPT_CLANGDWARF_*_CC_FLAGS   = -g3 -gcodeview -fdebug-macro -fno-omit-frame-pointer -fexceptions -fno-lto
 
   GCC:*_CLANGDWARF_X64_NASM_FLAGS  = -f win64
   GCC:*_CLANGDWARF_IA32_NASM_FLAGS = -f win32
@@ -673,7 +673,7 @@
 !endif
 
   GCC:RELEASE_*_*_CC_FLAGS = -g0
-  GCC:DEBUG_*_*_CC_FLAGS   = -g3 -O0 -fno-lto
+  GCC:DEBUG_*_*_CC_FLAGS   = -g3 -fno-lto -O0
   GCC:NOOPT_*_*_CC_FLAGS   = -g3 -fno-lto
 
   #
@@ -739,8 +739,8 @@
   #
   GCC:*_CLANGDWARF_*_CC_FLAGS       = -D UNICODE -D _CRT_SECURE_NO_DEPRECATE -Wno-incompatible-pointer-types
   GCC:RELEASE_CLANGDWARF_*_CC_FLAGS = -g0
-  GCC:DEBUG_CLANGDWARF_*_CC_FLAGS   = -O0 -fno-omit-frame-pointer -fexceptions -g3 -gcodeview -fdebug-macro -fno-lto
-  GCC:NOOPT_CLANGDWARF_*_CC_FLAGS   = -O0 -fno-omit-frame-pointer -fexceptions -g3 -gcodeview -fdebug-macro -fno-lto
+  GCC:DEBUG_CLANGDWARF_*_CC_FLAGS   = -g3 -gcodeview -fdebug-macro -fno-omit-frame-pointer -fexceptions -fno-lto -O0
+  GCC:NOOPT_CLANGDWARF_*_CC_FLAGS   = -g3 -gcodeview -fdebug-macro -fno-omit-frame-pointer -fexceptions -fno-lto
 
   GCC:*_CLANGDWARF_*_DLINK_FLAGS    == -o $(BIN_DIR)/$(BASE_NAME).exe -Wl,--entry,main -lwinmm -lgdi32
   GCC:*_CLANGDWARF_IA32_DLINK_FLAGS  = -target i686-w64-mingw32
