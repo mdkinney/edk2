@@ -51,9 +51,9 @@ jobs:
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-a X64 -t CLANGDWARF'
-      build_type_list: '["DEBUG","RELEASE"]'
-      build_arch_list: '["IA32","X64"]'
-      tool_chain_tag_list: '["CLANGDWARF"]'
+      build-type-list: '["DEBUG","RELEASE"]'
+      build-arch-list: '["IA32","X64"]'
+      tool-chain-tag-list: '["CLANGDWARF"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_windows_llvm_mingw_clang_noopt_unit_tests:
@@ -67,9 +67,9 @@ jobs:
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-a X64 -t CLANGDWARF'
-      build_type_list: '["NOOPT"]'
-      build_arch_list: '["X64"]'
-      tool_chain_tag_list: '["CLANGDWARF"]'
+      build-type-list: '["NOOPT"]'
+      build-arch-list: '["X64"]'
+      tool-chain-tag-list: '["CLANGDWARF"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_windows_llvm_mingw_clang_emulatorpkg:
@@ -83,5 +83,5 @@ jobs:
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-a X64 -t CLANGDWARF'
       edk-setup-params: 'Mingw-w64'
-      build_arch_list: '["IA32","X64"]'
-      tool_chain_tag_list: '["CLANGDWARF"]'
+      build-arch-list: '["IA32","X64"]'
+      tool-chain-tag-list: '["CLANGDWARF"]'

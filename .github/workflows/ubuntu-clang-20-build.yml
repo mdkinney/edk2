@@ -98,9 +98,9 @@ jobs:
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGPDB'
-      build_type_list: '["DEBUG", "RELEASE"]'
-      build_arch_list: '["IA32", "X64"]'
-      tool_chain_tag_list: '["CLANGPDB", "CLANGDWARF"]'
+      build-type-list: '["DEBUG", "RELEASE"]'
+      build-arch-list: '["IA32", "X64"]'
+      tool-chain-tag-list: '["CLANGPDB", "CLANGDWARF"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_linux_clangdwarf_aarch64_riscv64_packages:
@@ -113,9 +113,9 @@ jobs:
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGDWARF'
-      build_type_list: '["DEBUG", "RELEASE"]'
-      build_arch_list: '["AARCH64", "RISCV64"]'
-      tool_chain_tag_list: '["CLANGDWARF"]'
+      build-type-list: '["DEBUG", "RELEASE"]'
+      build-arch-list: '["AARCH64", "RISCV64"]'
+      tool-chain-tag-list: '["CLANGDWARF"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_linux_clangdwarf_noopt_unit_tests:
@@ -128,9 +128,9 @@ jobs:
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGDWARF'
-      build_type_list: '["NOOPT"]'
-      build_arch_list: '["X64"]'
-      tool_chain_tag_list: '["CLANGDWARF"]'
+      build-type-list: '["NOOPT"]'
+      build-arch-list: '["X64"]'
+      tool-chain-tag-list: '["CLANGDWARF"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_linux_clangdwarf_emulatorpkg:
@@ -145,6 +145,6 @@ jobs:
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGDWARF'
       edk-setup-params: ''
-      build_arch_list: '["IA32", "X64"]'
-      tool_chain_tag_list: '["CLANGDWARF"]'
+      build-arch-list: '["IA32", "X64"]'
+      tool-chain-tag-list: '["CLANGDWARF"]'
       emulatorpkg-build-options: ${{ inputs.emulatorpkg-build-options }}

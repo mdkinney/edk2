@@ -43,17 +43,17 @@ on:
         required: true
         type: string
         default: '-t CLANGPDB'
-      build_type_list:
+      build-type-list:
         description: List of build types to test.
         required: true
         type: string
         default: '["DEBUG", "RELEASE"]'
-      build_arch_list:
+      build-arch-list:
         description: List of build architectures to test.
         required: true
         type: string
         default: '["IA32", "X64"]'
-      tool_chain_tag_list:
+      tool-chain-tag-list:
         description: List of tool chain tags to test.
         required: true
         type: string
@@ -71,9 +71,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: ${{ fromJSON(inputs.build_type_list) }}
-        build_arch: ${{ fromJSON(inputs.build_arch_list) }}
-        tool_chain_tag: ${{ fromJSON(inputs.tool_chain_tag_list) }}
+        build_type: ${{ fromJSON(inputs.build-type-list) }}
+        build_arch: ${{ fromJSON(inputs.build-arch-list) }}
+        tool_chain_tag: ${{ fromJSON(inputs.tool-chain-tag-list) }}
         build_package: ${{ fromJSON(inputs.package-lists) }}
     steps:
       - name: Checkout

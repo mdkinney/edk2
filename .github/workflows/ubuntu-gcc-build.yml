@@ -100,9 +100,9 @@ jobs:
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
-      build_type_list: '["DEBUG", "RELEASE"]'
-      build_arch_list: '["IA32", "X64"]'
-      tool_chain_tag_list: '["GCC"]'
+      build-type-list: '["DEBUG", "RELEASE"]'
+      build-arch-list: '["IA32", "X64"]'
+      tool-chain-tag-list: '["GCC"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_linux_gcc_aarch64_packages:
@@ -115,9 +115,9 @@ jobs:
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
-      build_type_list: '["DEBUG", "RELEASE"]'
-      build_arch_list: '["AARCH64"]'
-      tool_chain_tag_list: '["GCC"]'
+      build-type-list: '["DEBUG", "RELEASE"]'
+      build-arch-list: '["AARCH64"]'
+      tool-chain-tag-list: '["GCC"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_linux_gcc_riscv64_packages:
@@ -130,9 +130,9 @@ jobs:
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
-      build_type_list: '["DEBUG", "RELEASE"]'
-      build_arch_list: '["RISCV64"]'
-      tool_chain_tag_list: '["GCC"]'
+      build-type-list: '["DEBUG", "RELEASE"]'
+      build-arch-list: '["RISCV64"]'
+      tool-chain-tag-list: '["GCC"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_linux_gcc_noopt_unit_tests:
@@ -145,9 +145,9 @@ jobs:
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
-      build_type_list: '["NOOPT"]'
-      build_arch_list: '["IA32", "X64"]'
-      tool_chain_tag_list: '["GCC"]'
+      build-type-list: '["NOOPT"]'
+      build-arch-list: '["IA32", "X64"]'
+      tool-chain-tag-list: '["GCC"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_linux_gcc_emulatorpkg:
@@ -162,6 +162,6 @@ jobs:
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
       edk-setup-params: ''
-      build_arch_list: '["IA32", "X64"]'
-      tool_chain_tag_list: '["GCC"]'
+      build-arch-list: '["IA32", "X64"]'
+      tool-chain-tag-list: '["GCC"]'
       emulatorpkg-build-options: ${{ inputs.emulatorpkg-build-options }}

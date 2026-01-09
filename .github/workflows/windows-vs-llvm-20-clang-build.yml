@@ -50,9 +50,9 @@ jobs:
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t VS2022'
-      build_type_list: '["DEBUG","RELEASE"]'
-      build_arch_list: '["IA32","X64"]'
-      tool_chain_tag_list: '["CLANGPDB"]'
+      build-type-list: '["DEBUG","RELEASE"]'
+      build-arch-list: '["IA32","X64"]'
+      tool-chain-tag-list: '["CLANGPDB"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_windows_visual_studio_clangpdb_noopt_unit_tests:
@@ -66,9 +66,9 @@ jobs:
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t VS2022'
-      build_type_list: '["NOOPT"]'
-      build_arch_list: '["X64"]'
-      tool_chain_tag_list: '["CLANGPDB"]'
+      build-type-list: '["NOOPT"]'
+      build-arch-list: '["X64"]'
+      tool-chain-tag-list: '["CLANGPDB"]'
       package-lists: ${{ inputs.package-lists }}
 
   build_windows_visual_studio_clangpdb_emulatorpkg:
@@ -82,5 +82,5 @@ jobs:
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t VS2022'
       edk-setup-params: ''
-      build_arch_list: '["IA32","X64"]'
-      tool_chain_tag_list: '["CLANGPDB"]'
+      build-arch-list: '["IA32","X64"]'
+      tool-chain-tag-list: '["CLANGPDB"]'
