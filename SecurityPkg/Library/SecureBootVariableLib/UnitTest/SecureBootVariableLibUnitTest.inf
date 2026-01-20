@@ -34,6 +34,3 @@
   DebugLib
   UefiLib
   UnitTestLib
-
-[BuildOptions]
-  GCC:NOOPT_*_*_CC_FLAGS = -Wno-pointer-to-int-cast
