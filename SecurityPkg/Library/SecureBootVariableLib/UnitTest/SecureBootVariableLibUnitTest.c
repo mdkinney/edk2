@@ -91,9 +91,9 @@ MockSetVariable (
     ));
   check_expected_ptr (VariableName);
   check_expected_ptr (VendorGuid);
-  check_expected_ptr (Attributes);
+  check_expected (Attributes);
   check_expected (DataSize);
-  check_expected (Data);
+  check_expected_ptr (Data);
 
   return (EFI_STATUS)mock ();
 }
@@ -268,7 +268,7 @@ GetSetupModeShouldGetVar (
 
   will_return (MockGetVariable, TRUE);
   will_return (MockGetVariable, sizeof (SetupMode));
-  will_return (MockGetVariable, &TargetMode);
+  will_return (MockGetVariable, (UINTN)&TargetMode);
 
   Status = GetSetupMode (&SetupMode);
 
@@ -316,7 +316,7 @@ IsSecureBootEnableShouldGetVar (
 
   will_return (MockGetVariable, TRUE);
   will_return (MockGetVariable, sizeof (TargetMode));
-  will_return (MockGetVariable, &TargetMode);
+  will_return (MockGetVariable, (UINTN)&TargetMode);
 
   Enabled = IsSecureBootEnabled ();
 
@@ -613,7 +613,7 @@ DeleteDbShouldDelete (
 
   will_return (MockGetVariable, TRUE);
   will_return (MockGetVariable, sizeof (Dummy));
-  will_return (MockGetVariable, &Dummy);
+  will_return (MockGetVariable, (UINTN)&Dummy);
 
   Status = CreateTimeBasedPayload (&PayloadSize, &Payload, &mMaxTimestamp);
   UT_ASSERT_NOT_EFI_ERROR (Status);
@@ -672,7 +672,7 @@ DeleteDbxShouldDelete (
 
   will_return (MockGetVariable, TRUE);
   will_return (MockGetVariable, sizeof (Dummy));
-  will_return (MockGetVariable, &Dummy);
+  will_return (MockGetVariable, (UINTN)&Dummy);
 
   Status = CreateTimeBasedPayload (&PayloadSize, &Payload, &mMaxTimestamp);
   UT_ASSERT_NOT_EFI_ERROR (Status);
@@ -731,7 +731,7 @@ DeleteDbtShouldDelete (
 
   will_return (MockGetVariable, TRUE);
   will_return (MockGetVariable, sizeof (Dummy));
-  will_return (MockGetVariable, &Dummy);
+  will_return (MockGetVariable, (UINTN)&Dummy);
 
   Status = CreateTimeBasedPayload (&PayloadSize, &Payload, &mMaxTimestamp);
   UT_ASSERT_NOT_EFI_ERROR (Status);
@@ -790,7 +790,7 @@ DeleteKEKShouldDelete (
 
   will_return (MockGetVariable, TRUE);
   will_return (MockGetVariable, sizeof (Dummy));
-  will_return (MockGetVariable, &Dummy);
+  will_return (MockGetVariable, (UINTN)&Dummy);
 
   Status = CreateTimeBasedPayload (&PayloadSize, &Payload, &mMaxTimestamp);
   UT_ASSERT_NOT_EFI_ERROR (Status);
@@ -858,7 +858,7 @@ DeletePKShouldDelete (
 
   will_return (MockGetVariable, TRUE);
   will_return (MockGetVariable, sizeof (Dummy));
-  will_return (MockGetVariable, &Dummy);
+  will_return (MockGetVariable, (UINTN)&Dummy);
 
   Status = CreateTimeBasedPayload (&PayloadSize, &Payload, &mMaxTimestamp);
   UT_ASSERT_NOT_EFI_ERROR (Status);
@@ -932,7 +932,7 @@ DeleteSecureBootVariablesShouldDelete (
 
   will_return (MockGetVariable, TRUE);
   will_return (MockGetVariable, sizeof (Dummy));
-  will_return (MockGetVariable, &Dummy);
+  will_return (MockGetVariable, (UINTN)&Dummy);
 
   expect_memory (MockSetVariable, VariableName, EFI_PLATFORM_KEY_NAME, sizeof (EFI_PLATFORM_KEY_NAME));
   expect_memory (MockSetVariable, VendorGuid, &gEfiGlobalVariableGuid, sizeof (gEfiGlobalVariableGuid));
@@ -955,7 +955,7 @@ DeleteSecureBootVariablesShouldDelete (
 
   will_return (MockGetVariable, TRUE);
   will_return (MockGetVariable, sizeof (Dummy));
-  will_return (MockGetVariable, &Dummy);
+  will_return (MockGetVariable, (UINTN)&Dummy);
 
   expect_memory (MockSetVariable, VariableName, EFI_KEY_EXCHANGE_KEY_NAME, sizeof (EFI_KEY_EXCHANGE_KEY_NAME));
   expect_memory (MockSetVariable, VendorGuid, &gEfiGlobalVariableGuid, sizeof (gEfiGlobalVariableGuid));
@@ -978,7 +978,7 @@ DeleteSecureBootVariablesShouldDelete (
 
   will_return (MockGetVariable, TRUE);
   will_return (MockGetVariable, sizeof (Dummy));
-  will_return (MockGetVariable, &Dummy);
+  will_return (MockGetVariable, (UINTN)&Dummy);
 
   expect_memory (MockSetVariable, VariableName, EFI_IMAGE_SECURITY_DATABASE, sizeof (EFI_IMAGE_SECURITY_DATABASE));
   expect_memory (MockSetVariable, VendorGuid, &gEfiImageSecurityDatabaseGuid, sizeof (gEfiImageSecurityDatabaseGuid));
@@ -1001,7 +1001,7 @@ DeleteSecureBootVariablesShouldDelete (
 
   will_return (MockGetVariable, TRUE);
   will_return (MockGetVariable, sizeof (Dummy));
-  will_return (MockGetVariable, &Dummy);
+  will_return (MockGetVariable, (UINTN)&Dummy);
 
   expect_memory (MockSetVariable, VariableName, EFI_IMAGE_SECURITY_DATABASE1, sizeof (EFI_IMAGE_SECURITY_DATABASE1));
   expect_memory (MockSetVariable, VendorGuid, &gEfiImageSecurityDatabaseGuid, sizeof (gEfiImageSecurityDatabaseGuid));
@@ -1024,7 +1024,7 @@ DeleteSecureBootVariablesShouldDelete (
 
   will_return (MockGetVariable, TRUE);
   will_return (MockGetVariable, sizeof (Dummy));
-  will_return (MockGetVariable, &Dummy);
+  will_return (MockGetVariable, (UINTN)&Dummy);
 
   expect_memory (MockSetVariable, VariableName, EFI_IMAGE_SECURITY_DATABASE2, sizeof (EFI_IMAGE_SECURITY_DATABASE2));
   expect_memory (MockSetVariable, VendorGuid, &gEfiImageSecurityDatabaseGuid, sizeof (gEfiImageSecurityDatabaseGuid));
@@ -1357,7 +1357,7 @@ SetSecureBootVariablesShouldStopWhenSecure (
 
   will_return (MockGetVariable, TRUE);
   will_return (MockGetVariable, sizeof (TargetMode));
-  will_return (MockGetVariable, &TargetMode);
+  will_return (MockGetVariable, (UINTN)&TargetMode);
 
   Status = SetSecureBootVariablesToDefault (&PayloadInfo);
   UT_ASSERT_STATUS_EQUAL (Status, EFI_ABORTED);
