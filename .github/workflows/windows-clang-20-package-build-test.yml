@@ -92,11 +92,6 @@ jobs:
 
           FILTER_LIST = [
             {
-            'build_type':    'NOOPT',
-            'build_arch':    'IA32',
-            'build_package': 'RedfishPkg'
-            },
-            {
             'tool_chain_tag': 'GCCNOLTO',
             'build_arch':     'RISCV64'
             }
