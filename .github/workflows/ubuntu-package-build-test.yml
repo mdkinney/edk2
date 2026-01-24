@@ -90,7 +90,8 @@ jobs:
           BUILD_ARCH_LIST: ${{ inputs.build-arch-list }}
           TOOL_CHAIN_TAG_LIST: ${{ inputs.tool-chain-tag-list }}
           PACKAGE_LISTS: ${{ inputs.package-lists }}
-          FILTER_LIST: '[{"tool_chain_tag": "GCCNOLTO"}]'
+          SKIP_FILTER_LIST: '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
+          CONTINUE_ON_ERROR_FILTER_LIST: '[{"tool_chain_tag": "GCCNOLTO"}]'
         run: python ./.github/scripts/filter_matrix.py --verbose
 
   build_linux_packages:

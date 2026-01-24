@@ -129,7 +129,7 @@ class TestFilterMatrix(unittest.TestCase):
         'BUILD_ARCH_LIST': '["X64", "IA32"]',
         'TOOL_CHAIN_TAG_LIST': '["GCC5", "VS2019"]',
         'PACKAGE_LISTS': '["Package1", "Package2"]',
-        'FILTER_LIST': '[{"build_type": "DEBUG"}]'
+        'SKIP_FILTER_LIST': '[{"build_type": "DEBUG"}]'
     })
     def test_generate_filtered_matrix_with_environment(self):
         result = filter_matrix.generate_filtered_matrix()
@@ -141,7 +141,7 @@ class TestFilterMatrix(unittest.TestCase):
         'BUILD_ARCH_LIST': '["X64,IA32"]',
         'TOOL_CHAIN_TAG_LIST': '["GCC5"]',
         'PACKAGE_LISTS': '["Package1"]',
-        'FILTER_LIST': '[{"build_type": "DEBUG"}]'
+        'SKIP_FILTER_LIST': '[{"build_type": "DEBUG"}]'
     })
     def test_generate_filtered_matrix_with_comma_separated_env(self):
         result = filter_matrix.generate_filtered_matrix()
@@ -159,7 +159,7 @@ class TestFilterMatrix(unittest.TestCase):
         'BUILD_ARCH_LIST': '["X64"]',
         'TOOL_CHAIN_TAG_LIST': '["GCC5"]',
         'PACKAGE_LISTS': '["Package1"]',
-        'FILTER_LIST': '[]'
+        'SKIP_FILTER_LIST': '[]'
     })
     def test_generate_filtered_matrix_invalid_json(self):
         with self.assertRaises(json.JSONDecodeError):
@@ -190,7 +190,7 @@ class TestFilterMatrix(unittest.TestCase):
         'BUILD_ARCH_LIST': '["X64"]',
         'TOOL_CHAIN_TAG_LIST': '["GCC5"]',
         'PACKAGE_LISTS': '["Package1"]',
-        'FILTER_LIST': '[]'
+        'SKIP_FILTER_LIST': '[]'
     })
     @patch('builtins.open', mock_open())
     def test_main_success(self):
@@ -204,7 +204,7 @@ class TestFilterMatrix(unittest.TestCase):
         'BUILD_ARCH_LIST': '["X64,IA32"]',
         'TOOL_CHAIN_TAG_LIST': '["GCC5"]',
         'PACKAGE_LISTS': '["Package1"]',
-        'FILTER_LIST': '[{"build_type": "DEBUG"}]'
+        'SKIP_FILTER_LIST': '[{"build_type": "DEBUG"}]'
     })
     @patch('builtins.open', mock_open())
     def test_main_verbose_with_comma_separated(self):

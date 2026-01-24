@@ -31,7 +31,8 @@ Environment Variables:
     TOOL_CHAIN_TAG_LIST (str): JSON array of toolchain tags (e.g., ["GCC5",
         "VS2019"])
     PACKAGE_LISTS (str): JSON array of package lists to build
-    FILTER_LIST (str): JSON array of filter objects to apply to combinations
+    SKIP_FILTER_LIST (str): JSON array of filter objects to apply to combinations
+    CONTINUE_ON_ERROR_FILTER_LIST (str): JSON array of filter objects to apply to combinations
     GITHUB_OUTPUT (str): Path to GitHub Actions output file
 
 Functions:
@@ -205,7 +206,8 @@ def generate_filtered_matrix(verbose: bool = False) -> list:
         BUILD_ARCH_LIST: JSON array of architectures
         TOOL_CHAIN_TAG_LIST: JSON array of toolchain tags
         PACKAGE_LISTS: JSON array of package lists
-        FILTER_LIST: JSON array of filter objects
+        SKIP_FILTER_LIST: JSON array of filter objects
+        CONTINUE_ON_ERROR_FILTER_LIST: JSON array of filter objects
     """
     # Display input values if verbose mode is enabled
     if verbose:
@@ -215,7 +217,8 @@ def generate_filtered_matrix(verbose: bool = False) -> list:
         print('  tool-chain-tag-list:',
               os.environ.get('TOOL_CHAIN_TAG_LIST', '[]'))
         print('  package-lists:', os.environ.get('PACKAGE_LISTS', '[]'))
-        print('  filter-list:', os.environ.get('FILTER_LIST', '[]'))
+        print('  skip-filter-list:', os.environ.get('SKIP_FILTER_LIST', '[]'))
+        print('  continue-on-error-filter-list:', os.environ.get('CONTINUE_ON_ERROR_FILTER_LIST', '[]'))
 
     # Parse JSON environment variables into Python lists
     build_type_list = json.loads(os.environ.get('BUILD_TYPE_LIST', '[]'))
@@ -223,7 +226,8 @@ def generate_filtered_matrix(verbose: bool = False) -> list:
     tool_chain_tag_list = json.loads(
         os.environ.get('TOOL_CHAIN_TAG_LIST', '[]'))
     package_lists = json.loads(os.environ.get('PACKAGE_LISTS', '[]'))
-    filter_list = json.loads(os.environ.get('FILTER_LIST', '[]'))
+    skip_filter_list = json.loads(os.environ.get('SKIP_FILTER_LIST', '[]'))
+    continue_on_error_filter_list = json.loads(os.environ.get('CONTINUE_ON_ERROR_FILTER_LIST', '[]'))
 
     # Display parsed values if verbose mode is enabled
     if verbose:
@@ -231,7 +235,8 @@ def generate_filtered_matrix(verbose: bool = False) -> list:
         print('Initial build_arch_list:', build_arch_list)
         print('Initial tool_chain_tag_list:', tool_chain_tag_list)
         print('Initial package_lists:', package_lists)
-        print('Initial filter_list:', filter_list)
+        print('Initial skip_filter_list:', skip_filter_list)
+        print('Initial continue_on_error_filter_list:', continue_on_error_filter_list)
 
     # Generate all possible combinations using nested loops
     # This creates a Cartesian product of all build parameters
@@ -254,12 +259,17 @@ def generate_filtered_matrix(verbose: bool = False) -> list:
         for i, combo in enumerate(combinations):
             print(f'  {i+1}: {combo}')
 
-    # Apply filters to reduce the number of combinations
-    # This helps optimize CI runtime by eliminating redundant or unnecessary
-    # jobs
+    # Apply filter to reduce the number of jobs to run by removing
+    # combinations that should be skipped based on the skip_filter_list
     filtered_combinations = apply_filters_to_combination(combinations,
-                                                         filter_list,
+                                                         skip_filter_list,
                                                          verbose)
+    filtered_combinations = [x for x in filtered_combinations
+                           if x['continue_on_error'] == 'false']
+
+    # Apply filter to tag combinations that should be run, but continue on error
+    filtered_combinations = apply_filters_to_combination(
+        filtered_combinations, continue_on_error_filter_list, verbose)
 
     # Display filtered combinations if verbose mode is enabled
     if verbose:
