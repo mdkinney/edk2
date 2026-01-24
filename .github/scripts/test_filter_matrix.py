@@ -6,11 +6,11 @@
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 #
 
-import unittest
-from unittest.mock import patch, mock_open
-import json
 import os
 import sys
+import json
+import unittest
+from unittest.mock import patch, mock_open
 import filter_matrix
 
 # Add the script directory to the path to import the module

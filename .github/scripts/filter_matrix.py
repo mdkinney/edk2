@@ -5,10 +5,10 @@
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 #
 
-import json
 import os
-import argparse
 import sys
+import argparse
+import json
 
 '''
 filter_matrix.py
