@@ -90,7 +90,7 @@ jobs:
           BUILD_ARCH_LIST: ${{ inputs.build-arch-list }}
           TOOL_CHAIN_TAG_LIST: ${{ inputs.tool-chain-tag-list }}
           PACKAGE_LISTS: ${{ inputs.package-lists }}
-          FILTER_LIST: '[{"tool_chain_tag": "GCCNOLTO"]'
+          FILTER_LIST: '[{"tool_chain_tag": "GCCNOLTO"}]'
         run: python ./.github/scripts/filter_matrix.py
 
   build_linux_packages:
