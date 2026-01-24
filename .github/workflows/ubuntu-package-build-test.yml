@@ -91,7 +91,7 @@ jobs:
           TOOL_CHAIN_TAG_LIST: ${{ inputs.tool-chain-tag-list }}
           PACKAGE_LISTS: ${{ inputs.package-lists }}
           FILTER_LIST: '[{"tool_chain_tag": "GCCNOLTO"]'
-        uses: ./.github/scripts/filter_matrix.py
+        run: python ./.github/scripts/filter_matrix.py
 
   build_linux_packages:
     name: Build Linux Packages (${{ matrix.config.build_arch }}-${{ matrix.config.build_type }}-${{ matrix.config.tool_chain_tag }}-${{ strategy.job-index }})
