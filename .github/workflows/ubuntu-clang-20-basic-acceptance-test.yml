@@ -71,7 +71,7 @@ jobs:
               TOOL_CHAIN_TAG=CLANGPDB                                \
               -t DEBUG,RELEASE,NOOPT -a X64,IA32                     \
               -p MdeModulePkg                                        \
-              BUILDMODULE=MdeModulePkg\Application\HelloWorld\HelloWorld.inf
+              BUILDMODULE=MdeModulePkg/Application/HelloWorld/HelloWorld.inf
       - name: Build HelloWorld CLANGDWARF
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" \
@@ -79,7 +79,7 @@ jobs:
               TOOL_CHAIN_TAG=CLANGDWARF                              \
               -t DEBUG,RELEASE,NOOPT -a X64,IA32,AARCH64,RISCV64     \
               -p MdeModulePkg                                        \
-              BUILDMODULE=MdeModulePkg\Application\HelloWorld\HelloWorld.inf
+              BUILDMODULE=MdeModulePkg/Application/HelloWorld/HelloWorld.inf
       - name: Build UnitTestFrameworkPkg X64 Unit Tests
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"     \
@@ -87,7 +87,7 @@ jobs:
               HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run \
               TOOL_CHAIN_TAG=CLANGDWARF -t NOOPT -a X64                  \
               -p UnitTestFrameworkPkg                                    \
-              BUILDMODULE=UnitTestFrameworkPkg\Test\GoogleTest\Sample\SampleGoogleTest\SampleGoogleTestHost.inf
+              BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
       - name: Build UnitTestFrameworkPkg IA32 Unit Tests
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"     \
@@ -95,7 +95,7 @@ jobs:
               HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run \
               TOOL_CHAIN_TAG=CLANGDWARF -t NOOPT -a IA32                 \
               -p UnitTestFrameworkPkg                                    \
-              BUILDMODULE=UnitTestFrameworkPkg\Test\GoogleTest\Sample\SampleGoogleTest\SampleGoogleTestHost.inf
+              BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
       - name: Upload Linux CLANGPDB CLANGDWARF Packages Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
