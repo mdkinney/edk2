@@ -276,7 +276,7 @@ jobs:
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
-      firmware-test-arch-list: '["IA32", "X64", "AARCH64", "RISCV64"]'
+      firmware-test-arch-list: '["IA32,X64,AARCH64,RISCV64"]'
       tool-chain-tag-list: '["GCC"]'
   build_linux_gccnolto_basic_acceptance_test:
     # Firmware Build Support:             GCC          - IA32/X64/AARCH64/RISCV64
@@ -293,7 +293,7 @@ jobs:
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
-      firmware-test-arch-list: '["IA32", "X64", "AARCH64"]'
+      firmware-test-arch-list: '["IA32,X64,AARCH64"]'
       tool-chain-tag-list: '["GCCNOLTO"]'
   build_windows_vs_basic_acceptance_test:
     # Firmware Build Support:             VS20xx - IA32/X64

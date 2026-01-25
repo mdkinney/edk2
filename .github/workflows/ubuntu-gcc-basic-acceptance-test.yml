@@ -126,17 +126,29 @@ jobs:
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
       - name: Build HelloWorld ${{ matrix.tool_chain_tag }}
         run: |
-          . ./edksetup.sh
-          # Convert JSON array to build command architecture list (e.g. -a IA32 -a X64)
-          ARCH_LIST=$(echo '${{ inputs.firmware-test-arch-list }}' | sed 's/\[//g; s/\]//g; s/"//g; s/,/ -a /g; s/^/-a /')
-          build $ARCH_LIST -t ${{ matrix.tool_chain_tag }} -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldGccBuild.log >NUL
-      - name: Build UnitTestFrameworkPkg X64 Unit Tests ${{ matrix.tool_chain_tag }}
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" \
+              --disable-all CompilerPlugin=run                       \
+              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }}            \
+              -t DEBUG,RELEASE,NOOPT                                 \
+              -a ${{ inputs.firmware-test-arch-list }}               \
+              -p MdeModulePkg                                        \
+              BUILDMODULE=MdeModulePkg/Application/HelloWorld/HelloWorld.inf
+      - name: Stuart Build UnitTestFrameworkPkg X64 Unit Tests ${{ matrix.tool_chain_tag }}
         run: |
-          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" -a X64 -t NOOPT TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -p UnitTestFrameworkPkg
-      - name: Build UnitTestFrameworkPkg IA32 Unit Tests ${{ matrix.tool_chain_tag }}
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"      \
+              --disable-all DISABLE_DEBUG_MACRO_CHECK                     \
+              HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run  \
+              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -t NOOPT -a X64 \
+              -p UnitTestFrameworkPkg                                     \
+              BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
+      - name: Stuart Build UnitTestFrameworkPkg IA32 Unit Tests ${{ matrix.tool_chain_tag }}
         run: |
-          . ./edksetup.sh
-          build -a IA32 -t ${{ matrix.tool_chain_tag }} -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"       \
+              --disable-all DISABLE_DEBUG_MACRO_CHECK                      \
+              HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run   \
+              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -t NOOPT -a IA32 \
+              -p UnitTestFrameworkPkg                                      \
+              BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
       - name: Upload Linux ${{ matrix.tool_chain_tag }} Packages Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
@@ -170,19 +182,29 @@ jobs:
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
-      - name: Build EmulatorPkg X64 Unix Host Module ${{ matrix.tool_chain_tag }}
+      - name: Stuart Update EmulatorPkg
+        run: stuart_update -c EmulatorPkg/PlatformCI/PlatformBuild.py
+      - name: Stuart Build EmulatorPkg X64 Unix Host Module ${{ matrix.tool_chain_tag }}
         run: |
-          . ./edksetup.sh
-          build -a X64  -t ${{ matrix.tool_chain_tag }}      -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64DebugGccBuild.log >NUL
-      - name: Build EmulatorPkg IA32 Unix Host Module ${{ matrix.tool_chain_tag }}
+          stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py \
+              DISABLE_DEBUG_MACRO_CHECK                           \
+              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -a X64  \
+              BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
+      - name: Stuart Build EmulatorPkg IA32 Unix Host Module ${{ matrix.tool_chain_tag }}
         run: |
-          . ./edksetup.sh
-          build -a IA32 -t ${{ matrix.tool_chain_tag }}      -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32DebugGccBuild.log >NUL
-      - name: Build OVMF IA32/X64 Platform ${{ matrix.tool_chain_tag }}
-        if: false
+          stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py \
+              DISABLE_DEBUG_MACRO_CHECK                           \
+              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -a IA32 \
+              BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
+      - name: Stuart Update OvmfPkg
         run: |
-          . ./edksetup.sh
-          build -a IA32 -a X64 -t ${{ matrix.tool_chain_tag }}      -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64GccBuild.log >NUL
+          stuart_update -c OvmfPkg/PlatformCI/PlatformBuild.py
+      - name: Stuart Build and Boot OVMF IA32/X64 Platform ${{ matrix.tool_chain_tag }}
+        run: |
+          stuart_build -c OvmfPkg/PlatformCI/PlatformBuild.py         \
+              -a IA32,X64 TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} \
+              BLD_*_NETWORK_ENABLE=FALSE                              \
+              --FLASHROM MAKE_STARTUP_NSH=TRUE QEMU_HEADLESS=TRUE
       - name: Upload Linux ${{ matrix.tool_chain_tag }} Platforms Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
