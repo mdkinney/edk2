@@ -66,19 +66,36 @@ jobs:
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
       - name: Build HelloWorld CLANGPDB
         run: |
-          . ./edksetup.sh
-          build -a IA32 -a X64                       -t CLANGPDB   -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangPdbBuild.log >NUL
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" \
+              --disable-all CompilerPlugin=run                       \
+              TOOL_CHAIN_TAG=CLANGPDB                                \
+              -t DEBUG,RELEASE,NOOPT -a X64,IA32                     \
+              -p MdeModulePkg                                        \
+              BUILDMODULE=MdeModulePkg\Application\HelloWorld\HelloWorld.inf
       - name: Build HelloWorld CLANGDWARF
         run: |
-          . ./edksetup.sh
-          build -a IA32 -a X64 -a AARCH64 -a RISCV64 -t CLANGDWARF -b DEBUG -b RELEASE -b NOOPT -p MdeModulePkg/MdeModulePkg.dsc -m MdeModulePkg/Application/HelloWorld/HelloWorld.inf -j Build/HelloWorldClangDwarfBuild.log >NUL
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" \
+              --disable-all CompilerPlugin=run                       \
+              TOOL_CHAIN_TAG=CLANGDWARF                              \
+              -t DEBUG,RELEASE,NOOPT -a X64,IA32,AARCH64,RISCV64     \
+              -p MdeModulePkg                                        \
+              BUILDMODULE=MdeModulePkg\Application\HelloWorld\HelloWorld.inf
       - name: Build UnitTestFrameworkPkg X64 Unit Tests
         run: |
-          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" -a X64 -t NOOPT TOOL_CHAIN_TAG=CLANGDWARF -p UnitTestFrameworkPkg
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"     \
+              --disable-all DISABLE_DEBUG_MACRO_CHECK                    \
+              HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run \
+              TOOL_CHAIN_TAG=CLANGDWARF -t NOOPT -a X64                  \
+              -p UnitTestFrameworkPkg                                    \
+              BUILDMODULE=UnitTestFrameworkPkg\Test\GoogleTest\Sample\SampleGoogleTest\SampleGoogleTestHost.inf
       - name: Build UnitTestFrameworkPkg IA32 Unit Tests
         run: |
-          . ./edksetup.sh
-          build -a IA32 -t CLANGDWARF -b NOOPT -p UnitTestFrameworkPkg/Test/UnitTestFrameworkPkgHostTest.dsc -j Build/UnitTestFrameworkPkgHostTestIA32.log >NUL
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"     \
+              --disable-all DISABLE_DEBUG_MACRO_CHECK                    \
+              HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run \
+              TOOL_CHAIN_TAG=CLANGDWARF -t NOOPT -a IA32                 \
+              -p UnitTestFrameworkPkg                                    \
+              BUILDMODULE=UnitTestFrameworkPkg\Test\GoogleTest\Sample\SampleGoogleTest\SampleGoogleTestHost.inf
       - name: Upload Linux CLANGPDB CLANGDWARF Packages Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
@@ -108,18 +125,28 @@ jobs:
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
-      - name: Build EmulatorPkg X64 Unix Host Module
+      - name: Stuart Update EmulatorPkg
+        run: stuart_update -c EmulatorPkg/PlatformCI/PlatformBuild.py
+      - name: Stuart Build EmulatorPkg X64 Unix Host Module
         run: |
-          . ./edksetup.sh
-          build -a X64 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorX64DebugBuild.log >NUL
-      - name: Build EmulatorPkg IA32 Unix Host Module
+          stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py \
+              DISABLE_DEBUG_MACRO_CHECK                           \
+              TOOL_CHAIN_TAG=CLANGDWARF -a X64                    \
+              BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
+      - name: Stuart Build EmulatorPkg IA32 Unix Host Module
         run: |
-          . ./edksetup.sh
-          build -a IA32 -t CLANGDWARF -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -m EmulatorPkg/Unix/Host/Host.inf -j Build/EmulatorIA32DebugBuild.log >NUL
-      - name: Build OVMF IA32/X64 Platform
+          stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py \
+              DISABLE_DEBUG_MACRO_CHECK                           \
+              TOOL_CHAIN_TAG=CLANGDWARF -a IA32                   \
+              BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
+      - name: Stuart Update OvmfPkg
+        run: stuart_update -c OvmfPkg/PlatformCI/PlatformBuild.py
+      - name: Stuart Build and Boot OVMF IA32/X64 Platform
         run: |
-          . ./edksetup.sh
-          build -a IA32 -a X64 -t CLANGPDB -b DEBUG -p OvmfPkg/OvmfPkgIa32X64.dsc -D SMM_REQUIRE -j Build/OvmfIa32X64Build.log >NUL
+          stuart_build -c OvmfPkg/PlatformCI/PlatformBuild.py \
+              -a IA32,X64 TOOL_CHAIN_TAG=CLANGPDB             \
+              BLD_*_NETWORK_ENABLE=FALSE                      \
+              --FLASHROM MAKE_STARTUP_NSH=TRUE QEMU_HEADLESS=TRUE
       - name: Upload Linux CLANGPDB CLANGDWARF Platforms Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
