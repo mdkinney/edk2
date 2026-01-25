@@ -79,6 +79,10 @@ jobs:
     outputs:
       filtered-matrix: ${{ steps.filter-matrix.outputs.filtered-matrix }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - id: filter-matrix
         env:
           BUILD_TYPE_LIST: ${{ inputs.build-type-list }}
