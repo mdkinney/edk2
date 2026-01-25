@@ -64,7 +64,7 @@ jobs:
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
-      - name: Build HelloWorld CLANGPDB
+      - name: Stuart Build HelloWorld CLANGPDB
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" \
               --disable-all CompilerPlugin=run                       \
@@ -72,7 +72,7 @@ jobs:
               -t DEBUG,RELEASE,NOOPT -a X64,IA32                     \
               -p MdeModulePkg                                        \
               BUILDMODULE=MdeModulePkg/Application/HelloWorld/HelloWorld.inf
-      - name: Build HelloWorld CLANGDWARF
+      - name: Stuart Build HelloWorld CLANGDWARF
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" \
               --disable-all CompilerPlugin=run                       \
@@ -80,7 +80,7 @@ jobs:
               -t DEBUG,RELEASE,NOOPT -a X64,IA32,AARCH64,RISCV64     \
               -p MdeModulePkg                                        \
               BUILDMODULE=MdeModulePkg/Application/HelloWorld/HelloWorld.inf
-      - name: Build UnitTestFrameworkPkg X64 Unit Tests
+      - name: Stuart Build UnitTestFrameworkPkg X64 Unit Tests
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"     \
               --disable-all DISABLE_DEBUG_MACRO_CHECK                    \
@@ -88,7 +88,7 @@ jobs:
               TOOL_CHAIN_TAG=CLANGDWARF -t NOOPT -a X64                  \
               -p UnitTestFrameworkPkg                                    \
               BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
-      - name: Build UnitTestFrameworkPkg IA32 Unit Tests
+      - name: Stuart Build UnitTestFrameworkPkg IA32 Unit Tests
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"     \
               --disable-all DISABLE_DEBUG_MACRO_CHECK                    \
@@ -111,7 +111,7 @@ jobs:
     name: Build Linux CLANGPDB CLANGDWARF Platforms Basic Acceptance Test
     runs-on: ${{ inputs.linux-runs-on }}
     container:
-      image: ${{ inputs.linux-container-image }}
+      image: 'ghcr.io/mdkinney/containers/ubuntu-24-test:latest'
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -140,7 +140,8 @@ jobs:
               TOOL_CHAIN_TAG=CLANGDWARF -a IA32                   \
               BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
       - name: Stuart Update OvmfPkg
-        run: stuart_update -c OvmfPkg/PlatformCI/PlatformBuild.py
+        run: |
+          stuart_update -c OvmfPkg/PlatformCI/PlatformBuild.py
       - name: Stuart Build and Boot OVMF IA32/X64 Platform
         run: |
           stuart_build -c OvmfPkg/PlatformCI/PlatformBuild.py \
