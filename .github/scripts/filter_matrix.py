@@ -242,9 +242,17 @@ def generate_filtered_matrix(verbose: bool = False) -> list:
     # This creates a Cartesian product of all build parameters
     combinations = []
     for build_type in build_type_list:
+        if not build_type:
+            continue
         for build_arch in build_arch_list:
+            if not build_arch:
+                continue
             for tool_chain_tag in tool_chain_tag_list:
+                if not tool_chain_tag:
+                    continue
                 for build_package in package_lists:
+                    if not build_package:
+                        continue
                     combinations.append({
                         'build_type': build_type,
                         'build_arch': build_arch,
