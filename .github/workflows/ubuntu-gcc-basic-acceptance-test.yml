@@ -236,7 +236,6 @@ jobs:
               -a IA32,X64 TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} \
               BLD_*_NETWORK_ENABLE=FALSE                              \
               --FLASHROM MAKE_STARTUP_NSH=TRUE QEMU_HEADLESS=TRUE
-          mv Build/CI_BUILDLOG.txt Build/OVMF_IA32_X64_${{ matrix.tool_chain_tag }}_CI_BUILDLOG.txt
       - name: Upload Linux ${{ matrix.tool_chain_tag }} Platforms Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
