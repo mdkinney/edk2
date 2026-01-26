@@ -209,16 +209,15 @@ def generate_filtered_matrix(verbose: bool = False) -> list:
         SKIP_FILTER_LIST: JSON array of filter objects
         CONTINUE_ON_ERROR_FILTER_LIST: JSON array of filter objects
     """
-    # Display input values if verbose mode is enabled
-    if verbose:
-        print('Inputs values...')
-        print('  build-type-list:', os.environ.get('BUILD_TYPE_LIST', '[]'))
-        print('  build-arch-list:', os.environ.get('BUILD_ARCH_LIST', '[]'))
-        print('  tool-chain-tag-list:',
-              os.environ.get('TOOL_CHAIN_TAG_LIST', '[]'))
-        print('  package-lists:', os.environ.get('PACKAGE_LISTS', '[]'))
-        print('  skip-filter-list:', os.environ.get('SKIP_FILTER_LIST', '[]'))
-        print('  continue-on-error-filter-list:', os.environ.get('CONTINUE_ON_ERROR_FILTER_LIST', '[]'))
+    # Display input values
+    print('Inputs values...')
+    print('  build-type-list:', os.environ.get('BUILD_TYPE_LIST', '[]'))
+    print('  build-arch-list:', os.environ.get('BUILD_ARCH_LIST', '[]'))
+    print('  tool-chain-tag-list:',
+          os.environ.get('TOOL_CHAIN_TAG_LIST', '[]'))
+    print('  package-lists:', os.environ.get('PACKAGE_LISTS', '[]'))
+    print('  skip-filter-list:', os.environ.get('SKIP_FILTER_LIST', '[]'))
+    print('  continue-on-error-filter-list:', os.environ.get('CONTINUE_ON_ERROR_FILTER_LIST', '[]'))
 
     # Parse JSON environment variables into Python lists
     build_type_list = json.loads(os.environ.get('BUILD_TYPE_LIST', '[]') or '[]')
@@ -262,10 +261,9 @@ def generate_filtered_matrix(verbose: bool = False) -> list:
                     })
 
     # Display combinations before filtering if verbose mode is enabled
-    if verbose:
-        print(f'Total combinations before filtering: {len(combinations)}')
-        for i, combo in enumerate(combinations):
-            print(f'  {i+1}: {combo}')
+    print(f'Total combinations before filtering: {len(combinations)}')
+    for i, combo in enumerate(combinations):
+        print(f'  {i+1}: {combo}')
 
     # Apply filter to reduce the number of jobs to run by removing
     # combinations that should be skipped based on the skip_filter_list
@@ -279,13 +277,14 @@ def generate_filtered_matrix(verbose: bool = False) -> list:
     filtered_combinations = apply_filters_to_combination(
         filtered_combinations, continue_on_error_filter_list, verbose)
 
-    # Display filtered combinations if verbose mode is enabled
-    if verbose:
-        print(f'Total combinations after applying filters: '
-              f'{len(filtered_combinations)}')
-        for i, combo in enumerate(filtered_combinations):
-            print(f'  {i+1}: {combo}')
+    # Display filtered combinations
+    print(f'Total combinations after applying filters: '
+          f'{len(filtered_combinations)}')
+    for i, combo in enumerate(filtered_combinations):
+        print(f'  {i+1}: {combo}')
 
+    # Display filtered combinations in JSON format if verbose mode is enabled
+    if verbose:
         print(f'filtered-matrix={json.dumps(filtered_combinations)}')
 
     return filtered_combinations
