@@ -143,6 +143,7 @@ jobs:
               -a ${{ inputs.firmware-test-arch-list }}               \
               -p MdeModulePkg                                        \
               BUILDMODULE=MdeModulePkg/Application/HelloWorld/HelloWorld.inf
+          mv Build/CI_BUILDLOG.txt Build/HelloWorld_${{ matrix.tool_chain_tag }}_CI_BUILDLOG.txt
       - name: Stuart Build UnitTestFrameworkPkg X64 Unit Tests ${{ matrix.tool_chain_tag }}
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"      \
@@ -151,6 +152,7 @@ jobs:
               TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -t NOOPT -a X64 \
               -p UnitTestFrameworkPkg                                     \
               BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
+          mv Build/CI_BUILDLOG.txt Build/UnitTestFrameworkPkg_X64_${{ matrix.tool_chain_tag }}_CI_BUILDLOG.txt
       - name: Stuart Build UnitTestFrameworkPkg IA32 Unit Tests ${{ matrix.tool_chain_tag }}
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"       \
@@ -159,6 +161,7 @@ jobs:
               TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -t NOOPT -a IA32 \
               -p UnitTestFrameworkPkg                                      \
               BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
+          mv Build/CI_BUILDLOG.txt Build/UnitTestFrameworkPkg_IA32_${{ matrix.tool_chain_tag }}_CI_BUILDLOG.txt
       - name: Upload Linux ${{ matrix.tool_chain_tag }} Packages Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
@@ -193,22 +196,27 @@ jobs:
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
       - name: Stuart Update EmulatorPkg
-        run: stuart_update -c EmulatorPkg/PlatformCI/PlatformBuild.py
+        run: |
+          stuart_update -c EmulatorPkg/PlatformCI/PlatformBuild.py
+          mv Build/UPDATE_LOG.txt Build/EmulatorPkg_${{ matrix.tool_chain_tag }}_UPDATE_LOG.txt
       - name: Stuart Build EmulatorPkg X64 Unix Host Module ${{ matrix.tool_chain_tag }}
         run: |
           stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py \
               DISABLE_DEBUG_MACRO_CHECK                           \
               TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -a X64  \
               BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
+          mv Build/CI_BUILDLOG.txt Build/EmulatorPkg_X64_${{ matrix.tool_chain_tag }}_CI_BUILDLOG.txt
       - name: Stuart Build EmulatorPkg IA32 Unix Host Module ${{ matrix.tool_chain_tag }}
         run: |
           stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py \
               DISABLE_DEBUG_MACRO_CHECK                           \
               TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -a IA32 \
               BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
+          mv Build/CI_BUILDLOG.txt Build/EmulatorPkg_IA32_${{ matrix.tool_chain_tag }}_CI_BUILDLOG.txt
       - name: Stuart Update OvmfPkg
         run: |
           stuart_update -c OvmfPkg/PlatformCI/PlatformBuild.py
+          mv Build/UPDATE_LOG.txt Build/OvmfPkg_${{ matrix.tool_chain_tag }}_UPDATE_LOG.txt
       - name: Stuart Build and Boot OVMF IA32/X64 Platform ${{ matrix.tool_chain_tag }}
         continue-on-error: ${{ matrix.tool_chain_tag == 'GCCNOLTO' }}
         run: |
@@ -216,6 +224,7 @@ jobs:
               -a IA32,X64 TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} \
               BLD_*_NETWORK_ENABLE=FALSE                              \
               --FLASHROM MAKE_STARTUP_NSH=TRUE QEMU_HEADLESS=TRUE
+          mv Build/CI_BUILDLOG.txt Build/OVMF_IA32_X64_${{ matrix.tool_chain_tag }}_CI_BUILDLOG.txt
       - name: Upload Linux ${{ matrix.tool_chain_tag }} Platforms Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
