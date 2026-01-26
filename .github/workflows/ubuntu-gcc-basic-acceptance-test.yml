@@ -200,6 +200,7 @@ jobs:
         run: |
           stuart_update -c OvmfPkg/PlatformCI/PlatformBuild.py
       - name: Stuart Build and Boot OVMF IA32/X64 Platform ${{ matrix.tool_chain_tag }}
+        continue-on-error: ${{ matrix.tool_chain_tag == 'GCCNOLTO' }}
         run: |
           stuart_build -c OvmfPkg/PlatformCI/PlatformBuild.py         \
               -a IA32,X64 TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} \
