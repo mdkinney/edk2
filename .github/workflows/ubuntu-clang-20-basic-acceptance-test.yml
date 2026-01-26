@@ -24,6 +24,11 @@ on:
         required: true
         type: string
         default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      linux-host-compiler:
+        description: Linux Host Compiler (e.g., clang, gcc)
+        required: false
+        type: string
+        default: 'clang'
       python-version:
         description: The version of Python to use.
         required: true
@@ -59,7 +64,7 @@ jobs:
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/setup-job
         with:
-          linux-host-compiler: 'clang'
+          linux-host-compiler: ${{ inputs.linux-host-compiler }}
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -120,7 +125,7 @@ jobs:
       - name: Setup Linux CLANG Job
         uses: ./.github/actions/setup-job
         with:
-          linux-host-compiler: 'clang'
+          linux-host-compiler: ${{ inputs.linux-host-compiler }}
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
