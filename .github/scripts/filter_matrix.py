@@ -221,13 +221,13 @@ def generate_filtered_matrix(verbose: bool = False) -> list:
         print('  continue-on-error-filter-list:', os.environ.get('CONTINUE_ON_ERROR_FILTER_LIST', '[]'))
 
     # Parse JSON environment variables into Python lists
-    build_type_list = json.loads(os.environ.get('BUILD_TYPE_LIST', '[]'))
-    build_arch_list = json.loads(os.environ.get('BUILD_ARCH_LIST', '[]'))
+    build_type_list = json.loads(os.environ.get('BUILD_TYPE_LIST', '[]') or '[]')
+    build_arch_list = json.loads(os.environ.get('BUILD_ARCH_LIST', '[]') or '[]')
     tool_chain_tag_list = json.loads(
-        os.environ.get('TOOL_CHAIN_TAG_LIST', '[]'))
-    package_lists = json.loads(os.environ.get('PACKAGE_LISTS', '[]'))
-    skip_filter_list = json.loads(os.environ.get('SKIP_FILTER_LIST', '[]'))
-    continue_on_error_filter_list = json.loads(os.environ.get('CONTINUE_ON_ERROR_FILTER_LIST', '[]'))
+        os.environ.get('TOOL_CHAIN_TAG_LIST', '[]') or '[]')
+    package_lists = json.loads(os.environ.get('PACKAGE_LISTS', '[]') or '[]')
+    skip_filter_list = json.loads(os.environ.get('SKIP_FILTER_LIST', '[]') or '[]')
+    continue_on_error_filter_list = json.loads(os.environ.get('CONTINUE_ON_ERROR_FILTER_LIST', '[]') or '[]')
 
     # Display parsed values if verbose mode is enabled
     if verbose:
