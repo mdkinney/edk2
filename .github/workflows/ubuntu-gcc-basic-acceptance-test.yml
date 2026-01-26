@@ -164,7 +164,7 @@ jobs:
     name: Build Linux ${{ matrix.tool_chain_tag }} Platforms Basic Acceptance Test
     runs-on: ${{ inputs.linux-runs-on }}
     container:
-      image: ${{ inputs.linux-container-image }}
+      image: 'ghcr.io/mdkinney/containers/ubuntu-24-test:latest'
     strategy:
       fail-fast: false
       matrix:
