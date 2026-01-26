@@ -155,7 +155,7 @@ jobs:
               BUILDMODULE=MdeModulePkg/Application/HelloWorld/HelloWorld.inf
           mv Build/CI_BUILDLOG.txt Build/HelloWorld_${{ matrix.tool_chain_tag }}_CI_BUILDLOG.txt
       - name: Stuart Build UnitTestFrameworkPkg X64 Unit Tests ${{ matrix.tool_chain_tag }}
-        if: contains(fromJson(inputs.unit-test-arch-list), 'X64')
+        if: contains(inputs.unit-test-arch-list, 'X64')
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"      \
               --disable-all DISABLE_DEBUG_MACRO_CHECK                     \
@@ -165,7 +165,7 @@ jobs:
               BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
           mv Build/CI_BUILDLOG.txt Build/UnitTestFrameworkPkg_X64_${{ matrix.tool_chain_tag }}_CI_BUILDLOG.txt
       - name: Stuart Build UnitTestFrameworkPkg IA32 Unit Tests ${{ matrix.tool_chain_tag }}
-        if: contains(fromJson(inputs.unit-test-arch-list), 'IA32')
+        if: contains(inputs.unit-test-arch-list, 'IA32')
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"       \
               --disable-all DISABLE_DEBUG_MACRO_CHECK                      \
@@ -217,14 +217,14 @@ jobs:
               DISABLE_DEBUG_MACRO_CHECK                           \
               TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -a X64  \
               BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
-          mv Build/CI_BUILDLOG.txt Build/EmulatorPkg_X64_${{ matrix.tool_chain_tag }}_CI_BUILDLOG.txt
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_X64_${{ matrix.tool_chain_tag }}.txt
       - name: Stuart Build EmulatorPkg IA32 Unix Host Module ${{ matrix.tool_chain_tag }}
         run: |
           stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py \
               DISABLE_DEBUG_MACRO_CHECK                           \
               TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -a IA32 \
               BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
-          mv Build/CI_BUILDLOG.txt Build/EmulatorPkg_IA32_${{ matrix.tool_chain_tag }}_CI_BUILDLOG.txt
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_IA32_${{ matrix.tool_chain_tag }}.txt
       - name: Stuart Update OvmfPkg
         run: |
           stuart_update -c OvmfPkg/PlatformCI/PlatformBuild.py
