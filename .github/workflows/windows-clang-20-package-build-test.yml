@@ -91,7 +91,7 @@ jobs:
           PACKAGE_LISTS: ${{ inputs.package-lists }}
           SKIP_FILTER_LIST: '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
           CONTINUE_ON_ERROR_FILTER_LIST: '[{"tool_chain_tag": "GCCNOLTO"}]'
-        run: python ./.github/scripts/filter_matrix.py --verbose
+        run: python ./.github/scripts/filter_matrix.py
 
   build_windows_packages:
     name: Build Windows Packages ${{inputs.windows-clang-installer}}-${{ matrix.config.build_arch }}-${{ matrix.config.build_type }}-${{ matrix.config.tool_chain_tag }}-${{ strategy.job-index }}
