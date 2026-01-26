@@ -153,7 +153,7 @@ jobs:
               -a ${{ inputs.firmware-test-arch-list }}               \
               -p MdeModulePkg                                        \
               BUILDMODULE=MdeModulePkg/Application/HelloWorld/HelloWorld.inf
-          mv Build/CI_BUILDLOG.txt Build/HelloWorld_${{ matrix.tool_chain_tag }}_CI_BUILDLOG.txt
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_HelloWorld_${{ matrix.tool_chain_tag }}.txt
       - name: Stuart Build UnitTestFrameworkPkg X64 Unit Tests ${{ matrix.tool_chain_tag }}
         if: contains(inputs.unit-test-arch-list, 'X64')
         run: |
@@ -163,7 +163,7 @@ jobs:
               TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -t NOOPT -a X64 \
               -p UnitTestFrameworkPkg                                     \
               BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
-          mv Build/CI_BUILDLOG.txt Build/UnitTestFrameworkPkg_X64_${{ matrix.tool_chain_tag }}_CI_BUILDLOG.txt
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_UnitTestFrameworkPkg_X64_${{ matrix.tool_chain_tag }}.txt
       - name: Stuart Build UnitTestFrameworkPkg IA32 Unit Tests ${{ matrix.tool_chain_tag }}
         if: contains(inputs.unit-test-arch-list, 'IA32')
         run: |
@@ -173,14 +173,13 @@ jobs:
               TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -t NOOPT -a IA32 \
               -p UnitTestFrameworkPkg                                      \
               BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
-          mv Build/CI_BUILDLOG.txt Build/UnitTestFrameworkPkg_IA32_${{ matrix.tool_chain_tag }}_CI_BUILDLOG.txt
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_UnitTestFrameworkPkg_IA32_${{ matrix.tool_chain_tag }}.txt
       - name: Upload Linux ${{ matrix.tool_chain_tag }} Packages Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
           name: Upload Linux ${{ matrix.tool_chain_tag }} Packages Basic Acceptance Test Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
-            Build/**/BUILDLOG*.txt
             Build/*.txt
             Build/*.log
         if: always()
@@ -210,7 +209,7 @@ jobs:
       - name: Stuart Update EmulatorPkg
         run: |
           stuart_update -c EmulatorPkg/PlatformCI/PlatformBuild.py
-          mv Build/UPDATE_LOG.txt Build/EmulatorPkg_${{ matrix.tool_chain_tag }}_UPDATE_LOG.txt
+          mv Build/UPDATE_LOG.txt Build/UPDATE_LOG_EmulatorPkg_${{ matrix.tool_chain_tag }}.txt
       - name: Stuart Build EmulatorPkg X64 Unix Host Module ${{ matrix.tool_chain_tag }}
         run: |
           stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py \
@@ -228,7 +227,7 @@ jobs:
       - name: Stuart Update OvmfPkg
         run: |
           stuart_update -c OvmfPkg/PlatformCI/PlatformBuild.py
-          mv Build/UPDATE_LOG.txt Build/OvmfPkg_${{ matrix.tool_chain_tag }}_UPDATE_LOG.txt
+          mv Build/UPDATE_LOG.txt Build/UPDATE_LOG_OvmfPkg_${{ matrix.tool_chain_tag }}.txt
       - name: Stuart Build and Boot OVMF IA32/X64 Platform ${{ matrix.tool_chain_tag }}
         continue-on-error: ${{ matrix.tool_chain_tag == 'GCCNOLTO' }}
         run: |
@@ -242,7 +241,6 @@ jobs:
           name: Upload Linux ${{ matrix.tool_chain_tag }} Platforms Basic Acceptance Test Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
-            Build/**/BUILDLOG*.txt
             Build/*.txt
             Build/*.log
         if: always()
