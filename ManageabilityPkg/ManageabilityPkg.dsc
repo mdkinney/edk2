@@ -116,4 +116,4 @@
   IpmiLib|MdeModulePkg/Library/BaseIpmiLibNull/BaseIpmiLibNull.inf
   PlatformBmcReadyLib|ManageabilityPkg/Library/PlatformBmcReadyLibNull/PlatformBmcReadyLibNull.inf
 
-!include Include/Manageability.dsc
+!include ManageabilityPkg/Include/Manageability.dsc
