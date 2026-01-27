@@ -20,7 +20,7 @@ runs:
   steps:
     - name: Download External Dependencies using stuart_update
       shell: bash
-      run: stuart_update -c ${{ inputs.stuart-ci-settings-file }} -v
+      run: stuart_update -c ${{ inputs.stuart-ci-settings-file }}
     - name: Build BaseTools using Edk2ToolsBuild.py
       shell: bash
       run: python BaseTools/Edk2ToolsBuild.py ${{ inputs.edk2-tools-build-params }}
