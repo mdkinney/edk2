@@ -70,7 +70,7 @@ on:
         description: Firmware test tool chain tags to build.
         required: true
         type: string
-        default: '["GCC"]'
+        default: 'GCC'
       unit-test-arch-list:
         description: List of unit test architectures to build.
         required: false
@@ -138,7 +138,7 @@ on:
         description: Firmware test tool chain tags to build.
         required: true
         type: string
-        default: '["GCC"]'
+        default: 'GCC'
       unit-test-arch-list:
         description: List of unit test architectures to build.
         required: false

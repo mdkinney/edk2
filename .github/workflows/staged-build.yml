@@ -235,7 +235,7 @@ jobs:
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGPDB'
       firmware-test-arch-parameter: 'IA32,X64,AARCH64,RISCV64'
-      firmware-tool-chain-tag-list: '["CLANGDWARF"]'
+      firmware-tool-chain-tag: 'CLANGDWARF'
       unit-test-arch-list: '["IA32","X64"]'
       unit-test-tool-chain-tag: 'CLANGDWARF'
       emulatorpkg-target-list: '["DEBUG", "RELEASE", "NOOPT"]'
@@ -256,7 +256,7 @@ jobs:
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGPDB'
       firmware-test-arch-parameter: 'IA32,X64'
-      firmware-tool-chain-tag-list: '["CLANGPDB"]'
+      firmware-tool-chain-tag: 'CLANGPDB'
       unit-test-arch-list: ''
       unit-test-tool-chain-tag: ''
       emulatorpkg-target-list: ''
@@ -317,7 +317,7 @@ jobs:
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
       firmware-test-arch-parameter: 'IA32,X64,AARCH64,RISCV64'
-      firmware-tool-chain-tag-list: '["GCC"]'
+      firmware-tool-chain-tag: 'GCC'
       unit-test-arch-list: '["IA32","X64"]'
       unit-test-tool-chain-tag: 'GCC'
       emulatorpkg-target-list: '["DEBUG", "RELEASE", "NOOPT"]'
@@ -339,7 +339,7 @@ jobs:
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
       firmware-test-arch-parameter: 'IA32,X64,AARCH64'
-      firmware-tool-chain-tag-list: '["GCCNOLTO"]'
+      firmware-tool-chain-tag: 'GCCNOLTO'
       unit-test-arch-list: '["IA32","X64"]'
       unit-test-tool-chain-tag: 'GCCNOLTO'
       emulatorpkg-target-list: '["DEBUG", "RELEASE", "NOOPT"]'
