@@ -31,6 +31,11 @@ on:
         required: true
         type: string
         default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      linux-container-image-qemu:
+        description: The container image for Linux jobs with QEMU.
+        required: true
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-test:latest'
       linux-host-compiler:
         description: Linux Host Compiler (e.g., clang, gcc)
         required: false
@@ -94,6 +99,11 @@ on:
         required: true
         type: string
         default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      linux-container-image-qemu:
+        description: The container image for Linux jobs with QEMU.
+        required: true
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-test:latest'
       linux-host-compiler:
         description: Linux Host Compiler (e.g., clang, gcc)
         required: false
@@ -150,7 +160,7 @@ jobs:
     name: Build Linux ${{ matrix.tool_chain_tag }} Firmware Basic Acceptance Test
     runs-on: ${{ inputs.linux-runs-on }}
     container:
-      image: ${{ inputs.linux-container-image }}
+      image: ${{ inputs.linux-container-image-qemu }}
     strategy:
       fail-fast: false
       matrix:

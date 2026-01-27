@@ -21,6 +21,11 @@ on:
         required: false
         type: string
         default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      linux-container-image-qemu:
+        description: The container image for Linux jobs with QEMU.
+        required: false
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-test:latest'
       windows-runs-on:
         description: The runner label for Windows jobs.
         required: false
@@ -94,6 +99,11 @@ on:
         required: false
         type: string
         default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      linux-container-image-qemu:
+        description: The container image for Linux jobs with QEMU.
+        required: false
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-test:latest'
       windows-runs-on:
         description: The runner label for Windows jobs.
         required: false
@@ -218,6 +228,7 @@ jobs:
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
+      linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
       linux-host-compiler: 'gcc'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
@@ -278,6 +289,7 @@ jobs:
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
+      linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
       linux-host-compiler: 'gcc'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
@@ -299,6 +311,7 @@ jobs:
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
+      linux-container-image-qemu: ${{ inputs.linux-container-image_qemu }}
       linux-host-compiler: 'gcc'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
