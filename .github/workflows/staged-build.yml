@@ -194,6 +194,7 @@ jobs:
     steps:
       - name: Stage 0 Success
         run: echo "Stage 0 jobs completed successfully"
+      - uses: Kesin11/actions-timeline@v2
 
   #
   # Stage 1: Run no-target tests and basic acceptance tests
@@ -381,6 +382,7 @@ jobs:
     steps:
       - name: Stage 1 Success
         run: echo "Stage 1 jobs completed successfully"
+      - uses: Kesin11/actions-timeline@v2
 
   #
   # Stage 2: Run full tests for packages and platforms
@@ -509,4 +511,5 @@ jobs:
     steps:
       - name: Stage 2 Success
         run: echo "Stage 2 jobs completed successfully"
+      - uses: Kesin11/actions-timeline@v2
 
