@@ -185,7 +185,7 @@ jobs:
   #
   stage0:
     name: Stage 0 Success
-    runs-on: ${{ inputs.linux-runs-on }}
+    runs-on: ubuntu-slim
     needs:
       - set_package_lists
     if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
@@ -364,7 +364,7 @@ jobs:
   #
   stage1:
     name: Stage 1 Success
-    runs-on: ${{ inputs.linux-runs-on }}
+    runs-on: ubuntu-slim
     needs:
       - stage0
       - build_linux_clang_no_target_test
@@ -495,7 +495,7 @@ jobs:
   #
   stage2:
     name: Stage 2 Success
-    runs-on: ${{ inputs.linux-runs-on }}
+    runs-on: ubuntu-slim
     needs:
       - stage1
       - ubuntu_clang_20_build
