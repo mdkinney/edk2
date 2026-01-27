@@ -52,7 +52,7 @@ on:
         required: true
         type: string
         default: '-t GCC'
-      firmware-test-arch-list:
+      firmware-test-arch-parameter:
         description: List of firmware test architectures to build.
         required: false
         type: string
@@ -61,17 +61,17 @@ on:
         description: Firmware test tool chain tag to build.
         required: true
         type: string
-        default: '["GCC"]'
+        default: 'GCC'
       unit-test-arch-list:
         description: List of unit test architectures to build.
         required: false
         type: string
-        default: 'IA32,X64'
+        default: '["IA32","X64"]'
       unit-test-tool-chain-tag:
         description: Unit test tool chain tag to build.
         required: true
         type: string
-        default: '["GCC"]'
+        default: 'GCC'
 
   workflow_dispatch:
     inputs:
@@ -110,8 +110,8 @@ on:
         required: true
         type: string
         default: '-t GCC'
-      firmware-test-arch-list:
-        description: List of firmware test architectures to build.
+      firmware-test-arch-parameter:
+        description: Firmware test architectures to build.
         required: false
         type: string
         default: 'IA32,X64,AARCH64,RISCV64'
@@ -119,17 +119,17 @@ on:
         description: Firmware test tool chain tag to build.
         required: true
         type: string
-        default: '["GCC"]'
+        default: 'GCC'
       unit-test-arch-list:
         description: List of unit test architectures to build.
         required: false
         type: string
-        default: 'IA32,X64'
+        default: '["IA32","X64"]'
       unit-test-tool-chain-tag:
         description: Unit test tool chain tag to build.
         required: true
         type: string
-        default: '["GCC"]'
+        default: 'GCC'
 
 jobs:
   build_linux_firmware_packages_basic_acceptance_test:
@@ -156,7 +156,7 @@ jobs:
               --disable-all CompilerPlugin=run                       \
               TOOL_CHAIN_TAG=${{ inputs.firmware-tool-chain-tag }}   \
               -t DEBUG,RELEASE,NOOPT                                 \
-              -a ${{ inputs.firmware-test-arch-list }}               \
+              -a ${{ inputs.firmware-test-arch-parameter }}          \
               -p MdeModulePkg                                        \
               BUILDMODULE=MdeModulePkg/Application/HelloWorld/HelloWorld.inf
           mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_HelloWorld_${{ inputs.firmware-tool-chain-tag }}.txt
@@ -171,7 +171,7 @@ jobs:
         if: always()
 
   build_linux_unit_test_emulatorpkg_basic_acceptance_test:
-    name: Build Linux ${{ inputs.unit-test-tool-chain-tag }} Packages Basic Acceptance Test
+    name: Build Linux ${{ inputs.unit-test-tool-chain-tag }} Unit Test EmulatorPkg Basic Acceptance Test
     runs-on: ${{ inputs.linux-runs-on }}
     container:
       image: ${{ inputs.linux-container-image }}
@@ -233,10 +233,10 @@ jobs:
               -a ${{ matrix.build_arch }}                            \
               BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
           mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.build_arch }}_${{ inputs.unit-test-tool-chain-tag }}_NOOPT.txt
-      - name: Upload Linux ${{ inputs.unit-test-tool-chain-tag }} Packages Basic Acceptance Test Logs
+      - name: Upload Linux ${{ inputs.unit-test-tool-chain-tag }} Unit Test EmulatorPkg Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
-          name: Upload Linux ${{ inputs.unit-test-tool-chain-tag }} Packages Basic Acceptance Test Logs
+          name: Upload Linux ${{ inputs.unit-test-tool-chain-tag }} Unit Test EmulatorPkg Basic Acceptance Test Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/*.txt
