@@ -214,15 +214,20 @@ jobs:
     # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
     needs: stage0
     if: ${{ always() && inputs.enable-basic-acceptance-tests && inputs.enable-linux-tests && inputs.enable-clang-tests }}
-    uses: ./.github/workflows/ubuntu-clang-20-basic-acceptance-test.yml
+    uses: ./.github/workflows/ubuntu-gcc-basic-acceptance-test.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
-      linux-host-compiler: 'clang'
+      linux-host-compiler: 'gcc'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGPDB'
+      firmware-test-arch-parameter: 'IA32,X64,AARCH64,RISCV64'
+      firmware-tool-chain-tag-list: '["CLANGPDB", "CLANGDWARF"]'
+      unit-test-arch-list: '["IA32","X64"]'
+      unit-test-tool-chain-tag: 'CLANGDWARF'
+      emulatorpkg-target-list: '["DEBUG", "RELEASE", "NOOPT"]'
   build_windows_mingw_edk2_clang_basic_acceptance_test:
     # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF          - IA32
@@ -279,7 +284,7 @@ jobs:
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
       firmware-test-arch-parameter: 'IA32,X64,AARCH64,RISCV64'
-      firmware-tool-chain-tag: 'GCC'
+      firmware-tool-chain-tag-list: '["GCC"]'
       unit-test-arch-list: '["IA32","X64"]'
       unit-test-tool-chain-tag: 'GCC'
       emulatorpkg-target-list: '["DEBUG", "RELEASE", "NOOPT"]'
@@ -300,7 +305,7 @@ jobs:
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
       firmware-test-arch-parameter: 'IA32,X64,AARCH64'
-      firmware-tool-chain-tag: 'GCCNOLTO'
+      firmware-tool-chain-tag-list: '["GCCNOLTO"]'
       unit-test-arch-list: '["IA32","X64"]'
       unit-test-tool-chain-tag: 'GCCNOLTO'
       emulatorpkg-target-list: '["DEBUG", "RELEASE", "NOOPT"]'

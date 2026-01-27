@@ -2,6 +2,10 @@
 # A workflow using Ubuntu GCC tools to run Basic Acceptance Tests (BAT)
 # on packages and platforms and uploads artifacts.
 #
+# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64/AARCH64/RISCV64
+# Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
+# EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
+#
 # Firmware Build Support:             GCC          - IA32/X64/AARCH64/RISCV64
 # Firmware Build Support:             GCCNOLTO     - IA32/X64/AARCH64
 # Host-Based Unit Test Build Support: GCC/GCCNOLTO - IA32/X64
@@ -12,7 +16,7 @@
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
-name: Ubuntu GCC Basic Acceptance Test
+name: Ubuntu Basic Acceptance Test
 
 on:
   workflow_call:
@@ -57,11 +61,11 @@ on:
         required: false
         type: string
         default: 'IA32,X64,AARCH64,RISCV64'
-      firmware-tool-chain-tag:
-        description: Firmware test tool chain tag to build.
+      firmware-tool-chain-tag-list:
+        description: List of firmware test tool chain tags to build.
         required: true
         type: string
-        default: 'GCC'
+        default: '["GCC"]'
       unit-test-arch-list:
         description: List of unit test architectures to build.
         required: false
@@ -120,11 +124,11 @@ on:
         required: false
         type: string
         default: 'IA32,X64,AARCH64,RISCV64'
-      firmware-tool-chain-tag:
-        description: Firmware test tool chain tag to build.
+      firmware-tool-chain-tag-list:
+        description: List of firmware test tool chain tags to build.
         required: true
         type: string
-        default: 'GCC'
+        default: '["GCC"]'
       unit-test-arch-list:
         description: List of unit test architectures to build.
         required: false
@@ -142,17 +146,21 @@ on:
         default: '["DEBUG", "RELEASE", "NOOPT"]'
 
 jobs:
-  build_linux_firmware_packages_basic_acceptance_test:
-    name: Build Linux ${{ inputs.firmware-tool-chain-tag }} Packages Basic Acceptance Test
+  build_linux_firmware_basic_acceptance_test:
+    name: Build Linux ${{ matrix.tool_chain_tag }} Firmware Basic Acceptance Test
     runs-on: ${{ inputs.linux-runs-on }}
     container:
       image: ${{ inputs.linux-container-image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        tool_chain_tag: ${{ fromJSON(inputs.firmware-tool-chain-tag-list) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Setup Linux ${{ inputs.firmware-tool-chain-tag }} Job
+      - name: Setup Linux ${{ matrix.tool_chain_tag }} Job
         uses: ./.github/actions/setup-job
         with:
           linux-host-compiler: ${{ inputs.linux-host-compiler }}
@@ -160,20 +168,31 @@ jobs:
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
-      - name: Build HelloWorld ${{ inputs.firmware-tool-chain-tag }}
+      - name: Build HelloWorld ${{ matrix.tool_chain_tag }}
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" \
               --disable-all CompilerPlugin=run                       \
-              TOOL_CHAIN_TAG=${{ inputs.firmware-tool-chain-tag }}   \
+              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }}   \
               -t DEBUG,RELEASE,NOOPT                                 \
               -a ${{ inputs.firmware-test-arch-parameter }}          \
               -p MdeModulePkg                                        \
               BUILDMODULE=MdeModulePkg/Application/HelloWorld/HelloWorld.inf
-          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_HelloWorld_${{ inputs.firmware-tool-chain-tag }}.txt
-      - name: Upload Linux ${{ inputs.firmware-tool-chain-tag }} Packages Basic Acceptance Test Logs
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_HelloWorld_${{ matrix.tool_chain_tag }}.txt
+      - name: Stuart Update OvmfPkg
+        run: |
+          stuart_update -c OvmfPkg/PlatformCI/PlatformBuild.py
+          mv Build/UPDATE_LOG.txt Build/UPDATE_LOG_OvmfPkg_${{ matrix.tool_chain_tag }}.txt
+      - name: Stuart Build and Boot OVMF IA32/X64 Platform ${{ matrix.tool_chain_tag }}
+        continue-on-error: ${{ matrix.tool_chain_tag == 'GCCNOLTO' }}
+        run: |
+          stuart_build -c OvmfPkg/PlatformCI/PlatformBuild.py         \
+              -a IA32,X64 TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} \
+              BLD_*_NETWORK_ENABLE=FALSE                              \
+              --FLASHROM MAKE_STARTUP_NSH=TRUE QEMU_HEADLESS=TRUE
+      - name: Upload Linux ${{ matrix.tool_chain_tag }} Firmware Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
-          name: Upload Linux ${{ inputs.firmware-tool-chain-tag }} Packages Basic Acceptance Test Logs
+          name: Upload Linux ${{ matrix.tool_chain_tag }} Firmware Basic Acceptance Test Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/*.txt
@@ -256,41 +275,3 @@ jobs:
             Build/*.log
         if: always()
 
-  build_linux_virtual_platforms_basic_acceptance_test:
-    name: Build Linux ${{ inputs.unit-test-tool-chain-tag }} Virtual Platforms Basic Acceptance Test
-    runs-on: ${{ inputs.linux-runs-on }}
-    container:
-      image: 'ghcr.io/mdkinney/containers/ubuntu-24-test:latest'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Ensure safe directory for Git
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Setup Linux ${{ inputs.unit-test-tool-chain-tag }} Job
-        uses: ./.github/actions/setup-job
-        with:
-          linux-host-compiler: ${{ inputs.linux-host-compiler }}
-          python-version: ${{ inputs.python-version }}
-          pip-requirements: ${{ inputs.pip-requirements }}
-          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
-          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
-      - name: Stuart Update OvmfPkg
-        run: |
-          stuart_update -c OvmfPkg/PlatformCI/PlatformBuild.py
-          mv Build/UPDATE_LOG.txt Build/UPDATE_LOG_OvmfPkg_${{ inputs.unit-test-tool-chain-tag }}.txt
-      - name: Stuart Build and Boot OVMF IA32/X64 Platform ${{ inputs.unit-test-tool-chain-tag }}
-        continue-on-error: ${{ inputs.unit-test-tool-chain-tag == 'GCCNOLTO' }}
-        run: |
-          stuart_build -c OvmfPkg/PlatformCI/PlatformBuild.py         \
-              -a IA32,X64 TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }} \
-              BLD_*_NETWORK_ENABLE=FALSE                              \
-              --FLASHROM MAKE_STARTUP_NSH=TRUE QEMU_HEADLESS=TRUE
-      - name: Upload Linux ${{ inputs.unit-test-tool-chain-tag }} Virtual Platforms Basic Acceptance Test Logs
-        uses: actions/upload-artifact@v4
-        with:
-          name: Upload Linux ${{ inputs.unit-test-tool-chain-tag }} Virtual Platforms Basic Acceptance Test Logs
-          path: |
-            BaseTools/BaseToolsBuild/*.txt
-            Build/*.txt
-            Build/*.log
-        if: always()
