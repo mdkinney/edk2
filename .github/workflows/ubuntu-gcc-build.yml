@@ -26,6 +26,11 @@ on:
         required: true
         type: string
         default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      linux-container-image-qemu:
+        description: The container image for Linux jobs with QEMU.
+        required: false
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-test:latest'
       python-version:
         description: The version of Python to use.
         required: true
@@ -69,6 +74,11 @@ on:
         required: true
         type: string
         default: 'ghcr.io/mdkinney/containers/ubuntu-24-build:latest'
+      linux-container-image-qemu:
+        description: The container image for Linux jobs with QEMU.
+        required: false
+        type: string
+        default: 'ghcr.io/mdkinney/containers/ubuntu-24-test:latest'
       python-version:
         description: The version of Python to use.
         required: true

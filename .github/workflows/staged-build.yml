@@ -205,7 +205,6 @@ jobs:
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
-      linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
       linux-host-compiler: 'clang'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
