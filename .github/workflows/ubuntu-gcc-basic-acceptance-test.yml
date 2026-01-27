@@ -57,13 +57,18 @@ on:
         required: false
         type: string
         default: 'IA32,X64,AARCH64,RISCV64'
+      firmware-tool-chain-tag:
+        description: Firmware test tool chain tag to build.
+        required: true
+        type: string
+        default: '["GCC"]'
       unit-test-arch-list:
         description: List of unit test architectures to build.
         required: false
         type: string
         default: 'IA32,X64'
-      tool-chain-tag-list:
-        description: List of tool chain tags to test.
+      unit-test-tool-chain-tag:
+        description: Unit test tool chain tag to build.
         required: true
         type: string
         default: '["GCC"]'
@@ -110,33 +115,34 @@ on:
         required: false
         type: string
         default: 'IA32,X64,AARCH64,RISCV64'
+      firmware-tool-chain-tag:
+        description: Firmware test tool chain tag to build.
+        required: true
+        type: string
+        default: '["GCC"]'
       unit-test-arch-list:
         description: List of unit test architectures to build.
         required: false
         type: string
         default: 'IA32,X64'
-      tool-chain-tag-list:
-        description: List of tool chain tags to test.
+      unit-test-tool-chain-tag:
+        description: Unit test tool chain tag to build.
         required: true
         type: string
         default: '["GCC"]'
 
 jobs:
-  build_linux_gcc_packages_basic_acceptance_test:
-    name: Build Linux ${{ matrix.tool_chain_tag }} Packages Basic Acceptance Test
+  build_linux_firmware_packages_basic_acceptance_test:
+    name: Build Linux ${{ inputs.firmware-tool-chain-tag }} Packages Basic Acceptance Test
     runs-on: ${{ inputs.linux-runs-on }}
     container:
       image: ${{ inputs.linux-container-image }}
-    strategy:
-      fail-fast: false
-      matrix:
-        tool_chain_tag: ${{ fromJSON(inputs.tool-chain-tag-list) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Setup Linux ${{ matrix.tool_chain_tag }} Job
+      - name: Setup Linux ${{ inputs.firmware-tool-chain-tag }} Job
         uses: ./.github/actions/setup-job
         with:
           linux-host-compiler: ${{ inputs.linux-host-compiler }}
@@ -144,61 +150,41 @@ jobs:
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
-      - name: Build HelloWorld ${{ matrix.tool_chain_tag }}
+      - name: Build HelloWorld ${{ inputs.firmware-tool-chain-tag }}
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" \
               --disable-all CompilerPlugin=run                       \
-              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }}            \
+              TOOL_CHAIN_TAG=${{ inputs.firmware-tool-chain-tag }}   \
               -t DEBUG,RELEASE,NOOPT                                 \
               -a ${{ inputs.firmware-test-arch-list }}               \
               -p MdeModulePkg                                        \
               BUILDMODULE=MdeModulePkg/Application/HelloWorld/HelloWorld.inf
-          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_HelloWorld_${{ matrix.tool_chain_tag }}.txt
-      - name: Stuart Build UnitTestFrameworkPkg X64 Unit Tests ${{ matrix.tool_chain_tag }}
-        if: contains(inputs.unit-test-arch-list, 'X64')
-        run: |
-          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"      \
-              --disable-all DISABLE_DEBUG_MACRO_CHECK                     \
-              HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run  \
-              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -t NOOPT -a X64 \
-              -p UnitTestFrameworkPkg                                     \
-              BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
-          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_UnitTestFrameworkPkg_X64_${{ matrix.tool_chain_tag }}.txt
-      - name: Stuart Build UnitTestFrameworkPkg IA32 Unit Tests ${{ matrix.tool_chain_tag }}
-        if: contains(inputs.unit-test-arch-list, 'IA32')
-        run: |
-          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"       \
-              --disable-all DISABLE_DEBUG_MACRO_CHECK                      \
-              HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run   \
-              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -t NOOPT -a IA32 \
-              -p UnitTestFrameworkPkg                                      \
-              BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
-          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_UnitTestFrameworkPkg_IA32_${{ matrix.tool_chain_tag }}.txt
-      - name: Upload Linux ${{ matrix.tool_chain_tag }} Packages Basic Acceptance Test Logs
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_HelloWorld_${{ inputs.firmware-tool-chain-tag }}.txt
+      - name: Upload Linux ${{ inputs.firmware-tool-chain-tag }} Packages Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
-          name: Upload Linux ${{ matrix.tool_chain_tag }} Packages Basic Acceptance Test Logs
+          name: Upload Linux ${{ inputs.firmware-tool-chain-tag }} Packages Basic Acceptance Test Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/*.txt
             Build/*.log
         if: always()
 
-  build_linux_gcc_platforms_basic_acceptance_test:
-    name: Build Linux ${{ matrix.tool_chain_tag }} Platforms Basic Acceptance Test
+  build_linux_unit_test_emulatorpkg_basic_acceptance_test:
+    name: Build Linux ${{ inputs.unit-test-tool-chain-tag }} Packages Basic Acceptance Test
     runs-on: ${{ inputs.linux-runs-on }}
     container:
-      image: 'ghcr.io/mdkinney/containers/ubuntu-24-test:latest'
+      image: ${{ inputs.linux-container-image }}
     strategy:
       fail-fast: false
       matrix:
-        tool_chain_tag: ${{ fromJSON(inputs.tool-chain-tag-list) }}
+        build_arch: ${{ fromJSON(inputs.unit-test-arch-list) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Setup Linux ${{ matrix.tool_chain_tag }} Job
+      - name: Setup Linux ${{ inputs.unit-test-tool-chain-tag }} Job
         uses: ./.github/actions/setup-job
         with:
           linux-host-compiler: ${{ inputs.linux-host-compiler }}
@@ -206,39 +192,90 @@ jobs:
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
+      - name: Stuart Build UnitTestFrameworkPkg ${{ matrix.build_arch }} Unit Tests ${{ inputs.unit-test-tool-chain-tag }}
+        run: |
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"       \
+              DISABLE_DEBUG_MACRO_CHECK                                    \
+              --disable-all                                                \
+              HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run   \
+              TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}        \
+              -t NOOPT -a ${{ matrix.build_arch }} -p UnitTestFrameworkPkg \
+              BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_UnitTestFrameworkPkg_${{ matrix.build_arch }}_${{ inputs.unit-test-tool-chain-tag }}.txt
       - name: Stuart Update EmulatorPkg
         run: |
           stuart_update -c EmulatorPkg/PlatformCI/PlatformBuild.py
-          mv Build/UPDATE_LOG.txt Build/UPDATE_LOG_EmulatorPkg_${{ matrix.tool_chain_tag }}.txt
-      - name: Stuart Build EmulatorPkg X64 Unix Host Module ${{ matrix.tool_chain_tag }}
+          mv Build/UPDATE_LOG.txt Build/UPDATE_LOG_EmulatorPkg_${{ inputs.unit-test-tool-chain-tag }}.txt
+      - name: Stuart Build EmulatorPkg ${{ matrix.build_arch }} Unix Host Module ${{ inputs.unit-test-tool-chain-tag }} DEBUG
         run: |
-          stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py \
-              DISABLE_DEBUG_MACRO_CHECK                           \
-              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -a X64  \
+          stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py    \
+              DISABLE_DEBUG_MACRO_CHECK                              \
+              TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}  \
+              TARGET=DEBUG                                           \
+              -a ${{ matrix.build_arch }}                            \
               BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
-          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_X64_${{ matrix.tool_chain_tag }}.txt
-      - name: Stuart Build EmulatorPkg IA32 Unix Host Module ${{ matrix.tool_chain_tag }}
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.build_arch }}_${{ inputs.unit-test-tool-chain-tag }}_DEBUG.txt
+      - name: Stuart Build EmulatorPkg ${{ matrix.build_arch }} Unix Host Module ${{ inputs.unit-test-tool-chain-tag }} RELEASE
         run: |
-          stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py \
-              DISABLE_DEBUG_MACRO_CHECK                           \
-              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} -a IA32 \
+          stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py    \
+              DISABLE_DEBUG_MACRO_CHECK                              \
+              TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}  \
+              TARGET=RELEASE                                         \
+              -a ${{ matrix.build_arch }}                            \
               BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
-          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_IA32_${{ matrix.tool_chain_tag }}.txt
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.build_arch }}_${{ inputs.unit-test-tool-chain-tag }}_RELEASE.txt
+      - name: Stuart Build EmulatorPkg ${{ matrix.build_arch }} Unix Host Module ${{ inputs.unit-test-tool-chain-tag }} NOOPT
+        run: |
+          stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py    \
+              DISABLE_DEBUG_MACRO_CHECK                              \
+              TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}  \
+              TARGET=NOOPT                                           \
+              -a ${{ matrix.build_arch }}                            \
+              BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.build_arch }}_${{ inputs.unit-test-tool-chain-tag }}_NOOPT.txt
+      - name: Upload Linux ${{ inputs.unit-test-tool-chain-tag }} Packages Basic Acceptance Test Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: Upload Linux ${{ inputs.unit-test-tool-chain-tag }} Packages Basic Acceptance Test Logs
+          path: |
+            BaseTools/BaseToolsBuild/*.txt
+            Build/*.txt
+            Build/*.log
+        if: always()
+
+  build_linux_virtual_platforms_basic_acceptance_test:
+    name: Build Linux ${{ inputs.unit-test-tool-chain-tag }} Virtual Platforms Basic Acceptance Test
+    runs-on: ${{ inputs.linux-runs-on }}
+    container:
+      image: 'ghcr.io/mdkinney/containers/ubuntu-24-test:latest'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Ensure safe directory for Git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Setup Linux ${{ inputs.unit-test-tool-chain-tag }} Job
+        uses: ./.github/actions/setup-job
+        with:
+          linux-host-compiler: ${{ inputs.linux-host-compiler }}
+          python-version: ${{ inputs.python-version }}
+          pip-requirements: ${{ inputs.pip-requirements }}
+          stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+          edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
       - name: Stuart Update OvmfPkg
         run: |
           stuart_update -c OvmfPkg/PlatformCI/PlatformBuild.py
-          mv Build/UPDATE_LOG.txt Build/UPDATE_LOG_OvmfPkg_${{ matrix.tool_chain_tag }}.txt
-      - name: Stuart Build and Boot OVMF IA32/X64 Platform ${{ matrix.tool_chain_tag }}
-        continue-on-error: ${{ matrix.tool_chain_tag == 'GCCNOLTO' }}
+          mv Build/UPDATE_LOG.txt Build/UPDATE_LOG_OvmfPkg_${{ inputs.unit-test-tool-chain-tag }}.txt
+      - name: Stuart Build and Boot OVMF IA32/X64 Platform ${{ inputs.unit-test-tool-chain-tag }}
+        continue-on-error: ${{ inputs.unit-test-tool-chain-tag == 'GCCNOLTO' }}
         run: |
           stuart_build -c OvmfPkg/PlatformCI/PlatformBuild.py         \
-              -a IA32,X64 TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }} \
+              -a IA32,X64 TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }} \
               BLD_*_NETWORK_ENABLE=FALSE                              \
               --FLASHROM MAKE_STARTUP_NSH=TRUE QEMU_HEADLESS=TRUE
-      - name: Upload Linux ${{ matrix.tool_chain_tag }} Platforms Basic Acceptance Test Logs
+      - name: Upload Linux ${{ inputs.unit-test-tool-chain-tag }} Virtual Platforms Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
-          name: Upload Linux ${{ matrix.tool_chain_tag }} Platforms Basic Acceptance Test Logs
+          name: Upload Linux ${{ inputs.unit-test-tool-chain-tag }} Virtual Platforms Basic Acceptance Test Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/*.txt
