@@ -72,6 +72,11 @@ on:
         required: true
         type: string
         default: 'GCC'
+      emulatorpkg-target-list:
+        description: List of EmulatorPkg targets to build.
+        required: false
+        type: string
+        default: '["DEBUG", "RELEASE", "NOOPT"]'
 
   workflow_dispatch:
     inputs:
@@ -130,6 +135,11 @@ on:
         required: true
         type: string
         default: 'GCC'
+      emulatorpkg-target-list:
+        description: List of EmulatorPkg targets to build.
+        required: false
+        type: string
+        default: '["DEBUG", "RELEASE", "NOOPT"]'
 
 jobs:
   build_linux_firmware_packages_basic_acceptance_test:
@@ -171,7 +181,7 @@ jobs:
         if: always()
 
   build_linux_unit_test_emulatorpkg_basic_acceptance_test:
-    name: Build Linux ${{ inputs.unit-test-tool-chain-tag }} Unit Test EmulatorPkg Basic Acceptance Test
+    name: Build Linux ${{ inputs.unit-test-tool-chain-tag }} ${{matrix.build_arch}} Unit Test EmulatorPkg Basic Acceptance Test
     runs-on: ${{ inputs.linux-runs-on }}
     container:
       image: ${{ inputs.linux-container-image }}
@@ -184,7 +194,7 @@ jobs:
         uses: actions/checkout@v6
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Setup Linux ${{ inputs.unit-test-tool-chain-tag }} Job
+      - name: Setup Linux ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} Job
         uses: ./.github/actions/setup-job
         with:
           linux-host-compiler: ${{ inputs.linux-host-compiler }}
@@ -192,7 +202,7 @@ jobs:
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
-      - name: Stuart Build UnitTestFrameworkPkg ${{ matrix.build_arch }} Unit Tests ${{ inputs.unit-test-tool-chain-tag }}
+      - name: Stuart Build UnitTestFrameworkPkg Sample GoogleTest ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }}
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"       \
               DISABLE_DEBUG_MACRO_CHECK                                    \
@@ -201,12 +211,13 @@ jobs:
               TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}        \
               -t NOOPT -a ${{ matrix.build_arch }} -p UnitTestFrameworkPkg \
               BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
-          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_UnitTestFrameworkPkg_${{ matrix.build_arch }}_${{ inputs.unit-test-tool-chain-tag }}.txt
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_UnitTestFrameworkPkg_${{ inputs.unit-test-tool-chain-tag }}_${{ matrix.build_arch }}.txt
       - name: Stuart Update EmulatorPkg
         run: |
           stuart_update -c EmulatorPkg/PlatformCI/PlatformBuild.py
           mv Build/UPDATE_LOG.txt Build/UPDATE_LOG_EmulatorPkg_${{ inputs.unit-test-tool-chain-tag }}.txt
-      - name: Stuart Build EmulatorPkg ${{ matrix.build_arch }} Unix Host Module ${{ inputs.unit-test-tool-chain-tag }} DEBUG
+      - name: Stuart Build EmulatorPkg Unix Host Module ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} DEBUG
+        if: contains(inputs.emulatorpkg-target-list, 'DEBUG')
         run: |
           stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py    \
               DISABLE_DEBUG_MACRO_CHECK                              \
@@ -214,8 +225,9 @@ jobs:
               TARGET=DEBUG                                           \
               -a ${{ matrix.build_arch }}                            \
               BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
-          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.build_arch }}_${{ inputs.unit-test-tool-chain-tag }}_DEBUG.txt
-      - name: Stuart Build EmulatorPkg ${{ matrix.build_arch }} Unix Host Module ${{ inputs.unit-test-tool-chain-tag }} RELEASE
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ inputs.unit-test-tool-chain-tag }}_${{ matrix.build_arch }}_DEBUG.txt
+      - name: Stuart Build EmulatorPkg Unix Host Module ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} RELEASE
+        if: contains(inputs.emulatorpkg-target-list, 'RELEASE')
         run: |
           stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py    \
               DISABLE_DEBUG_MACRO_CHECK                              \
@@ -223,8 +235,9 @@ jobs:
               TARGET=RELEASE                                         \
               -a ${{ matrix.build_arch }}                            \
               BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
-          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.build_arch }}_${{ inputs.unit-test-tool-chain-tag }}_RELEASE.txt
-      - name: Stuart Build EmulatorPkg ${{ matrix.build_arch }} Unix Host Module ${{ inputs.unit-test-tool-chain-tag }} NOOPT
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ inputs.unit-test-tool-chain-tag }}_${{ matrix.build_arch }}_RELEASE.txt
+      - name: Stuart Build EmulatorPkg Unix Host Module ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} NOOPT
+        if: contains(inputs.emulatorpkg-target-list, 'NOOPT')
         run: |
           stuart_build -c EmulatorPkg/PlatformCI/PlatformBuild.py    \
               DISABLE_DEBUG_MACRO_CHECK                              \
@@ -232,11 +245,11 @@ jobs:
               TARGET=NOOPT                                           \
               -a ${{ matrix.build_arch }}                            \
               BUILDMODULE=EmulatorPkg/Unix/Host/Host.inf
-          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.build_arch }}_${{ inputs.unit-test-tool-chain-tag }}_NOOPT.txt
-      - name: Upload Linux ${{ inputs.unit-test-tool-chain-tag }} Unit Test EmulatorPkg Basic Acceptance Test Logs
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ inputs.unit-test-tool-chain-tag }}_${{ matrix.build_arch }}_NOOPT.txt
+      - name: Upload Linux ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} Unit Test EmulatorPkg Basic Acceptance Test Logs
         uses: actions/upload-artifact@v4
         with:
-          name: Upload Linux ${{ inputs.unit-test-tool-chain-tag }} Unit Test EmulatorPkg Basic Acceptance Test Logs
+          name: Upload Linux ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} Unit Test EmulatorPkg Basic Acceptance Test Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/*.txt

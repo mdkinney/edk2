@@ -282,6 +282,7 @@ jobs:
       firmware-tool-chain-tag: 'GCC'
       unit-test-arch-list: '["IA32","X64"]'
       unit-test-tool-chain-tag: 'GCC'
+      emulatorpkg-target-list: '["DEBUG", "RELEASE", "NOOPT"]'
   build_linux_gccnolto_basic_acceptance_test:
     # Firmware Build Support:             GCC          - IA32/X64/AARCH64/RISCV64
     # Firmware Build Support:             GCCNOLTO     - IA32/X64/AARCH64
@@ -302,6 +303,7 @@ jobs:
       firmware-tool-chain-tag: 'GCCNOLTO'
       unit-test-arch-list: '["IA32","X64"]'
       unit-test-tool-chain-tag: 'GCCNOLTO'
+      emulatorpkg-target-list: '["DEBUG", "RELEASE", "NOOPT"]'
   build_windows_vs_basic_acceptance_test:
     # Firmware Build Support:             VS20xx - IA32/X64
     # Host-Based Unit Test Build Support: VS20xx - IA32/X64
