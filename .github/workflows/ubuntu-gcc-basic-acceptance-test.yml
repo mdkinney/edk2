@@ -174,7 +174,7 @@ jobs:
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
-      - name: Build HelloWorld ${{ inputs.firmware-tool-chain-tag }}
+      - name: UEFI Application with NASM BAT ${{ inputs.firmware-tool-chain-tag }}
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" \
               --disable-all CompilerPlugin=run                       \
@@ -184,6 +184,26 @@ jobs:
               -p MdeModulePkg                                        \
               BUILDMODULE=MdeModulePkg/Application/HelloWorld/HelloWorld.inf
           mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_HelloWorld_${{ inputs.firmware-tool-chain-tag }}.txt
+      - name: DXE Driver with ASL BAT ${{ inputs.firmware-tool-chain-tag }}
+        run: |
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" \
+              --disable-all CompilerPlugin=run                       \
+              TOOL_CHAIN_TAG=${{ inputs.firmware-tool-chain-tag }}   \
+              -t DEBUG,RELEASE,NOOPT                                 \
+              -a ${{ inputs.firmware-test-arch-parameter }}          \
+              -p PrmPkg                                              \
+              BUILDMODULE=PrmPkg/PrmSsdtInstallDxe/PrmSsdtInstallDxe.inf
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_PrmSsdtInstallDxe_${{ inputs.firmware-tool-chain-tag }}.txt
+      - name: DXE Library with VFR BAT ${{ inputs.firmware-tool-chain-tag }}
+        run: |
+          stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" \
+              --disable-all CompilerPlugin=run                       \
+              TOOL_CHAIN_TAG=${{ inputs.firmware-tool-chain-tag }}   \
+              -t DEBUG,RELEASE,NOOPT                                 \
+              -a ${{ inputs.firmware-test-arch-parameter }}          \
+              -p MdeModulePkg                                        \
+              BUILDMODULE=MdeModulePkg\Library\PlatformVarCleanupLib\PlatformVarCleanupLib.inf
+          mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_PlatformVarCleanupLib_${{ inputs.firmware-tool-chain-tag }}.txt
       - name: Stuart Update OvmfPkg
         run: |
           stuart_update -c OvmfPkg/PlatformCI/PlatformBuild.py
