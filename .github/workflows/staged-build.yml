@@ -218,7 +218,7 @@ jobs:
       build-arch-list: '["X64"]'
       tool-chain-tag-list: '["CLANGPDB"]'
       package-lists: ${{ needs.stage0.outputs.package-lists }}
-  build_linux_clang_basic_acceptance_test:
+  build_linux_clangdwarf_basic_acceptance_test:
     # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64/AARCH64/RISCV64
     # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
     # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
@@ -235,10 +235,31 @@ jobs:
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGPDB'
       firmware-test-arch-parameter: 'IA32,X64,AARCH64,RISCV64'
-      firmware-tool-chain-tag-list: '["CLANGPDB", "CLANGDWARF"]'
+      firmware-tool-chain-tag-list: '["CLANGDWARF"]'
       unit-test-arch-list: '["IA32","X64"]'
       unit-test-tool-chain-tag: 'CLANGDWARF'
       emulatorpkg-target-list: '["DEBUG", "RELEASE", "NOOPT"]'
+  build_linux_clangpdb_basic_acceptance_test:
+    # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64/AARCH64/RISCV64
+    # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
+    # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
+    needs: stage0
+    if: ${{ always() && inputs.enable-basic-acceptance-tests && inputs.enable-linux-tests && inputs.enable-clang-tests }}
+    uses: ./.github/workflows/ubuntu-gcc-basic-acceptance-test.yml
+    with:
+      linux-runs-on: ${{ inputs.linux-runs-on }}
+      linux-container-image: ${{ inputs.linux-container-image }}
+      linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
+      linux-host-compiler: 'gcc'
+      python-version: ${{ inputs.python-version }}
+      pip-requirements: ${{ inputs.pip-requirements }}
+      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      edk2-tools-build-params: '-t CLANGPDB'
+      firmware-test-arch-parameter: 'IA32,X64'
+      firmware-tool-chain-tag-list: '["CLANGPDB"]'
+      unit-test-arch-list: ''
+      unit-test-tool-chain-tag: ''
+      emulatorpkg-target-list: ''
   build_windows_mingw_edk2_clang_basic_acceptance_test:
     # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF          - IA32
@@ -346,7 +367,8 @@ jobs:
     needs:
       - stage0
       - build_linux_clang_no_target_test
-      - build_linux_clang_basic_acceptance_test
+      - build_linux_clangpdb_basic_acceptance_test
+      - build_linux_clangdwarf_basic_acceptance_test
       - build_windows_mingw_edk2_clang_basic_acceptance_test
       - build_windows_mingw_llvm_20_clang_basic_acceptance_test
       - build_windows_vs_llvm_20_clang_basic_acceptance_test
