@@ -202,7 +202,7 @@ jobs:
               -t DEBUG,RELEASE,NOOPT                                 \
               -a ${{ inputs.firmware-test-arch-parameter }}          \
               -p MdeModulePkg                                        \
-              BUILDMODULE=MdeModulePkg\Library\PlatformVarCleanupLib\PlatformVarCleanupLib.inf
+              BUILDMODULE=MdeModulePkg/Library/PlatformVarCleanupLib/PlatformVarCleanupLib.inf
           mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_PlatformVarCleanupLib_${{ inputs.firmware-tool-chain-tag }}.txt
       - name: Stuart Update OvmfPkg
         run: |
