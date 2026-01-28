@@ -75,6 +75,9 @@ jobs:
   build_linux_emulatorpkg_test:
     name: Build Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} EmulatorPkg Test
     runs-on: ${{ inputs.linux-runs-on }}
+    defaults:
+          run:
+            shell: bash
     container:
       image: ${{ inputs.linux-container-image }}
     strategy:
