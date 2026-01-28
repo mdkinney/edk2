@@ -99,7 +99,7 @@ jobs:
               -a ${{ matrix.build_arch }}                            \
               BLD_*_NETWORK_ENABLE=FALSE                             \
               MAKE_STARTUP_NSH=TRUE --FLASHROM
-          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_DEBUG.txt
+          mv Build/BUILDLOG_EmulatorPkg_With_Run.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_DEBUG.txt
       - name: Stuart Build EmulatorPkg Unix Host Module ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} RELEASE
         if: contains(inputs.emulatorpkg-target-list, 'RELEASE')
         run: |
@@ -110,7 +110,7 @@ jobs:
               -a ${{ matrix.build_arch }}                            \
               BLD_*_NETWORK_ENABLE=TRUE                              \
               MAKE_STARTUP_NSH=TRUE --FLASHROM
-          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_RELEASE.txt
+          mv Build/BUILDLOG_EmulatorPkg_With_Run.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_RELEASE.txt
       - name: Stuart Build EmulatorPkg Unix Host Module ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} NOOPT
         if: contains(inputs.emulatorpkg-target-list, 'NOOPT')
         run: |
@@ -121,7 +121,7 @@ jobs:
               -a ${{ matrix.build_arch }}                            \
               BLD_*_SECURE_BOOT_ENABLE=TRUE                          \
               MAKE_STARTUP_NSH=TRUE --FLASHROM
-          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_NOOPT.txt
+          mv Build/BUILDLOG_EmulatorPkg_With_Run.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_NOOPT.txt
       - name: Upload Linux EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
         uses: actions/upload-artifact@v6
         with:
