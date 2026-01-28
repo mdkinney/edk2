@@ -60,6 +60,7 @@ runs:
         echo GCCNOLTO_RISCV64_PREFIX=/usr/bin/riscv64-linux-gnu->> $GITHUB_ENV
     - name: Windows Setup Visual Studio Job
       if: ${{ inputs.windows-installer == 'vs' && runner.os == 'Windows' }}
+      shell: cmd
       run: |
         echo "Visual Studio selected, no additional setup required."
     - name: Windows Setup Visual Studio CLANGPDB Job
