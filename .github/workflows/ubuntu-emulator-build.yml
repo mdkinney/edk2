@@ -89,39 +89,39 @@ jobs:
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
-      - name: Stuart Build EmulatorPkg Unix Host Module ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} DEBUG
+      - name: Stuart Build EmulatorPkg Unix Host Module ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} DEBUG
         if: contains(inputs.emulatorpkg-target-list, 'DEBUG')
         run: |
           stuart_build -c ${{ inputs.stuart-ci-settings-file }}      \
               DISABLE_DEBUG_MACRO_CHECK                              \
-              TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}  \
+              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }}  \
               TARGET=DEBUG                                           \
               -a ${{ matrix.build_arch }}                            \
               BLD_*_NETWORK_ENABLE=FALSE                             \
               MAKE_STARTUP_NSH=TRUE --FLASHROM
-          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ inputs.unit-test-tool-chain-tag }}_${{ matrix.build_arch }}_DEBUG.txt
-      - name: Stuart Build EmulatorPkg Unix Host Module ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} RELEASE
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_DEBUG.txt
+      - name: Stuart Build EmulatorPkg Unix Host Module ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} RELEASE
         if: contains(inputs.emulatorpkg-target-list, 'RELEASE')
         run: |
           stuart_build -c ${{ inputs.stuart-ci-settings-file }}      \
               DISABLE_DEBUG_MACRO_CHECK                              \
-              TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}  \
+              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }}  \
               TARGET=RELEASE                                         \
               -a ${{ matrix.build_arch }}                            \
               BLD_*_NETWORK_ENABLE=TRUE                              \
               MAKE_STARTUP_NSH=TRUE --FLASHROM
-          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ inputs.unit-test-tool-chain-tag }}_${{ matrix.build_arch }}_RELEASE.txt
-      - name: Stuart Build EmulatorPkg Unix Host Module ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} NOOPT
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_RELEASE.txt
+      - name: Stuart Build EmulatorPkg Unix Host Module ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} NOOPT
         if: contains(inputs.emulatorpkg-target-list, 'NOOPT')
         run: |
           stuart_build -c ${{ inputs.stuart-ci-settings-file }}      \
               DISABLE_DEBUG_MACRO_CHECK                              \
-              TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}  \
+              TOOL_CHAIN_TAG=${{ matrix.tool_chain_tag }}  \
               TARGET=NOOPT                                           \
               -a ${{ matrix.build_arch }}                            \
               BLD_*_SECURE_BOOT_ENABLE=TRUE                          \
               MAKE_STARTUP_NSH=TRUE --FLASHROM
-          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ inputs.unit-test-tool-chain-tag }}_${{ matrix.build_arch }}_NOOPT.txt
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_NOOPT.txt
       - name: Upload Linux EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
         uses: actions/upload-artifact@v6
         with:
