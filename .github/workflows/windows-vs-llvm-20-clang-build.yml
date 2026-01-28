@@ -97,7 +97,7 @@ jobs:
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
-      windows-clang-installer: 'vs-clangpdb'
+      windows-installer: 'vs-clangpdb'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -116,7 +116,7 @@ jobs:
     uses: ./.github/workflows/windows-clang-20-package-build-test.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
-      windows-clang-installer: 'vs-clangpdb'
+      windows-installer: 'vs-clangpdb'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -134,7 +134,7 @@ jobs:
     uses: ./.github/workflows/windows-emulator-build.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
-      windows-clang-installer: 'vs-clangpdb'
+      windows-installer: 'vs-clangpdb'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       edk2-tools-build-params: '-t VS2022'

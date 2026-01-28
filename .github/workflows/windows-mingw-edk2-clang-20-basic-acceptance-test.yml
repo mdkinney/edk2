@@ -50,7 +50,7 @@ jobs:
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/setup-job
         with:
-          windows-clang-installer: 'edk2-clang'
+          windows-installer: 'edk2-clang'
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -88,7 +88,7 @@ jobs:
       - name: Setup Windows Mingw edk2-clang Job
         uses: ./.github/actions/setup-job
         with:
-          windows-clang-installer: 'edk2-clang'
+          windows-installer: 'edk2-clang'
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}

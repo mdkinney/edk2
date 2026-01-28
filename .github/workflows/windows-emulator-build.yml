@@ -20,7 +20,7 @@ on:
         required: true
         type: string
         default: 'windows-2025'
-      windows-clang-installer:
+      windows-installer:
         description: Windows CLANG installer (e.g., edk2-clang, llvm, vs-clangpdb, or none)
         required: true
         type: string
@@ -84,7 +84,7 @@ jobs:
       - name: Setup Windows Job
         uses: ./.github/actions/setup-job
         with:
-          windows-clang-installer: ${{ inputs.windows-clang-installer }}
+          windows-installer: ${{ inputs.windows-installer }}
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -122,10 +122,10 @@ jobs:
               BLD_*_SECURE_BOOT_ENABLE=TRUE                     \
               MAKE_STARTUP_NSH=TRUE --FLASHROM
           mv Build/BUILDLOG_EmulatorPkg_With_Run.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_NOOPT.txt
-      - name: Upload Windows EmulatorPkg ${{ inputs.windows-clang-installer }} ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
+      - name: Upload Windows EmulatorPkg ${{ inputs.windows-installer }} ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
         uses: actions/upload-artifact@v6
         with:
-          name: Upload Windows EmulatorPkg ${{ inputs.windows-clang-installer }} ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
+          name: Upload Windows EmulatorPkg ${{ inputs.windows-installer }} ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
             Build/*.txt

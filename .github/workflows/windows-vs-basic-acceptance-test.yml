@@ -59,7 +59,7 @@ jobs:
       - name: Setup Windows Visual Studio ${{ matrix.tool_chain_tag }} Job
         uses: ./.github/actions/setup-job
         with:
-          windows-clang-installer: 'none'
+          windows-installer: 'none'
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -101,7 +101,7 @@ jobs:
       - name: Setup Windows Visual Studio ${{ matrix.tool_chain_tag }} Job
         uses: ./.github/actions/setup-job
         with:
-          windows-clang-installer: 'none'
+          windows-installer: 'none'
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}

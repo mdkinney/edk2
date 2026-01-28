@@ -51,7 +51,7 @@ jobs:
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/setup-job
         with:
-          windows-clang-installer: 'llvm'
+          windows-installer: 'llvm'
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -89,7 +89,7 @@ jobs:
       - name: Setup Windows LLVM MINGW CLANG Job
         uses: ./.github/actions/setup-job
         with:
-          windows-clang-installer: 'llvm'
+          windows-installer: 'llvm'
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
