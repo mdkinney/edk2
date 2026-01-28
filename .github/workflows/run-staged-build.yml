@@ -40,3 +40,5 @@ jobs:
       enable-linux-gccnolto-tests: false
       enable-windows-visual-studio-tests: false
       enable-windows-clang-tests: true
+      skip-filter-list: '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
+      continue-on-error-filter-list: '[{"tool_chain_tag": "GCCNOLTO"}]'

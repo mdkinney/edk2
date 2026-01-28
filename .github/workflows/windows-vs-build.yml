@@ -39,6 +39,18 @@ on:
         required: true
         type: string
         default: '["FatPkg"]'
+      skip-filter-list:
+        description: List of filter criteria to skip.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
+        default: ''
+      continue-on-error-filter-list:
+        description: List of filter criteria to continue on error.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO"}]'
+        default: ''
       tool-chain-tag-list:
         description: List of tool chain tags to test.
         required: true
@@ -72,6 +84,18 @@ on:
         required: true
         type: string
         default: '["FatPkg"]'
+      skip-filter-list:
+        description: List of filter criteria to skip.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
+        default: ''
+      continue-on-error-filter-list:
+        description: List of filter criteria to continue on error.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO"}]'
+        default: ''
       tool-chain-tag-list:
         description: List of tool chain tags to test.
         required: true
@@ -92,6 +116,8 @@ jobs:
       build-arch-list: '["IA32","X64"]'
       tool-chain-tag-list: ${{ inputs.tool-chain-tag-list }}
       package-lists: ${{ inputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
       stuart-ci-build-params: '--disable-all CompilerPlugin=run'
 
   build_windows_visual_studio_noopt_unit_tests:
@@ -109,6 +135,8 @@ jobs:
       build-arch-list: '["IA32", "X64"]'
       tool-chain-tag-list: ${{ inputs.tool-chain-tag-list }}
       package-lists: ${{ inputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
       stuart-ci-build-params: '--disable-all DISABLE_DEBUG_MACRO_CHECK HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run CODE_COVERAGE=FALSE'
 
   build_windows_visual_studio_emulatorpkg:

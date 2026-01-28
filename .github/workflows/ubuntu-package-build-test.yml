@@ -64,6 +64,18 @@ on:
         required: true
         type: string
         default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+      skip-filter-list:
+        description: List of filter criteria to skip.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
+        default: ''
+      continue-on-error-filter-list:
+        description: List of filter criteria to continue on error.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO"}]'
+        default: ''
       stuart-ci-build-params:
         description: Additional Stuart CI build parameters.
         required: false
@@ -90,8 +102,8 @@ jobs:
           BUILD_ARCH_LIST: ${{ inputs.build-arch-list }}
           TOOL_CHAIN_TAG_LIST: ${{ inputs.tool-chain-tag-list }}
           PACKAGE_LISTS: ${{ inputs.package-lists }}
-          SKIP_FILTER_LIST: '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
-          CONTINUE_ON_ERROR_FILTER_LIST: '[{"tool_chain_tag": "GCCNOLTO"}]'
+          SKIP_FILTER_LIST: ${{ inputs.skip-filter-list }}
+          CONTINUE_ON_ERROR_FILTER_LIST: ${{ inputs.continue-on-error-filter-list }}
         run: python ./.github/scripts/filter_matrix.py
 
   build_linux_packages:

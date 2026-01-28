@@ -56,6 +56,18 @@ on:
         required: true
         type: string
         default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+      skip-filter-list:
+        description: List of filter criteria to skip.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
+        default: ''
+      continue-on-error-filter-list:
+        description: List of filter criteria to continue on error.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO"}]'
+        default: ''
       emulatorpkg-build-options:
         description: Additional build options for EmulatorPkg.
         required: false
@@ -104,6 +116,18 @@ on:
         required: true
         type: string
         default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SignedCapsulePkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+      skip-filter-list:
+        description: List of filter criteria to skip.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
+        default: ''
+      continue-on-error-filter-list:
+        description: List of filter criteria to continue on error.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO"}]'
+        default: ''
       emulatorpkg-build-options:
         description: Additional build options for EmulatorPkg.
         required: false
@@ -125,6 +149,8 @@ jobs:
       build-arch-list: '["IA32", "X64"]'
       tool-chain-tag-list: ${{ inputs.tool-chain-tag-list }}
       package-lists: ${{ inputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
       stuart-ci-build-params: '--disable-all CompilerPlugin=run'
 
   build_linux_gcc_aarch64_riscv64_packages:
@@ -141,6 +167,8 @@ jobs:
       build-arch-list: '["AARCH64", "RISCV64"]'
       tool-chain-tag-list: ${{ inputs.tool-chain-tag-list }}
       package-lists: ${{ inputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
       stuart-ci-build-params: '--disable-all CompilerPlugin=run'
 
   build_linux_gcc_noopt_unit_tests:
@@ -157,6 +185,8 @@ jobs:
       build-arch-list: '["IA32", "X64"]'
       tool-chain-tag-list: ${{ inputs.tool-chain-tag-list }}
       package-lists: ${{ inputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
       stuart-ci-build-params: '--disable-all DISABLE_DEBUG_MACRO_CHECK HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run'
 
   build_linux_gcc_emulatorpkg:

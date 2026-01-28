@@ -39,6 +39,18 @@ on:
         required: true
         type: string
         default: '["FatPkg"]'
+      skip-filter-list:
+        description: List of filter criteria to skip.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
+        default: ''
+      continue-on-error-filter-list:
+        description: List of filter criteria to continue on error.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO"}]'
+        default: ''
 
   workflow_dispatch:
     inputs:
@@ -67,6 +79,18 @@ on:
         required: true
         type: string
         default: '["FatPkg"]'
+      skip-filter-list:
+        description: List of filter criteria to skip.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO", "build_arch": "RISCV64"}]'
+        default: ''
+      continue-on-error-filter-list:
+        description: List of filter criteria to continue on error.
+        required: false
+        type: string
+        # '[{"tool_chain_tag": "GCCNOLTO"}]'
+        default: ''
 
 jobs:
   build_windows_visual_studio_clangpdb_packages:
@@ -82,6 +106,8 @@ jobs:
       build-arch-list: '["IA32","X64"]'
       tool-chain-tag-list: '["CLANGPDB"]'
       package-lists: ${{ inputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
       stuart-ci-build-params: '--disable-all CompilerPlugin=run'
 
   build_windows_visual_studio_clangpdb_noopt_unit_tests:
@@ -99,6 +125,8 @@ jobs:
       build-arch-list: '["IA32", "X64"]'
       tool-chain-tag-list: '["CLANGPDB"]'
       package-lists: ${{ inputs.package-lists }}
+      skip-filter-list: ${{ inputs.skip-filter-list }}
+      continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
       stuart-ci-build-params: '--disable-all DISABLE_DEBUG_MACRO_CHECK HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run'
 
   build_windows_visual_studio_clangpdb_emulatorpkg:
