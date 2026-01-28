@@ -196,11 +196,20 @@ class PlatformBuilder(UefiBuilder, BuildSettingsManager):
             elif self.env.GetValue("TARGET_ARCH") == "X64":
                 shell_environment.ShellEnvironment().set_shell_var(key, "x64")
 
+        #
+        # Set environment variable set by build that are used in EmulatorPkg.dsc
+        # This is required for the stuart DSC parser that is run before build
+        # to pick up the correct settings.
+        #
+        if GetHostInfo().os.upper() == "WINDOWS":
+            self.env.SetValue("WIN_HOST_BUILD", "TRUE", "Windows env detected")
+            clang_bin = self.env.GetValue("CLANG_BIN")
+            if clang_bin:
+                if os.path.exists(os.path.join(clang_bin, "mingw32-make.exe")):
+                    self.env.SetValue("WIN_MINGW32_BUILD", "TRUE", "Windows MinGW env detected")
+
         self.env.SetValue("MAKE_STARTUP_NSH", "FALSE", "Default to false")
 
-        # I don't see what this does but it is in build.sh
-        key = "BLD_*_BUILD_" + self.env.GetValue("TARGET_ARCH")
-        self.env.SetValue(key, "TRUE", "match script in build.sh")
         return 0
 
     def PlatformPreBuild(self):
