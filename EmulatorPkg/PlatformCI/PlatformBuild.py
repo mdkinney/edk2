@@ -210,6 +210,8 @@ class PlatformBuilder(UefiBuilder, BuildSettingsManager):
 
         self.env.SetValue("MAKE_STARTUP_NSH", "FALSE", "Default to false")
 
+        self.env.PrintAll()
+
         return 0
 
     def PlatformPreBuild(self):
