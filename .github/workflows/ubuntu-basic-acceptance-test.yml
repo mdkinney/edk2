@@ -1,6 +1,6 @@
 ## @file
-# A workflow using Ubuntu GCC tools to run Basic Acceptance Tests (BAT)
-# on packages and platforms and uploads artifacts.
+# A workflow using Ubuntu to run Basic Acceptance Tests (BAT) on packages and
+# platforms and uploads artifacts.
 #
 # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64/AARCH64/RISCV64
 # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64

@@ -194,7 +194,6 @@ jobs:
     steps:
       - name: Stage 0 Success
         run: echo "Stage 0 jobs completed successfully"
-      - uses: Kesin11/actions-timeline@v2
 
   #
   # Stage 1: Run no-target tests and basic acceptance tests
@@ -225,7 +224,7 @@ jobs:
     # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
     needs: stage0
     if: ${{ always() && inputs.enable-basic-acceptance-tests && inputs.enable-linux-tests && inputs.enable-clang-tests }}
-    uses: ./.github/workflows/ubuntu-gcc-basic-acceptance-test.yml
+    uses: ./.github/workflows/ubuntu-basic-acceptance-test.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
@@ -246,7 +245,7 @@ jobs:
     # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
     needs: stage0
     if: ${{ always() && inputs.enable-basic-acceptance-tests && inputs.enable-linux-tests && inputs.enable-clang-tests }}
-    uses: ./.github/workflows/ubuntu-gcc-basic-acceptance-test.yml
+    uses: ./.github/workflows/ubuntu-basic-acceptance-test.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
@@ -307,7 +306,7 @@ jobs:
     # EmulatorPkg Build Support:          GCC/GCCNOLTO - IA32/X64
     needs: stage0
     if: ${{ always() && inputs.enable-basic-acceptance-tests && inputs.enable-linux-tests && inputs.enable-gcc-tests }}
-    uses: ./.github/workflows/ubuntu-gcc-basic-acceptance-test.yml
+    uses: ./.github/workflows/ubuntu-basic-acceptance-test.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
@@ -329,7 +328,7 @@ jobs:
     # EmulatorPkg Build Support:          GCC/GCCNOLTO - IA32/X64
     needs: stage0
     if: ${{ always() && inputs.enable-basic-acceptance-tests && inputs.enable-linux-tests && inputs.enable-gccnolto-tests }}
-    uses: ./.github/workflows/ubuntu-gcc-basic-acceptance-test.yml
+    uses: ./.github/workflows/ubuntu-basic-acceptance-test.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
@@ -382,7 +381,6 @@ jobs:
     steps:
       - name: Stage 1 Success
         run: echo "Stage 1 jobs completed successfully"
-      - uses: Kesin11/actions-timeline@v2
 
   #
   # Stage 2: Run full tests for packages and platforms
