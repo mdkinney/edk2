@@ -75,7 +75,8 @@ class SettingsManager(UpdateSettingsManager, SetupSettingsManager, PrEvalSetting
                 _, _, path = line.partition(" ")
                 if path is not None:
                     if path not in [x.path for x in rs]:
-                        rs.append(RequiredSubmodule(path, True)) # add it with recursive since we don't know
+                        # add it without recursive since no dependencies expected
+                        rs.append(RequiredSubmodule(path, False))
         return rs
 
     def SetArchitectures(self, list_of_requested_architectures):
