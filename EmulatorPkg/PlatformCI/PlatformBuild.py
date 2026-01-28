@@ -196,15 +196,6 @@ class PlatformBuilder(UefiBuilder, BuildSettingsManager):
             elif self.env.GetValue("TARGET_ARCH") == "X64":
                 shell_environment.ShellEnvironment().set_shell_var(key, "x64")
 
-        # Add support for using the correct Platform Headers, tools, and Libs based on emulator architecture
-        # requested to be built when building on linux.
-        if GetHostInfo().os.upper() == "LINUX":
-            self.ConfigureLinuxDLinkPath()
-
-        if GetHostInfo().os.upper() == "WINDOWS":
-            self.env.SetValue("BLD_*_WIN_HOST_BUILD", "TRUE",
-                              "Trigger Windows host build")
-
         self.env.SetValue("MAKE_STARTUP_NSH", "FALSE", "Default to false")
 
         # I don't see what this does but it is in build.sh
@@ -240,32 +231,3 @@ class PlatformBuilder(UefiBuilder, BuildSettingsManager):
             logging.critical("Unsupported Host")
             return -1
         return RunCmd(cmd, "", workingdir=OutputPath)
-
-    def ConfigureLinuxDLinkPath(self):
-        '''
-        logic copied from build.sh to setup the correct libraries
-        '''
-        if self.env.GetValue("TARGET_ARCH") == "IA32":
-            LIB_NAMES = ["ld-linux.so.2", "libdl.so.2 crt1.o", "crti.o crtn.o"]
-            LIB_SEARCH_PATHS = ["/usr/lib/i386-linux-gnu",
-                                "/usr/lib32", "/lib32", "/usr/lib", "/lib"]
-        elif self.env.GetValue("TARGET_ARCH") == "X64":
-            LIB_NAMES = ["ld-linux-x86-64.so.2",
-                         "libdl.so.2", "crt1.o", "crti.o", "crtn.o"]
-            LIB_SEARCH_PATHS = ["/usr/lib/x86_64-linux-gnu",
-                                "/usr/lib64", "/lib64", "/usr/lib", "/lib"]
-
-        HOST_DLINK_PATHS = ""
-        for lname in LIB_NAMES:
-            logging.debug(f"Looking for {lname}")
-            for dname in LIB_SEARCH_PATHS:
-                logging.debug(f"In {dname}")
-                if os.path.isfile(os.path.join(dname, lname)):
-                    logging.debug(f"Found {lname} in {dname}")
-                    HOST_DLINK_PATHS += os.path.join(
-                        os.path.join(dname, lname)) + os.pathsep
-                    break
-        HOST_DLINK_PATHS = HOST_DLINK_PATHS.rstrip(os.pathsep)
-        logging.critical(f"Setting HOST_DLINK_PATHS to {HOST_DLINK_PATHS}")
-        shell_environment.ShellEnvironment().set_shell_var(
-            "HOST_DLINK_PATHS", HOST_DLINK_PATHS)
