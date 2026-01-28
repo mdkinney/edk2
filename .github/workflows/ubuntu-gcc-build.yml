@@ -68,11 +68,6 @@ on:
         type: string
         # '[{"tool_chain_tag": "GCCNOLTO"}]'
         default: ''
-      emulatorpkg-build-options:
-        description: Additional build options for EmulatorPkg.
-        required: false
-        type: string
-        default: ''
 
   workflow_dispatch:
     inputs:
@@ -127,11 +122,6 @@ on:
         required: false
         type: string
         # '[{"tool_chain_tag": "GCCNOLTO"}]'
-        default: ''
-      emulatorpkg-build-options:
-        description: Additional build options for EmulatorPkg.
-        required: false
-        type: string
         default: ''
 
 jobs:
@@ -198,9 +188,7 @@ jobs:
       linux-host-compiler: 'gcc'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
       edk-setup-params: ''
       build-arch-list: '["IA32", "X64"]'
       tool-chain-tag-list: ${{ inputs.tool-chain-tag-list }}
-      emulatorpkg-build-options: ${{ inputs.emulatorpkg-build-options }}

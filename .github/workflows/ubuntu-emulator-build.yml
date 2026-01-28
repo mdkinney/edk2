@@ -1,14 +1,10 @@
 ## @file
-# A workflow using Ubuntu CLANG tools to build EmulatorPkg and uploads artifacts.
-#
-# Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64
-# Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
-# EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
+# A workflow using Ubuntu tools to build EmulatorPkg and uploads artifacts.
 #
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
-name: Ubuntu CLANG 20.1.8 EmulatorPkg Test
+name: Ubuntu EmulatorPkg Test
 
 on:
   workflow_call:
@@ -40,9 +36,9 @@ on:
         default: 'pip-requirements.txt'
       stuart-ci-settings-file:
         description: The path to the Stuart CI settings file.
-        required: true
+        required: false
         type: string
-        default: '.pytool/CISettings.py'
+        default: 'EmulatorPkg/PlatformCI/PlatformBuild.py'
       edk2-tools-build-params:
         description: The EDK2 Tools build parameters.
         required: true
@@ -63,14 +59,14 @@ on:
         required: true
         type: string
         default: '["CLANGDWARF"]'
-      emulatorpkg-build-options:
-        description: Additional build options for EmulatorPkg.
+      emulatorpkg-target-list:
+        description: List of EmulatorPkg targets to build.
         required: false
         type: string
-        default: ''
+        default: '["DEBUG", "RELEASE", "NOOPT"]'
 
 jobs:
-  build_linux_clang_emulatorpkg_test:
+  build_linux_emulatorpkg_test:
     name: Build Linux ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} EmulatorPkg Test
     runs-on: ${{ inputs.linux-runs-on }}
     container:
@@ -85,7 +81,7 @@ jobs:
         uses: actions/checkout@v6
       - name: Ensure safe directory for Git
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Setup Linux CLANG Job
+      - name: Setup Linux Job
         uses: ./.github/actions/setup-job
         with:
           linux-host-compiler: ${{ inputs.linux-host-compiler }}
@@ -93,25 +89,45 @@ jobs:
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
-      - name: Build Linux EmulatorPkg DEBUG ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }}
+      - name: Stuart Build EmulatorPkg Unix Host Module ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} DEBUG
+        if: contains(inputs.emulatorpkg-target-list, 'DEBUG')
         run: |
-          . ./edksetup.sh ${{ inputs.edk-setup-params }}
-          build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b DEBUG   -p EmulatorPkg/EmulatorPkg.dsc -D NETWORK_ENABLE=FALSE ${{ inputs.emulatorpkg-build-options }} -j Build/Emulator${{ matrix.build_arch }}DebugBuild.log >NUL
-      - name: Build Linux EmulatorPkg RELEASE ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }}
+          stuart_build -c ${{ inputs.stuart-ci-settings-file }}      \
+              DISABLE_DEBUG_MACRO_CHECK                              \
+              TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}  \
+              TARGET=DEBUG                                           \
+              -a ${{ matrix.build_arch }}                            \
+              BLD_*_NETWORK_ENABLE=FALSE                             \
+              MAKE_STARTUP_NSH=TRUE --FLASHROM
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ inputs.unit-test-tool-chain-tag }}_${{ matrix.build_arch }}_DEBUG.txt
+      - name: Stuart Build EmulatorPkg Unix Host Module ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} RELEASE
+        if: contains(inputs.emulatorpkg-target-list, 'RELEASE')
         run: |
-          . ./edksetup.sh ${{ inputs.edk-setup-params }}
-          build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b RELEASE -p EmulatorPkg/EmulatorPkg.dsc                         ${{ inputs.emulatorpkg-build-options }} -j Build/Emulator${{ matrix.build_arch }}ReleaseBuild.log >NUL
-      - name: Build Linux EmulatorPkg NOOPT ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }}
+          stuart_build -c ${{ inputs.stuart-ci-settings-file }}      \
+              DISABLE_DEBUG_MACRO_CHECK                              \
+              TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}  \
+              TARGET=RELEASE                                         \
+              -a ${{ matrix.build_arch }}                            \
+              BLD_*_NETWORK_ENABLE=TRUE                              \
+              MAKE_STARTUP_NSH=TRUE --FLASHROM
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ inputs.unit-test-tool-chain-tag }}_${{ matrix.build_arch }}_RELEASE.txt
+      - name: Stuart Build EmulatorPkg Unix Host Module ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} NOOPT
+        if: contains(inputs.emulatorpkg-target-list, 'NOOPT')
         run: |
-          . ./edksetup.sh ${{ inputs.edk-setup-params }}
-          build -a ${{ matrix.build_arch }} -t ${{ matrix.tool_chain_tag }} -b NOOPT   -p EmulatorPkg/EmulatorPkg.dsc -D SECURE_BOOT_ENABLE   ${{ inputs.emulatorpkg-build-options }} -j Build/Emulator${{ matrix.build_arch }}NooptBuild.log >NUL
+          stuart_build -c ${{ inputs.stuart-ci-settings-file }}      \
+              DISABLE_DEBUG_MACRO_CHECK                              \
+              TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}  \
+              TARGET=NOOPT                                           \
+              -a ${{ matrix.build_arch }}                            \
+              BLD_*_SECURE_BOOT_ENABLE=TRUE                          \
+              MAKE_STARTUP_NSH=TRUE --FLASHROM
+          mv Build/BUILDLOG_EmulatorPkg.txt Build/BUILDLOG_EmulatorPkg_${{ inputs.unit-test-tool-chain-tag }}_${{ matrix.build_arch }}_NOOPT.txt
       - name: Upload Linux EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
         uses: actions/upload-artifact@v6
         with:
           name: Upload Linux EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
-            Build/**/BUILDLOG*.txt
             Build/*.txt
             Build/*.log
         if: always()

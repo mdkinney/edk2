@@ -8,7 +8,7 @@
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
-name: Ubuntu CLANG 20.1.8 Build
+name: Ubuntu CLANG Build
 
 on:
   workflow_call:
@@ -60,11 +60,6 @@ on:
         type: string
         # '[{"tool_chain_tag": "GCCNOLTO"}]'
         default: ''
-      emulatorpkg-build-options:
-        description: Additional build options for EmulatorPkg.
-        required: false
-        type: string
-        default: ''
 
   workflow_dispatch:
     inputs:
@@ -114,11 +109,6 @@ on:
         required: false
         type: string
         # '[{"tool_chain_tag": "GCCNOLTO"}]'
-        default: ''
-      emulatorpkg-build-options:
-        description: Additional build options for EmulatorPkg.
-        required: false
-        type: string
         default: ''
 
 jobs:
@@ -185,9 +175,7 @@ jobs:
       linux-host-compiler: 'clang'
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGDWARF'
       edk-setup-params: ''
       build-arch-list: '["IA32", "X64"]'
       tool-chain-tag-list: '["CLANGDWARF"]'
-      emulatorpkg-build-options: ${{ inputs.emulatorpkg-build-options }}

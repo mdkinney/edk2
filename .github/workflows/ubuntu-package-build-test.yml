@@ -4,7 +4,7 @@
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
-name: Ubuntu CLANG 20.1.8 Build Packages Test
+name: Ubuntu Build Packages Test
 
 on:
   workflow_call:
