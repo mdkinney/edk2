@@ -416,13 +416,13 @@ jobs:
   #
   # Stage 2: Run full tests for packages and platforms
   #
-  ubuntu_clang_20_build:
+  ubuntu_clang_build:
     # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64/AARCH64/RISCV64
     # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
     # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
     needs: stage1
     if: ${{ always() && inputs.enable-linux-clang-tests }}
-    uses: ./.github/workflows/ubuntu-clang-20-build.yml
+    uses: ./.github/workflows/ubuntu-clang-build.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
@@ -541,7 +541,7 @@ jobs:
     runs-on: ubuntu-slim
     needs:
       - stage1
-      - ubuntu_clang_20_build
+      - ubuntu_clang_build
       - windows_mingw_llvm_20_clang_build
       - windows_mingw_edk2_clang_20_build
       - windows_vs_llvm_20_clang_build
