@@ -203,7 +203,7 @@ class PlatformBuilder(UefiBuilder, BuildSettingsManager):
         #
         if GetHostInfo().os.upper() == "WINDOWS":
             self.env.SetValue("WIN_HOST_BUILD", "TRUE", "Windows env detected")
-            clang_bin = self.env.GetValue("CLANG_BIN")
+            clang_bin = os.getenv("CLANG_BIN")
             if clang_bin:
                 if os.path.exists(os.path.join(clang_bin, "mingw32-make.exe")):
                     self.env.SetValue("WIN_MINGW32_BUILD", "TRUE", "Windows MinGW env detected")
