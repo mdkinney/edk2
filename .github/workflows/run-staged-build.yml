@@ -33,9 +33,10 @@ jobs:
       python-version: '3.12'
       pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
-      enable-linux-tests: true
-      enable-windows-tests: true
-      enable-clang-tests: true
-      enable-gcc-tests: true
-      enable-gccnolto-tests: false
-      enable-visualstudio-tests: false
+      enable-code-quality-checks: true
+      enable-basic-acceptance-tests: true
+      enable-linux-clang-tests: true
+      enable-linux-gcc-tests: true
+      enable-linux-gccnolto-tests: false
+      enable-windows-visual-studio-tests: false
+      enable-windows-clang-tests: true
