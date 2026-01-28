@@ -1,6 +1,12 @@
 ## @file
 # A workflow using Ubuntu tools to build EmulatorPkg and uploads artifacts.
 #
+# TARGET     Feature Enable/Disable
+# ========== ==========================
+# DEBUG      NETWORK_ENABLE=FALSE
+# RELEASE    NETWORK_ENABLE=TRUE
+# NOOPT      SECURE_BOOT_ENABLE=TRUE
+#
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##

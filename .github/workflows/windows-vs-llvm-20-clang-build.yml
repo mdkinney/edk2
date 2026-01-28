@@ -131,7 +131,7 @@ jobs:
 
   build_windows_visual_studio_clangpdb_emulatorpkg:
     if: ${{ contains(inputs.package-lists, 'EmulatorPkg') }}
-    uses: ./.github/workflows/windows-emulator-build-test.yml
+    uses: ./.github/workflows/windows-emulator-build.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-clang-installer: 'vs-clangpdb'

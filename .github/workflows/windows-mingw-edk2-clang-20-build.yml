@@ -132,7 +132,7 @@ jobs:
   build_windows_mingw_edk2_clang_emulatorpkg:
     # Do not run for PR.  Covered by mingw-llvm workflow.
     if: ${{ github.event_name != 'pull_request' && contains(inputs.package-lists, 'EmulatorPkg') }}
-    uses: ./.github/workflows/windows-emulator-build-test.yml
+    uses: ./.github/workflows/windows-emulator-build.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-clang-installer: 'edk2-clang'
