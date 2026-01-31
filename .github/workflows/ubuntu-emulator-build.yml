@@ -107,6 +107,7 @@ jobs:
               TARGET=DEBUG                                      \
               -a ${{ matrix.build_arch }}                       \
               BLD_*_NETWORK_ENABLE=FALSE                        \
+              BLD_*_NO_PLATFORM_BOOT_DELAYS                     \
               MAKE_STARTUP_NSH=TRUE --FLASHROM
           mv Build/BUILDLOG_EmulatorPkg_With_Run.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_DEBUG.txt
       - name: Stuart Build EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} RELEASE
@@ -118,6 +119,7 @@ jobs:
               TARGET=RELEASE                                    \
               -a ${{ matrix.build_arch }}                       \
               BLD_*_NETWORK_ENABLE=TRUE                         \
+              BLD_*_NO_PLATFORM_BOOT_DELAYS                     \
               MAKE_STARTUP_NSH=TRUE --FLASHROM
           mv Build/BUILDLOG_EmulatorPkg_With_Run.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_RELEASE.txt
       - name: Stuart Build EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} NOOPT
@@ -129,6 +131,7 @@ jobs:
               TARGET=NOOPT                                      \
               -a ${{ matrix.build_arch }}                       \
               BLD_*_SECURE_BOOT_ENABLE=TRUE                     \
+              BLD_*_NO_PLATFORM_BOOT_DELAYS                     \
               MAKE_STARTUP_NSH=TRUE --FLASHROM
           mv Build/BUILDLOG_EmulatorPkg_With_Run.txt Build/BUILDLOG_EmulatorPkg_${{ matrix.tool_chain_tag }}_${{ matrix.build_arch }}_NOOPT.txt
       - name: Upload Linux EmulatorPkg ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
