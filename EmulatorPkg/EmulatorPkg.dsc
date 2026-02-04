@@ -624,6 +624,8 @@
 !endif
 
 [BuildOptions]
+  *_VS2022_*_MAKE_PATH       == C:\ProgramData\chocolatey\bin\nmake
+
   #
   # Disable deprecated APIs.
   #
@@ -632,8 +634,8 @@
   #
   # Windows/VS20xx using Visual Studio includes and libraries
   #
-  MSFT:DEBUG_*_*_CC_FLAGS = /Od /Oy-
-  MSFT:NOOPT_*_*_CC_FLAGS = /Od /Oy-
+  MSFT:DEBUG_*_*_CC_FLAGS = /Od /Oy- /FS
+  MSFT:NOOPT_*_*_CC_FLAGS = /Od /Oy- /FS
 
   MSFT:*_*_*_DLINK_FLAGS     = /ALIGN:4096 /FILEALIGN:4096
   MSFT:*_*_IA32_DLINK_FLAGS  = /BASE:0x010000000
@@ -713,7 +715,7 @@
   DEFINE VISUAL_STUDIO_DEFINES        = -D UNICODE -D _CRT_SECURE_NO_WARNINGS -D _CRT_SECURE_NO_DEPRECATE
   DEFINE VISUAL_STUDIO_IA32_LIB_PATHS = /LIBPATH:"%VCToolsInstallDir%lib\x86" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x86" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%um\x86"
   DEFINE VISUAL_STUDIO_X64_LIB_PATHS  = /LIBPATH:"%VCToolsInstallDir%lib\X64" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\X64" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%um\X64"
-  DEFINE VISUAL_STUDIO_LIBS           = /NODEFAULTLIB:LIBCMT Kernel32.lib MSVCRTD.lib vcruntimed.lib ucrtd.lib Gdi32.lib User32.lib Winmm.lib Advapi32.lib
+  DEFINE VISUAL_STUDIO_LIBS           = Kernel32.lib MSVCRTD.lib vcruntimed.lib ucrtd.lib Gdi32.lib User32.lib Winmm.lib Advapi32.lib
 
 [BuildOptions.common.EDKII.HOST_APPLICATION]
   MSFT:*_*_*_CC_FLAGS        = $(VISUAL_STUDIO_DEFINES)

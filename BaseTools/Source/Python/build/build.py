@@ -279,7 +279,8 @@ def LaunchCommand(Command, WorkingDir,ModuleAuto = None):
     if ModuleAuto:
         iau = IncludesAutoGen(WorkingDir,ModuleAuto)
         if ModuleAuto.ToolChainFamily == TAB_COMPILER_MSFT:
-            iau.CreateDepsFileForMsvc(Proc.ProcOut)
+            #iau.CreateDepsFileForMsvc(Proc.ProcOut)
+            pass
         else:
             iau.UpdateDepsFileforNonMsvc()
         iau.UpdateDepsFileforTrim()
@@ -481,7 +482,7 @@ class BuildTask:
                     BuildTask._Thread.acquire(True)
 
                     # start a new build thread
-                    Bo, Bt = BuildTask._ReadyQueue.popitem()
+                    Bo, Bt = BuildTask._ReadyQueue.popitem(False)
 
                     # move into running queue
                     BuildTask._RunningQueueLock.acquire()
@@ -569,6 +570,9 @@ class BuildTask:
 
         BuildTask._PendingQueueLock.acquire()
         BuildTask._PendingQueue[BuildItem] = Bt
+        BuildTask._PendingQueue = OrderedDict(sorted(BuildTask._PendingQueue.items(),
+                                                   key=lambda x: (-len(x[1].BuildItem.BuildObject.SourceFileList), repr(x[1].BuildItem)),
+                                                   reverse=False))
         BuildTask._PendingQueueLock.release()
 
         return Bt
@@ -621,6 +625,8 @@ class BuildTask:
             self.BuildItem.BuildObject.BuildTime = LaunchCommand(Command, WorkingDir,self.BuildItem.BuildObject)
             self.CompleteFlag = True
 
+            EdkLogger.quiet(f"  Finished ... {self.BuildItem}")
+
             # Run hash operation post dependency to account for libs
             # Run if --hash or --binary-destination
             if GlobalData.gUseHashCache and not GlobalData.gBinCacheSource:
@@ -653,7 +659,7 @@ class BuildTask:
     ## Start build task thread
     #
     def Start(self):
-        EdkLogger.quiet("Building ... %s" % repr(self.BuildItem))
+        EdkLogger.quiet(f"Building ... [{len(self.BuildItem.BuildObject.SourceFileList):3d}] {repr(self.BuildItem)}")
         Command = self.BuildItem.BuildCommand + [self.BuildItem.Target]
         self.BuildTread = Thread(target=self._CommandThread, args=(Command, self.BuildItem.WorkingDir))
         self.BuildTread.name = "build thread"
@@ -1977,9 +1983,9 @@ class Build():
                             BuildTask.WaitForComplete()
                             Pa.CreateMakeFile(False)
                             EdkLogger.error("build", BUILD_ERROR, "Failed to build module", ExtraData=GlobalData.gBuildingModule)
-                        # Start task scheduler
-                        if not BuildTask.IsOnGoing():
-                            BuildTask.StartScheduler(self.ThreadNumber, ExitFlag)
+                    # Start task scheduler
+                    if not BuildTask.IsOnGoing():
+                        BuildTask.StartScheduler(self.ThreadNumber, ExitFlag)
 
                     # in case there's an interruption. we need a full version of makefile for platform
                     Pa.CreateMakeFile(False)
@@ -2307,9 +2313,9 @@ class Build():
                             BuildTask.WaitForComplete()
                             Pa.CreateMakeFile(False)
                             EdkLogger.error("build", BUILD_ERROR, "Failed to build module", ExtraData=GlobalData.gBuildingModule)
-                        # Start task scheduler
-                        if not BuildTask.IsOnGoing():
-                            BuildTask.StartScheduler(self.ThreadNumber, ExitFlag)
+                    # Start task scheduler
+                    if not BuildTask.IsOnGoing():
+                        BuildTask.StartScheduler(self.ThreadNumber, ExitFlag)
 
                     # in case there's an interruption. we need a full version of makefile for platform
 

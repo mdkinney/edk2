@@ -185,6 +185,31 @@ ${END}
                 target_abs = source_file_abs
         return target_abs
 
+    def CreateDepsFileForMsvc_new(self, DepList):
+        """ Generate dependency files, .deps file from /showIncludes output message """
+        try:
+            for abspath in self.deps_files:
+                EdkLogger.quiet("Update deps file: %s" % abspath)
+                with open(abspath, "r") as fd:
+                    lines = fd.readlines()
+                newlines = []
+                for line in lines:
+                    if not line.startswith("Note: including file:"):
+                        continue
+                    includefile = os.path.normpath(os.path.abspath(line.lstrip()[22:].strip()))
+                    includefile = self.GetRealTarget(includefile)
+                    includefile = f'"{includefile}"'
+                    if includefile not in newlines:
+                        newlines.append(includefile)
+                newlines = sorted(newlines)
+                with open(abspath, "w") as fw:
+                    fw.write(f"{abspath.split('.deps')[0]}:\n" + " \\\n".join(newlines))
+                EdkLogger.quiet("Update deps file DONE: %s" % abspath)
+        except Exception as e:
+            EdkLogger.quiet(f"Exception occurred: {str(e)}")
+            EdkLogger.quiet(traceback.format_exc())
+            EdkLogger.error("build", FILE_NOT_FOUND, f"Failed to update deps file {abspath}", ExtraData=str(e), RaiseError=False)
+
     def CreateDepsFileForMsvc(self, DepList):
         """ Generate dependency files, .deps file from /showIncludes output message """
         if not DepList:

@@ -1064,7 +1064,7 @@ cleanlib:
                     if Type in [TAB_OBJECT_FILE, TAB_STATIC_LIBRARY]:
                         Deps.append("$(%s)" % T.ListFileMacro)
 
-                if self._AutoGenObject.BuildRuleFamily == TAB_COMPILER_MSFT and Type == TAB_C_CODE_FILE:
+                if self._AutoGenObject.BuildRuleFamily == TAB_COMPILER_MSFT and Type == TAB_C_CODE_FILE and False:
                     T, CmdTarget, CmdTargetDict, CmdCppDict = self.ParserCCodeFile(T, Type, CmdSumDict, CmdTargetDict,
                                                                                    CmdCppDict, DependencyDict, RespFile,
                                                                                    ToolsDef, resp_file_number)
