@@ -121,6 +121,7 @@
         $(OUTPUT_DIR)(+)${s_dir}(+)${s_base}.obj
 
     <Command.MSFT, Command.INTEL>
+        "$(PP)" $(DEPS_FLAGS) $(CC_FLAGS) $(INC) ${src} 2> ${d_path}(+)${s_base}.deps
         "$(CC)" /Fo${dst} $(DEPS_FLAGS) $(CC_FLAGS) $(INC) ${src}
 
     <Command.GCC>
@@ -144,6 +145,7 @@
         $(OUTPUT_DIR)(+)${s_dir}(+)${s_base}.obj
 
     <Command.MSFT, Command.INTEL>
+        "$(PP)" $(DEPS_FLAGS) $(CC_FLAGS) $(INC) ${src} 2> ${d_path}(+)${s_base}.deps
         "$(CC)" /Fo${dst} $(DEPS_FLAGS) $(CC_FLAGS) $(CXX_FLAGS) $(INC) ${src}
 
     <Command.GCC>

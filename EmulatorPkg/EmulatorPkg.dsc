@@ -634,8 +634,8 @@
   #
   # Windows/VS20xx using Visual Studio includes and libraries
   #
-  MSFT:DEBUG_*_*_CC_FLAGS = /Od /Oy- /FS
-  MSFT:NOOPT_*_*_CC_FLAGS = /Od /Oy- /FS
+  MSFT:DEBUG_*_*_CC_FLAGS = /Od /Oy-
+  MSFT:NOOPT_*_*_CC_FLAGS = /Od /Oy-
 
   MSFT:*_*_*_DLINK_FLAGS     = /ALIGN:4096 /FILEALIGN:4096
   MSFT:*_*_IA32_DLINK_FLAGS  = /BASE:0x010000000

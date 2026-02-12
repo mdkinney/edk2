@@ -279,8 +279,7 @@ def LaunchCommand(Command, WorkingDir,ModuleAuto = None):
     if ModuleAuto:
         iau = IncludesAutoGen(WorkingDir,ModuleAuto)
         if ModuleAuto.ToolChainFamily == TAB_COMPILER_MSFT:
-            #iau.CreateDepsFileForMsvc(Proc.ProcOut)
-            pass
+            iau.CreateDepsFileForMsvc(Proc.ProcOut)
         else:
             iau.UpdateDepsFileforNonMsvc()
         iau.UpdateDepsFileforTrim()
