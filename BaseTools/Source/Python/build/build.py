@@ -236,6 +236,7 @@ def LaunchCommand(Command, WorkingDir,ModuleAuto = None):
     EndOfProcedure = None
     try:
         # launch the command
+        EdkLogger.quiet("Executing command \"%s\" in directory %s" % (Command, WorkingDir))
         Proc = MakeSubProc(Command, stdout=PIPE, stderr=STDOUT, env=os.environ, cwd=WorkingDir, bufsize=-1, shell=True)
 
         # launch two threads to read the STDOUT and STDERR
