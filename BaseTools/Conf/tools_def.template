@@ -1296,7 +1296,7 @@ RELEASE_GCC49_AARCH64_DLINK_XIPFLAGS = -z common-page-size=0x20
 *_GCCNOLTO_*_*_DLL                        = ENV(GCCNOLTO_DLL)
 *_GCCNOLTO_*_ASL_PATH                     = DEF(UNIX_IASL_BIN)
 
-*_GCCNOLTO_*_MAKE_FLAGS                   = -j 2
+#*_GCCNOLTO_*_MAKE_FLAGS                   = -j 2
 *_GCCNOLTO_*_PP_FLAGS                     = DEF(GCC_PP_FLAGS)
 *_GCCNOLTO_*_ASLPP_FLAGS                  = DEF(GCC_ASLPP_FLAGS)
 *_GCCNOLTO_*_ASLCC_FLAGS                  = DEF(GCC_ASLCC_FLAGS)
@@ -1412,7 +1412,7 @@ RELEASE_GCCNOLTO_AARCH64_DLINK_XIPFLAGS = -z common-page-size=0x20
 *_GCC5_*_*_DLL                   = ENV(GCC5_DLL)
 *_GCC5_*_ASL_PATH                = DEF(UNIX_IASL_BIN)
 
-*_GCC5_*_MAKE_FLAGS              = -j 2
+#*_GCC5_*_MAKE_FLAGS              = -j 2
 *_GCC5_*_PP_FLAGS                = DEF(GCC_PP_FLAGS)
 *_GCC5_*_ASLPP_FLAGS             = DEF(GCC_ASLPP_FLAGS)
 *_GCC5_*_ASLCC_FLAGS             = DEF(GCC_ASLCC_FLAGS)
@@ -1598,7 +1598,7 @@ RELEASE_GCC5_LOONGARCH64_CC_FLAGS       = DEF(GCC5_LOONGARCH64_CC_FLAGS) -Wno-un
 *_GCC_*_*_DLL                   = ENV(GCC_DLL)
 *_GCC_*_ASL_PATH                = DEF(UNIX_IASL_BIN)
 
-*_GCC_*_MAKE_FLAGS              = -j 2
+#*_GCC_*_MAKE_FLAGS              = -j 2
 *_GCC_*_PP_FLAGS                = DEF(GCC_PP_FLAGS)
 *_GCC_*_ASLPP_FLAGS             = DEF(GCC_ASLPP_FLAGS)
 *_GCC_*_ASLCC_FLAGS             = DEF(GCC_ASLCC_FLAGS)
@@ -1936,7 +1936,7 @@ NOOPT_CLANGPDB_AARCH64_GENFW_FLAGS      = --keepexceptiontable
 *_CLANGDWARF_*_*_DLL                = ENV(CLANGDWARF_DLL)
 *_CLANGDWARF_*_ASL_PATH             = DEF(UNIX_IASL_BIN)
 
-*_CLANGDWARF_*_MAKE_FLAGS           = -j 2
+#*_CLANGDWARF_*_MAKE_FLAGS           = -j 2
 *_CLANGDWARF_*_APP_FLAGS            =
 *_CLANGDWARF_*_ASL_FLAGS            = DEF(IASL_FLAGS)
 *_CLANGDWARF_*_ASL_OUTFLAGS         = DEF(IASL_OUTFLAGS)
