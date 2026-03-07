@@ -19,6 +19,31 @@
   DEFINE CUSTOM_STACK_CHECK_LIB = NONE
 !endif
 
+[BuildOptions]
+!if $(CUSTOM_STACK_CHECK_LIB) in "STATIC DYNAMIC"
+  #
+  # MSFT family compiler and linker settings to enable stack checks
+  #
+  MSFT:*_*_*_CC_FLAGS       = /GS
+  MSFT:*_*_IA32_DLINK_FLAGS = /INCLUDE:___security_cookie
+  MSFT:*_*_X64_DLINK_FLAGS  = /INCLUDE:__security_cookie
+
+  CLANGPDB:*_*_IA32_DLINK_FLAGS = /INCLUDE:___security_cookie /INCLUDE:_StackCheckFailure
+  CLANGPDB:*_*_X64_DLINK_FLAGS  = /INCLUDE:__security_cookie /INCLUDE:StackCheckFailure
+
+  #
+  # GCC family compiler and linker settings to enable stack checks
+  # All supported GCC archs except LOONGARCH64 support
+  # -mstack-protector-guard=global, so set that on everything except LOONGARCH64
+  #
+  GCC:*_*_*_CC_FLAGS       = -fstack-protector
+  GCC:*_*_IA32_CC_FLAGS    = -mstack-protector-guard=global
+  GCC:*_*_X64_CC_FLAGS     = -mstack-protector-guard=global
+  GCC:*_*_AARCH64_CC_FLAGS = -mstack-protector-guard=global
+  GCC:*_*_RISCV64_CC_FLAGS = -mstack-protector-guard=global
+  GCC:*_*_*_DLINK_FLAGS    = -Wl,--undefined=__stack_chk_fail,--undefined=__stack_chk_guard
+!endif
+
 [LibraryClasses]
   OrderedCollectionLib|MdePkg/Library/BaseOrderedCollectionRedBlackTreeLib/BaseOrderedCollectionRedBlackTreeLib.inf
   ArmTrngLib|MdePkg/Library/BaseArmTrngLibNull/BaseArmTrngLibNull.inf
