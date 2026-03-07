@@ -41,7 +41,9 @@
   # LNK1237, which is a failure to link against a symbol from a library compiled with /GL. The whole program
   # optimization tries to do away with references to this symbol. The solution is to not compile the stack
   # check libs with /GL
-#  MSFT:*_*_*_CC_FLAGS = /GL-
+#  MSFT:DEBUG_*_*_CC_FLAGS = /GL-
+#  MSFT:RELEASE_*_*_CC_FLAGS = /GL-
+  MSFT:*_*_*_DLINK_FLAGS = /INCLUDE:__security_cookie
 
   # We cannot build the GCC version with LTO (link time optimization) because we run into linker errors where
   # the stack cookie variable has been optimized away, as it looks to GCC like the variable is not used, because
