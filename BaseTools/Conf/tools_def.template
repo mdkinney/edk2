@@ -922,11 +922,9 @@ NOOPT_*_*_OBJCOPY_ADDDEBUGFLAG     = --add-gnu-debuglink="$(DEBUG_DIR)/$(MODULE_
 *_*_*_DTCPP_PATH                   = DEF(DTCPP_BIN)
 *_*_*_DTC_PATH                     = DEF(DTC_BIN)
 
-# All supported GCC archs except LOONGARCH64 support -mstack-protector-guard=global, so set that on everything except LOONGARCH64
-DEFINE GCC_ALL_CC_COMMON               = -g -Os -fshort-wchar -fno-builtin -fno-strict-aliasing -Wall -Werror -Wno-array-bounds -include AutoGen.h -fno-common -fstack-protector
-DEFINE GCC_IA32_X64_CC_FLAGS           = -mstack-protector-guard=global
-DEFINE GCC_LOONGARCH64_CC_FLAGS        = DEF(GCC_ALL_CC_COMMON) -mabi=lp64d -fno-asynchronous-unwind-tables -Wno-address -fno-short-enums -fsigned-char -ffunction-sections -fdata-sections -march=loongarch64 -mno-memcpy -Werror -Wno-maybe-uninitialized -Wno-stringop-overflow -Wno-pointer-to-int-cast -no-pie -fno-stack-protector -mno-explicit-relocs -mno-relax
-DEFINE GCC_AARCH64_CC_COMMON           = DEF(GCC_ALL_CC_COMMON) -mlittle-endian -fno-short-enums -fverbose-asm -funsigned-char  -ffunction-sections -fdata-sections -Wno-address -fno-asynchronous-unwind-tables -fno-unwind-tables -fno-pic -fno-pie -ffixed-x18 -mstack-protector-guard=global
+DEFINE GCC_ALL_CC_COMMON               = -g -Os -fshort-wchar -fno-builtin -fno-strict-aliasing -Wall -Werror -Wno-array-bounds -include AutoGen.h -fno-common -fno-stack-protector
+DEFINE GCC_LOONGARCH64_CC_FLAGS        = DEF(GCC_ALL_CC_COMMON) -mabi=lp64d -fno-asynchronous-unwind-tables -Wno-address -fno-short-enums -fsigned-char -ffunction-sections -fdata-sections -march=loongarch64 -mno-memcpy -Werror -Wno-maybe-uninitialized -Wno-stringop-overflow -Wno-pointer-to-int-cast -no-pie -mno-explicit-relocs -mno-relax
+DEFINE GCC_AARCH64_CC_COMMON           = DEF(GCC_ALL_CC_COMMON) -mlittle-endian -fno-short-enums -fverbose-asm -funsigned-char  -ffunction-sections -fdata-sections -Wno-address -fno-asynchronous-unwind-tables -fno-unwind-tables -fno-pic -fno-pie -ffixed-x18
 DEFINE GCC_AARCH64_CC_XIPCOMMON        = -mstrict-align -mgeneral-regs-only
 DEFINE GCC_RISCV64_CC_XIPFLAGS         = -mstrict-align -mgeneral-regs-only
 DEFINE GCC_DLINK2_FLAGS_COMMON         = -Wl,--script=$(EDK_TOOLS_PATH)/Scripts/GccBase.lds
@@ -953,8 +951,8 @@ DEFINE GCC_DEPS_FLAGS              = -MMD -MF $@.deps
 
 DEFINE GCC_ALL_CC_FLAGS                 = DEF(GCC_ALL_CC_COMMON) -ffunction-sections -fdata-sections -DSTRING_ARRAY_NAME=$(BASE_NAME)Strings
 
-DEFINE GCCNOLTO_IA32_CC_FLAGS           = DEF(GCC_ALL_CC_FLAGS) DEF(GCC_IA32_X64_CC_FLAGS) -m32 -march=i586 -malign-double -D EFI32 -fno-asynchronous-unwind-tables -Wno-address -fno-omit-frame-pointer -fno-pic -fno-pie
-DEFINE GCCNOLTO_X64_CC_FLAGS            = DEF(GCC_ALL_CC_FLAGS) DEF(GCC_IA32_X64_CC_FLAGS) -m64 "-DEFIAPI=__attribute__((ms_abi))" -maccumulate-outgoing-args -mno-red-zone -Wno-address -mcmodel=small -fpie -fno-asynchronous-unwind-tables -Wno-address  -fno-omit-frame-pointer
+DEFINE GCCNOLTO_IA32_CC_FLAGS           = DEF(GCC_ALL_CC_FLAGS) -m32 -march=i586 -malign-double -D EFI32 -fno-asynchronous-unwind-tables -Wno-address -fno-omit-frame-pointer -fno-pic -fno-pie
+DEFINE GCCNOLTO_X64_CC_FLAGS            = DEF(GCC_ALL_CC_FLAGS) -m64 "-DEFIAPI=__attribute__((ms_abi))" -maccumulate-outgoing-args -mno-red-zone -Wno-address -mcmodel=small -fpie -fno-asynchronous-unwind-tables -Wno-address  -fno-omit-frame-pointer
 DEFINE GCCNOLTO_IA32_X64_DLINK_COMMON   = -nostdlib -Wl,-n,-q,--gc-sections -z common-page-size=0x40
 DEFINE GCCNOLTO_IA32_X64_ASLDLINK_FLAGS = DEF(GCCNOLTO_IA32_X64_DLINK_COMMON) -Wl,--defsym=PECOFF_HEADER_SIZE=0 DEF(GCC_DLINK2_FLAGS_COMMON) -Wl,--entry,ReferenceAcpiTable -u ReferenceAcpiTable
 DEFINE GCCNOLTO_IA32_X64_DLINK_FLAGS    = DEF(GCCNOLTO_IA32_X64_DLINK_COMMON) -Wl,--entry,$(IMAGE_ENTRY_POINT) -u $(IMAGE_ENTRY_POINT) -Wl,-Map,$(DEST_DIR_DEBUG)/$(BASE_NAME).map,--whole-archive
@@ -987,7 +985,7 @@ DEFINE GCC_AARCH64_DLINK2_FLAGS      = DEF(GCCNOLTO_AARCH64_DLINK2_FLAGS) -Wno-e
 DEFINE GCC_AARCH64_ASLDLINK_FLAGS    = DEF(GCCNOLTO_AARCH64_ASLDLINK_FLAGS) DEF(GCC_DLINK_WARNING_FLAGS)
 DEFINE GCC_ASLCC_FLAGS               = DEF(GCCNOLTO_ASLCC_FLAGS) -fno-lto
 
-DEFINE GCC_RISCV_ALL_CC_FLAGS                    = -g -fshort-wchar -fno-omit-frame-pointer -fno-strict-aliasing -Wall -Werror -Wno-array-bounds -ffunction-sections -fdata-sections -include AutoGen.h -fno-common -DSTRING_ARRAY_NAME=$(BASE_NAME)Strings -msmall-data-limit=0
+DEFINE GCC_RISCV_ALL_CC_FLAGS                    = -g -fshort-wchar -fno-omit-frame-pointer -fno-strict-aliasing -Wall -Werror -Wno-array-bounds -ffunction-sections -fdata-sections -include AutoGen.h -fno-common -DSTRING_ARRAY_NAME=$(BASE_NAME)Strings -msmall-data-limit=0 -fno-stack-protector
 DEFINE GCC_RISCV_ALL_DLINK_COMMON                = -nostdlib -Wl,-n,-q,--gc-sections -z common-page-size=0x40 DEF(GCC_DLINK_WARNING_FLAGS)
 DEFINE GCC_RISCV_ALL_DLINK_FLAGS                 = DEF(GCC_RISCV_ALL_DLINK_COMMON) -Wl,--entry,$(IMAGE_ENTRY_POINT) -u $(IMAGE_ENTRY_POINT) -Wl,-Map,$(DEST_DIR_DEBUG)/$(BASE_NAME).map
 DEFINE GCC_RISCV_ALL_DLINK2_FLAGS                = -Wl,--defsym=PECOFF_HEADER_SIZE=0x220,--script=$(EDK_TOOLS_PATH)/Scripts/GccBase.lds
@@ -998,7 +996,7 @@ DEFINE GCC_RISCV_OPENSBI_TYPES                   = -DOPENSBI_EXTERNAL_SBI_TYPES=
 
 DEFINE GCC_RISCV64_ARCH                    = rv64gc
 DEFINE GCC_RISCV32_RISCV64_ASLDLINK_FLAGS  = DEF(GCC_RISCV_ALL_DLINK_COMMON) -Wl,--entry,ReferenceAcpiTable -u ReferenceAcpiTable
-DEFINE GCC_RISCV64_CC_FLAGS                = DEF(GCC_RISCV_ALL_CC_FLAGS) DEF(GCC_RISCV_ALL_CC_FLAGS_WARNING_DISABLE) DEF(GCC_RISCV_OPENSBI_TYPES) -march=DEF(GCC_RISCV64_ARCH) -fno-builtin -fno-builtin-memcpy -fno-stack-protector -Wno-address -fno-asynchronous-unwind-tables -fno-unwind-tables -fpack-struct=8 -mcmodel=medany -mabi=lp64 -mno-relax
+DEFINE GCC_RISCV64_CC_FLAGS                = DEF(GCC_RISCV_ALL_CC_FLAGS) DEF(GCC_RISCV_ALL_CC_FLAGS_WARNING_DISABLE) DEF(GCC_RISCV_OPENSBI_TYPES) -march=DEF(GCC_RISCV64_ARCH) -fno-builtin -fno-builtin-memcpy -Wno-address -fno-asynchronous-unwind-tables -fno-unwind-tables -fpack-struct=8 -mcmodel=medany -mabi=lp64 -mno-relax
 DEFINE GCC_RISCV64_DLINK_FLAGS             = DEF(GCC_RISCV_ALL_DLINK_FLAGS) -Wl,-melf64lriscv,--oformat=elf64-littleriscv,--no-relax
 DEFINE GCC_RISCV64_DLINK2_FLAGS            = DEF(GCC_RISCV_ALL_DLINK2_FLAGS)
 DEFINE GCC_RISCV64_ASM_FLAGS               = DEF(GCC_RISCV_ALL_ASM_FLAGS) -march=DEF(GCC_RISCV64_ARCH) -mcmodel=medany -mabi=lp64
@@ -1338,7 +1336,7 @@ DEFINE CLANGPDB_X64_TARGET           = -target x86_64-pc-windows-msvc
 DEFINE CLANGPDB_AARCH64_TARGET       = -target aarch64-unknown-windows-msvc
 
 DEFINE CLANGPDB_WARNING_OVERRIDES    = -Wno-parentheses-equality -Wno-tautological-compare -Wno-tautological-constant-out-of-range-compare -Wno-empty-body -Wno-varargs -Wno-unknown-warning-option -Wno-unaligned-access -Wno-microsoft-enum-forward-reference
-DEFINE CLANGPDB_ALL_CC_FLAGS         = DEF(GCC_ALL_CC_FLAGS) DEF(CLANGPDB_WARNING_OVERRIDES) -fstack-protector -funsigned-char -ftrap-function=undefined_behavior_has_been_optimized_away_by_clang -Wno-address -Wno-shift-negative-value -Wno-unknown-pragmas -Wno-incompatible-library-redeclaration -Wno-null-dereference -mno-implicit-float -mms-bitfields -mno-stack-arg-probe -fno-omit-frame-pointer -D __GNUC__=4 -D __GNUC_MINOR__=2 -D __GNUC_PATCHLEVEL__=1 -D __MINGW32__=1
+DEFINE CLANGPDB_ALL_CC_FLAGS         = DEF(GCC_ALL_CC_FLAGS) DEF(CLANGPDB_WARNING_OVERRIDES) -funsigned-char -ftrap-function=undefined_behavior_has_been_optimized_away_by_clang -Wno-address -Wno-shift-negative-value -Wno-unknown-pragmas -Wno-incompatible-library-redeclaration -Wno-null-dereference -mno-implicit-float -mms-bitfields -mno-stack-arg-probe -fno-omit-frame-pointer -D __GNUC__=4 -D __GNUC_MINOR__=2 -D __GNUC_PATCHLEVEL__=1 -D __MINGW32__=1
 
 ###########################
 # CLANGPDB IA32 definitions
@@ -1534,7 +1532,7 @@ RELEASE_CLANGDWARF_IA32_CC_FLAGS       = DEF(CLANGDWARF_ALL_CC_FLAGS) -fno-pic -
 RELEASE_CLANGDWARF_IA32_DLINK_FLAGS    = DEF(CLANGDWARF_IA32_TARGET) DEF(CLANGDWARF_IA32_X64_DLINK_FLAGS) -flto -Wl,-O3 -Wl,-melf_i386 -Wl,--oformat,elf32-i386
 RELEASE_CLANGDWARF_IA32_DLINK2_FLAGS   = DEF(CLANGDWARF_IA32_DLINK2_FLAGS) -O3 -fuse-ld=lld -no-pie
 
-NOOPT_CLANGDWARF_IA32_CC_FLAGS         = DEF(CLANGDWARF_ALL_CC_FLAGS) -fno-stack-protector -fno-pic -fno-pie -m32 -O0 -march=i586 DEF(CLANGDWARF_IA32_TARGET) -g -malign-double
+NOOPT_CLANGDWARF_IA32_CC_FLAGS         = DEF(CLANGDWARF_ALL_CC_FLAGS) -fno-pic -fno-pie -m32 -O0 -march=i586 DEF(CLANGDWARF_IA32_TARGET) -g -malign-double
 NOOPT_CLANGDWARF_IA32_DLINK_FLAGS      = DEF(CLANGDWARF_IA32_TARGET) DEF(CLANGDWARF_IA32_X64_DLINK_FLAGS) -Wl,-O0 -Wl,-melf_i386 -Wl,--oformat,elf32-i386
 NOOPT_CLANGDWARF_IA32_DLINK2_FLAGS     = DEF(CLANGDWARF_IA32_DLINK2_FLAGS) -O0 -fuse-ld=lld -no-pie
 
@@ -1630,7 +1628,7 @@ RELEASE_CLANGDWARF_AARCH64_DLINK_FLAGS = DEF(CLANGDWARF_AARCH64_DLINK_FLAGS) -fl
 # CLANGDWARF RISCV64 definitions
 ##################
 DEFINE CLANGDWARF_RISCV64_TARGET    = -target riscv64-linux-gnu
-DEFINE CLANGDWARF_RISCV64_CC_COMMON = DEF(GCC_RISCV_ALL_CC_FLAGS) DEF(GCC_RISCV_ALL_CC_FLAGS_WARNING_DISABLE) DEF(GCC_RISCV_OPENSBI_TYPES) -march=DEF(GCC_RISCV64_ARCH) -fno-builtin -fno-builtin-memcpy -fno-stack-protector -Wno-address -fno-asynchronous-unwind-tables -fno-unwind-tables -fpack-struct=8 -mcmodel=medany -mabi=lp64 -mno-relax
+DEFINE CLANGDWARF_RISCV64_CC_COMMON = DEF(GCC_RISCV_ALL_CC_FLAGS) DEF(GCC_RISCV_ALL_CC_FLAGS_WARNING_DISABLE) DEF(GCC_RISCV_OPENSBI_TYPES) -march=DEF(GCC_RISCV64_ARCH) -fno-builtin -fno-builtin-memcpy -Wno-address -fno-asynchronous-unwind-tables -fno-unwind-tables -fpack-struct=8 -mcmodel=medany -mabi=lp64 -mno-relax
 DEFINE CLANGDWARF_RISCV64_CC_FLAGS  = DEF(CLANGDWARF_RISCV64_CC_COMMON) DEF(CLANGDWARF_RISCV64_TARGET) DEF(CLANGDWARF_WARNING_OVERRIDES)
 
 # This is similar to GCC flags but without -n
