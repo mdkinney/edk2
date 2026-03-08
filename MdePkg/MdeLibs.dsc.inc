@@ -19,6 +19,13 @@
   DEFINE CUSTOM_STACK_CHECK_LIB = NONE
 !endif
 
+[BuildOptions]
+!if $(CUSTOM_STACK_CHECK_LIB) in "STATIC DYNAMIC"
+  MSFT:*_*_*_CC_FLAGS = /GS
+  MSFT:*_*_IA32_DLINK_FLAGS = /INCLUDE:___security_cookie
+  MSFT:*_*_X64_DLINK_FLAGS = /INCLUDE:__security_cookie
+!endif
+
 [LibraryClasses]
   OrderedCollectionLib|MdePkg/Library/BaseOrderedCollectionRedBlackTreeLib/BaseOrderedCollectionRedBlackTreeLib.inf
   ArmTrngLib|MdePkg/Library/BaseArmTrngLibNull/BaseArmTrngLibNull.inf
