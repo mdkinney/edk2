@@ -41,6 +41,7 @@
   GCC:*_*_X64_CC_FLAGS     = -mstack-protector-guard=global
   GCC:*_*_AARCH64_CC_FLAGS = -mstack-protector-guard=global
   GCC:*_*_RISCV64_CC_FLAGS = -mstack-protector-guard=global
+  GCC:*_*_*_DLINK_FLAGS    = -Wl,--undefined=__stack_chk_fail
 !endif
 
 [LibraryClasses]
