@@ -28,6 +28,9 @@
   MSFT:*_*_IA32_DLINK_FLAGS = /INCLUDE:___security_cookie
   MSFT:*_*_X64_DLINK_FLAGS  = /INCLUDE:__security_cookie
 
+  CLANGPDB:*_*_IA32_DLINK_FLAGS = /INCLUDE:___security_cookie /INCLUDE:_StackCheckFailure
+  CLANGPDB:*_*_X64_DLINK_FLAGS  = /INCLUDE:__security_cookie /INCLUDE:StackCheckFailure
+
   #
   # GCC family compiler and linker settings to enable stack checks
   # All supported GCC archs except LOONGARCH64 support
