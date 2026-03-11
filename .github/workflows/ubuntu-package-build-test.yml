@@ -150,23 +150,24 @@ jobs:
       - name: Generate Unit Test HTML Coverage Report
         if: ${{ always() && contains(inputs['stuart-ci-build-params'], 'HostBasedUnitTestRunner=run') }}
         run: |
-          coverage_input=""
-
-          if [ -f "Build/all-coverage.info" ]; then
-            coverage_input="Build/all-coverage.info"
-          elif [ -f "Build/coverage.lcov" ]; then
-            coverage_input="Build/coverage.lcov"
-          fi
-
-          if [ -n "$coverage_input" ]; then
-            genhtml "$coverage_input" --output-directory Build/coverage-html --legend --branch-coverage
+          if [ -f "Build/coverage.xml" ]; then
+            dotnet tool install -g dotnet-reportgenerator-globaltool
+            export PATH="$PATH:$HOME/.dotnet/tools"
+            reportgenerator \
+              -reports:Build/coverage.xml \
+              -targetdir:Build/coverage-html \
+              -reporttypes:"HtmlInline;MarkdownSummaryGithub" \
+              -sourcedirs:"$GITHUB_WORKSPACE"
           else
-            echo "No LCOV coverage data found. Skipping HTML coverage generation."
+            echo "No coverage.xml found. Skipping HTML coverage generation."
           fi
       - name: Add Unit Test Code Coverage Report to Job Summary
         if: ${{ always() && contains(inputs['stuart-ci-build-params'], 'HostBasedUnitTestRunner=run') }}
         run: |
-          if [ -f "Build/coverage.md" ]; then
+          if [ -f "Build/coverage-html/SummaryGithub.md" ]; then
+            echo "Unit Test Code Coverage Report:" >> $GITHUB_STEP_SUMMARY
+            cat Build/coverage-html/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+          elif [ -f "Build/coverage.md" ]; then
             echo "Unit Test Code Coverage Report:" >> $GITHUB_STEP_SUMMARY
             cat Build/coverage.md >> $GITHUB_STEP_SUMMARY
           else
