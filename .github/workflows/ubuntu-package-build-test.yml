@@ -147,6 +147,22 @@ jobs:
         with:
           coverage_file: "Build/coverage.xml"
           output_file: "Build/coverage.md"
+      - name: Generate Unit Test HTML Coverage Report
+        if: ${{ always() && contains(inputs['stuart-ci-build-params'], 'HostBasedUnitTestRunner=run') }}
+        run: |
+          coverage_input=""
+
+          if [ -f "Build/all-coverage.info" ]; then
+            coverage_input="Build/all-coverage.info"
+          elif [ -f "Build/coverage.lcov" ]; then
+            coverage_input="Build/coverage.lcov"
+          fi
+
+          if [ -n "$coverage_input" ]; then
+            genhtml "$coverage_input" --output-directory Build/coverage-html --legend --branch-coverage
+          else
+            echo "No LCOV coverage data found. Skipping HTML coverage generation."
+          fi
       - name: Add Unit Test Code Coverage Report to Job Summary
         if: ${{ always() && contains(inputs['stuart-ci-build-params'], 'HostBasedUnitTestRunner=run') }}
         run: |
@@ -156,6 +172,13 @@ jobs:
           else
             echo "No code coverage report found." >> $GITHUB_STEP_SUMMARY
           fi
+      - name: Upload Unit Test HTML Coverage Report
+        if: ${{ always() && contains(inputs['stuart-ci-build-params'], 'HostBasedUnitTestRunner=run') }}
+        uses: actions/upload-artifact@v6
+        with:
+          name: Unit Test HTML Coverage Report (${{ matrix.config.build_arch }}-${{ matrix.config.build_type }}-${{ matrix.config.tool_chain_tag }}-${{ strategy.job-index }})
+          if-no-files-found: ignore
+          path: Build/coverage-html
       - name: Upload Linux Packages Logs ${{ matrix.config.tool_chain_tag }} ${{ matrix.config.build_type }} ${{ matrix.config.build_arch }}
         uses: actions/upload-artifact@v6
         with:
@@ -166,6 +189,7 @@ jobs:
             Build/**/BUILDLOG*.txt
             Build/*.txt
             Build/*.log
+            Build/*.info
             Build/*.xml
             Build/*.lcov
             Build/*.md
