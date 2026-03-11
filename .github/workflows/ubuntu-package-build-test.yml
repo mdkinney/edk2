@@ -135,20 +135,20 @@ jobs:
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}" -a ${{ matrix.config.build_arch }} -t ${{ matrix.config.build_type }} TOOL_CHAIN_TAG=${{ matrix.config.tool_chain_tag }} -p ${{ matrix.config.build_package }} ${{ inputs.stuart-ci-build-params }}
       - name: Publish Unit Test Results
-        if: ${{ always() && contains(matrix.config.stuart_ci_build_params, 'HostBasedUnitTestRunner=run') }}
+        if: ${{ always() && contains(inputs.stuart_ci_build_params, 'HostBasedUnitTestRunner=run') }}
         uses: mikepenz/action-junit-report@v6.1.0
         with:
           report_paths: "Build/**/*.result.xml"
           detailed_summary: true
           include_passed: true
       - name: Generate Unit Test Code Coverage Report
-        if: ${{ always() && contains(matrix.config.stuart_ci_build_params, 'HostBasedUnitTestRunner=run') }}
+        if: ${{ always() && contains(inputs.stuart_ci_build_params, 'HostBasedUnitTestRunner=run') }}
         uses: alan-null/cobertura-to-markdown@v1
         with:
           coverage_file: "Build/coverage.xml"
           output_file: "Build/coverage.md"
       - name: Add Unit Test Code Coverage Report to Job Summary
-        if: ${{ always() && contains(matrix.config.stuart_ci_build_params, 'HostBasedUnitTestRunner=run') }}
+        if: ${{ always() && contains(inputs.stuart_ci_build_params, 'HostBasedUnitTestRunner=run') }}
         run: |
           if [ -f "Build/coverage.md" ]; then
             echo "Unit Test Code Coverage Report:" >> $GITHUB_STEP_SUMMARY
