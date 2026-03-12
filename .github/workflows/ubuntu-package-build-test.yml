@@ -147,6 +147,7 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           files: Build/coverage.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
           fail_ci_if_error: false
       - name: Upload Linux Packages Logs ${{ matrix.config.tool_chain_tag }} ${{ matrix.config.build_type }} ${{ matrix.config.build_arch }}
