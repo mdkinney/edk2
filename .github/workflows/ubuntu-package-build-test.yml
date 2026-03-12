@@ -140,46 +140,15 @@ jobs:
         with:
           report_paths: "Build/**/*.result.xml"
           detailed_summary: true
-          include_passed: true
-      - name: Generate Unit Test Code Coverage Report
+          include_passed: false
+          check_name: "Unit Test Results"
+      - name: Upload Coverage to Codecov
         if: ${{ always() && contains(inputs['stuart-ci-build-params'], 'HostBasedUnitTestRunner=run') }}
-        uses: alan-null/cobertura-to-markdown@v1
+        uses: codecov/codecov-action@v3
         with:
-          coverage_file: "Build/coverage.xml"
-          output_file: "Build/coverage.md"
-      - name: Generate Unit Test HTML Coverage Report
-        if: ${{ always() && contains(inputs['stuart-ci-build-params'], 'HostBasedUnitTestRunner=run') }}
-        run: |
-          if [ -f "Build/coverage.xml" ]; then
-            dotnet tool install -g dotnet-reportgenerator-globaltool
-            export PATH="$PATH:$HOME/.dotnet/tools"
-            reportgenerator \
-              -reports:Build/coverage.xml \
-              -targetdir:Build/coverage-html \
-              -reporttypes:"HtmlInline;MarkdownSummaryGithub" \
-              -sourcedirs:"$GITHUB_WORKSPACE"
-          else
-            echo "No coverage.xml found. Skipping HTML coverage generation."
-          fi
-      - name: Add Unit Test Code Coverage Report to Job Summary
-        if: ${{ always() && contains(inputs['stuart-ci-build-params'], 'HostBasedUnitTestRunner=run') }}
-        run: |
-          if [ -f "Build/coverage-html/SummaryGithub.md" ]; then
-            echo "Unit Test Code Coverage Report:" >> $GITHUB_STEP_SUMMARY
-            cat Build/coverage-html/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
-          elif [ -f "Build/coverage.md" ]; then
-            echo "Unit Test Code Coverage Report:" >> $GITHUB_STEP_SUMMARY
-            cat Build/coverage.md >> $GITHUB_STEP_SUMMARY
-          else
-            echo "No code coverage report found." >> $GITHUB_STEP_SUMMARY
-          fi
-      - name: Upload Unit Test HTML Coverage Report
-        if: ${{ always() && contains(inputs['stuart-ci-build-params'], 'HostBasedUnitTestRunner=run') }}
-        uses: actions/upload-artifact@v6
-        with:
-          name: Unit Test HTML Coverage Report (${{ matrix.config.build_arch }}-${{ matrix.config.build_type }}-${{ matrix.config.tool_chain_tag }}-${{ strategy.job-index }})
-          if-no-files-found: ignore
-          path: Build/coverage-html
+          files: Build/coverage.xml
+          verbose: true
+          fail_ci_if_error: false
       - name: Upload Linux Packages Logs ${{ matrix.config.tool_chain_tag }} ${{ matrix.config.build_type }} ${{ matrix.config.build_arch }}
         uses: actions/upload-artifact@v6
         with:
