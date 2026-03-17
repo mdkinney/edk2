@@ -16,6 +16,104 @@ extern "C" {
   #include <Library/HostMemoryAllocationBelowAddressLib.h>
 }
 
+typedef union {
+  struct {
+    UINT64 Bit0 : 1;
+    UINT64 Bit1 : 1;
+    UINT64 A : 30;
+    UINT64 B : 31;
+    UINT64 C : 1;
+  } Bits;
+  UINT64 Uint64;
+} SAMPLE_UNION;
+
+#define ZERO 0
+
+TEST (SimpleCompareTests, TestAgainstZero) {
+  UINTN   ValueN;
+  UINT32  Value32;
+  UINT32  Value64;
+  SAMPLE_UNION SampleUnion;
+
+  ValueN = 0;
+  ASSERT_TRUE (ValueN == 0);
+  Value32 = 0;
+  ASSERT_TRUE (Value32 == 0);
+  Value64 = 0;
+  ASSERT_TRUE (Value64 == 0);
+  SampleUnion.Uint64 = 0;
+  ASSERT_TRUE (SampleUnion.Uint64 == 0);
+  ASSERT_TRUE (SampleUnion.Bits.Bit0 == 0);
+  ASSERT_TRUE (SampleUnion.Bits.Bit1 == 0);
+  ASSERT_TRUE (SampleUnion.Bits.A == 0);
+  ASSERT_TRUE (SampleUnion.Bits.B == 0);
+  ASSERT_TRUE (SampleUnion.Bits.C == 0);
+
+  ValueN = 0;
+  ASSERT_EQ (ValueN, ZERO);
+  Value32 = 0;
+  ASSERT_EQ (Value32, ZERO);
+  Value64 = 0;
+  ASSERT_EQ (Value64, ZERO);
+  SampleUnion.Uint64 = 0;
+  ASSERT_EQ (SampleUnion.Uint64, ZERO);
+  ASSERT_EQ (SampleUnion.Bits.Bit0, ZERO);
+  ASSERT_EQ (SampleUnion.Bits.Bit1, ZERO);
+  ASSERT_EQ (SampleUnion.Bits.A, ZERO);
+  ASSERT_EQ (SampleUnion.Bits.B, ZERO);
+  ASSERT_EQ (SampleUnion.Bits.C, ZERO);
+
+
+  ValueN = 0;
+  ASSERT_EQ (ValueN, 0);
+
+  ValueN = 1;
+  ASSERT_NE (ValueN, 0);
+
+  ValueN = 0;
+  EXPECT_EQ (ValueN, 0);
+
+  ValueN = 1;
+  EXPECT_NE (ValueN, 0);
+
+  Value32 = 0;
+  ASSERT_EQ (Value32, 0);
+
+  Value32 = 1;
+  ASSERT_NE (Value32, 0);
+
+  Value32 = 0;
+  EXPECT_EQ (Value32, 0);
+
+  Value32 = 1;
+  EXPECT_NE (Value32, 0);
+
+  Value64 = 0;
+  ASSERT_EQ (Value64, 0);
+
+  Value64 = 1;
+  ASSERT_NE (Value64, 0);
+
+  Value64 = 0;
+  EXPECT_EQ (Value64, 0);
+
+  Value64 = 1;
+  EXPECT_NE (Value64, 0);
+
+  SampleUnion.Uint64 = 0;
+  ASSERT_EQ (SampleUnion.Uint64, 0);
+  SampleUnion.Uint64 = 1;
+  ASSERT_NE (SampleUnion.Uint64, 0);
+
+  SampleUnion.Uint64 = 0;
+  EXPECT_EQ (SampleUnion.Bits.Bit0, 0);
+  EXPECT_EQ (SampleUnion.Bits.Bit1, 0);
+  EXPECT_EQ (SampleUnion.Bits.A, 0);
+  EXPECT_EQ (SampleUnion.Bits.B, 0);
+  EXPECT_EQ (SampleUnion.Bits.C, 0);
+}
+
+
 /**
   Sample unit test that verifies the expected result of an unsigned integer
   addition operation.
