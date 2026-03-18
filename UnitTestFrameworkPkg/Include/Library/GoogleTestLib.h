@@ -26,6 +26,130 @@ using ::testing::Throws;
 using ::testing::ThrowsMessage;
 using ::testing::HasSubstr;
 
+namespace TestLib {
+
+template <typename LhsType, typename RhsType>
+bool
+ValuesAreEqualDispatch (
+  const LhsType &Lhs,
+  const RhsType &Rhs,
+  std::true_type
+  )
+{
+  typedef typename std::common_type<LhsType, RhsType>::type  CommonType;
+
+  const bool  LhsIsZero = (Lhs == static_cast<LhsType> (0));
+  const bool  RhsIsZero = (Rhs == static_cast<RhsType> (0));
+
+  if (LhsIsZero && !RhsIsZero) {
+    return (static_cast<RhsType> (0) == Rhs);
+  }
+
+  if (RhsIsZero && !LhsIsZero) {
+    return (Lhs == static_cast<LhsType> (0));
+  }
+
+  return (static_cast<CommonType> (Lhs) == static_cast<CommonType> (Rhs));
+}
+
+template <typename LhsType, typename RhsType>
+bool
+ValuesAreEqualDispatch (
+  const LhsType &Lhs,
+  const RhsType &Rhs,
+  std::false_type
+  )
+{
+  return (Lhs == Rhs);
+}
+
+template <typename LhsType, typename RhsType>
+bool
+ValuesAreEqual (
+  const LhsType &Lhs,
+  const RhsType &Rhs
+  )
+{
+  return ValuesAreEqualDispatch (
+           Lhs,
+           Rhs,
+           std::integral_constant<bool, std::is_integral<LhsType>::value && std::is_integral<RhsType>::value> ()
+           );
+}
+
+template <bool ExpectEqual, typename LhsType, typename RhsType>
+::testing::AssertionResult
+CompareRelationSafe (
+  const char   *LhsExpr,
+  const char   *RhsExpr,
+  const LhsType &Lhs,
+  const RhsType &Rhs
+  )
+{
+  typedef typename std::decay<LhsType>::type  LhsValueType;
+  typedef typename std::decay<RhsType>::type  RhsValueType;
+  const bool  AreEqual = ValuesAreEqual<LhsValueType, RhsValueType> (Lhs, Rhs);
+
+  if (AreEqual == ExpectEqual) {
+    return ::testing::AssertionSuccess ();
+  }
+
+  const char  *ExpectedRelation = ExpectEqual ? "equality" : "inequality";
+
+  return ::testing::AssertionFailure ()
+         << "Expected " << ExpectedRelation << " of these values:\n"
+         << "  " << LhsExpr << "\n"
+         << "    Which is: " << Lhs << "\n"
+         << "  " << RhsExpr << "\n"
+         << "    Which is: " << Rhs;
+}
+
+template <typename LhsType, typename RhsType>
+::testing::AssertionResult
+CompareEqSafe (
+  const char   *LhsExpr,
+  const char   *RhsExpr,
+  const LhsType &Lhs,
+  const RhsType &Rhs
+  )
+{
+  return CompareRelationSafe<true> (LhsExpr, RhsExpr, Lhs, Rhs);
+}
+
+template <typename LhsType, typename RhsType>
+::testing::AssertionResult
+CompareNeSafe (
+  const char   *LhsExpr,
+  const char   *RhsExpr,
+  const LhsType &Lhs,
+  const RhsType &Rhs
+  )
+{
+  return CompareRelationSafe<false> (LhsExpr, RhsExpr, Lhs, Rhs);
+}
+
+} // namespace TestLib
+
+#ifdef EXPECT_EQ
+  #undef EXPECT_EQ
+#endif
+#define EXPECT_EQ(val1, val2)  EXPECT_PRED_FORMAT2 (::TestLib::CompareEqSafe, val1, val2)
+
+#ifdef ASSERT_EQ
+  #undef ASSERT_EQ
+#endif
+#define ASSERT_EQ(val1, val2)  ASSERT_PRED_FORMAT2 (::TestLib::CompareEqSafe, val1, val2)
+
+#ifdef EXPECT_NE
+  #undef EXPECT_NE
+#endif
+#define EXPECT_NE(val1, val2)  EXPECT_PRED_FORMAT2 (::TestLib::CompareNeSafe, val1, val2)
+
+#ifdef ASSERT_NE
+  #undef ASSERT_NE
+#endif
+#define ASSERT_NE(val1, val2)  ASSERT_PRED_FORMAT2 (::TestLib::CompareNeSafe, val1, val2)
+
 //
 // Extended macros for testing exceptions with a specific description string
 // in the exception message.  Typically used to check that the expression
