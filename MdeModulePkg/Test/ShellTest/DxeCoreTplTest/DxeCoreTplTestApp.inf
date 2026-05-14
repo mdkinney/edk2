@@ -1,0 +1,46 @@
+## @file
+# UEFI Shell test application for DXE Core TPL timer interrupt recursion fix.
+#
+# Verifies that the mInterruptedTplMask-based fix in CoreRaiseTpl/CoreRestoreTpl
+# prevents infinite recursion from timer interrupts while preserving normal
+# TPL and interrupt behavior.
+#
+# Copyright (c) 2024, Intel Corporation. All rights reserved.<BR>
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+[Defines]
+  INF_VERSION    = 0x00010006
+  BASE_NAME      = DxeCoreTplTestApp
+  FILE_GUID      = 3A7E2C5D-8B1F-4D96-A4E3-F7B8C1D2E9A0
+  MODULE_TYPE    = UEFI_APPLICATION
+  VERSION_STRING = 1.0
+  ENTRY_POINT    = DxeEntryPoint
+
+[Sources]
+  DxeCoreTplTest.h
+  DxeCoreTplTestApp.c
+  TplManagedTests.c
+  CpuProtocolTests.c
+  ArchSpecificTests.c
+  StressTests.c
+  IrqHookTests.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  UnitTestFrameworkPkg/UnitTestFrameworkPkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  BaseLib
+  DebugLib
+  UnitTestLib
+  UefiLib
+  UefiBootServicesTableLib
+  PrintLib
+  TimerLib
+
+[Protocols]
+  gEfiCpuArchProtocolGuid         ## CONSUMES
+  gEfiTimerArchProtocolGuid       ## CONSUMES
