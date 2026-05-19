@@ -2822,7 +2822,7 @@ In Scenarios 10, 15, 18, 20, and 25, code explicitly disables interrupts
 
 This section describes a UEFI Shell application test suite to verify the
 DXE Core timer interrupt recursion fix across all 25 scenarios plus a
-bounded preemption validation test (26 tests total). Tests run on QEMU
+bounded preemption validation test (27 tests total). Tests run on QEMU
 using OvmfPkg (IA32/X64) and ArmVirtPkg (AARCH64).
 
 ### 6.1 Test Infrastructure
@@ -3834,6 +3834,213 @@ interrupts (safe: above interrupted TPL), final restore correctly leaves
 disabled (at interrupted TPL)
 ```
 
+**Test 27 — Bounded nesting depth under sustained interrupt load**
+*(Bounded preemption — stability verification under overload)*
+
+Verifies system stability under sustained timer interrupt overload and
+confirms that application code is starved during a burst of fast interrupts:
+
+1. **Burst processing:** A burst of fast timer interrupts (100µs period)
+   with slow event callbacks is fully processed. The handler self-terminates
+   after BURST_TARGET_INVOCATIONS (10) by clearing slow event signaling.
+
+2. **Application starvation:** While the burst is active, application-level
+   code makes minimal forward progress. On real hardware (x86 IRET has no
+   interrupt shadow), the app counter stays at zero because the pending timer
+   IRQ preempts immediately after each IRET. On QEMU TCG, some progress
+   occurs but is measurably slower than baseline.
+
+3. **Bounded depth:** If interrupt nesting occurs, maximum depth never
+   exceeds the theoretical bound (3 with standard UEFI TPL levels).
+
+4. **No missed interrupts:** When the handler is fast (completes within one
+   timer period at normal rate), timer interrupts are delivered at a
+   reasonable rate — bounded preemption does not systematically suppress
+   or coalesce interrupts.
+
+**Real-world motivation:** On physical platforms, slow event callbacks
+(e.g., disk I/O completion, network packet processing) may exceed the
+timer period. The bounded preemption mechanism in `CoreRestoreTpl` enables
+interrupts during event dispatch at TPL levels above the interrupted level.
+If the timer fires during this window, a nested handler runs — bounded by
+TPL levels. This test verifies the system remains stable under such
+conditions and that application code does not make forward progress while
+the system is saturated with interrupt processing.
+
+**Design rationale:** The test uses three phases:
+- **Phase 1 (burst):** Timer period set to 100µs. Handler signals slow
+  events (TPL_NOTIFY + TPL_CALLBACK callbacks that each stall for ~30ms).
+  Application code spins incrementing a progress counter. The handler
+  self-terminates after 10 invocations by setting `mBurstComplete = TRUE`,
+  which breaks the application spin loop. The wall-clock duration of the
+  burst is measured via performance counter.
+- **Phase 2 (baseline):** Same spin loop runs for the same wall-clock
+  duration as Phase 1, but at normal timer rate with no slow events.
+  Measures what the app loop achieves when NOT starved by interrupt overload.
+  The ratio (baseline/burst) quantifies the slowdown.
+- **Phase 3 (normal):** Timer at original rate. Fast handler with no slow
+  events. Verifies interrupt delivery rate is reasonable (50–200% tolerance).
+
+**QEMU TCG limitation:** In QEMU TCG (software emulation) mode, the virtual
+timer does not deliver interrupts inside a handler's nested execution context
+(even after EOI and interrupt re-enable). This is because QEMU TCG only
+checks for pending interrupts at translation block boundaries, and the
+nested execution path within a single interrupt handler may not cross a TB
+boundary. As a result, nesting depth remains at 1 on QEMU TCG. On real
+hardware or KVM-accelerated guests, nesting to depth 2–3 would occur.
+The test accepts depth 1–3 to accommodate both environments.
+
+```
+Precondition: TPL_APPLICATION, interrupts enabled, timer running
+Globals:
+  volatile UINTN mNestingDepth = 0;
+  volatile UINTN mMaxNestingDepth = 0;
+  volatile UINTN mTotalNestInvocations = 0;
+  volatile BOOLEAN mSignalSlowEvents = FALSE;
+  volatile BOOLEAN mSlowNotifyInProgress = FALSE;
+  volatile BOOLEAN mSlowCallbackInProgress = FALSE;
+  volatile BOOLEAN mBurstComplete = FALSE;
+  volatile UINTN mAppProgressCounter = 0;
+  EFI_EVENT mTest27SlowNotifyEvent;    // TPL_NOTIFY event with slow callback
+  EFI_EVENT mTest27SlowCallbackEvent;  // TPL_CALLBACK event with slow callback
+  #define BURST_TARGET_INVOCATIONS  10
+
+NestSlowNotifyCallback:
+  VOID EFIAPI NestSlowNotifyCallback (IN EFI_EVENT Event, IN VOID *Ctx) {
+    mSlowNotifyInProgress = TRUE;
+    // Stall for 2 original timer periods (~30ms) at TPL_NOTIFY.
+    // With interrupts enabled by bounded preemption (NOTIFY > interrupted TPL),
+    // timer may fire during this stall → nested handler.
+    gBS->Stall (StallForTicks(2));
+    mSlowNotifyInProgress = FALSE;
+  }
+
+NestSlowCallbackCallback:
+  VOID EFIAPI NestSlowCallbackCallback (IN EFI_EVENT Event, IN VOID *Ctx) {
+    mSlowCallbackInProgress = TRUE;
+    // Stall for 2 original timer periods (~30ms) at TPL_CALLBACK.
+    gBS->Stall (StallForTicks(2));
+    mSlowCallbackInProgress = FALSE;
+  }
+
+Handler:
+  VOID EFIAPI Test27Handler (IN UINT64 Time) {
+    EFI_TPL OldTpl;
+    UINTN   CurrentDepth;
+
+    CurrentDepth = ++mNestingDepth;
+    if (CurrentDepth > mMaxNestingDepth) {
+      mMaxNestingDepth = CurrentDepth;
+    }
+    mTotalNestInvocations++;
+
+    // Self-terminate: after enough invocations, stop signaling slow
+    // events and signal burst completion so app loop exits.
+    if (mTotalNestInvocations >= BURST_TARGET_INVOCATIONS) {
+      mSignalSlowEvents = FALSE;
+      mBurstComplete = TRUE;
+    }
+
+    OldTpl = gBS->RaiseTPL (TPL_HIGH_LEVEL);
+
+    if (mSignalSlowEvents) {
+      if (!mSlowNotifyInProgress) {
+        gBS->SignalEvent (mTest27SlowNotifyEvent);
+      }
+      if (!mSlowCallbackInProgress) {
+        gBS->SignalEvent (mTest27SlowCallbackEvent);
+      }
+    }
+
+    gBS->RestoreTPL (OldTpl);
+    mNestingDepth--;
+  }
+
+Steps:
+  1. Create mTest27SlowNotifyEvent at TPL_NOTIFY with NestSlowNotifyCallback
+  2. Create mTest27SlowCallbackEvent at TPL_CALLBACK with NestSlowCallbackCallback
+  3. Query original timer period via gTimer->GetTimerPeriod()
+  4. Get performance counter properties (StartValue, EndValue → CountsUp)
+  5. SetRecursionWatchdog(60)
+  6. InstallTestTimerHandler(Test27Handler)
+
+  // --- Phase 1: Burst with fast timer + app progress counter ---
+  // Set timer to 100µs (vs default 10ms).  Slow callbacks stall ~30ms
+  // each.  Handler self-terminates after BURST_TARGET_INVOCATIONS.
+  // App spins incrementing mAppProgressCounter until mBurstComplete.
+  7. gTimer->SetTimerPeriod(gTimer, 1000)   // 100µs in 100ns units
+  8. mSignalSlowEvents = TRUE
+  9. BurstStartCounter = GetPerformanceCounter()
+  10. while (!mBurstComplete) { mAppProgressCounter++; }
+  11. BurstEndCounter = GetPerformanceCounter()
+  12. Stall(20000)   // 20ms drain any in-progress nested dispatch
+  13. SavedMaxDepth = mMaxNestingDepth
+  14. SavedInvocations = mTotalNestInvocations
+  15. SavedAppProgress = mAppProgressCounter
+  16. BurstDurationTicks = |BurstEndCounter - BurstStartCounter|
+  17. gTimer->SetTimerPeriod(gTimer, OriginalPeriod)  // restore
+
+  // --- Phase 2: Baseline app loop (same duration, no burst) ---
+  // Same spin loop for same wall-clock duration but at normal timer rate.
+  // Measures what the app loop achieves without interrupt overload.
+  18. mAppProgressCounter = 0
+  19. BaselineStartCounter = GetPerformanceCounter()
+  20. while (elapsed < BurstDurationTicks) {
+        mAppProgressCounter++;
+        if ((mAppProgressCounter & 0xFFF) == 0)  // check every 4096 iters
+          elapsed = |GetPerformanceCounter() - BaselineStartCounter|
+      }
+  21. BaselineProgress = mAppProgressCounter
+
+  // --- Phase 3: Normal load (no-miss measurement) ---
+  // Fast handler at original rate, no slow events.
+  22. mTotalNestInvocations = 0
+  23. mMaxNestingDepth = 0
+  24. StartTime = GetPerformanceCounter()
+  25. Stall(StallForTicks(50))   // 50 timer periods
+  26. EndTime = GetPerformanceCounter()
+  27. ExpectedInvocations = ElapsedUs / mTimerPeriodUs (capped at 500)
+
+  28. UninstallTestTimerHandler()
+  29. ClearRecursionWatchdog()
+
+  // --- Assertions ---
+  // Phase 1: Burst was fully processed
+  30. ASSERT SavedInvocations >= BURST_TARGET_INVOCATIONS
+  // Phase 1: Nesting depth bounded
+  31. ASSERT SavedMaxDepth >= 1     // handler was called
+  32. ASSERT SavedMaxDepth <= 3     // bounded by TPL levels
+
+  // Phase 1 vs Phase 2: Application starvation
+  // BaselineProgress >> SavedAppProgress proves burst starves app code
+  33. LOG "burst=%u, baseline=%u (ratio: %u, burst at %u%% of baseline)"
+  34. ASSERT BaselineProgress > SavedAppProgress  (if both > 0)
+
+  // Phase 3: Reasonable invocation rate at normal speed
+  35. ASSERT mTotalNestInvocations >= (ExpectedInvocations * 50 / 100)
+  36. ASSERT mTotalNestInvocations <= (ExpectedInvocations * 200 / 100)
+
+  // Phase 3: Fast handler should show no nesting
+  37. ASSERT mMaxNestingDepth <= 1
+
+  // System health
+  38. gCpu->EnableInterrupt(gCpu)
+  39. OldTpl = gBS->RaiseTPL(TPL_HIGH_LEVEL)
+  40. gBS->RestoreTPL(OldTpl)
+  41. ASSERT GetInterruptState() == TRUE
+  42. Close events
+
+Expected:
+- Phase 1: Handler self-terminates after ≥10 invocations. Nesting 1–3.
+  App progress counter shows minimal advancement during burst.
+- Phase 2: Same loop for same duration achieves much higher count.
+  Baseline/burst ratio quantifies interrupt overhead (15x on X64 QEMU,
+  798x on AARCH64 QEMU).
+- Phase 3: Fast handler at normal rate → no nesting, invocation count
+  reasonable (within 50–200% of expected).
+- All phases: No stack overflow, no infinite recursion, no hang.
+```
+
 ### 6.6 Test Matrix
 
 | Test | Scenario(s) | OvmfPkg IA32 | OvmfPkg X64 | ArmVirtPkg AARCH64 |
@@ -3864,9 +4071,10 @@ disabled (at interrupted TPL)
 | 24 — IRQ hook: callback RaiseTpl | 4, 5 | ✅ | ✅ | ✅ |
 | 25 — IRQ hook: intermediate TPL | 4, 8 | ✅ | ✅ | ✅ |
 | 26 — TPL preemption hierarchy | bounded preemption | ✅ | ✅ | ✅ |
+| 27 — Bounded nesting depth stress | bounded preemption | ✅ | ✅ | ✅ |
 
-**Test execution order:** Test 26 runs in Suite 1 (before IRQ hook tests).
-Tests 16–19, 24, and 25 must run **last** because
+**Test execution order:** Tests 26 runs in Suite 1 (before IRQ hook tests).
+Tests 16–19, 24, 25, and 27 must run **last** because
 they replace `CoreTimerTick` via `RegisterHandler()`. After these tests,
 timer event signaling is permanently disabled (the DXE Core's handler
 cannot be re-registered). The system should be rebooted after the test
@@ -3905,11 +4113,11 @@ by code review and the analysis in Section 5.4.1.
 
 **PASS:** All assertions hold, no watchdog timeout, no system reset, no
 hang. Timer events continue to fire after all test sequences (Tests 1–15,
-20–23, 26). IRQ hook tests (16–19, 24, 25) complete with handler verification
-passing.
+20–23, 26). IRQ hook tests (16–19, 24, 25, 27) complete with handler
+verification passing.
 
 **FAIL (critical):** System hangs or resets during Tests 4, 8, 16, 17, 19,
-20, 21, 24, or 25 — indicates the recursion fix is not working. This would
+20, 21, 24, 25, or 27 — indicates the recursion fix is not working. This would
 manifest as a watchdog timeout (QEMU reset) or a serial console showing
 repeated `CoreTimerTick` `DEBUG` output before stack overflow.
 

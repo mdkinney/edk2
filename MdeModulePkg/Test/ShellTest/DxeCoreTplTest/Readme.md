@@ -109,6 +109,7 @@ unregister the DXE Core timer handler.
 | 19 | IRQ-context temporarily lower TPL |
 | 24 | IRQ-context callback with RaiseTpl(HIGH) |
 | 25 | IRQ-context intermediate TPL restore |
+| 27 | Bounded nesting depth under sustained interrupt load |
 
 ## Timing
 
@@ -127,13 +128,14 @@ Performance counter: <N> KHz (counts up)
   ...
   [Timing] Test 25: <N> ms
   [Timing] Test 26: <N> ms
+  [Timing] Test 27: <N> ms
 ---------------------------------------------------------
 ------------- UNIT TEST FRAMEWORK RESULTS ---------------
 ---------------------------------------------------------
   ...
 =========================================================
 Total Stats
- Passed:  26  (100%)
+ Passed:  27  (100%)
  Failed:  0  (0%)
  Not Run: 0  (0%)
 =========================================================
@@ -141,5 +143,5 @@ Total Stats
 =========================================================
 ```
 
-All 26 tests should pass. Any failure indicates a regression in the
+All 27 tests should pass. Any failure indicates a regression in the
 `mIsrEntryTplMask` timer interrupt recursion prevention logic.

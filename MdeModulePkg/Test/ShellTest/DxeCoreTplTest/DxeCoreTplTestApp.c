@@ -17,7 +17,7 @@
   - Helper functions (watchdog, interrupt state, timer handler install)
   - Event callback functions used by multiple test suites
   - Performance counter timing infrastructure (portable across IA32/X64/AARCH64)
-  - The main test framework entry point that registers all 26 test cases
+  - The main test framework entry point that registers all 27 test cases
     organized into 5 suites and measures total execution time
 
   Tests cover all 25 scenarios from the TimerInterruptRecursionAnalysis.md:
@@ -28,6 +28,7 @@
   - Tests 20-23: Stress and stability (100K iterations, rapid cycling, timer events)
   - Tests 24-25: Advanced IRQ-context (callback nesting, intermediate TPL restore)
   - Test 26:     TPL preemption hierarchy (bounded preemption validation)
+  - Test 27:     Bounded nesting depth under sustained interrupt load
 
   Copyright (c) 2024, Intel Corporation. All rights reserved.<BR>
   SPDX-License-Identifier: BSD-2-Clause-Patent
@@ -72,6 +73,18 @@ volatile UINTN    mPreemptNotifyCountAtStart = 0;
 volatile UINTN    mPreemptNotifyCountAtEnd   = 0;
 volatile BOOLEAN  mPreemptCallbackStarted    = FALSE;
 volatile BOOLEAN  mPreemptCallbackFinished   = FALSE;
+
+//
+// Shared volatile state for bounded nesting depth test (Test 27)
+//
+volatile UINTN    mNestingDepth              = 0;
+volatile UINTN    mMaxNestingDepth           = 0;
+volatile UINTN    mTotalNestInvocations      = 0;
+volatile BOOLEAN  mSignalSlowEvents          = FALSE;
+volatile BOOLEAN  mSlowNotifyInProgress      = FALSE;
+volatile BOOLEAN  mSlowCallbackInProgress    = FALSE;
+volatile BOOLEAN  mBurstComplete             = FALSE;
+volatile UINTN    mAppProgressCounter        = 0;
 
 //
 // Events used by IRQ-context tests
@@ -273,6 +286,52 @@ PreemptNotifyCallback (
   // whether this count increases while the CALLBACK handler stalls.
   //
   mNotifyDispatchCount++;
+}
+
+VOID
+EFIAPI
+NestSlowNotifyCallback (
+  IN EFI_EVENT  Event,
+  IN VOID       *Context
+  )
+{
+  //
+  // Mark in-progress to prevent handler from re-signaling this event
+  // (which would create an infinite loop in CoreDispatchEventNotifies).
+  //
+  mSlowNotifyInProgress = TRUE;
+
+  //
+  // Stall for 2 timer periods at TPL_NOTIFY with interrupts enabled
+  // (bounded preemption enables them because NOTIFY > interrupted TPL).
+  // Timer fires during this stall -> nested handler invocation.
+  //
+  gBS->Stall (StallForTicks (2));
+
+  mSlowNotifyInProgress = FALSE;
+}
+
+VOID
+EFIAPI
+NestSlowCallbackCallback (
+  IN EFI_EVENT  Event,
+  IN VOID       *Context
+  )
+{
+  //
+  // Mark in-progress to prevent handler from re-signaling this event
+  // (which would create an infinite loop in CoreDispatchEventNotifies).
+  //
+  mSlowCallbackInProgress = TRUE;
+
+  //
+  // Stall for 2 timer periods at TPL_CALLBACK with interrupts enabled
+  // (bounded preemption enables them because CALLBACK > interrupted TPL).
+  // Timer fires during this stall -> nested handler invocation.
+  //
+  gBS->Stall (StallForTicks (2));
+
+  mSlowCallbackInProgress = FALSE;
 }
 
 VOID
@@ -532,7 +591,7 @@ UefiTestMain (
   AddTestCase (StressSuite, "Non-HIGH RestoreTpl after timer IRQ (regression)", "Test23", Test23NonHighRestoreTplRegression, TimingPreReq, TimingCleanUp, NULL);
 
   // --------------------------------------------------------------------------
-  // Suite 5: IRQ Hook Tests (Tests 16-19, 24-25)
+  // Suite 5: IRQ Hook Tests (Tests 16-19, 24-25, 27)
   // These MUST run LAST - they replace CoreTimerTick permanently
   // --------------------------------------------------------------------------
   Status = CreateUnitTestSuite (
@@ -553,6 +612,7 @@ UefiTestMain (
   AddTestCase (IrqHookSuite, "IRQ-context temp lower TPL", "Test19", Test19IrqContextTempLowerTpl, TimingPreReq, TimingCleanUp, NULL);
   AddTestCase (IrqHookSuite, "IRQ-context callback RaiseTpl(HIGH)", "Test24", Test24IrqContextCallbackRaiseTpl, TimingPreReq, TimingCleanUp, NULL);
   AddTestCase (IrqHookSuite, "IRQ-context intermediate TPL restore", "Test25", Test25IrqContextIntermediateTpl, TimingPreReq, TimingCleanUp, NULL);
+  AddTestCase (IrqHookSuite, "Bounded nesting depth under sustained load", "Test27", Test27BoundedNestingDepth, TimingPreReq, TimingCleanUp, NULL);
 
   // --------------------------------------------------------------------------
   // Execute all test suites

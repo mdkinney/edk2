@@ -1,7 +1,7 @@
 ## @file
 # UEFI Shell test application for DXE Core TPL timer interrupt recursion fix.
 #
-# Verifies that the mInterruptedTplMask-based fix in CoreRaiseTpl/CoreRestoreTpl
+# Verifies that the mIsrEntryTplMask-based fix in CoreRaiseTpl/CoreRestoreTpl
 # prevents infinite recursion from timer interrupts while preserving normal
 # TPL and interrupt behavior.
 #

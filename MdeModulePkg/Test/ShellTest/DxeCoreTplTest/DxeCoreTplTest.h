@@ -56,6 +56,18 @@ extern volatile BOOLEAN  mPreemptCallbackStarted;
 extern volatile BOOLEAN  mPreemptCallbackFinished;
 
 //
+// Bounded nesting depth test state (Test 27)
+//
+extern volatile UINTN    mNestingDepth;
+extern volatile UINTN    mMaxNestingDepth;
+extern volatile UINTN    mTotalNestInvocations;
+extern volatile BOOLEAN  mSignalSlowEvents;
+extern volatile BOOLEAN  mSlowNotifyInProgress;
+extern volatile BOOLEAN  mSlowCallbackInProgress;
+extern volatile BOOLEAN  mBurstComplete;
+extern volatile UINTN    mAppProgressCounter;
+
+//
 // Events used by IRQ-context tests (defined in DxeCoreTplTestApp.c)
 //
 extern EFI_EVENT  mTestNotifyEvent;
@@ -168,6 +180,20 @@ PreemptNotifyCallback (
 VOID
 EFIAPI
 PreemptSlowCallbackHandler (
+  IN EFI_EVENT  Event,
+  IN VOID       *Context
+  );
+
+VOID
+EFIAPI
+NestSlowNotifyCallback (
+  IN EFI_EVENT  Event,
+  IN VOID       *Context
+  );
+
+VOID
+EFIAPI
+NestSlowCallbackCallback (
   IN EFI_EVENT  Event,
   IN VOID       *Context
   );
@@ -345,6 +371,12 @@ Test24IrqContextCallbackRaiseTpl (
 UNIT_TEST_STATUS
 EFIAPI
 Test25IrqContextIntermediateTpl (
+  IN UNIT_TEST_CONTEXT  Context
+  );
+
+UNIT_TEST_STATUS
+EFIAPI
+Test27BoundedNestingDepth (
   IN UNIT_TEST_CONTEXT  Context
   );
 
