@@ -168,7 +168,8 @@ CpuGetInterruptState (
     return EFI_INVALID_PARAMETER;
   }
 
-  *State = mInterruptState;
+  *State          = GetInterruptState ();
+  mInterruptState = *State;
   return EFI_SUCCESS;
 }
 
