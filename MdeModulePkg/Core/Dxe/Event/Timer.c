@@ -224,7 +224,58 @@ CoreTimerTick (
 
   DEBUG_CODE_END ();
 
-  EntryTpl = gEfiCurrentTpl;
+  //
+  // Determine the actual interrupted TPL
+  //
+  if ((gEfiCurrentTpl >= TPL_HIGH_LEVEL) && (gTplBeforeHighTpl != 0)) {
+    //
+    // Timer Arch Protocol raised TPL to HIGH before calling CoreTimerTick.
+    // gEfiCurrentTpl is already HIGH and the actual interrupted TPL was
+    // recorded in gTplBeforeHighTpl by CoreRaiseTpl().  The timer handler
+    // will call RestoreTpl() after this function returns, triggering event
+    // dispatch within ISR context.  gIsrEntryTplMask prevents recursive
+    // interrupt re-enable during that dispatch; the ISR unwind path in
+    // RestoreTpl() leaves interrupts disabled for the exception-return
+    // instruction to restore.
+    //
+    EntryTpl          = gTplBeforeHighTpl;
+    gTplBeforeHighTpl = 0;
+  } else if (gEfiCurrentTpl < TPL_HIGH_LEVEL) {
+    //
+    // Timer Arch Protocol did NOT raise TPL before calling CoreTimerTick.
+    // gEfiCurrentTpl reflects the interrupted level.
+    // CoreAcquireLock (mEfiSystemTimeLock) below calls RaiseTpl(HIGH), then
+    // CoreReleaseLock calls RestoreTpl(interrupted level), which dispatches
+    // pending events.  If interrupts are re-enabled during that dispatch,
+    // another timer fires, causing up to 4 levels of recursion (one per TPL
+    // level).  gIsrEntryTplMask prevents recursive interrupt re-enable at or
+    // below already-interrupted levels.
+    //
+    EntryTpl = gEfiCurrentTpl;
+  } else {
+    //
+    // Edge case: Code at TPL_HIGH_LEVEL manually enabled interrupts.
+    // gTplBeforeHighTpl is 0 (no RaiseTpl transition recorded).
+    // CoreAcquireLock's RaiseTpl(HIGH) is a no-op (already at HIGH).
+    // CoreReleaseLock's RestoreTpl(HIGH) returns immediately -- no event
+    // dispatch occurs, so no recursion is possible.  Skip ISR tracking.
+    //
+    EntryTpl = 0;
+  }
+
+  if (EntryTpl != 0) {
+    //
+    // Check that EntryTpl is above the highest TPL already tracked in
+    // gIsrEntryTplMask. HighBitSet64() returns that highest tracked TPL
+    // (or -1 when empty).
+    //
+    ASSERT ((INTN)EntryTpl > HighBitSet64 (gIsrEntryTplMask));
+
+    //
+    // Record EntryTpl as the interrupted TPL for recursion prevention.
+    //
+    gIsrEntryTplMask |= (UINTN)LShiftU64 (1, EntryTpl);
+  }
 
   DEBUG_CODE_BEGIN ();
   //
