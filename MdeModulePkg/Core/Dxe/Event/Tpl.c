@@ -88,9 +88,16 @@ CoreRaiseTpl (
   ASSERT (VALID_TPL (NewTpl));
 
   //
+  // If the new TPL is the same as the current TPL, no action is needed
+  //
+  if (NewTpl == OldTpl) {
+    return NewTpl;
+  }
+
+  //
   // If raising to high level, disable interrupts
   //
-  if ((NewTpl >= TPL_HIGH_LEVEL) &&  (OldTpl < TPL_HIGH_LEVEL)) {
+  if (NewTpl >= TPL_HIGH_LEVEL) {
     CoreSetInterruptState (FALSE);
   }
 
@@ -127,8 +134,7 @@ CoreRestoreTpl (
   ASSERT (VALID_TPL (NewTpl));
 
   //
-  // If lowering below HIGH_LEVEL, make sure
-  // interrupts are enabled
+  // If lowering below HIGH_LEVEL, prepare for interrupt-enabled dispatch.
   //
 
   if ((OldTpl >= TPL_HIGH_LEVEL) &&  (NewTpl < TPL_HIGH_LEVEL)) {
@@ -159,10 +165,14 @@ CoreRestoreTpl (
   gEfiCurrentTpl = NewTpl;
 
   //
-  // If lowering below HIGH_LEVEL, make sure
-  // interrupts are enabled
+  // Nothing to do if remaining at TPL_HIGH_LEVEL -- interrupts stay disabled.
   //
-  if (gEfiCurrentTpl < TPL_HIGH_LEVEL) {
-    CoreSetInterruptState (TRUE);
+  if (NewTpl >= TPL_HIGH_LEVEL) {
+    return;
   }
+
+  //
+  // If lowering below HIGH_LEVEL, make sure interrupts are enabled.
+  //
+  CoreSetInterruptState (TRUE);
 }
