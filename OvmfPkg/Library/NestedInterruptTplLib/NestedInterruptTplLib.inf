@@ -1,11 +1,8 @@
 ## @file
-# Handle raising and lowering TPL from within nested interrupt handlers.
+# Placeholder INF for NestedInterruptTplLib.
 #
-# Allows interrupt handlers to safely raise and lower the TPL to
-# dispatch event notifications, correctly allowing for nested
-# interrupts to occur without risking stack exhaustion.
-#
-# Copyright (C) 2022, Fen Systems Ltd.
+# This keeps DSC library mappings valid after removing the old implementation
+# sources so builds do not fail with a missing library mapping error.
 #
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
@@ -17,19 +14,3 @@
   MODULE_TYPE    = DXE_DRIVER
   VERSION_STRING = 1.0
   LIBRARY_CLASS  = NestedInterruptTplLib|DXE_DRIVER
-
-[Sources]
-  Tpl.c
-  Iret.c
-
-[Packages]
-  MdePkg/MdePkg.dec
-  OvmfPkg/OvmfPkg.dec
-
-[LibraryClasses]
-  BaseLib
-  DebugLib
-  UefiBootServicesTableLib
-
-[Depex.common.DXE_DRIVER]
-  TRUE
