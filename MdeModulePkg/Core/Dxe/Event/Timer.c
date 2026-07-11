@@ -8,6 +8,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 
 #include "DxeMain.h"
 #include "Event.h"
+#include <Guid/DxeCoreDiagnostics.h>
 
 //
 // Internal data
@@ -19,6 +20,15 @@ EFI_EVENT   mEfiCheckTimerEvent = NULL;
 
 EFI_LOCK  mEfiSystemTimeLock = EFI_INITIALIZE_LOCK_VARIABLE (TPL_HIGH_LEVEL);
 UINT64    mEfiSystemTime     = 0;
+
+GLOBAL_REMOVE_IF_UNREFERENCED
+static CORE_TIMER_TICK_DIAGNOSTICS  mTimerTickDiagnostics = {
+  CORE_TIMER_TICK_DIAGNOSTICS_SIGNATURE,    // Signature
+  0,                                        // CurrentDepth
+  0,                                        // MaxDepth
+  0,                                        // TotalEntries
+  { 0 }                                     // EntriesAtTpl[]
+};
 
 //
 // Timer functions
@@ -174,6 +184,19 @@ CoreInitializeTimer (
              &mEfiCheckTimerEvent
              );
   ASSERT_EFI_ERROR (Status);
+
+  //
+  // Install diagnostics structure in EFI System Configuration Table
+  // so test applications can observe CoreTimerTick() nesting behavior.
+  // Only installed when DEBUG_CODE is enabled via PcdDebugPropertyMask.
+  //
+  DEBUG_CODE_BEGIN ();
+  Status = CoreInstallConfigurationTable (
+             &gDxeCoreTimerTickDiagnosticsGuid,
+             &mTimerTickDiagnostics
+             );
+  ASSERT_EFI_ERROR (Status);
+  DEBUG_CODE_END ();
 }
 
 /**
@@ -192,7 +215,26 @@ CoreTimerTick (
   IEVENT   *Event;
   EFI_TPL  EntryTpl;
 
+  DEBUG_CODE_BEGIN ();
+  mTimerTickDiagnostics.TotalEntries++;
+  mTimerTickDiagnostics.CurrentDepth++;
+  if (mTimerTickDiagnostics.CurrentDepth > mTimerTickDiagnostics.MaxDepth) {
+    mTimerTickDiagnostics.MaxDepth = mTimerTickDiagnostics.CurrentDepth;
+  }
+
+  DEBUG_CODE_END ();
+
   EntryTpl = gEfiCurrentTpl;
+
+  DEBUG_CODE_BEGIN ();
+  //
+  // Update number of times CoreTimerTick() was entered at this TPL.
+  //
+  if (EntryTpl < ARRAY_SIZE (mTimerTickDiagnostics.EntriesAtTpl)) {
+    mTimerTickDiagnostics.EntriesAtTpl[EntryTpl]++;
+  }
+
+  DEBUG_CODE_END ();
 
   //
   // Check runtiem flag in case there are ticks while exiting boot services
@@ -217,6 +259,10 @@ CoreTimerTick (
   }
 
   CoreReleaseLock (&mEfiSystemTimeLock);
+
+  DEBUG_CODE_BEGIN ();
+  mTimerTickDiagnostics.CurrentDepth--;
+  DEBUG_CODE_END ();
 }
 
 /**
