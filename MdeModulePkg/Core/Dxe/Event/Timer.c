@@ -189,7 +189,10 @@ CoreTimerTick (
   IN UINT64  Duration
   )
 {
-  IEVENT  *Event;
+  IEVENT   *Event;
+  EFI_TPL  EntryTpl;
+
+  EntryTpl = gEfiCurrentTpl;
 
   //
   // Check runtiem flag in case there are ticks while exiting boot services
