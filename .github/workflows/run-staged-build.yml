@@ -22,6 +22,10 @@ on:
     branches:
       - sandbox/master
 
+concurrency:
+  group: run-staged-build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   staged_build:
     name: Staged Build
@@ -33,7 +37,7 @@ jobs:
       python-version: '3.12'
       pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
-      enable-code-quality-checks: true
+      enable-code-quality-tests: true
       enable-basic-acceptance-tests: true
       enable-linux-clang-tests: true
       enable-linux-gcc-tests: true

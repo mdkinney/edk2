@@ -63,7 +63,7 @@ on:
         description: List of package lists to test.
         required: true
         type: string
-        default: '["ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,DynamicTablesPkg,EmbeddedPkg,MdeModulePkg,MdePkg,CryptoPkg", "IntelFsp2Pkg,IntelFsp2WrapperPkg,UefiCpuPkg,PrmPkg,NetworkPkg,SecurityPkg,ShellPkg,FmpDevicePkg,FatPkg,RedfishPkg,PcAtChipsetPkg,SourceLevelDebugPkg,UnitTestFrameworkPkg,StandaloneMmPkg,EmulatorPkg"]'
+        default: '["CryptoPkg", "MdeModulePkg,ShellPkg,UefiCpuPkg,NetworkPkg,MdePkg,UnitTestFrameworkPkg,DynamicTablesPkg,StandaloneMmPkg", "SecurityPkg,RedfishPkg,IntelFsp2Pkg,PrmPkg,SourceLevelDebugPkg,FmpDevicePkg,FatPkg,IntelFsp2WrapperPkg,ManageabilityPkg,TcgTpmPkg,EmbeddedPkg,PcAtChipsetPkg,ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,EmulatorPkg"]'
       skip-filter-list:
         description: List of filter criteria to skip.
         required: false
