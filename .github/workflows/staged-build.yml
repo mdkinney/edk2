@@ -90,7 +90,7 @@ on:
         description: Default package lists to use if not set in Stage 0.
         required: false
         type: string
-        default: '["CryptoPkg", "MdeModulePkg,ShellPkg,UefiCpuPkg,NetworkPkg,MdePkg,UnitTestFrameworkPkg,DynamicTablesPkg,StandaloneMmPkg", "SecurityPkg,RedfishPkg,IntelFsp2Pkg,PrmPkg,SourceLevelDebugPkg,FmpDevicePkg,FatPkg,IntelFsp2WrapperPkg,ManageabilityPkg,TcgTpmPkg", "EmbeddedPkg,PcAtChipsetPkg,ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,EmulatorPkg"]'
+        default: '["CryptoPkg", "MdeModulePkg,ShellPkg,UefiCpuPkg,NetworkPkg,MdePkg,UnitTestFrameworkPkg,DynamicTablesPkg,StandaloneMmPkg", "SecurityPkg,RedfishPkg,IntelFsp2Pkg,PrmPkg,SourceLevelDebugPkg,FmpDevicePkg,FatPkg,IntelFsp2WrapperPkg,ManageabilityPkg,TcgTpmPkg,EmbeddedPkg,PcAtChipsetPkg,ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,EmulatorPkg"]'
       skip-filter-list:
         description: List of filter criteria to skip.
         required: false
@@ -183,7 +183,7 @@ on:
         description: Default package lists to use if not set in Stage 0.
         required: false
         type: string
-        default: '["CryptoPkg", "MdeModulePkg,ShellPkg,UefiCpuPkg,NetworkPkg,MdePkg,UnitTestFrameworkPkg,DynamicTablesPkg,StandaloneMmPkg", "SecurityPkg,RedfishPkg,IntelFsp2Pkg,PrmPkg,SourceLevelDebugPkg,FmpDevicePkg,FatPkg,IntelFsp2WrapperPkg,ManageabilityPkg,TcgTpmPkg", "EmbeddedPkg,PcAtChipsetPkg,ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,EmulatorPkg"]'
+        default: '["CryptoPkg", "MdeModulePkg,ShellPkg,UefiCpuPkg,NetworkPkg,MdePkg,UnitTestFrameworkPkg,DynamicTablesPkg,StandaloneMmPkg", "SecurityPkg,RedfishPkg,IntelFsp2Pkg,PrmPkg,SourceLevelDebugPkg,FmpDevicePkg,FatPkg,IntelFsp2WrapperPkg,ManageabilityPkg,TcgTpmPkg,EmbeddedPkg,PcAtChipsetPkg,ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,EmulatorPkg"]'
       skip-filter-list:
         description: List of filter criteria to skip.
         required: false
