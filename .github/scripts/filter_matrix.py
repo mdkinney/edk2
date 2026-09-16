@@ -277,6 +277,10 @@ def generate_filtered_matrix(verbose: bool = False) -> list:
     filtered_combinations = apply_filters_to_combination(
         filtered_combinations, continue_on_error_filter_list, verbose)
 
+    # Sort combinations by package_lists order to prioritize earlier package lists (e.g. CryptoPkg)
+    package_priority = {pkg: idx for idx, pkg in enumerate(package_lists)}
+    filtered_combinations.sort(key=lambda x: package_priority.get(x['build_package'], 999))
+
     # Display filtered combinations
     print(f'Total combinations after applying filters: '
           f'{len(filtered_combinations)}')
