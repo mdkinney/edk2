@@ -1,0 +1,654 @@
+//------------------------------------------------------------------------------
+// Combined X64 NASM Functions (All Toolchains)
+//------------------------------------------------------------------------------
+#include "BaseLibInternals.h"
+
+    DEFAULT REL
+    SECTION .text
+
+
+;------------------------------------------------------------------------------
+;  UINT32
+;  EFIAPI
+;  AsmCpuidEx (
+;    IN   UINT32  RegisterInEax,
+;    IN   UINT32  RegisterInEcx,
+;    OUT  UINT32  *RegisterOutEax  OPTIONAL,
+;    OUT  UINT32  *RegisterOutEbx  OPTIONAL,
+;    OUT  UINT32  *RegisterOutEcx  OPTIONAL,
+;    OUT  UINT32  *RegisterOutEdx  OPTIONAL
+;    )
+;------------------------------------------------------------------------------
+global ASM_PFX(AsmCpuidEx)
+ASM_PFX(AsmCpuidEx):
+    push    rbx
+    mov     eax, ecx
+    mov     ecx, edx
+    push    rax                         ; save Index on stack
+    cpuid
+    mov     r10, [rsp + 0x38]
+    test    r10, r10
+    jz      .0
+    mov     [r10], ecx
+.0:
+    mov     rcx, r8
+    jrcxz   .1
+    mov     [rcx], eax
+.1:
+    mov     rcx, r9
+    jrcxz   .2
+    mov     [rcx], ebx
+.2:
+    mov     rcx, [rsp + 0x40]
+    jrcxz   .3
+    mov     [rcx], edx
+.3:
+    pop     rax                         ; restore Index to rax as return value
+    pop     rbx
+    ret
+
+
+;------------------------------------------------------------------------------
+;  VOID
+;  EFIAPI
+;  AsmCpuid (
+;    IN   UINT32  RegisterInEax,
+;    OUT  UINT32  *RegisterOutEax  OPTIONAL,
+;    OUT  UINT32  *RegisterOutEbx  OPTIONAL,
+;    OUT  UINT32  *RegisterOutEcx  OPTIONAL,
+;    OUT  UINT32  *RegisterOutEdx  OPTIONAL
+;    )
+;------------------------------------------------------------------------------
+global ASM_PFX(AsmCpuid)
+ASM_PFX(AsmCpuid):
+    push    rbx
+    mov     eax, ecx
+    push    rax                         ; save Index on stack
+    push    rdx
+    cpuid
+    test    r9, r9
+    jz      .0
+    mov     [r9], ecx
+.0:
+    pop     rcx
+    jrcxz   .1
+    mov     [rcx], eax
+.1:
+    mov     rcx, r8
+    jrcxz   .2
+    mov     [rcx], ebx
+.2:
+    mov     rcx, [rsp + 0x38]
+    jrcxz   .3
+    mov     [rcx], edx
+.3:
+    pop     rax                         ; restore Index to rax as return value
+    pop     rbx
+    ret
+
+
+;------------------------------------------------------------------------------
+; VOID
+; EFIAPI
+; AsmEnableCache (
+;   VOID
+;   );
+;------------------------------------------------------------------------------
+global ASM_PFX(AsmEnableCache)
+ASM_PFX(AsmEnableCache):
+    wbinvd
+    mov     rax, cr0
+    btr     rax, 29
+    btr     rax, 30
+    mov     cr0, rax
+    ret
+
+
+;------------------------------------------------------------------------------
+; VOID
+; EFIAPI
+; AsmDisableCache (
+;   VOID
+;   );
+;------------------------------------------------------------------------------
+global ASM_PFX(AsmDisableCache)
+ASM_PFX(AsmDisableCache):
+    mov     rax, cr0
+    bts     rax, 30
+    btr     rax, 29
+    mov     cr0, rax
+    wbinvd
+    ret
+
+
+;------------------------------------------------------------------------------
+; VOID
+; AsmWriteTr (
+;   UINT16 Selector
+;   );
+;------------------------------------------------------------------------------
+global ASM_PFX(AsmWriteTr)
+ASM_PFX(AsmWriteTr):
+    mov     eax, ecx
+    ltr     ax
+    ret
+
+
+;------------------------------------------------------------------------------
+; VOID
+; EFIAPI
+; AsmLfence (
+;   VOID
+;   );
+;------------------------------------------------------------------------------
+global ASM_PFX(AsmLfence)
+ASM_PFX(AsmLfence):
+    lfence
+    ret
+
+%macro tdcall 0
+    db 0x66,0x0f,0x01,0xcc
+%endmacro
+
+%macro tdcall_push_regs 0
+    push rbp
+    mov  rbp, rsp
+    push r15
+    push r14
+    push r13
+    push r12
+    push rbx
+    push rsi
+    push rdi
+%endmacro
+
+%macro tdcall_pop_regs 0
+    pop rdi
+    pop rsi
+    pop rbx
+    pop r12
+    pop r13
+    pop r14
+    pop r15
+    pop rbp
+%endmacro
+
+%define number_of_regs_pushed 8
+%define number_of_parameters  4
+
+;
+; Keep these in sync for push_regs/pop_regs, code below
+; uses them to find 5th or greater parameters
+;
+%define first_variable_on_stack_offset \
+  ((number_of_regs_pushed * 8) + (number_of_parameters * 8) + 8)
+%define second_variable_on_stack_offset \
+  ((first_variable_on_stack_offset) + 8)
+
+;  TdCall (
+;    UINT64  Leaf,    // Rcx
+;    UINT64  P1,      // Rdx
+;    UINT64  P2,      // R8
+;    UINT64  P3,      // R9
+;    UINT64  Results, // rsp + 0x28
+;    )
+global ASM_PFX(TdCall)
+ASM_PFX(TdCall):
+       tdcall_push_regs
+
+       mov rax, rcx
+       mov rcx, rdx
+       mov rdx, r8
+       mov r8, r9
+
+       tdcall
+
+       ; exit if tdcall reports failure.
+       test rax, rax
+       jnz .exit
+
+       ; test if caller wanted results
+       mov r12, [rsp + first_variable_on_stack_offset ]
+       test r12, r12
+       jz .exit
+       mov [r12 + 0 ], rcx
+       mov [r12 + 8 ], rdx
+       mov [r12 + 16], r8
+       mov [r12 + 24], r9
+       mov [r12 + 32], r10
+       mov [r12 + 40], r11
+.exit:
+       tdcall_pop_regs
+       ret
+
+%define TDVMCALL_EXPOSE_REGS_MASK       0xffcc
+%define TDVMCALL                        0x0
+
+
+
+
+%define number_of_regs_pushed 8
+%define number_of_parameters  4
+
+;
+; Keep these in sync for push_regs/pop_regs, code below
+; uses them to find 5th or greater parameters
+;
+%define first_variable_on_stack_offset \
+  ((number_of_regs_pushed * 8) + (number_of_parameters * 8) + 8)
+%define second_variable_on_stack_offset \
+  ((first_variable_on_stack_offset) + 8)
+
+%macro tdcall_regs_preamble 2
+    mov rax, %1
+
+    xor rcx, rcx
+    mov ecx, %2
+
+    ; R10 = 0 (standard TDVMCALL)
+
+    xor r10d, r10d
+
+    ; Zero out unused (for standard TDVMCALL) registers to avoid leaking
+    ; secrets to the VMM.
+
+    xor ebx, ebx
+    xor esi, esi
+    xor edi, edi
+
+    xor edx, edx
+    xor ebp, ebp
+    xor r8d, r8d
+    xor r9d, r9d
+%endmacro
+
+%macro tdcall_regs_postamble 0
+    xor ebx, ebx
+    xor esi, esi
+    xor edi, edi
+
+    xor ecx, ecx
+    xor edx, edx
+    xor r8d,  r8d
+    xor r9d,  r9d
+    xor r10d, r10d
+    xor r11d, r11d
+%endmacro
+
+;------------------------------------------------------------------------------
+; 0   => RAX = TDCALL leaf
+; M   => RCX = TDVMCALL register behavior
+; 1   => R10 = standard vs. vendor
+; RDI => R11 = TDVMCALL function / nr
+; RSI =  R12 = p1
+; RDX => R13 = p2
+; RCX => R14 = p3
+; R8  => R15 = p4
+
+;  UINT64
+;  EFIAPI
+;  TdVmCall (
+;    UINT64  Leaf,  // Rcx
+;    UINT64  P1,  // Rdx
+;    UINT64  P2,  // R8
+;    UINT64  P3,  // R9
+;    UINT64  P4,  // rsp + 0x28
+;    UINT64  *Val // rsp + 0x30
+;    )
+global ASM_PFX(TdVmCall)
+ASM_PFX(TdVmCall):
+       tdcall_push_regs
+
+       mov r11, rcx
+       mov r12, rdx
+       mov r13, r8
+       mov r14, r9
+       mov r15, [rsp + first_variable_on_stack_offset ]
+
+       tdcall_regs_preamble TDVMCALL, TDVMCALL_EXPOSE_REGS_MASK
+
+       tdcall
+
+       ; ignore return data if TDCALL reports failure.
+       test rax, rax
+       jnz .no_return_data
+
+       ; Propagate TDVMCALL success/failure to return value.
+       mov rax, r10
+
+       ; Retrieve the Val pointer.
+       mov r9, [rsp + second_variable_on_stack_offset ]
+       test r9, r9
+       jz .no_return_data
+
+       ; Propagate TDVMCALL output value to output param
+       mov [r9], r11
+.no_return_data:
+       tdcall_regs_postamble
+
+       tdcall_pop_regs
+
+       ret
+
+;------------------------------------------------------------------------------
+; VOID
+; EFIAPI
+; EnableDisableInterrupts (
+;   VOID
+;   );
+;------------------------------------------------------------------------------
+global ASM_PFX(EnableDisableInterrupts)
+ASM_PFX(EnableDisableInterrupts):
+    sti
+    cli
+    ret
+
+
+;------------------------------------------------------------------------------
+; VOID
+; EFIAPI
+; InternalX86DisablePaging64 (
+;   IN      UINT16                    Cs,
+;   IN      UINT32                    EntryPoint,
+;   IN      UINT32                    Context1,  OPTIONAL
+;   IN      UINT32                    Context2,  OPTIONAL
+;   IN      UINT32                    NewStack
+;   );
+;------------------------------------------------------------------------------
+global ASM_PFX(InternalX86DisablePaging64)
+ASM_PFX(InternalX86DisablePaging64):
+    cli
+    lea     rsi, [.0]                     ; rsi <- The start address of transition code
+    mov     edi, [rsp + 0x28]            ; rdi <- New stack
+    lea     rax, [mTransitionEnd]         ; rax <- end of transition code
+    sub     rax, rsi                    ; rax <- The size of transition piece code
+    add     rax, 4                      ; Round RAX up to the next 4 byte boundary
+    and     al, 0xfc
+    sub     rdi, rax                    ; rdi <- Use stack to hold transition code
+    mov     r10d, edi                   ; r10 <- The start address of transition code below 4G
+    push    rcx                         ; save rcx to stack
+    mov     rcx, rax                    ; rcx <- The size of transition piece code
+    rep     movsb                       ; copy transition code to top of new stack which must be below 4GB
+    pop     rcx                         ; restore rcx
+
+    mov     esi, r8d
+    mov     edi, r9d
+    mov     eax, r10d                   ; eax <- start of the transition code on the stack
+    sub     eax, 4                      ; eax <- One slot below transition code on the stack
+    push    rcx                         ; push Cs to stack
+    push    r10                         ; push address of tansition code on stack
+    retfq
+
+; Start of transition code
+.0:
+    mov     esp, eax                    ; set up new stack
+    mov     rax, cr0
+    btr     eax, 31                     ; Clear CR0.PG
+    mov     cr0, rax                    ; disable paging and caches
+
+    mov     ebx, edx                    ; save EntryPoint to rbx, for rdmsr will overwrite rdx
+    mov     ecx, 0xc0000080
+    rdmsr
+    and     ah, ~ 1                   ; clear LME
+    wrmsr
+    mov     rax, cr4
+    and     al, ~ (1 << 5)           ; clear PAE
+    mov     cr4, rax
+    push    rdi                         ; push Context2
+    push    rsi                         ; push Context1
+    call    rbx                         ; transfer control to EntryPoint
+    hlt                                 ; no one should get here
+
+mTransitionEnd:
+
+
+
+;-----------------------------------------------------------------------------
+;  UINT32
+;  EFIAPI
+;  AsmPvalidate (
+;    IN   UINT32              PageSize
+;    IN   UINT32              Validate,
+;    IN   UINT64              Address
+;    )
+;-----------------------------------------------------------------------------
+global ASM_PFX(AsmPvalidate)
+ASM_PFX(AsmPvalidate):
+  mov     rax, r8
+
+  PVALIDATE
+
+  ; Save the carry flag.
+  setc    dl
+
+  ; The PVALIDATE instruction returns the status in rax register.
+  cmp     rax, 0
+  jne     PvalidateExit
+
+  ; Check the carry flag to determine if RMP entry was updated.
+  cmp     dl, 0
+  je      PvalidateExit
+
+  ; Return the PVALIDATE_RET_NO_RMPUPDATE.
+  mov     rax, 255
+
+PvalidateExit:
+  ret
+
+;------------------------------------------------------------------------------
+;  Generates a 16 bit random number through RDRAND instruction.
+;  Return TRUE if Rand generated successfully, or FALSE if not.
+;
+;  BOOLEAN EFIAPI InternalX86RdRand16 (UINT16 *Rand);
+;------------------------------------------------------------------------------
+global ASM_PFX(InternalX86RdRand16)
+ASM_PFX(InternalX86RdRand16):
+    rdrand eax                     ; generate a 16 bit RN into eax,
+                                   ; CF=1 if RN generated ok, otherwise CF=0
+    jc     rn16_ok                 ; jmp if CF=1
+    xor    rax, rax                ; reg=0 if CF=0
+    ret                            ; return with failure status
+rn16_ok:
+    mov    [rcx], ax
+    mov    rax,  1
+    ret
+
+;------------------------------------------------------------------------------
+;  Generates a 32 bit random number through RDRAND instruction.
+;  Return TRUE if Rand generated successfully, or FALSE if not.
+;
+;  BOOLEAN EFIAPI InternalX86RdRand32 (UINT32 *Rand);
+;------------------------------------------------------------------------------
+global ASM_PFX(InternalX86RdRand32)
+ASM_PFX(InternalX86RdRand32):
+    rdrand eax                     ; generate a 32 bit RN into eax,
+                                   ; CF=1 if RN generated ok, otherwise CF=0
+    jc     rn32_ok                 ; jmp if CF=1
+    xor    rax, rax                ; reg=0 if CF=0
+    ret                            ; return with failure status
+rn32_ok:
+    mov    [rcx], eax
+    mov    rax,  1
+    ret
+
+;------------------------------------------------------------------------------
+;  Generates a 64 bit random number through one RDRAND instruction.
+;  Return TRUE if Rand generated successfully, or FALSE if not.
+;
+;  BOOLEAN EFIAPI InternalX86RdRand64 (UINT64 *Random);
+;------------------------------------------------------------------------------
+global ASM_PFX(InternalX86RdRand64)
+ASM_PFX(InternalX86RdRand64):
+    rdrand rax                     ; generate a 64 bit RN into rax,
+                                   ; CF=1 if RN generated ok, otherwise CF=0
+    jc     rn64_ok                 ; jmp if CF=1
+    xor    rax, rax                ; reg=0 if CF=0
+    ret                            ; return with failure status
+rn64_ok:
+    mov    [rcx], rax
+    mov    rax, 1
+    ret
+
+
+
+;-----------------------------------------------------------------------------
+;  UINT32
+;  EFIAPI
+;  AsmRmpAdjust (
+;    IN  UINT64  Rax,
+;    IN  UINT64  Rcx,
+;    IN  UINT64  Rdx
+;    )
+;-----------------------------------------------------------------------------
+global ASM_PFX(AsmRmpAdjust)
+ASM_PFX(AsmRmpAdjust):
+  mov     rax, rcx       ; Input Rax is in RCX by calling convention
+  mov     rcx, rdx       ; Input Rcx is in RDX by calling convention
+  mov     rdx, r8        ; Input Rdx is in R8  by calling convention
+
+  RMPADJUST
+
+  ; RMPADJUST returns the status in the EAX register.
+  ret
+
+;------------------------------------------------------------------------------
+; UINT64
+; EFIAPI
+; AsmXGetBv (
+;   IN UINT32  Index
+;   );
+;------------------------------------------------------------------------------
+global ASM_PFX(AsmXGetBv)
+ASM_PFX(AsmXGetBv):
+    xgetbv
+    shl     rdx, 32
+    or      rax, rdx
+    ret
+
+
+;------------------------------------------------------------------------------
+; UINT64
+; EFIAPI
+; AsmXSetBv (
+;   IN UINT32  Index,
+;   IN UINT64  Value
+;   );
+;------------------------------------------------------------------------------
+global ASM_PFX(AsmXSetBv)
+ASM_PFX(AsmXSetBv):
+    mov     rax, rdx                    ; meanwhile, rax <- return value
+    shr     rdx, 0x20                    ; edx:eax contains the value to write
+    xsetbv
+    ret
+
+;------------------------------------------------------------------------------
+; VOID
+; EFIAPI
+; AsmVmgExit (
+;   VOID
+;   );
+;------------------------------------------------------------------------------
+global ASM_PFX(AsmVmgExit)
+ASM_PFX(AsmVmgExit):
+    rep     vmmcall
+    ret
+
+
+;------------------------------------------------------------------------------
+; typedef struct {
+;   VOID      *Caa;
+;   UINT64    RaxIn;
+;   UINT64    RcxIn;
+;   UINT64    RdxIn;
+;   UINT64    R8In;
+;   UINT64    R9In;
+;   UINT64    RaxOut;
+;   UINT64    RcxOut;
+;   UINT64    RdxOut;
+;   UINT64    R8Out;
+;   UINT64    R9Out;
+;   UINT8     *CallPending;
+; } SVSM_CALL_DATA;
+;
+; UINT32
+; EFIAPI
+; AsmVmgExitSvsm (
+;   SVSM_CALL_DATA *SvsmCallData
+;   );
+;------------------------------------------------------------------------------
+global ASM_PFX(AsmVmgExitSvsm)
+ASM_PFX(AsmVmgExitSvsm):
+    push    r10
+    push    r11
+    push    r12
+
+;
+; Calling convention has SvsmCallData in RCX. Move RCX to R12 in order to
+; properly populate the SVSM register state.
+;
+    mov     r12, rcx
+
+    mov     rax, [r12 + 8]
+    mov     rcx, [r12 + 16]
+    mov     rdx, [r12 + 24]
+    mov     r8,  [r12 + 32]
+    mov     r9,  [r12 + 40]
+
+;
+; Set CA call pending
+;
+    mov     r10, [r12]
+    mov     byte [r10], 1
+
+    rep     vmmcall
+
+    mov     [r12 + 48], rax
+    mov     [r12 + 56], rcx
+    mov     [r12 + 64], rdx
+    mov     [r12 + 72], r8
+    mov     [r12 + 80], r9
+
+;
+; Perform the atomic exchange and return the CA call pending value.
+; The call pending value is a one-byte field at offset 0 into the CA,
+; which is currently the value in R10.
+;
+
+    mov     r11, [r12 + 88]     ; Get CallPending address
+    mov     cl, byte [r11]
+    xchg    byte [r10], cl
+    mov     byte [r11], cl      ; Return the exchanged value
+
+    pop     r12
+    pop     r11
+    pop     r10
+
+;
+; RAX has the value to be returned from the SVSM
+;
+    ret
+
+
+;------------------------------------------------------------------------------
+; UINT64
+; EFIAPI
+; InternalX86ReadFsBase (
+;   VOID
+;   );
+;------------------------------------------------------------------------------
+global ASM_PFX(InternalX86ReadFsBase)
+ASM_PFX(InternalX86ReadFsBase):
+    rdfsbase rax
+    ret
+
+;------------------------------------------------------------------------------
+; VOID
+; EFIAPI
+; InternalX86WriteFsBase (
+;   UINT64  FsBase
+;   );
+;------------------------------------------------------------------------------
+global ASM_PFX(InternalX86WriteFsBase)
+ASM_PFX(InternalX86WriteFsBase):
+    wrfsbase rcx
+    ret

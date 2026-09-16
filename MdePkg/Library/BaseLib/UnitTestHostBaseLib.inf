@@ -105,18 +105,8 @@
   Ia32/GccInline.c | GCC
   Ia32/LongJump.nasm
   Ia32/SetJump.nasm
-  Ia32/SwapBytes64.nasm| GCC
+  Ia32/Ia32GccMath64.nasm | GCC
   Ia32/DivU64x64Remainder.nasm
-  Ia32/DivU64x32Remainder.nasm| GCC
-  Ia32/ModU64x32.nasm| GCC
-  Ia32/DivU64x32.nasm| GCC
-  Ia32/MultU64x64.nasm| GCC
-  Ia32/MultU64x32.nasm| GCC
-  Ia32/RRotU64.nasm| GCC
-  Ia32/LRotU64.nasm| GCC
-  Ia32/ARShiftU64.nasm| GCC
-  Ia32/RShiftU64.nasm| GCC
-  Ia32/LShiftU64.nasm| GCC
   Ia32/RdRand.nasm
   Ia32/DivS64x64Remainder.c
   Ia32/InternalSwitchStack.c | MSFT
@@ -136,28 +126,8 @@
   X64/LongJump.nasm
   X64/SetJump.nasm
   X64/SwitchStack.nasm
+  X64/X64MsftHostCombined.nasm | MSFT
   X64/CpuBreakpoint.c | MSFT
-  X64/CpuPause.nasm| MSFT
-  X64/ReadTsc.nasm| MSFT
-  X64/WriteMm7.nasm| MSFT
-  X64/WriteMm6.nasm| MSFT
-  X64/WriteMm5.nasm| MSFT
-  X64/WriteMm4.nasm| MSFT
-  X64/WriteMm3.nasm| MSFT
-  X64/WriteMm2.nasm| MSFT
-  X64/WriteMm1.nasm| MSFT
-  X64/WriteMm0.nasm| MSFT
-  X64/ReadMm7.nasm| MSFT
-  X64/ReadMm6.nasm| MSFT
-  X64/ReadMm5.nasm| MSFT
-  X64/ReadMm4.nasm| MSFT
-  X64/ReadMm3.nasm| MSFT
-  X64/ReadMm2.nasm| MSFT
-  X64/ReadMm1.nasm| MSFT
-  X64/ReadMm0.nasm| MSFT
-  X64/FxRestore.nasm| MSFT
-  X64/FxSave.nasm| MSFT
-  X64/ReadEflags.nasm| MSFT
   X64/Non-existing.c
   Math64.c
   X86MemoryFence.c | MSFT
@@ -203,7 +173,7 @@
   RiscV64/RiscVCpuBreakpoint.S      | GCC
   RiscV64/RiscVCpuPause.S           | GCC
   RiscV64/RiscVInterrupt.S          | GCC
-  RiscV64/FlushCache.S              | GCC
+  RiscV64/RiscVCacheMgmt.S          | GCC
 
 [Packages]
   MdePkg/MdePkg.dec

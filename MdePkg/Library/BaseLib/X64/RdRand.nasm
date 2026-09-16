@@ -71,4 +71,3 @@ rn64_ok:
     mov    [rcx], rax
     mov    rax, 1
     ret
-

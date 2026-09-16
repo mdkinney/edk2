@@ -66,9 +66,6 @@
   BaseLibInternals.h
 
 [Sources.Ia32]
-  Ia32/WriteTr.nasm
-  Ia32/Lfence.nasm
-
   Ia32/Wbinvd.c | MSFT
   Ia32/WriteMm7.c | MSFT
   Ia32/WriteMm6.c | MSFT
@@ -161,39 +158,14 @@
   Ia32/GccInline.c | GCC
   Ia32/GccInlinePriv.c | GCC
   Ia32/Thunk16.nasm
-  Ia32/EnableDisableInterrupts.nasm| GCC
   Ia32/EnablePaging64.nasm
-  Ia32/DisablePaging32.nasm| GCC
-  Ia32/EnablePaging32.nasm| GCC
-  Ia32/Mwait.nasm| GCC
-  Ia32/Monitor.nasm| GCC
-  Ia32/CpuIdEx.nasm| GCC
-  Ia32/CpuId.nasm| GCC
   Ia32/LongJump.nasm
   Ia32/SetJump.nasm
-  Ia32/SwapBytes64.nasm| GCC
-  Ia32/DivU64x64Remainder.nasm
-  Ia32/DivU64x32Remainder.nasm| GCC
-  Ia32/ModU64x32.nasm| GCC
-  Ia32/DivU64x32.nasm| GCC
-  Ia32/MultU64x64.nasm| GCC
-  Ia32/MultU64x32.nasm| GCC
-  Ia32/RRotU64.nasm| GCC
-  Ia32/LRotU64.nasm| GCC
-  Ia32/ARShiftU64.nasm| GCC
-  Ia32/RShiftU64.nasm| GCC
-  Ia32/LShiftU64.nasm| GCC
-  Ia32/EnableCache.nasm| GCC
-  Ia32/DisableCache.nasm| GCC
-  Ia32/RdRand.nasm
-  Ia32/XGetBv.nasm
-  Ia32/XSetBv.nasm
-  Ia32/VmgExit.nasm
-  Ia32/VmgExitSvsm.nasm
+  Ia32/Ia32Combined.nasm
+  Ia32/Ia32GccCombined.nasm | GCC
 
   Ia32/DivS64x64Remainder.c
   Ia32/InternalSwitchStack.c | MSFT
-  Ia32/InternalSwitchStack.nasm | GCC
   Ia32/Non-existing.c
   X86WriteIdtr.c
   X86WriteGdtr.c
@@ -217,88 +189,16 @@
 
 [Sources.X64]
   X64/Thunk16.nasm
-  X64/CpuIdEx.nasm
-  X64/CpuId.nasm
   X64/LongJump.nasm
   X64/SetJump.nasm
   X64/SwitchStack.nasm
-  X64/EnableCache.nasm
-  X64/DisableCache.nasm
-  X64/WriteTr.nasm
-  X64/Lfence.nasm
+  X64/X64Combined.nasm
+  X64/X64MsftCombined.nasm | MSFT
 
   X64/CpuBreakpoint.c | MSFT
   X64/WriteMsr64.c | MSFT
   X64/ReadMsr64.c | MSFT
-  X64/CpuPause.nasm| MSFT
-  X64/DisableInterrupts.nasm| MSFT
-  X64/EnableInterrupts.nasm| MSFT
-  X64/FlushCacheLine.nasm| MSFT
-  X64/Invd.nasm| MSFT
-  X64/Wbinvd.nasm| MSFT
-  X64/Mwait.nasm| MSFT
-  X64/Monitor.nasm| MSFT
-  X64/ReadPmc.nasm| MSFT
-  X64/ReadTsc.nasm| MSFT
-  X64/WriteMm7.nasm| MSFT
-  X64/WriteMm6.nasm| MSFT
-  X64/WriteMm5.nasm| MSFT
-  X64/WriteMm4.nasm| MSFT
-  X64/WriteMm3.nasm| MSFT
-  X64/WriteMm2.nasm| MSFT
-  X64/WriteMm1.nasm| MSFT
-  X64/WriteMm0.nasm| MSFT
-  X64/ReadMm7.nasm| MSFT
-  X64/ReadMm6.nasm| MSFT
-  X64/ReadMm5.nasm| MSFT
-  X64/ReadMm4.nasm| MSFT
-  X64/ReadMm3.nasm| MSFT
-  X64/ReadMm2.nasm| MSFT
-  X64/ReadMm1.nasm| MSFT
-  X64/ReadMm0.nasm| MSFT
-  X64/FxRestore.nasm| MSFT
-  X64/FxSave.nasm| MSFT
-  X64/WriteLdtr.nasm| MSFT
-  X64/ReadLdtr.nasm| MSFT
-  X64/WriteIdtr.nasm| MSFT
-  X64/ReadIdtr.nasm| MSFT
-  X64/WriteGdtr.nasm| MSFT
-  X64/ReadGdtr.nasm| MSFT
-  X64/ReadTr.nasm| MSFT
-  X64/ReadSs.nasm| MSFT
-  X64/ReadGs.nasm| MSFT
-  X64/ReadFs.nasm| MSFT
-  X64/ReadEs.nasm| MSFT
-  X64/ReadDs.nasm| MSFT
-  X64/ReadCs.nasm| MSFT
-  X64/WriteDr7.nasm| MSFT
-  X64/WriteDr6.nasm| MSFT
-  X64/WriteDr5.nasm| MSFT
-  X64/WriteDr4.nasm| MSFT
-  X64/WriteDr3.nasm| MSFT
-  X64/WriteDr2.nasm| MSFT
-  X64/WriteDr1.nasm| MSFT
-  X64/WriteDr0.nasm| MSFT
-  X64/ReadDr7.nasm| MSFT
-  X64/ReadDr6.nasm| MSFT
-  X64/ReadDr5.nasm| MSFT
-  X64/ReadDr4.nasm| MSFT
-  X64/ReadDr3.nasm| MSFT
-  X64/ReadDr2.nasm| MSFT
-  X64/ReadDr1.nasm| MSFT
-  X64/ReadDr0.nasm| MSFT
-  X64/WriteCr4.nasm| MSFT
-  X64/WriteCr3.nasm| MSFT
-  X64/WriteCr2.nasm| MSFT
-  X64/WriteCr0.nasm| MSFT
-  X64/ReadCr4.nasm| MSFT
-  X64/ReadCr3.nasm| MSFT
-  X64/ReadCr2.nasm| MSFT
-  X64/ReadCr0.nasm| MSFT
-  X64/ReadEflags.nasm| MSFT
 
-  X64/TdCall.nasm
-  X64/TdVmcall.nasm
   X64/TdProbe.c
   X64/SevProbe.c
 
@@ -323,17 +223,6 @@
   X86SpeculationBarrier.c
   X64/GccInline.c | GCC
   X64/GccInlinePriv.c | GCC
-  X64/EnableDisableInterrupts.nasm
-  X64/DisablePaging64.nasm
-  X64/Pvalidate.nasm
-  X64/RdRand.nasm
-  X64/RmpAdjust.nasm
-  X64/XGetBv.nasm
-  X64/XSetBv.nasm
-  X64/VmgExit.nasm
-  X64/VmgExitSvsm.nasm
-  X64/ReadFsBase.nasm
-  X64/WriteFsBase.nasm
   X64/FsGsBase.c
 
 [Sources.EBC]

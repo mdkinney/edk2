@@ -78,4 +78,3 @@ ASM_PFX(InternalX86RdRand64):
 rn64_ret:
     xor    eax, eax
     ret                            ; return with failure status
-
