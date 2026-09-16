@@ -246,6 +246,20 @@ class TestFilterMatrix(unittest.TestCase):
         for combo in result:
             self.assertEqual(combo['extra_field'], 'value')
 
+    @patch.dict(os.environ, {
+        'BUILD_TYPE_LIST': '["DEBUG", "RELEASE"]',
+        'BUILD_ARCH_LIST': '["X64"]',
+        'TOOL_CHAIN_TAG_LIST': '["GCC5"]',
+        'PACKAGE_LISTS': '["CryptoPkg", "MdeModulePkg"]'
+    })
+    def test_generate_filtered_matrix_package_priority_sorting(self):
+        result = filter_matrix.generate_filtered_matrix()
+        # CryptoPkg combinations should appear before MdeModulePkg combinations
+        self.assertEqual(result[0]['build_package'], 'CryptoPkg')
+        self.assertEqual(result[1]['build_package'], 'CryptoPkg')
+        self.assertEqual(result[2]['build_package'], 'MdeModulePkg')
+        self.assertEqual(result[3]['build_package'], 'MdeModulePkg')
+
 
 if __name__ == '__main__':
     unittest.main()
