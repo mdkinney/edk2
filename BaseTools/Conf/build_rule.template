@@ -187,13 +187,11 @@
         $(OUTPUT_DIR)(+)${s_dir}(+)${s_base}.obj
 
     <Command.MSFT, Command.INTEL>
-        Trim --asm-file -o ${d_path}(+)${s_base}.i -i $(INC_LIST) ${src}
         "$(PP)" $(DEPS_FLAGS) $(PP_FLAGS) $(INC) ${src} > ${d_path}(+)${s_base}.ii
         Trim --source-code --convert-hex --trim-long -o ${d_path}(+)${s_base}.iiii ${d_path}(+)${s_base}.ii
         "$(ASM)" /Fo${dst} $(ASM_FLAGS) /I${s_path} $(INC) ${d_path}(+)${s_base}.iiii
 
     <Command.GCC>
-        Trim --asm-file -o ${d_path}(+)${s_base}.i -i $(INC_LIST) ${src}
         "$(PP)" $(DEPS_FLAGS) $(PP_FLAGS) $(INC) ${src} > ${d_path}(+)${s_base}.ii
         Trim --trim-long --source-code -o ${d_path}(+)${s_base}.iiii ${d_path}(+)${s_base}.ii
         "$(ASM)" $(ASM_FLAGS) -o ${dst} $(INC) ${d_path}(+)${s_base}.iiii
@@ -213,19 +211,16 @@
         $(OUTPUT_DIR)(+)${s_dir}(+)${s_base}.obj
 
     <Command.INTEL>
-        Trim --asm-file -o ${d_path}(+)${s_base}.i -i $(INC_LIST) ${src}
         "$(PP)" $(DEPS_FLAGS) $(PP_FLAGS) $(INC) ${src} > ${d_path}(+)${s_base}.ii
         Trim --source-code --convert-hex --trim-long -o ${d_path}(+)${s_base}.iiii ${d_path}(+)${s_base}.ii
         "$(ASM)" /Fo${dst} $(ASM_FLAGS) /I${s_path} $(INC) ${d_path}(+)${s_base}.iiii
 
     <Command.MSFT>
-        Trim --asm-file  -o ${d_path}(+)${s_base}.i -i $(INC_LIST) ${src}
         "$(PP)" $(DEPS_FLAGS) $(PP_FLAGS) $(INC) ${src} > ${d_path}(+)${s_base}.ii
         Trim --source-code --trim-long -o ${d_path}(+)${s_base}.iiii ${d_path}(+)${s_base}.ii
         "$(ASM)" /Fo${dst} $(ASM_FLAGS) /I${s_path} $(INC) ${d_path}(+)${s_base}.iiii
 
     <Command.GCC>
-        Trim --asm-file -o ${d_path}(+)${s_base}.i -i $(INC_LIST) ${src}
         "$(PP)" $(DEPS_FLAGS) $(PP_FLAGS) $(INC) ${src} > ${d_path}(+)${s_base}.ii
         Trim --trim-long --source-code -o ${d_path}(+)${s_base}.iiii ${d_path}(+)${s_base}.ii
         "$(ASM)" $(ASM_FLAGS) -o ${dst} $(INC) ${d_path}(+)${s_base}.iiii
@@ -241,7 +236,6 @@
         $(OUTPUT_DIR)(+)${s_dir}(+)${s_base}.obj
 
     <Command>
-        Trim --asm-file -o ${d_path}(+)${s_base}.i -i $(INC_LIST) ${src}
         "$(PP)" $(DEPS_FLAGS) $(PP_FLAGS) $(INC) ${src} > ${d_path}(+)${s_base}.ii
         Trim --trim-long --source-code --source-code-format=NASM -o ${d_path}(+)${s_base}.iii ${d_path}(+)${s_base}.ii
         "$(NASM)" -I${s_path}(+) $(NASM_INC) $(NASM_FLAGS) -o $dst ${d_path}(+)${s_base}.iii
@@ -549,7 +543,6 @@
         $(OUTPUT_DIR)(+)${s_base}.com
 
     <Command.MSFT, Command.INTEL>
-        Trim --asm-file -o ${d_path}(+)${s_base}.i -i $(INC_LIST) ${src}
         "$(PP)" $(DEPS_FLAGS) $(PP_FLAGS) $(INC) ${src} > ${d_path}(+)${s_base}.ii
         Trim --source-code --convert-hex --trim-long -o ${d_path}(+)${s_base}.iii ${d_path}(+)${s_base}.ii
         cd $(OUTPUT_DIR)(+)${s_dir}
@@ -557,14 +550,12 @@
         "$(ASMLINK)" $(ASMLINK_FLAGS) $(OUTPUT_DIR)(+)${s_dir}(+)${s_base}.obj,${dst},,,,
 
     <Command.GCC>
-      Trim --asm-file -o {d_path}(+)${s_base}.i -i $(INC_LIST) ${src}
       "$(PP)" $(DEPS_FLAGS) $(PP_FLAGS) $(INC) ${src} > ${d_path}(+)${s_base}.ii
       Trim --source-code -o ${d_path}(+)${s_base}.iii ${d_path}(+)${s_base}.ii
       "$(ASM)" -o $(OUTPUT_DIR)(+)${s_dir}(+)${s_base}.obj $(ASM_FLAGS) $(INC) ${d_path}(+)${s_base}.iii
       "$(DLINK)" -o ${dst} $(DLINK_FLAGS) --start-group $(DLINK_SPATH) $(LIBS) $(OUTPUT_DIR)(+)${s_dir}(+)${s_base}.obj --end-group
 
     <Command.XCODE>
-      Trim --asm-file -o ${d_path}(+)${s_base}.i -i $(INC_LIST) ${src}
       "$(PP)" $(DEPS_FLAGS) $(PP_FLAGS) $(INC) ${src} > ${d_path}(+)${s_base}.ii
       Trim --source-code -o ${d_path}(+)${s_base}.iii ${d_path}(+)${s_base}.ii
       "$(ASM)" -o $(OUTPUT_DIR)(+)${s_dir}(+)${s_base}.obj $(ASM_FLAGS) $(INC) ${d_path}(+)${s_base}.iii
@@ -583,7 +574,6 @@
         $(OUTPUT_DIR)(+)${s_base}.bin
 
     <Command>
-        Trim --asm-file -o ${d_path}(+)${s_base}.i -i $(INC_LIST) ${src}
         "$(PP)" $(DEPS_FLAGS) $(PP_FLAGS) $(INC) ${src} > ${d_path}(+)${s_base}.ii
         Trim --source-code --source-code-format=NASM --convert-hex -o ${d_path}(+)${s_base}.iii ${d_path}(+)${s_base}.ii
         "$(NASM)" -I${s_path}(+) -l ${d_path}(+)${s_base}.lst $(NASMB_FLAGS) $(NASM_INC) -o $dst ${d_path}(+)${s_base}.iii
