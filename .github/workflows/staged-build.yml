@@ -613,5 +613,5 @@ jobs:
     steps:
       - name: Stage 2 Success
         run: echo "Stage 2 jobs completed successfully"
-      - uses: Kesin11/actions-timeline@v2
+      - uses: Kesin11/actions-timeline@v3.2.0
 
