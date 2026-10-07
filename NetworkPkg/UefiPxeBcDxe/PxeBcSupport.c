@@ -318,23 +318,19 @@ PxeBcIcmpErrorDpcHandle (
   }
 
   //
-  // Copy the right ICMP error message into mode data.
+  // Copy ICMP error fragments into Mode->IcmpError in order. The maximum
+  // buffer size is sizeof (EFI_PXE_BASE_CODE_ICMP_ERROR); truncate any excess.
   //
-  CopiedLen = 0;
-  IcmpError = (UINT8 *)&Mode->IcmpError;
-
-  // Copy the ICMP6 error message into mode data. Mode->IcmpError holds at most
-  // sizeof (EFI_PXE_BASE_CODE_ICMP_ERROR) bytes: copy the fragments back to back,
-  // clamp each one to the space that is left and stop once the structure is full,
-  // so that a longer message is truncated instead of written past the structure.
-  for (Index = 0; (Index < RxData->FragmentCount) && (CopiedLen < sizeof (EFI_PXE_BASE_CODE_ICMP_ERROR)); Index++) {
-    FragmentLen = RxData->FragmentTable[Index].FragmentLength;
-    if (FragmentLen > sizeof (EFI_PXE_BASE_CODE_ICMP_ERROR) - CopiedLen) {
-      FragmentLen = (UINT32)(sizeof (EFI_PXE_BASE_CODE_ICMP_ERROR) - CopiedLen);
-    }
-
-    CopyMem (IcmpError + CopiedLen, RxData->FragmentTable[Index].FragmentBuffer, FragmentLen);
-    CopiedLen += FragmentLen;
+  for (Index = 0, IcmpError = (UINT8 *)&Mode->IcmpError, CopiedLen = 0;
+       (Index < RxData->FragmentCount) &&
+       (CopiedLen < sizeof (EFI_PXE_BASE_CODE_ICMP_ERROR));
+       Index++, IcmpError += FragmentLen, CopiedLen += FragmentLen)
+  {
+    FragmentLen = MIN (
+                    RxData->FragmentTable[Index].FragmentLength,
+                    (UINT32)(sizeof (EFI_PXE_BASE_CODE_ICMP_ERROR) - CopiedLen)
+                    );
+    CopyMem (IcmpError, RxData->FragmentTable[Index].FragmentBuffer, FragmentLen);
   }
 
 ON_RECYCLE:
@@ -446,23 +442,19 @@ PxeBcIcmp6ErrorDpcHandle (
   }
 
   //
-  // Copy the right ICMP6 error message into mode data.
+  // Copy ICMP error fragments into Mode->IcmpError in order. The maximum
+  // buffer size is sizeof (EFI_PXE_BASE_CODE_ICMP_ERROR); truncate any excess.
   //
-  CopiedLen  = 0;
-  Icmp6Error = (UINT8 *)&Mode->IcmpError;
-
-  // Copy the ICMP6 error message into mode data. Mode->IcmpError holds at most
-  // sizeof (EFI_PXE_BASE_CODE_ICMP_ERROR) bytes: copy the fragments back to back,
-  // clamp each one to the space that is left and stop once the structure is full,
-  // so that a longer message is truncated instead of written past the structure.
-  for (Index = 0; (Index < RxData->FragmentCount) && (CopiedLen < sizeof (EFI_PXE_BASE_CODE_ICMP_ERROR)); Index++) {
-    FragmentLen = RxData->FragmentTable[Index].FragmentLength;
-    if (FragmentLen > sizeof (EFI_PXE_BASE_CODE_ICMP_ERROR) - CopiedLen) {
-      FragmentLen = (UINT32)(sizeof (EFI_PXE_BASE_CODE_ICMP_ERROR) - CopiedLen);
-    }
-
-    CopyMem (Icmp6Error + CopiedLen, RxData->FragmentTable[Index].FragmentBuffer, FragmentLen);
-    CopiedLen += FragmentLen;
+  for (Index = 0, Icmp6Error = (UINT8 *)&Mode->IcmpError, CopiedLen = 0;
+       (Index < RxData->FragmentCount) &&
+       (CopiedLen < sizeof (EFI_PXE_BASE_CODE_ICMP_ERROR));
+       Index++, Icmp6Error += FragmentLen, CopiedLen += FragmentLen)
+  {
+    FragmentLen = MIN (
+                    RxData->FragmentTable[Index].FragmentLength,
+                    (UINT32)(sizeof (EFI_PXE_BASE_CODE_ICMP_ERROR) - CopiedLen)
+                    );
+    CopyMem (Icmp6Error, RxData->FragmentTable[Index].FragmentBuffer, FragmentLen);
   }
 
 ON_RECYCLE:
