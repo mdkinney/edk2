@@ -23,8 +23,7 @@
 
 [Sources]
   Logo.c
-  LogoFfsDummy.idf
-  LogoFfsDummy.bmp
+  LogoHiiImageNull.c
 
 [Packages]
   MdeModulePkg/MdeModulePkg.dec

@@ -43,6 +43,11 @@ LOGO_ENTRY  mLogos[] = {
   }
 };
 
+EFI_IMAGE_ID
+GetHiiImageId (
+  VOID
+  );
+
 /**
   Load logo image from cached BMP and convert to GOP BLT format.
 
@@ -300,7 +305,7 @@ InitializeLogo (
   //
   // Set ImageId for HII mode
   //
-  mLogos[0].ImageId = IMAGE_TOKEN (IMG_LOGO);
+  mLogos[0].ImageId = GetHiiImageId ();
 
 InstallProtocol:
   Handle = NULL;

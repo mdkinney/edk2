@@ -32,6 +32,7 @@
 [Sources]
   Logo.bmp
   Logo.c
+  LogoHiiImage.c
   Logo.idf
 
 [Packages]
