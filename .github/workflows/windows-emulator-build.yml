@@ -30,6 +30,11 @@ on:
         required: false
         type: string
         default: '22.1.8'
+      edk2-clang-version:
+        description: EDK2 Clang version for the Windows MinGW toolchain.
+        required: false
+        type: string
+        default: '22.1.8.0'
       python-version:
         description: The version of Python to use.
         required: true
@@ -91,6 +96,7 @@ jobs:
         with:
           windows-installer: ${{ inputs.windows-installer }}
           vs-clang-llvm-version: ${{ inputs.vs-clang-llvm-version }}
+          edk2-clang-version: ${{ inputs.edk2-clang-version }}
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}

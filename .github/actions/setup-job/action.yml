@@ -32,6 +32,10 @@ inputs:
     description: LLVM version for the Visual Studio CLANGPDB toolchain.
     required: false
     default: '22.1.8'
+  edk2-clang-version:
+    description: EDK2 Clang version for the Windows MinGW toolchain.
+    required: false
+    default: '22.1.8.0'
   windows-qemu-installer-version:
     description: Windows QEMU installer (e.g., 2023.7.25)
     required: false
@@ -74,8 +78,7 @@ runs:
       if: ${{ inputs.windows-installer == 'edk2-clang' && runner.os == 'Windows' }}
       uses: ./.github/actions/windows-setup-mingw-edk2-clang-job
       with:
-        edk2-clang-version: '20.1.8'
-        edk2-clang-version-patch-level: '0'
+        edk2-clang-version: ${{ inputs.edk2-clang-version }}
         edk2-clang-install_path: 'C:\edk2-clang'
     - name: Windows Setup LLVM MINGW CLANG Job
       if: ${{ inputs.windows-installer == 'llvm' && runner.os == 'Windows' }}

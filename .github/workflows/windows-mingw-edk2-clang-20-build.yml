@@ -9,7 +9,7 @@
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
-name: Windows Mingw edk2-clang 20.1.8 Build
+name: Windows Mingw edk2-clang Build
 
 on:
   workflow_call:
@@ -19,6 +19,11 @@ on:
         required: true
         type: string
         default: 'windows-2025'
+      edk2-clang-version:
+        description: EDK2 Clang version for the Windows MinGW toolchain.
+        required: false
+        type: string
+        default: '22.1.8.0'
       python-version:
         description: The version of Python to use.
         required: true
@@ -59,6 +64,11 @@ on:
         required: true
         type: string
         default: 'windows-2025'
+      edk2-clang-version:
+        description: EDK2 Clang version for the Windows MinGW toolchain.
+        required: false
+        type: string
+        default: '22.1.8.0'
       python-version:
         description: The version of Python to use.
         required: true
@@ -98,6 +108,7 @@ jobs:
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-installer: 'edk2-clang'
+      edk2-clang-version: ${{ inputs.edk2-clang-version }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -117,6 +128,7 @@ jobs:
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-installer: 'edk2-clang'
+      edk2-clang-version: ${{ inputs.edk2-clang-version }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -136,6 +148,7 @@ jobs:
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-installer: 'edk2-clang'
+      edk2-clang-version: ${{ inputs.edk2-clang-version }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       edk2-tools-build-params: '-a X64 -t CLANGDWARF'

@@ -41,6 +41,16 @@ on:
         required: false
         type: string
         default: ''
+      edk2-clang-version:
+        description: EDK2 Clang version for Windows MinGW jobs.
+        required: false
+        type: string
+        default: '22.1.8.0'
+      edk2-clang-version-override:
+        description: Optional custom EDK2 Clang version that overrides the selected version.
+        required: false
+        type: string
+        default: ''
       windows-qemu-installer-version:
         description: Windows QEMU installer (e.g., 2023.7.25)
         required: true
@@ -147,6 +157,20 @@ on:
         required: false
         type: string
         default: ''
+      edk2-clang-version:
+        description: Select a known EDK2 Clang version for Windows MinGW jobs.
+        required: false
+        type: choice
+        options:
+          - '20.1.8.0'
+          - '22.1.8.0'
+          - '23.1.3.0'
+        default: '22.1.8.0'
+      edk2-clang-version-override:
+        description: Optional custom EDK2 Clang version to evaluate; overrides the selected version.
+        required: false
+        type: string
+        default: ''
       windows-qemu-installer-version:
         description: Windows QEMU installer (e.g., 2023.7.25)
         required: true
@@ -227,22 +251,33 @@ jobs:
     name: Resolve Workflow Inputs
     runs-on: ubuntu-slim
     outputs:
-      llvm_version: ${{ steps.select-version.outputs.version }}
+      llvm_version: ${{ steps.resolve-versions.outputs.llvm_version }}
+      edk2_clang_version: ${{ steps.resolve-versions.outputs.edk2_clang_version }}
     steps:
-      - name: Select LLVM version
+      - name: Resolve compiler versions
         if: ${{ inputs.enable-windows-clang-tests }}
-        id: select-version
+        id: resolve-versions
         env:
-          SELECTED_VERSION: ${{ inputs.vs-clang-llvm-version }}
-          VERSION_OVERRIDE: ${{ inputs.vs-clang-llvm-version-override }}
+          VS_LLVM_SELECTED_VERSION: ${{ inputs.vs-clang-llvm-version }}
+          VS_LLVM_VERSION_OVERRIDE: ${{ inputs.vs-clang-llvm-version-override }}
+          EDK2_CLANG_SELECTED_VERSION: ${{ inputs.edk2-clang-version }}
+          EDK2_CLANG_VERSION_OVERRIDE: ${{ inputs.edk2-clang-version-override }}
         shell: bash
         run: |
-          llvm_version="${VERSION_OVERRIDE:-$SELECTED_VERSION}"
+          llvm_version="${VS_LLVM_VERSION_OVERRIDE:-$VS_LLVM_SELECTED_VERSION}"
           if [[ ! "$llvm_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][A-Za-z0-9.-]+)?$ ]]; then
-            echo "::error::Invalid LLVM version '$llvm_version'. Expected a version such as 22.1.8."
+            echo "::error::Invalid VS LLVM version '$llvm_version'. Expected a version such as 22.1.8."
             exit 1
           fi
-          printf 'version=%s\n' "$llvm_version" >> "$GITHUB_OUTPUT"
+
+          edk2_clang_version="${EDK2_CLANG_VERSION_OVERRIDE:-$EDK2_CLANG_SELECTED_VERSION}"
+          if [[ ! "$edk2_clang_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Invalid EDK2 Clang version '$edk2_clang_version'. Expected a version such as 22.1.8.0."
+            exit 1
+          fi
+
+          printf 'llvm_version=%s\n' "$llvm_version" >> "$GITHUB_OUTPUT"
+          printf 'edk2_clang_version=%s\n' "$edk2_clang_version" >> "$GITHUB_OUTPUT"
 
   #
   # Stage 0: Set Package Lists and run PatchCheck
@@ -272,6 +307,7 @@ jobs:
     outputs:
       package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
       llvm_version: ${{ needs.resolve_inputs.outputs.llvm_version }}
+      edk2_clang_version: ${{ needs.resolve_inputs.outputs.edk2_clang_version }}
     steps:
       - name: Stage 0 Success
         run: echo "Stage 0 jobs completed successfully"
@@ -357,6 +393,7 @@ jobs:
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-installer: 'edk2-clang'
+      edk2-clang-version: ${{ needs.stage0.outputs.edk2_clang_version }}
       windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
@@ -377,6 +414,7 @@ jobs:
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-installer: 'edk2-clang'
+      edk2-clang-version: ${{ needs.stage0.outputs.edk2_clang_version }}
       windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
@@ -517,6 +555,7 @@ jobs:
     outputs:
       package-lists: ${{ needs.stage0.outputs.package-lists }}
       llvm_version: ${{ needs.stage0.outputs.llvm_version }}
+      edk2_clang_version: ${{ needs.stage0.outputs.edk2_clang_version }}
     steps:
       - name: Stage 1 Success
         run: echo "Stage 1 jobs completed successfully"
@@ -550,6 +589,7 @@ jobs:
     uses: ./.github/workflows/windows-mingw-edk2-clang-20-build.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
+      edk2-clang-version: ${{ needs.stage1.outputs.edk2_clang_version }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
