@@ -24,17 +24,17 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Set up Python ${{ inputs.python-version }}
+      id: setup-python
+      uses: actions/setup-python@v6
+      with:
+        python-version: ${{ inputs.python-version }}
     - name: Restore cached venv
       id: cache-venv
       uses: actions/cache/restore@v5
       with:
         path: .venv
-        key: ${{ runner.os }}-Python-${{ inputs.python-version }}-venv-${{ hashFiles(inputs.pip-requirements) }}${{ inputs.cache-name-suffix }}
-    - name: Set up Python ${{ inputs.python-version }}
-      if: ${{ steps.cache-venv.outputs.cache-hit != 'true' }}
-      uses: actions/setup-python@v6
-      with:
-        python-version: ${{ inputs.python-version }}
+        key: ${{ runner.os }}-Python-${{ steps.setup-python.outputs.python-version }}-venv-${{ hashFiles(inputs.pip-requirements) }}${{ inputs.cache-name-suffix }}
     - name: Linux Create venv if cache missed
       if: ${{ steps.cache-venv.outputs.cache-hit != 'true' && runner.os == 'Linux' }}
       shell: bash
