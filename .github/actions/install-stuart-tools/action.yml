@@ -21,6 +21,17 @@ runs:
     - name: Download External Dependencies using stuart_update
       shell: bash
       run: stuart_update -c ${{ inputs.stuart-ci-settings-file }}
+    - name: Display Clang compiler path and version
+      if: ${{ runner.os == 'Windows' && env.CLANG_BIN != '' }}
+      shell: bash
+      run: |
+        echo "CLANG_BIN=$CLANG_BIN"
+        type -a clang
+        clang --version
+        clang -print-resource-dir
+        type -a clang++
+        clang++ --version
+        clang++ -print-resource-dir
     - name: Build BaseTools using Edk2ToolsBuild.py
       shell: bash
       run: python BaseTools/Edk2ToolsBuild.py ${{ inputs.edk2-tools-build-params }}
