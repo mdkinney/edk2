@@ -44,6 +44,11 @@ on:
         required: true
         type: string
         default: 'vs'
+      vs-clang-llvm-version:
+        description: LLVM version for the Visual Studio CLANGPDB toolchain.
+        required: false
+        type: string
+        default: '22.1.8'
       windows-qemu-installer-version:
         description: Windows QEMU installer (e.g., 2023.7.25)
         required: true
@@ -107,6 +112,11 @@ on:
         required: true
         type: string
         default: 'vs'
+      vs-clang-llvm-version:
+        description: LLVM version for the Visual Studio CLANGPDB toolchain.
+        required: false
+        type: string
+        default: '22.1.8'
       windows-qemu-installer-version:
         description: Windows QEMU installer (e.g., 2023.7.25)
         required: true
@@ -172,6 +182,7 @@ jobs:
         uses: ./.github/actions/setup-job
         with:
           windows-installer: ${{ inputs.windows-installer }}
+          vs-clang-llvm-version: ${{ inputs.vs-clang-llvm-version }}
           windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}
@@ -245,6 +256,7 @@ jobs:
         uses: ./.github/actions/setup-job
         with:
           windows-installer: ${{ inputs.windows-installer }}
+          vs-clang-llvm-version: ${{ inputs.vs-clang-llvm-version }}
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}

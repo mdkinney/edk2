@@ -31,6 +31,16 @@ on:
         required: false
         type: string
         default: 'windows-2025'
+      vs-clang-llvm-version:
+        description: LLVM version for Windows Visual Studio CLANGPDB jobs.
+        required: false
+        type: string
+        default: '22.1.8'
+      vs-clang-llvm-version-override:
+        description: Optional custom LLVM version that overrides the selected version.
+        required: false
+        type: string
+        default: ''
       windows-qemu-installer-version:
         description: Windows QEMU installer (e.g., 2023.7.25)
         required: true
@@ -124,6 +134,19 @@ on:
         required: false
         type: string
         default: 'windows-2025'
+      vs-clang-llvm-version:
+        description: Select a known LLVM version for Windows Visual Studio CLANGPDB jobs.
+        required: false
+        type: choice
+        options:
+          - '20.1.8'
+          - '22.1.8'
+        default: '22.1.8'
+      vs-clang-llvm-version-override:
+        description: Optional custom LLVM version to evaluate; overrides the selected version.
+        required: false
+        type: string
+        default: ''
       windows-qemu-installer-version:
         description: Windows QEMU installer (e.g., 2023.7.25)
         required: true
@@ -200,11 +223,33 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  resolve_inputs:
+    name: Resolve Workflow Inputs
+    runs-on: ubuntu-slim
+    outputs:
+      llvm_version: ${{ steps.select-version.outputs.version }}
+    steps:
+      - name: Select LLVM version
+        if: ${{ inputs.enable-windows-clang-tests }}
+        id: select-version
+        env:
+          SELECTED_VERSION: ${{ inputs.vs-clang-llvm-version }}
+          VERSION_OVERRIDE: ${{ inputs.vs-clang-llvm-version-override }}
+        shell: bash
+        run: |
+          llvm_version="${VERSION_OVERRIDE:-$SELECTED_VERSION}"
+          if [[ ! "$llvm_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][A-Za-z0-9.-]+)?$ ]]; then
+            echo "::error::Invalid LLVM version '$llvm_version'. Expected a version such as 22.1.8."
+            exit 1
+          fi
+          printf 'version=%s\n' "$llvm_version" >> "$GITHUB_OUTPUT"
+
   #
   # Stage 0: Set Package Lists and run PatchCheck
   #
   set_package_lists:
     name: Set Package Lists
+    needs: resolve_inputs
     uses: ./.github/workflows/ubuntu-set-package-lists-and-patch-check.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
@@ -222,9 +267,11 @@ jobs:
     runs-on: ubuntu-slim
     needs:
       - set_package_lists
+      - resolve_inputs
     if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
     outputs:
       package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
+      llvm_version: ${{ needs.resolve_inputs.outputs.llvm_version }}
     steps:
       - name: Stage 0 Success
         run: echo "Stage 0 jobs completed successfully"
@@ -361,7 +408,7 @@ jobs:
       unit-test-arch-list: '["IA32","X64"]'
       unit-test-tool-chain-tag: 'CLANGDWARF'
   build_windows_vs_llvm_20_clang_basic_acceptance_test:
-    name: Basic Acceptance Tests - Windows VS LLVM 20 CLANG
+    name: Basic Acceptance Tests - Windows VS LLVM ${{ needs.stage0.outputs.llvm_version }} CLANG
     # Firmware Build Support:             CLANGPDB - IA32/X64
     # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
     # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
@@ -371,6 +418,7 @@ jobs:
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-installer: 'vs-clangpdb'
+      vs-clang-llvm-version: ${{ needs.stage0.outputs.llvm_version }}
       windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
@@ -468,6 +516,7 @@ jobs:
     if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
     outputs:
       package-lists: ${{ needs.stage0.outputs.package-lists }}
+      llvm_version: ${{ needs.stage0.outputs.llvm_version }}
     steps:
       - name: Stage 1 Success
         run: echo "Stage 1 jobs completed successfully"
@@ -531,6 +580,7 @@ jobs:
     uses: ./.github/workflows/windows-vs-llvm-20-clang-build.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
+      vs-clang-llvm-version: ${{ needs.stage1.outputs.llvm_version }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}

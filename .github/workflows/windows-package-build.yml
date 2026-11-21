@@ -19,6 +19,11 @@ on:
         required: true
         type: string
         default: 'vs'
+      vs-clang-llvm-version:
+        description: LLVM version for the Visual Studio CLANGPDB toolchain.
+        required: false
+        type: string
+        default: '22.1.8'
       python-version:
         description: The version of Python to use.
         required: true
@@ -117,6 +122,7 @@ jobs:
         uses: ./.github/actions/setup-job
         with:
           windows-installer: ${{ inputs.windows-installer }}
+          vs-clang-llvm-version: ${{ inputs.vs-clang-llvm-version }}
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
