@@ -57,9 +57,19 @@ runs:
     - name: Add TianoCore Mingw CLANG ${{ inputs.edk2-clang-version }} to PATH
       shell: cmd
       run: |
-        PATH=${{ inputs.edk2-clang-install_path }}\bin;%PATH%
-        echo PATH=%PATH%>> %GITHUB_ENV%
-        echo CLANG_BIN=${{ inputs.edk2-clang-install_path }}\bin\>> %GITHUB_ENV%
-        echo BASETOOLS_MINGW_PATH=${{ inputs.edk2-clang-install_path }}>> %GITHUB_ENV%
+        set "CLANG_ROOT=${{ inputs.edk2-clang-install_path }}"
+        set "CLANG_EXE="
+        for /f "delims=" %%i in ('where /r "%CLANG_ROOT%" clang.exe') do (
+          if not defined CLANG_EXE set "CLANG_EXE=%%i"
+        )
+        if not defined CLANG_EXE (
+          echo clang.exe not found under %CLANG_ROOT%
+          exit /b 1
+        )
+        for %%i in ("%CLANG_EXE%") do set "CLANG_BIN=%%~dpi"
+        for %%i in ("%CLANG_BIN%..") do set "MINGW_ROOT=%%~fi"
+        echo %CLANG_BIN%>> %GITHUB_PATH%
+        echo CLANG_BIN=%CLANG_BIN%>> %GITHUB_ENV%
+        echo BASETOOLS_MINGW_PATH=%MINGW_ROOT%>> %GITHUB_ENV%
         echo CC=clang>> %GITHUB_ENV%
         echo CXX=clang++>> %GITHUB_ENV%
