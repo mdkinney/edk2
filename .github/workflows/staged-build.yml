@@ -51,6 +51,16 @@ on:
         required: false
         type: string
         default: ''
+      llvm-mingw-version:
+        description: 'Release date (YYYYMMDD): 20250709=LLVM 20.1.8; 20260616=22.1.8; 20261117=23.1.6.'
+        required: false
+        type: string
+        default: '20261117'
+      llvm-mingw-version-override:
+        description: Optional custom LLVM MinGW release date (YYYYMMDD); overrides the selected date.
+        required: false
+        type: string
+        default: ''
       windows-qemu-installer-version:
         description: Windows QEMU installer (e.g., 2023.7.25)
         required: true
@@ -171,6 +181,20 @@ on:
         required: false
         type: string
         default: ''
+      llvm-mingw-version:
+        description: 'Release date (YYYYMMDD): 20250709=LLVM 20.1.8; 20260616=22.1.8; 20261117=23.1.6.'
+        required: false
+        type: choice
+        options:
+          - '20250709'
+          - '20260616'
+          - '20261117'
+        default: '20261117'
+      llvm-mingw-version-override:
+        description: Optional custom LLVM MinGW release date (YYYYMMDD); overrides the selected date.
+        required: false
+        type: string
+        default: ''
       windows-qemu-installer-version:
         description: Windows QEMU installer (e.g., 2023.7.25)
         required: true
@@ -251,8 +275,9 @@ jobs:
     name: Resolve Workflow Inputs
     runs-on: ubuntu-slim
     outputs:
-      llvm_version: ${{ steps.resolve-versions.outputs.llvm_version }}
+      vs_clang_llvm_version: ${{ steps.resolve-versions.outputs.vs_clang_llvm_version }}
       edk2_clang_version: ${{ steps.resolve-versions.outputs.edk2_clang_version }}
+      llvm_mingw_version: ${{ steps.resolve-versions.outputs.llvm_mingw_version }}
     steps:
       - name: Resolve compiler versions
         if: ${{ inputs.enable-windows-clang-tests }}
@@ -262,11 +287,13 @@ jobs:
           VS_LLVM_VERSION_OVERRIDE: ${{ inputs.vs-clang-llvm-version-override }}
           EDK2_CLANG_SELECTED_VERSION: ${{ inputs.edk2-clang-version }}
           EDK2_CLANG_VERSION_OVERRIDE: ${{ inputs.edk2-clang-version-override }}
+          LLVM_MINGW_VERSION: ${{ inputs.llvm-mingw-version }}
+          LLVM_MINGW_VERSION_OVERRIDE: ${{ inputs.llvm-mingw-version-override }}
         shell: bash
         run: |
-          llvm_version="${VS_LLVM_VERSION_OVERRIDE:-$VS_LLVM_SELECTED_VERSION}"
-          if [[ ! "$llvm_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][A-Za-z0-9.-]+)?$ ]]; then
-            echo "::error::Invalid VS LLVM version '$llvm_version'. Expected a version such as 22.1.8."
+          vs_clang_llvm_version="${VS_LLVM_VERSION_OVERRIDE:-$VS_LLVM_SELECTED_VERSION}"
+          if [[ ! "$vs_clang_llvm_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][A-Za-z0-9.-]+)?$ ]]; then
+            echo "::error::Invalid VS LLVM version '$vs_clang_llvm_version'. Expected a version such as 22.1.8."
             exit 1
           fi
 
@@ -276,8 +303,15 @@ jobs:
             exit 1
           fi
 
-          printf 'llvm_version=%s\n' "$llvm_version" >> "$GITHUB_OUTPUT"
+          llvm_mingw_version="${LLVM_MINGW_VERSION_OVERRIDE:-$LLVM_MINGW_VERSION}"
+          if [[ ! "$llvm_mingw_version" =~ ^[0-9]{8}$ ]]; then
+            echo "::error::Invalid LLVM MinGW release date '$llvm_mingw_version'. Expected YYYYMMDD."
+            exit 1
+          fi
+
+          printf 'vs_clang_llvm_version=%s\n' "$vs_clang_llvm_version" >> "$GITHUB_OUTPUT"
           printf 'edk2_clang_version=%s\n' "$edk2_clang_version" >> "$GITHUB_OUTPUT"
+          printf 'llvm_mingw_version=%s\n' "$llvm_mingw_version" >> "$GITHUB_OUTPUT"
 
   #
   # Stage 0: Set Package Lists and run PatchCheck
@@ -306,8 +340,9 @@ jobs:
     if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
     outputs:
       package-lists: ${{ needs.set_package_lists.outputs.package-lists }}
-      llvm_version: ${{ needs.resolve_inputs.outputs.llvm_version }}
+      vs_clang_llvm_version: ${{ needs.resolve_inputs.outputs.vs_clang_llvm_version }}
       edk2_clang_version: ${{ needs.resolve_inputs.outputs.edk2_clang_version }}
+      llvm_mingw_version: ${{ needs.resolve_inputs.outputs.llvm_mingw_version }}
     steps:
       - name: Stage 0 Success
         run: echo "Stage 0 jobs completed successfully"
@@ -426,7 +461,7 @@ jobs:
       unit-test-tool-chain-tag: ''
       emulatorpkg-target-list: ''
   build_windows_mingw_llvm_20_clang_basic_acceptance_test:
-    name: Basic Acceptance Tests - Windows MinGW LLVM 20 CLANG
+    name: Basic Acceptance Tests - Windows MinGW LLVM ${{ needs.stage0.outputs.llvm_mingw_version }} CLANG
     # Firmware Build Support:             CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
     # EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
@@ -436,6 +471,7 @@ jobs:
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-installer: 'llvm'
+      llvm-mingw-version: ${{ needs.stage0.outputs.llvm_mingw_version }}
       windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
@@ -446,7 +482,7 @@ jobs:
       unit-test-arch-list: '["IA32","X64"]'
       unit-test-tool-chain-tag: 'CLANGDWARF'
   build_windows_vs_llvm_20_clang_basic_acceptance_test:
-    name: Basic Acceptance Tests - Windows VS LLVM ${{ needs.stage0.outputs.llvm_version }} CLANG
+    name: Basic Acceptance Tests - Windows VS LLVM ${{ needs.stage0.outputs.vs_clang_llvm_version }} CLANG
     # Firmware Build Support:             CLANGPDB - IA32/X64
     # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
     # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
@@ -456,7 +492,7 @@ jobs:
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-installer: 'vs-clangpdb'
-      vs-clang-llvm-version: ${{ needs.stage0.outputs.llvm_version }}
+      vs-clang-llvm-version: ${{ needs.stage0.outputs.vs_clang_llvm_version }}
       windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
@@ -554,8 +590,9 @@ jobs:
     if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
     outputs:
       package-lists: ${{ needs.stage0.outputs.package-lists }}
-      llvm_version: ${{ needs.stage0.outputs.llvm_version }}
+      vs_clang_llvm_version: ${{ needs.stage0.outputs.vs_clang_llvm_version }}
       edk2_clang_version: ${{ needs.stage0.outputs.edk2_clang_version }}
+      llvm_mingw_version: ${{ needs.stage0.outputs.llvm_mingw_version }}
     steps:
       - name: Stage 1 Success
         run: echo "Stage 1 jobs completed successfully"
@@ -597,6 +634,7 @@ jobs:
       skip-filter-list: ${{ inputs.skip-filter-list }}
       continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
   windows_mingw_llvm_20_clang_build:
+    name: Windows MinGW LLVM ${{ needs.stage1.outputs.llvm_mingw_version }} CLANG Build
     # Firmware Build Support:             CLANGDWARF - IA32/X64
     # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
     # EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
@@ -605,6 +643,7 @@ jobs:
     uses: ./.github/workflows/windows-mingw-llvm-20-clang-build.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
+      llvm-mingw-version: ${{ needs.stage1.outputs.llvm_mingw_version }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -620,7 +659,7 @@ jobs:
     uses: ./.github/workflows/windows-vs-llvm-20-clang-build.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
-      vs-clang-llvm-version: ${{ needs.stage1.outputs.llvm_version }}
+      vs-clang-llvm-version: ${{ needs.stage1.outputs.vs_clang_llvm_version }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}

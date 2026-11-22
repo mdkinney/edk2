@@ -13,41 +13,55 @@
 name: Windows Setup LLVM MINGW CLANG Job
 description: Windows setup LLVM MINGW with CLANG support for CI jobs
 inputs:
-  llvm_version:
+  llvm-mingw-version:
     description: The LLVM version to install (e.g., 20250709)
     required: true
   llvm_install_path:
-    description: The path where LLVM is installed (e.g., C:\llvm-mingw-20250709-ucrt-x86_64)
+    description: The path where LLVM is installed. Defaults to a path based on the version.
     required: false
-    default: 'C:\llvm-mingw-20250709-ucrt-x86_64'
+    default: ''
 runs:
   using: 'composite'
   steps:
-    - name: Restore LLVM MINGW ${{ inputs.llvm_version }} from cache
+    - name: Resolve LLVM MINGW install path
+      id: resolve-install-path
+      shell: cmd
+      env:
+        LLVM_MINGW_INSTALL_PATH: ${{ inputs.llvm_install_path }}
+        LLVM_MINGW_VERSION: ${{ inputs.llvm-mingw-version }}
+      run: |
+        set "installPath=%LLVM_MINGW_INSTALL_PATH%"
+        if "%LLVM_MINGW_INSTALL_PATH%"=="" set "installPath=C:\llvm-mingw-%LLVM_MINGW_VERSION%-ucrt-x86_64"
+        echo path=%installPath%>> "%GITHUB_OUTPUT%"
+    - name: Restore LLVM MINGW ${{ inputs.llvm-mingw-version }} from cache
       id: cache-llvm-mingw
       uses: actions/cache/restore@v5
       with:
-        path: ${{ inputs.llvm_install_path }}
-        key: ${{ runner.os }}-llvm-mingw-${{ inputs.llvm_version }}-ucrt-x86_64
-    - name: Install LLVM MINGW ${{ inputs.llvm_version }}
+        path: ${{ steps.resolve-install-path.outputs.path }}
+        key: ${{ runner.os }}-llvm-mingw-${{ inputs.llvm-mingw-version }}-ucrt-x86_64
+    - name: Install LLVM MINGW ${{ inputs.llvm-mingw-version }}
       if: ${{ steps.cache-llvm-mingw.outputs.cache-hit != 'true' }}
       shell: cmd
       run: |
-        curl -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/${{ inputs.llvm_version }}/llvm-mingw-${{ inputs.llvm_version }}-ucrt-x86_64.zip"
+        set LLVM_MINGW_RELEASE_URL=https://github.com/mstorsjo/llvm-mingw/releases/download
+        set LLVM_MINGW_ARCHIVE=llvm-mingw-${{ inputs.llvm-mingw-version }}-ucrt-x86_64.zip
+        curl -L -o "llvm-mingw.zip" "%LLVM_MINGW_RELEASE_URL%/${{ inputs.llvm-mingw-version }}/%LLVM_MINGW_ARCHIVE%"
         powershell -command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath 'C:\' -Force"
-    - name: Save LLVM MINGW ${{ inputs.llvm_version }} to cache
+    - name: Save LLVM MINGW ${{ inputs.llvm-mingw-version }} to cache
       if: ${{ steps.cache-llvm-mingw.outputs.cache-hit != 'true' }}
       uses: actions/cache/save@v5
       with:
-        path: ${{ inputs.llvm_install_path }}
+        path: ${{ steps.resolve-install-path.outputs.path }}
         key: ${{ steps.cache-llvm-mingw.outputs.cache-primary-key }}
-    - name: Add LLVM MINGW ${{ inputs.llvm_version }} to PATH
+    - name: Add LLVM MINGW ${{ inputs.llvm-mingw-version }} to PATH
       shell: cmd
+      env:
+        LLVM_MINGW_INSTALL_PATH: ${{ steps.resolve-install-path.outputs.path }}
       run: |
-        PATH=${{ inputs.llvm_install_path }}\bin;%PATH%
-        PATH=%PATH%;${{ inputs.llvm_install_path }}\i686-w64-mingw32\bin
+        PATH=%LLVM_MINGW_INSTALL_PATH%\bin;%PATH%
+        PATH=%PATH%;%LLVM_MINGW_INSTALL_PATH%\i686-w64-mingw32\bin
         echo PATH=%PATH%>> %GITHUB_ENV%
-        echo CLANG_BIN=${{ inputs.llvm_install_path }}\bin\>> %GITHUB_ENV%
-        echo BASETOOLS_MINGW_PATH=${{ inputs.llvm_install_path }}>> %GITHUB_ENV%
+        echo CLANG_BIN=%LLVM_MINGW_INSTALL_PATH%\bin\>> %GITHUB_ENV%
+        echo BASETOOLS_MINGW_PATH=%LLVM_MINGW_INSTALL_PATH%>> %GITHUB_ENV%
         echo CC=clang>> %GITHUB_ENV%
         echo CXX=clang++>> %GITHUB_ENV%

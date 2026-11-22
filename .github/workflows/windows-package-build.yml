@@ -29,6 +29,11 @@ on:
         required: false
         type: string
         default: '22.1.8.0'
+      llvm-mingw-version:
+        description: LLVM MinGW release version.
+        required: false
+        type: string
+        default: '20261117'
       python-version:
         description: The version of Python to use.
         required: true
@@ -129,6 +134,7 @@ jobs:
           windows-installer: ${{ inputs.windows-installer }}
           vs-clang-llvm-version: ${{ inputs.vs-clang-llvm-version }}
           edk2-clang-version: ${{ inputs.edk2-clang-version }}
+          llvm-mingw-version: ${{ inputs.llvm-mingw-version }}
           python-version: ${{ inputs.python-version }}
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}

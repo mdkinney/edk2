@@ -36,6 +36,10 @@ inputs:
     description: EDK2 Clang version for the Windows MinGW toolchain.
     required: false
     default: '22.1.8.0'
+  llvm-mingw-version:
+    description: LLVM MinGW release version (e.g., 20250709).
+    required: false
+    default: '20261117'
   windows-qemu-installer-version:
     description: Windows QEMU installer (e.g., 2023.7.25)
     required: false
@@ -84,8 +88,7 @@ runs:
       if: ${{ inputs.windows-installer == 'llvm' && runner.os == 'Windows' }}
       uses: ./.github/actions/windows-setup-mingw-llvm-clang-job
       with:
-        llvm_version: '20250709'
-        llvm_install_path: 'C:\llvm-mingw-20250709-ucrt-x86_64'
+        llvm-mingw-version: ${{ inputs.llvm-mingw-version }}
     - name: Install QEMU on Windows
       if: ${{ inputs.windows-qemu-installer-version != '' && runner.os == 'Windows' }}
       uses: ./.github/actions/windows-setup-qemu-job

@@ -10,7 +10,7 @@
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
 
-name: Windows LLVM MINGW CLANG 20.1.8 Build
+name: Windows LLVM MINGW CLANG Build
 
 on:
   workflow_call:
@@ -20,6 +20,11 @@ on:
         required: true
         type: string
         default: 'windows-2025'
+      llvm-mingw-version:
+        description: LLVM MinGW release version.
+        required: false
+        type: string
+        default: '20261117'
       python-version:
         description: The version of Python to use.
         required: true
@@ -60,6 +65,11 @@ on:
         required: true
         type: string
         default: 'windows-2025'
+      llvm-mingw-version:
+        description: LLVM MinGW release version.
+        required: false
+        type: string
+        default: '20261117'
       python-version:
         description: The version of Python to use.
         required: true
@@ -99,6 +109,7 @@ jobs:
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-installer: 'llvm'
+      llvm-mingw-version: ${{ inputs.llvm-mingw-version }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -118,6 +129,7 @@ jobs:
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-installer: 'llvm'
+      llvm-mingw-version: ${{ inputs.llvm-mingw-version }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
@@ -136,6 +148,7 @@ jobs:
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-installer: 'llvm'
+      llvm-mingw-version: ${{ inputs.llvm-mingw-version }}
       python-version: ${{ inputs.python-version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       edk2-tools-build-params: '-a X64 -t CLANGDWARF'
