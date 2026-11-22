@@ -16,10 +16,10 @@ inputs:
   llvm-mingw-version:
     description: The LLVM version to install (e.g., 20250709)
     required: true
-  llvm_install_path:
-    description: The path where LLVM is installed. Defaults to a path based on the version.
+  llvm-mingw-install-path:
+    description: Install directory template ending in llvm-mingw-{version}-ucrt-x86_64; parent must exist.
     required: false
-    default: ''
+    default: 'C:\llvm-mingw-{version}-ucrt-x86_64'
 runs:
   using: 'composite'
   steps:
@@ -27,12 +27,13 @@ runs:
       id: resolve-install-path
       shell: cmd
       env:
-        LLVM_MINGW_INSTALL_PATH: ${{ inputs.llvm_install_path }}
+        LLVM_MINGW_INSTALL_PATH_TEMPLATE: ${{ inputs.llvm-mingw-install-path }}
         LLVM_MINGW_VERSION: ${{ inputs.llvm-mingw-version }}
       run: |
-        set "installPath=%LLVM_MINGW_INSTALL_PATH%"
-        if "%LLVM_MINGW_INSTALL_PATH%"=="" set "installPath=C:\llvm-mingw-%LLVM_MINGW_VERSION%-ucrt-x86_64"
-        echo path=%installPath%>> "%GITHUB_OUTPUT%"
+        setlocal EnableDelayedExpansion
+        set "installPath=%LLVM_MINGW_INSTALL_PATH_TEMPLATE%"
+        set "installPath=!installPath:{version}=%LLVM_MINGW_VERSION%!"
+        echo path=!installPath!>> "%GITHUB_OUTPUT%"
     - name: Restore LLVM MINGW ${{ inputs.llvm-mingw-version }} from cache
       id: cache-llvm-mingw
       uses: actions/cache/restore@v5
@@ -42,11 +43,15 @@ runs:
     - name: Install LLVM MINGW ${{ inputs.llvm-mingw-version }}
       if: ${{ steps.cache-llvm-mingw.outputs.cache-hit != 'true' }}
       shell: cmd
+      env:
+        LLVM_MINGW_INSTALL_PATH: ${{ steps.resolve-install-path.outputs.path }}
+        LLVM_MINGW_VERSION: ${{ inputs.llvm-mingw-version }}
       run: |
-        set LLVM_MINGW_RELEASE_URL=https://github.com/mstorsjo/llvm-mingw/releases/download
-        set LLVM_MINGW_ARCHIVE=llvm-mingw-${{ inputs.llvm-mingw-version }}-ucrt-x86_64.zip
-        curl -L -o "llvm-mingw.zip" "%LLVM_MINGW_RELEASE_URL%/${{ inputs.llvm-mingw-version }}/%LLVM_MINGW_ARCHIVE%"
-        powershell -command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath 'C:\' -Force"
+        for %%I in ("%LLVM_MINGW_INSTALL_PATH%") do set "LLVM_MINGW_INSTALL_PARENT=%%~dpI"
+        curl --fail -L -o "llvm-mingw.zip" "https://github.com/mstorsjo/llvm-mingw/releases/download/%LLVM_MINGW_VERSION%/llvm-mingw-%LLVM_MINGW_VERSION%-ucrt-x86_64.zip"
+        if errorlevel 1 exit /b %errorlevel%
+        powershell -NoProfile -Command "Expand-Archive -Path 'llvm-mingw.zip' -DestinationPath $env:LLVM_MINGW_INSTALL_PARENT -Force -ErrorAction Stop"
+        if errorlevel 1 exit /b %errorlevel%
     - name: Save LLVM MINGW ${{ inputs.llvm-mingw-version }} to cache
       if: ${{ steps.cache-llvm-mingw.outputs.cache-hit != 'true' }}
       uses: actions/cache/save@v5
