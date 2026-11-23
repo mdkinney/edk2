@@ -155,9 +155,13 @@ on:
         type: string
         default: 'ghcr.io/tianocore/containers/ubuntu-24-test:latest'
       windows-runs-on:
-        description: The runner label for Windows jobs.
+        description: Select the x64 GitHub-hosted Windows runner.
         required: false
-        type: string
+        type: choice
+        options:
+          - 'windows-latest'
+          - 'windows-2025'
+          - 'windows-2022'
         default: 'windows-2025'
       vs-version:
         description: Visual Studio toolchain version for Windows builds.
