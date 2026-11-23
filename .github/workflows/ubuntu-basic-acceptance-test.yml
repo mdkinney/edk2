@@ -248,15 +248,14 @@ jobs:
           pip-requirements: ${{ inputs.pip-requirements }}
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
-      - name: Stuart Build UnitTestFrameworkPkg Sample GoogleTest ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }}
+      - name: Stuart UnitTestFrameworkPkg Host Unit Tests ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }}
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"       \
               DISABLE_DEBUG_MACRO_CHECK                                    \
               --disable-all                                                \
               HostUnitTestCompilerPlugin=run HostBasedUnitTestRunner=run   \
               TOOL_CHAIN_TAG=${{ inputs.unit-test-tool-chain-tag }}        \
-              -t NOOPT -a ${{ matrix.build_arch }} -p UnitTestFrameworkPkg \
-              BUILDMODULE=UnitTestFrameworkPkg/Test/GoogleTest/Sample/SampleGoogleTest/SampleGoogleTestHost.inf
+              -t NOOPT -a ${{ matrix.build_arch }} -p UnitTestFrameworkPkg
           mv Build/CI_BUILDLOG.txt Build/CI_BUILDLOG_UnitTestFrameworkPkg_${{ inputs.unit-test-tool-chain-tag }}_${{ matrix.build_arch }}.txt
       - name: Stuart Update EmulatorPkg
         run: |
