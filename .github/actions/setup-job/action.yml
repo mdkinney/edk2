@@ -71,7 +71,8 @@ runs:
       if: ${{ inputs.windows-installer == 'vs' && runner.os == 'Windows' }}
       shell: cmd
       run: |
-        echo "Visual Studio selected, no additional setup required."
+        choco install opencppcoverage -y
+        echo C:\Program Files\OpenCppCoverage>> "%GITHUB_PATH%"
     - name: Windows Setup Visual Studio CLANGPDB Job
       if: ${{ inputs.windows-installer == 'vs-clangpdb' && runner.os == 'Windows' }}
       uses: ./.github/actions/windows-setup-vs-clangpdb-job
