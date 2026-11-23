@@ -34,6 +34,8 @@ jobs:
       linux-runs-on: 'ubuntu-24.04'
       linux-container-image: 'ghcr.io/tianocore/containers/ubuntu-24-build:latest'
       windows-runs-on: 'windows-2025'
+      vs-version: 'VS2026'
+      vs-clang-llvm-version: '22.1.8'
       python-version: '3.12'
       pip-requirements: 'pip-requirements.txt'
       stuart-ci-settings-file: '.pytool/CISettings.py'
