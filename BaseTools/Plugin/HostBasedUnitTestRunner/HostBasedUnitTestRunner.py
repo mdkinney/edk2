@@ -31,9 +31,11 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
         return 0
 
     def do_post_build(self, thebuilder):
+        return self.run_tests(thebuilder)
+
+    def run_tests(self, thebuilder, test_module_base_name=None):
         '''
-        After a build, will automatically locate and run all host-based unit tests. Logs any
-        failures with Warning severity and will return a count of the failures as the return code.
+        Run host-based unit tests. Optionally limit execution to one module.
 
         EXPECTS:
         - Build Var 'CI_BUILD_TYPE' - If not set to 'host_unit_test', will not do anything.
@@ -51,6 +53,7 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
         path = thebuilder.env.GetValue("BUILD_OUTPUT_BASE")
 
         failure_count = 0
+        module_test_list = []
 
         # Do not catch exceptions in gtest so they are handled by address sanitizer
         shell_env.set_shell_var('GTEST_CATCH_EXCEPTIONS', '0')
@@ -70,13 +73,21 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
                         "Testing for architecture: " + arch)
             cp = os.path.join(path, arch)
 
-            # If any old results XML files exist, clean them up.
-            for old_result in glob.iglob(os.path.join(cp, "*.result.xml")):
-                os.remove(old_result)
+            if test_module_base_name is None:
+                # If any old results XML files exist, clean them up.
+                for old_result in glob.iglob(os.path.join(cp, "*.result.xml")):
+                    os.remove(old_result)
 
             # Find and Run any Host Tests
-            if GetHostInfo().os.upper() == "LINUX":
-                testList = glob.glob(os.path.join(cp, "*Test*"))
+            host_os = GetHostInfo().os.upper()
+            if host_os == "LINUX":
+                if test_module_base_name is None:
+                    testList = glob.glob(os.path.join(cp, "*Test*"))
+                else:
+                    testList = [
+                        os.path.join(cp, test_module_base_name)
+                    ]
+
                 for a in testList[:]:
                     p = os.path.join(cp, a)
                     # It must be a file
@@ -92,12 +103,23 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
 
                     logging.info(f"Test file found: {p}")
 
-            elif GetHostInfo().os.upper() == "WINDOWS":
-                testList = glob.glob(os.path.join(cp, "*Test*.exe"))
+            elif host_os == "WINDOWS":
+                if test_module_base_name is None:
+                    testList = glob.glob(os.path.join(cp, "*Test*.exe"))
+                else:
+                    testList = [
+                        os.path.join(cp, test_module_base_name + ".exe")
+                    ]
+                testList = [test for test in testList if os.path.isfile(test)]
             else:
                 raise NotImplementedError("Unsupported Operating System")
 
             if not testList:
+                if test_module_base_name is not None:
+                    logging.info(
+                        f"No executable found for {test_module_base_name} on {arch}.")
+                    continue
+
                 logging.warning(dedent(f"""
                     UnitTest Coverage ({arch}):
                       No unit tests discovered for this architecture.
@@ -109,6 +131,13 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
                       3. Disabling HostUnitTestCompilerPlugin in the package CI YAML file
                     """).strip())
                 continue
+
+            if test_module_base_name is not None:
+                for test in testList:
+                    module_test_list.append(test)
+                    for old_result in glob.iglob(
+                            test + ".*." + arch + ".result.xml"):
+                        os.remove(old_result)
 
             for test in testList:
                 # Configure output name if test uses cmocka.
@@ -142,23 +171,39 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
                                             "  %s - %s" % (case.attrib['name'], result.text))
                                         failure_count += 1
 
+            if (test_module_base_name is None and
+                    thebuilder.env.GetValue("CODE_COVERAGE") != "FALSE"):
+                ret = self._generate_code_coverage(thebuilder)
+                if ret != 0:
+                    failure_count += 1
+
+        if test_module_base_name is not None:
+            if not module_test_list:
+                logging.error(
+                    f"No executable found for host test module "
+                    f"{test_module_base_name}.")
+                return 1
+
             if thebuilder.env.GetValue("CODE_COVERAGE") != "FALSE":
-                if thebuilder.env.GetValue("TOOL_CHAIN_TAG").startswith("GCC"):
-                    ret = self.gen_code_coverage_gcc(thebuilder)
-                    if ret != 0:
-                        failure_count += 1
-                elif thebuilder.env.GetValue("TOOL_CHAIN_TAG").startswith("CLANG"):
-                    ret = self.gen_code_coverage_clang(thebuilder)
-                    if ret != 0:
-                        failure_count += 1
-                elif thebuilder.env.GetValue("TOOL_CHAIN_TAG").startswith ("VS"):
-                    ret = self.gen_code_coverage_msvc(thebuilder)
-                    if ret != 0:
-                        failure_count += 1
-                else:
-                    logging.info("Skipping code coverage. Currently, support GCC, CLANG, and MSVC compiler.")
+                ret = self._generate_code_coverage(
+                    thebuilder, module_test_list)
+                if ret != 0:
+                    failure_count += 1
 
         return failure_count
+
+    def _generate_code_coverage(self, thebuilder, test_list=None):
+        tool_chain_tag = thebuilder.env.GetValue("TOOL_CHAIN_TAG")
+        if tool_chain_tag.startswith("GCC"):
+            return self.gen_code_coverage_gcc(thebuilder)
+        if tool_chain_tag.startswith("CLANG"):
+            return self.gen_code_coverage_clang(thebuilder, test_list)
+        if tool_chain_tag.startswith("VS"):
+            return self.gen_code_coverage_msvc(thebuilder, test_list)
+
+        logging.info(
+            "Skipping code coverage. Currently, support GCC, CLANG, and MSVC compiler.")
+        return 0
 
     def get_lcov_version(self):
         """Get lcov version number"""
@@ -238,7 +283,7 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
         return 0
 
 
-    def gen_code_coverage_clang(self, thebuilder):
+    def gen_code_coverage_clang(self, thebuilder, test_list=None):
         logging.info("Generating UnitTest code coverage")
 
         buildOutputBase = thebuilder.env.GetValue("BUILD_OUTPUT_BASE")
@@ -256,6 +301,9 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
             allTestList = glob.glob(os.path.join(workspace, "Build", "**","*Test*.exe"), recursive=True)
         else:
             raise NotImplementedError("Unsupported Operating System")
+        if test_list is not None:
+            testList = test_list
+
         if not testList:
             logging.warning("UnitTest Coverage: No test binaries found.")
             return 0
@@ -356,12 +404,17 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
 
         return 0
 
-    def gen_code_coverage_msvc(self, thebuilder):
+    def gen_code_coverage_msvc(self, thebuilder, test_list=None):
         logging.info("Generating UnitTest code coverage")
 
-
         buildOutputBase = thebuilder.env.GetValue("BUILD_OUTPUT_BASE")
-        testList = glob.glob(os.path.join(buildOutputBase, "**","*Test*.exe"), recursive=True)
+        if test_list is None:
+            testList = glob.glob(
+                os.path.join(buildOutputBase, "**", "*Test*.exe"),
+                recursive=True)
+        else:
+            testList = test_list
+
         workspace = thebuilder.env.GetValue("WORKSPACE")
         workspace = (workspace + os.sep) if workspace[-1] != os.sep else workspace
         workspaceBuild = os.path.join(workspace, 'Build')

@@ -8,6 +8,7 @@ import logging
 import os
 import re
 from edk2toollib.uefi.edk2.parsers.dsc_parser import DscParser
+from edk2toollib.uefi.edk2.parsers.inf_parser import InfParser
 from edk2toolext.environment.plugintypes.ci_build_plugin import ICiBuildPlugin
 from edk2toolext.environment.uefi_build import UefiBuilder
 from edk2toolext import edk2_logging
@@ -73,6 +74,14 @@ class HostUnitTestCompilerPlugin(ICiBuildPlugin):
         willrun = set(requested) & set(host)
         return (len(willrun), " ".join(willrun))
 
+    def _run_single_module_tests(self, uefiBuilder, module_base_name):
+        for plugin in uefiBuilder.pm.GetAllPlugins():
+            if plugin.Module == "HostBasedUnitTestRunner":
+                return plugin.Obj.run_tests(uefiBuilder, module_base_name)
+
+        logging.info(
+            "Host-Based Unit Test Runner is disabled; not running BUILDMODULE.")
+        return None
 
     ##
     # External function of plugin.  This function is used to perform the task of the ICiBuildPlugin Plugin
@@ -142,6 +151,37 @@ class HostUnitTestCompilerPlugin(ICiBuildPlugin):
                 tc.LogStdError("No supported architecutres to build for host unit tests")
                 return -1
 
+        build_module = (environment.GetValue("BUILDMODULE", "") or "").strip()
+        module_base_name = None
+        if build_module:
+            module_path = Edk2pathObj.GetAbsolutePathOnThisSystemFromEdk2RelativePath(
+                build_module)
+            if module_path is None or not os.path.isfile(module_path):
+                tc.SetFailed(
+                    "Host unit test module not found: {0}".format(build_module),
+                    "MODULE_NOT_FOUND")
+                tc.LogStdError("Host unit test module not found.")
+                return 1
+
+            module_parser = InfParser().SetEdk2Path(Edk2pathObj)
+            module_parser.ParseFile(build_module)
+            if module_parser.Dict.get("MODULE_TYPE", "").upper() != "HOST_APPLICATION":
+                tc.SetFailed(
+                    "BUILDMODULE is not a host application: {0}".format(
+                        build_module),
+                    "NOT_HOST_APPLICATION")
+                tc.LogStdError("BUILDMODULE must identify a host application.")
+                return 1
+
+            module_base_name = module_parser.Dict.get("BASE_NAME")
+            if not module_base_name:
+                tc.SetFailed(
+                    "BASE_NAME not found in host test module: {0}".format(
+                        build_module),
+                    "BASE_NAME_NOT_FOUND")
+                tc.LogStdError("BASE_NAME not found in host test module.")
+                return 1
+
         uefiBuilder = UefiBuilder()
         # do all the steps
         # WorkSpace, PackagesPath, PInHelper, PInManager
@@ -151,6 +191,18 @@ class HostUnitTestCompilerPlugin(ICiBuildPlugin):
             tc.LogStdError("{0} Compile failed with error code {1} ".format(AP_Path, ret))
             return 1
 
-        else:
-            tc.SetSuccess()
-            return 0
+        if module_base_name is not None and uefiBuilder.SkipPostBuild:
+            # Single-module builds skip the UEFI post-build plugins.
+            ret = self._run_single_module_tests(uefiBuilder, module_base_name)
+            if ret not in (None, 0):
+                tc.SetFailed(
+                    "Host unit test execution failed for {0}".format(
+                        build_module),
+                    "UNIT_TEST_FAILED")
+                tc.LogStdError(
+                    "Host unit test execution failed with error code {0}".format(
+                        ret))
+                return 1
+
+        tc.SetSuccess()
+        return 0
