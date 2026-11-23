@@ -22,9 +22,6 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 // EFER register LMA bit
 #define LMA  BIT10
 
-// The mode of the CPU at the time an SMI occurs
-STATIC UINT8  mSmmSaveStateRegisterLma;
-
 //
 // Indicate SmBase for each Processors has been relocated or not. If TRUE,
 // means no need to do the relocation in SmmCpuFeaturesInitializeProcessor().
@@ -43,11 +40,6 @@ CpuFeaturesLibInitialization (
   VOID
   )
 {
-  //
-  // AMD64 processors support EFI_SMM_SAVE_STATE_REGISTER_LMA_64BIT only
-  //
-  mSmmSaveStateRegisterLma = EFI_SMM_SAVE_STATE_REGISTER_LMA_64BIT;
-
   //
   // If gSmmBaseHobGuid found, means SmBase info has been relocated and recorded
   // in the SmBase array.
@@ -100,10 +92,6 @@ SmmCpuFeaturesInitializeProcessor (
     CpuState             = (AMD_SMRAM_SAVE_STATE_MAP *)(UINTN)(SMM_DEFAULT_SMBASE + SMRAM_SAVE_STATE_MAP_OFFSET);
     CpuState->x64.SMBASE = (UINT32)CpuHotPlugData->SmBase[CpuIndex];
   }
-
-  // Re-initialize the value of mSmmSaveStateRegisterLma flag which might have been changed in PiCpuSmmDxeSmm Driver
-  // Entry point, to make sure correct value on AMD platform is assigned to be used by SmmCpuFeaturesLib.
-  mSmmSaveStateRegisterLma = EFI_SMM_SAVE_STATE_REGISTER_LMA_64BIT;
 
   //
   // If SMRR is supported, then program SMRR base/mask MSRs.
