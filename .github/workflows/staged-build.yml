@@ -41,38 +41,23 @@ on:
         required: false
         type: string
         default: '22.1.8'
-      vs-clang-llvm-version-override:
-        description: Optional custom LLVM version that overrides the selected version.
-        required: false
-        type: string
-        default: ''
       edk2-clang-version:
         description: EDK2 Clang version for Windows MinGW jobs.
         required: false
         type: string
         default: '22.1.8.0'
-      edk2-clang-version-override:
-        description: Optional custom EDK2 Clang version that overrides the selected version.
-        required: false
-        type: string
-        default: ''
       llvm-mingw-version:
         description: 'Release date (YYYYMMDD): 20250709=LLVM 20.1.8; 20260616=22.1.8; 20261117=23.1.6.'
         required: false
         type: string
         default: '20261117'
-      llvm-mingw-version-override:
-        description: Optional custom LLVM MinGW release date (YYYYMMDD); overrides the selected date.
-        required: false
-        type: string
-        default: ''
       windows-qemu-installer-version:
         description: Windows QEMU installer (e.g., 2023.7.25)
         required: true
         type: string
         default: '2023.7.25'
       python-version:
-        description: The version of Python to use.
+        description: Python version or version spec to use.
         required: true
         type: string
         default: '3.12'
@@ -219,10 +204,20 @@ on:
         type: string
         default: '2023.7.25'
       python-version:
-        description: The version of Python to use.
+        description: Select the Python version to use.
         required: true
-        type: string
+        type: choice
+        options:
+          - '3.12'
+          - '3.13'
+          - '3.14'
+          - '3.15'
         default: '3.12'
+      python-version-override:
+        description: Optional custom Python version or spec; overrides the selected version.
+        required: false
+        type: string
+        default: ''
       pip-requirements:
         description: Path to pip requirements file
         required: true
@@ -293,22 +288,30 @@ jobs:
     name: Resolve Workflow Inputs
     runs-on: ubuntu-slim
     outputs:
+      python_version: ${{ steps.resolve-versions.outputs.python_version }}
       vs_clang_llvm_version: ${{ steps.resolve-versions.outputs.vs_clang_llvm_version }}
       edk2_clang_version: ${{ steps.resolve-versions.outputs.edk2_clang_version }}
       llvm_mingw_version: ${{ steps.resolve-versions.outputs.llvm_mingw_version }}
     steps:
-      - name: Resolve compiler versions
-        if: ${{ inputs.enable-windows-clang-tests }}
+      - name: Resolve Python and compiler versions
         id: resolve-versions
         env:
+          PYTHON_VERSION: ${{ inputs.python-version }}
+          PYTHON_VERSION_OVERRIDE: ${{ github.event_name == 'workflow_dispatch' && inputs.python-version-override || '' }}
           VS_LLVM_SELECTED_VERSION: ${{ inputs.vs-clang-llvm-version }}
-          VS_LLVM_VERSION_OVERRIDE: ${{ inputs.vs-clang-llvm-version-override }}
+          VS_LLVM_VERSION_OVERRIDE: ${{ github.event_name == 'workflow_dispatch' && inputs.vs-clang-llvm-version-override || '' }}
           EDK2_CLANG_SELECTED_VERSION: ${{ inputs.edk2-clang-version }}
-          EDK2_CLANG_VERSION_OVERRIDE: ${{ inputs.edk2-clang-version-override }}
+          EDK2_CLANG_VERSION_OVERRIDE: ${{ github.event_name == 'workflow_dispatch' && inputs.edk2-clang-version-override || '' }}
           LLVM_MINGW_VERSION: ${{ inputs.llvm-mingw-version }}
-          LLVM_MINGW_VERSION_OVERRIDE: ${{ inputs.llvm-mingw-version-override }}
+          LLVM_MINGW_VERSION_OVERRIDE: ${{ github.event_name == 'workflow_dispatch' && inputs.llvm-mingw-version-override || '' }}
         shell: bash
         run: |
+          python_version="${PYTHON_VERSION_OVERRIDE:-$PYTHON_VERSION}"
+          if [[ -z "$python_version" ]]; then
+            echo "::error::A Python version or version spec must be provided."
+            exit 1
+          fi
+
           vs_clang_llvm_version="${VS_LLVM_VERSION_OVERRIDE:-$VS_LLVM_SELECTED_VERSION}"
           if [[ ! "$vs_clang_llvm_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][A-Za-z0-9.-]+)?$ ]]; then
             echo "::error::Invalid VS LLVM version '$vs_clang_llvm_version'. Expected a version such as 22.1.8."
@@ -327,6 +330,7 @@ jobs:
             exit 1
           fi
 
+          printf 'python_version=%s\n' "$python_version" >> "$GITHUB_OUTPUT"
           printf 'vs_clang_llvm_version=%s\n' "$vs_clang_llvm_version" >> "$GITHUB_OUTPUT"
           printf 'edk2_clang_version=%s\n' "$edk2_clang_version" >> "$GITHUB_OUTPUT"
           printf 'llvm_mingw_version=%s\n' "$llvm_mingw_version" >> "$GITHUB_OUTPUT"
@@ -340,7 +344,7 @@ jobs:
     uses: ./.github/workflows/ubuntu-set-package-lists-and-patch-check.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.resolve_inputs.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       default-package-lists: ${{ inputs.default-package-lists }}
@@ -361,6 +365,7 @@ jobs:
       vs_clang_llvm_version: ${{ needs.resolve_inputs.outputs.vs_clang_llvm_version }}
       edk2_clang_version: ${{ needs.resolve_inputs.outputs.edk2_clang_version }}
       llvm_mingw_version: ${{ needs.resolve_inputs.outputs.llvm_mingw_version }}
+      python_version: ${{ needs.resolve_inputs.outputs.python_version }}
     steps:
       - name: Stage 0 Success
         run: echo "Stage 0 jobs completed successfully"
@@ -377,7 +382,7 @@ jobs:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
       linux-host-compiler: 'clang'
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage0.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGPDB'
@@ -404,7 +409,7 @@ jobs:
       linux-container-image: ${{ inputs.linux-container-image }}
       linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
       linux-host-compiler: 'gcc'
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage0.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGPDB'
@@ -426,7 +431,7 @@ jobs:
       linux-container-image: ${{ inputs.linux-container-image }}
       linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
       linux-host-compiler: 'gcc'
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage0.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t CLANGPDB'
@@ -448,7 +453,7 @@ jobs:
       windows-installer: 'edk2-clang'
       edk2-clang-version: ${{ needs.stage0.outputs.edk2_clang_version }}
       windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage0.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-a X64 -t CLANGPDB'
@@ -469,7 +474,7 @@ jobs:
       windows-installer: 'edk2-clang'
       edk2-clang-version: ${{ needs.stage0.outputs.edk2_clang_version }}
       windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage0.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-a X64 -t CLANGPDB'
@@ -491,7 +496,7 @@ jobs:
       windows-installer: 'llvm'
       llvm-mingw-version: ${{ needs.stage0.outputs.llvm_mingw_version }}
       windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage0.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-a X64 -t CLANGDWARF'
@@ -512,7 +517,7 @@ jobs:
       windows-installer: 'vs-clangpdb'
       vs-clang-llvm-version: ${{ needs.stage0.outputs.vs_clang_llvm_version }}
       windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage0.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t ${{ inputs.vs-version }}'
@@ -534,7 +539,7 @@ jobs:
       linux-container-image: ${{ inputs.linux-container-image }}
       linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
       linux-host-compiler: 'gcc'
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage0.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
@@ -557,7 +562,7 @@ jobs:
       linux-container-image: ${{ inputs.linux-container-image }}
       linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
       linux-host-compiler: 'gcc'
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage0.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t GCC'
@@ -578,7 +583,7 @@ jobs:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       windows-installer: 'vs'
       windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage0.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       edk2-tools-build-params: '-t ${{ inputs.vs-version }}'
@@ -611,6 +616,7 @@ jobs:
       vs_clang_llvm_version: ${{ needs.stage0.outputs.vs_clang_llvm_version }}
       edk2_clang_version: ${{ needs.stage0.outputs.edk2_clang_version }}
       llvm_mingw_version: ${{ needs.stage0.outputs.llvm_mingw_version }}
+      python_version: ${{ needs.stage0.outputs.python_version }}
     steps:
       - name: Stage 1 Success
         run: echo "Stage 1 jobs completed successfully"
@@ -629,7 +635,7 @@ jobs:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
       linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage1.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       package-lists: ${{ needs.stage1.outputs.package-lists }}
@@ -645,7 +651,7 @@ jobs:
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       edk2-clang-version: ${{ needs.stage1.outputs.edk2_clang_version }}
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage1.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       package-lists: ${{ needs.stage1.outputs.package-lists }}
@@ -662,7 +668,7 @@ jobs:
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       llvm-mingw-version: ${{ needs.stage1.outputs.llvm_mingw_version }}
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage1.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       package-lists: ${{ needs.stage1.outputs.package-lists }}
@@ -680,7 +686,7 @@ jobs:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       vs-version: ${{ inputs.vs-version }}
       vs-clang-llvm-version: ${{ needs.stage1.outputs.vs_clang_llvm_version }}
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage1.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       package-lists: ${{ needs.stage1.outputs.package-lists }}
@@ -698,7 +704,7 @@ jobs:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
       linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage1.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       package-lists: ${{ needs.stage1.outputs.package-lists }}
@@ -717,7 +723,7 @@ jobs:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       linux-container-image: ${{ inputs.linux-container-image }}
       linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage1.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       package-lists: ${{ needs.stage1.outputs.package-lists }}
@@ -735,7 +741,7 @@ jobs:
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       vs-version: ${{ inputs.vs-version }}
-      python-version: ${{ inputs.python-version }}
+      python-version: ${{ needs.stage1.outputs.python_version }}
       pip-requirements: ${{ inputs.pip-requirements }}
       stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
       package-lists: ${{ needs.stage1.outputs.package-lists }}
