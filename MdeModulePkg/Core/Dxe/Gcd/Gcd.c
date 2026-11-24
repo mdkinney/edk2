@@ -2286,7 +2286,7 @@ ResourceHobVerification (
 
     DEBUG ((
       DEBUG_INFO,
-      "%5u  v%u 0x%08x %016lx-%016lx %016lx %016lx %g\n",
+      "%5u  v%u 0x%08x %016lx-%016lx %08x %016lx %g\n",
       ResourceIndex,
       (GET_HOB_TYPE (Hob) == EFI_HOB_TYPE_RESOURCE_DESCRIPTOR2) ? 2 : 1,
       ResourceHob->ResourceType,
