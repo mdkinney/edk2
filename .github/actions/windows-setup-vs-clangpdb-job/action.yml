@@ -33,8 +33,14 @@ runs:
       if: ${{ steps.cache-clang.outputs.cache-hit != 'true' }}
       shell: cmd
       run: |
-        curl -SL --output llvm_install.exe https://github.com/llvm/llvm-project/releases/download/llvmorg-${{ inputs.vs-clang-llvm-version }}/LLVM-${{ inputs.vs-clang-llvm-version }}-win64.exe
-        llvm_install.exe /S
+        curl --fail -SL --output llvm_install.exe https://github.com/llvm/llvm-project/releases/download/llvmorg-${{ inputs.vs-clang-llvm-version }}/LLVM-${{ inputs.vs-clang-llvm-version }}-win64.exe
+        if errorlevel 1 (
+          curl --fail -SL --output llvm_install.msi https://github.com/llvm/llvm-project/releases/download/llvmorg-${{ inputs.vs-clang-llvm-version }}/LLVM-${{ inputs.vs-clang-llvm-version }}-win64.msi
+          if errorlevel 1 exit /b 1
+          msiexec /i llvm_install.msi /qn /norestart
+        ) else (
+          llvm_install.exe /S
+        )
     - name: Save CLANG ${{ inputs.vs-clang-llvm-version }} to cache
       if: ${{ steps.cache-clang.outputs.cache-hit != 'true' }}
       uses: actions/cache/save@v5

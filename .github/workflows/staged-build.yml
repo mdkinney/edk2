@@ -139,6 +139,7 @@ on:
         options:
           - '20.1.8'
           - '22.1.8'
+          - '23.1.6'
         default: '22.1.8'
       vs-clang-llvm-version-override:
         description: Optional custom LLVM version to evaluate; overrides the selected version.
@@ -164,9 +165,9 @@ on:
         required: false
         type: choice
         options:
-          - '20250709'
-          - '20260616'
-          - '20261117'
+          - '20250709'  # LLVM 20.1.8
+          - '20260616'  # LLVM 22.1.8
+          - '20261117'  # LLVM 23.1.6
         default: '20261117'
       llvm-mingw-version-override:
         description: Optional custom LLVM MinGW release date (YYYYMMDD); overrides the selected date.
