@@ -151,6 +151,7 @@ jobs:
           if-no-files-found: ignore
           path: |
             BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILD_TOOLS_REPORT.html
             Build/**/BUILDLOG*.txt
             Build/*.txt
             Build/*.log

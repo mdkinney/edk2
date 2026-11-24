@@ -149,6 +149,8 @@ jobs:
           name: Upload Windows EmulatorPkg ${{ inputs.windows-installer }} ${{ matrix.tool_chain_tag }} ${{ matrix.build_arch }} Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILD_TOOLS_REPORT.html
+            Build/**/BUILDLOG*.txt
             Build/*.txt
             Build/*.log
         if: always()

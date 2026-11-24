@@ -221,6 +221,8 @@ jobs:
           name: Upload Linux ${{ inputs.firmware-tool-chain-tag }} Firmware Basic Acceptance Test Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILD_TOOLS_REPORT.html
+            Build/**/BUILDLOG*.txt
             Build/*.txt
             Build/*.log
         if: always()
@@ -297,6 +299,8 @@ jobs:
           name: Upload Linux ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }} Unit Test EmulatorPkg Basic Acceptance Test Logs
           path: |
             BaseTools/BaseToolsBuild/*.txt
+            Build/**/BUILD_TOOLS_REPORT.html
+            Build/**/BUILDLOG*.txt
             Build/*.txt
             Build/*.log
         if: always()
