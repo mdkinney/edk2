@@ -72,7 +72,16 @@ runs:
       shell: cmd
       run: |
         choco install opencppcoverage -y
+        if errorlevel 1 (
+          echo ERROR: Chocolatey failed to install OpenCppCoverage.
+          exit /b 1
+        )
+        if not exist "C:\Program Files\OpenCppCoverage\OpenCppCoverage.exe" (
+          echo ERROR: OpenCppCoverage.exe was not installed.
+          exit /b 1
+        )
         echo C:\Program Files\OpenCppCoverage>> "%GITHUB_PATH%"
+        if errorlevel 1 exit /b 1
     - name: Windows Setup Visual Studio CLANGPDB Job
       if: ${{ inputs.windows-installer == 'vs-clangpdb' && runner.os == 'Windows' }}
       uses: ./.github/actions/windows-setup-vs-clangpdb-job
