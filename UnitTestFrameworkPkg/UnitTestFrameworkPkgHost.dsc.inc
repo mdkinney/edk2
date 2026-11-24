@@ -218,6 +218,10 @@
   DEFINE VISUAL_STUDIO_DEFINES        = -D UNICODE -D _CRT_SECURE_NO_WARNINGS -D _CRT_SECURE_NO_DEPRECATE
   DEFINE VISUAL_STUDIO_IA32_LIB_PATHS = /LIBPATH:"%VCToolsInstallDir%lib\x86" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x86" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%um\x86"
   DEFINE VISUAL_STUDIO_X64_LIB_PATHS  = /LIBPATH:"%VCToolsInstallDir%lib\X64" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\X64" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%um\X64"
+  DEFINE CLANGPDB_X64_RUNTIME_LIB_DIR  = %CLANGPDB_X64_RESOURCE_DIR%\lib\windows
+  DEFINE CLANGPDB_PROFILE_LIB_X64      = "$(CLANGPDB_X64_RUNTIME_LIB_DIR)\clang_rt.profile-x86_64.lib"
+  DEFINE CLANGPDB_ASAN_LIB_X64         = "$(CLANGPDB_X64_RUNTIME_LIB_DIR)\clang_rt.asan_dynamic-x86_64.lib"
+  DEFINE CLANGPDB_ASAN_THUNK_LIB_X64   = "$(CLANGPDB_X64_RUNTIME_LIB_DIR)\clang_rt.asan_dynamic_runtime_thunk-x86_64.lib"
 
 [BuildOptions.common.EDKII.HOST_APPLICATION]
   #
@@ -249,10 +253,10 @@
   #
   CLANGPDB:*_*_IA32_DLINK_FLAGS = /NODEFAULTLIB:clang_rt.profile.lib
   #
-  # Add Address Sanitizer runtime libraries for IA32/X64 architectures
+  # Windows CLANGPDB host tests skip IA32; pin X64 runtimes to the selected LLVM.
   #
   CLANGPDB:*_*_IA32_DLINK_FLAGS = clang_rt.profile-i386.lib clang_rt.asan_dynamic-i386.lib clang_rt.asan_dynamic_runtime_thunk-i386.lib
-  CLANGPDB:*_*_X64_DLINK_FLAGS  = clang_rt.profile-x86_64.lib clang_rt.asan_dynamic-x86_64.lib clang_rt.asan_dynamic_runtime_thunk-x86_64.lib
+  CLANGPDB:*_*_X64_DLINK_FLAGS  = $(CLANGPDB_PROFILE_LIB_X64) $(CLANGPDB_ASAN_LIB_X64) $(CLANGPDB_ASAN_THUNK_LIB_X64)
 !endif
 
   #

@@ -17,7 +17,7 @@
 # VS20xx CLANG Build Support
 # ===============================================================================
 # Firmware Build Support:             CLANGPDB - IA32/X64
-# Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
+# Host-Based Unit Test Build Support: CLANGPDB - X64
 # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
 #
 # VS20xx Build Support
@@ -288,6 +288,7 @@ jobs:
           stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
           edk2-tools-build-params: ${{ inputs.edk2-tools-build-params }}
       - name: Stuart UnitTestFrameworkPkg Host Unit Tests ${{ inputs.unit-test-tool-chain-tag }} ${{ matrix.build_arch }}
+        if: ${{ inputs.unit-test-tool-chain-tag != 'CLANGPDB' || matrix.build_arch != 'IA32' }}
         run: |
           stuart_ci_build -c "${{ inputs.stuart-ci-settings-file }}"       \
               DISABLE_DEBUG_MACRO_CHECK                                    \

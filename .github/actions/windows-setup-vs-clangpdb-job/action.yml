@@ -4,7 +4,7 @@
 # re-installing LLVM on subsequent runs.
 #
 # * Installs LLVM with CLANGPDB support, adds LLVM to PATH, and sets CLANG_BIN
-#   environment variable.
+#   and CLANGPDB_X64_RESOURCE_DIR environment variables.
 #
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
@@ -50,6 +50,27 @@ runs:
     - name: Add CLANG ${{ inputs.vs-clang-llvm-version }} to PATH
       shell: cmd
       run: |
-        PATH=${{ inputs.vs-clang-llvm-install-path }}\bin;%PATH%
+        set "CLANG_BIN=${{ inputs.vs-clang-llvm-install-path }}\bin"
+        PATH=%CLANG_BIN%;%PATH%
+        set "CLANG_EXE=%CLANG_BIN%\clang.exe"
+        for /f "delims=" %%i in ('"%CLANG_EXE%" --print-resource-dir') do set "CLANGPDB_X64_RESOURCE_DIR=%%i"
+        if not defined CLANGPDB_X64_RESOURCE_DIR (
+          echo ERROR: Could not determine the LLVM resource directory.
+          exit /b 1
+        )
+        set "CLANGPDB_X64_RUNTIME_LIB_DIR=%CLANGPDB_X64_RESOURCE_DIR%\lib\windows"
+        if not exist "%CLANGPDB_X64_RUNTIME_LIB_DIR%\clang_rt.profile-x86_64.lib" (
+          echo ERROR: LLVM X64 profile runtime is missing.
+          exit /b 1
+        )
+        if not exist "%CLANGPDB_X64_RUNTIME_LIB_DIR%\clang_rt.asan_dynamic-x86_64.lib" (
+          echo ERROR: LLVM X64 AddressSanitizer runtime is missing.
+          exit /b 1
+        )
+        if not exist "%CLANGPDB_X64_RUNTIME_LIB_DIR%\clang_rt.asan_dynamic_runtime_thunk-x86_64.lib" (
+          echo ERROR: LLVM X64 AddressSanitizer thunk is missing.
+          exit /b 1
+        )
         echo PATH=%PATH%>> %GITHUB_ENV%
-        echo CLANG_BIN=${{ inputs.vs-clang-llvm-install-path }}\bin\>> %GITHUB_ENV%
+        echo CLANG_BIN=%CLANG_BIN%\>> %GITHUB_ENV%
+        echo CLANGPDB_X64_RESOURCE_DIR=%CLANGPDB_X64_RESOURCE_DIR%>> %GITHUB_ENV%
