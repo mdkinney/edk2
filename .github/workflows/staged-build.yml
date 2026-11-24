@@ -61,16 +61,6 @@ on:
         required: true
         type: string
         default: '3.12'
-      pip-requirements:
-        description: Path to pip requirements file
-        required: true
-        type: string
-        default: 'pip-requirements.txt'
-      stuart-ci-settings-file:
-        description: The path to the Stuart CI settings file.
-        required: true
-        type: string
-        default: '.pytool/CISettings.py'
       enable-code-quality-tests:
         description: Enable Code Quality Tests
         required: false
@@ -218,16 +208,6 @@ on:
         required: false
         type: string
         default: ''
-      pip-requirements:
-        description: Path to pip requirements file
-        required: true
-        type: string
-        default: 'pip-requirements.txt'
-      stuart-ci-settings-file:
-        description: The path to the Stuart CI settings file.
-        required: true
-        type: string
-        default: '.pytool/CISettings.py'
       enable-code-quality-tests:
         description: Enable Code Quality Tests
         required: false
@@ -279,6 +259,10 @@ on:
         type: string
         default: '[{"tool_chain_tag": "GCCNOLTO"}]'
 
+env:
+  PIP_REQUIREMENTS: 'pip-requirements.txt'
+  STUART_CI_SETTINGS_FILE: '.pytool/CISettings.py'
+
 concurrency:
   group: staged-build-${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
@@ -292,6 +276,8 @@ jobs:
       vs_clang_llvm_version: ${{ steps.resolve-versions.outputs.vs_clang_llvm_version }}
       edk2_clang_version: ${{ steps.resolve-versions.outputs.edk2_clang_version }}
       llvm_mingw_version: ${{ steps.resolve-versions.outputs.llvm_mingw_version }}
+      pip_requirements: ${{ steps.resolve-versions.outputs.pip_requirements }}
+      stuart_ci_settings_file: ${{ steps.resolve-versions.outputs.stuart_ci_settings_file }}
     steps:
       - name: Resolve Python and compiler versions
         id: resolve-versions
@@ -304,6 +290,8 @@ jobs:
           EDK2_CLANG_VERSION_OVERRIDE: ${{ github.event_name == 'workflow_dispatch' && inputs.edk2-clang-version-override || '' }}
           LLVM_MINGW_VERSION: ${{ inputs.llvm-mingw-version }}
           LLVM_MINGW_VERSION_OVERRIDE: ${{ github.event_name == 'workflow_dispatch' && inputs.llvm-mingw-version-override || '' }}
+          PIP_REQUIREMENTS_INPUT: ${{ env.PIP_REQUIREMENTS }}
+          STUART_CI_SETTINGS_FILE_INPUT: ${{ env.STUART_CI_SETTINGS_FILE }}
         shell: bash
         run: |
           python_version="${PYTHON_VERSION_OVERRIDE:-$PYTHON_VERSION}"
@@ -334,6 +322,8 @@ jobs:
           printf 'vs_clang_llvm_version=%s\n' "$vs_clang_llvm_version" >> "$GITHUB_OUTPUT"
           printf 'edk2_clang_version=%s\n' "$edk2_clang_version" >> "$GITHUB_OUTPUT"
           printf 'llvm_mingw_version=%s\n' "$llvm_mingw_version" >> "$GITHUB_OUTPUT"
+          printf 'pip_requirements=%s\n' "$PIP_REQUIREMENTS_INPUT" >> "$GITHUB_OUTPUT"
+          printf 'stuart_ci_settings_file=%s\n' "$STUART_CI_SETTINGS_FILE_INPUT" >> "$GITHUB_OUTPUT"
 
   #
   # Stage 0: Set Package Lists and run PatchCheck
@@ -345,8 +335,8 @@ jobs:
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
       python-version: ${{ needs.resolve_inputs.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.resolve_inputs.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.resolve_inputs.outputs.stuart_ci_settings_file }}
       default-package-lists: ${{ inputs.default-package-lists }}
       run-patch-check: ${{ inputs.enable-code-quality-tests }}
 
@@ -366,6 +356,8 @@ jobs:
       edk2_clang_version: ${{ needs.resolve_inputs.outputs.edk2_clang_version }}
       llvm_mingw_version: ${{ needs.resolve_inputs.outputs.llvm_mingw_version }}
       python_version: ${{ needs.resolve_inputs.outputs.python_version }}
+      pip_requirements: ${{ needs.resolve_inputs.outputs.pip_requirements }}
+      stuart_ci_settings_file: ${{ needs.resolve_inputs.outputs.stuart_ci_settings_file }}
     steps:
       - name: Stage 0 Success
         run: echo "Stage 0 jobs completed successfully"
@@ -383,8 +375,8 @@ jobs:
       linux-container-image: ${{ inputs.linux-container-image }}
       linux-host-compiler: 'clang'
       python-version: ${{ needs.stage0.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage0.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage0.outputs.stuart_ci_settings_file }}
       edk2-tools-build-params: '-t CLANGPDB'
       build-type-list: '["NO-TARGET"]'
       #
@@ -410,8 +402,8 @@ jobs:
       linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
       linux-host-compiler: 'gcc'
       python-version: ${{ needs.stage0.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage0.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage0.outputs.stuart_ci_settings_file }}
       edk2-tools-build-params: '-t CLANGPDB'
       firmware-test-arch-parameter: 'IA32,X64,AARCH64,RISCV64'
       firmware-tool-chain-tag: 'CLANGDWARF'
@@ -432,8 +424,8 @@ jobs:
       linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
       linux-host-compiler: 'gcc'
       python-version: ${{ needs.stage0.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage0.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage0.outputs.stuart_ci_settings_file }}
       edk2-tools-build-params: '-t CLANGPDB'
       firmware-test-arch-parameter: 'IA32,X64'
       firmware-tool-chain-tag: 'CLANGPDB'
@@ -454,8 +446,8 @@ jobs:
       edk2-clang-version: ${{ needs.stage0.outputs.edk2_clang_version }}
       windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
       python-version: ${{ needs.stage0.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage0.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage0.outputs.stuart_ci_settings_file }}
       edk2-tools-build-params: '-a X64 -t CLANGPDB'
       firmware-test-arch-parameter: 'IA32,X64'
       firmware-tool-chain-tag: 'CLANGDWARF'
@@ -475,8 +467,8 @@ jobs:
       edk2-clang-version: ${{ needs.stage0.outputs.edk2_clang_version }}
       windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
       python-version: ${{ needs.stage0.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage0.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage0.outputs.stuart_ci_settings_file }}
       edk2-tools-build-params: '-a X64 -t CLANGPDB'
       firmware-test-arch-parameter: 'IA32,X64'
       firmware-tool-chain-tag: 'CLANGPDB'
@@ -497,8 +489,8 @@ jobs:
       llvm-mingw-version: ${{ needs.stage0.outputs.llvm_mingw_version }}
       windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
       python-version: ${{ needs.stage0.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage0.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage0.outputs.stuart_ci_settings_file }}
       edk2-tools-build-params: '-a X64 -t CLANGDWARF'
       firmware-test-arch-parameter: 'IA32,X64'
       firmware-tool-chain-tag: 'CLANGDWARF'
@@ -518,8 +510,8 @@ jobs:
       vs-clang-llvm-version: ${{ needs.stage0.outputs.vs_clang_llvm_version }}
       windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
       python-version: ${{ needs.stage0.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage0.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage0.outputs.stuart_ci_settings_file }}
       edk2-tools-build-params: '-t ${{ inputs.vs-version }}'
       firmware-test-arch-parameter: 'IA32,X64'
       firmware-tool-chain-tag: 'CLANGPDB'
@@ -540,8 +532,8 @@ jobs:
       linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
       linux-host-compiler: 'gcc'
       python-version: ${{ needs.stage0.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage0.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage0.outputs.stuart_ci_settings_file }}
       edk2-tools-build-params: '-t GCC'
       firmware-test-arch-parameter: 'IA32,X64,AARCH64,RISCV64'
       firmware-tool-chain-tag: 'GCC'
@@ -563,8 +555,8 @@ jobs:
       linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
       linux-host-compiler: 'gcc'
       python-version: ${{ needs.stage0.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage0.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage0.outputs.stuart_ci_settings_file }}
       edk2-tools-build-params: '-t GCC'
       firmware-test-arch-parameter: 'IA32,X64,AARCH64'
       firmware-tool-chain-tag: 'GCCNOLTO'
@@ -584,8 +576,8 @@ jobs:
       windows-installer: 'vs'
       windows-qemu-installer-version: ${{ inputs.windows-qemu-installer-version }}
       python-version: ${{ needs.stage0.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage0.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage0.outputs.stuart_ci_settings_file }}
       edk2-tools-build-params: '-t ${{ inputs.vs-version }}'
       firmware-test-arch-parameter: 'IA32,X64'
       firmware-tool-chain-tag: ${{ inputs.vs-version }}
@@ -617,6 +609,8 @@ jobs:
       edk2_clang_version: ${{ needs.stage0.outputs.edk2_clang_version }}
       llvm_mingw_version: ${{ needs.stage0.outputs.llvm_mingw_version }}
       python_version: ${{ needs.stage0.outputs.python_version }}
+      pip_requirements: ${{ needs.stage0.outputs.pip_requirements }}
+      stuart_ci_settings_file: ${{ needs.stage0.outputs.stuart_ci_settings_file }}
     steps:
       - name: Stage 1 Success
         run: echo "Stage 1 jobs completed successfully"
@@ -636,8 +630,8 @@ jobs:
       linux-container-image: ${{ inputs.linux-container-image }}
       linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
       python-version: ${{ needs.stage1.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage1.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage1.outputs.stuart_ci_settings_file }}
       package-lists: ${{ needs.stage1.outputs.package-lists }}
       skip-filter-list: ${{ inputs.skip-filter-list }}
       continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
@@ -652,8 +646,8 @@ jobs:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       edk2-clang-version: ${{ needs.stage1.outputs.edk2_clang_version }}
       python-version: ${{ needs.stage1.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage1.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage1.outputs.stuart_ci_settings_file }}
       package-lists: ${{ needs.stage1.outputs.package-lists }}
       skip-filter-list: ${{ inputs.skip-filter-list }}
       continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
@@ -669,8 +663,8 @@ jobs:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       llvm-mingw-version: ${{ needs.stage1.outputs.llvm_mingw_version }}
       python-version: ${{ needs.stage1.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage1.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage1.outputs.stuart_ci_settings_file }}
       package-lists: ${{ needs.stage1.outputs.package-lists }}
       skip-filter-list: ${{ inputs.skip-filter-list }}
       continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
@@ -687,8 +681,8 @@ jobs:
       vs-version: ${{ inputs.vs-version }}
       vs-clang-llvm-version: ${{ needs.stage1.outputs.vs_clang_llvm_version }}
       python-version: ${{ needs.stage1.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage1.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage1.outputs.stuart_ci_settings_file }}
       package-lists: ${{ needs.stage1.outputs.package-lists }}
       skip-filter-list: ${{ inputs.skip-filter-list }}
       continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
@@ -705,8 +699,8 @@ jobs:
       linux-container-image: ${{ inputs.linux-container-image }}
       linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
       python-version: ${{ needs.stage1.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage1.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage1.outputs.stuart_ci_settings_file }}
       package-lists: ${{ needs.stage1.outputs.package-lists }}
       skip-filter-list: ${{ inputs.skip-filter-list }}
       continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
@@ -724,8 +718,8 @@ jobs:
       linux-container-image: ${{ inputs.linux-container-image }}
       linux-container-image-qemu: ${{ inputs.linux-container-image-qemu }}
       python-version: ${{ needs.stage1.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage1.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage1.outputs.stuart_ci_settings_file }}
       package-lists: ${{ needs.stage1.outputs.package-lists }}
       skip-filter-list: ${{ inputs.skip-filter-list }}
       continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
@@ -742,8 +736,8 @@ jobs:
       windows-runs-on: ${{ inputs.windows-runs-on }}
       vs-version: ${{ inputs.vs-version }}
       python-version: ${{ needs.stage1.outputs.python_version }}
-      pip-requirements: ${{ inputs.pip-requirements }}
-      stuart-ci-settings-file: ${{ inputs.stuart-ci-settings-file }}
+      pip-requirements: ${{ needs.stage1.outputs.pip_requirements }}
+      stuart-ci-settings-file: ${{ needs.stage1.outputs.stuart_ci_settings_file }}
       package-lists: ${{ needs.stage1.outputs.package-lists }}
       skip-filter-list: ${{ inputs.skip-filter-list }}
       continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}

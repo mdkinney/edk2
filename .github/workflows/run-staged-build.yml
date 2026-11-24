@@ -37,8 +37,6 @@ jobs:
       vs-version: 'VS2026'
       vs-clang-llvm-version: '22.1.8'
       python-version: '3.12'
-      pip-requirements: 'pip-requirements.txt'
-      stuart-ci-settings-file: '.pytool/CISettings.py'
       enable-code-quality-tests: true
       enable-basic-acceptance-tests: true
       enable-linux-clang-tests: true
