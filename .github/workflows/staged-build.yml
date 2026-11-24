@@ -27,15 +27,10 @@ on:
         type: string
         default: 'ghcr.io/tianocore/containers/ubuntu-24-test:latest'
       windows-runs-on:
-        description: The runner label for Windows jobs.
+        description: Windows runner; windows-2022 uses VS2022, others use VS2026.
         required: false
         type: string
         default: 'windows-2025'
-      vs-version:
-        description: Visual Studio toolchain version for Windows builds.
-        required: false
-        type: string
-        default: 'VS2026'
       vs-clang-llvm-version:
         description: LLVM version for Windows Visual Studio CLANGPDB jobs.
         required: false
@@ -130,23 +125,13 @@ on:
         type: string
         default: 'ghcr.io/tianocore/containers/ubuntu-24-test:latest'
       windows-runs-on:
-        description: Select the x64 GitHub-hosted Windows runner.
+        description: Windows runner; windows-2022 uses VS2022, others use VS2026.
         required: false
         type: choice
         options:
-          - 'windows-latest'
           - 'windows-2025'
           - 'windows-2022'
         default: 'windows-2025'
-      vs-version:
-        description: Visual Studio toolchain version for Windows builds.
-        required: false
-        type: choice
-        options:
-          - 'VS2019'
-          - 'VS2022'
-          - 'VS2026'
-        default: 'VS2026'
       vs-clang-llvm-version:
         description: Select a known LLVM version for Windows Visual Studio CLANGPDB jobs.
         required: false
@@ -273,6 +258,7 @@ jobs:
     runs-on: ubuntu-slim
     outputs:
       python_version: ${{ steps.resolve-versions.outputs.python_version }}
+      vs_version: ${{ steps.resolve-versions.outputs.vs_version }}
       vs_clang_llvm_version: ${{ steps.resolve-versions.outputs.vs_clang_llvm_version }}
       edk2_clang_version: ${{ steps.resolve-versions.outputs.edk2_clang_version }}
       llvm_mingw_version: ${{ steps.resolve-versions.outputs.llvm_mingw_version }}
@@ -284,6 +270,7 @@ jobs:
         env:
           PYTHON_VERSION: ${{ inputs.python-version }}
           PYTHON_VERSION_OVERRIDE: ${{ github.event_name == 'workflow_dispatch' && inputs.python-version-override || '' }}
+          WINDOWS_RUNS_ON: ${{ inputs.windows-runs-on }}
           VS_LLVM_SELECTED_VERSION: ${{ inputs.vs-clang-llvm-version }}
           VS_LLVM_VERSION_OVERRIDE: ${{ github.event_name == 'workflow_dispatch' && inputs.vs-clang-llvm-version-override || '' }}
           EDK2_CLANG_SELECTED_VERSION: ${{ inputs.edk2-clang-version }}
@@ -318,7 +305,20 @@ jobs:
             exit 1
           fi
 
+          case "$WINDOWS_RUNS_ON" in
+            windows-2022)
+              vs_version='VS2022'
+              ;;
+            windows-2025)
+              vs_version='VS2026'
+              ;;
+            *)
+              vs_version='VS2026'
+              ;;
+          esac
+
           printf 'python_version=%s\n' "$python_version" >> "$GITHUB_OUTPUT"
+          printf 'vs_version=%s\n' "$vs_version" >> "$GITHUB_OUTPUT"
           printf 'vs_clang_llvm_version=%s\n' "$vs_clang_llvm_version" >> "$GITHUB_OUTPUT"
           printf 'edk2_clang_version=%s\n' "$edk2_clang_version" >> "$GITHUB_OUTPUT"
           printf 'llvm_mingw_version=%s\n' "$llvm_mingw_version" >> "$GITHUB_OUTPUT"
@@ -356,6 +356,7 @@ jobs:
       edk2_clang_version: ${{ needs.resolve_inputs.outputs.edk2_clang_version }}
       llvm_mingw_version: ${{ needs.resolve_inputs.outputs.llvm_mingw_version }}
       python_version: ${{ needs.resolve_inputs.outputs.python_version }}
+      vs_version: ${{ needs.resolve_inputs.outputs.vs_version }}
       pip_requirements: ${{ needs.resolve_inputs.outputs.pip_requirements }}
       stuart_ci_settings_file: ${{ needs.resolve_inputs.outputs.stuart_ci_settings_file }}
     steps:
@@ -497,7 +498,9 @@ jobs:
       unit-test-arch-list: '["IA32","X64"]'
       unit-test-tool-chain-tag: 'CLANGDWARF'
   build_windows_vs_llvm_20_clang_basic_acceptance_test:
-    name: Basic Acceptance Tests - Windows ${{ inputs.vs-version }} LLVM ${{ needs.stage0.outputs.vs_clang_llvm_version }} CLANG
+    name: >-
+      Basic Acceptance Tests - Windows ${{ needs.stage0.outputs.vs_version }}
+      LLVM ${{ needs.stage0.outputs.vs_clang_llvm_version }} CLANG
     # Firmware Build Support:             CLANGPDB - IA32/X64
     # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
     # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
@@ -512,7 +515,7 @@ jobs:
       python-version: ${{ needs.stage0.outputs.python_version }}
       pip-requirements: ${{ needs.stage0.outputs.pip_requirements }}
       stuart-ci-settings-file: ${{ needs.stage0.outputs.stuart_ci_settings_file }}
-      edk2-tools-build-params: '-t ${{ inputs.vs-version }}'
+      edk2-tools-build-params: '-t ${{ needs.stage0.outputs.vs_version }}'
       firmware-test-arch-parameter: 'IA32,X64'
       firmware-tool-chain-tag: 'CLANGPDB'
       unit-test-arch-list: '["IA32","X64"]'
@@ -564,7 +567,7 @@ jobs:
       unit-test-tool-chain-tag: 'GCCNOLTO'
       emulatorpkg-target-list: '["DEBUG", "RELEASE", "NOOPT"]'
   build_windows_vs_basic_acceptance_test:
-    name: Basic Acceptance Tests - Windows ${{ inputs.vs-version }}
+    name: Basic Acceptance Tests - Windows ${{ needs.stage0.outputs.vs_version }}
     # Firmware Build Support:             VS20xx - IA32/X64
     # Host-Based Unit Test Build Support: VS20xx - IA32/X64
     # EmulatorPkg Build Support:          VS20xx - IA32/X64
@@ -578,11 +581,11 @@ jobs:
       python-version: ${{ needs.stage0.outputs.python_version }}
       pip-requirements: ${{ needs.stage0.outputs.pip_requirements }}
       stuart-ci-settings-file: ${{ needs.stage0.outputs.stuart_ci_settings_file }}
-      edk2-tools-build-params: '-t ${{ inputs.vs-version }}'
+      edk2-tools-build-params: '-t ${{ needs.stage0.outputs.vs_version }}'
       firmware-test-arch-parameter: 'IA32,X64'
-      firmware-tool-chain-tag: ${{ inputs.vs-version }}
+      firmware-tool-chain-tag: ${{ needs.stage0.outputs.vs_version }}
       unit-test-arch-list: '["IA32","X64"]'
-      unit-test-tool-chain-tag: ${{ inputs.vs-version }}
+      unit-test-tool-chain-tag: ${{ needs.stage0.outputs.vs_version }}
 
   #
   # Stage 1 Success
@@ -609,6 +612,7 @@ jobs:
       edk2_clang_version: ${{ needs.stage0.outputs.edk2_clang_version }}
       llvm_mingw_version: ${{ needs.stage0.outputs.llvm_mingw_version }}
       python_version: ${{ needs.stage0.outputs.python_version }}
+      vs_version: ${{ needs.stage0.outputs.vs_version }}
       pip_requirements: ${{ needs.stage0.outputs.pip_requirements }}
       stuart_ci_settings_file: ${{ needs.stage0.outputs.stuart_ci_settings_file }}
     steps:
@@ -669,7 +673,9 @@ jobs:
       skip-filter-list: ${{ inputs.skip-filter-list }}
       continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
   windows_vs_llvm_20_clang_build:
-    name: Windows CLANGPDB - ${{ inputs.vs-version }} / LLVM ${{ needs.stage1.outputs.vs_clang_llvm_version }}
+    name: >-
+      Windows CLANGPDB - ${{ needs.stage1.outputs.vs_version }} / LLVM
+      ${{ needs.stage1.outputs.vs_clang_llvm_version }}
     # Firmware Build Support:             CLANGPDB - IA32/X64
     # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
     # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
@@ -678,7 +684,7 @@ jobs:
     uses: ./.github/workflows/windows-vs-llvm-20-clang-build.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
-      vs-version: ${{ inputs.vs-version }}
+      vs-version: ${{ needs.stage1.outputs.vs_version }}
       vs-clang-llvm-version: ${{ needs.stage1.outputs.vs_clang_llvm_version }}
       python-version: ${{ needs.stage1.outputs.python_version }}
       pip-requirements: ${{ needs.stage1.outputs.pip_requirements }}
@@ -725,7 +731,7 @@ jobs:
       continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
       tool-chain-tag-list: '["GCCNOLTO"]'
   windows_vs_build:
-    name: Windows Visual Studio - ${{ inputs.vs-version }}
+    name: Windows Visual Studio - ${{ needs.stage1.outputs.vs_version }}
     # Firmware Build Support:             VS20xx - IA32/X64
     # Host-Based Unit Test Build Support: VS20xx - IA32/X64
     # EmulatorPkg Build Support:          VS20xx - IA32/X64
@@ -734,7 +740,7 @@ jobs:
     uses: ./.github/workflows/windows-vs-build.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
-      vs-version: ${{ inputs.vs-version }}
+      vs-version: ${{ needs.stage1.outputs.vs_version }}
       python-version: ${{ needs.stage1.outputs.python_version }}
       pip-requirements: ${{ needs.stage1.outputs.pip_requirements }}
       stuart-ci-settings-file: ${{ needs.stage1.outputs.stuart_ci_settings_file }}
