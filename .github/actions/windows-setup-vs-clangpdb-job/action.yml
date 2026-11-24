@@ -51,7 +51,6 @@ runs:
       shell: cmd
       run: |
         set "CLANG_BIN=${{ inputs.vs-clang-llvm-install-path }}\bin"
-        PATH=%CLANG_BIN%;%PATH%
         set "CLANG_EXE=%CLANG_BIN%\clang.exe"
         for /f "delims=" %%i in ('"%CLANG_EXE%" --print-resource-dir') do set "CLANGPDB_X64_RESOURCE_DIR=%%i"
         if not defined CLANGPDB_X64_RESOURCE_DIR (
@@ -67,10 +66,15 @@ runs:
           echo ERROR: LLVM X64 AddressSanitizer runtime is missing.
           exit /b 1
         )
+        if not exist "%CLANGPDB_X64_RUNTIME_LIB_DIR%\clang_rt.asan_dynamic-x86_64.dll" (
+          echo ERROR: LLVM X64 AddressSanitizer DLL is missing.
+          exit /b 1
+        )
         if not exist "%CLANGPDB_X64_RUNTIME_LIB_DIR%\clang_rt.asan_dynamic_runtime_thunk-x86_64.lib" (
           echo ERROR: LLVM X64 AddressSanitizer thunk is missing.
           exit /b 1
         )
+        PATH=%CLANG_BIN%;%CLANGPDB_X64_RUNTIME_LIB_DIR%;%PATH%
         echo PATH=%PATH%>> %GITHUB_ENV%
         echo CLANG_BIN=%CLANG_BIN%\>> %GITHUB_ENV%
         echo CLANGPDB_X64_RESOURCE_DIR=%CLANGPDB_X64_RESOURCE_DIR%>> %GITHUB_ENV%
