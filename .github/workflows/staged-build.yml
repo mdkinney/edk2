@@ -503,7 +503,7 @@ jobs:
       Basic Acceptance Tests - Windows ${{ needs.stage0.outputs.vs_version }}
       LLVM ${{ needs.stage0.outputs.vs_clang_llvm_version }} CLANG
     # Firmware Build Support:             CLANGPDB - IA32/X64
-    # Host-Based Unit Test Build Support: CLANGPDB - X64
+    # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
     # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
     needs: stage0
     if: ${{ inputs.enable-basic-acceptance-tests && inputs.enable-windows-clang-tests }}
@@ -678,7 +678,7 @@ jobs:
       Windows CLANGPDB - ${{ needs.stage1.outputs.vs_version }} / LLVM
       ${{ needs.stage1.outputs.vs_clang_llvm_version }}
     # Firmware Build Support:             CLANGPDB - IA32/X64
-    # Host-Based Unit Test Build Support: CLANGPDB - X64
+    # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
     # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
     needs: stage1
     if: ${{ !cancelled() && inputs.enable-windows-clang-tests }}
