@@ -314,19 +314,25 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
         mergedCoverageXml = os.path.join(buildOutputBase, 'coverage.xml')
 
         # Generate LCOV and XML file for each unit test executable
-        if self.clang_gen_profdata(buildOutputBase, profrawlistFile, mergedProfData) != 0:
+        profraw_count = self.clang_gen_profdata(buildOutputBase, profrawlistFile, mergedProfData)
+        if profraw_count is None:
             return 1
-        count = self.clang_prof_data_get_total_count(mergedProfData)
-        if count is None:
-            return 1
-        if count > 0:
-            for testFile in testList:
-                if self.clang_gen_lcov_xml(mergedProfData, [testFile], f"{testFile}.coverage.lcov", f"{testFile}.coverage.xml") != 0:
-                    return 1
-
-            # Generate LCOV and XML for the package
-            if self.clang_gen_lcov_xml(mergedProfData, testList, mergedCoverageLcov, mergedCoverageXml) != 0:
+        if profraw_count > 0:
+            count = self.clang_prof_data_get_total_count(mergedProfData)
+            if count is None:
                 return 1
+            if count > 0:
+                for testFile in testList:
+                    if self.clang_gen_lcov_xml(mergedProfData, [testFile], f"{testFile}.coverage.lcov", f"{testFile}.coverage.xml") != 0:
+                        return 1
+
+                # Generate LCOV and XML for the package
+                if self.clang_gen_lcov_xml(mergedProfData, testList, mergedCoverageLcov, mergedCoverageXml) != 0:
+                    return 1
+            else:
+                logging.info("clang_gen_profdata: No coverage data found in package.")
+        else:
+            logging.info("clang_gen_profdata: No profraw files found in package.")
 
         allProfrawlistFile = os.path.join(workspace, 'Build', 'profrawlist.txt')
         allMergedProfData = os.path.join(workspace, 'Build', 'merged.profdata')
@@ -334,14 +340,20 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
         allCoverageXml = os.path.join(workspace, 'Build', 'coverage.xml')
 
         # Generate LCOV and XML for all packages
-        if self.clang_gen_profdata(workspace, allProfrawlistFile, allMergedProfData) != 0:
+        profraw_count = self.clang_gen_profdata(workspace, allProfrawlistFile, allMergedProfData)
+        if profraw_count is None:
             return 1
-        count = self.clang_prof_data_get_total_count(allMergedProfData)
-        if count is None:
-            return 1
-        if count > 0:
-            if self.clang_gen_lcov_xml(allMergedProfData, allTestList, allCoverageLcov, allCoverageXml) != 0:
+        if profraw_count > 0:
+            count = self.clang_prof_data_get_total_count(allMergedProfData)
+            if count is None:
                 return 1
+            if count > 0:
+                if self.clang_gen_lcov_xml(allMergedProfData, allTestList, allCoverageLcov, allCoverageXml) != 0:
+                    return 1
+            else:
+                logging.info("clang_gen_profdata: No coverage data found in all packages.")
+        else:
+            logging.info("clang_gen_profdata: No profraw files found in all packages.")
         return 0
 
     def _get_llvm_tool_path(self, tool_name):
@@ -371,23 +383,26 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
         """
         if not os.path.isdir(basepath):
             logging.error(f"clang_gen_profdata: Base path {basepath} is not a directory.")
-            return 1
+            return None
         if not output_profrawlistfile:
             logging.error("clang_gen_profdata: No profraw list file provided.")
-            return 1
+            return None
         if not output_profdata:
             logging.error("clang_gen_profdata: No output profdata file provided.")
-            return 1
+            return None
 
         for file in [output_profrawlistfile, output_profdata]:
             if os.path.isfile(file):
                 os.remove(file)
 
+        profraw_files = glob.glob(os.path.join(basepath, "**", "*.profraw"), recursive=True)
+        if len(profraw_files) == 0:
+            return 0
         with open(output_profrawlistfile, "w") as f:
-            f.write("\n".join(glob.glob(os.path.join(basepath, "**", "*.profraw"), recursive=True)))
+            f.write("\n".join(profraw_files))
         llvm_profdata = self._get_llvm_tool_path("llvm-profdata")
         if not llvm_profdata:
-            return 1
+            return None
         ret = RunCmd(
             llvm_profdata,
             f"merge -sparse --input-files {output_profrawlistfile} "
@@ -395,8 +410,8 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
         )
         if ret != 0:
             logging.error(f"clang_gen_profdata: Failed to merge coverage data for {basepath}.")
-            return 1
-        return 0
+            return None
+        return len(profraw_files)
 
     def clang_prof_data_get_total_count(self, output_profdata):
         """

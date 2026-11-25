@@ -213,20 +213,35 @@ class TestClangGenProfdata(unittest.TestCase):
 
         return result, calls
 
-    def test_returns_success_when_merge_succeeds(self):
+    def test_returns_profraw_count_when_merge_succeeds(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             result, calls = self.run_profdata(temp_dir)
 
-        self.assertEqual(result, 0)
+        self.assertEqual(result, 1)
         self.assertEqual(len(calls), 1)
         self.assertTrue(calls[0].startswith("merge -sparse "))
 
-    def test_returns_error_when_merge_fails(self):
+    def test_returns_none_when_merge_fails(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             result, calls = self.run_profdata(temp_dir, merge_result=1)
 
-        self.assertEqual(result, 1)
+        self.assertIsNone(result)
         self.assertEqual(len(calls), 1)
+
+    def test_returns_zero_without_profraw_files(self):
+        runner = runner_module.HostBasedUnitTestRunner()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            with patch.object(runner, "_get_llvm_tool_path") as get_tool_path, \
+                    patch.object(runner_module, "RunCmd") as run_cmd:
+                result = runner.clang_gen_profdata(
+                    temp_dir,
+                    os.path.join(temp_dir, "profrawlist.txt"),
+                    os.path.join(temp_dir, "merged.profdata"),
+                )
+
+        self.assertEqual(result, 0)
+        get_tool_path.assert_not_called()
+        run_cmd.assert_not_called()
 
 class TestClangProfileDataTotalCount(unittest.TestCase):
     def check_profile(self, show_output, command_result=0):
@@ -289,7 +304,7 @@ class TestClangCoverageNoData(unittest.TestCase):
                     patch.object(
                         runner,
                         "clang_gen_profdata",
-                        return_value=0), \
+                        return_value=1), \
                     patch.object(
                         runner,
                         "clang_prof_data_get_total_count",
