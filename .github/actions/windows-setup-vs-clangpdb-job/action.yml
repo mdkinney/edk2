@@ -3,8 +3,8 @@
 # CI jobs that builds packages and uploads artifacts. Caching is used to avoid
 # re-installing LLVM on subsequent runs.
 #
-# * Installs LLVM with CLANGPDB support, adds LLVM to PATH, and sets CLANG_BIN
-#   and CLANGPDB_X64_RESOURCE_DIR environment variables.
+# * Installs LLVM with CLANGPDB support, sets CLANG_BIN, and adds the
+#   LLVM runtime directory to PATH.
 #
 # Copyright (C) 2025 Intel Corporation.
 # SPDX-License-Identifier: BSD-2-Clause-Patent
@@ -52,29 +52,30 @@ runs:
       run: |
         set "CLANG_BIN=${{ inputs.vs-clang-llvm-install-path }}\bin"
         set "CLANG_EXE=%CLANG_BIN%\clang.exe"
-        for /f "delims=" %%i in ('"%CLANG_EXE%" --print-resource-dir') do set "CLANGPDB_X64_RESOURCE_DIR=%%i"
-        if not defined CLANGPDB_X64_RESOURCE_DIR (
+        for /f "delims=" %%i in ('"%CLANG_EXE%" --print-resource-dir') do (
+          set "LLVM_RUNTIME=%%i\lib\windows"
+        )
+        if not defined LLVM_RUNTIME (
           echo ERROR: Could not determine the LLVM resource directory.
           exit /b 1
         )
-        set "CLANGPDB_X64_RUNTIME_LIB_DIR=%CLANGPDB_X64_RESOURCE_DIR%\lib\windows"
-        if not exist "%CLANGPDB_X64_RUNTIME_LIB_DIR%\clang_rt.profile-x86_64.lib" (
+        if not exist "%LLVM_RUNTIME%\clang_rt.profile-x86_64.lib" (
           echo ERROR: LLVM X64 profile runtime is missing.
           exit /b 1
         )
-        if not exist "%CLANGPDB_X64_RUNTIME_LIB_DIR%\clang_rt.asan_dynamic-x86_64.lib" (
+        if not exist "%LLVM_RUNTIME%\clang_rt.asan_dynamic-x86_64.lib" (
           echo ERROR: LLVM X64 AddressSanitizer runtime is missing.
           exit /b 1
         )
-        if not exist "%CLANGPDB_X64_RUNTIME_LIB_DIR%\clang_rt.asan_dynamic-x86_64.dll" (
+        if not exist "%LLVM_RUNTIME%\clang_rt.asan_dynamic-x86_64.dll" (
           echo ERROR: LLVM X64 AddressSanitizer DLL is missing.
           exit /b 1
         )
-        if not exist "%CLANGPDB_X64_RUNTIME_LIB_DIR%\clang_rt.asan_static_runtime_thunk-x86_64.lib" (
+        set "ASAN_STATIC_THUNK=clang_rt.asan_static_runtime_thunk-x86_64.lib"
+        if not exist "%LLVM_RUNTIME%\%ASAN_STATIC_THUNK%" (
           echo ERROR: LLVM X64 AddressSanitizer static runtime thunk is missing.
           exit /b 1
         )
-        PATH=%CLANG_BIN%;%CLANGPDB_X64_RUNTIME_LIB_DIR%;%PATH%
+        PATH=%CLANG_BIN%;%LLVM_RUNTIME%;%PATH%
         echo PATH=%PATH%>> %GITHUB_ENV%
         echo CLANG_BIN=%CLANG_BIN%\>> %GITHUB_ENV%
-        echo CLANGPDB_X64_RESOURCE_DIR=%CLANGPDB_X64_RESOURCE_DIR%>> %GITHUB_ENV%

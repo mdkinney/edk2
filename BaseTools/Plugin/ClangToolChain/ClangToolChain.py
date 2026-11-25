@@ -95,19 +95,6 @@ class ClangToolChain(IUefiBuildPlugin):
                         self.Logger.error(f"CLANGPDB not supported for detected host [{HostInfo.arch}-{HostInfo.bit}]")
                         return -1
 
-                    resource_dir = env.get_shell_var("CLANGPDB_X64_RESOURCE_DIR")
-                    if resource_dir:
-                        runtime_dir = Path(resource_dir) / "lib" / "windows"
-                        if runtime_dir.is_dir():
-                            runtime_path = os.path.normcase(os.path.normpath(str(runtime_dir)))
-                            path_entries = env.active_path
-                            path_entries = [
-                                entry for entry in path_entries
-                                if os.path.normcase(os.path.normpath(entry)) != runtime_path
-                            ]
-                            # VS setup can put a different ASan DLL ahead of LLVM's runtime.
-                            env.set_path(os.pathsep.join([str(runtime_dir)] + path_entries))
-
                     # Add path to IA32 toolchain DLLs for unit test execution
                     if vc_tools_install_dir := env.get_shell_var("VCToolsInstallDir"):
                         ia32_dll_path = Path(vc_tools_install_dir) / 'bin' / 'Hostx64' / 'x86'
@@ -153,6 +140,29 @@ class ClangToolChain(IUefiBuildPlugin):
         ClangBin = self._resolve_clang_bin(HostInfo)
         if ClangBin is None:
             return 1
+
+        if (
+            HostInfo.os == "Windows"
+            and tool_chain_tag == "CLANGPDB"
+        ):
+            resource_dir = self._get_clang_resource_dir(ClangBin)
+            if resource_dir is None:
+                return -1
+
+            runtime_dir = resource_dir / "lib" / "windows"
+            env = shell_environment.GetEnvironment()
+            env.set_shell_var("CLANGPDB_X64_RUNTIME_LIB_PATH", str(runtime_dir))
+            if runtime_dir.is_dir():
+                runtime_path = os.path.normcase(
+                    os.path.normpath(str(runtime_dir))
+                )
+                path_entries = env.active_path
+                path_entries = [
+                    entry for entry in path_entries
+                    if os.path.normcase(os.path.normpath(entry)) != runtime_path
+                ]
+                # VS setup can put a different ASan DLL ahead of LLVM's runtime.
+                env.set_path(os.pathsep.join([str(runtime_dir)] + path_entries))
 
         clang_bin_parent = ClangBin.parent
         version_aggregator.GetVersionAggregator().ReportVersion(
@@ -508,3 +518,32 @@ class ClangToolChain(IUefiBuildPlugin):
             return line[idx + len(marker):].strip()
         self.Logger.warning("Unexpected clang --version format: %r", line)
         return line
+
+    def _get_clang_resource_dir(self, clang_path):
+        """Get the selected clang resource directory."""
+        return_buffer = StringIO()
+        ret = RunCmd(
+            str(clang_path),
+            "--print-resource-dir",
+            outstream=return_buffer,
+        )
+        if ret != 0:
+            self.Logger.error(
+                "clang --print-resource-dir exited with code %d",
+                ret,
+            )
+            return None
+        resource_dir = return_buffer.getvalue().strip()
+        if not resource_dir:
+            self.Logger.error(
+                "clang --print-resource-dir produced no output"
+            )
+            return None
+        resource_path = Path(resource_dir)
+        if not resource_path.is_dir():
+            self.Logger.error(
+                "Clang resource directory does not exist: %s",
+                resource_path,
+            )
+            return None
+        return resource_path

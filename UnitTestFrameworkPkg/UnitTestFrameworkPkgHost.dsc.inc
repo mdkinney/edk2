@@ -218,7 +218,7 @@
   DEFINE VISUAL_STUDIO_DEFINES        = -D UNICODE -D _CRT_SECURE_NO_WARNINGS -D _CRT_SECURE_NO_DEPRECATE
   DEFINE VISUAL_STUDIO_IA32_LIB_PATHS = /LIBPATH:"%VCToolsInstallDir%lib\x86" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x86" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%um\x86"
   DEFINE VISUAL_STUDIO_X64_LIB_PATHS  = /LIBPATH:"%VCToolsInstallDir%lib\X64" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\X64" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%um\X64"
-  DEFINE CLANGPDB_X64_RUNTIME_LIB_DIR  = %CLANGPDB_X64_RESOURCE_DIR%\lib\windows
+  DEFINE CLANGPDB_X64_RUNTIME_LIB_DIR  = %CLANGPDB_X64_RUNTIME_LIB_PATH%
   DEFINE CLANGPDB_PROFILE_LIB_X64      = "$(CLANGPDB_X64_RUNTIME_LIB_DIR)\clang_rt.profile-x86_64.lib"
   DEFINE CLANGPDB_ASAN_LIB_X64         = "$(CLANGPDB_X64_RUNTIME_LIB_DIR)\clang_rt.asan_dynamic-x86_64.lib"
   # Use the static thunk with the dynamic DLL to provide CRT allocator interceptors.
