@@ -7,6 +7,7 @@
 # SPDX-License-Identifier: BSD-2-Clause-Patent
 ##
 import logging
+import os
 import shutil
 from io import StringIO
 from pathlib import Path
@@ -93,6 +94,19 @@ class ClangToolChain(IUefiBuildPlugin):
                     if not HostType:
                         self.Logger.error(f"CLANGPDB not supported for detected host [{HostInfo.arch}-{HostInfo.bit}]")
                         return -1
+
+                    resource_dir = env.get_shell_var("CLANGPDB_X64_RESOURCE_DIR")
+                    if resource_dir:
+                        runtime_dir = Path(resource_dir) / "lib" / "windows"
+                        if runtime_dir.is_dir():
+                            runtime_path = os.path.normcase(os.path.normpath(str(runtime_dir)))
+                            path_entries = env.active_path
+                            path_entries = [
+                                entry for entry in path_entries
+                                if os.path.normcase(os.path.normpath(entry)) != runtime_path
+                            ]
+                            # VS setup can put a different ASan DLL ahead of LLVM's runtime.
+                            env.set_path(os.pathsep.join([str(runtime_dir)] + path_entries))
 
                     # Add path to IA32 toolchain DLLs for unit test execution
                     if vc_tools_install_dir := env.get_shell_var("VCToolsInstallDir"):

@@ -70,8 +70,8 @@ runs:
           echo ERROR: LLVM X64 AddressSanitizer DLL is missing.
           exit /b 1
         )
-        if not exist "%CLANGPDB_X64_RUNTIME_LIB_DIR%\clang_rt.asan_dynamic_runtime_thunk-x86_64.lib" (
-          echo ERROR: LLVM X64 AddressSanitizer thunk is missing.
+        if not exist "%CLANGPDB_X64_RUNTIME_LIB_DIR%\clang_rt.asan_static_runtime_thunk-x86_64.lib" (
+          echo ERROR: LLVM X64 AddressSanitizer static runtime thunk is missing.
           exit /b 1
         )
         PATH=%CLANG_BIN%;%CLANGPDB_X64_RUNTIME_LIB_DIR%;%PATH%

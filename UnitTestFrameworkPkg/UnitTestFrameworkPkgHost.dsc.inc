@@ -221,7 +221,8 @@
   DEFINE CLANGPDB_X64_RUNTIME_LIB_DIR  = %CLANGPDB_X64_RESOURCE_DIR%\lib\windows
   DEFINE CLANGPDB_PROFILE_LIB_X64      = "$(CLANGPDB_X64_RUNTIME_LIB_DIR)\clang_rt.profile-x86_64.lib"
   DEFINE CLANGPDB_ASAN_LIB_X64         = "$(CLANGPDB_X64_RUNTIME_LIB_DIR)\clang_rt.asan_dynamic-x86_64.lib"
-  DEFINE CLANGPDB_ASAN_THUNK_LIB_X64   = "$(CLANGPDB_X64_RUNTIME_LIB_DIR)\clang_rt.asan_dynamic_runtime_thunk-x86_64.lib"
+  # Use the static thunk with the dynamic DLL to provide CRT allocator interceptors.
+  DEFINE CLANGPDB_ASAN_THUNK_LIB_X64   = "$(CLANGPDB_X64_RUNTIME_LIB_DIR)\clang_rt.asan_static_runtime_thunk-x86_64.lib"
 
 [BuildOptions.common.EDKII.HOST_APPLICATION]
   #
