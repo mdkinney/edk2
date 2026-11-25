@@ -165,7 +165,8 @@
   MSFT:*_VS2022_*_CC_FLAGS = /fsanitize=address
   MSFT:*_VS2026_*_CC_FLAGS = /fsanitize=address
   GCC:*_*_*_CC_FLAGS       = -fsanitize=address
-  CLANGPDB:*_*_*_CC_FLAGS  = -fsanitize=address
+#  CLANGPDB:*_*_*_CC_FLAGS  = -fsanitize=address
+  CLANGPDB:*_*_X64_CC_FLAGS  = -fsanitize=address
 !endif
 
 !ifdef $(UNIT_TESTING_DEBUG)
@@ -187,7 +188,8 @@
 !else
   GCC:*_*_*_CC_FLAGS          = --coverage
 !endif
-  CLANGPDB:*_*_*_CC_FLAGS     = -fprofile-instr-generate -fcoverage-mapping
+#  CLANGPDB:*_*_*_CC_FLAGS     = -fprofile-instr-generate -fcoverage-mapping
+  CLANGPDB:*_*_X64_CC_FLAGS    = -fprofile-instr-generate -fcoverage-mapping
 !endif
 
   #
@@ -246,12 +248,12 @@
   #
   # Remove default library clang_rt.profile.lib that is not included with Visual Studio
   #
-  CLANGPDB:*_*_IA32_DLINK_FLAGS = /NODEFAULTLIB:clang_rt.profile.lib
+#  CLANGPDB:*_*_IA32_DLINK_FLAGS = /NODEFAULTLIB:clang_rt.profile.lib
   #
   # The ClangToolChain plugin puts LLVM's runtimes first in LIB.
   # Avoid /LIBPATH options here; they precede LIB during linker lookup.
   #
-  CLANGPDB:*_*_IA32_DLINK_FLAGS = clang_rt.profile-i386.lib clang_rt.asan_dynamic-i386.lib clang_rt.asan_dynamic_runtime_thunk-i386.lib
+#  CLANGPDB:*_*_IA32_DLINK_FLAGS = clang_rt.profile-i386.lib clang_rt.asan_dynamic-i386.lib clang_rt.asan_dynamic_runtime_thunk-i386.lib
   # The static thunk supplies CRT allocator interceptors with the dynamic DLL.
   CLANGPDB:*_*_X64_DLINK_FLAGS  = clang_rt.profile-x86_64.lib clang_rt.asan_dynamic-x86_64.lib clang_rt.asan_static_runtime_thunk-x86_64.lib
 !endif
