@@ -151,7 +151,10 @@ class ClangToolChain(IUefiBuildPlugin):
 
             runtime_dir = resource_dir / "lib" / "windows"
             env = shell_environment.GetEnvironment()
-            env.set_shell_var("CLANGPDB_X64_RUNTIME_LIB_PATH", str(runtime_dir))
+            env.set_shell_var(
+                "CLANGPDB_X64_RUNTIME_LIB_PATH",
+                str(runtime_dir),
+            )
             if runtime_dir.is_dir():
                 runtime_path = os.path.normcase(
                     os.path.normpath(str(runtime_dir))
