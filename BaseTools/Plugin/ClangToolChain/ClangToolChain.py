@@ -141,31 +141,39 @@ class ClangToolChain(IUefiBuildPlugin):
         if ClangBin is None:
             return 1
 
-        if (
-            HostInfo.os == "Windows"
-            and tool_chain_tag == "CLANGPDB"
-        ):
+        if HostInfo.os == "Windows" and tool_chain_tag == "CLANGPDB":
             resource_dir = self._get_clang_resource_dir(ClangBin)
             if resource_dir is None:
                 return -1
 
-            runtime_dir = resource_dir / "lib" / "windows"
-            env = shell_environment.GetEnvironment()
-            env.set_shell_var(
-                "CLANGPDB_X64_RUNTIME_LIB_PATH",
-                str(runtime_dir),
-            )
-            if runtime_dir.is_dir():
-                runtime_path = os.path.normcase(
-                    os.path.normpath(str(runtime_dir))
+            runtime_dir = resource_dir.joinpath("lib", "windows")
+            if not runtime_dir.is_dir():
+                self.Logger.error(
+                    "Clang runtime directory does not exist: %s",
+                    runtime_dir,
                 )
-                path_entries = env.active_path
-                path_entries = [
-                    entry for entry in path_entries
-                    if os.path.normcase(os.path.normpath(entry)) != runtime_path
-                ]
-                # VS setup can put a different ASan DLL ahead of LLVM's runtime.
-                env.set_path(os.pathsep.join([str(runtime_dir)] + path_entries))
+                return -1
+
+            env = shell_environment.GetEnvironment()
+            runtime_path = os.path.normcase(os.path.normpath(str(runtime_dir)))
+            lib_path = env.get_shell_var("LIB") or ""
+            lib_entries = lib_path.split(os.pathsep) if lib_path else []
+            lib_entries = [
+                entry for entry in lib_entries
+                if os.path.normcase(os.path.normpath(entry)) != runtime_path
+            ]
+            # Keep the selected LLVM runtime ahead of VS libraries.
+            env.set_shell_var(
+                "LIB",
+                os.pathsep.join([str(runtime_dir)] + lib_entries),
+            )
+            path_entries = env.active_path
+            path_entries = [
+                entry for entry in path_entries
+                if os.path.normcase(os.path.normpath(entry)) != runtime_path
+            ]
+            # VS setup can put a different ASan DLL ahead of LLVM's runtime.
+            env.set_path(os.pathsep.join([str(runtime_dir)] + path_entries))
 
         clang_bin_parent = ClangBin.parent
         version_aggregator.GetVersionAggregator().ReportVersion(

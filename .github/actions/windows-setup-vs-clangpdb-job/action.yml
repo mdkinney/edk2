@@ -59,23 +59,6 @@ runs:
           echo ERROR: Could not determine the LLVM resource directory.
           exit /b 1
         )
-        if not exist "%LLVM_RUNTIME%\clang_rt.profile-x86_64.lib" (
-          echo ERROR: LLVM X64 profile runtime is missing.
-          exit /b 1
-        )
-        if not exist "%LLVM_RUNTIME%\clang_rt.asan_dynamic-x86_64.lib" (
-          echo ERROR: LLVM X64 AddressSanitizer runtime is missing.
-          exit /b 1
-        )
-        if not exist "%LLVM_RUNTIME%\clang_rt.asan_dynamic-x86_64.dll" (
-          echo ERROR: LLVM X64 AddressSanitizer DLL is missing.
-          exit /b 1
-        )
-        set "ASAN_STATIC_THUNK=clang_rt.asan_static_runtime_thunk-x86_64.lib"
-        if not exist "%LLVM_RUNTIME%\%ASAN_STATIC_THUNK%" (
-          echo ERROR: LLVM X64 AddressSanitizer static runtime thunk is missing.
-          exit /b 1
-        )
         PATH=%CLANG_BIN%;%LLVM_RUNTIME%;%PATH%
         echo PATH=%PATH%>> %GITHUB_ENV%
         echo CLANG_BIN=%CLANG_BIN%\>> %GITHUB_ENV%

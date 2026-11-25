@@ -218,11 +218,6 @@
   DEFINE VISUAL_STUDIO_DEFINES        = -D UNICODE -D _CRT_SECURE_NO_WARNINGS -D _CRT_SECURE_NO_DEPRECATE
   DEFINE VISUAL_STUDIO_IA32_LIB_PATHS = /LIBPATH:"%VCToolsInstallDir%lib\x86" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\x86" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%um\x86"
   DEFINE VISUAL_STUDIO_X64_LIB_PATHS  = /LIBPATH:"%VCToolsInstallDir%lib\X64" /LIBPATH:"%UniversalCRTSdkDir%lib\%UCRTVersion%\ucrt\X64" /LIBPATH:"%WindowsSdkDir%lib\%WindowsSDKLibVersion%um\X64"
-  DEFINE CLANGPDB_X64_RUNTIME_LIB_DIR  = %CLANGPDB_X64_RUNTIME_LIB_PATH%
-  DEFINE CLANGPDB_PROFILE_LIB_X64      = "$(CLANGPDB_X64_RUNTIME_LIB_DIR)\clang_rt.profile-x86_64.lib"
-  DEFINE CLANGPDB_ASAN_LIB_X64         = "$(CLANGPDB_X64_RUNTIME_LIB_DIR)\clang_rt.asan_dynamic-x86_64.lib"
-  # Use the static thunk with the dynamic DLL to provide CRT allocator interceptors.
-  DEFINE CLANGPDB_ASAN_THUNK_LIB_X64   = "$(CLANGPDB_X64_RUNTIME_LIB_DIR)\clang_rt.asan_static_runtime_thunk-x86_64.lib"
 
 [BuildOptions.common.EDKII.HOST_APPLICATION]
   #
@@ -246,7 +241,6 @@
   #
   CLANGPDB:*_*_*_DLINK_FLAGS   == /out:"$(BIN_DIR)\$(MODULE_NAME_GUID).exe" /NOLOGO /SUBSYSTEM:CONSOLE /WHOLEARCHIVE /STACK:0x00800000,0x00800000 /IGNORE:4099 /SAFESEH:NO
   CLANGPDB:*_*_IA32_DLINK_FLAGS = $(VISUAL_STUDIO_IA32_LIB_PATHS)
-  CLANGPDB:*_*_X64_DLINK_FLAGS  = $(VISUAL_STUDIO_X64_LIB_PATHS)
   CLANGPDB:*_*_*_DLINK_FLAGS    = /DEBUG /pdb:"$(BIN_DIR)\$(MODULE_NAME_GUID).pdb"
 !if $(UNIT_TESTING_ADDRESS_SANITIZER_ENABLE)
   #
@@ -254,10 +248,12 @@
   #
   CLANGPDB:*_*_IA32_DLINK_FLAGS = /NODEFAULTLIB:clang_rt.profile.lib
   #
-  # Windows CLANGPDB host tests skip IA32; pin X64 runtimes to the selected LLVM.
+  # The ClangToolChain plugin puts LLVM's runtimes first in LIB.
+  # Avoid /LIBPATH options here; they precede LIB during linker lookup.
   #
   CLANGPDB:*_*_IA32_DLINK_FLAGS = clang_rt.profile-i386.lib clang_rt.asan_dynamic-i386.lib clang_rt.asan_dynamic_runtime_thunk-i386.lib
-  CLANGPDB:*_*_X64_DLINK_FLAGS  = $(CLANGPDB_PROFILE_LIB_X64) $(CLANGPDB_ASAN_LIB_X64) $(CLANGPDB_ASAN_THUNK_LIB_X64)
+  # The static thunk supplies CRT allocator interceptors with the dynamic DLL.
+  CLANGPDB:*_*_X64_DLINK_FLAGS  = clang_rt.profile-x86_64.lib clang_rt.asan_dynamic-x86_64.lib clang_rt.asan_static_runtime_thunk-x86_64.lib
 !endif
 
   #
