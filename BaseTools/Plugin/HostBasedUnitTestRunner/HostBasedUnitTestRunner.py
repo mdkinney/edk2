@@ -316,13 +316,17 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
         # Generate LCOV and XML file for each unit test executable
         if self.clang_gen_profdata(buildOutputBase, profrawlistFile, mergedProfData) != 0:
             return 1
-        for testFile in testList:
-            if self.clang_gen_lcov_xml(mergedProfData, [testFile], f"{testFile}.coverage.lcov", f"{testFile}.coverage.xml") != 0:
-                return 1
-
-        # Generate LCOV and XML for the package
-        if self.clang_gen_lcov_xml(mergedProfData, testList, mergedCoverageLcov, mergedCoverageXml) != 0:
+        count = self.clang_prof_data_get_total_count(mergedProfData)
+        if count is None:
             return 1
+        if count > 0:
+            for testFile in testList:
+                if self.clang_gen_lcov_xml(mergedProfData, [testFile], f"{testFile}.coverage.lcov", f"{testFile}.coverage.xml") != 0:
+                    return 1
+
+            # Generate LCOV and XML for the package
+            if self.clang_gen_lcov_xml(mergedProfData, testList, mergedCoverageLcov, mergedCoverageXml) != 0:
+                return 1
 
         allProfrawlistFile = os.path.join(workspace, 'Build', 'profrawlist.txt')
         allMergedProfData = os.path.join(workspace, 'Build', 'merged.profdata')
@@ -332,9 +336,12 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
         # Generate LCOV and XML for all packages
         if self.clang_gen_profdata(workspace, allProfrawlistFile, allMergedProfData) != 0:
             return 1
-        if self.clang_gen_lcov_xml(allMergedProfData, allTestList, allCoverageLcov, allCoverageXml) != 0:
+        count = self.clang_prof_data_get_total_count(allMergedProfData)
+        if count is None:
             return 1
-
+        if count > 0:
+            if self.clang_gen_lcov_xml(allMergedProfData, allTestList, allCoverageLcov, allCoverageXml) != 0:
+                return 1
         return 0
 
     def _get_llvm_tool_path(self, tool_name):
@@ -390,6 +397,44 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
             logging.error(f"clang_gen_profdata: Failed to merge coverage data for {basepath}.")
             return 1
         return 0
+
+    def clang_prof_data_get_total_count(self, output_profdata):
+        """
+        Return the total counter value in an LLVM profdata file.
+
+        Returns None if the profile inspection fails.
+        """
+        llvm_profdata = self._get_llvm_tool_path("llvm-profdata")
+        if not llvm_profdata:
+            return None
+        profdata_output = io.StringIO()
+        ret = RunCmd(
+            llvm_profdata,
+            f"show {output_profdata}",
+            outstream=profdata_output,
+            logging_level=logging.DEBUG,
+        )
+        if ret != 0:
+            logging.error(
+                "clang_prof_data_get_total_count: Failed to inspect coverage data "
+                "for %s.",
+                output_profdata,
+            )
+            return None
+
+        total_count = re.search(
+            r"^Total count:\s*(\d+)\s*$",
+            profdata_output.getvalue(),
+            re.MULTILINE,
+        )
+        if total_count is None:
+            logging.error(
+                "clang_prof_data_get_total_count: llvm-profdata did not report a "
+                "total count for %s.",
+                output_profdata,
+            )
+            return None
+        return int(total_count.group(1))
 
     def clang_gen_lcov_xml(self, profdata, testfiles, output_lcov, output_xml):
         """
