@@ -131,5 +131,58 @@ class TestSingleModuleUnitTestRunner(unittest.TestCase):
                 f'"{selected_test}"', "", workingdir=str(arch_dir))
 
 
+class TestLlvmToolPath(unittest.TestCase):
+    def test_uses_clang_bin_on_windows(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            tool_path = pathlib.Path(temp_dir) / "llvm-profdata.exe"
+            tool_path.touch()
+            shell_env = SimpleNamespace(
+                get_shell_var=lambda name: temp_dir)
+            runner = runner_module.HostBasedUnitTestRunner()
+
+            with patch.object(
+                    runner_module.shell_environment,
+                    "GetEnvironment",
+                    return_value=shell_env), \
+                    patch.object(
+                        runner_module,
+                        "GetHostInfo",
+                        return_value=SimpleNamespace(os="WINDOWS")):
+                result = runner._get_llvm_tool_path("llvm-profdata")
+
+        self.assertEqual(result, str(tool_path))
+
+    def test_falls_back_to_path_when_tool_missing_from_clang_bin(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            shell_env = SimpleNamespace(
+                get_shell_var=lambda name: temp_dir)
+            runner = runner_module.HostBasedUnitTestRunner()
+
+            with patch.object(
+                    runner_module.shell_environment,
+                    "GetEnvironment",
+                    return_value=shell_env), \
+                    patch.object(
+                        runner_module,
+                        "GetHostInfo",
+                        return_value=SimpleNamespace(os="WINDOWS")), \
+                    self.assertLogs(level="WARNING"):
+                result = runner._get_llvm_tool_path("llvm-profdata")
+
+        self.assertEqual(result, "llvm-profdata")
+
+    def test_falls_back_to_path_when_clang_bin_is_not_set(self):
+        shell_env = SimpleNamespace(get_shell_var=lambda name: None)
+        runner = runner_module.HostBasedUnitTestRunner()
+
+        with patch.object(
+                runner_module.shell_environment,
+                "GetEnvironment",
+                return_value=shell_env):
+            result = runner._get_llvm_tool_path("llvm-profdata")
+
+        self.assertEqual(result, "llvm-profdata")
+
+
 if __name__ == "__main__":
     unittest.main()

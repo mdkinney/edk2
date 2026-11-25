@@ -337,6 +337,27 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
 
         return 0
 
+    def _get_llvm_tool_path(self, tool_name):
+        shell_env = shell_environment.GetEnvironment()
+        clang_bin = shell_env.get_shell_var("CLANG_BIN")
+        if not clang_bin:
+            return tool_name
+
+        tool_filename = tool_name
+        if GetHostInfo().os.upper() == "WINDOWS":
+            tool_filename += ".exe"
+        tool_path = os.path.join(clang_bin, tool_filename)
+        if os.path.isfile(tool_path):
+            return tool_path
+
+        logging.warning(
+            "LLVM tool %s was not found in CLANG_BIN directory %s; "
+            "falling back to PATH.",
+            tool_filename,
+            clang_bin,
+        )
+        return tool_name
+
     def clang_gen_profdata(self, basepath, output_profrawlistfile, output_profdata):
         """
         Merge multiple LLVM profraw files into a single profdata file.
@@ -357,7 +378,14 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
 
         with open(output_profrawlistfile, "w") as f:
             f.write("\n".join(glob.glob(os.path.join(basepath, "**", "*.profraw"), recursive=True)))
-        ret = RunCmd("llvm-profdata", f"merge -sparse --input-files {output_profrawlistfile} --output {output_profdata}")
+        llvm_profdata = self._get_llvm_tool_path("llvm-profdata")
+        if not llvm_profdata:
+            return 1
+        ret = RunCmd(
+            llvm_profdata,
+            f"merge -sparse --input-files {output_profrawlistfile} "
+            f"--output {output_profdata}",
+        )
         if ret != 0:
             logging.error(f"clang_gen_profdata: Failed to merge coverage data for {basepath}.")
             return 1
@@ -390,7 +418,14 @@ class HostBasedUnitTestRunner(IUefiBuildPlugin):
 
         # llvm-cov supports response file with '@' to pass list of object files.
         # Use response file to avoid command line length limit.
-        ret = RunCmd("llvm-cov", f"export -format=lcov --instr-profile={profdata} @{resp_file} > {output_lcov}")
+        llvm_cov = self._get_llvm_tool_path("llvm-cov")
+        if not llvm_cov:
+            return 1
+        ret = RunCmd(
+            llvm_cov,
+            f"export -format=lcov --instr-profile={profdata} @{resp_file} "
+            f"> {output_lcov}",
+        )
         if ret != 0:
             logging.error(f"clang_gen_lcov_xml: Failed to generate coverage lcov. {output_lcov}")
             return 1
