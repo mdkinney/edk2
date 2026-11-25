@@ -8,6 +8,7 @@
 **/
 
 #include <Library/GoogleTestLib.h>
+#include "SanitizerTests.h"
 extern "C" {
   #include <Uefi.h>
   #include <Library/BaseLib.h>
@@ -431,7 +432,7 @@ TEST (MacroTestsMessages, MacroTraceMessage) {
 /**
   Sample unit test that performs double free
 **/
-TEST (SanitizerTests, DoubleFreeDeathTest) {
+TEST_F (SanitizerTests, DoubleFreeDeathTest) {
   UINT8  *Pointer;
 
   Pointer = (UINT8 *)AllocatePool (100);
@@ -446,7 +447,7 @@ TEST (SanitizerTests, DoubleFreeDeathTest) {
 /**
   Sample unit test that performs read past end of allocated buffer
 **/
-TEST (SanitizerTests, BufferOverflowReadDeathTest) {
+TEST_F (SanitizerTests, BufferOverflowReadDeathTest) {
   UINT8  *Pointer;
   UINT8  Value;
 
@@ -465,7 +466,7 @@ TEST (SanitizerTests, BufferOverflowReadDeathTest) {
 /**
   Sample unit test that performs write past end of allocated buffer
 **/
-TEST (SanitizerTests, BufferOverflowWriteDeathTest) {
+TEST_F (SanitizerTests, BufferOverflowWriteDeathTest) {
   UINT8  *Pointer;
 
   Pointer = (UINT8 *)AllocatePool (100);
@@ -482,7 +483,7 @@ TEST (SanitizerTests, BufferOverflowWriteDeathTest) {
 /**
   Sample unit test that performs read before beginning of allocated buffer
 **/
-TEST (SanitizerTests, BufferUnderflowReadDeathTest) {
+TEST_F (SanitizerTests, BufferUnderflowReadDeathTest) {
   UINT8  *Pointer;
   UINT8  Value;
 
@@ -501,7 +502,7 @@ TEST (SanitizerTests, BufferUnderflowReadDeathTest) {
 /**
   Sample unit test that performs read from address 0 (NULL)
 **/
-TEST (SanitizerTests, NullPointerReadDeathTest) {
+TEST_F (SanitizerTests, NullPointerReadDeathTest) {
   UINT8  Value;
 
   //
@@ -514,7 +515,7 @@ TEST (SanitizerTests, NullPointerReadDeathTest) {
 /**
   Sample unit test that performs write to address 0 (NULL)
 **/
-TEST (SanitizerTests, NullPointerWriteDeathTest) {
+TEST_F (SanitizerTests, NullPointerWriteDeathTest) {
   //
   // Write to address 0 should be caught by address sanitizer, log details, and exit
   //
@@ -524,7 +525,7 @@ TEST (SanitizerTests, NullPointerWriteDeathTest) {
 /**
   Sample unit test that performs read from invalid address -1
 **/
-TEST (SanitizerTests, InvalidPointerReadDeathTest) {
+TEST_F (SanitizerTests, InvalidPointerReadDeathTest) {
   UINT8  Value;
 
   //
@@ -537,7 +538,7 @@ TEST (SanitizerTests, InvalidPointerReadDeathTest) {
 /**
   Sample unit test that performs write to invalid address -1
 **/
-TEST (SanitizerTests, InvalidPointerWriteDeathTest) {
+TEST_F (SanitizerTests, InvalidPointerWriteDeathTest) {
   //
   // Write to address -1 should be caught by address sanitizer, log details, and exit
   //

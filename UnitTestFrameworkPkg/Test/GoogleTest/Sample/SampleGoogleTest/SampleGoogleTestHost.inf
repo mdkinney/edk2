@@ -21,6 +21,7 @@
 
 [Sources]
   SampleGoogleTest.cpp
+  SanitizerTests.h
 
 [Sources.IA32, Sources.X64]
   SampleGoogleTestX86.cpp

@@ -7,7 +7,7 @@
 
 **/
 
-#include <Library/GoogleTestLib.h>
+#include "SanitizerTests.h"
 extern "C" {
   #include <Uefi.h>
   #include <Library/BaseLib.h>
@@ -31,7 +31,7 @@ DivideWithNoParameterChecking (
 /**
   Sample unit test that performs a divide by 0
 **/
-TEST (SanitizerTests, DivideByZeroDeathTest) {
+TEST_F (SanitizerTests, DivideByZeroDeathTest) {
   //
   // Divide by 0 should be caught by address sanitizer, log details, and exit
   //
