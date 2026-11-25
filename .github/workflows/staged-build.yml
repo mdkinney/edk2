@@ -66,6 +66,11 @@ on:
         required: false
         type: boolean
         default: true
+      enable-full-tests:
+        description: Enable Stage 2 and later full package and platform tests.
+        required: false
+        type: boolean
+        default: true
       enable-linux-clang-tests:
         description: Enable Linux CLANG builds and tests
         required: false
@@ -201,6 +206,11 @@ on:
         default: true
       enable-basic-acceptance-tests:
         description: Enable Basic Acceptance Tests (BAT)
+        required: false
+        type: boolean
+        default: true
+      enable-full-tests:
+        description: Enable Stage 2 and later full package and platform tests.
         required: false
         type: boolean
         default: true
@@ -621,14 +631,15 @@ jobs:
         run: echo "Stage 1 jobs completed successfully"
 
   #
-  # Stage 2: Run full tests for packages and platforms
+  # Stage 2: Full tests for packages and platforms.
+  # Gate future full-test stages with inputs.enable-full-tests as well.
   #
   ubuntu_clang_build:
     # Firmware Build Support:             CLANGPDB/CLANGDWARF - IA32/X64/AARCH64/RISCV64
     # Host-Based Unit Test Build Support: CLANGDWARF          - IA32/X64
     # EmulatorPkg Build Support:          CLANGDWARF          - IA32/X64
     needs: stage1
-    if: ${{ !cancelled() && inputs.enable-linux-clang-tests }}
+    if: ${{ !cancelled() && inputs.enable-full-tests && inputs.enable-linux-clang-tests }}
     uses: ./.github/workflows/ubuntu-clang-build.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
@@ -645,7 +656,7 @@ jobs:
     # Host-Based Unit Test Build Support: CLANGDWARF          - X64
     # EmulatorPkg Build Support:          CLANGDWARF          - X64
     needs: stage1
-    if: ${{ !cancelled() && inputs.enable-windows-clang-tests }}
+    if: ${{ !cancelled() && inputs.enable-full-tests && inputs.enable-windows-clang-tests }}
     uses: ./.github/workflows/windows-mingw-edk2-clang-20-build.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
@@ -662,7 +673,7 @@ jobs:
     # Host-Based Unit Test Build Support: CLANGDWARF - IA32/X64
     # EmulatorPkg Build Support:          CLANGDWARF - IA32/X64
     needs: stage1
-    if: ${{ !cancelled() && inputs.enable-windows-clang-tests }}
+    if: ${{ !cancelled() && inputs.enable-full-tests && inputs.enable-windows-clang-tests }}
     uses: ./.github/workflows/windows-mingw-llvm-20-clang-build.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
@@ -681,7 +692,7 @@ jobs:
     # Host-Based Unit Test Build Support: CLANGPDB - IA32/X64
     # EmulatorPkg Build Support:          CLANGPDB - IA32/X64
     needs: stage1
-    if: ${{ !cancelled() && inputs.enable-windows-clang-tests }}
+    if: ${{ !cancelled() && inputs.enable-full-tests && inputs.enable-windows-clang-tests }}
     uses: ./.github/workflows/windows-vs-llvm-20-clang-build.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
@@ -699,7 +710,7 @@ jobs:
     # Host-Based Unit Test Build Support: GCC/GCCNOLTO - IA32/X64
     # EmulatorPkg Build Support:          GCC/GCCNOLTO - IA32/X64
     needs: stage1
-    if: ${{ !cancelled() && inputs.enable-linux-gcc-tests }}
+    if: ${{ !cancelled() && inputs.enable-full-tests && inputs.enable-linux-gcc-tests }}
     uses: ./.github/workflows/ubuntu-gcc-build.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
@@ -718,7 +729,7 @@ jobs:
     # Host-Based Unit Test Build Support: GCC/GCCNOLTO - IA32/X64
     # EmulatorPkg Build Support:          GCC/GCCNOLTO - IA32/X64
     needs: stage1
-    if: ${{ !cancelled() && inputs.enable-linux-gccnolto-tests }}
+    if: ${{ !cancelled() && inputs.enable-full-tests && inputs.enable-linux-gccnolto-tests }}
     uses: ./.github/workflows/ubuntu-gcc-build.yml
     with:
       linux-runs-on: ${{ inputs.linux-runs-on }}
@@ -737,7 +748,7 @@ jobs:
     # Host-Based Unit Test Build Support: VS20xx - IA32/X64
     # EmulatorPkg Build Support:          VS20xx - IA32/X64
     needs: stage1
-    if: ${{ !cancelled() && inputs.enable-windows-visual-studio-tests }}
+    if: ${{ !cancelled() && inputs.enable-full-tests && inputs.enable-windows-visual-studio-tests }}
     uses: ./.github/workflows/windows-vs-build.yml
     with:
       windows-runs-on: ${{ inputs.windows-runs-on }}
@@ -764,7 +775,7 @@ jobs:
       - ubuntu_gcc_build
       - ubuntu_gccnolto_build
       - windows_vs_build
-    if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
+    if: always() && inputs.enable-full-tests && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
     outputs:
       package-lists: ${{ needs.stage1.outputs.package-lists }}
     steps:

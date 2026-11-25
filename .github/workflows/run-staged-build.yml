@@ -38,6 +38,7 @@ jobs:
       python-version: '3.12'
       enable-code-quality-tests: true
       enable-basic-acceptance-tests: true
+      enable-full-tests: true
       enable-linux-clang-tests: true
       enable-linux-gcc-tests: true
       enable-linux-gccnolto-tests: false
