@@ -71,9 +71,20 @@ runs:
       if: ${{ inputs.windows-installer == 'vs' && runner.os == 'Windows' }}
       shell: cmd
       run: |
-        choco install opencppcoverage -y
+        set "OPENCPP_COVERAGE_RELEASE_URL=https://github.com/OpenCppCoverage/OpenCppCoverage/releases/download"
+        set "OPENCPP_COVERAGE_VERSION=release-0.9.9.0"
+        set "OPENCPP_COVERAGE_INSTALLER=OpenCppCoverageSetup-x64-0.9.9.0.exe"
+        set "OPENCPP_COVERAGE_INSTALLER_PATH=%RUNNER_TEMP%\%OPENCPP_COVERAGE_INSTALLER%"
+        curl.exe --fail --location --retry 3 ^
+          --output "%OPENCPP_COVERAGE_INSTALLER_PATH%" ^
+          "%OPENCPP_COVERAGE_RELEASE_URL%/%OPENCPP_COVERAGE_VERSION%/%OPENCPP_COVERAGE_INSTALLER%"
         if errorlevel 1 (
-          echo ERROR: Chocolatey failed to install OpenCppCoverage.
+          echo ERROR: Failed to download OpenCppCoverage.
+          exit /b 1
+        )
+        "%OPENCPP_COVERAGE_INSTALLER_PATH%" /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /DIR="C:\Program Files\OpenCppCoverage"
+        if errorlevel 1 (
+          echo ERROR: OpenCppCoverage installer failed.
           exit /b 1
         )
         if not exist "C:\Program Files\OpenCppCoverage\OpenCppCoverage.exe" (
