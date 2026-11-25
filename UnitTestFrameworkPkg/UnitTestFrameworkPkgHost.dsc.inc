@@ -20,6 +20,8 @@
   #
   # Enable code coverage and address sanitizers
   # The Platform DSC may pre-define these MACROS to temporarily disable them.
+  # Always disable for CLANGPDB IA32 due to lack of code coverage and address
+  # sanitizer library support on CLANGPDB IA32 configuration.
   #
 
 !ifndef UNIT_TESTING_CODE_COVERAGE_ENABLE
@@ -28,6 +30,11 @@
 
 !ifndef UNIT_TESTING_ADDRESS_SANITIZER_ENABLE
   UNIT_TESTING_ADDRESS_SANITIZER_ENABLE = TRUE
+!endif
+
+!if $(TOOL_CHAIN_TAG) in "CLANGPDB" && $(ARCH) in "IA32"
+  UNIT_TESTING_CODE_COVERAGE_ENABLE     = FALSE
+  UNIT_TESTING_ADDRESS_SANITIZER_ENABLE = FALSE
 !endif
 
 [LibraryClasses.common.HOST_APPLICATION]
@@ -159,14 +166,11 @@
 
 !if $(UNIT_TESTING_ADDRESS_SANITIZER_ENABLE)
   #
-  # Enable Address Sanitizer for VS2019, VS2022, VS2026, and GCC
+  # Enable Address Sanitizer for MSFT, GCC, and CLANGPDB X64
   #
-  MSFT:*_VS2019_*_CC_FLAGS = /fsanitize=address
-  MSFT:*_VS2022_*_CC_FLAGS = /fsanitize=address
-  MSFT:*_VS2026_*_CC_FLAGS = /fsanitize=address
-  GCC:*_*_*_CC_FLAGS       = -fsanitize=address
-#  CLANGPDB:*_*_*_CC_FLAGS  = -fsanitize=address
-  CLANGPDB:*_*_X64_CC_FLAGS  = -fsanitize=address
+  MSFT:*_*_*_CC_FLAGS     = /fsanitize=address /D UNIT_TESTING_ADDRESS_SANITIZER_ENABLE=1
+  GCC:*_*_*_CC_FLAGS      = -fsanitize=address -D UNIT_TESTING_ADDRESS_SANITIZER_ENABLE=1
+  CLANGPDB:*_*_*_CC_FLAGS = -fsanitize=address -D UNIT_TESTING_ADDRESS_SANITIZER_ENABLE=1
 !endif
 
 !ifdef $(UNIT_TESTING_DEBUG)
@@ -188,8 +192,7 @@
 !else
   GCC:*_*_*_CC_FLAGS          = --coverage
 !endif
-#  CLANGPDB:*_*_*_CC_FLAGS     = -fprofile-instr-generate -fcoverage-mapping
-  CLANGPDB:*_*_X64_CC_FLAGS    = -fprofile-instr-generate -fcoverage-mapping
+  CLANGPDB:*_*_*_CC_FLAGS     = -fprofile-instr-generate -fcoverage-mapping
 !endif
 
   #
@@ -242,21 +245,12 @@
   # Must override DLINK_FLAGS to remove /DLL when linking .exe
   #
   CLANGPDB:*_*_*_DLINK_FLAGS   == /out:"$(BIN_DIR)\$(MODULE_NAME_GUID).exe" /NOLOGO /SUBSYSTEM:CONSOLE /WHOLEARCHIVE /STACK:0x00800000,0x00800000 /IGNORE:4099 /SAFESEH:NO
-  CLANGPDB:*_*_IA32_DLINK_FLAGS = $(VISUAL_STUDIO_IA32_LIB_PATHS)
-  CLANGPDB:*_*_*_DLINK_FLAGS    = /DEBUG /pdb:"$(BIN_DIR)\$(MODULE_NAME_GUID).pdb"
+  CLANGPDB:*_*_IA32_DLINK_FLAGS = $(VISUAL_STUDIO_IA32_LIB_PATHS) /DEFAULTLIB:libcmt.lib /DEFAULTLIB:libvcruntime.lib /DEFAULTLIB:libucrt.lib /DEFAULTLIB:oldnames.lib /DEFAULTLIB:kernel32.lib
 !if $(UNIT_TESTING_ADDRESS_SANITIZER_ENABLE)
-  #
-  # Remove default library clang_rt.profile.lib that is not included with Visual Studio
-  #
-#  CLANGPDB:*_*_IA32_DLINK_FLAGS = /NODEFAULTLIB:clang_rt.profile.lib
-  #
-  # The ClangToolChain plugin puts LLVM's runtimes first in LIB.
-  # Avoid /LIBPATH options here; they precede LIB during linker lookup.
-  #
-#  CLANGPDB:*_*_IA32_DLINK_FLAGS = clang_rt.profile-i386.lib clang_rt.asan_dynamic-i386.lib clang_rt.asan_dynamic_runtime_thunk-i386.lib
   # The static thunk supplies CRT allocator interceptors with the dynamic DLL.
   CLANGPDB:*_*_X64_DLINK_FLAGS  = clang_rt.profile-x86_64.lib clang_rt.asan_dynamic-x86_64.lib clang_rt.asan_static_runtime_thunk-x86_64.lib
 !endif
+  CLANGPDB:*_*_*_DLINK_FLAGS    = /DEBUG /pdb:"$(BIN_DIR)\$(MODULE_NAME_GUID).pdb"
 
   #
   # Set GCC HOST_APPLICATION options
