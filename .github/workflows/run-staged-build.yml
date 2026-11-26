@@ -98,16 +98,54 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  prepare_staged_build_matrix:
+    name: Prepare Staged Build Matrix
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.generate.outputs.matrix }}
+    steps:
+      - name: Generate matrix combinations
+        id: generate
+        env:
+          WINDOWS_RUNNERS: ${{ inputs.windows-runs-on }}
+          PYTHON_VERSIONS: ${{ inputs.python-versions }}
+          LLVM_VERSION_TUPLES: ${{ inputs.llvm-version-tuples }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+
+          windows_runners = json.loads(os.environ["WINDOWS_RUNNERS"])
+          python_versions = json.loads(os.environ["PYTHON_VERSIONS"])
+          llvm_version_tuples = json.loads(os.environ["LLVM_VERSION_TUPLES"])
+
+          if not windows_runners or not python_versions or not llvm_version_tuples:
+              raise SystemExit("Matrix inputs must be non-empty JSON arrays.")
+
+          matrix = {
+              "include": [
+                  {
+                      "windows_runner": windows_runner,
+                      "python": python_version,
+                      **llvm_version_tuple,
+                  }
+                  for windows_runner in windows_runners
+                  for python_version in python_versions
+                  for llvm_version_tuple in llvm_version_tuples
+              ]
+          }
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"matrix={json.dumps(matrix)}\n")
+          PY
   staged_build_dispatch:
     name: Staged Build - ${{ matrix.windows_runner }} / LLVM ${{ matrix.vs }} / Python ${{ matrix.python }}
     if: ${{ github.event_name == 'workflow_dispatch' }}
+    needs: prepare_staged_build_matrix
     strategy:
       fail-fast: false
       max-parallel: 1
-      matrix:
-        windows_runner: ${{ fromJSON(inputs.windows-runs-on) }}
-        python: ${{ fromJSON(inputs.python-versions) }}
-        include: ${{ fromJSON(inputs.llvm-version-tuples) }}
+      matrix: ${{ fromJSON(needs.prepare_staged_build_matrix.outputs.matrix) }}
     uses: ./.github/workflows/staged-build.yml
     with:
       linux-runs-on: 'ubuntu-24.04'
