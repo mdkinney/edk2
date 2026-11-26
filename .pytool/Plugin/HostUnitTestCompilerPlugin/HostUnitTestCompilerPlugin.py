@@ -7,13 +7,15 @@
 import logging
 import os
 import re
+import shutil
+from io import StringIO
 from edk2toollib.uefi.edk2.parsers.dsc_parser import DscParser
 from edk2toollib.uefi.edk2.parsers.inf_parser import InfParser
+from edk2toollib.utility_functions import GetHostInfo, RunCmd
 from edk2toolext.environment.plugintypes.ci_build_plugin import ICiBuildPlugin
 from edk2toolext.environment.uefi_build import UefiBuilder
 from edk2toolext import edk2_logging
 from edk2toolext.environment.var_dict import VarDict
-from edk2toollib.utility_functions import GetHostInfo
 
 
 class HostUnitTestCompilerPlugin(ICiBuildPlugin):
@@ -83,6 +85,67 @@ class HostUnitTestCompilerPlugin(ICiBuildPlugin):
             "Host-Based Unit Test Runner is disabled; not running BUILDMODULE.")
         return None
 
+    @staticmethod
+    def _get_cl_version():
+        cl_path = shutil.which("cl")
+        if cl_path is None:
+            return None
+
+        output = StringIO()
+        RunCmd(cl_path, "/Bv", outstream=output)
+        version_match = re.search(
+            r"\bCompiler Version\s+(\d+\.\d+)", output.getvalue())
+        if version_match is None:
+            return None
+
+        return version_match.group(1)
+
+    @staticmethod
+    def _get_clang_version():
+        clang_path = shutil.which("clang")
+        if clang_path is None:
+            return None
+
+        output = StringIO()
+        RunCmd(clang_path, "--version", outstream=output)
+        version_match = re.search(
+            r"\bclang version\s+(\d+(?:\.\d+)+)", output.getvalue())
+        if version_match is None:
+            return None
+
+        return version_match.group(1)
+
+    @staticmethod
+    def _get_vs_clangpdb_compatibility_warning(environment):
+        if environment.GetValue("TOOL_CHAIN_TAG", "").upper() != "CLANGPDB":
+            return None
+
+        cl_version = HostUnitTestCompilerPlugin._get_cl_version()
+        if cl_version is None:
+            return (
+                "Could not determine the MSVC version with cl /Bv; "
+                "skipping host-based unit tests."
+            )
+
+        clang_version = HostUnitTestCompilerPlugin._get_clang_version()
+        if clang_version is None:
+            return (
+                "Could not determine the LLVM version with clang --version; "
+                "skipping host-based unit tests."
+            )
+
+        cl_major, cl_minor = (int(part) for part in cl_version.split("."))
+        clang_major = int(clang_version.split(".", maxsplit=1)[0])
+        # MSVC 19.50 is the first toolset released with Visual Studio 2026.
+        if (cl_major, cl_minor) >= (19, 50) and clang_major < 22:
+            return (
+                "MSVC {0} (VS2026 or later) requires LLVM 22 or later; "
+                "skipping host-based unit tests for clang {1}.".format(
+                    cl_version, clang_version)
+            )
+
+        return None
+
     ##
     # External function of plugin.  This function is used to perform the task of the ICiBuildPlugin Plugin
     #
@@ -97,6 +160,13 @@ class HostUnitTestCompilerPlugin(ICiBuildPlugin):
     def RunBuildPlugin(self, packagename, Edk2pathObj, pkgconfig, environment, PLM, PLMHelper, tc, output_stream=None):
         self._env = environment
         environment.SetValue("CI_BUILD_TYPE", "host_unit_test", "Set in HostUnitTestCompilerPlugin")
+
+        compatibility_warning = self._get_vs_clangpdb_compatibility_warning(
+            environment)
+        if compatibility_warning:
+            logging.warning(compatibility_warning)
+            tc.SetSkipped()
+            return -1
 
         # Parse the config for required DscPath element
         if "DscPath" not in pkgconfig:
