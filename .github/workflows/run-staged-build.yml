@@ -75,6 +75,11 @@ on:
         required: false
         type: boolean
         default: true
+      default-package-lists:
+        description: Default package lists to use if not set in Stage 0.
+        required: false
+        type: string
+        default: '["CryptoPkg", "MdeModulePkg,ShellPkg,UefiCpuPkg,NetworkPkg,MdePkg,UnitTestFrameworkPkg,DynamicTablesPkg,StandaloneMmPkg", "SecurityPkg,RedfishPkg,IntelFsp2Pkg,PrmPkg,SourceLevelDebugPkg,FmpDevicePkg,FatPkg,IntelFsp2WrapperPkg,ManageabilityPkg,TcgTpmPkg,EmbeddedPkg,PcAtChipsetPkg,ArmPkg,ArmPlatformPkg,ArmVirtPkg,OvmfPkg,EmulatorPkg"]'
       skip-filter-list:
         description: Array of build filters to skip.
         required: false
@@ -164,6 +169,7 @@ jobs:
       enable-linux-gccnolto-tests: ${{ inputs.enable-linux-gccnolto-tests }}
       enable-windows-visual-studio-tests: ${{ inputs.enable-windows-visual-studio-tests }}
       enable-windows-clang-tests: ${{ inputs.enable-windows-clang-tests }}
+      default-package-lists: ${{ inputs.default-package-lists }}
       skip-filter-list: ${{ inputs.skip-filter-list }}
       continue-on-error-filter-list: ${{ inputs.continue-on-error-filter-list }}
   staged_build_ci:
